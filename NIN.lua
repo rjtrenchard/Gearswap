@@ -158,7 +158,7 @@ function init_gear_sets()
 
     sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS,{ear1=gear.WSEarBrutal,ear2="Odr Earring",ring2="Epona's Ring"})
 
-    sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS,{neck="Tjukurrpa Medal", waist="Prosilio Belt", ring1="Regal Ring"})
+    sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS,{neck="Tjukurrpa Medal", waist="Sailfi Belt +1", ring1="Regal Ring"})
 
     sets.precast.WS['Blade: Ku'] = sets.precast.WS['Blade: Shun']
     sets.precast.WS['Blade: Ku'].Low = sets.precast.WS.Low
@@ -171,7 +171,7 @@ function init_gear_sets()
         back="Toro Cape",waist=gear.ElementalObi,legs="Herculean Trousers",feet="Malignance Boots"}
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS,{ammo="Seething Bomblet +1",
-        neck="Tjukurrpa Medal",ear1="Ishvara Earring",ring1="Regal Ring",waist="Prosilio Belt"
+        neck="Tjukurrpa Medal",ear1="Ishvara Earring",ring1="Regal Ring",waist="Sailfi Belt +1"
     })
 
     sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS.Magic, {head='Pixie Hairpin +1', ring2="Archon Ring"})

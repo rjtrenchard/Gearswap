@@ -176,7 +176,7 @@ function init_gear_sets()
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {})
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Prosilio Belt"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
     
     
     -- Midcast Sets

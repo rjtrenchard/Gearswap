@@ -180,7 +180,7 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].SATA = set_combine(sets.precast.WS['Evisceration'].Att, {})
     sets.precast.WS['Evisceration'].Low = sets.precast.WS.Low
 
-    sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {head="Pillager's Bonnet +3", neck="Tjukurrpa Medal",ear1="Odr Earring",ear2="Moonshade Earring", body="Pillager's Vest +2", waist="Prosilio Belt", legs="Herculean Trousers"})
+    sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {head="Pillager's Bonnet +3", neck="Tjukurrpa Medal",ear1="Odr Earring",ear2="Moonshade Earring", body="Pillager's Vest +2", waist="Sailfi Belt +1", legs="Herculean Trousers"})
     sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {})
     sets.precast.WS["Rudra's Storm"].Att = set_combine(sets.precast.WS["Rudra's Storm"], {ring2="Ilabrat Ring"})
     sets.precast.WS["Rudra's Storm"].SA = set_combine(sets.precast.WS["Rudra's Storm"].Att, {ammo="Yetshila +1", body="Pillager's Vest +2"})
@@ -211,7 +211,7 @@ function init_gear_sets()
     sets.precast.WS['Mandalic Stab'].Low = sets.precast.WS.Low
 
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {head="Pillager's Bonnet +3", neck="Tjukurrpa Medal", ear1="Ishvara Earring", waist="Prosilio Belt", legs="Herculean Trousers"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {head="Pillager's Bonnet +3", neck="Tjukurrpa Medal", ear1="Ishvara Earring", waist="Sailfi Belt +1", legs="Herculean Trousers"})
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {})
     sets.precast.WS['Savage Blade'].Att = set_combine(sets.precast.WS['Savage Blade'], {})
     sets.precast.WS['Savage Blade'].SA = set_combine(sets.precast.WS['Savage Blade'], {ammo="Yetshila +1"})

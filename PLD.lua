@@ -155,7 +155,7 @@ function init_gear_sets()
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Regal Ring",ring2="Vexer Ring",
         back="Fierabras's Mantle",waist="Fotia Belt",legs="Sulevia's Cuisses +2",feet="Caballarius Leggings"}
     
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Prosilio Belt"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
     
     --------------------------------------
     -- Midcast sets

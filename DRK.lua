@@ -72,8 +72,6 @@ function user_setup()
     sets.Weapons['greataxe'] = {main="Lycurgos", sub="Utu Grip"}
     sets.Weapons['sword'] = {main="Naegling", sub="Blurred Shield +1"}
     sets.Weapons['club'] = {main="Loxotic Mace +1", sub="Blurred Shield +1"}
-    
-    
 
     gear.default.obi_waist = "Eschan Stone"
     gear.default.drain_waist = "Austerity Belt +1"
@@ -250,7 +248,7 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
 
-    sets.precast.WS.SingleHit = set_combine(sets.precast.WS,{neck="Abyssal Beads +2", waist="Prosilio belt"})
+    sets.precast.WS.SingleHit = set_combine(sets.precast.WS,{neck="Abyssal Beads +2", waist="Sailfi Belt +1"})
 
     sets.precast.WS.MultiHit = {ammo="Seething Bomblet +1",
         head="Sakpata's Helm",neck="Fotia Gorget",ear1=gear.WSEarThrud, ear2="Moonshade Earring",
@@ -289,7 +287,7 @@ function init_gear_sets()
     sets.precast.WS['Guillotine'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Guillotine'].Mod = set_combine(sets.precast.WS['Guillotine'], {})
 
-    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.MultiHit, {neck="Abyssal Beads +2",waist="Prosilio belt"})
+    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.MultiHit, {neck="Abyssal Beads +2",waist="Sailfi Belt +1"})
     sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Cross Reaper'].Mod = set_combine(sets.precast.WS, {})
 
@@ -297,7 +295,7 @@ function init_gear_sets()
     sets.precast.WS['Insurgency'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Insurgency'].Mod = set_combine(sets.precast.WS['Insurgency'], {})
 
-    sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal Beads +2",waist="Prosilio belt",ear2=gear.WSEarBrutal})
+    sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal Beads +2",waist="Sailfi Belt +1",ear2=gear.WSEarBrutal})
     sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS.Acc, {ear2=gear.WSEarBrutal})
     sets.precast.WS['Catastrophe'].Mod = set_combine(sets.precast.WS['Catastrophe'], {})
 
@@ -314,7 +312,7 @@ function init_gear_sets()
     sets.precast.WS['Ground Strike'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Ground Strike'].Mod = set_combine(sets.precast.WS['Ground Strike'], {})
 
-    sets.precast.WS['Torcleaver'] = set_combine(sets.precast.WS.SingleHit, {head=gear.torcleaver_helm, neck="Abyssal Beads +2", hands=gear.torcleaver_gauntlets, waist="Prosilio Belt"})
+    sets.precast.WS['Torcleaver'] = set_combine(sets.precast.WS.SingleHit, {head=gear.torcleaver_helm, neck="Abyssal Beads +2", hands=gear.torcleaver_gauntlets, waist="Sailfi Belt +1"})
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS.Acc, {head=gear.torcleaver_helm})
     sets.precast.WS['Torcleaver'].Mod = set_combine(sets.precast.WS['Torcleaver'], {head=gear.torcleaver_helm})
 
@@ -438,7 +436,7 @@ function init_gear_sets()
 
     sets.precast.FC = {ammo="Sapience Orb",
         head="Sakpata's Helm",neck="Baetyl Pendant",ear1="Malignance Earring",ear2="Loquacious Earring",
-        body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Kishar Ring",ring2="Prolix Ring",
+        body="Sacro Breastplate",hands="Flamma Manopolas +2",ring1="Kishar Ring",ring2="Prolix Ring",
         back=gear.casting_cape,waist="Sailfi Belt +1",legs="Carmine Cuisses +1",feet="Flamma Gambieras +2"}
 
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
@@ -470,7 +468,7 @@ function init_gear_sets()
         back=gear.casting_cape,waist="Eschan Stone",legs="Fallen's Flanchard +3",feet="Flamma Gambieras +2"}
     sets.midcast['Dark Magic'].DarkSeal = set_combine(sets.midcast['Dark Magic'], {head="Fallen's Burgeonet +2"})
 
-    sets.midcast['Dread Spikes'] = set_combine(sets.midcast['Dark Magic'],{neck="Erra Pendant",body="Heathen's Cuirass +1"})
+    sets.midcast['Dread Spikes'] = set_combine(sets.HP_High,{body="Heathen's Cuirass +1"})
     sets.midcast['Dread Spikes'].DarkSeal = set_combine(sets.midcast['Dread Spikes'], {head="Fallen's Burgeonet +2"})
 
     sets.midcast['Endark'] = set_combine(sets.midcast['Dark Magic'],{back="Niht Mantle",legs="Heathen's Flanchard +1"})
@@ -556,12 +554,12 @@ function init_gear_sets()
     sets.engaged.Reraise.Apocalypse = sets.engaged.Reraise
     sets.engaged.Acc.Reraise.Apocalypse = sets.engaged.Acc.Reraise
 
-    sets.engaged.Apocalypse_AM = sets.engaged
-    sets.engaged.Acc.Apocalypse_AM = sets.engaged.Acc
-    sets.engaged.PDT.Apocalypse_AM = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Apocalypse_AM = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Apocalypse_AM = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Apocalypse_AM = sets.engaged.Acc.Reraise
+    sets.engaged.Apocalypse.AM = sets.engaged
+    sets.engaged.Acc.Apocalypse.AM = sets.engaged.Acc
+    sets.engaged.PDT.Apocalypse.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Apocalypse.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Apocalypse.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Apocalypse.AM = sets.engaged.Acc.Reraise
 
     -- Ragnarok
     sets.engaged.Ragnarok = sets.engaged
@@ -571,12 +569,12 @@ function init_gear_sets()
     sets.engaged.Reraise.Ragnarok = sets.engaged.Reraise
     sets.engaged.Acc.Reraise.Ragnarok = sets.engaged.Acc.Reraise
 
-    sets.engaged.Ragnarok_AM = sets.engaged
-    sets.engaged.Acc.Ragnarok_AM = sets.engaged.Acc
-    sets.engaged.PDT.Ragnarok_AM = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Ragnarok_AM = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Ragnarok_AM = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Ragnarok_AM = sets.engaged.Acc.Reraise
+    sets.engaged.Ragnarok.AM = sets.engaged
+    sets.engaged.Acc.Ragnarok.AM = sets.engaged.Acc
+    sets.engaged.PDT.Ragnarok.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Ragnarok.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Ragnarok.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Ragnarok.AM = sets.engaged.Acc.Reraise
 
     -- Caladbolg
     sets.engaged.Caladbolg = sets.engaged
@@ -586,34 +584,34 @@ function init_gear_sets()
     sets.engaged.Reraise.Caladbolg = sets.engaged.Reraise
     sets.engaged.Acc.Reraise.Caladbolg = sets.engaged.Acc.Reraise
     
-    sets.engaged.Caladbolg_AM = sets.engaged
-    sets.engaged.Acc.Caladbolg_AM = sets.engaged.Acc
-    sets.engaged.PDT.Caladbolg_AM = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Caladbolg_AM = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Caladbolg_AM = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Caladbolg_AM = sets.engaged.Acc.Reraise
+    sets.engaged.Caladbolg.AM = sets.engaged
+    sets.engaged.Acc.Caladbolg.AM = sets.engaged.Acc
+    sets.engaged.PDT.Caladbolg.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Caladbolg.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Caladbolg.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Caladbolg.AM = sets.engaged.Acc.Reraise
 
-    sets.engaged.Caladbolg_AM3 = {ammo="Ginsen",
+    sets.engaged.Caladbolg.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
-    sets.engaged.Acc.Caladbolg_AM3 = {ammo="Ginsen",
+    sets.engaged.Acc.Caladbolg.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
-    sets.engaged.PDT.Caladbolg_AM3 = {ammo="Ginsen",
+    sets.engaged.PDT.Caladbolg.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Loricate Torque +1", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Defending Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
-    sets.engaged.Acc.PDT.Caladbolg_AM3 = {ammo="Ginsen",
+    sets.engaged.Acc.PDT.Caladbolg.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Loricate Torque +1", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Defending Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
-    sets.engaged.Reraise.Caladbolg_AM3 = {ammo="Ginsen",
+    sets.engaged.Reraise.Caladbolg.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
-    sets.engaged.Acc.Reraise.Caladbolg_AM3 = {ammo="Ginsen",
+    sets.engaged.Acc.Reraise.Caladbolg.AM3 = {ammo="Ginsen",
         head="Twilight Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Twilight Mail", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
@@ -626,19 +624,19 @@ function init_gear_sets()
     sets.engaged.Reraise.Liberator = sets.engaged.Reraise
     sets.engaged.Acc.Reraise.Liberator = sets.engaged.Acc.Reraise
 
-    sets.engaged.Liberator_AM = sets.engaged
-    sets.engaged.Acc.Liberator_AM = sets.engaged.Acc
-    sets.engaged.PDT.Liberator_AM = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Liberator_AM = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Liberator_AM = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Liberator_AM = sets.engaged.Acc.Reraise
+    sets.engaged.Liberator.AM = sets.engaged
+    sets.engaged.Acc.Liberator.AM = sets.engaged.Acc
+    sets.engaged.PDT.Liberator.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Liberator.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Liberator.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Liberator.AM = sets.engaged.Acc.Reraise
 
-    sets.engaged.Liberator_AM3 = sets.engaged
-    sets.engaged.Acc.Liberator_AM3 = sets.engaged.Acc
-    sets.engaged.PDT.Liberator_AM3 = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Liberator_AM3 = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Liberator_AM3 = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Liberator_AM3 = sets.engaged.Acc.Reraise
+    sets.engaged.Liberator.AM = sets.engaged
+    sets.engaged.Acc.Liberator.AM = sets.engaged.Acc
+    sets.engaged.PDT.Liberator.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Liberator.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Liberator.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Liberator.AM = sets.engaged.Acc.Reraise
 
     -- Redemption
     sets.engaged.Redemption = sets.engaged
@@ -648,19 +646,19 @@ function init_gear_sets()
     sets.engaged.Reraise.Redemption = sets.engaged.Reraise
     sets.engaged.Acc.Reraise.Redemption = sets.engaged.Acc.Reraise
 
-    sets.engaged.Redemption_AM = sets.engaged
-    sets.engaged.Acc.Redemption_AM = sets.engaged.Acc
-    sets.engaged.PDT.Redemption_AM = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Redemption_AM = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Redemption_AM = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Redemption_AM = sets.engaged.Acc.Reraise
+    sets.engaged.Redemption.AM = sets.engaged
+    sets.engaged.Acc.Redemption.AM = sets.engaged.Acc
+    sets.engaged.PDT.Redemption.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Redemption.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Redemption.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Redemption.AM = sets.engaged.Acc.Reraise
 
-    sets.engaged.Redemption_AM3 = sets.engaged
-    sets.engaged.Acc.Redemption_AM3 = sets.engaged.Acc
-    sets.engaged.PDT.Redemption_AM3 = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Redemption_AM3 = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Redemption_AM3 = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Redemption_AM3 = sets.engaged.Acc.Reraise
+    sets.engaged.Redemption.AM = sets.engaged
+    sets.engaged.Acc.Redemption.AM = sets.engaged.Acc
+    sets.engaged.PDT.Redemption.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Redemption.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Redemption.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Redemption.AM = sets.engaged.Acc.Reraise
 
     -- Anguta
     sets.engaged.Anguta = sets.engaged
@@ -670,19 +668,19 @@ function init_gear_sets()
     sets.engaged.Reraise.Anguta = sets.engaged.Reraise
     sets.engaged.Acc.Reraise.Anguta = sets.engaged.Acc.Reraise
 
-    sets.engaged.Anguta_AM = sets.engaged
-    sets.engaged.Acc.Anguta_AM = sets.engaged.Acc
-    sets.engaged.PDT.Anguta_AM = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Anguta_AM = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Anguta_AM = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Anguta_AM = sets.engaged.Acc.Reraise
+    sets.engaged.Anguta.AM = sets.engaged
+    sets.engaged.Acc.Anguta.AM = sets.engaged.Acc
+    sets.engaged.PDT.Anguta.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Anguta.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Anguta.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Anguta.AM = sets.engaged.Acc.Reraise
 
-    sets.engaged.Anguta_AM3 = sets.engaged
-    sets.engaged.Acc.Anguta_AM3 = sets.engaged.Acc
-    sets.engaged.PDT.Anguta_AM3 = sets.engaged.PDT
-    sets.engaged.Acc.PDT.Anguta_AM3 = sets.engaged.Acc.PDT
-    sets.engaged.Reraise.Anguta_AM3 = sets.engaged.Reraise
-    sets.engaged.Acc.Reraise.Anguta_AM3 = sets.engaged.Acc.Reraise
+    sets.engaged.Anguta.AM = sets.engaged
+    sets.engaged.Acc.Anguta.AM = sets.engaged.Acc
+    sets.engaged.PDT.Anguta.AM = sets.engaged.PDT
+    sets.engaged.Acc.PDT.Anguta.AM = sets.engaged.Acc.PDT
+    sets.engaged.Reraise.Anguta.AM = sets.engaged.Reraise
+    sets.engaged.Acc.Reraise.Anguta.AM = sets.engaged.Acc.Reraise
 
     -- Father Time
     sets.engaged['Father Time'] = sets.engaged
@@ -695,7 +693,11 @@ function init_gear_sets()
     -------------------------------------------------------------------------------------------------------------------
     -- Miscellaneous Sets
     -------------------------------------------------------------------------------------------------------------------
-    sets.HP_High = {}
+    sets.HP_High = {
+        head="Odyssean Helm",ear1="Eabani Earring",
+        body="Ignominy Cuirass +3",hands="Sakpata's Gauntlets",ring2="Regal Ring",
+        waist="Eschan Stone",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"
+    }
     sets.HP_Low = set_combine(sets.naked, {main=gear.MainHand, sub=gear.SubHand, ranged="",})
     sets.Sleeping = {neck="Berserker's Torque"}
 
@@ -794,7 +796,6 @@ function job_midcast(spell, action, spellMap, eventArgs)
     end]]
 end
 
-
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -817,6 +818,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
 
+end
+
+function job_post_aftercast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' then 
+        update_combat_form()
+    end
+    eventArgs.handled = false
 end
 
 function job_buff_change(buff, gain)
@@ -870,7 +878,7 @@ function job_buff_change(buff, gain)
                 send_command('input /p Charmed.')
             end
         elseif S{'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3'}:contains(buff) then
-            job_update()
+            update_combat_form()
         end
     
     -- when losing a buff
@@ -896,7 +904,7 @@ end
 function job_update(cmdParams, eventArgs)
     procTime(world.time)
     update_combat_form()
-    eventArgs.handled = false
+    --eventArgs.handled = false
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
@@ -939,40 +947,51 @@ function set_aftermath_mode(AM_level)
     -- Relic AM state
     if AM_level == 'Aftermath' then
         if currentWeapon == 'Apocalypse' then
-            state.CombatForm:set('Apocalypse_AM')
+            state.CombatForm:set('Apocalypse.AM')
         elseif currentWeapon == 'Ragnarok' then
-            state.CombatForm:set('Ragnarok_AM')
+            state.CombatForm:set('Ragnarok.AM')
         end
     elseif AM_level == 'Aftermath: Lv.1' then
         if currentWeapon == 'Liberator' then
-            state.CombatForm:set('Liberator_AM')
+            state.CombatForm:set('Liberator.AM')
         elseif currentWeapon == 'Caladbolg' then
-            state.CombatForm:set('Caladbolg_AM')
+            state.CombatForm:set('Caladbolg.AM')
         elseif currentWeapon == 'Redemption' then
-            state.CombatForm:set('Redemption_AM')
+            state.CombatForm:set('Redemption.AM')
         elseif currentWeapon == 'Anguta' then
-            state.CombatForm:set('Anguta_AM')
+            state.CombatForm:set('Anguta.AM')
         end
     elseif AM_level == 'Aftermath: Lv.2' then
         if currentWeapon == 'Liberator' then
-            state.CombatForm:set('Liberator_AM')
+            state.CombatForm:set('Liberator.AM')
         elseif currentWeapon == 'Caladbolg' then
-            state.CombatForm:set('Caladbolg_AM')
+            state.CombatForm:set('Caladbolg.AM')
         elseif currentWeapon == 'Redemption' then
-            state.CombatForm:set('Redemption_AM')
+            state.CombatForm:set('Redemption.AM')
         elseif currentWeapon == 'Anguta' then
-            state.CombatForm:set('Anguta_AM')
+            state.CombatForm:set('Anguta.AM')
         end
     elseif AM_level == 'Aftermath: Lv.3' then
         if currentWeapon == 'Liberator' then
-            state.CombatForm:set('Liberator_AM3')
+            state.CombatForm:set('Liberator.AM')
         elseif currentWeapon == 'Caladbolg' then
-            state.CombatForm:set('Caladbolg_AM3')
+            state.CombatForm:set('Caladbolg.AM')
         elseif currentWeapon == 'Redemption' then
-            state.CombatForm:set('Redemption_AM3')
+            state.CombatForm:set('Redemption.AM')
         elseif currentWeapon == 'Anguta' then
-            state.CombatForm:set('Anguta_AM3')
+            state.CombatForm:set('Anguta.AM')
         end
+    end
+end
+
+function determine_weapon_form()
+    -- if a weapon has a specific combat form, switch to that
+    if info.Weapons.REMA:contains(player.equipment.main) then
+        state.CombatWeapon:set(player.equipment.main)
+        echo('CombatWeapon: '.. player.equipment.main ..' set',1)
+    else
+        state.CombatWeapon:reset()
+        echo('CombatWeapon: Normal set',1)
     end
 end
 
@@ -980,28 +999,18 @@ end
 function reset_combat_form()
     local weapon_slot = player.equipment.main
     local sub_slot = player.equipment.sub
-    
-    local function determine_regular_combat_form(equipped_weapon)
-        -- if a weapon has a specific combat form, switch to that
-        if info.Weapons.REMA:contains(equipped_weapon) then
-            state.CombatForm:set(equipped_weapon)
-            echo('In reset Combat form: REMA reset',1)
-        else
-            state.CombatForm:reset()
-        end
-    end
 
     if S{'NIN','DNC'}:contains(player.sub_job) then
         -- change to DW only if mainhanding a one handed weapon and a weapon is equipped in the sub slot
         if info.Weapons.Onehanded:contains(info.Weapons.Type[weapon_slot]) then
             if info.Weapons.Shields:contains(info.Weapons.Type[sub_slot]) or sub_slot == empty then
-                determine_regular_combat_form(weapon_slot)
+                state.CombatForm:reset()
             else
                 state.CombatForm:set('DW')
             end
         end
     else
-        determine_regular_combat_form(weapon_slot)
+        state.CombatForm:reset()
     end
 end
 
@@ -1128,7 +1137,7 @@ function getFencerBonus()
 end
 
 -- sets the aftermath level
-function determine_AM_Level()
+function determine.AM_Level()
     if buffactive['Aftermath'] then
         state.AMLevel:set('Aftermath')
     elseif buffactive['Aftermath: Lv.1'] then
@@ -1171,12 +1180,22 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
-function update_combat_form()    
-    determine_AM_Level()    
-    if state.AMLevel.value ~= 'Normal' then
-        set_aftermath_mode(state.AMLevel.value)
+function update_combat_form()
+    
+    determine_weapon_form()
+
+    classes.CustomMeleeGroups:clear()
+    
+    if buffactive['Aftermath'] then
+        classes.CustomMeleeGroups:append('AM')
+    elseif buffactive['Aftermath: Lv.1'] then
+        classes.CustomMeleeGroups:append('AM')
+    elseif buffactive['Aftermath: Lv.2'] then
+        classes.CustomMeleeGroups:append('AM')
+    elseif buffactive['Aftermath: Lv.3'] then
+        classes.CustomMeleeGroups:append('AM3')
     else
-        reset_combat_form() 
+        reset_combat_form()
     end
 end
 

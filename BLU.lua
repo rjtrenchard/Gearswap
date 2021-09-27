@@ -260,7 +260,7 @@ function init_gear_sets()
         body="Malignance Tabard",hands="Jhakri Cuffs",ring1="Acumen Ring",ring2="Archon Ring",
         back="Toro Cape",waist=gear.ElementalObi,legs="Jhakri Slops",feet="Jhakri Pigaches"}
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", hands="Herculean Gloves",legs="Herculean trousers",waist="Prosilio Belt",ring2="Regal Ring"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", hands="Herculean Gloves",legs="Herculean trousers",waist="Sailfi Belt +1",ring2="Regal Ring"})
 
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {body="Ayanmo Corazza +2",ear2="Odr Earring",ring1="Begrudging Ring"})
         

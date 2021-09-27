@@ -137,11 +137,11 @@ function init_gear_sets()
 
     sets.precast.WS['Victory Smite'] = set_combine(sets.precast.WS, {ear1="Brutal Earring",ear2="Moonshade Earring",ring2="Begrudging Ring"})
 
-    sets.precast.WS['Shijin Spiral'] = set_combine(sets.precast.WS, {waist="Prosilio belt"})
+    sets.precast.WS['Shijin Spiral'] = set_combine(sets.precast.WS, {waist="Sailfi Belt +1"})
 
-    sets.precast.WS['Howling Fist'] = set_combine(sets.precast.WS,{neck="Tjukurrpa Medal", waist="Prosilio Belt"})
+    sets.precast.WS['Howling Fist'] = set_combine(sets.precast.WS,{neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
 
-    sets.precast.WS['Raging Fists'] = set_combine(sets.precast.WS,{waist="Prosilio Belt"})
+    sets.precast.WS['Raging Fists'] = set_combine(sets.precast.WS,{waist="Sailfi Belt +1"})
 
     
     -- Midcast Sets

@@ -113,9 +113,9 @@ function init_gear_sets()
     -- legs={name="Quiahuiz Trousers", augments={'Phys. dmg. taken -2%','Magic dmg. taken -2%','STR+8'}}}
 
     sets.precast.WS['Raging Fists']    = set_combine(sets.precast.WS, {ring2="Niqmaddu Ring"}) -- TP = Damage, fTP replicating
-    sets.precast.WS['Howling Fist']    = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal",waist="Prosilio Belt"}) -- fTP replicating, decent fTP bonus from TP
+    sets.precast.WS['Howling Fist']    = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal",waist="Sailfi Belt +1"}) -- fTP replicating, decent fTP bonus from TP
     sets.precast.WS['Asuran Fists']    = set_combine(sets.precast.WS, {ear1="Ethereal Earring", ring2="Niqmaddu ring"}) -- Multi-hit max attack rounds
-    sets.precast.WS["Ascetic's Fury"]  = set_combine(sets.precast.WSCrit, {neck="Tjukurrpa Medal",waist="Prosilio Belt"}) -- Attack boost
+    sets.precast.WS["Ascetic's Fury"]  = set_combine(sets.precast.WSCrit, {neck="Tjukurrpa Medal",waist="Sailfi Belt +1"}) -- Attack boost
     sets.precast.WS["Victory Smite"]   = set_combine(sets.precast.WSCrit, {ring2="Epona's Ring"}) -- Crit WS, STR80
     sets.precast.WS['Shijin Spiral']   = set_combine(sets.precast.WS, {ear1="Odr Earring", ring2="Epona's Ring"}) -- 5hit attack, DEX73-85
     sets.precast.WS['Dragon Kick']     = set_combine(sets.precast.WS, {}) -- Kick attack WS, TP=Damage?

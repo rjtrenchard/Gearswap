@@ -200,11 +200,11 @@ function init_gear_sets()
 
     -- Specific weaponskill sets.
     -- Axes
-    sets.precast.WS['Mistral Axe'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Prosilio Belt"})
-    sets.precast.WS['Mistral Axe'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Prosilio Belt"})
+    sets.precast.WS['Mistral Axe'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Mistral Axe'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
 
-    sets.precast.WS['Calamity'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Prosilio Belt"})
-    sets.precast.WS['Calamity'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Prosilio Belt"})
+    sets.precast.WS['Calamity'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Calamity'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
 
     sets.precast.WS['Rampage'] = set_combine(sets.precast.WS.WSCrit, {ear1=gear.WSEarThrud, ear2=gear.WSEarBrutal})
     sets.precast.WS['Rampage'].Acc = set_combine(sets.precast.WS.Acc, {})
@@ -226,7 +226,7 @@ function init_gear_sets()
     sets.precast.WS['Cloudsplitter'] = set_combine(sets.precast.WS['Primal Rend'], {})
 
     -- Sword
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Prosilio belt"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS.WSAcc, {})
 
     -- Dagger
@@ -234,8 +234,8 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS.WSAcc, {})
 
     -- Scythe
-    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Prosilio Belt"})
-    sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Prosilio belt"})
+    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
 
     
     --------------------------------------

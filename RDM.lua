@@ -130,12 +130,12 @@ function init_gear_sets()
 
     sets.precast.WS['Vorpal Blade'] = set_combine(sets.precast.WS.Crit, {ring2="Begrudging Ring"})
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {ammo="Voluspa Tathlum",neck="Tjukurrpa medal", waist="Prosilio belt"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {ammo="Voluspa Tathlum",neck="Tjukurrpa medal", waist="Sailfi Belt +1"})
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS.Acc,
         {ammo="Voluspa Tathlum",
         head="Malignance Chapeau",neck="Tjukurrpa medal",
         body="Malignance Tabard", hands="Malignance Gloves",
-        waist="Prosilio belt", legs="Malignance Tights", feet="Malignance Boots"})
+        waist="Sailfi Belt +1", legs="Malignance Tights", feet="Malignance Boots"})
 
     sets.precast.WS['Death Blossom'] = set_combine(sets.precast.WS.Acc, {})
 

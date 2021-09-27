@@ -147,7 +147,7 @@ function init_gear_sets()
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {ear2="Odr Earring", ring1="Ilabrat Ring",ring2="Epona's Ring"})
     
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {body="laksamana's frac +3",neck="Tjukurrpa Medal",waist="Prosilio belt",ring2="Regal Ring", legs="herculean trousers"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {body="laksamana's frac +3",neck="Tjukurrpa Medal",waist="Sailfi Belt +1",ring2="Regal Ring", legs="herculean trousers"})
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {head="malignance chapeau",legs="Malignance Tights", hands="Meghanada gloves +2"})
 
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {})

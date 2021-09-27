@@ -92,7 +92,7 @@ function init_gear_sets()
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {ammo="Seething Bomblet +1", hands="Adhemar Wristbands +1", legs="Herculean Trousers", ring1="Regal Ring", ring2="Niqmaddu Ring"})
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'].Normal, 
         {ammo="Honed Tathlum", body="Dread Jupon", hands="Umuthi Gloves", back="Evasionist's Cape", legs="Manibozho Legs"})
-    sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal",waist="Prosilio Belt"})
+    sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal",waist="Sailfi Belt +1"})
     sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'].Normal, 
         {ammo="Honed Tathlum", head="Whirlpool Mask", hands="Buremte Gloves", back="Evasionist's Cape"})
     
