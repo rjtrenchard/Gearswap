@@ -47,12 +47,11 @@ end
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'PDT', 'Reraise')
-    state.WeaponskillMode:options('Normal', 'Acc', 'Mod')
+    state.WeaponskillMode:options('Normal', 'Acc', 'Mod', 'Low')
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
     state.IdleMode:options('Normal','PDT')
 
     state.WeaponMode = M{['description']='Weapon Mode', 'greatsword', 'scythe', 'greataxe', 'sword', 'club'}
-    state.AMLevel = M{['description']='Aftermath Level', 'Normal', 'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3'}
     state.Verbose = M{['description']='Verbosity', 'Normal', 'Verbose', 'Debug'}
     
     -- Additional local binds
@@ -201,13 +200,18 @@ function user_setup()
     end)
 
     --info.tp_level = 0
-    info.willAM3 = false
+    info.AMpotential = 0
+    info.AMlevel = 0
 
     tp_ticker = windower.register_event('tp change', function(new_tp, old_tp)
         if old_tp == 3000 or new_tp == 3000 then
-            info.willAM3 = true
+            info.AMpotential = 3
+        elseif (new_tp >= 2000 or new_tp < 3000) or (old_tp >= 2000 or old_tp < 3000) then
+            info.AMpotential = 2
+        elseif (new_tp >= 1000 or new_tp < 2000) or (old_tp >= 1000 or old_tp < 2000) then
+            info.AMpotential = 1
         else
-            info.willAM3 = false
+            info.AMpotential = 0
         end
         echo('new: ' .. new_tp .. ' old: '.. old_tp, 2)
 
@@ -835,7 +839,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
-    if spell.type == 'WeaponSkill' and info.Weapons.REMA:contains(player.equipment.main) and info.willAM3 then
+    if spell.type == 'WeaponSkill' and info.Weapons.REMA:contains(player.equipment.main) and info.AMpotential > info.AMlevel then
+        info.AMlevel = info.AMpotential
         classes.CustomMeleeGroups:clear()
         if data.weaponskills.relic[player.equipment.main] then
             if data.weaponskills.relic[player.equipment.main] == spell.english then
@@ -843,7 +848,13 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             end
         elseif data.weaponskills[info.Weapons.REMA.Type[player.equipment.main]][player.equipment.main] then
             if data.weaponskills[info.Weapons.REMA.Type[player.equipment.main]][player.equipment.main] == spell.english then
-                classes.CustomMeleeGroups:append('AM3')
+                if info.AMpotential == 1 then
+                    classes.CustomMeleeGroups:append('AM')
+                elseif info.AMpotential == 2 then
+                    classes.CustomMeleeGroups:append('AM')
+                elseif info.AMpotential == 3 then
+                    classes.CustomMeleeGroups:append('AM3')
+                end
             end
         end
     end
@@ -919,6 +930,7 @@ function job_buff_change(buff, gain)
         elseif buff == 'sleep' then
             job_update()
         elseif S{'Aftermath'}:contains(buff) then
+            info.AMlevel = 0
             update_combat_form()
             job_update()
         end
