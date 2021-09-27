@@ -182,6 +182,7 @@ function user_setup()
         if isMainChanged() then
             procSub()
             weapon_macro_book()
+            determine_weapon_form()
         end
         if (myTime == 17*60 or myTime == 7*60) then 
             procTime(myTime)
