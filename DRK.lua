@@ -111,6 +111,14 @@ function user_setup()
         ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',
     }
     info.Weapons.REMA = S{'Apocalypse','Ragnarok','Caladbolg','Redemption','Liberator','Anguta','Father Time'}
+    info.Weapons.REMA.Type = {
+        ['Apocalypse'] = 'relic',
+        ['Ragnarok'] = 'relic',
+        ['Caladbolg'] = 'empyrean',
+        ['Redemption'] = 'empyrean',
+        ['Liberator'] = 'mythic',
+        ['Anguta'] = 'aeonic',
+    }
     info.Weapons.Delay = {
         ['Naegling'] = 240,
         ['Zulfiqar'] = 504,
@@ -827,26 +835,16 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
-    if spell.type == 'WeaponSkill' then 
-        if info.Weapons.REMA:contains(player.equipment.main) and info.willAM3 then
-            classes.CustomMeleeGroups:clear()
-            if data.weaponskills.relic[player.equipment.main] then
-                if data.weaponskills.relic[player.equipment.main] == spell.english then
-                    classes.CustomMeleeGroups:append('AM')
-                end
-            elseif data.weaponskills.mythic[player.equipment.main] then
-                if data.weaponskills.mythic[player.equipment.main] == spell.english then
-                    classes.CustomMeleeGroups:append('AM3')
-                end
-            elseif data.weaponskills.empyrean[player.equipment.main] then
-                if data.weaponskills.empyrean[player.equipment.main] == spell.english then
-                    classes.CustomMeleeGroups:append('AM3')
-                end
-            elseif data.weaponskills.aeonic[player.equipment.main] then
-                if data.weaponskills.aeonic[player.equipment.main] == spell.english then
-                    classes.CustomMeleeGroups:append('AM3')
-                end
-            end 
+    if spell.type == 'WeaponSkill' and info.Weapons.REMA:contains(player.equipment.main) and info.willAM3 then
+        classes.CustomMeleeGroups:clear()
+        if data.weaponskills.relic[player.equipment.main] then
+            if data.weaponskills.relic[player.equipment.main] == spell.english then
+                classes.CustomMeleeGroups:append('AM')
+            end
+        elseif data.weaponskills[info.Weapons.REMA.Type[player.equipment.main]][player.equipment.main] then
+            if data.weaponskills[info.Weapons.REMA.Type[player.equipment.main]][player.equipment.main] == spell.english then
+                classes.CustomMeleeGroups:append('AM3')
+            end
         end
     end
 end
