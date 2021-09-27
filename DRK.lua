@@ -471,9 +471,9 @@ function init_gear_sets()
     -- Midcast Sets
     -------------------------------------------------------------------------------------------------------------------
     sets.midcast.FastRecast = {ammo="Sapience Orb",
-        head="Ignominy Burgeonet +1",neck="Baetyl Pendant",ear1="Malignance Earring",ear2="Loquacious Earring",
-        body="Flamma Korazin +2",hands="Otronif Gloves",ring1="Kishar Ring",ring2="Prolix Ring",
-        legs="Flamma Dirs +2",feet="Flamma Gambieras +2"}
+        head="Sakpata's Helm",neck="Baetyl Pendant",ear1="Malignance Earring",ear2="Loquacious Earring",
+        body="Sacro Breastplate",hands="Flamma Manopolas +2",ring1="Kishar Ring",ring2="Prolix Ring",
+        back=gear.casting_cape,waist="Sailfi Belt +1",legs="Carmine Cuisses +1",feet="Flamma Gambieras +2"}
 
     sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.FastRecast, {
         neck="Erra Pendant",
