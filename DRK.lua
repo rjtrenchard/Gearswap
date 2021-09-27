@@ -1173,13 +1173,19 @@ function update_combat_form()
     classes.CustomMeleeGroups:clear()
     
     if buffactive['Aftermath'] then
+        info.AMlevel = 1
         classes.CustomMeleeGroups:append('AM')
     elseif buffactive['Aftermath: Lv.1'] then
+        info.AMlevel = 1
         classes.CustomMeleeGroups:append('AM')
     elseif buffactive['Aftermath: Lv.2'] then
+        info.AMlevel = 2
         classes.CustomMeleeGroups:append('AM')
     elseif buffactive['Aftermath: Lv.3'] then
+        info.AMlevel = 3
         classes.CustomMeleeGroups:append('AM3')
+    else
+        info.AMlevel = 0
     end
     reset_combat_form()
 end
