@@ -182,7 +182,7 @@ function user_setup()
         if isMainChanged() then
             procSub()
             weapon_macro_book()
-            determine_weapon_form()
+            determine_combat_weapon()
         end
         if (myTime == 17*60 or myTime == 7*60) then 
             procTime(myTime)
@@ -192,12 +192,17 @@ function user_setup()
         end
     end)
 
-    info.tp_level = 0
+    --info.tp_level = 0
+    info.willAM3 = false
 
     tp_ticker = windower.register_event('tp change', function(new_tp, old_tp)
-        if isOverMaxTP(new_tp) then 
-
+        if old_tp == 3000 or new_tp == 3000 then
+            info.willAM3 = true
+        else
+            info.willAM3 = false
         end
+        echo('new: ' .. new_tp .. ' old: '.. old_tp, 2)
+
     end)
 
     update_weapon_mode(state.WeaponMode.value)
@@ -268,37 +273,37 @@ function init_gear_sets()
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     -- Scythe Weaponskills
-    sets.precast.WS['Spinning Scythe'] = set_combine(sets.precast.WS.SingleHit, {})
-    sets.precast.WS['Spinning Scythe'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Spinning Scythe'].Mod = set_combine(sets.precast.WS['Spinning Scythe'], {})
+    sets.precast.WS['Spinning Scythe'] = set_combine(sets.precast.WS.SingleHit, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Spinning Scythe'].Acc = set_combine(sets.precast.WS.Acc, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Spinning Scythe'].Mod = set_combine(sets.precast.WS['Spinning Scythe'], {feet="Ratri Sollerets +1"})
 
-    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS.SingleHit, {})
-    sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Spiral Hell'].Mod = set_combine(sets.precast.WS['Spiral Hell'], {})
+    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS.SingleHit, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.Acc, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Spiral Hell'].Mod = set_combine(sets.precast.WS['Spiral Hell'], {feet="Ratri Sollerets +1"})
 
-    sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {})
-    sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Entropy'].Mod = set_combine(sets.precast.WS['Entropy'], {})
+    sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS.Acc, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Entropy'].Mod = set_combine(sets.precast.WS['Entropy'], {feet="Ratri Sollerets +1"})
 
-    sets.precast.WS['Quietus'] = set_combine(sets.precast.WS.SingleHit, {})
-    sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Quietus'].Mod = set_combine(sets.precast.WS['Quietus'], {})
+    sets.precast.WS['Quietus'] = set_combine(sets.precast.WS.SingleHit, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS.Acc, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Quietus'].Mod = set_combine(sets.precast.WS['Quietus'], {feet="Ratri Sollerets +1"})
 
-    sets.precast.WS['Guillotine'] = set_combine(sets.precast.WS.MultiHit, {})
-    sets.precast.WS['Guillotine'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Guillotine'].Mod = set_combine(sets.precast.WS['Guillotine'], {})
+    sets.precast.WS['Guillotine'] = set_combine(sets.precast.WS.MultiHit, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Guillotine'].Acc = set_combine(sets.precast.WS.Acc, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Guillotine'].Mod = set_combine(sets.precast.WS['Guillotine'], {feet="Ratri Sollerets +1"})
 
-    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.MultiHit, {neck="Abyssal Beads +2",waist="Sailfi Belt +1"})
-    sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Cross Reaper'].Mod = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.MultiHit, {neck="Abyssal Beads +2",waist="Sailfi Belt +1", feet="Ratri Sollerets +1"})
+    sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS.Acc, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Cross Reaper'].Mod = set_combine(sets.precast.WS, {feet="Ratri Sollerets +1"})
 
-    sets.precast.WS['Insurgency'] = set_combine(sets.precast.WS.MultiHit, {})
-    sets.precast.WS['Insurgency'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Insurgency'].Mod = set_combine(sets.precast.WS['Insurgency'], {})
+    sets.precast.WS['Insurgency'] = set_combine(sets.precast.WS.MultiHit, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Insurgency'].Acc = set_combine(sets.precast.WS.Acc, {feet="Ratri Sollerets +1"})
+    sets.precast.WS['Insurgency'].Mod = set_combine(sets.precast.WS['Insurgency'], {feet="Ratri Sollerets +1"})
 
-    sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal Beads +2",waist="Sailfi Belt +1",ear2=gear.WSEarBrutal})
-    sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS.Acc, {ear2=gear.WSEarBrutal})
-    sets.precast.WS['Catastrophe'].Mod = set_combine(sets.precast.WS['Catastrophe'], {})
+    sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal Beads +2",waist="Sailfi Belt +1",ear2=gear.WSEarBrutal, feet="Ratri Sollerets +1"})
+    sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS.Acc, {ear2=gear.WSEarBrutal, feet="Ratri Sollerets +1"})
+    sets.precast.WS['Catastrophe'].Mod = set_combine(sets.precast.WS['Catastrophe'], {feet="Ratri Sollerets +1"})
 
     -- Greatsword WS's
     sets.precast.WS['Shockwave'] = set_combine(sets.precast.WS.SingleHit, {})
@@ -466,7 +471,7 @@ function init_gear_sets()
     sets.midcast['Dark Magic'] = {ammo="Sturm's Report",
         head="Ignominy Burgeonet +1",neck="Erra Pendant",ear1="Malignance Earring",ear2="Gwati earring",
         body="Carm. Sc. Mail +1",hands="Fallen's Finger Gauntlets +2",ring1="Evanescence Ring",ring2="Archon Ring",
-        back=gear.casting_cape,waist="Eschan Stone",legs="Fallen's Flanchard +3",feet="Flamma Gambieras +2"}
+        back=gear.casting_cape,waist="Eschan Stone",legs="Fallen's Flanchard +3",feet="Ratri Sollerets +1"}
     sets.midcast['Dark Magic'].DarkSeal = set_combine(sets.midcast['Dark Magic'], {head="Fallen's Burgeonet +2"})
 
     sets.midcast['Dread Spikes'] = set_combine(sets.HP_High,{body="Heathen's Cuirass +1"})
@@ -697,7 +702,7 @@ function init_gear_sets()
     sets.HP_High = {
         head="Odyssean Helm",ear1="Eabani Earring",
         body="Ignominy Cuirass +3",hands="Sakpata's Gauntlets",ring2="Regal Ring",
-        waist="Eschan Stone",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"
+        waist="Eschan Stone",legs="Sakpata's Cuisses",feet="Ratri Sollerets +1"
     }
     sets.HP_Low = set_combine(sets.naked, {main=gear.MainHand, sub=gear.SubHand, ranged="",})
     sets.Sleeping = {neck="Berserker's Torque"}
@@ -821,17 +826,42 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 end
 
-function job_post_aftercast(spell, action, spellMap, eventArgs)
+function job_aftercast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' then 
+        if info.Weapons.REMA:contains(player.equipment.main) and info.willAM3 then
+            classes.CustomMeleeGroups:clear()
+            if data.weaponskills.relic[player.equipment.main] then
+                if data.weaponskills.relic[player.equipment.main] == spell.english then
+                    classes.CustomMeleeGroups:append('AM')
+                end
+            elseif data.weaponskills.mythic[player.equipment.main] then
+                if data.weaponskills.mythic[player.equipment.main] == spell.english then
+                    classes.CustomMeleeGroups:append('AM3')
+                end
+            elseif data.weaponskills.empyrean[player.equipment.main] then
+                if data.weaponskills.empyrean[player.equipment.main] == spell.english then
+                    classes.CustomMeleeGroups:append('AM3')
+                end
+            elseif data.weaponskills.aeonic[player.equipment.main] then
+                if data.weaponskills.aeonic[player.equipment.main] == spell.english then
+                    classes.CustomMeleeGroups:append('AM3')
+                end
+            end 
+        end
+    end
+end
+
+--[[function job_post_aftercast(spell, action, spellMap, eventArgs)
     if spell.type == 'WeaponSkill' then 
         update_combat_form()
     end
     eventArgs.handled = false
-end
+end]]
 
 function job_buff_change(buff, gain)
     -- when gaining a buff
     if gain then
-        if buff == 'sleep' then
+        if buff == 'sleep' and player.hp > 50 then
             if not buffactive['charm'] then
                 equip(sets.Sleeping)
             end
@@ -880,6 +910,8 @@ function job_buff_change(buff, gain)
             end
         elseif S{'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3'}:contains(buff) then
             update_combat_form()
+            job_update()
+            
         end
     
     -- when losing a buff
@@ -889,7 +921,7 @@ function job_buff_change(buff, gain)
         elseif buff == 'sleep' then
             job_update()
         elseif S{'Aftermath'}:contains(buff) then
-            state.AMLevel:reset()
+            update_combat_form()
             job_update()
         end
     end
@@ -942,50 +974,7 @@ function weapon_macro_book()
     end
 end
 
--- choose a combat form based on aftermath level
-function set_aftermath_mode(AM_level)
-    local currentWeapon = player.equipment.main
-    -- Relic AM state
-    if AM_level == 'Aftermath' then
-        if currentWeapon == 'Apocalypse' then
-            state.CombatForm:set('Apocalypse.AM')
-        elseif currentWeapon == 'Ragnarok' then
-            state.CombatForm:set('Ragnarok.AM')
-        end
-    elseif AM_level == 'Aftermath: Lv.1' then
-        if currentWeapon == 'Liberator' then
-            state.CombatForm:set('Liberator.AM')
-        elseif currentWeapon == 'Caladbolg' then
-            state.CombatForm:set('Caladbolg.AM')
-        elseif currentWeapon == 'Redemption' then
-            state.CombatForm:set('Redemption.AM')
-        elseif currentWeapon == 'Anguta' then
-            state.CombatForm:set('Anguta.AM')
-        end
-    elseif AM_level == 'Aftermath: Lv.2' then
-        if currentWeapon == 'Liberator' then
-            state.CombatForm:set('Liberator.AM')
-        elseif currentWeapon == 'Caladbolg' then
-            state.CombatForm:set('Caladbolg.AM')
-        elseif currentWeapon == 'Redemption' then
-            state.CombatForm:set('Redemption.AM')
-        elseif currentWeapon == 'Anguta' then
-            state.CombatForm:set('Anguta.AM')
-        end
-    elseif AM_level == 'Aftermath: Lv.3' then
-        if currentWeapon == 'Liberator' then
-            state.CombatForm:set('Liberator.AM')
-        elseif currentWeapon == 'Caladbolg' then
-            state.CombatForm:set('Caladbolg.AM')
-        elseif currentWeapon == 'Redemption' then
-            state.CombatForm:set('Redemption.AM')
-        elseif currentWeapon == 'Anguta' then
-            state.CombatForm:set('Anguta.AM')
-        end
-    end
-end
-
-function determine_weapon_form()
+function determine_combat_weapon()
     -- if a weapon has a specific combat form, switch to that
     if info.Weapons.REMA:contains(player.equipment.main) then
         state.CombatWeapon:set(player.equipment.main)
@@ -994,6 +983,7 @@ function determine_weapon_form()
         state.CombatWeapon:reset()
         echo('CombatWeapon: Normal set',1)
     end
+    echo('CombatWeapon mode: '.. state.CombatWeapon.value,2)
 end
 
 -- reset combat form, or choose a specific weapons combat form. Blind to aftermath
@@ -1137,21 +1127,6 @@ function getFencerBonus()
     return bonus
 end
 
--- sets the aftermath level
-function determine.AM_Level()
-    if buffactive['Aftermath'] then
-        state.AMLevel:set('Aftermath')
-    elseif buffactive['Aftermath: Lv.1'] then
-        state.AMLevel:set('Aftermath: Lv.1')
-    elseif buffactive['Aftermath: Lv.2'] then
-        state.AMLevel:set('Aftermath: Lv.2')
-    elseif buffactive['Aftermath: Lv.3'] then
-        state.AMLevel:set('Aftermath: Lv.3')
-    else
-        state.AMLevel:reset()
-    end
-end
-
 -- returns true if tp is overcapping
 function isOverMaxTP(tp, perm_bonus_tp, max_tp)
     perm_bonus_tp = perm_bonus_tp or 0
@@ -1183,7 +1158,7 @@ end
 
 function update_combat_form()
     
-    determine_weapon_form()
+    determine_combat_weapon()
 
     classes.CustomMeleeGroups:clear()
     
@@ -1195,9 +1170,8 @@ function update_combat_form()
         classes.CustomMeleeGroups:append('AM')
     elseif buffactive['Aftermath: Lv.3'] then
         classes.CustomMeleeGroups:append('AM3')
-    else
-        reset_combat_form()
     end
+    reset_combat_form()
 end
 
 -- Select default macro book on initial load or subjob change.
