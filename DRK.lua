@@ -839,6 +839,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
+    -- set AM level in aftercast, this is needed for some reason because job_buff gets eaten.
     if spell.type == 'WeaponSkill' and info.Weapons.REMA:contains(player.equipment.main) and info.AMpotential > info.AMlevel then
         info.AMlevel = info.AMpotential
         classes.CustomMeleeGroups:clear()
