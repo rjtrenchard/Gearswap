@@ -199,19 +199,20 @@ function user_setup()
         end
     end)
 
-    --info.tp_level = 0
-    info.AMpotential = 0
-    info.AMlevel = 0
+    info.AM = {}
+    info.AM.potential = 0
+    info.AM.level = 0
+    info.TP = 0
 
     tp_ticker = windower.register_event('tp change', function(new_tp, old_tp)
         if old_tp == 3000 or new_tp == 3000 then
-            info.AMpotential = 3
+            info.AM.potential = 3
         elseif (new_tp >= 2000 or new_tp < 3000) or (old_tp >= 2000 or old_tp < 3000) then
-            info.AMpotential = 2
+            info.AM.potential = 2
         elseif (new_tp >= 1000 or new_tp < 2000) or (old_tp >= 1000 or old_tp < 2000) then
-            info.AMpotential = 1
+            info.AM.potential = 1
         else
-            info.AMpotential = 0
+            info.AM.potential = 0
         end
         echo('new: ' .. new_tp .. ' old: '.. old_tp, 2)
 
@@ -486,7 +487,7 @@ function init_gear_sets()
         back=gear.casting_cape,waist="Eschan Stone",legs="Fallen's Flanchard +3",feet="Ratri Sollerets +1"}
     sets.midcast['Dark Magic'].DarkSeal = set_combine(sets.midcast['Dark Magic'], {head="Fallen's Burgeonet +2"})
 
-    sets.midcast['Dread Spikes'] = set_combine(sets.HP_High,{body="Heathen's Cuirass +1"})
+    sets.midcast['Dread Spikes'] = set_combine(sets.HP_High,{body="Heathen's Cuirass +1", feet="Rat. sollerets +1"})
     sets.midcast['Dread Spikes'].DarkSeal = set_combine(sets.midcast['Dread Spikes'], {head="Fallen's Burgeonet +2"})
 
     sets.midcast['Endark'] = set_combine(sets.midcast['Dark Magic'],{back="Niht Mantle",legs="Heathen's Flanchard +1"})
@@ -714,7 +715,7 @@ function init_gear_sets()
     sets.HP_High = {
         head="Odyssean Helm",ear1="Eabani Earring",
         body="Ignominy Cuirass +3",hands="Sakpata's Gauntlets",ring2="Regal Ring",
-        waist="Eschan Stone",legs="Sakpata's Cuisses",feet="Ratri Sollerets +1"
+        waist="Eschan Stone",legs="Sakpata's Cuisses",feet="Ratri Sollerets +1",
     }
     sets.HP_Low = set_combine(sets.naked, {main=gear.MainHand, sub=gear.SubHand, ranged="",})
     sets.Sleeping = {neck="Berserker's Torque"}
@@ -840,8 +841,8 @@ end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
     -- set AM level in aftercast, this is needed for some reason because job_buff gets eaten.
-    if spell.type == 'WeaponSkill' and info.Weapons.REMA:contains(player.equipment.main) and info.AMpotential > info.AMlevel then
-        info.AMlevel = info.AMpotential
+    if spell.type == 'WeaponSkill' and info.Weapons.REMA:contains(player.equipment.main) and info.AM.potential > info.AM.level then
+        info.AM.level = info.AM.potential
         classes.CustomMeleeGroups:clear()
         if data.weaponskills.relic[player.equipment.main] then
             if data.weaponskills.relic[player.equipment.main] == spell.english then
@@ -849,11 +850,11 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             end
         elseif data.weaponskills[info.Weapons.REMA.Type[player.equipment.main]][player.equipment.main] then
             if data.weaponskills[info.Weapons.REMA.Type[player.equipment.main]][player.equipment.main] == spell.english then
-                if info.AMpotential == 1 then
+                if info.AM.potential == 1 then
                     classes.CustomMeleeGroups:append('AM')
-                elseif info.AMpotential == 2 then
+                elseif info.AM.potential == 2 then
                     classes.CustomMeleeGroups:append('AM')
-                elseif info.AMpotential == 3 then
+                elseif info.AM.potential == 3 then
                     classes.CustomMeleeGroups:append('AM3')
                 end
             end
@@ -931,7 +932,7 @@ function job_buff_change(buff, gain)
         elseif buff == 'sleep' then
             job_update()
         elseif S{'Aftermath'}:contains(buff) then
-            info.AMlevel = 0
+            info.AM.level = 0
             update_combat_form()
             job_update()
         end
@@ -1174,19 +1175,19 @@ function update_combat_form()
     classes.CustomMeleeGroups:clear()
     
     if buffactive['Aftermath'] then
-        info.AMlevel = 1
+        info.AM.level = 1
         classes.CustomMeleeGroups:append('AM')
     elseif buffactive['Aftermath: Lv.1'] then
-        info.AMlevel = 1
+        info.AM.level = 1
         classes.CustomMeleeGroups:append('AM')
     elseif buffactive['Aftermath: Lv.2'] then
-        info.AMlevel = 2
+        info.AM.level = 2
         classes.CustomMeleeGroups:append('AM')
     elseif buffactive['Aftermath: Lv.3'] then
-        info.AMlevel = 3
+        info.AM.level = 3
         classes.CustomMeleeGroups:append('AM3')
     else
-        info.AMlevel = 0
+        info.AM.level = 0
     end
     reset_combat_form()
 end
