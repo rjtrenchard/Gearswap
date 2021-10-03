@@ -211,19 +211,19 @@ function init_gear_sets()
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEffect = {main="Kali",range="Gjallarhorn",
         head="Fili Calot +1",neck="Moonbow whistle +1",ear1="Handler's Earring +1",ear2="Loquacious Earring",
-        body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Prolix Ring",
+        body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Prolix Ring",ring2="Kishar Ring",
         back=gear.CastingCape,waist="Corvax Sash",legs="Inyanga Shalwar +2",feet="Brioso Slippers +2"}
 
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {main="Kali",sub="Ammurapi Shield",range="Gjallarhorn",
         head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Psystorm Earring",ear2="Lifestorm Earring",
-        body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Prolix Ring",ring2="Sangoma Ring",
+        body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back=gear.CastingCape,waist="Goading Belt",legs="Marduk's Shalwar +1",feet="Brioso Slippers +2"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = {main="Kali",sub="Ammurapi Shield",range="Gjallarhorn",
         head="Brioso Roundlet +2",neck="Incanter's Torque",ear1="Psystorm Earring",ear2="Lifestorm Earring",
-        body="Brioso Justaucorps +2",hands="Fili Manchettes",ring1="Prolix Ring",ring2="Sangoma Ring",
+        body="Brioso Justaucorps +2",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back=gear.CastingCape,waist="Demonry Sash",legs="Brioso Cannions +2",feet="Brioso Slippers +2"}
 
     -- Song-specific recast reduction
@@ -245,7 +245,7 @@ function init_gear_sets()
     -- Other general spells and classes.
     sets.midcast.Cure = {main="Daybreak",sub="Genbu's Shield",
         head="Vanya Hood",neck="Phalaina Locket",ear1="Regal Earring", ear2="",
-        body="Gendewitha Bliaut +1",hands=gear.CureHands,ring1="Ephedra Ring",ring2="Sirona's Ring",
+        body="Gendewitha Bliaut +1",hands=gear.CureHands,ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Oretania's Cape",legs="Gendewitha Spats",feet="Gendewitha Galoshes +1"}
         
     sets.midcast.Curaga = sets.midcast.Cure

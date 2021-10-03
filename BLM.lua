@@ -118,32 +118,32 @@ function init_gear_sets()
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
 
     sets.midcast['Enfeebling Magic'] = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
-        head="Nahtirah Hat",neck="Weike Torque",ear1="Psystorm Earring",ear2="Lifestorm Earring",
-        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Sangoma Ring",
+        head="Nahtirah Hat",neck="Weike Torque",ear1="Malignance Earring",ear2="Gwati Earring",
+        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",legs="Bokwus Slops",feet="Bokwus Boots"}
         
     sets.midcast.ElementalEnfeeble = sets.midcast['Enfeebling Magic']
 
     sets.midcast['Dark Magic'] = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
-        head="Nahtirah Hat",neck="Aesir Torque",ear1="Psystorm Earring",ear2="Lifestorm Earring",
-        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Sangoma Ring",
+        head="Nahtirah Hat",neck="Aesir Torque",ear1="Malignance Earring",ear2="Gwati Earring",
+        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",waist="Goading Belt",legs="Bokwus Slops",feet="Bokwus Boots"}
 
     sets.midcast.Drain = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
-        head="Nahtirah Hat",neck="Aesir Torque",ear1="Psystorm Earring",ear2="Lifestorm Earring",
-        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Excelsis Ring",ring2="Sangoma Ring",
+        head="Nahtirah Hat",neck="Aesir Torque",ear1="Malignance Earring",ear2="Gwati Earring",
+        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Excelsis Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",waist="Fucho-no-Obi",legs="Bokwus Slops",feet="Goetia Sabots +2"}
     
     sets.midcast.Aspir = sets.midcast.Drain
 
     sets.midcast.Stun = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
-        head="Nahtirah Hat",neck="Weike Torque",ear1="Psystorm Earring",ear2="Lifestorm Earring",
-        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Sangoma Ring",
+        head="Nahtirah Hat",neck="Weike Torque",ear1="Malignance Earring",ear2="Gwati Earring",
+        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",waist="Witful Belt",legs="Orvail Pants +1",feet="Bokwus Boots"}
 
     sets.midcast.BardSong = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
-        head="Nahtirah Hat",neck="Weike Torque",ear1="Psystorm Earring",ear2="Lifestorm Earring",
-        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Sangoma Ring",
+        head="Nahtirah Hat",neck="Weike Torque",ear1="Malignance Earring",ear2="Gwati Earring",
+        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",legs="Bokwus Slops",feet="Bokwus Boots"}
 
 

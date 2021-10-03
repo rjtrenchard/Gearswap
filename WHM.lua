@@ -161,23 +161,23 @@ function init_gear_sets()
 
     sets.midcast['Divine Magic'] = {main="Daybreak",sub="Genbu's Shield",
         head="Inyanga Tiara +1",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Theophany Mitts +1",ring2="Sangoma Ring",
+        body="Inyanga Jubbah +2",hands="Theophany Mitts +1",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist=gear.ElementalObi,legs="Theophany Pantaloons +1",feet="Gendewitha Galoshes"}
 
     sets.midcast['Dark Magic'] = {main="Daybreak", sub="Genbu's Shield",
         head="Inyanga Tiara +1",neck="Aesir Torque",ear1="Gwati Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Strendu Ring",ring2="Sangoma Ring",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist="Demonry Sash",legs="Bokwus Slops",feet="Piety Duckbills"}
 
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {main="Daybreak", sub="Genbu's Shield",
         head="Inyanga Tiara +1",neck="Weike Torque",ear1="Gwati Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Aquasoul Ring",ring2="Sangoma Ring",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Aquasoul Ring",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist="Eschan Stone",legs="Bokwus Slops",feet="Piety Duckbills"}
 
     sets.midcast.IntEnfeebles = {main="Daybreak", sub="Genbu's Shield",
         head="Inyanga Tiara +1",neck="Sanctity Necklace",ear1="Gwati Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Icesoul Ring",ring2="Sangoma Ring",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Icesoul Ring",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist="Eschan Stone",legs="Bokwus Slops",feet="Piety Duckbills"}
 
     

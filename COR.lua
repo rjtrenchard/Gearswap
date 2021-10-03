@@ -218,7 +218,7 @@ function init_gear_sets()
 
     sets.midcast.CorsairShot.Acc = set_combine(sets.midcast.CorsairShot, {
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Sangoma Ring",ring2="Regal Ring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back=gear.ranged_cape,waist="Eschan Stone",legs="Malignance Tights",feet="Malignance Boots"})
 
     sets.midcast.CorsairShot['Light Shot'] = set_combine(sets.midcast.CorsairShot.Acc, {})

@@ -185,9 +185,9 @@ function init_gear_sets()
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Kunaji Ring",ring2="Asklepian Ring",
         back="Fierabras's Mantle",waist="Chuq'aba Belt",legs="Sulevia's Cuisses +2",feet="Caballarius Leggings"}
 
-    sets.midcast['Enhancing Magic'] = {neck="Incanter's Torque",waist="Olympus Sash",legs="Sulevia's Cuisses +2"}
+    sets.midcast['Enhancing Magic'] = {neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Mimir Earring",ring1="Stikini Ring +1",ring2="Stikini Ring +1",waist="Olympus Sash",legs="Sulevia's Cuisses +2"}
 
-    sets.midcast['Divine Magic'] = {neck="Incanter's Torque"}
+    sets.midcast['Divine Magic'] = {neck="Incanter's Torque",ring1="Stikini Ring +1",ring2="Stikini Ring +1"}
     
     sets.midcast.Protect = {ring1="Sheltered Ring"}
     sets.midcast.Shell = {ring1="Sheltered Ring"}

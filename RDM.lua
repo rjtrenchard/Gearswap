@@ -161,7 +161,7 @@ function init_gear_sets()
 
     sets.midcast.Cure = {main="Daybreak",sub="Genbu's Shield",ammo="Regal Gem",
         head="Vanya Hood",neck="Phalaina locket",ear1="Roundel Earring",ear2="Malignance Earring",
-        body="Gendewitha Bliaut +1",hands="Telchine Gloves",ring1="Ephedra Ring",ring2="Sirona's Ring",
+        body="Gendewitha Bliaut +1",hands="Telchine Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Oretania's Cape",waist="Witful Belt",legs="Atrophy Tights +2",feet="Vitiation boots +3"}
 
     sets.midcast.Curaga = sets.midcast.Cure
@@ -169,7 +169,7 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = {main={ name="Grioavolr", augments={'Enh. Mag. eff. dur. +8','MND+12','Mag. Acc.+27',}},sub="Enki Strap",ammo="Regal Gem",
         head="Umuthi Hat",neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Mimir Earring",
-        body="Vitiation Tabard +3",hands="Vitiation Gloves +3",ring1="Kishar Ring",ring2="Prolix Ring",
+        body="Vitiation Tabard +3",hands="Vitiation Gloves +3",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back=gear.mnd_cape,waist="Embla Sash",legs="Atrophy Tights +2",feet="Lethargy Houseaux +1"}
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'],{main="Bolelabunga",sub="Genbu's Shield",hands="Telchine Gloves"})
@@ -182,12 +182,12 @@ function init_gear_sets()
 
     sets.midcast['Enfeebling Magic'] = {main="Naegling",sub="Genbu Shield",ammo="Regal Gem",
         head="Vitiation Chapeau +3",neck="Duelist's Torque",ear1="Snotra Earring",ear2="Malignance Earring",
-        body="Lethargy Sayon +1",hands="Malignance Gloves",ring1="Kishar Ring",ring2="Sangoma Ring",
+        body="Lethargy Sayon +1",hands="Malignance Gloves",ring1="Kishar Ring",ring2="Stikini Ring +1",
         back="Sucellos's Cape",waist="Eschan Stone",legs="Chironic Hose",feet="Vitiation boots +3"}
 
     sets.midcast['Enfeebling Magic'].Acc = {main="Naegling",ammo="Regal Gem",
         head="Malignance Chapeau", neck="Duelist's Torque",ear1="Snotra Earring", ear2="Malignance Earring",
-        body="Atrophy Tabard +2", hands="Malignance Gloves",ring1="Kishar Ring", ring2="Sangoma Ring",
+        body="Atrophy Tabard +2", hands="Malignance Gloves",ring1="Stikini Ring +1", ring2="Stikini Ring +1",
         back=gear.mnd_cape, waist="Eschan Stone", legs="Chironic Hose", feet="Vitiation boots +3"}
 
     sets.midcast['Divine Magic'] = {}
@@ -206,7 +206,7 @@ function init_gear_sets()
         head="Merlinic Hood",neck="Baetyl Pendant",ear1="Friomisi Earring",ear2="Malignance Earring",
         body="Jhakri Robe +2",hands="Jhakri Cuffs +1",ring1="Jhakri Ring",ring2="Acumen Ring",
         back=gear.int_cape,waist=gear.ElementalObi,legs="Jhakri Slops +1",feet="Vitiation boots +3"}
-    sets.midcast['Elemental Magic'].acc = set_combine(sets.midcast['Elemental Magic'], {neck="Sanctity Necklace",waist="Eschan Stone"})
+    sets.midcast['Elemental Magic'].acc = set_combine(sets.midcast['Elemental Magic'], {neck="Sanctity Necklace",waist="Eschan Stone", ring1="Stikini Ring +1", ring2="Stikini Ring +1"})
 
     sets.midcast.MagicBurst = set_combine(sets.midcast['Elemental Magic'], {neck="Mizukage-no-kubikazari",ring1="Jhakri Ring", ring2="Mujin Band", feet="Jhakri Pigaches +2"})
 
@@ -246,29 +246,29 @@ function init_gear_sets()
     -- Resting sets
     sets.resting = {main="Daybreak", sub="Genbu's Shield",ammo="Homiliary",
         head="Vitiation Chapeau +3",neck="Sanctity Necklace",
-        body="Jhakri Robe +2",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
+        body="Jhakri Robe +2",hands="Serpentes Cuffs",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Felicitas cape +1",waist="Fucho-no-obi",legs="Nares Trews",feet="Chelona Boots +1"}
 
 
     -- Idle sets
     sets.idle = {main="Bolelabunga",sub="Genbu's Shield",ammo="Homiliary",
         head="Vitiation Chapeau +3",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused Earring",
-        body="Jhakri Robe +2",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
+        body="Jhakri Robe +2",hands="Malignance Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist="Fucho-No-Obi",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.Town = {main="Bolelabunga",sub="Genbu's Shield",ammo="Homiliary",
         head="Vitiation Chapeau +3",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused earring",
-        body="Vitiation Tabard +3",hands="Atrophy Gloves +3",ring1="Sheltered Ring",ring2="Defending Ring",
+        body="Vitiation Tabard +3",hands="Atrophy Gloves +3",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Shadow Mantle",waist="Fucho-no-obi",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.Weak = {main="Bolelabunga",sub="Genbu's Shield",ammo="Homiliary",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini ring +1",ring2="Defending Ring",
         back="Shadow Mantle",waist="Fucho-no-obi",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.PDT = {main="Malignance Pole",sub="Oneiros Grip",ammo="Homiliary",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring2="Defending Ring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini Ring +1",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.idle.MDT = sets.idle.PDT
@@ -311,7 +311,7 @@ function init_gear_sets()
 
     sets.engaged.Enspell = set_combine(sets.engaged.Acc, {ammo="Regal Gem", 
         neck="Duelist's Torque",ear2="Malignance Earring",
-        hands="Ayanmo Manopolas +2", ring1="Kishar Ring", ring2="Sangoma Ring", 
+        hands="Ayanmo Manopolas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1", 
         back="Ghostfyre Cape"})
     sets.engaged.Enspell0 = set_combine(sets.engaged.Enspell, sets.offense.Enspell)
 
@@ -333,7 +333,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Enspell = set_combine(sets.engaged.DW.Acc, {ammo="Regal Gem", 
     neck="Duelist's Torque",ear2="Malignance Earring",
-    hands="Ayanmo Manopolas +2", ring1="Kishar Ring", ring2="Sangoma Ring", 
+    hands="Ayanmo Manopolas +2", ring1="Kishar Ring", ring2="Stikini Ring +1", 
     back=gear.mnd_cape, legs="Malignance Tights"})
     sets.engaged.DW.Enspell0 = set_combine(sets.engaged.DW.Enspell, sets.offense.EnspellDW)
 

@@ -183,14 +183,9 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA['Astral Flow'] = {head="Glyphic Horn"}
 
-    sets.midcast['Summoning Magic'] = {ammo="Vox Grip",
-    head="Convoker's Horn +2", neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Lodurr Earring",
-    body="Beckoner's Doublet",hands="Glyphic Bracers",ring1="Evoker's Ring",
-    back="Conveyance Cape",waist="Kobo Obi",legs="Beckoner's Spats",feet="Baayami Sabots"}
-
     sets.precast.JA['Elemental Siphon'] = set_combine(sets.midcast['Summoning Magic'], {main="Soulscourge",sub="Vox Grip",
         head="Convoker's Horn +2",neck="Incanter Torque",
-        body="Caller's Doublet +1",hands="Glyphic Bracers",ring1="Evoker's Ring",ring2="Fervor Ring",
+        body="Caller's Doublet +1",hands="Glyphic Bracers",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Conveyance Cape",waist="Lucidity Sash",legs="Marduk's Shalwar +1",feet="Caller's Pigaches +2"})
 
     sets.precast.JA['Mana Cede'] = {hands="Caller's Bracers +1"}
@@ -198,7 +193,7 @@ function init_gear_sets()
     -- Pact delay reduction gear
     sets.precast.BloodPactWard = set_combine(sets.midcast['Summoning Magic'],{main="Espiritus",ammo="Sancus Sachet +1",
         head="Beckoner's horn +1",neck="Incanter's Torque",ear1="Evan's Earring",ear2="Andoaa Earring",
-        body="Convoker's Doublet +2",hands="Inyanga Dastanas +1",ring1="Evoker's Ring",
+        body="Convoker's Doublet +2",hands="Inyanga Dastanas +1",ring1="Stikini Ring +1", ring2="Stikini Ring +1",
         back="Conveyance Cape",waist="Lucidity Sash",})
 
     sets.precast.BloodPactRage = set_combine(sets.precast.BloodPactWard, {})
@@ -230,7 +225,7 @@ function init_gear_sets()
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Myrkr'] = {
         head="Nahtirah Hat",ear1="Evans Earring",ear2="Loquacious Earring",
-        body="Convoker's Doublet +2",hands="Caller's Bracers +2",ring1="Evoker's Ring",ring2="Sangoma Ring",
+        body="Convoker's Doublet +2",hands="Caller's Bracers +2",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Pahtli Cape",waist="Fucho-no-Obi",legs="Assiduity Pants +1",feet="Chelona Boots +1"}
 
     
@@ -250,18 +245,23 @@ function init_gear_sets()
         body="Gendewitha Bliaut +1",hands="Telchine Gloves",ring2="Prolix Ring",
         back="Oretania's Cape",waist="Witful Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
+    sets.midcast['Summoning Magic'] = {ammo="Vox Grip",
+        head="Convoker's Horn +2", neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Lodurr Earring",
+        body="Beckoner's Doublet",hands="Glyphic Bracers",ring1="Stikini Ring +1", ring2="Stikini Ring +1",
+        back="Conveyance Cape",waist="Kobo Obi",legs="Beckoner's Spats",feet="Baayami Sabots"}
+
     sets.midcast.Stoneskin = {waist="Siegel Sash"}
 
     -- Avatar pact sets.  All pacts are Ability type.
     
     sets.midcast.Pet.BloodPactWard = {main="Soulscourge",ammo="Sancus Sachet +1",
         head="Convoker's Horn +2",neck="Incanter Torque",ear1="Evans Earring",
-        body="Caller's Doublet +2",hands="Glyphic Bracers",ring1="Evoker's Ring",ring2="Fervor Ring",
+        body="Caller's Doublet +2",hands="Glyphic Bracers",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         waist="Diabolos's Rope",legs="Marduk's Shalwar +1"}
 
     sets.midcast.Pet.DebuffBloodPactWard = {main="Soulscourge",ammo="Sancus Sachet +1",
         head="Convoker's Horn +2",neck="Incanter Torque",
-        body="Caller's Doublet +2",hands="Glyphic Bracers",ring1="Evoker's Ring",ring2="Fervor Ring",
+        body="Caller's Doublet +2",hands="Glyphic Bracers",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         waist="Diabolos's Rope",legs="Marduk's Shalwar +1"}
         
     sets.midcast.Pet.DebuffBloodPactWard.Acc = sets.midcast.Pet.DebuffBloodPactWard
@@ -305,12 +305,12 @@ function init_gear_sets()
     -- Idle sets
     sets.idle = {main="Malignance Pole",sub="Oneiros Grip",ammo="Sancus Sachet +1",
         head="Convoker's Horn +2",neck="Sanctiy Necklace",ear1="Evans Earring",ear2="Handler's Earring +1",
-        body="Convoker's Doublet +2",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Sangoma Ring",
+        body="Convoker's Doublet +2",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Stikini Ring +1",
         back="Umbra Cape",waist="Fucho-no-Obi",legs="Assiduity Pants +1",feet="Crier's Gaiters"}
 
     sets.idle.PDT = {main=gear.Staff.PDT,sub="Enki Strap",ammo="Sancus Sachet +1",
         head="Convoker's Horn +2",neck="Loricate Torque +1",ear1="Evans Earring",ear2="Loquacious Earring",
-        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Sangoma Ring",
+        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Stikini Ring +1",
         back="Umbra Cape",waist="Regal Belt",legs="Hagondes Pants",feet="Crier's Gaiters"}
 
     -- perp costs:
@@ -327,7 +327,7 @@ function init_gear_sets()
     -- Gridarvor: -5
     -- Glyphic Horn: -4
     -- Caller's Doublet +2/Glyphic Doublet: -4
-    -- Evoker's Ring: -1
+    -- Stikini Ring +1: -1
     -- Convoker's Pigaches: -4
     -- total: -18
     
@@ -335,27 +335,29 @@ function init_gear_sets()
     
     sets.idle.Avatar = {main="Gridarvor",sub="Oneiros Grip",ammo="Sancus Sachet +1",
         head="Convoker's Horn +2",neck="Shulmanu Collar",ear1="Evans Earring",ear2="Enmerkar Earring",
-        body="Shomonjijoe +1",hands="Caller's Bracers +1",ring1="Evoker's Ring",ring2="Varar Ring +1",
+        body="Shomonjijoe +1",hands="Caller's Bracers +1",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Campestres's Cape",waist="Lucidity Sash",legs="Assiduity Pants +1",feet="Apogee Pumps +1"}
 
     sets.idle.PDT.Avatar = {main="Gridarvor",sub="Oneiros Grip",ammo="Sancus Sachet +1",
         head="Convoker's Horn +2",neck="Shulmanu Collar",ear1="Handler's Earring +1",ear2="Enmerkar Earring",
-        body="Shomonjijoe +1",hands="Caller's Bracers +1",ring1="Evoker's Ring",ring2="Defending Ring",
+        body="Shomonjijoe +1",hands="Caller's Bracers +1",ring1="Stikini Ring +1",ring2="Defending Ring",
         back="Campestres's Cape",waist="Lucidity Sash",legs="Assiduity Pants +1",feet="Apogee Pumps +1"}
 
     sets.idle.Spirit = {main="Gridarvor",sub="Vox Grip",ammo="Sancus Sachet +1",
         head="Convoker's Horn +2",neck="Incanter Torque",ear1="Evans Earring",ear2="Enmerkar Earring",
-        body="Shomonjijoe +1",hands="Caller's Bracers +1",ring1="Evoker's Ring",ring2="Sangoma Ring",
+        body="Shomonjijoe +1",hands="Caller's Bracers +1",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Conveyance Cape",waist="Lucidity Sash",legs="Assiduity Pants +1",feet="Apogee Pumps +1"}
 
     sets.idle.Town = {main="Malignance Pole",sub="Oneiros Grip",ammo="Sancus Sachet +1",
         head="Convoker's Horn +2",neck="Wiglen Gorget",ear1="Evans Earring",ear2="Loquacious Earring",
-        body="Shomonjijoe +1",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Sangoma Ring",
+        body="Shomonjijoe +1",hands="Serpentes Cuffs",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Umbra Cape",waist="Fucho-no-Obi",legs="Assiduity Pants +1",feet="Crier's Gaiters"}
 
     -- Favor uses Caller's Horn instead of Convoker's Horn for refresh
     sets.idle.Avatar.Favor = {head="Beckoner's horn +1"}--{head="Beckoner's Horn"}
-    sets.idle.Avatar.Melee = {hands="Glyphic Bracers",back="Campestres's Cape",waist="Lucidity Sash",legs="Convoker's Spats"}
+    sets.idle.Avatar.Melee = {
+        hands="Glyphic Bracers",ring1="Varar Ring +1",ring2="Varar Ring +1",
+        back="Campestres's Cape",waist="Lucidity Sash",legs="Convoker's Spats"}
         
     sets.perp = {}
     -- Caller's Bracer's halve the perp cost after other costs are accounted for.
@@ -382,7 +384,7 @@ function init_gear_sets()
 
     sets.defense.MDT = {
         head="Hagondes Hat",neck="Loricate Torque +1",ear1="Evans Earring",ear2="Loquacious Earring",
-        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Shadow Ring",
+        body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Archon Ring",
         back="Umbra Cape",waist="Fucho-no-Obi",legs="Bokwus Slops",feet="Hagondes Sabots"}
 
     sets.Kiting = {feet="Crier's Gaiters"}

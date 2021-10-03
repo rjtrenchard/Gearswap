@@ -274,7 +274,7 @@ function init_gear_sets()
         
     sets.midcast['Blue Magic'] = {
         head="Malignance Chapeau", neck="sanctity necklace", ear1="lifestorm earring", ear2="Psystorm earring",
-        body="Malignance Tabard", hands="Malignance Gloves", ring1="Jhakri Ring", ring2="Sangoma Ring",
+        body="Malignance Tabard", hands="Malignance Gloves", ring1="Jhakri Ring", ring2="Stikini Ring +1",
         back="Felicitas cape +1", waist=gear.ElementalObi, legs="Malignance Tights", feet="Malignance Boots"}
     
     -- Physical Spells --
@@ -326,7 +326,7 @@ function init_gear_sets()
         back="Felicitas Cape +1",waist="Eschan Stone",legs="Jhakri Slops",feet="Jhakri Pigaches"}
 
     sets.midcast['Blue Magic'].Magical.Resistant = set_combine(sets.midcast['Blue Magic'].Magical,
-        {body="Vanir Cotehardie",ring1="Sangoma Ring",legs="Iuitl Tights",feet="Mavi Basmak +2"})
+        {body="Vanir Cotehardie",ring1="Stikini Ring +1",legs="Iuitl Tights",feet="Mavi Basmak +2"})
     
     sets.midcast['Blue Magic'].MagicalMnd = set_combine(sets.midcast['Blue Magic'].Magical,
         {ring1="Aquasoul Ring"})
@@ -340,7 +340,7 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].MagicAccuracy = {ammo="Mavi Tathlum",
         head="Luhlaza Keffiyeh",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
-        body="Vanir Cotehardie",hands=gear.macc_hagondes,ring2="Sangoma Ring",
+        body="Vanir Cotehardie",hands=gear.macc_hagondes,ring2="Stikini Ring +1",
         back="Cornflower Cape",legs="Iuitl Tights",feet="Iuitl Gaiters +1"}
 
     -- Breath Spells --

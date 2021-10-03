@@ -324,7 +324,7 @@ function init_gear_sets()
         body="Pillager's Vest +2",hands="Adhemar Wristbands +1",ring1="Petrov Ring",ring2="Epona's Ring",
         back={name="Toutatis's Cape",bag="wardrobe 2"},waist="Shetal Stone",legs="Meghanada chausses +1",feet="Plunderer's Poulaines +1"}
     sets.engaged.Acc = {ammo="Seething Bomblet +1",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Sherida Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Cessance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Regal Ring",ring2="Epona's Ring",
         back={name="Toutatis's Cape",bag="wardrobe 2"},waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
         

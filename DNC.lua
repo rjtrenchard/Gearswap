@@ -125,7 +125,7 @@ function init_gear_sets()
 
     sets.precast.Flourish1 = {}
     sets.precast.Flourish1['Violent Flourish'] = {ear1="Psystorm Earring",ear2="Lifestorm Earring",
-        body="Horos Casaque",hands="Buremte Gloves",ring2="Sangoma Ring",
+        body="Horos Casaque",hands="Buremte Gloves",ring2="Stikini Ring +1",
         waist="Chaac Belt",legs="Iuitl Tights",feet="Malignance Boots"} -- magic accuracy
     sets.precast.Flourish1['Desperate Flourish'] = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Ej Necklace",

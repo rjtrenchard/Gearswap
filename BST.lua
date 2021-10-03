@@ -151,7 +151,7 @@ function init_gear_sets()
 
     sets.precast.JA['Charm'] = {ammo="Voluspa Tathlum",
         head="Totemic Helm +1",neck="Sanctity Necklace",ear1="Gwati Earring",ear2="Handler's Earring +1",
-        body="Ankusa Jackcoat +1",hands="Ankusa Gloves +1",ring1="Balrahn's Ring",ring2="Sangoma Ring",
+        body="Ankusa Jackcoat +1",hands="Ankusa Gloves +1",ring1="Balrahn's Ring",ring2="Stikini Ring +1",
         back="Aisance Mantle +1",waist="Eschan Stone",legs="Ankusa Trousers +1",feet="Ankusa Gaiters +1"}
 
     -- CURING WALTZ

@@ -83,16 +83,19 @@ function init_gear_sets()
         body="Hagondes Coat",hands="Telchine Gloves",ring1="Prolix Ring",
         back="Swith Cape +1",waist="Goading Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
-    sets.midcast.Geomancy = {range="Nepote Bell"}
-    sets.midcast.Geomancy.Indi = {range="Nepote Bell",legs="Bagua Pants"}
+    sets.midcast.Geomancy = {range="Nepote Bell",ring1="Stikini Ring +1",ring2="Stikini Ring +1"}
+    sets.midcast.Geomancy.Indi = {range="Nepote Bell",legs="Bagua Pants",ring1="Stikini Ring +1", ring2="Stikini Ring +1"}
 
     sets.midcast['Enhancing Magic'] = {main="Grioavolr",
-    neck="Erra Pendant",
-    ring2="Prolix Ring",
+    neck="Erra Pendant",ear1="Andoaa Earring",ear2="Mimir Earring",
+    ring1="Stikini Ring +1",ring2="Stikini Ring +1",
     waist="Embla Sash"}
 
+    sets.midcast['Enfeebling Magic'] = {neck="Erra Pendant", ear1="Malignance Earring", ear2="Gwati Earring",
+        ring1="Stikini Ring +1", ring2="Stikini Ring +1"}
+
     sets.midcast.Cure = {main="Tamaxchi",sub="Genbu's Shield",
-        body="Gendewitha Bliault +1",hands="Telchine Gloves",ring1="Haoma Ring",ring2="Sirona's Ring",
+        body="Gendewitha Bliault +1",hands="Telchine Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Swith Cape +1",legs="Nares Trews",feet="Hagondes Sabots"}
     
     sets.midcast.Curaga = sets.midcast.Cure
@@ -108,7 +111,7 @@ function init_gear_sets()
 
     -- Resting sets
     sets.resting = {head="Nefer Khat +1",neck="Wiglen Gorget",
-        body="Gendewitha Bliault +1",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
+        body="Gendewitha Bliault +1",hands="Serpentes Cuffs",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         waist="Austerity Belt",legs="Nares Trews",feet="Chelona Boots +1"}
 
 

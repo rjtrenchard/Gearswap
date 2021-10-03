@@ -49,7 +49,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'PDT', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc', 'Mod', 'Low')
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
-    state.IdleMode:options('Normal','PDT')
+    state.IdleMode:options('Normal', 'PDT', 'Refresh')
 
     state.WeaponMode = M{['description']='Weapon Mode', 'greatsword', 'scythe', 'greataxe', 'sword', 'club'}
     state.Verbose = M{['description']='Verbosity', 'Normal', 'Verbose', 'Debug'}
@@ -345,13 +345,13 @@ function init_gear_sets()
     sets.precast.WS['Upheaval'].Mod = set_combine(sets.precast.WS['Upheaval'], {})
 
     
-    sets.precast.WS['Fell Cleave'] = set_combine(sets.precast.WS.SingleHit, {})
-    sets.precast.WS['Fell Cleave'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Fell Cleave'].Mod = set_combine(sets.precast.WS['Fell Cleave'], {})
+    sets.precast.WS['Fell Cleave'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
+    sets.precast.WS['Fell Cleave'].Acc = set_combine(sets.precast.WS.Acc, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
+    sets.precast.WS['Fell Cleave'].Mod = set_combine(sets.precast.WS['Fell Cleave'], {neck="Abyssal beads +2", waist="Sailfi belt +1"})
 
-    sets.precast.WS['Steel Cyclone'] = set_combine(sets.precast.WS.SingleHit, {})
-    sets.precast.WS['Steel Cyclone'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Steel Cyclone'].Mod = set_combine(sets.precast.WS['Steel Cyclone'], {})
+    sets.precast.WS['Steel Cyclone'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
+    sets.precast.WS['Steel Cyclone'].Acc = set_combine(sets.precast.WS.Acc, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
+    sets.precast.WS['Steel Cyclone'].Mod = set_combine(sets.precast.WS['Steel Cyclone'], {neck="Abyssal beads +2", waist="Sailfi belt +1"})
 
     -- Axe WS's
     sets.precast.WS['Rampage'] = set_combine(sets.precast.WS.Crit, {})
@@ -425,6 +425,8 @@ function init_gear_sets()
     sets.idle.PDT = set_combine(sets.idle.Field, {head="Sakpata's Helm",body="Sakpata's Plate"})
     
     sets.idle.Reraise = sets.idle.Weak
+
+    sets.idle.Refresh = set_combine(sets.idle.Field, {body="Lugra Cloak +1", ring1="Stikini Ring +1", ring2="Stikini Ring +1"})
     
     -------------------------------------------------------------------------------------------------------------------
     -- Defense sets
@@ -478,7 +480,7 @@ function init_gear_sets()
 
     sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.FastRecast, {
         neck="Erra Pendant",
-        body="Ignominy Cuirass +3"
+        body="Ignominy Cuirass +3", ring1="Stikini Ring +1", ring2="Stikini Ring +1"
     })
 
     sets.midcast['Dark Magic'] = {ammo="Sturm's Report",
@@ -490,7 +492,7 @@ function init_gear_sets()
     sets.midcast['Dread Spikes'] = set_combine(sets.HP_High,{body="Heathen's Cuirass +1", feet="Rat. sollerets +1"})
     sets.midcast['Dread Spikes'].DarkSeal = set_combine(sets.midcast['Dread Spikes'], {head="Fallen's Burgeonet +2"})
 
-    sets.midcast['Endark'] = set_combine(sets.midcast['Dark Magic'],{back="Niht Mantle",legs="Heathen's Flanchard +1"})
+    sets.midcast['Endark'] = set_combine(sets.midcast['Dark Magic'],{back="Niht Mantle",legs="Heathen's Flanchard +1",ring2="Stikini Ring +1"})
     sets.midcast['Endark II'] = sets.midcast['Endark']
     sets.midcast['Endark'].DarkSeal = set_combine(sets.midcast['Endark'], {head="Fallen's Burgeonet +2"})
     sets.midcast['Endark II'].DarkSeal = sets.midcast['Endark'].DarkSeal
@@ -505,7 +507,7 @@ function init_gear_sets()
 
     sets.midcast.Stun = {
         head="Flamma Zucchetto +2",neck="Erra Pendant",ear1="Malignance Earring",ear2="Gwati Earring",
-        body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Sangoma Ring",ring2="Archon Ring",
+        body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Stikini Ring +1",ring2="Archon Ring",
         back="Niht Mantle",waist="Eschan Stone",legs="Fallen's Flanchard +3",feet="Flamma Gambieras +2"}
 
     sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],{head="Ignominy Burgeonet +1",back=gear.casting_cape})
@@ -515,7 +517,7 @@ function init_gear_sets()
     -- Elemental Magic sets    
     sets.midcast['Elemental Magic'] = {ammo="Seething Bomblet +1",
         head="Flamma Zucchetto +2",neck="Erra Pendant",ear1="Malignance Earring",ear2="Friomisi Earring",
-        body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Sangoma Ring",ring2="Acumen Ring",
+        body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Stikini Ring +1",ring2="Acumen Ring",
         back=gear.casting_cape,waist=gear.ElementalObi,legs="Fallen's Flanchard +3",feet="Flamma Gambieras +2"}
 
     -------------------------------------------------------------------------------------------------------------------
@@ -539,23 +541,23 @@ function init_gear_sets()
     sets.engaged.Acc = {ammo="Seething Bomblet +1",
         head="Flamma Zucchetto +2",neck="Abyssal Beads +2",ear1="Cessance Earring",ear2="Brutal Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Niqmaddu Ring",ring2="Regal Ring",
-        back=gear.melee_cape,waist="Eschan Stone",legs="Ignominy Flanchard +3",feet="Flamma Gambieras +2"}
+        back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Flamma Gambieras +2"}
     sets.engaged.PDT = {ammo="Ginsen",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Cessance Earring",ear2="Brutal Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Niqmaddu Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
-    sets.engaged.Acc.PDT = {ammo="Ginsen",
+    sets.engaged.Acc.PDT = {ammo="Seething Bomblet +1",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Cessance Earring",ear2="Brutal Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Regal Ring",
-        back=gear.melee_cape,waist="Eschan Stone",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
+        back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
     sets.engaged.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Cessance Earring",ear2="Brutal Earring",
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Niqmaddu Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
-    sets.engaged.Acc.Reraise = {ammo="Ginsen",
+    sets.engaged.Acc.Reraise = {ammo="Seething Bomblet +1",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Cessance Earring",ear2="Brutal Earring",
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Defending ring",ring2="Regal Ring",
-        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
+        back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
 
     -- Dual Wield sets
     sets.engaged.DW = sets.engaged
@@ -614,26 +616,26 @@ function init_gear_sets()
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
-    sets.engaged.Acc.Caladbolg.AM3 = {ammo="Ginsen",
+    sets.engaged.Acc.Caladbolg.AM3 = {ammo="Seething Bomblet +1",
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
-        back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
+        back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
     sets.engaged.PDT.Caladbolg.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Loricate Torque +1", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Defending Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
-    sets.engaged.Acc.PDT.Caladbolg.AM3 = {ammo="Ginsen",
+    sets.engaged.Acc.PDT.Caladbolg.AM3 = {ammo="Seething Bomblet +1",
         head="Sakpata's Helm", neck="Loricate Torque +1", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Defending Ring", ring2="Regal Ring",
-        back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
+        back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
     sets.engaged.Reraise.Caladbolg.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
-    sets.engaged.Acc.Reraise.Caladbolg.AM3 = {ammo="Ginsen",
+    sets.engaged.Acc.Reraise.Caladbolg.AM3 = {ammo="Seething Bomblet +1",
         head="Twilight Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
         body="Twilight Mail", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
-        back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
+        back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
 
     -- Liberator
     sets.engaged.Liberator = sets.engaged
@@ -708,6 +710,18 @@ function init_gear_sets()
     sets.engaged.Acc.PDT['Father Time'] = sets.engaged.Acc.PDT
     sets.engaged.Reraise['Father Time'] = sets.engaged.Reraise
     sets.engaged.Acc.Reraise['Father Time'] = sets.engaged.Acc.Reraise
+
+    -- Low Damage/Omen objectives
+    sets.engaged.Low = {ammo="Seething Bomblet +1",
+        head="Flamma Zucchetto +2", neck="Combatant's Torque", ear1="Cessance Earring", ear2="Brutal Earring",
+        body="Flamma Korazin +2", hands="Flamma Manopolas +2", ring1="Regal Ring",ring2="Petrov Ring",
+        back=gear.melee_cape, waist="Ioskeha Belt +1",legs="Ignomingy Flanchard +3",feet="Flamma Gambieras +2"
+    }
+    sets.engaged.Low.Acc = sets.engaged.Low
+    sets.engaged.Low.PDT = sets.engaged.Low
+    sets.engaged.Low.Acc.PDT = sets.engaged.Low
+    sets.engaged.Low.Reraise = sets.engaged.Low
+    sets.engaged.Low.Acc.Reraise = sets.engaged.Low
 
     -------------------------------------------------------------------------------------------------------------------
     -- Miscellaneous Sets

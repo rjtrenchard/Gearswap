@@ -203,18 +203,18 @@ function init_gear_sets()
 
     sets.midcast.ElementalNinjutsu.Resistant = set_combine(sets.midcast.Ninjutsu, {
         head="Malignance Tabard",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Sangoma Ring", ring2="Balrahn's Ring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini Ring +1", ring2="Stikini Ring +1",
         back="Yokaze Mantle", waist="Eschan Stone", legs="Malignance Tights", boots="Malignance Boots"})
 
     sets.midcast.NinjutsuDebuff = {ammo="Yamarang",
         head="Hachiya Hatsuburi",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
-        hands="Mochizuki Tekko",ring1="Balrahn's Ring",ring2="Sangoma Ring",
+        hands="Mochizuki Tekko",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Yokaze Mantle",waist="Eschan Stone",legs="Malignance Rights",feet="Hachiya Kyahan"}
     sets.midcast['Kurayami: Ni'] = set_combine(sets.midcast.NinjutsuDebuff, {ring1="Archon Ring"})
     sets.midcast['Kurayami: Ichi'] = sets.midcast['Kurayami: Ni']
     sets.midcast['Yurin: Ichi'] = sets.midcast['Kurayami: Ni']
 
-    sets.midcast.NinjutsuBuff = {head="Hachiya Hatsuburi",neck="Sanctity Necklace",hands="Mochizuki Tekko",back="Yokaze Mantle"}
+    sets.midcast.NinjutsuBuff = {head="Hachiya Hatsuburi",neck="Sanctity Necklace",hands="Mochizuki Tekko",ring1="Stikini Ring +1",ring2="Stikini Ring +1",back="Yokaze Mantle"}
 
     sets.midcast.RA = {
         head="Malignance Chapeau",neck="Sanctity Necklace",
