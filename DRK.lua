@@ -1,3 +1,21 @@
+--[[ 
+    f9      F9          cycle OffenseMode
+    ^f9     CTRL+F9     cycle HybridMode
+    !f9     ALT+F9      cycle RangedMode
+    @f9     WIN+F9      cycle WeaponskillMode
+    f10     F10         DefenseMode Physical
+    ^f10    CTRL+F10    cycle PhysicalDefenseMode
+    !f10    ALT+F10     toggle Kiting
+    f11     F11         set DefenseMode Magical
+    ^f11    CTRL+F11    cycle CastingMode
+    f12     F12         update user
+    ^f12    CTRL+F12    cycle IdleMode
+    !f12    ALT+F12     reset DefenseMode
+
+    bind ^- gs c toggle selectnpctargets')
+    send_command('bind ^= gs c cycle pctargetmode')
+]]
+
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
@@ -510,7 +528,7 @@ function init_gear_sets()
         body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Stikini Ring +1",ring2="Archon Ring",
         back="Niht Mantle",waist="Eschan Stone",legs="Fallen's Flanchard +3",feet="Flamma Gambieras +2"}
 
-    sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],{head="Ignominy Burgeonet +1",back=gear.casting_cape})
+    sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],{head="Ignominy Burgeonet +1",back=gear.casting_cape, ring1="Stikini Ring +1", ring2="Stikini Ring +1"})
     sets.midcast['Absorb-TP'] = set_combine(sets.midcast.Absorb, {hands="Heathen's Gauntlets +1"})
 
 

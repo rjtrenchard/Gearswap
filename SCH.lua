@@ -130,7 +130,7 @@ function init_gear_sets()
         feet="Gendewitha Galoshes"}
 
     sets.midcast['Enhancing Magic'] = {main="Grioavolr",sub="Enki Strap",ammo="Savant's Treatise",
-        head="Savant's Bonnet +2",neck="Colossus's Torque",
+        head="Savant's Bonnet +2",neck="Incanter's Torque",
         body="Manasa Chasuble",hands="Ayao's Gages",
         waist="Embla Sash",legs="Portent Pants"}
 

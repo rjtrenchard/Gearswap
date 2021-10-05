@@ -104,14 +104,14 @@ function init_gear_sets()
         back="Swith Cape +1",waist="Goading Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
     sets.midcast.Cure = {main="Tamaxchi",sub="Genbu's Shield",
-        head="Nahtirah Hat",neck="Colossus's Torque",ear2="Loquacious Earring",
+        head="Nahtirah Hat",neck="Incanter's Torque",ear2="Loquacious Earring",
         body="Heka's Kalasiris",hands="Bokwus Gloves",ring1="Ephedra Ring",ring2="Sirona's Ring",
         back="Pahtli Cape",waist=gear.ElementalObi,legs="Hagondes Pants",feet="Hagondes Sabots"}
 
     sets.midcast.Curaga = sets.midcast.Cure
 
     sets.midcast['Enhancing Magic'] = {
-        neck="Colossus's Torque",
+        neck="Incanter's Torque",
         body="Manasa Chasuble",hands="Ayao's Gages",
         waist="Embla Sash",legs="Portent Pants"}
     

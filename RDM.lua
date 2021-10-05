@@ -180,7 +180,7 @@ function init_gear_sets()
 
     --sets.midcast.ProShell = set_combine(set.midcast['Enhancing Magic'], {ring1="Sheltered Ring"})
 
-    sets.midcast['Enfeebling Magic'] = {main="Naegling",sub="Genbu Shield",ammo="Regal Gem",
+    sets.midcast['Enfeebling Magic'] = {main="Naegling",sub="Tauret",ammo="Regal Gem",
         head="Vitiation Chapeau +3",neck="Duelist's Torque",ear1="Snotra Earring",ear2="Malignance Earring",
         body="Lethargy Sayon +1",hands="Malignance Gloves",ring1="Kishar Ring",ring2="Stikini Ring +1",
         back="Sucellos's Cape",waist="Eschan Stone",legs="Chironic Hose",feet="Vitiation boots +3"}
@@ -189,6 +189,8 @@ function init_gear_sets()
         head="Malignance Chapeau", neck="Duelist's Torque",ear1="Snotra Earring", ear2="Malignance Earring",
         body="Atrophy Tabard +2", hands="Malignance Gloves",ring1="Stikini Ring +1", ring2="Stikini Ring +1",
         back=gear.mnd_cape, waist="Eschan Stone", legs="Chironic Hose", feet="Vitiation boots +3"}
+    
+    sets.midcast["Enfeebling Magic"].DW = set_combine(sets.midcast["Enfeebling Magic"], {sub="Tauret"})
 
     sets.midcast['Divine Magic'] = {}
     sets.midcast.Cursna = set_combine(sets.midcast['Divine Magic'], {feet="Gendewitha Galoshes +1"})
@@ -212,7 +214,7 @@ function init_gear_sets()
 
     sets.midcast['Dark Magic'] = {main="Naegling",sub="Genbu's Shield",ammo="Regal Gem",
         head="Malignance Chapeau",neck="Erra Pendant",ear1="Snotra Earring",ear2="Malignance Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Archon Ring",ring2="Evanescence Ring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini ring +1",ring2="Evanescence Ring",
         back=gear.int_cape,waist=gear.ElementalObi,legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.midcast.Dispel = set_combine(sets.midcast['Enfeebling Magic'], {neck="Duelist's Torque", ring1="Archon Ring"})
@@ -220,7 +222,7 @@ function init_gear_sets()
     sets.midcast.Impact = set_combine(sets.midcast['Dark Magic'], {head=empty,body="Twilight Cloak", waist="Eschan Stone"})
     --sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {})
 
-    sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {head="Pixie Hairpin +1", neck="Erra Pendant", ring2="Evanescence Ring", waist="Fucho-no-Obi"})
+    sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {head="Pixie Hairpin +1", neck="Erra Pendant", ring1="Archon Ring", ring2="Evanescence Ring", waist="Fucho-no-Obi"})
 
     sets.midcast.Aspir = sets.midcast.Drain
 
@@ -332,10 +334,10 @@ function init_gear_sets()
     sets.engaged.DW.MDT = set_combine(sets.engaged.PDT.DW, {ring2 = "Archon Ring"})
 
     sets.engaged.DW.Enspell = set_combine(sets.engaged.DW.Acc, {ammo="Regal Gem", 
-    neck="Duelist's Torque",ear2="Malignance Earring",
-    hands="Ayanmo Manopolas +2", ring1="Kishar Ring", ring2="Stikini Ring +1", 
-    back=gear.mnd_cape, legs="Malignance Tights"})
-    sets.engaged.DW.Enspell0 = set_combine(sets.engaged.DW.Enspell, sets.offense.EnspellDW)
+    head="Malignance Chapeau",neck="Duelist's Torque",ear1="Snotra Earring",ear2="Malignance Earring",
+    body="Malignance Tabard",hands="Ayanmo Manopolas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1", 
+    back=gear.int_cape, waist="Eschan Stone", legs="Malignance Tights"})
+    sets.engaged.DW.Enspell0 = set_combine(sets.engaged.DW.Enspell, {main="Aern Dagger", sub="Aern Dagger II", ring1="Stikini Ring +1", ring2="Stikini Ring +1"})
 
 end
 
@@ -343,11 +345,34 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_precast(spell, action, spellMap, eventArgs)
+    if state.OffenseMode.value == 'Magic' and spell.english == 'Dispelga' then
+        if player.equipment.main == 'Daybreak' then return
+        else
+            equip(sets.precast.Dispelga)
+            cast_delay(1.0)
+        end
+    elseif spell.english == 'Dispelga' then -- in the future, modify this so it can check if its main or offhand
+        add_to_chat(122,"Not in Magic mode, cancelling.")
+        eventArgs.cancel = true
+    end
+    
+    if spell.english == 'Impact' then
+        if player.equipment.body == 'Twilight Cloak' then return
+        else
+            equip(sets.precast.Impact)
+            cast_delay(1.0)
+        end
+    end
+end
+
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Enfeebling Magic' and state.Buff.Saboteur then
         equip(sets.buff.Saboteur)
+    elseif spell.skill == 'Enfeebling Magic' and S{'NIN','DNC'}:contains(player.sub_job) then
+        equip(sets.midcast["Enfeebling Magic"].DW)
     elseif spell.skill == 'Enhancing Magic' then
         if enhancing_skill_magic:contains(spell.english) then
             equip(sets.midcast['Enhancing Magic'])
@@ -373,27 +398,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         equip(sets.midcast.MagicBurst)
         state.MBurst:set('None')
         windower.add_to_chat(122, 'Magic Bursting. State reset')
-    end
-end
-
-function job_precast(spell, action, spellMap, eventArgs)
-    if state.OffenseMode.value == 'Magic' and spell.english == 'Dispelga' then
-        if player.equipment.main == 'Daybreak' then return
-        else
-            equip(sets.precast.Dispelga)
-            cast_delay(1.0)
-        end
-    elseif spell.english == 'Dispelga' then -- in the future, modify this so it can check if its main or offhand
-        add_to_chat(122,"Not in Magic mode, cancelling.")
-        eventArgs.cancel = true
-    end
-    
-    if spell.english == 'Impact' then
-        if player.equipment.body == 'Twilight Cloak' then return
-        else
-            equip(sets.precast.Impact)
-            cast_delay(1.0)
-        end
     end
 end
 

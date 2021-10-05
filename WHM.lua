@@ -133,7 +133,7 @@ function init_gear_sets()
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = {main="Grioavolr",sub="Oneiros Grip",
-        head="Umuthi Hat",neck="Colossus's Torque",
+        head="Umuthi Hat",neck="Incanter's Torque",
         body="Manasa Chasuble",hands="Dynasty Mitts",
         back="Mending Cape",waist="Embla Sash",legs="Piety Pantaloons",feet="Eber Duckbills"}
 
@@ -145,7 +145,7 @@ function init_gear_sets()
     sets.midcast.Auspice = {hands="Dynasty Mitts",feet="Eber Duckbills"}
 
     sets.midcast.BarElement = {main="Grioavolr",sub="Oneiros Grip",
-        head="Eber Cap",neck="Colossus's Torque",
+        head="Eber Cap",neck="Incanter's Torque",
         body="Eber Bliaud",hands="Eber Mitts",
         back="Mending Cape",waist="Olympus Sash",legs="Piety Pantaloons",feet="Eber Duckbills"}
 

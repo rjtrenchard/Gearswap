@@ -218,13 +218,13 @@ function init_gear_sets()
     sets.midcast.SongDebuff = {main="Kali",sub="Ammurapi Shield",range="Gjallarhorn",
         head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Psystorm Earring",ear2="Lifestorm Earring",
         body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
-        back=gear.CastingCape,waist="Goading Belt",legs="Marduk's Shalwar +1",feet="Brioso Slippers +2"}
+        back=gear.CastingCape,waist="Eschan Stone",legs="Marduk's Shalwar +1",feet="Brioso Slippers +2"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = {main="Kali",sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Brioso Roundlet +2",neck="Incanter's Torque",ear1="Psystorm Earring",ear2="Lifestorm Earring",
+        head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Psystorm Earring",ear2="Lifestorm Earring",
         body="Brioso Justaucorps +2",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
-        back=gear.CastingCape,waist="Demonry Sash",legs="Brioso Cannions +2",feet="Brioso Slippers +2"}
+        back=gear.CastingCape,waist="Eschan Stone",legs="Brioso Cannions +2",feet="Brioso Slippers +2"}
 
     -- Song-specific recast reduction
     sets.midcast.SongRecast = {ear2="Loquacious Earring",
@@ -289,8 +289,8 @@ function init_gear_sets()
         back=gear.MeleeCape,waist="Flume Belt",legs="Gendewitha Spats",feet="Fili Cothurnes +1"}
 
     sets.idle.Refresh = {main="Kali", sub="Genbu's Shield",
-        body="Gendewitha Bliaut +1", legs="Assiduity Pants +1", feet="Fili Cothurnes +1",
-        back=gear.MeleeCape}
+        body="Gendewitha Bliaut +1", ring1="Stikini Ring +1",ring2="Stikini Ring +1",
+        back=gear.MeleeCape,legs="Assiduity Pants +1", feet="Fili Cothurnes +1",}
 
     sets.idle.HonorMarch = set_combine(sets.idle, {range=info.HonorMarch})
     

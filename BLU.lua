@@ -248,7 +248,7 @@ function init_gear_sets()
     sets.precast.WS = {
         head="Adhemar Bonnet +1",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
         body="Jhakri Robe +1",hands="Adhemar Wristbands +1",ring1="Karieyh Ring +1",ring2="Regal Ring",
-        back="Aptitude Mantle",waist="Fotia Belt",legs="Carmine Cuisses +1",feet="Jhakri Pigaches"}
+        back="Sacro Mantle",waist="Fotia Belt",legs="Carmine Cuisses +1",feet="Jhakri Pigaches"}
     
     sets.precast.WS.acc = set_combine(sets.precast.WS, {head="Malignance Chapeau", ear1="Cessance Earring", body="Malignance Tabard", hands="Malignance Gloves", legs="Malignance Tights", feet="Malignance Boots"})
 
@@ -437,17 +437,17 @@ function init_gear_sets()
     sets.engaged = {ammo="Ginsen",
         head="Adhemar Bonnet +1",neck="Sanctity Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
         body="Ayanmo Corazza +2",hands="Adhemar Wristbands +1",ring1="Petrov Ring",ring2="Epona's Ring",
-        back="Aptitude Mantle",waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Sacro Mantle",waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.Acc = {ammo="Ginsen",
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Petrov Ring",ring2="Epona's Ring",
-        back="Aptitude Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Sacro Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.PDT = {ammo="Ginsen",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Cessance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Epona's Ring",
-        back="Aptitude Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Sacro Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
 
 
     sets.engaged.Refresh = set_combine(sets.engaged, {body="Jhakri Robe +1"})
