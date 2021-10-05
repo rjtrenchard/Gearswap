@@ -298,7 +298,7 @@ function init_gear_sets()
     -- Defense sets
 
     sets.defense.PDT = {main=gear.Staff.PDT,sub="Mephitis Grip",
-        head="Ayanmo Zucchetto +2",neck="Lissome Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Petrov Ring",ring2="Defending Ring",
         back=gear.MeleeCape,waist="Shetal Stone",legs="Inyanga Shalwar +2",feet="Ayanmo gambieras +1"}
 
@@ -321,7 +321,7 @@ function init_gear_sets()
 
     -- Basic set for if no TP weapon is defined.
     sets.engaged = set_combine(sets.weapons, {range=gear.MeleeInstrument,
-        head="Ayanmo Zucchetto +2",neck="Lissome Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Petrov Ring",ring2="Ilabrat Ring",
         back=gear.MeleeCape,waist="Sailfi belt +1",legs="Ayanmo Cosciales +2",feet="Ayanmo gambieras +1"})
 
@@ -329,7 +329,7 @@ function init_gear_sets()
 
     -- Set if dual-wielding
     sets.engaged.DW = set_combine(sets.weapons, {range=gear.MeleeInstrument,
-        head="Ayanmo Zucchetto +2",neck="Lissome Necklace",ear1="Brutal Earring",ear2="Suppanomimi",
+        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Suppanomimi",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Petrov Ring",ring2="Ilabrat Ring",
         back=gear.MeleeCape,waist="Shetal Stone",legs="Ayanmo Cosciales +2",feet="Ayanmo gambieras +1"})
 
