@@ -863,6 +863,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 
     -- Dark seal handling
+    if buffactive["Dark Seal"] and spell.skill == 'Dark Magic' then equip(sets.precast.JA['Dark Seal']) end
     if spell.skill == 'Dark Magic' and buffactive['Dark Seal'] then
         if S{'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II'}:contains(spell.english) then
             equip(sets.midcast.Drain.DarkSeal)
@@ -875,6 +876,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
 
+    if S{'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II'}:contains(spell.english) or spell.english:startswith('Absorb') then
+        adjust_timers_darkmagic(spell, spellMap)
+    end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -900,12 +904,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
---[[function job_post_aftercast(spell, action, spellMap, eventArgs)
-    if spell.type == 'WeaponSkill' then 
-        update_combat_form()
-    end
-    eventArgs.handled = false
-end]]
+function job_post_aftercast(spell, action, spellMap, eventArgs)
+    if buffactive.Souleater then equip(sets.precast.JA['Souleater']) end
+end
 
 function job_buff_change(buff, gain)
     -- when gaining a buff
