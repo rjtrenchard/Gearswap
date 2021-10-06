@@ -71,6 +71,7 @@ function user_setup()
 
     state.WeaponMode = M{['description']='Weapon Mode', 'greatsword', 'scythe', 'greataxe', 'sword', 'club'}
     state.Verbose = M{['description']='Verbosity', 'Normal', 'Verbose', 'Debug'}
+    state.UseCustomTimers = M(true, 'Use Custom Timers')
     
     -- Additional local binds
     send_command('bind ^` input /ja "Hasso" <me>')
@@ -115,6 +116,9 @@ function user_setup()
     gear.WSEarBrutal = {name=gear.WSDayEar1}
     gear.WSEarMoonshade = {name=gear.WSDayEar2}
     gear.WSEarThrud = {name=gear.WSDayEar3}
+
+    info.JobPoints = {}
+    info.JobPoints.DarkSeal = 5
 
     info.Weapons = {}
     info.Weapons.Type = {
@@ -216,6 +220,8 @@ function user_setup()
             end
         end
     end)
+
+    custom_timers = {}
 
     info.AM = {}
     info.AM.potential = 0
@@ -967,6 +973,8 @@ function job_buff_change(buff, gain)
             info.AM.level = 0
             update_combat_form()
             job_update()
+        elseif S{'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II'}:contains(buff) or buff:startswith('Absorb') then
+            send_command('timers delete "'..spell.name..'"')
         end
     end
 end
@@ -1176,6 +1184,72 @@ function isOverMaxTP(tp, perm_bonus_tp, max_tp)
     perm_bonus_tp = perm_bonus_tp or 0
     return (tp+perm_bonus_tp) > (max_tp or 3000)
 end
+
+-- Function to create custom buff-remaining timers with the Timers plugin,
+-- keeping only the actual valid songs rather than spamming the default
+-- buff remaining timers.
+function adjust_timers_darkmagic(spell, spellMap)
+    if state.UseCustomTimers.value == false then
+        return
+    end
+    
+    local current_time = os.time()
+    
+    -- custom_timers contains a table of song names, with the os time when they
+    -- will expire.
+    
+    -- Eliminate songs that have already expired from our local list.
+    local temp_timer_list = {}
+    for spell_name,expires in pairs(custom_timers) do
+        if expires < current_time then
+            temp_timer_list[spell_name] = true
+        end
+    end
+    for spell_name,expires in pairs(temp_timer_list) do
+        custom_timers[spell_name] = nil
+        custom_timers.basetime[spell_name] = nil
+    end
+    
+    local dur = calculate_duration_darkmagic(spell.name, spellMap)
+    if custom_timers[spell.name] then
+        if custom_timers[spell.name] < (current_time + dur) then
+            send_command('timers delete "'..spell.name..'"')
+            custom_timers[spell.name] = current_time + dur
+            send_command('timers create "'..spell.name..'" '..dur..' down')
+        end
+    else
+        send_command('timers create "'..spell.name..'" '..dur..' down')
+    end
+end
+
+-- Function to calculate the duration of a song based on the equipment used to cast it.
+-- Called from adjust_timers_darkmagic(), which is only called on aftercast().
+function calculate_duration_darkmagic(spellName, spellMap)
+    local mult = 1
+    local base_duration = 0
+
+    if spellMap == 'Absorb' and not spellName == 'Absorb-Attri' then base_duration = 1.5*60 end
+    --if spellName == 'Bio' then base_duration = 1*60 end
+    --if spellName == 'Bio II' then base_duration = 2*60 end
+    --if spellName == 'Bio III' then base_duration = 180 end
+    if spellName == 'Drain II' then base_duration = 3*60 end
+    if spellName == 'Drain III' then base_duration = 3*60 end
+    if spellName == 'Dread Spikes' then base_duration = 3*60 end
+    if spellName == "Endark" then base_duration = 3*60 end
+    if spellName == "Endark II" then base_duration = 3*60 end
+
+    if player.equipment.feet == 'Ratri Sollerets' then mult = mult + 0.2 end
+    if player.equipment.feet == 'Ratri Sollerets +1' then mult = mult + 0.25 end
+    
+    if buffactive.DarkSeal and S{'Abyss Burgeonet +2', "Fallen's Burgeonet","Fallen's Burgeone +1","Fallen's Burgeonet +2","Fallen's Burgeonet +3"}:contains(player.equipment.head) then
+        mult = mult + (info.JobPoints.DarkSeal*0.1)
+    end
+    
+    local totalDuration = math.floor(mult*base_duration)
+
+    return totalDuration
+end
+
 
 -- sent a message to the game
 function echo(msg, verbosity_, chatmode)
