@@ -36,6 +36,10 @@ function user_setup()
         send_command('gs c cycle OffenseMode')
     end
 
+    info.JobPoints = {}
+    info.JobPoints.EnhancingDuration = 20
+    info.JobPoints.EnhancingMerits = 5
+
     send_command('bind !` gs c cycle MBurst')
     send_command('bind != gs c set OffenseMode Magic')
 
@@ -52,6 +56,8 @@ function user_setup()
     gear.CureHands = { name="Telchine Gloves", augments={'"Cure" potency +7%', '"Regen" potency +3'}}
 
     enhancing_skill_magic = S{'Temper', 'Temper II', 'Aquaveil'}
+
+    custom_timers = {}
 
     select_default_macro_book()
     
@@ -392,6 +398,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                     equip(sets.buff.ComposureOther)
                 end
         end
+        adjust_timers_enhancing(spell, spellMap)
     elseif spellMap == 'Cure' and spell.target.type == 'SELF' then
         equip(sets.midcast.CureSelf)
     elseif spell_burstable:contains(spell.english) and state.MBurst.value == 'Magic Burst' then
@@ -521,9 +528,129 @@ function update_combat_form()
     end
 end
 
+function adjust_timers_enhancing(spell, spellMap)
+    if state.UseCustomTimers.value == false then
+        return
+    end
+    
+    local current_time = os.time()
+    
+    -- custom_timers contains a table of song names, with the os time when they
+    -- will expire.
+    
+    -- Eliminate songs that have already expired from our local list.
+    local temp_timer_list = {}
+    for spell_name,expires in pairs(custom_timers) do
+        if expires < current_time then
+            temp_timer_list[spell_name] = true
+        end
+    end
+    for spell_name,expires in pairs(temp_timer_list) do
+        custom_timers[spell_name] = nil
+        custom_timers.basetime[spell_name] = nil
+    end
+    
+    local dur = calculate_duration_enhancing(spell.name, spellMap)
+    if custom_timers[spell.name] then
+        if custom_timers[spell.name] < (current_time + dur) then
+            send_command('timers delete "'..spell.name..'"')
+            custom_timers[spell.name] = current_time + dur
+            send_command('timers create "'..spell.name..'" '..dur..' down')
+        end
+    else
+        send_command('timers create "'..spell.name..'" '..dur..' down')
+    end
+end
+
+-- Function to calculate the duration of a song based on the equipment used to cast it.
+-- Called from adjust_timers_enhancing(), which is only called on aftercast().
+function calculate_duration_enhancing(spellName, spellMap)
+    local mult = 1
+    local base_duration = 0
+    local composure_count = 0
+
+    if spellName:startswith('Bar') then base_duration = 8*60 end
+    if spellName:startswith('Protect') then base_duration = 30*60 end
+    if spellName:startswith('Shell') then base_duration = 30*60 end
+    if spellName == 'Aquaveil' then base_duration = 10*60 end
+    if spellName:startswith('En') then base_duration = 3*60 end
+    if spellName == 'Blaze Spikes' then base_duration = 3*60 end
+    if spellName == 'Ice Spikes' then base_duration = 3*60 end
+    if spellName == 'Shock Spikes' then base_duration = 3*60 end
+    if spellName == 'Regen' then base_duration = 75 end
+    if spellName == 'Regen II' then base_duration = 60 end
+    if spellName == 'Blink' then base_duration = 5*60 end
+    if spellName == 'Phalanx' then base_duration = 180 end
+    if spellName == 'Phalanx II' then base_duration = 240 end
+    if spellName == 'Stoneskin' then base_duration = 5*60 end
+    if spellName == 'Refresh' then base_duration = 150 end
+    if spellName == 'Refresh II' then base_duration = 150 end
+    if spellName == 'Refresh III' then base_duration = 150 end
+    if spellName == 'Flurry' then base_duration = 3*60 end
+    if spellName == 'Flurry II' then base_duration = 3*60 end
+    if spellName == 'Haste' then base_duration = 3*60 end
+    if spellName == 'Haste II' then base_duration = 3*60 end
+    if spellName:startswith('Gain-') then base_duration = 5*60 end
+    if spellName == 'Temper' then base_duration = 3*60 end
+    if spellName == 'Temper II' then base_duration = 180 end
+    if spellName:endswith('storm') then base_duration = 3*60 end
+
+
+
+    -- get composure bonus
+    if S{'Estq. Houseaux +2', 'Lethargy Houseaux', 'Lethargy Houseaux +1'}:contains(player.equipment.feet) then composure_count = composure_count + 1 end
+    if S{'Estq. Chappel +2', 'Lethargy Chappel', 'Lethargy Chappel +1'}:contains(player.equipment.head) then composure_count = composure_count + 1 end
+    if S{'Estq. Sayon +2', 'Lethargy Sayon', 'Lethargy Sayon +1'}:contains(player.equipment.body) then composure_count = composure_count + 1 end
+    if S{'Estq. Ganthrt. +2', 'Lethargy Gantherots', 'Lethargy Gantherots +1'}:contains(player.equipment.hands) then composure_count = composure_count + 1 end
+    if S{'Estq. Fuseau +2', 'Lethargy Fuseau', 'Lethargy Fuseau +1'}:contains(player.equipment.legs) then composure_count = composure_count + 1 end
+
+    if player.equipment.body == 'Vitiation Tabard +2' then mult = mult + 0.1 end
+    if player.equipment.body == 'Vitiation Tabard +3' then mult = mult + 0.15 end
+    if player.equipment.hands == 'Atrophy Gloves' then mult = mult + 0.15 end
+    if player.equipment.hands == 'Atrophy Gloves +1' then mult = mult + 0.16 end
+    if player.equipment.hands == 'Atrophy Gloves +2' then mult = mult + 0.18 end
+    if player.equipment.hands == 'Atrophy Gloves +3' then mult = mult + 0.2 end
+    if player.equipment.back == "Sucellos's Cape" then mult = mult + 0.2 end
+    if player.equipment.waist == "Embla Sash" then mult = mult + 0.1 end
+    if player.equipment.feet == 'Lethargy Houseaux' then mult = mult + 0.25 end
+    if player.equipment.feet == 'Lethargy Houseaux' then mult = mult + 0.30 end
+    if player.equipment.sub == 'Ammurapi Shield' then mult = mult + 0.16 end
+    if player.equipment.main == 'Oranyan' then mult = mult + 0.1 end
+
+    if buffactive.composure then
+        if player.target == player.name then
+            mult = mult * 3
+        else
+            if composure_count == 5 then
+                mult = mult + 0.5
+            elseif composure_count == 4 then
+                mult = mult + 0.35
+            elseif composure_count == 3 then
+                mult = mult + 0.2
+            elseif composure_count == 2 then
+                mult = mult + 0.1
+            end
+        end
+    end
+
+    if S{"Duelist's Gloves +2", 'Vitiation Gloves', 'Vitiation Gloves +1','Vitiation Gloves +2','Vitiation Gloves +3'}:contains(player.equipment.hands) then
+        base_duration = base_duration + (info.JobPoints.EnhancingMerits * 9)
+    else
+        base_duration = base_duration + (info.JobPoints.EnhancingMerits * 6)
+    end
+    base_duration = base_duration + info.JobPoints.EnhancingDuration
+
+    local totalDuration = math.floor(mult*base_duration)
+
+    return totalDuration
+end
+
+
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
