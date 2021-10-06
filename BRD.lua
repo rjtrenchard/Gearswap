@@ -54,9 +54,14 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'PDT', 'Refresh')
 
-    
+    -- information about your job points
+    info.JobPoints = {}
+    info.JobPoints.Marcato = 20
+    info.JobPoints.Tenuto = 20
+    info.JobPoints.DurationGift = true
 
-        -- Weapon to use while engaged
+
+    -- Weapon to use while engaged
     state.WeaponMode = M{['description']='Weapon Mode', 'Sword', 'Dagger'}
 
     brd_offense = S{'Naegling', 'Aeneas', 'Tauret', 'Kaja Knife'}
@@ -559,30 +564,66 @@ end
 -- Called from adjust_timers(), which is only called on aftercast().
 function calculate_duration(spellName, spellMap)
     local mult = 1
+    local amt_added = 0
+
+    if player.equipment.range == "Miracle Cheer" then 
+        if S{'Ballad', 'Paeon', 'Madrigal', 'Ballad', 'Minuet', 'Minne', 'March', 'Scherzo', 'Mazurka'}:contains(spellMap) then 
+            return math.floor(15*60)
+        else 
+            mult = mult + 0.3 
+        end
+    end
+
     if player.equipment.range == 'Daurdabla' then mult = mult + 0.3 end -- change to 0.25 with 90 Daur
     if player.equipment.range == "Gjallarhorn" then mult = mult + 0.4 end -- change to 0.3 with 95 Gjall
+    if player.equipment.range == "Marsyas" then mult = mult + 0.5 end -- change to 0.3 with 95 Gjall
+    if player.equipment.range == "Blurred Harp" then mult = mult + 0.1 end -- change to 0.3 with 95 Gjall
+    if player.equipment.range == "Blurred Harp +1" then mult = mult + 0.2 end -- change to 0.3 with 95 Gjall
+    if player.equipment.range == "Homestead Flute" then mult = mult + 0.4 end -- change to 0.3 with 95 Gjall
     
     if player.equipment.main == "Carnwenhan" then mult = mult + 0.1 end -- 0.1 for 75, 0.4 for 95, 0.5 for 99/119
     if player.equipment.main == "Legato Dagger" then mult = mult + 0.05 end
     if player.equipment.sub == "Legato Dagger" then mult = mult + 0.05 end
+    if player.equipment.main == "Kali" then mult = mult + 0.05 end
+    if player.equipment.sub == "Kali" then mult = mult + 0.05 end
     if player.equipment.neck == "Aoidos' Matinee" then mult = mult + 0.1 end
+    if player.equipment.neck == "Moonbow Whistle" then mult = mult + 0.2 end
+    if player.equipment.neck == "Moonbow Whistle +1" then mult = mult + 0.3 end
     if player.equipment.body == "Aoidos' Hngrln. +2" then mult = mult + 0.1 end
+    if player.equipment.body == "Fili Hongreline" then mult = mult + 0.11 end
+    if player.equipment.body == "Fili Hongreline +1" then mult = mult + 0.12 end
     if player.equipment.legs == "Mdk. Shalwar +1" then mult = mult + 0.1 end
+    if player.equipment.legs == "Inyanga Shalwar" then mult = mult + 0.12 end
+    if player.equipment.legs == "Inyanga Shalwar +1" then mult = mult + 0.15 end
+    if player.equipment.legs == "Inyanga Shalwar +2" then mult = mult + 0.17 end
     if player.equipment.feet == "Brioso Slippers" then mult = mult + 0.1 end
-    if player.equipment.feet == "Brioso Slippers +2" then mult = mult + 0.11 end
+    if player.equipment.feet == "Brioso Slippers +1" then mult = mult + 0.11 end
+    if player.equipment.feet == "Brioso Slippers +2" then mult = mult + 0.13 end
+    if player.equipment.feet == "Brioso Slippers +3" then mult = mult + 0.15 end
     
     if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet" then mult = mult + 0.1 end
+    if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet +1" then mult = mult + 0.1 end
     if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet +2" then mult = mult + 0.1 end
+    if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet +3" then mult = mult + 0.2 end
+    if spellMap == 'Madrigal' and player.equipment.head == "Fili Calot" then mult = mult + 0.1 end
     if spellMap == 'Madrigal' and player.equipment.head == "Fili Calot +1" then mult = mult + 0.1 end
     if spellMap == 'Minuet' and player.equipment.body == "Aoidos' Hngrln. +2" then mult = mult + 0.1 end
+    if spellMap == 'Minuet' and player.equipment.body == "Fili Hongreline" then mult = mult + 0.11 end
+    if spellMap == 'Minuet' and player.equipment.body == "Fili Hongreline +1" then mult = mult + 0.12 end
     if spellMap == 'March' and player.equipment.hands == 'Ad. Mnchtte. +2' then mult = mult + 0.1 end
+    if spellMap == 'March' and player.equipment.hands == 'Fili Manchettes' then mult = mult + 0.1 end
+    if spellMap == 'March' and player.equipment.hands == 'Fili Manchettes +1' then mult = mult + 0.1 end
+    if spellMap == 'Lullaby' and player.equipment.range == "Blurred Harp" then mult = mult + 0.2 end
+    if spellMap == 'Ballad' and player.equipment.range == "Blurred Harp +1" then mult = mult + 0.2 end
     if spellMap == 'Ballad' and player.equipment.legs == "Fili Rhingrave" then mult = mult + 0.1 end
+    if spellMap == 'Ballad' and player.equipment.legs == "Fili Rhingrave +1" then mult = mult + 0.1 end
+    if spellName == "Sentinel's Scherzo" and player.equipment.feet == "Fili Cothurnes" then mult = mult + 0.1 end
     if spellName == "Sentinel's Scherzo" and player.equipment.feet == "Fili Cothurnes +1" then mult = mult + 0.1 end
     
     if buffactive.Troubadour then
         mult = mult*2
     end
-    if spellName == "Sentinel's Scherzo" then
+    if S{"Sentinel's Scherzo","Goddess's Hymnus","Raptor Mazurka","Chocobo Mazurka"}:contains(spellName) then
         if buffactive['Soul Voice'] then
             mult = mult*2
         elseif buffactive['Marcato'] then
@@ -590,7 +631,17 @@ function calculate_duration(spellName, spellMap)
         end
     end
     
-    local totalDuration = math.floor(mult*120)
+    if info.JobPoints.DurationGift then mult = mult + 0.05 end
+
+    if buffactive.Marcato and not buffactive["Soul Voice"] then
+        amt_added = amt_added + info.JobPoints.Marcato*1
+    end
+
+    if buffactive.Tenuto and not buffactive.pianissimo then
+        amt_added = amt_added + info.JobPoints.Tenuto*2
+    end
+
+    local totalDuration = math.floor(mult* (120 + amt_added) )
 
     return totalDuration
 end
