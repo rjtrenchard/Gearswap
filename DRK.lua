@@ -71,7 +71,7 @@ function user_setup()
 
     state.WeaponMode = M{['description']='Weapon Mode', 'greatsword', 'scythe', 'greataxe', 'sword', 'club'}
     state.Verbose = M{['description']='Verbosity', 'Normal', 'Verbose', 'Debug'}
-    state.UseCustomTimers = M(true, 'Use Custom Timers')
+    state.UseCustomTimers = M(false, 'Use Custom Timers')
     
     -- Additional local binds
     send_command('bind ^` input /ja "Hasso" <me>')
@@ -980,7 +980,7 @@ function job_buff_change(buff, gain)
             update_combat_form()
             job_update()
         elseif S{'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II'}:contains(buff) or buff:startswith('Absorb') then
-            send_command('timers delete "'..spell.name..'"')
+            send_command('timers delete "'..buff..'"')
         end
     end
 end
@@ -1202,7 +1202,7 @@ function calculate_dreadspikes()
     if player.equipment.body == "Heathen's Cuirass +1" then base_absorbed = base_absorbed + 0.175 end
     if player.equipment.main == 'Crepuscular Scythe' then base_absorbed = base_absorbed + 0.25 end
 
-    return base * base_absorbed
+    return math.floor(base * base_absorbed)
 end
 
 -- Function to create custom buff-remaining timers with the Timers plugin,
