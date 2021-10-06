@@ -569,31 +569,31 @@ function calculate_duration_enhancing(spellName, spellMap)
     local base_duration = 0
     local composure_count = 0
 
-    if spellName:startswith('Bar') then base_duration = 8*60 end
-    if spellName:startswith('Protect') then base_duration = 30*60 end
-    if spellName:startswith('Shell') then base_duration = 30*60 end
-    if spellName == 'Aquaveil' then base_duration = 10*60 end
-    if spellName:startswith('En') then base_duration = 3*60 end
-    if spellName == 'Blaze Spikes' then base_duration = 3*60 end
-    if spellName == 'Ice Spikes' then base_duration = 3*60 end
-    if spellName == 'Shock Spikes' then base_duration = 3*60 end
-    if spellName == 'Regen' then base_duration = 75 end
-    if spellName == 'Regen II' then base_duration = 60 end
-    if spellName == 'Blink' then base_duration = 5*60 end
-    if spellName == 'Phalanx' then base_duration = 180 end
-    if spellName == 'Phalanx II' then base_duration = 240 end
-    if spellName == 'Stoneskin' then base_duration = 5*60 end
-    if spellName == 'Refresh' then base_duration = 150 end
-    if spellName == 'Refresh II' then base_duration = 150 end
-    if spellName == 'Refresh III' then base_duration = 150 end
-    if spellName == 'Flurry' then base_duration = 3*60 end
-    if spellName == 'Flurry II' then base_duration = 3*60 end
-    if spellName == 'Haste' then base_duration = 3*60 end
-    if spellName == 'Haste II' then base_duration = 3*60 end
-    if spellName:startswith('Gain-') then base_duration = 5*60 end
-    if spellName == 'Temper' then base_duration = 3*60 end
-    if spellName == 'Temper II' then base_duration = 180 end
-    if spellName:endswith('storm') then base_duration = 3*60 end
+    if spellName.english:startswith('Bar') then base_duration = 8*60 end
+    if spellName.english:startswith('Protect') then base_duration = 30*60 end
+    if spellName.english:startswith('Shell') then base_duration = 30*60 end
+    if spellName.english 'Aquaveil' then base_duration = 10*60 end
+    if spellName.english:startswith('En') then base_duration = 3*60 end
+    if spellName.english 'Blaze Spikes' then base_duration = 3*60 end
+    if spellName.english 'Ice Spikes' then base_duration = 3*60 end
+    if spellName.english 'Shock Spikes' then base_duration = 3*60 end
+    if spellName.english 'Regen' then base_duration = 75 end
+    if spellName.english 'Regen II' then base_duration = 60 end
+    if spellName.english 'Blink' then base_duration = 5*60 end
+    if spellName.english 'Phalanx' then base_duration = 180 end
+    if spellName.english 'Phalanx II' then base_duration = 240 end
+    if spellName.english 'Stoneskin' then base_duration = 5*60 end
+    if spellName.english 'Refresh' then base_duration = 150 end
+    if spellName.english 'Refresh II' then base_duration = 150 end
+    if spellName.english 'Refresh III' then base_duration = 150 end
+    if spellName.english 'Flurry' then base_duration = 3*60 end
+    if spellName.english 'Flurry II' then base_duration = 3*60 end
+    if spellName.english 'Haste' then base_duration = 3*60 end
+    if spellName.english 'Haste II' then base_duration = 3*60 end
+    if spellName.english:startswith('Gain-') then base_duration = 5*60 end
+    if spellName.english 'Temper' then base_duration = 3*60 end
+    if spellName.english 'Temper II' then base_duration = 180 end
+    if spellName.english:endswith('storm') then base_duration = 3*60 end
 
 
 
@@ -618,7 +618,7 @@ function calculate_duration_enhancing(spellName, spellMap)
     if player.equipment.main == 'Oranyan' then mult = mult + 0.1 end
 
     if buffactive.composure then
-        if player.target == player.name then
+        if spellName.target.name == player.name then
             mult = mult * 3
         else
             if composure_count == 5 then
