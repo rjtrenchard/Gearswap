@@ -1229,7 +1229,7 @@ function calculate_duration_darkmagic(spellName, spellMap)
     local mult = 1
     local base_duration = 0
 
-    if spellMap == 'Absorb' and not spellName == 'Absorb-Attri' then base_duration = 1.5*60 end
+    if spellMap == 'Absorb' and spellName ~= 'Absorb-Attri' and spellName ~= 'Absorb-TP' then base_duration = 1.5*60 end
     --if spellName == 'Bio' then base_duration = 1*60 end
     --if spellName == 'Bio II' then base_duration = 2*60 end
     --if spellName == 'Bio III' then base_duration = 180 end
@@ -1241,7 +1241,9 @@ function calculate_duration_darkmagic(spellName, spellMap)
 
     if player.equipment.feet == 'Ratri Sollerets' then mult = mult + 0.2 end
     if player.equipment.feet == 'Ratri Sollerets +1' then mult = mult + 0.25 end
-    
+    if player.equipment.ring1 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult + 0.1 end
+    if player.equipment.ring2 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult + 0.1 end
+
     if buffactive.DarkSeal and S{'Abyss Burgeonet +2', "Fallen's Burgeonet","Fallen's Burgeone +1","Fallen's Burgeonet +2","Fallen's Burgeonet +3"}:contains(player.equipment.head) then
         mult = mult + (info.JobPoints.DarkSeal*0.1)
     end
