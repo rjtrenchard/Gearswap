@@ -118,7 +118,8 @@ function user_setup()
     gear.WSEarThrud = {name=gear.WSDayEar3}
 
     info.JobPoints = {}
-    info.JobPoints.DarkSeal = 5
+    info.JobPoints.DarkSealMerits = 5
+    info.JobPoints.DreadSpikesBonus = true
 
     info.Weapons = {}
     info.Weapons.Type = {
@@ -879,6 +880,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if S{'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II'}:contains(spell.english) or spell.english:startswith('Absorb') then
         adjust_timers_darkmagic(spell, spellMap)
     end
+
+    if spell.english == 'Dread Spikes' then
+        echo('Dread Spikes [' .. calculate_dreadspikes() .. ']')
+    end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -1186,6 +1191,20 @@ function isOverMaxTP(tp, perm_bonus_tp, max_tp)
     return (tp+perm_bonus_tp) > (max_tp or 3000)
 end
 
+function calculate_dreadspikes() 
+    local base = player.max_hp
+    local base_absorbed = 0.5
+
+    if info.JobPoints.DreadSpikesBonus then base_absorbed = base_absorbed + 0.1 end
+    if player.equipment.body == 'Bale Cuirass +1' then base_absorbed = base_absorbed + 0.0625 end
+    if player.equipment.body == 'Bale Cuirass +2' then base_absorbed = base_absorbed + 0.125 end
+    if player.equipment.body == "Heathen's Cuirass" then base_absorbed = base_absorbed + 0.125 end
+    if player.equipment.body == "Heathen's Cuirass +1" then base_absorbed = base_absorbed + 0.175 end
+    if player.equipment.main == 'Crepuscular Scythe' then base_absorbed = base_absorbed + 0.25 end
+
+    return base * base_absorbed
+end
+
 -- Function to create custom buff-remaining timers with the Timers plugin,
 -- keeping only the actual valid songs rather than spamming the default
 -- buff remaining timers.
@@ -1245,7 +1264,7 @@ function calculate_duration_darkmagic(spellName, spellMap)
     if player.equipment.ring2 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult + 0.1 end
 
     if buffactive.DarkSeal and S{'Abyss Burgeonet +2', "Fallen's Burgeonet","Fallen's Burgeone +1","Fallen's Burgeonet +2","Fallen's Burgeonet +3"}:contains(player.equipment.head) then
-        mult = mult + (info.JobPoints.DarkSeal*0.1)
+        mult = mult + (info.JobPoints.DarkSealMerits*0.1)
     end
     
     local totalDuration = math.floor(mult*base_duration)
