@@ -567,7 +567,6 @@ end
 function calculate_duration_enhancing(spellName, spellMap)
     local mult = 1
     local base_duration = 0
-    local composure_count = 0
 
     if spellName.english:startswith('Bar') then base_duration = 8*60 end
     if spellName.english:startswith('Protect') then base_duration = 30*60 end
@@ -595,15 +594,7 @@ function calculate_duration_enhancing(spellName, spellMap)
     if spellName.english 'Temper II' then base_duration = 180 end
     if spellName.english:endswith('storm') then base_duration = 3*60 end
 
-
-
-    -- get composure bonus
-    if S{'Estq. Houseaux +2', 'Lethargy Houseaux', 'Lethargy Houseaux +1'}:contains(player.equipment.feet) then composure_count = composure_count + 1 end
-    if S{'Estq. Chappel +2', 'Lethargy Chappel', 'Lethargy Chappel +1'}:contains(player.equipment.head) then composure_count = composure_count + 1 end
-    if S{'Estq. Sayon +2', 'Lethargy Sayon', 'Lethargy Sayon +1'}:contains(player.equipment.body) then composure_count = composure_count + 1 end
-    if S{'Estq. Ganthrt. +2', 'Lethargy Gantherots', 'Lethargy Gantherots +1'}:contains(player.equipment.hands) then composure_count = composure_count + 1 end
-    if S{'Estq. Fuseau +2', 'Lethargy Fuseau', 'Lethargy Fuseau +1'}:contains(player.equipment.legs) then composure_count = composure_count + 1 end
-
+    -- get equipment bonuses
     if player.equipment.body == 'Vitiation Tabard +2' then mult = mult + 0.1 end
     if player.equipment.body == 'Vitiation Tabard +3' then mult = mult + 0.15 end
     if player.equipment.hands == 'Atrophy Gloves' then mult = mult + 0.15 end
@@ -617,6 +608,14 @@ function calculate_duration_enhancing(spellName, spellMap)
     if player.equipment.sub == 'Ammurapi Shield' then mult = mult + 0.16 end
     if player.equipment.main == 'Oranyan' then mult = mult + 0.1 end
 
+    -- get composure bonus
+    local composure_count = 0
+    if S{'Estq. Houseaux +2', 'Lethargy Houseaux', 'Lethargy Houseaux +1'}:contains(player.equipment.feet) then composure_count = composure_count + 1 end
+    if S{'Estq. Chappel +2', 'Lethargy Chappel', 'Lethargy Chappel +1'}:contains(player.equipment.head) then composure_count = composure_count + 1 end
+    if S{'Estq. Sayon +2', 'Lethargy Sayon', 'Lethargy Sayon +1'}:contains(player.equipment.body) then composure_count = composure_count + 1 end
+    if S{'Estq. Ganthrt. +2', 'Lethargy Gantherots', 'Lethargy Gantherots +1'}:contains(player.equipment.hands) then composure_count = composure_count + 1 end
+    if S{'Estq. Fuseau +2', 'Lethargy Fuseau', 'Lethargy Fuseau +1'}:contains(player.equipment.legs) then composure_count = composure_count + 1 end
+    
     if buffactive.composure then
         if spellName.target.name == player.name then
             mult = mult * 3
