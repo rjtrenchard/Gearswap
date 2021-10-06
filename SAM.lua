@@ -153,7 +153,7 @@ function init_gear_sets()
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle.Town = {main="Tsurumaru", sub="Pole Grip",ammo="Ginsen",
-        head="Yaoyotl Helm",neck="Asperity Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Yaoyotl Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
         body="Otronif Harness +1",hands="Otronif Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Atheling Mantle",waist="Flume Belt",legs="Phorcys Dirs",feet="Danzo Sune-ate"}
     
@@ -201,7 +201,7 @@ function init_gear_sets()
         body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Ilabrat Ring",ring2="Niqmaddu Ring",
         back="Atheling Mantle",waist="Sailfi Belt +1",legs="Hizamaru Hizayoroi",feet="Flamma Gambieras +2"}
     sets.engaged.Acc = {ammo="Ginsen",
-        head="Yaoyotl Helm",neck="Asperity Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Yaoyotl Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
         body="Gorney Haubert +1",hands="Otronif Gloves",ring1="Ilabrat Ring",ring2="Niqmaddu Ring",
         back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
     sets.engaged.PDT = {ammo="Ginsen",
@@ -224,11 +224,11 @@ function init_gear_sets()
     -- Melee sets for in Adoulin, which has an extra 10 Save TP for weaponskills.
     -- Delay 450 GK, 35 Save TP => 89 Store TP for a 4-hit (49 Store TP in gear), 2 Store TP for a 5-hit
 --    sets.engaged.Adoulin = {ammo="Ginsen",
---        head="Yaoyotl Helm",neck="Asperity Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
+--        head="Yaoyotl Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
 --        body="Gorney Haubert +1",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
 --        back="Takaha Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}]
 --    sets.engaged.Adoulin.Acc = {ammo="Ginsen",
---        head="Yaoyotl Helm",neck="Asperity Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
+--        head="Yaoyotl Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
 --        body="Unkai Domaru +2",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
 --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 --    sets.engaged.Adoulin.PDT = {ammo="Ginsen",

@@ -286,7 +286,7 @@ function init_gear_sets()
         back="Atheling Mantle",waist="Shetal Stone",legs="Flamma Dirs +1",feet="Flamma Gambieras +2"}
 
     sets.engaged.DW.Acc = {ammo="Ginsen",
-        head="Flamma Zucchetto +2",neck="Asperity Necklace",ear1="Cessance Earring",ear2="Suppanomimi",
+        head="Flamma Zucchetto +2",neck="Combatant's Torque",ear1="Cessance Earring",ear2="Suppanomimi",
         body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Petrov Ring",ring2="Flamma Ring",
         back="Atheling Mantle",waist="Shetal Stone",legs="Cizin Breeches",feet="Flamma Gambieras +2"}
 

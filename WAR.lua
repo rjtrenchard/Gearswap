@@ -132,7 +132,7 @@ function init_gear_sets()
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle.Town = {main="Tsurumaru", sub="Pole Grip",ammo="Ginsen",
-        head="Sakpata's Helm",neck="Asperity Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Atheling Mantle",waist="Flume Belt",legs="Phorcys Dirs",feet="Danzo Sune-ate"}
     
@@ -176,11 +176,11 @@ function init_gear_sets()
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
     sets.engaged = {ammo="Ginsen",
-        head="Sakpata's Helm",neck="Asperity Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Sakpata's breastplate",hands="Sakpata's Gauntlets",ring1="Rajas Ring",ring2="K'ayres Ring",
         back="Atheling Mantle",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Acc = {ammo="Seething Bomblet +1",
-        head="Sakpata's Helm",neck="Asperity Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Rajas Ring",ring2="K'ayres Ring",
         back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.PDT = {ammo="Ginsen",

@@ -164,7 +164,7 @@ function init_gear_sets()
 		back="Shadow Mantle",waist="Flume Belt",legs="Nahtirah Trousers",feet="Orion Socks +1"}
 
 	sets.engaged.Acc = {
-		head="Whirlpool Mask",neck="Asperity Necklace",ear1="Steelflash Earring",ear2="Bladeborn Earring",
+		head="Whirlpool Mask",neck="Combatant's Torque",ear1="Steelflash Earring",ear2="Bladeborn Earring",
 		body="Manibozho Jerkin",hands="Iuitl Wristbands",ring1="K'ayres Ring",ring2="Rajas Ring",
 		back="Letalis Mantle",waist="Windbuffet Belt",legs="Manibozho Brais",feet="Iuitl Gaiters"}
 

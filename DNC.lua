@@ -65,7 +65,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('Evasion', 'PDT')
 
 
-    gear.default.weaponskill_neck = "Asperity Necklace"
+    gear.default.weaponskill_neck = "Combatant's Torque"
     gear.default.weaponskill_waist = "Caudata Belt"
     gear.AugQuiahuiz = {name="Quiahuiz Trousers", augments={'Haste+2','"Snapshot"+2','STR+8'}}
 
@@ -278,7 +278,7 @@ function init_gear_sets()
 
     -- Custom melee group: High Haste (2x March or Haste)
     sets.engaged.HighHaste = {ammo="Charis Feather",
-        head="Adhemar Bonnet +1",neck="Asperity Necklace",ear1="Suppanomimi",ear2="Brutal Earring",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Shetal Stone",legs="Kaabnax Trousers",feet="Manibozho Boots"}
 
@@ -292,7 +292,7 @@ function init_gear_sets()
         back="Atheling Mantle",waist="Shetal Stone",legs="Kaabnax Trousers",feet="Malignance Boots"}
 
     sets.engaged.Acc.HighHaste = {ammo="Yamarang",
-        head="Adhemar Bonnet +1",neck="Asperity Necklace",ear1="Suppanomimi",ear2="Brutal Earring",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Iuitl Vest",hands="Adhemar Wristbands +1",ring1="Rajas Ring",ring2="Epona's Ring",
         back="Toetapper Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Evasion.HighHaste = {ammo="Charis Feather",
@@ -315,22 +315,22 @@ function init_gear_sets()
 
     -- Custom melee group: Max Haste (2x March + Haste)
     sets.engaged.MaxHaste = {ammo="Charis Feather",
-        head="Adhemar Bonnet +1",neck="Asperity Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Meghanada Cuirie +1",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Windbuffet Belt",legs=gear.AugQuiahuiz,feet="Manibozho Boots"}
 
     -- Getting Marches+Haste from Trust NPCs, doesn't cap delay.
     sets.engaged.Fodder.MaxHaste = {ammo="Charis Feather",
-        head="Adhemar Bonnet +1",neck="Asperity Necklace",ear1="Suppanomimi",ear2="Brutal Earring",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Thaumas Coat",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Shetal Stone",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
     sets.engaged.Fodder.Evasion.MaxHaste = {ammo="Charis Feather",
-        head="Adhemar Bonnet +1",neck="Asperity Necklace",ear1="Suppanomimi",ear2="Brutal Earring",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Shetal Stone",legs="Kaabnax Trousers",feet="Manibozho Boots"}
 
     sets.engaged.Acc.MaxHaste = {ammo="Yamarang",
-        head="Adhemar Bonnet +1",neck="Asperity Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Iuitl Vest",hands="Adhemar Wristbands +1",ring1="Rajas Ring",ring2="Epona's Ring",
         back="Toetapper Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Evasion.MaxHaste = {ammo="Charis Feather",

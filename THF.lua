@@ -79,12 +79,12 @@ function init_gear_sets()
     sets.Kiting = {feet="Skadi's Jambeaux +1"}
 
     sets.buff['Sneak Attack'] = {ammo="Yetshila +1",
-        head="Adhemar Bonnet +1",neck="Asperity Necklace",ear1="Sherida Earring",ear2="Odr Earring",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Odr Earring",
         body="Pillager's Vest +2",hands="Skulker's armlets",ring1="Regal Ring",ring2="Ilabrat Ring",
         back={name="Toutatis's Cape",bag="wardrobe 2"},waist="Chaac Belt",legs="Pillager's Culottes +1",feet="Plunderer's Poulaines +1"}
 
     sets.buff['Trick Attack'] = {ammo="Yetshila +1",
-        head="Adhemar Bonnet +1",neck="Asperity Necklace",ear1="Sherida Earring",ear2="Infused Earring",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Infused Earring",
         body="Pillager's Vest +2",hands="Pillager's armlets +1",ring1="Regal Ring",ring2="Ilabrat Ring",
         back={name="Toutatis's Cape",bag="wardrobe 2"},waist="Chaac Belt",legs="Pillager's Culottes +1",feet="Plunderer's Poulaines +1"}
 
