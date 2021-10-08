@@ -103,7 +103,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
 
-    sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], {head=empty,body="Twilight Cloak"})
+    sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], {head=empty,body="Crepuscular Cloak"})
 
 
     -- Midcast Sets
@@ -201,7 +201,7 @@ function init_gear_sets()
 
     sets.midcast.Impact = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Dosis Tathlum",
         head=empty,neck="Eddy Necklace",ear1="Barkarole Earring",ear2="Malignance Earring",
-        body="Twilight Cloak",hands=gear.macc_hagondes,ring1="Icesoul Ring",ring2="Stikini Ring +1",
+        body="Crepuscular Cloak",hands=gear.macc_hagondes,ring1="Icesoul Ring",ring2="Stikini Ring +1",
         back="Toro Cape",waist="Demonry Sash",legs="Hagondes Pants",feet="Bokwus Boots"}
 
 
