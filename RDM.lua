@@ -30,6 +30,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'PDT', 'MDT')
     
     state.MBurst = M{'None', 'Magic Burst'}
+    state.UseCustomTimers = M(false, 'Use Custom Timers')
 
     state.OffenseMode:set('Magic')
     if (player.sub_job == 'NIN' or player.sub_job == 'DNC') then
