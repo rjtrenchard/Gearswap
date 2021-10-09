@@ -487,9 +487,12 @@ function init_gear_sets()
 
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
 
-    sets.precast.FC['Dark Magic'] = set_combine (sets.precast.FC, {
+    sets.precast.FC['Dark Magic'] = set_combine(sets.precast.FC, {
         head="Fallen's Burgeonet +2"
     })
+
+    sets.precast['Impact'] = set_combine(sets.precast.FC['Dark Magic'], {head="", body="Crepuscular cloak"})
+    sets.precast.FC['Impact'] = set_combine(sets.precast.FC['Dark Magic'], {head="", body="Crepuscular cloak"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, { })
 
@@ -521,6 +524,8 @@ function init_gear_sets()
     sets.midcast['Endark II'] = sets.midcast['Endark']
     sets.midcast['Endark'].DarkSeal = set_combine(sets.midcast['Endark'], {head="Fallen's Burgeonet +2"})
     sets.midcast['Endark II'].DarkSeal = sets.midcast['Endark'].DarkSeal
+
+    sets.midcast['Impact'] = set_combine(sets.midcast['Dark Magic'],{head="", body="Crepuscular Cloak"})
 
     sets.midcast.Drain = set_combine( sets.midcast['Dark Magic'], {ammo="Sturm's Report",
         head="Pixie Hairpin +1",neck="Erra Pendant",ear1="Malignance Earring", ear2="Hirudinea Earring",
@@ -872,6 +877,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.midcast['Dread Spikes'].DarkSeal)
         elseif S{'Endark', 'Endark II'}:contains(spell.english) then
             equip(sets.midcast['Endark'].DarkSeal)
+        elseif S{'Impact'}:contains(spell.english) then
+            equip(sets.midcast['Impact'])
         else
             equip(sets.midcast['Dark Magic'].DarkSeal)
         end

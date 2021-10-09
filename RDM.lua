@@ -102,9 +102,9 @@ function init_gear_sets()
     sets.precast['Enfeebling Magic'] = set_combine(sets.precast.FC, {head="Lethargy Chappel"})
     sets.precast['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 
-    sets.precast.Dispelga = set_combine(sets.precast.FC, {main="Daybreak"})
-    sets.precast.Impact = set_combine(sets.precast.FC, {head="", body="Crepuscular Cloak"})
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty,body="Crepuscular Cloak"})
+    sets.precast['Dispelga'] = set_combine(sets.precast.FC, {main="Daybreak"})
+    sets.precast['Impact'] = set_combine(sets.precast.FC, {head="", body="Crepuscular Cloak"})
+    sets.precast.FC['Impact'] = set_combine(sets.precast.FC, {head="",body="Crepuscular Cloak"})
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
@@ -225,8 +225,8 @@ function init_gear_sets()
         back=gear.int_cape,waist=gear.ElementalObi,legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.midcast.Dispel = set_combine(sets.midcast['Enfeebling Magic'], {neck="Duelist's Torque", ring1="Archon Ring"})
-    sets.midcast.Dispelga = set_combine(sets.midcast.Dispel, {main="Daybreak"})
-    sets.midcast.Impact = set_combine(sets.midcast['Dark Magic'], {head=empty,body="Crepuscular Cloak", waist="Eschan Stone"})
+    sets.midcast['Dispelga'] = set_combine(sets.midcast.Dispel, {main="Daybreak"})
+    sets.midcast['Impact'] = set_combine(sets.midcast['Dark Magic'], {head=empty,body="Crepuscular Cloak", waist="Eschan Stone"})
     --sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {})
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {head="Pixie Hairpin +1", neck="Erra Pendant", ring1="Archon Ring", ring2="Evanescence Ring", waist="Fucho-no-Obi"})
@@ -357,7 +357,7 @@ function job_precast(spell, action, spellMap, eventArgs)
         if player.equipment.main == 'Daybreak' then return
         else
             equip(sets.precast.Dispelga)
-            cast_delay(1.0)
+            --cast_delay(1.0)
         end
     elseif spell.english == 'Dispelga' then -- in the future, modify this so it can check if its main or offhand
         add_to_chat(122,"Not in Magic mode, cancelling.")
@@ -368,7 +368,7 @@ function job_precast(spell, action, spellMap, eventArgs)
         if player.equipment.body == 'Crepuscular Cloak' then return
         else
             equip(sets.precast.Impact)
-            cast_delay(1.0)
+            --cast_delay(1.0)
         end
     end
 end
