@@ -170,7 +170,7 @@ function init_gear_sets()
     -- Idle sets
 
     sets.idle = {range="Animator P",
-        head="Hizamaru Somen",neck="Empath Necklace",ear1="Eabani Earring",ear2="Hearty Earring",
+        head="Hizamaru Somen",neck="Empath Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Taeon Tabard",hands="Taeon Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Hurch'lan Sash",legs="Taeon Tights",feet="Hermes' Sandals"}
 

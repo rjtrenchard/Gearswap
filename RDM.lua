@@ -199,7 +199,7 @@ function init_gear_sets()
     
     sets.midcast["Enfeebling Magic"].DW = set_combine(sets.midcast["Enfeebling Magic"], {sub="Tauret"})
 
-    sets.midcast['Divine Magic'] = {}
+    sets.midcast['Divine Magic'] = {neck="Incanter's Torque",ring1="Stikini Ring +1",ring2="Stikini Ring +1"}
     sets.midcast.Cursna = set_combine(sets.midcast['Divine Magic'], {feet="Gendewitha Galoshes +1"})
 
 
@@ -220,11 +220,11 @@ function init_gear_sets()
     sets.midcast.MagicBurst = set_combine(sets.midcast['Elemental Magic'], {neck="Mizukage-no-kubikazari",ring1="Jhakri Ring", ring2="Mujin Band", feet="Jhakri Pigaches +2"})
 
     sets.midcast['Dark Magic'] = {main="Naegling",sub="Genbu's Shield",ammo="Regal Gem",
-        head="Malignance Chapeau",neck="Erra Pendant",ear1="Snotra Earring",ear2="Malignance Earring",
+        head="Malignance Chapeau",neck="Erra Pendant",ear1="Mani Earring",ear2="Malignance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini ring +1",ring2="Evanescence Ring",
         back=gear.int_cape,waist=gear.ElementalObi,legs="Malignance Tights",feet="Malignance Boots"}
 
-    sets.midcast.Dispel = set_combine(sets.midcast['Enfeebling Magic'], {neck="Duelist's Torque", ring1="Archon Ring"})
+    sets.midcast['Dispel'] = set_combine(sets.midcast['Enfeebling Magic'].Acc, {neck="Duelist's Torque", back=gear.int_cape})
     sets.midcast['Dispelga'] = set_combine(sets.midcast.Dispel, {main="Daybreak"})
     sets.midcast['Impact'] = set_combine(sets.midcast['Dark Magic'], {head=empty,body="Crepuscular Cloak", waist="Eschan Stone"})
     --sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {})
@@ -261,22 +261,22 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {main="Bolelabunga",sub="Genbu's Shield",ammo="Homiliary",
-        head="Vitiation Chapeau +3",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused Earring",
+        head="Vitiation Chapeau +3",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Infused Earring",
         body="Jhakri Robe +2",hands="Malignance Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist="Fucho-No-Obi",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.Town = {main="Bolelabunga",sub="Genbu's Shield",ammo="Homiliary",
-        head="Vitiation Chapeau +3",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused earring",
+        head="Vitiation Chapeau +3",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Infused earring",
         body="Vitiation Tabard +3",hands="Atrophy Gloves +3",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Shadow Mantle",waist="Fucho-no-obi",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.Weak = {main="Bolelabunga",sub="Genbu's Shield",ammo="Homiliary",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Infused earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini ring +1",ring2="Defending Ring",
         back="Shadow Mantle",waist="Fucho-no-obi",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.PDT = {main="Malignance Pole",sub="Oneiros Grip",ammo="Homiliary",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Infused earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini Ring +1",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
 
@@ -285,7 +285,7 @@ function init_gear_sets()
 
     -- Defense sets
     sets.defense.PDT = {ammo="Ginsen",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Eabani Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
 
@@ -322,14 +322,14 @@ function init_gear_sets()
         neck="Duelist's Torque",ear2="Malignance Earring",
         hands="Ayanmo Manopolas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1", 
         back="Ghostfyre Cape"})
-    sets.engaged.Enspell0 = set_combine(sets.engaged.Enspell, sets.offense.Enspell)
+    sets.engaged.Enspell0 = set_combine(sets.engaged.Enspell, {back=gear.melee_cape, waist="Eschan Stone", ear1="Crepuscular Earring"})
 
     sets.engaged.Defense = {ammo="Ginsen",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring",ear2="Cessance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring2="Defending Ring",ring1="Ilabrat Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.PDT = sets.engaged.Defense
-    sets.engaged.MDT = set_combine(sets.engaged.PDT, {ring2 = "Archon Ring"})
+    sets.engaged.MDT = set_combine(sets.engaged.PDT, {ring2="Archon Ring"})
 
 
     sets.engaged.DW = set_combine(sets.engaged, {ear2="Suppanomimi", waist="Shetal Stone", legs="Carmine Cuisses +1"})
@@ -376,10 +376,18 @@ end
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.skill == 'Enfeebling Magic' and state.Buff.Saboteur then
-        equip(sets.buff.Saboteur)
-    elseif spell.skill == 'Enfeebling Magic' and S{'NIN','DNC'}:contains(player.sub_job) then
+    if spell.skill == 'Enfeebling Magic' then
+        if S{'NIN','DNC'}:contains(player.sub_job) then
         equip(sets.midcast["Enfeebling Magic"].DW)
+        end
+        if spell.english == 'Dispel' then
+            equip(sets.midcast['Dispel'])
+        elseif spell.english == 'Dispelga' then
+            equip(sets.midcast['Dispelga'])
+        end
+        if state.Buff.Saboteur then
+            equip(sets.buff.Saboteur)
+        end
     elseif spell.skill == 'Enhancing Magic' then
         if enhancing_skill_magic:contains(spell.english) then
             equip(sets.midcast['Enhancing Magic'])

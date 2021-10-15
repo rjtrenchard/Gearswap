@@ -217,7 +217,7 @@ function init_gear_sets()
         back=gear.leaden_cape,waist=gear.ElementalObi,legs="Herculean Trousers",feet="Lanun Bottes +3"})
 
     sets.midcast.CorsairShot.Acc = set_combine(sets.midcast.CorsairShot, {
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Crepuscular Earring",ear2="Gwati Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back=gear.ranged_cape,waist="Eschan Stone",legs="Malignance Tights",feet="Malignance Boots"})
 
@@ -248,12 +248,12 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {ammo=gear.RAbullet,
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Eabani Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Flume Belt",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.Town = {ammo=gear.RAbullet,
-        head="Malignance Chapeau",neck="Iskur Gorget",ear1="Hearty Earring",ear2="Eabani Earring",
+        head="Malignance Chapeau",neck="Iskur Gorget",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Flume Belt",legs="Carmine Cuisses +1",feet="Malignance Boots"}
     

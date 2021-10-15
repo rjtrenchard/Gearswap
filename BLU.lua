@@ -273,7 +273,7 @@ function init_gear_sets()
         back="Swith Cape +1",waist="Witful Belt",legs="Enif Cosciales",feet="Iuitl Gaiters +1"}
         
     sets.midcast['Blue Magic'] = {
-        head="Malignance Chapeau", neck="sanctity necklace", ear1="lifestorm earring", ear2="Psystorm earring",
+        head="Malignance Chapeau", neck="sanctity necklace", ear1="Crepuscular Earring", ear2="Gwati Earring",
         body="Malignance Tabard", hands="Malignance Gloves", ring1="Jhakri Ring", ring2="Stikini Ring +1",
         back="Felicitas cape +1", waist=gear.ElementalObi, legs="Malignance Tights", feet="Malignance Boots"}
     
@@ -304,11 +304,11 @@ function init_gear_sets()
          waist="Chaac Belt",feet="Iuitl Gaiters +1"})
 
     sets.midcast['Blue Magic'].PhysicalInt = set_combine(sets.midcast['Blue Magic'].Physical,
-        {ear1="Psystorm Earring",body="Vanir Cotehardie",hands="Assimilator's Bazubands +1",
+        {ear1="Gwati Earring",body="Vanir Cotehardie",hands="Assimilator's Bazubands +1",
          ring2="Icesoul Ring",back="Toro Cape",feet="Hagondes Sabots"})
 
     sets.midcast['Blue Magic'].PhysicalMnd = set_combine(sets.midcast['Blue Magic'].Physical,
-        {ear1="Lifestorm Earring",body="Vanir Cotehardie",hands="Assimilator's Bazubands +1",
+        {ear1="Crepuscular Earring",body="Vanir Cotehardie",hands="Assimilator's Bazubands +1",
          ring2="Aquasoul Ring",back="Refraction Cape"})
 
     sets.midcast['Blue Magic'].PhysicalChr = set_combine(sets.midcast['Blue Magic'].Physical,
@@ -339,14 +339,14 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].MagicalDex = set_combine(sets.midcast['Blue Magic'].Magical)
 
     sets.midcast['Blue Magic'].MagicAccuracy = {ammo="Mavi Tathlum",
-        head="Luhlaza Keffiyeh",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
+        head="Luhlaza Keffiyeh",neck="Sanctity Necklace",ear1="Crepuscular Earring",ear2="Gwati Earring",
         body="Vanir Cotehardie",hands=gear.macc_hagondes,ring2="Stikini Ring +1",
         back="Cornflower Cape",legs="Iuitl Tights",feet="Iuitl Gaiters +1"}
 
     -- Breath Spells --
     
     sets.midcast['Blue Magic'].Breath = {ammo="Mavi Tathlum",
-        head="Luhlaza Keffiyeh",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
+        head="Luhlaza Keffiyeh",neck="Sanctity Necklace",ear1="Crepuscular Earring",ear2="Gwati Earring",
         body="Vanir Cotehardie",hands="Assimilator's Bazubands +1",ring1="K'ayres Ring",ring2="Beeline Ring",
         back="Refraction Cape",legs="Enif Cosciales",feet="Iuitl Gaiters +1"}
 
@@ -361,7 +361,7 @@ function init_gear_sets()
         back="Fravashi Mantle",waist="Hurch'lan Sash",legs="Enif Cosciales",feet="Hagondes Sabots"}
 
     sets.midcast['Blue Magic'].Healing = {
-        head="Uk'uxkaj Cap",neck="Phalaina Locket",ear1="Lifestorm Earring",ear2="Loquacious Earring",
+        head="Uk'uxkaj Cap",neck="Phalaina Locket",ear1="Crepuscular Earring",ear2="Loquacious Earring",
         body="Vanir Cotehardie",hands="Telchine Gloves",ring1="Aquasoul Ring",ring2="Sirona's Ring",
         back="Pahtli Cape",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
@@ -399,17 +399,17 @@ function init_gear_sets()
     
     -- Idle sets
     sets.idle = {ammo="Impatiens",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Ethereal earring",ear2="Hearty Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Ethereal earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.PDT = {ammo="Impatiens",
-        head="Malignance Chapeau",neck="Sanctity necklace",ear1="Ethereal earring",ear2="Hearty Earring",
+        head="Malignance Chapeau",neck="Sanctity necklace",ear1="Ethereal earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.Town = {main="Buramenk'ah",ammo="Impatiens",
-        head="Mavi Kavuk +2",neck="Sanctity necklace",ear1="Ethereal earring",ear2="Hearty Earring",
+        head="Mavi Kavuk +2",neck="Sanctity necklace",ear1="Ethereal earring",ear2="Eabani Earring",
         body="Luhlaza Jubbah",hands="Assimilator's Bazubands +1",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Atheling Mantle",waist="Flume Belt",legs="Carmine Cuisses +1",feet="Luhlaza Charuqs"}
 

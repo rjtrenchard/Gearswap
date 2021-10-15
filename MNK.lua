@@ -166,17 +166,17 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {ammo="Ginsen",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Hearty Earring",ear2="Eabani Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Iximulew Cape",waist="Black Belt",legs="Malignance Tights",feet="Hermes' Sandals"}
 
     sets.idle.Town = {ammo="Ginsen",
-    head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Hearty Earring",ear2="Eabani Earring",
+    head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
     body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
     back="Iximulew Cape",waist="Black Belt",legs="Malignance Tights",feet="Hermes' Sandals"}
     
     sets.idle.Weak = {ammo="Ginsen",
-    head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Hearty Earring",ear2="Eabani Earring",
+    head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
     body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
     back="Iximulew Cape",waist="Black Belt",legs="Malignance Tights",feet="Hermes' Sandals"}
     

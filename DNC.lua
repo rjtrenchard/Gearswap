@@ -124,7 +124,7 @@ function init_gear_sets()
     sets.precast.Step['Feather Step'] = {feet="Charis Shoes +2"}
 
     sets.precast.Flourish1 = {}
-    sets.precast.Flourish1['Violent Flourish'] = {ear1="Psystorm Earring",ear2="Lifestorm Earring",
+    sets.precast.Flourish1['Violent Flourish'] = {ear1="Gwati Earring",ear2="Crepuscular Earring",
         body="Horos Casaque",hands="Buremte Gloves",ring2="Stikini Ring +1",
         waist="Chaac Belt",legs="Iuitl Tights",feet="Malignance Boots"} -- magic accuracy
     sets.precast.Flourish1['Desperate Flourish'] = {ammo="Charis Feather",
@@ -213,7 +213,7 @@ function init_gear_sets()
         back="Atheling Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
     
     sets.idle.Weak = {ammo="Iron Gobbet",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Hearty Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
     
@@ -229,7 +229,7 @@ function init_gear_sets()
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Epona's Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
 
-    sets.defense.MDT = set_combine(sets.defense.PDT, {ear1="Eabani Earring",ear2="Hearty Earring",ring2='Archon Ring'})
+    sets.defense.MDT = set_combine(sets.defense.PDT, {ear1="Eabani Earring",ear2="Eabani Earring",ring2='Archon Ring'})
 
     sets.Kiting = {feet="Skadi's Jambeaux +1"}
 

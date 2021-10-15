@@ -221,13 +221,13 @@ function init_gear_sets()
 
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {main="Kali",sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Psystorm Earring",ear2="Lifestorm Earring",
+        head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Gwati Earring",ear2="Crepuscular Earring",
         body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back=gear.CastingCape,waist="Eschan Stone",legs="Marduk's Shalwar +1",feet="Brioso Slippers +2"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = {main="Kali",sub="Ammurapi Shield",range="Gjallarhorn",
-        head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Psystorm Earring",ear2="Lifestorm Earring",
+        head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Gwati Earring",ear2="Crepuscular Earring",
         body="Brioso Justaucorps +2",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back=gear.CastingCape,waist="Eschan Stone",legs="Brioso Cannions +2",feet="Brioso Slippers +2"}
 
@@ -243,7 +243,7 @@ function init_gear_sets()
 
     -- Dummy song with Daurdabla; minimize duration to make it easy to overwrite.
     sets.midcast.DaurdablaDummy = {main="Kali",range=info.ExtraSongInstrument,
-        head="Volte Cap",neck="Incanter's Torque",ear1="Psystorm Earring",ear2="Lifestorm Earring",
+        head="Volte Cap",neck="Incanter's Torque",ear1="Gwati Earring",ear2="Crepuscular Earring",
         body="Ayanmo corazza +2",hands="Ayanmo manopolas +2",ring1="Prolix Ring",ring2="Kishar Ring",
         back=gear.CastingCape,waist="Embla Sash",legs="Ayanmo Cosciales +2",feet="Ayanmo Gambieras +1"}
 
@@ -304,7 +304,7 @@ function init_gear_sets()
 
     sets.defense.PDT = {main=gear.Staff.PDT,sub="Mephitis Grip",
         head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
-        body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Petrov Ring",ring2="Defending Ring",
+        body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.MeleeCape,waist="Shetal Stone",legs="Inyanga Shalwar +2",feet="Ayanmo gambieras +1"}
 
     sets.defense.MDT = {main=gear.Staff.PDT,sub="Mephitis Grip",
@@ -327,7 +327,7 @@ function init_gear_sets()
     -- Basic set for if no TP weapon is defined.
     sets.engaged = set_combine(sets.weapons, {range=gear.MeleeInstrument,
         head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
-        body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Petrov Ring",ring2="Ilabrat Ring",
+        body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Moonlight Ring",ring2="Ilabrat Ring",
         back=gear.MeleeCape,waist="Sailfi belt +1",legs="Ayanmo Cosciales +2",feet="Ayanmo gambieras +1"})
 
     sets.engaged.PDT = set_combine(sets.engaged, {neck="Loricate Torque +1",ring2="Defending Ring"})
@@ -335,7 +335,7 @@ function init_gear_sets()
     -- Set if dual-wielding
     sets.engaged.DW = set_combine(sets.weapons, {range=gear.MeleeInstrument,
         head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Suppanomimi",
-        body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Petrov Ring",ring2="Ilabrat Ring",
+        body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Moonlight Ring",ring2="Ilabrat Ring",
         back=gear.MeleeCape,waist="Shetal Stone",legs="Ayanmo Cosciales +2",feet="Ayanmo gambieras +1"})
 
     sets.engaged.DW.PDT = set_combine(sets.engaged.DW, {neck="Loricate Torque +1",ring2="Defending Ring"})
@@ -362,12 +362,13 @@ function job_precast(spell, action, spellMap, eventArgs)
                 return
             end
         end]]
-        if spell.english == 'Honor March' then
+        -- originally for honor march, turns out i'm just an idiot and didn't define precast sets.
+        --[[if spell.english == 'Honor March' then
             local delay_flag = false
             if player.equipment.ranged == info.HonorMarch then delay_flag = true end
             equip(sets.precast['Honor March'])
             if delay_flag then cast_delay(1.0) end
-        end
+        end]]
     end
 end
 
@@ -380,9 +381,6 @@ function job_midcast(spell, action, spellMap, eventArgs)
             if generalClass and sets.midcast[generalClass] then
                 equip(sets.midcast[generalClass])
             end
-            if spell.english == 'Honor March' then
-                equip(sets.midcast['Honor March'])
-            end
         end
 
     end
@@ -390,12 +388,10 @@ end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.type == 'BardSong' then
-        if state.ExtraSongsMode.value == 'FullLength' then
-            equip(sets.midcast.Daurdabla)
-        end
         if spell.english == 'Honor March' then
-            equip(sets.midcast['Honor March'])
-            
+            equip(sets.midcast['Honor March']) 
+        elseif state.ExtraSongsMode.value == 'FullLength' then
+            equip(sets.midcast.Daurdabla)
         end
         state.ExtraSongsMode:reset()
     end

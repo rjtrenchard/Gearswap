@@ -191,22 +191,22 @@ function init_gear_sets()
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle = {main="Bolelabunga", sub="Genbu's Shield",ammo="Homiliary",
-        head="Theophany cap +1",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Hearty Earring",
+        head="Theophany cap +1",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Theophany Briault +1",hands="Theophany Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Felicitas Cape +1",waist="Fucho-no-obi",legs="Assiduity Pants +1",feet="Theophany Duckbills"}
 
     sets.idle.PDT = {main="Malignance Pole",sub="Oneiros Grip",ammo="Homiliary",
-        head="Inyanga Tiara +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Hearty Earring",
+        head="Inyanga Tiara +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Inyanga Jubbah +2",hands="Theophany Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Felicitas Cape +1",waist="Witful Belt",legs="Assiduity Pants +1",feet="Crier's Gaiters"}
 
     sets.idle.Town = {main="Bolelabunga", sub="Genbu's Shield",ammo="Homiliary",
-        head="Theophany cap +1",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Hearty Earring",
+        head="Theophany cap +1",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Theophany Briault +1",hands="Theophany Mitts +1",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Felicitas Cape +1",waist="Fucho-no-obi",legs="Assiduity Pants +1",feet="Crier's Gaiters"}
     
     sets.idle.Weak = {main="Malignance Pole",sub="Oneiros Grip",ammo="Homiliary",
-        head="Inyanga Tiara +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Hearty Earring",
+        head="Inyanga Tiara +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Theophany Briault +1",hands="Theophany Mitts +1",ring1="Defending Ring",ring2="Meridian Ring",
         back="Felicitas Cape +1",waist="Fucho-no-obi",legs="Nares Trews",feet="Gendewitha Galoshes"}
     

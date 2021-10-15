@@ -145,7 +145,7 @@ function init_gear_sets()
     sets.precast.JA['Spur'] = {feet="Nukumi Ocreae"}
 
     sets.precast.JA['Reward'] = {ammo=RewardFood,
-        head="Ankusa Helm +1",neck="Phaliana Locket",ear1="Lifestorm Earring",ear2="Pratik Earring",
+        head="Ankusa Helm +1",neck="Phaliana Locket",ear1="Crepuscular Earring",ear2="Pratik Earring",
         body="Totemic Jackcoat +1",hands="Malignance Gloves",ring1="Aquasoul Ring",ring2="Aquasoul Ring",
         back="Artio's Mantle",waist="Crudelis Belt",legs="Ankusa Trousers +1",feet="Ankusa Gaiters +1"}
 
@@ -278,7 +278,7 @@ function init_gear_sets()
 
     -- IDLE SETS
     sets.idle = {ammo="Voluspa Tathlum",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Infused Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Infused Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Sheltered Ring",
         back="Pastoralist's Mantle",waist="Muscle Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
@@ -302,7 +302,7 @@ function init_gear_sets()
 
     -- DEFENSE SETS
     sets.defense.PDT = {ammo="Ginsen",
-        head="Malignance Chapeau",neck="Loricate Torque +1", ear1="Eabani Earring", ear2="Hearty Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1", ear1="Eabani Earring", ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring2="Epona's Ring",ring1="Defending Ring",
         back="Mollusca Mantle",waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
 
@@ -323,17 +323,17 @@ function init_gear_sets()
 
     sets.engaged = {ammo="Ginsen",
         head="Meghanada Visor +1",neck="Shulmanu Collar",ear1="Sherida Earring",ear2="Suppanomimi",
-        body="Meghanada Cuirie +1",hands="Meghanada Gloves +2",ring1="Epona's Ring",ring2="Petrov Ring",
+        body="Meghanada Cuirie +1",hands="Meghanada Gloves +2",ring1="Epona's Ring",ring2="Moonlight Ring",
         back="Atheling Mantle",waist="Shetal Stone",legs="Meghanada chausses +1",feet="Meghanada Jambeaux +1"}
 
     sets.engaged.Acc = {ammo="Voluspa Tathlum",
         head="Malignance Chapeau",neck="Shulmanu Collar",ear1="Sherida Earring",ear2="Suppanomimi",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Epona's Ring",ring2="Regal Ring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Regal Ring",ring2="Moonlight Ring",
         back="Atheling Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.PDT = {ammo="Voluspa Tathlum",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring", ear2="Suppanomimi",
-        body="Malignance Tabard", hands="Malignance Gloves", ring1="Epona's Ring", ring2="Defending Ring",
+        body="Malignance Tabard", hands="Malignance Gloves", ring1="Defending Ring", ring2="Moonlight Ring",
         back="Atheling Mantle", waist="Hurch'lan Sash", legs="Malignance Tights", feet="Malignance Boots"}
 
     sets.engaged.Killer = set_combine(sets.engaged, {head="Ankusa Helm +1",body="Nukumi Gausape", legs="Totemic Trousers +1"})

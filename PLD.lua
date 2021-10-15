@@ -151,7 +151,7 @@ function init_gear_sets()
         back="Toro Cape",waist="Eschan Stone",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
     
     sets.precast.WS['Atonement'] = {ammo="Iron Gobbet",
-        head="Sulevia's Mask +1",neck="Fotia Gorget",ear1="Hearty Earring",ear2="Moonshade Earring",
+        head="Sulevia's Mask +1",neck="Fotia Gorget",ear1="Eabani Earring",ear2="Moonshade Earring",
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Regal Ring",ring2="Vexer Ring",
         back="Fierabras's Mantle",waist="Fotia Belt",legs="Sulevia's Cuisses +2",feet="Caballarius Leggings"}
     
@@ -205,12 +205,12 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {ammo="Iron Gobbet",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Ethereal earring",
+        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Ethereal earring",
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Fierabras's Mantle",waist="Flume Belt",legs="Carmine Cuisses +1",feet="Sulevia's Leggings +2"}
 
     sets.idle.Town = {main="Malignance Sword",ammo="Incantor Stone",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Ethereal earring",
+        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Ethereal earring",
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Fierabras's Mantle",waist="Flume Belt",legs="Carmine cuisses +1",feet="Sulevia's Leggings +2"}
     
@@ -243,25 +243,25 @@ function init_gear_sets()
     -- Basic defense sets.
         
     sets.defense.PDT = {ammo="Iron Gobbet",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Buckler Earring",
+        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Buckler Earring",
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Petrov Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
     sets.defense.HP = {ammo="Iron Gobbet",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Ethereal earring",
+        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Ethereal earring",
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Petrov Ring",ring2="Meridian Ring",
         back="Weard Mantle",waist="Creed Baudrier",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
     sets.defense.Reraise = {ammo="Iron Gobbet",
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Ethereal earring",
+        head="Twilight Helm",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Ethereal earring",
         body="Twilight Mail",hands="Sulevia's Gauntlets +1",ring1="Petrov Ring",ring2="Defending Ring",
         back="Weard Mantle",waist="Nierenschutz",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
     sets.defense.Charm = {ammo="Iron Gobbet",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Eabani Earring",
+        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Petrov Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
     -- To cap MDT with Shell IV (52/256), need 76/256 in gear.
     -- Shellra V can provide 75/256, which would need another 53/256 in gear.
     sets.defense.MDT = {ammo="Demonry Stone",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Hearty Earring",ear2="Ethereal earring",
+        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Ethereal earring",
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Archon Ring",ring2="Defending Ring",
         back="Engulfer Cape",waist="Creed Baudrier",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
 

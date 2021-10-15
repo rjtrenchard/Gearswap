@@ -202,12 +202,12 @@ function init_gear_sets()
         back="Toro Cape",waist=gear.ElementalObi,legs="Malignance Tights",feet="Hachiya Kyahan"}
 
     sets.midcast.ElementalNinjutsu.Resistant = set_combine(sets.midcast.Ninjutsu, {
-        head="Malignance Tabard",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
+        head="Malignance Tabard",neck="Sanctity Necklace",ear1="Crepuscular Earring",ear2="Gwati Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini Ring +1", ring2="Stikini Ring +1",
         back="Yokaze Mantle", waist="Eschan Stone", legs="Malignance Tights", boots="Malignance Boots"})
 
     sets.midcast.NinjutsuDebuff = {ammo="Yamarang",
-        head="Hachiya Hatsuburi",neck="Sanctity Necklace",ear1="Lifestorm Earring",ear2="Psystorm Earring",
+        head="Hachiya Hatsuburi",neck="Sanctity Necklace",ear1="Crepuscular Earring",ear2="Gwati Earring",
         hands="Mochizuki Tekko",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Yokaze Mantle",waist="Eschan Stone",legs="Malignance Rights",feet="Hachiya Kyahan"}
     sets.midcast['Kurayami: Ni'] = set_combine(sets.midcast.NinjutsuDebuff, {ring1="Archon Ring"})
@@ -232,12 +232,12 @@ function init_gear_sets()
     
     -- Idle sets
     sets.idle = {
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="Hearty Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Atheling Mantle",waist="Flume Belt",legs="Malignance Tights",feet=gear.MovementFeet}
 
     sets.idle.Town = {main="Raimitsukane",sub="Kaitsuburi",ammo="Togakushi Shuriken",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="Hearty Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Atheling Mantle",waist="Shetal Stone",legs="Malignance Tights",feet=gear.MovementFeet}
     
@@ -281,11 +281,11 @@ function init_gear_sets()
         body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring1="Ilabrat Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Shetal Stone",legs="Hizamaru Hizayoroi",feet="Hizamaru sune-ate"}
     sets.engaged.Acc = {ammo="Togakushi Shuriken",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Cessance Earring",
         body="Mochizuki Chainmail +1",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
         back="Yokaze Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Evasion = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Cessance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
         back="Yokaze Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Hizamaru Sune-ate"}
     sets.engaged.Acc.Evasion = {ammo="Togakushi Shuriken",
@@ -414,7 +414,7 @@ function do_shuriken_check(spell, spellMap, eventArgs)
     -- ensure ammo exists
     if not available_shuriken then
         add_to_chat(104, 'No Ammo ('..tostring(shuriken_name)..') available for that action.')
-        eventArgs.cancel = true
+        --eventArgs.cancel = true
         return
     end
 end

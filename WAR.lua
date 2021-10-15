@@ -95,7 +95,7 @@ function init_gear_sets()
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {ammo="Sonia's Plectrum",
         head="Sakpata's Helm",
-        body="Sakpata's Breastplate",hands="Buremte Gloves",ring1="Spiral Ring",
+        body="Sakpata's Plate",hands="Buremte Gloves",ring1="Spiral Ring",
         back="Iximulew Cape",waist="Caudata Belt",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
         
     -- Don't need any special gear for Healing Waltz.
@@ -106,9 +106,9 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Ginsen",
         head="Sakpata's Helm",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Rajas Ring",ring2="Spiral Ring",
-        back="Atheling Mantle",waist="Sailfi Belt +1",legs="Karieyh Brayettes +1",feet="Karieyh Sollerets +1"}
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {back="Letalis Mantle"})
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Karieyh Ring +1",ring2="Regal Ring",
+        back="Atheling Mantle",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, {back="Atheling Mantle"})
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Tachi: Fudo'] = set_combine(sets.precast.WS, {neck="Snow Gorget"})
@@ -120,7 +120,7 @@ function init_gear_sets()
     -- Midcast Sets
     sets.midcast.FastRecast = {
         head="Sakpata's Helm",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",
         legs="Phorcys Dirs",feet="Sakpata's Leggings"}
 
     
@@ -133,23 +133,23 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle.Town = {main="Tsurumaru", sub="Pole Grip",ammo="Ginsen",
         head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-        back="Atheling Mantle",waist="Flume Belt",legs="Phorcys Dirs",feet="Danzo Sune-ate"}
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
+        back="Atheling Mantle",waist="Flume Belt",legs="Sakpata's Cuisses",feet="Hermes' Sandals"}
     
     sets.idle.Field = {
         head="Sakpata's Helm",neck="Wiglen Gorget",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Danzo Sune-ate"}
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Sheltered Ring",ring2="Paguroidea Ring",
+        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
 
     sets.idle.Weak = {
         head="Twilight Helm",neck="Wiglen Gorget",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Twilight Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Danzo Sune-ate"}
+        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
     
     -- Defense sets
     sets.defense.PDT = {ammo="Iron Gobbet",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2=gear.DarkRing.physical,
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2=gear.DarkRing.physical,
         back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
 
     sets.defense.Reraise = {
@@ -159,10 +159,10 @@ function init_gear_sets()
 
     sets.defense.MDT = {ammo="Demonry Stone",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Shadow Ring",
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Shadow Ring",
         back="Engulfer Cape",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
 
-    sets.Kiting = {feet="Danzo Sune-ate"}
+    sets.Kiting = {feet="Hermes' Sandals"}
 
     sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
 
@@ -177,27 +177,27 @@ function init_gear_sets()
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
     sets.engaged = {ammo="Ginsen",
         head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's breastplate",hands="Sakpata's Gauntlets",ring1="Rajas Ring",ring2="K'ayres Ring",
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
         back="Atheling Mantle",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Acc = {ammo="Seething Bomblet +1",
         head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Rajas Ring",ring2="K'ayres Ring",
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
         back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.PDT = {ammo="Ginsen",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="K'ayres Ring",
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
         back="Iximulew Cape",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Acc.PDT = {ammo="Seething Bomblet +1",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Breastplate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="K'ayres Ring",
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Niqmaddu Ring",
         back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Beeline Ring",ring2="K'ayres Ring",
+        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
         back="Ik Cape",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Acc.Reraise = {ammo="Seething bomblet +1",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Beeline Ring",ring2="K'ayres Ring",
+        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
         back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
 
 end
@@ -267,11 +267,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function update_combat_form()
-    if areas.Adoulin:contains(world.area) and buffactive.ionis then
-        state.CombatForm:set('Adoulin')
-    else
-        state.CombatForm:reset()
-    end
+    state.CombatForm:reset()
 end
 
 -- Select default macro book on initial load or subjob change.
