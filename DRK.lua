@@ -308,8 +308,8 @@ function init_gear_sets()
 
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Knobkierrie",
-        head="Fallen's Burgeonet +2",neck="Abyss Beads +2",ear1="Thrud Earring",ear2="Moonshade Earring",
-        body="Ignominy Cuirass +3",hands="Valorous Mitts",ring1="Regal Ring",ring2="Karieyh Ring +1",
+        head="Sakpata's Helm",neck="Abyss Beads +2",ear1="Thrud Earring",ear2="Moonshade Earring",
+        body="Ignominy Cuirass +3",hands="Sakpata's Gauntlets",ring1="Regal Ring",ring2="Karieyh Ring +1",
         back=gear.ws_cape,waist="Fotia Belt",legs="Fallen's Flanchard +3",feet="Sulevia's Leggings +2"}
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
