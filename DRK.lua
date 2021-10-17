@@ -571,6 +571,7 @@ function init_gear_sets()
     sets.midcast['Drain III'].DarkSeal = set_combine(sets.midcast.Drain, {head="Fallen's Burgeonet +2"})
     sets.midcast['Aspir'] = sets.midcast.Drain
     sets.midcast['Aspir II'] = sets.midcast.Aspir
+    sets.midcast['Drain'].Weapon = {main="Dacnomania"}
 
     sets.midcast.Stun = {
         head="Ignominy Burgeonet +2",neck="Erra Pendant",ear1="Malignance Earring",ear2="Mani Earring",
@@ -607,7 +608,7 @@ function init_gear_sets()
         body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Moonlight ring",ring2="Niqmaddu Ring",
         back=gear.melee_cape,waist="Sailfi Belt +1",legs="Ignominy Flanchard +3",feet="Flamma Gambieras +2"}
     sets.engaged.Acc = {ammo="Seething Bomblet +1",
-        head="Flamma Zucchetto +2",neck="Abyssal Beads +2",ear1="Cessance Earring",ear2="Brutal Earring",
+        head="Flamma Zucchetto +2",neck="Abyssal Beads +2",ear1="Cessance Earring",ear2="Telos Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight ring",ring2="Regal Ring",
         back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Flamma Gambieras +2"}
     sets.engaged.PDT = {ammo="Ginsen",
@@ -615,7 +616,7 @@ function init_gear_sets()
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Acc.PDT = {ammo="Seething Bomblet +1",
-        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Cessance Earring",ear2="Brutal Earring",
+        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Cessance Earring",ear2="Telos Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Regal Ring",
         back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
     sets.engaged.Reraise = {ammo="Ginsen",
@@ -623,7 +624,7 @@ function init_gear_sets()
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Acc.Reraise = {ammo="Seething Bomblet +1",
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Cessance Earring",ear2="Brutal Earring",
+        head="Twilight Helm",neck="Loricate Torque +1",ear1="Cessance Earring",ear2="Telos Earring",
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Regal Ring",
         back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
 
@@ -681,27 +682,27 @@ function init_gear_sets()
     sets.engaged.Acc.Reraise.Caladbolg.AM = sets.engaged.Acc.Reraise
 
     sets.engaged.Caladbolg.AM3 = {ammo="Ginsen",
-        head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
+        head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Telos Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Regal Ring", ring2="Niqmaddu Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
     sets.engaged.Acc.Caladbolg.AM3 = {ammo="Seething Bomblet +1",
-        head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
+        head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Telos Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Moonlight Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
     sets.engaged.PDT.Caladbolg.AM3 = {ammo="Ginsen",
-        head="Sakpata's Helm", neck="Loricate Torque +1", ear1="Cessance Earring", ear2="Brutal Earring",
+        head="Sakpata's Helm", neck="Loricate Torque +1", ear1="Telos Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Moonlight Ring", ring2="Defending Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
     sets.engaged.Acc.PDT.Caladbolg.AM3 = {ammo="Seething Bomblet +1",
-        head="Sakpata's Helm", neck="Loricate Torque +1", ear1="Cessance Earring", ear2="Brutal Earring",
+        head="Sakpata's Helm", neck="Loricate Torque +1", ear1="Telos Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Defending Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
     sets.engaged.Reraise.Caladbolg.AM3 = {ammo="Ginsen",
-        head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
+        head="Sakpata's Helm", neck="Abyssal Beads +2", ear1="Telos Earring", ear2="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Regal Ring", ring2="Niqmaddu Ring",
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
     sets.engaged.Acc.Reraise.Caladbolg.AM3 = {ammo="Seething Bomblet +1",
-        head="Twilight Helm", neck="Abyssal Beads +2", ear1="Cessance Earring", ear2="Brutal Earring",
+        head="Twilight Helm", neck="Abyssal Beads +2", ear1="Telos Earring", ear2="Brutal Earring",
         body="Twilight Mail", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
 
@@ -886,16 +887,23 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         equip(sets.Reraise)
     end
 
-
     -- Dark seal handling
     if buffactive["Dark Seal"] and spell.skill == 'Dark Magic' and spell.english ~= 'Impact' then equip(sets.precast.JA['Dark Seal']) end
     
     if spell.skill == 'Dark Magic' and buffactive['Dark Seal'] then
         if spell.english == 'Drain III' then
-            equip(sets.midcast['Drain III'].DarkSeal)
+            if player.tp < 1000 then
+                equip(sets.midcast['Drain III'].DarkSeal)
+            else
+                equip(set_combine( sets.midcast['Drain III'].DarkSeal, sets.midcast['Drain'].Weapon ))
+            end
         -- we're not interested in the relic bonus for these spells    
         elseif S{'Drain','Drain II','Aspir','Aspir II','Impact','Dread Spikes'}:contains(spell.english) then
-            equip(sets.midcast[spell.english])
+            if player.tp < 1000 then
+                equip(sets.midcast[spell.english])
+            else
+                equip(set_combine( sets.midcast[spell.english], sets.midcast['Drain'].Weapon ))
+            end
         elseif S{'Endark', 'Endark II'}:contains(spell.english) then
             equip(sets.midcast['Endark'].DarkSeal)
         else

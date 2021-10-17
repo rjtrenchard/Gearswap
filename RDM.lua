@@ -309,17 +309,17 @@ function init_gear_sets()
     sets.offenseEnspellDW = {main="Aern Dagger", sub="Aern Dagger II"}
 
     sets.engaged = {ammo="Ginsen",
-        head="Ayanmo Zucchetto +2",neck="Anu Torque",ear1="Sherida Earring",ear2="Brutal Earring",
+        head="Ayanmo Zucchetto +2",neck="Anu Torque",ear1="Sherida Earring",ear2="Telos Earring",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring2="Petrov Ring",ring1="Ilabrat Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Ayanmo Cosciales +2",feet="Ayanmo Gambieras +1"}
 
     sets.engaged.Acc = {ammo="Ginsen",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Sherida Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Telos Earring",ear2="Cessance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring2="Jhakri Ring",ring1="Varar Ring +1",
         back=gear.melee_cape,waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.Enspell = set_combine(sets.engaged.Acc, {ammo="Regal Gem", 
-        neck="Duelist's Torque",ear2="Malignance Earring",
+        neck="Duelist's Torque",ear1="Crepuscular Earring",ear2="Malignance Earring",
         hands="Ayanmo Manopolas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1", 
         back="Ghostfyre Cape"})
     sets.engaged.Enspell0 = set_combine(sets.engaged.Enspell, {back=gear.melee_cape, waist="Eschan Stone", ear1="Crepuscular Earring"})
@@ -335,15 +335,15 @@ function init_gear_sets()
     sets.engaged.DW = set_combine(sets.engaged, {ear2="Suppanomimi", waist="Shetal Stone", legs="Carmine Cuisses +1"})
     sets.engaged.DW.Acc = set_combine(sets.engaged.Acc, {ear2="Suppanomimi", waist="Shetal Stone", legs="Carmine Cuisses +1"})
 
-    sets.engaged.Defense.DW = set_combine(sets.engaged.Defense, {ear2="Eabani Earring", waist="Shetal Stone", legs="Carmine Cuisses +1"})
+    sets.engaged.Defense.DW = set_combine(sets.engaged.Defense, {waist="Shetal Stone", legs="Carmine Cuisses +1"})
     sets.engaged.DW.Defense = sets.engaged.Defense.DW
     sets.engaged.DW.PDT = sets.engaged.Defense.DW
     sets.engaged.DW.MDT = set_combine(sets.engaged.PDT.DW, {ring2 = "Archon Ring"})
 
     sets.engaged.DW.Enspell = set_combine(sets.engaged.DW.Acc, {ammo="Regal Gem", 
-    head="Malignance Chapeau",neck="Duelist's Torque",ear1="Snotra Earring",ear2="Malignance Earring",
-    body="Malignance Tabard",hands="Ayanmo Manopolas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1", 
-    back=gear.int_cape, waist="Eschan Stone", legs="Malignance Tights"})
+        head="Malignance Chapeau",neck="Duelist's Torque",ear1="Crepuscular Earring",ear2="Malignance Earring",
+        body="Malignance Tabard",hands="Ayanmo Manopolas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1", 
+        back=gear.int_cape, waist="Eschan Stone", legs="Malignance Tights"})
     sets.engaged.DW.Enspell0 = set_combine(sets.engaged.DW.Enspell, {main="Aern Dagger", sub="Aern Dagger II", ring1="Stikini Ring +1", ring2="Stikini Ring +1"})
 
 end

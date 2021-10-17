@@ -205,17 +205,17 @@ function init_gear_sets()
     
     -- Normal melee sets
     sets.engaged = {ammo="Ginsen",
-        head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Sherida Earring",ear2="Cessance Earring",
+        head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Sherida Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Adhemar Wristbands +1",ring1="Niqmaddu Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Hurch'lan sash",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc = {ammo="Honed Tathlum",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Sherida Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Telos Earring",ear2="Cessance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Hurch'lan sash",legs="Malignance Tights",feet="Malignance Boots"}
 
     -- Defensive melee hybrid sets
     sets.engaged.PDT = {ammo="Ginsen",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Hurch'lan sash",legs="Malignance Tights",feet="Malignance Boots"}
     

@@ -107,7 +107,7 @@ function init_gear_sets()
 	-- Ranged sets
 
 	sets.midcast.RA = {
-		head="Arcadian Beret +1",neck="Iskur Gorget",ear1="Volley earring",ear2="Tripudio Earring",
+		head="Arcadian Beret +1",neck="Iskur Gorget",ear1="Telos Earring",ear2="Tripudio Earring",
 		body="Kyujutsugi",hands="Manibozho Gloves",ring1="Dingir Ring",ring2="Hajduk Ring +1",
 		back="Lutian Cape",waist="Elanid Belt",legs="Nahtirah Trousers",feet="Orion Socks +1"}
 	
