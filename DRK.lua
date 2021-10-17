@@ -892,16 +892,22 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     
     if spell.skill == 'Dark Magic' and buffactive['Dark Seal'] then
         if spell.english == 'Drain III' then
-            if player.tp < 1000 then
+            if player.tp > 1000 then
                 equip(sets.midcast['Drain III'].DarkSeal)
             else
+                if sets.midcast['Drain'].Weapon.main ~= player.equipment.main then
+                    info.recastWeapon = player.equipment.main
+                end
                 equip(set_combine( sets.midcast['Drain III'].DarkSeal, sets.midcast['Drain'].Weapon ))
             end
         -- we're not interested in the relic bonus for these spells    
         elseif S{'Drain','Drain II','Aspir','Aspir II','Impact','Dread Spikes'}:contains(spell.english) then
-            if player.tp < 1000 then
+            if player.tp > 1000 then
                 equip(sets.midcast[spell.english])
             else
+                if sets.midcast['Drain'].Weapon.main ~= player.equipment.main then
+                    info.recastWeapon = player.equipment.main
+                end
                 equip(set_combine( sets.midcast[spell.english], sets.midcast['Drain'].Weapon ))
             end
         elseif S{'Endark', 'Endark II'}:contains(spell.english) then
