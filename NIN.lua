@@ -46,13 +46,6 @@ function user_setup()
     gear.DayFeet = "Danzo Sune-ate"
     gear.NightFeet = gear.DayFeet --"Hachiya Kyahan"
 
-    gear.WSDayEar1 = "Brutal Earring"
-    gear.WSDayEar2 = "Cessance Earring"
-    gear.WSNightEar1 = "Lugra Earring +1"
-    gear.WSNightEar2 = "Lugra Earring"
-    gear.WSEarBrutal = {name=gear.WSDayEar1}
-    gear.WSEarCessance = {name=gear.WSDayEar2}
-
     ticker = windower.register_event('time change', function(myTime)
         if (myTime == 17*60 or myTime == 7*60) then 
             procTime(myTime)
@@ -69,12 +62,8 @@ end
 
 function procTime(myTime) 
     if isNight() then
-        gear.WSEarBrutal = gear.WSNightEar1
-        gear.WSEarCessance = gear.WSNightEar2
         gear.MovementFeet = gear.NightFeet
     else
-        gear.WSEarBrutal = gear.WSDayEar1
-        gear.WSEarCessance = gear.WSDayEar2
         gear.MovementFeet = gear.DayFeet
     end
 end
@@ -131,7 +120,7 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Seething Bomblet +1",
-        head="Adhemar Bonnet +1",neck="Fotia Gorget",ear1="Moonshade Earring",ear2=gear.WSEarBrutal,
+        head="Adhemar Bonnet +1",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Lugra Earring +1",
         body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring2="Karieyh Ring +1",ring1="Regal Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Hizamaru hizayoroi",feet="Hizamaru Sune-ate"}
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {ammo="Jukukik Feather",hands="Buremte Gloves",
@@ -149,16 +138,16 @@ function init_gear_sets()
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {ammo="yetshila +1",
-        head="Mummu Bonnet +1",ear1=gear.WSEarBrutal,ear2="Odr Earring",
-        body="Mummu Jacket +1",hands="Mummu Wrists +2",ring2="Karieyh Ring +1", ring1="Regal Ring",
+        head="Mummu Bonnet +1",ear1="Odr Earring",ear2="Lugra Earring +1",
+        body="Mummu Jacket +1",hands="Mummu Wrists +2",ring2="Karieyh Ring +1", ring1="Begrudging Ring",
         waist="Sveltesse Gouriz +1",legs="Mummu Kecks +1",feet="Mummu Gamashes +1"})
 
     sets.precast.WS['Blade: Jin'] = set_combine(sets.precast.WS['Blade: Hi'],
-    {ammo="yetshila +1",ear1=gear.WSEarBrutal,ear2="Odr Earring",ring1="Ilabrat Ring",ring2="Begrudging Ring"})
+    {ammo="yetshila +1",ear1="Odr Earring",ear2="Lugra Earring +1",ring1="Ilabrat Ring",ring2="Begrudging Ring"})
 
-    sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS,{ear1=gear.WSEarBrutal,ear2="Odr Earring",ring2="Epona's Ring"})
+    sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS,{ear1="Odr Earring",ear2="Lugra Earring +1",ring1="Regal Ring",ring2="Epona's Ring"})
 
-    sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS,{neck="Tjukurrpa Medal", waist="Sailfi Belt +1", ring1="Regal Ring"})
+    sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS,{neck="Tjukurrpa Medal", ear1="Moonshade Earring", waist="Sailfi Belt +1", ring1="Regal Ring", ring2="Karieyh Ring +1"})
 
     sets.precast.WS['Blade: Ku'] = sets.precast.WS['Blade: Shun']
     sets.precast.WS['Blade: Ku'].Low = sets.precast.WS.Low

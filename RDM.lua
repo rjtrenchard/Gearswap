@@ -124,12 +124,14 @@ function init_gear_sets()
         back=gear.ws_cape,waist='Fotia Gorget', legs='Malignance Tights', feet='Chironic Slippers'}
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
-    sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS,
-        {ear1="Brutal Earring",ear2="Moonshade Earring",ring1="Aquasoul Ring",ring2="Aquasoul Ring"})
+    sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS,{ammo="Regal Gem",
+        head="Vitiation Chapeau +3",ear1="Sherida Earring",ear2="Snotra Earring",
+        body="Vitiation Tabard +3",hands="Vitiation Gloves +3",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
+        back=gear.mnd_cape, legs="Vitiation Tights +2",feet="Jhakri Pigaches +2"})
 
-    sets.precast.WS['Sanguine Blade'] = {ammo="Witchstone",
-        head="Pixie Hairpin +1",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Malignance Earring",
-        body="Jhakri Robe +2",hands="Jhakri Cuffs +1",ring1="Karieyh Ring +1",ring2="Archon Ring",
+    sets.precast.WS['Sanguine Blade'] = {ammo="Regal Gem",
+        head="Pixie Hairpin +1",neck="Baetyl Pendant",ear1="Friomisi Earring",ear2="Malignance Earring",
+        body="Jhakri Robe +2",hands="Jhakri cuffs +1",ring1="Karieyh Ring +1",ring2="Archon Ring",
         back=gear.ws_cape,waist=gear.ElementalObi,legs="Jhakri Slops +1",feet="Vitiation boots +3"}
 
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS.Crit, {ammo="Yetshila +1",
@@ -196,6 +198,10 @@ function init_gear_sets()
         head="Malignance Chapeau", neck="Duelist's Torque",ear1="Snotra Earring", ear2="Malignance Earring",
         body="Atrophy Tabard +2", hands="Malignance Gloves",ring1="Stikini Ring +1", ring2="Stikini Ring +1",
         back=gear.mnd_cape, waist="Eschan Stone", legs="Chironic Hose", feet="Vitiation boots +3"}
+
+    sets.midcast['Enfeebling Magic'].Duration = set_combine(sets.midcast['Enfeebling Magic'], {
+        head="Lethargy Chappel", body="Lethargy Sayon +1", hands="Lethargy Gantherots +1", legs="Lethargy Fuseau +1",feet="Lethargy Houseaux +1"
+    })
     
     sets.midcast["Enfeebling Magic"].DW = set_combine(sets.midcast["Enfeebling Magic"], {sub="Tauret"})
 
@@ -378,7 +384,7 @@ end
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Enfeebling Magic' then
         if S{'NIN','DNC'}:contains(player.sub_job) then
-        equip(sets.midcast["Enfeebling Magic"].DW)
+            equip(sets.midcast["Enfeebling Magic"].DW)
         end
         if spell.english == 'Dispel' then
             equip(sets.midcast['Dispel'])
@@ -387,6 +393,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
         if state.Buff.Saboteur then
             equip(sets.buff.Saboteur)
+        end
+        if state.buff['Elemental Seal'] then
+            equip(sets.midcast['Enfeebling Magic'].Duration)
         end
     elseif spell.skill == 'Enhancing Magic' then
         if enhancing_skill_magic:contains(spell.english) then

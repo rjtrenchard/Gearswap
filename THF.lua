@@ -285,18 +285,18 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
     sets.idle = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Shetal Stone",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Genmei Earring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Defending Ring",
+        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
     sets.idle.Town = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Genmei Earring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Leech Belt",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
     sets.idle.Weak = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
-        body="Malignance Tabard",hands="Malignance Glvoes",ring1="Sheltered Ring",ring2="Defending Ring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Genmei Earring",
+        body="Malignance Tabard",hands="Malignance Glvoes",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Flume Belt",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
 
@@ -315,7 +315,7 @@ function init_gear_sets()
     sets.defense.MDT = {ammo="Demonry Stone",
         head="Malignance Chapeau",neck="Loricate Torque +1", ear1="Eabani Earring", ear2="Cessance Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Archon Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
 
     --------------------------------------
@@ -324,13 +324,13 @@ function init_gear_sets()
 
     -- Normal melee group
     sets.engaged = {ammo="Ginsen",
-        head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Sherida Earring",ear2="Telos Earring",
+        head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Dedition Earring",ear2="Telos Earring",
         body="Pillager's Vest +2",hands="Adhemar Wristbands +1",ring1="Moonlight Ring",ring2="Epona's Ring",
-        back=gear.melee_cape,waist="Shetal Stone",legs="Meghanada chausses +1",feet="Plunderer's Poulaines +1"}
+        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Meghanada chausses +1",feet="Plunderer's Poulaines +1"}
     sets.engaged.Acc = {ammo="Seething Bomblet +1",
-        head="Malignance Chapeau",neck="Combatant's Torque",ear1="Cessance Earring",ear2="Telos Earring",
+        head="Malignance Chapeau",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight ring",ring2="Regal Ring",
-        back=gear.melee_cape,waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
         
     -- Mod set for behind mob
     sets.engaged.Mod = set_combine(sets.engaged,{body="Plunderer's Vest"})
@@ -339,22 +339,22 @@ function init_gear_sets()
     sets.engaged.Crit = set_combine(sets.engaged,{ammo="Yetshila +1",head="Mummu Bonnet +1",ear2="Odr Earring",body="Mummu Jacket +1",hands="Mummu Wrists +2",legs="Mummu Kecks +1",feet="Mummu Gamashes +1"})
 
     sets.engaged.Evasion = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Sherida Earring",ear2="Eabani Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Epona's Ring",
-        back="Canny Cape",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Canny Cape",waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc.Evasion = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Ej Necklace",ear1="Telos Earring",ear2="Eabani Earring",
+        head="Malignance Chapeau",neck="Ej Necklace",ear1="Eabani Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Regal Ring",
         back="Canny Cape",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.PDT = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring",ear2="Telos Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Dedition Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc.PDT = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring",ear2="Suppanomimi",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Regal Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.MDT = set_combine(sets.engaged.PDT, {ammo="Yamarang",ear2="Eabani Earring"})
     sets.engaged.Acc.MDT = set_combine(sets.engaged.MDT, {})
