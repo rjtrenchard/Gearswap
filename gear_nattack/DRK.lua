@@ -23,12 +23,20 @@ function include_job_sets()
     -- Start defining the sets
     --------------------------------------
 
+    -- individual gear
+    gear.melee_cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.ws_cape = {name="Ankou's Mantle", augments={'STR+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%'}}
+    gear.torcleaver_cape = { name="Ankou's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%',}}
+    gear.casting_cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}}
+
+    gear.torcleaver_helm = { name="Odyssean Helm", augments={'Mag. Acc.+23','Weapon skill damage +3%','VIT+10','Attack+2',}}
+    gear.torcleaver_gauntlets = { name="Odyssean Gauntlets", augments={'VIT+9','Enmity+5','Weapon skill damage +3%','Accuracy+13 Attack+13','Mag. Acc.+1 "Mag.Atk.Bns."+1',}}
+
+    gear.DrainFeet = { name="Yorium Sabatons", augments={'Mag. Acc.+10','"Drain" and "Aspir" potency +6',}}
+    gear.DrainBody = { name="Acro Surcoat", augments={'Mag. Acc.+10','"Drain" and "Aspir" potency +7','INT+6',}}
+
+
     -- Mainhand Sets
-    send_command('bind numpad1 gs equip sets.Weapons.greatsword')
-    send_command('bind numpad2 gs equip sets.Weapons.scythe')
-    send_command('bind numpad3 gs equip sets.Weapons.greataxe')
-    send_command('bind numpad4 gs equip sets.Weapons.sword')
-    send_command('bind numpad5 gs equip sets.Weapons.club')
     sets.Weapons = {}
     sets.Weapons.greatsword = {main="Caladbolg", sub="Utu Grip"}
     sets.Weapons.scythe = {main="Apocalypse", sub="Utu Grip"}
