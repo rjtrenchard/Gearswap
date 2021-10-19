@@ -70,6 +70,7 @@ function include_job_sets()
         head="Sakpata's Helm",neck="Abyss Beads +2",ear1="Thrud Earring",ear2="Moonshade Earring",
         body="Ignominy Cuirass +3",hands="Sakpata's Gauntlets",ring1="Regal Ring",ring2="Karieyh Ring +1",
         back=gear.ws_cape,waist="Fotia Belt",legs="Fallen's Flanchard +3",feet="Sulevia's Leggings +2"}
+    sets.precast.WS.FullTP = {ear2="Lugra Earring +1"}
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
 
@@ -100,19 +101,23 @@ function include_job_sets()
     sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
     sets.precast.WS['Spiral Hell'].Mod = set_combine(sets.precast.WS['Spiral Hell'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
 
-    sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {})
-    sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Entropy'].Mod = set_combine(sets.precast.WS['Entropy'], {})
+    sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {
+        head="Ratri Sallet +1",ear1="Lugra Earring +1",ear2="Moonshade Earring",
+        body="Sakpata's breastplate",hands="Fallen's Finger gauntlets +3",
+        back=gear.ws_cape, legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"})
+    sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS.Acc, {ear2="Moonshade Earring"})
+    sets.precast.WS['Entropy'].Mod = set_combine(sets.precast.WS['Entropy'], {ear2="Moonshade Earring"})
+    sets.precast.WS['Entropy'].FullTP = {ear2="Malignance Earring"}
 
-    sets.precast.WS['Quietus'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
-    sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
-    sets.precast.WS['Quietus'].Mod = set_combine(sets.precast.WS['Quietus'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
+    sets.precast.WS['Quietus'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1", ear2="Lugra Earring +1"})
+    sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1", ear2="Lugra Earring +1"})
+    sets.precast.WS['Quietus'].Mod = set_combine(sets.precast.WS['Quietus'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1", ear2="Lugra Earring +1"})
 
     sets.precast.WS['Guillotine'] = set_combine(sets.precast.WS.MultiHit, {})
     sets.precast.WS['Guillotine'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Guillotine'].Mod = set_combine(sets.precast.WS['Guillotine'], {})
 
-    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.MultiHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",neck="Abyssal Beads +2",waist="Sailfi Belt +1", feet="Ratri Sollerets +1"})
+    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",neck="Abyssal Beads +2",waist="Sailfi Belt +1", feet="Ratri Sollerets +1"})
     sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
     sets.precast.WS['Cross Reaper'].Mod = set_combine(sets.precast.WS, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
 
@@ -141,14 +146,14 @@ function include_job_sets()
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS.Acc, {head="Sakpata's Helm", hands="Sakpata's Gauntlets", back=gear.torcleaver_cape, waist="Sailfi Belt +1"})
     sets.precast.WS['Torcleaver'].Mod = set_combine(sets.precast.WS['Torcleaver'], {head=gear.torcleaver_helm, back=gear.torcleaver_cape})
 
-    sets.precast.WS['Resolution'] = set_combine(sets.precast.WS.MultiHit, {})
+    sets.precast.WS['Resolution'] = set_combine(sets.precast.WS.MultiHit, {ear2="Moonshade Earring"})
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Resolution'].Mod = set_combine(sets.precast.WS['Resolution'], {})
 
     -- Greataxe WS's
-    sets.precast.WS['Upheaval'] = set_combine(sets.precast.WS.MultiHit, {})
-    sets.precast.WS['Upheaval'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Upheaval'].Mod = set_combine(sets.precast.WS['Upheaval'], {})
+    sets.precast.WS['Upheaval'] = set_combine(sets.precast.WS.MultiHit, {ear2="Moonshade Earring"})
+    sets.precast.WS['Upheaval'].Acc = set_combine(sets.precast.WS.Acc, {ear2="Moonshade Earring"})
+    sets.precast.WS['Upheaval'].Mod = set_combine(sets.precast.WS['Upheaval'], {ear2="Moonshade Earring"})
 
     
     sets.precast.WS['Fell Cleave'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
@@ -557,7 +562,7 @@ function include_job_sets()
     -- Buff specific sets
     -------------------------------------------------------------------------------------------------------------------
     sets.buff['Blood Weapon'] = { }
-    sets.buff['Souleater'] = { }
+    sets.buff['Souleater'] = { head="Ignominy Burgeonet +2" }
     sets.buff['Last Resort'] = { }
     sets.buff['Scarlet Delirium'] = { }
     sets.buff['Consume Mana'] = { }

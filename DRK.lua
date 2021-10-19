@@ -30,7 +30,6 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
-
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
     state.Buff.Sekkanoki = buffactive.Sekkanoki or false
@@ -123,7 +122,9 @@ function user_setup()
     info.AM = {}
     info.AM.potential = 0
     info.AM.level = 0
-    info.TP = 0
+    info.TP = {}
+    info.TP.old = 0
+    info.TP.new = 0
 
     tp_ticker = windower.register_event('tp change', function(new_tp, old_tp)
         if old_tp == 3000 or new_tp == 3000 then
@@ -135,10 +136,13 @@ function user_setup()
         else
             info.AM.potential = 0
         end
+        info.TP.old = old_tp
+        info.TP.new = new_tp
         echo('new: ' .. new_tp .. ' old: '.. old_tp, 2)
 
     end)
-
+    
+    echo('Job:' .. player.main_job .. '/' .. player.sub_job .. '.',2)
     select_default_macro_book()
 end
 
@@ -156,6 +160,11 @@ function user_unload()
 end
 
 function job_helper()
+    info.TP_scaling_ws = S{
+        'Spinning Scythe', 'Spiral Hell', 'Cross Reaper', 'Entropy', 
+        'Spinning Slash', 'Ground Strike', 'Torcleaver', 'Resolution', 
+        'Upheaval', 'Steel Cyclone', 'Savage Blade', 'Judgment'
+    }
     info.Weapons = {}
     info.Weapons.Type = {
         ['Naegling'] = 'sword',
@@ -239,6 +248,7 @@ function job_helper()
 
     info.macro_sets['axe'] = info.macro_sets['sword']
     info.macro_sets['club'] = info.macro_sets['sword']
+    
 end
 
 -- found in gear_name/DRK.lua
@@ -265,48 +275,16 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             --cast_delay(0.3)
             send_command('cancel hasso')
         end
-    end
-    if spell.type:lower() == 'weaponskill' then
-        if state.Buff['Souleater'] then
-            equip(sets.buff['Souleater'])
+    elseif spell.type:lower() == 'weaponskill' then
+        if info.TP_scaling_ws:contains(spell.english) and info.TP.new > 2999 then
+            -- kinda messy, but will equip moonshade with either lugra or a specific sets 
+            -- earring if lugra exists in the first ear slot.
+            if sets.precast.WS[spell.english].ear1 == sets.precast.WS.FullTP.ear2 then
+                equip(sets.precast[spell.english].FullTP)
+            else
+                equip(sets.precast.WS.FullTP)
+            end
         end
-        if state.Buff['Last Resort'] then
-            equip(sets.buff['Last Resort'])
-        end
-        if state.Buff['Scarlet Delirium'] then
-            equip(sets.buff['Scarlet Delirium'])
-        end
-        if state.Buff['Consume Mana'] then
-            equip(sets.buff['Consume Mana'])
-        end
-        if state.Buff['Blood Weapon'] then
-            equip(sets.buff['Blood Weapon'])
-        end
-        if state.Buff['Soul Enslavement'] then
-            equip(sets.buff['Soul Enslavement'])
-        end
-    elseif spell.type:lower() == 'ability' then
-        if state.Buff['Last Resort'] then
-            equip(sets.buff['Last Resort'])
-        end
-        if state.Buff['Scarlet Delirium'] then
-            equip(sets.buff['Scarlet Delirium'])
-        end
-        if state.Buff['Consume Mana'] then
-            equip(sets.buff['Consume Mana'])
-        end
-        if state.Buff['Dread Spikes'] then
-            equip(sets.buff['Dread Spikes'])
-        end
-        if state.Buff['Blood Weapon'] then
-            equip(sets.buff['Blood Weapon'])
-        end
-        if state.Buff['Soul Enslavement'] then
-            equip(sets.buff['Soul Enslavement'])
-        end
-        if state.Buff['Nether Void'] then
-            equip(sets.buff['Nether Void'])
-        end   
     end
 end
 
@@ -387,8 +365,8 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_aftercast(spell, action, spellMap, eventArgs)
-    if buffactive.Souleater then equip(sets.precast.JA['Souleater']) end
-    
+    if buffactive.Souleater then equip(sets.buff['Souleater']) end
+
     if info.recastWeapon then
         equip( {main=info.recastWeapon,sub=info.recastSub} )
         info.recastWeapon = nil
