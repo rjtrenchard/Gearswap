@@ -63,6 +63,7 @@ end
 
 -- Setup vars that are user-dependent.
 function user_setup()
+    job_helper()
     include('gear_' .. player.name:lower()..'/'..player.main_job:upper()..'.lua' )
 
     state.OffenseMode:options('Normal', 'Acc')
@@ -71,16 +72,17 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
     state.IdleMode:options('Normal', 'PDT', 'Refresh')
 
+    state.StunMode = M{['description']='Stun Mode', 'default', 'Enmity'}
     state.WeaponMode = M{['description']='Weapon Mode', 'greatsword', 'scythe', 'greataxe', 'sword', 'club'}
     state.Verbose = M{['description']='Verbosity', 'Normal', 'Verbose', 'Debug'}
     state.UseCustomTimers = M(false, 'Use Custom Timers')
     state.AutoMacro = M(true, 'Use automatic macro books')
-    
-    job_helper()
+
     include_job_stats()
 
     -- Additional local binds
-    send_command('bind ^` input /ja "Hasso" <me>')
+    send_command('bind ^` input /ja "Scarlet Delirium"')
+    send_command('bind !` input /ja "Scarlet Delirium"')
     --send_command('bind !` input /ja "Seigan" <me>')
     --send_command('bind != gs c cycle WeaponMode')
 
@@ -89,6 +91,7 @@ function user_setup()
     send_command('bind numpad3 gs equip sets.Weapons.greataxe')
     send_command('bind numpad4 gs equip sets.Weapons.sword')
     send_command('bind numpad5 gs equip sets.Weapons.club')
+    send_command('bind numpad6 gs equip sets.Weapons.ridill')
     send_command('bind numpad9 gs equip sets.HP_High')
 
     gear.Moonshade = {}
@@ -167,14 +170,14 @@ function job_helper()
     }
     info.Weapons = {}
     info.Weapons.Type = {
-        ['Naegling'] = 'sword',
+        ['Naegling'] = 'sword',['Ridill'] = 'sword',
         ['Zulfiqar'] = 'greatsword', ['Caladbolg'] = 'greatsword',
         ['Lycurgos'] = 'greataxe',
         ['Kaja Axe']= 'axe',['Dolichenus']='axe',
-        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe',
+        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania']='scythe',
         ['Loxotic Mace +1'] = 'club',['Loxotic Mace'] = 'club',
         ['empty'] = 'handtohand',
-        ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',
+        ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',["Smyth's Aspis"]='shield',["Smyth's Ecu"]='shield',["Smythe's Scutum"]='shield',["Smythe's Shield"]='shield',["Smythe's Eschuteon"]="Shield"
     }
     info.Weapons.REMA = S{'Apocalypse','Ragnarok','Caladbolg','Redemption','Liberator','Anguta','Father Time'}
     info.Weapons.REMA.Type = {
@@ -216,7 +219,7 @@ function job_helper()
     info.Fencer[8] = 630
     info.Fencer.JPGift = {}
     info.Fencer.JPGift = {bonus = 230, active=false}
-    --list of two handed weapon types
+    --list of weapon types
     info.Weapons.Twohanded = S{'greatsword', 'greataxe','scythe','staff','greatkatana','polearm'}
     info.Weapons.Onehanded = S{'sword', 'club', 'katana', 'dagger', 'axe'}
     info.Weapons.HandtoHand = S{'handtohand'}
@@ -270,10 +273,12 @@ end
 -- eventArgs is the same one used in job_precast, in case information needs to be persisted.
 function job_post_precast(spell, action, spellMap, eventArgs)
     local ability_recast = windower.ffxi.get_ability_recasts()
-    if (spell.action_type:lower() == 'magic' and player.status == 'Idle') then
-        if (state.Buff['Hasso'] and (ability_recast[138] == 0 or nil)) then
-            --cast_delay(0.3)
-            send_command('cancel hasso')
+    if (spell.action_type:lower() == 'magic') then
+        if player.status == 'Idle' then
+            if (state.Buff['Hasso'] and (ability_recast[138] == 0 or ability_recast[138] == nil)) then
+                --cast_delay(0.3)
+                send_command('cancel hasso')
+            end
         end
     elseif spell.type:lower() == 'weaponskill' then
         if info.TP_scaling_ws:contains(spell.english) and info.TP.new > 2999 then
@@ -301,8 +306,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     -- Dark seal handling
-    if buffactive["Dark Seal"] and spell.skill == 'Dark Magic' and spell.english ~= 'Impact' then equip(sets.precast.JA['Dark Seal']) end
-    
     if spell.skill == 'Dark Magic' and buffactive['Dark Seal'] then
         if spell.english == 'Drain III' then
             if player.tp > 1000 then
@@ -315,7 +318,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 equip(set_combine( sets.midcast['Drain III'].DarkSeal, sets.midcast['Drain'].Weapon ))
             end
         -- we're not interested in the relic bonus for these spells    
-        elseif S{'Drain','Drain II','Aspir','Aspir II','Impact','Dread Spikes'}:contains(spell.english) then
+        elseif S{'Drain','Drain II','Aspir','Aspir II','Dread Spikes'}:contains(spell.english) then
             if player.tp > 1000 then
                 equip(sets.midcast[spell.english])
             else
@@ -335,6 +338,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if S{'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II'}:contains(spell.english) or spell.english:startswith('Absorb') then
         adjust_timers_darkmagic(spell, spellMap)
     end
+
+    if S{'Provoke'}:contains(spell.english) then 
+        equip(sets.Enmity)
+    elseif S{'Stun'}:contains(spell.english) and state.StunMode.value == 'Enmity' then
+        equip(sets.Enmity)
+    end
+
 
     if spell.english == 'Dread Spikes' then
         echo('Dread Spikes [' .. calculate_dreadspikes() .. ']')
@@ -487,8 +497,9 @@ function weapon_macro_book()
     local currentWeapon = player.equipment.main
     local subjob = player.sub_job
 
+
     -- ensure it exists, then go there
-    if info.Weapons.Type[currentWeapon] ~= nil and info.macro_sets.subjobs:contains(subjob) then
+    if (info.Weapons.Type[currentWeapon] ~= nil or currentWeapon ~= empty) and info.macro_sets.subjobs:contains(subjob) then
         local book = info.macro_sets[info.Weapons.Type[currentWeapon]][subjob].book
         local page = info.macro_sets[info.Weapons.Type[currentWeapon]][subjob].page
         echo('Changing macro book to <' .. book .. ',' .. page .. '>.',0,144)
@@ -505,7 +516,7 @@ function determine_combat_weapon()
         state.CombatWeapon:reset()
         echo('CombatWeapon: Normal set',1)
     end
-    echo('CombatWeapon mode: '.. state.CombatWeapon.value,2)
+    echo('CombatWeapon mode: '.. state.CombatWeapon.value,1)
 end
 
 -- reset combat form, or choose a specific weapons combat form. Blind to aftermath

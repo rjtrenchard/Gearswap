@@ -232,7 +232,7 @@ function init_gear_sets()
 
     sets.midcast['Dispel'] = set_combine(sets.midcast['Enfeebling Magic'].Acc, {neck="Duelist's Torque", back=gear.int_cape})
     sets.midcast['Dispelga'] = set_combine(sets.midcast.Dispel, {main="Daybreak"})
-    sets.midcast['Impact'] = set_combine(sets.midcast['Dark Magic'], {head=empty,body="Crepuscular Cloak", waist="Eschan Stone"})
+    sets.midcast['Impact'] = set_combine(sets.midcast['Elemental Magic'], {head=empty,body="Crepuscular Cloak"})
     --sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {})
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {head="Pixie Hairpin +1", neck="Erra Pendant", ring1="Archon Ring", ring2="Evanescence Ring", waist="Fucho-no-Obi"})
@@ -284,7 +284,7 @@ function init_gear_sets()
     sets.idle.PDT = {main="Malignance Pole",sub="Oneiros Grip",ammo="Homiliary",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Infused earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Stikini Ring +1",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Shadow Mantle",waist="Flume Belt",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.MDT = sets.idle.PDT
 
@@ -394,9 +394,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if state.Buff.Saboteur then
             equip(sets.buff.Saboteur)
         end
-        if state.buff['Elemental Seal'] then
-            equip(sets.midcast['Enfeebling Magic'].Duration)
-        end
+        --if state.buff['Elemental Seal'] then
+        --    equip(sets.midcast['Enfeebling Magic'].Duration)
+        --end
     elseif spell.skill == 'Enhancing Magic' then
         if enhancing_skill_magic:contains(spell.english) then
             equip(sets.midcast['Enhancing Magic'])
