@@ -94,13 +94,13 @@ function include_job_sets()
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     -- Scythe Weaponskills
-    sets.precast.WS['Spinning Scythe'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
-    sets.precast.WS['Spinning Scythe'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
-    sets.precast.WS['Spinning Scythe'].Mod = set_combine(sets.precast.WS['Spinning Scythe'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
+    sets.precast.WS['Spinning Scythe'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
+    sets.precast.WS['Spinning Scythe'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
+    sets.precast.WS['Spinning Scythe'].Mod = set_combine(sets.precast.WS['Spinning Scythe'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
 
-    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
-    sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
-    sets.precast.WS['Spiral Hell'].Mod = set_combine(sets.precast.WS['Spiral Hell'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
+    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
+    sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
+    sets.precast.WS['Spiral Hell'].Mod = set_combine(sets.precast.WS['Spiral Hell'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
 
     sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {
         head="Ratri Sallet +1",ear1="Lugra Earring +1",ear2="Moonshade Earring",
@@ -110,25 +110,25 @@ function include_job_sets()
     sets.precast.WS['Entropy'].Mod = set_combine(sets.precast.WS['Entropy'], {ear2="Moonshade Earring"})
     sets.precast.WS['Entropy'].FullTP = {ear2="Malignance Earring"}
 
-    sets.precast.WS['Quietus'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1", ear2="Lugra Earring +1"})
-    sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1", ear2="Lugra Earring +1"})
-    sets.precast.WS['Quietus'].Mod = set_combine(sets.precast.WS['Quietus'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1", ear2="Lugra Earring +1"})
+    sets.precast.WS['Quietus'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}, ear2="Lugra Earring +1"})
+    sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}, ear2="Lugra Earring +1"})
+    sets.precast.WS['Quietus'].Mod = set_combine(sets.precast.WS['Quietus'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}, ear2="Lugra Earring +1"})
 
     sets.precast.WS['Guillotine'] = set_combine(sets.precast.WS.MultiHit, {})
     sets.precast.WS['Guillotine'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Guillotine'].Mod = set_combine(sets.precast.WS['Guillotine'], {})
 
-    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",neck="Abyssal Beads +2",waist="Sailfi Belt +1", feet="Ratri Sollerets +1"})
-    sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
-    sets.precast.WS['Cross Reaper'].Mod = set_combine(sets.precast.WS, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
+    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",neck="Abyssal Beads +2",waist="Sailfi Belt +1", feet={name="Ratri Sollerets +1", priority=10}})
+    sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
+    sets.precast.WS['Cross Reaper'].Mod = set_combine(sets.precast.WS, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
 
     sets.precast.WS['Insurgency'] = set_combine(sets.precast.WS.MultiHit, {})
     sets.precast.WS['Insurgency'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Insurgency'].Mod = set_combine(sets.precast.WS['Insurgency'], {})
 
-    sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",neck="Abyssal Beads +2",hands="Ratri Gadlings +1",waist="Sailfi Belt +1",ear2="Lugra Earring +1", feet="Ratri Sollerets +1"})
-    sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",ear2="Lugra Earring +1", hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
-    sets.precast.WS['Catastrophe'].Mod = set_combine(sets.precast.WS['Catastrophe'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet="Ratri Sollerets +1"})
+    sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS.SingleHit, {head="Ratri Sallet +1",neck="Abyssal Beads +2",hands="Ratri Gadlings +1",waist="Sailfi Belt +1",ear2="Lugra Earring +1", feet={name="Ratri Sollerets +1", priority=10}})
+    sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",ear2="Lugra Earring +1", hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
+    sets.precast.WS['Catastrophe'].Mod = set_combine(sets.precast.WS['Catastrophe'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
 
     -- Greatsword WS's
     sets.precast.WS['Shockwave'] = set_combine(sets.precast.WS.SingleHit, {})
@@ -222,7 +222,7 @@ function include_job_sets()
     sets.HP_High = {
         head="Ratri sallet +1",ear1="Eabani Earring",
         body="Ignominy Cuirass +3",hands="Rat. Gadlings +1",ring1="Moonlight Ring",ring2="Regal Ring",
-        waist="Eschan Stone",legs="Sakpata's Cuisses",feet="Ratri Sollerets +1",
+        waist="Eschan Stone",legs="Sakpata's Cuisses",feet={name="Ratri Sollerets +1", priority=10},
     }
     sets.HP_Low = set_combine(sets.naked, {main=gear.MainHand, sub=gear.SubHand, ranged="",})
 
@@ -322,7 +322,7 @@ function include_job_sets()
     sets.midcast['Dark Magic'] = {ammo="Sturm's Report",
         head="Ignominy Burgonet +3",neck="Erra Pendant",ear1="Malignance Earring",ear2="Mani Earring",
         body="Carm. Sc. Mail +1",hands="Fallen's Finger Gauntlets +3",ring1="Evanescence Ring",ring2="Archon Ring",
-        back=gear.casting_cape,waist="Eschan Stone",legs="Fallen's Flanchard +3",feet="Ratri Sollerets +1"}
+        back=gear.casting_cape,waist="Eschan Stone",legs="Fallen's Flanchard +3",feet={name="Ratri Sollerets +1", priority=10}}
     sets.midcast['Dark Magic'].DarkSeal = set_combine(sets.midcast['Dark Magic'], {head="Fallen's Burgeonet +3"})
     sets.midcast['Dark Magic'].Weapon = {main="Void Scythe", sub="Caecus Grip"}
 
@@ -341,7 +341,7 @@ function include_job_sets()
     sets.midcast['Drain III'] = set_combine( sets.midcast['Dark Magic'], {ammo="Sturm's Report",
     head="Pixie Hairpin +1",neck="Erra Pendant",ear1="Hirudinea earring", ear2="Mani Earring",
     body="Carmine Scale Mail +1", hands="Fallen's Finger Gauntlets +3",
-    back="Niht Mantle",waist=gear.DrainWaist,legs="Fallen's Flanchard +3", feet="Ratri Sollerets +1"})
+    back="Niht Mantle",waist=gear.DrainWaist,legs="Fallen's Flanchard +3", feet={name="Ratri Sollerets +1", priority=10}})
     sets.midcast['Drain III'].DarkSeal = set_combine(sets.midcast.Drain, {head="Fallen's Burgeonet +3"})
     sets.midcast['Aspir'] = sets.midcast.Drain
     sets.midcast['Aspir II'] = sets.midcast.Aspir
@@ -350,13 +350,13 @@ function include_job_sets()
     sets.midcast.Stun = {
         head="Ignominy Burgonet +3",neck="Erra Pendant",ear1="Malignance Earring",ear2="Mani Earring",
         body="Carmine Scale Mail +1",hands="Fallen's Finger Gauntlets +3",ring1="Evanescence Ring",ring2="Stikini Ring +1",
-        back="Niht Mantle",waist="Eschan Stone",legs="Fallen's Flanchard +3",feet="Ratri Sollerets +1"}
+        back="Niht Mantle",waist="Eschan Stone",legs="Fallen's Flanchard +3",feet={name="Ratri Sollerets +1", priority=10}}
 
     sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],{head="Ignominy Burgonet +3",back=gear.casting_cape, ring1="Stikini Ring +1", ring2="Stikini Ring +1"})
     sets.midcast['Absorb-TP'] = set_combine(sets.midcast.Absorb, {hands="Heathen's Gauntlets +1"})
 
     sets.midcast['Dread Spikes'] = set_combine(sets.HP_High, {head="Ratri sallet +1", ear1="Odnowa Earring",ear2="Odnowa Earring +1", body="Heathen's Cuirass +1", hands="Rat. Gadlings +1", feet="Rat. sollerets +1"})
-    sets.midcast['Dread Spikes'].Weapon = {main="Agwu's Scythe",sub="Utu Grip"}
+    sets.midcast['Dread Spikes'].Weapon = {main="Crepuscular Scythe",sub="Utu Grip"}
 
     -- Elemental Magic sets    
     sets.midcast['Elemental Magic'] = {ammo="Seething Bomblet +1",

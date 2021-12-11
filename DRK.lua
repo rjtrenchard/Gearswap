@@ -99,8 +99,9 @@ function user_setup()
     gear.default.Moonshade = 'Ishvara Earring'
 
     info.lastWeapon = nil
-    info.recastWeapon = nil
-    info.recastSub = nil
+    sets._Recast = {}
+    info._RecastFlag = false
+    
 
 
     -- Event driven functions
@@ -174,10 +175,11 @@ function job_helper()
         ['Zulfiqar'] = 'greatsword', ['Caladbolg'] = 'greatsword',
         ['Lycurgos'] = 'greataxe',
         ['Kaja Axe']= 'axe',['Dolichenus']='axe',
-        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania']='scythe',
+        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania']='scythe',['Woeborn']='scythe',
         ['Loxotic Mace +1'] = 'club',['Loxotic Mace'] = 'club',
         ['empty'] = 'handtohand',
-        ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',["Smyth's Aspis"]='shield',["Smyth's Ecu"]='shield',["Smythe's Scutum"]='shield',["Smythe's Shield"]='shield',["Smythe's Eschuteon"]="Shield"
+        ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',["Smyth's Aspis"]='shield',["Smyth's Ecu"]='shield',["Smythe's Scutum"]='shield',["Smythe's Shield"]='shield',["Smythe's Eschuteon"]="Shield",
+        ['Utu Grip']='Grip',['Caecus Grip']='Grip'
     }
     info.Weapons.REMA = S{'Apocalypse','Ragnarok','Caladbolg','Redemption','Liberator','Anguta','Father Time'}
     info.Weapons.REMA.Type = {
@@ -308,30 +310,29 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     -- Dark seal handling
     if spell.skill == 'Dark Magic' and buffactive['Dark Seal'] then
         if spell.english == 'Drain III' then
-            if player.tp > 1000 then
-                equip(sets.midcast['Drain III'].DarkSeal)
-            else
-                if sets.midcast['Drain'].Weapon.main ~= player.equipment.main then
-                    info.recastWeapon = player.equipment.main
-                    info.recastSub = player.equipment.sub
-                end
-                equip(set_combine( sets.midcast['Drain III'].DarkSeal, sets.midcast['Drain'].Weapon ))
-            end
+            equip(sets.midcast['Drain III'].DarkSeal)
         -- we're not interested in the relic bonus for these spells    
         elseif S{'Drain','Drain II','Aspir','Aspir II','Dread Spikes'}:contains(spell.english) then
-            if player.tp > 1000 then
-                equip(sets.midcast[spell.english])
-            else
-                if sets.midcast['Drain'].Weapon.main ~= player.equipment.main then
-                    info.recastWeapon = player.equipment.main
-                    info.recastSub = player.equipment.sub
-                end
-                equip(set_combine( sets.midcast[spell.english], sets.midcast['Drain'].Weapon ))
-            end
+            equip(sets.midcast[spell.english])
         elseif S{'Endark', 'Endark II'}:contains(spell.english) then
             equip(sets.midcast['Endark'].DarkSeal)
         else
             equip(sets.midcast['Dark Magic'].DarkSeal)
+        end
+    end
+
+    -- Weapon swap handling
+    if spell.skill == 'Dark Magic' and player.tp < 1000 then
+        if S{'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II'}:contains(spell.english) and (sets.midcast['Drain'].Weapon.main ~= player.equipment.main) then
+            setRecast()
+            equip(sets.midcast['Drain'].Weapon)
+        -- do not change weapons if AM3 is up
+        elseif S{'Endark', 'Endark II'}:contains(spell.english) and (sets.midcast['Endark'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
+            setRecast()
+            equip(sets.midcast['Endark'].Weapon)
+        elseif spell.english == 'Dread Spikes' and (sets.midcast['Dread Spikes'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
+            setRecast()
+            equip(sets.midcast['Dread Spikes'].Weapon)
         end
     end
 
@@ -377,10 +378,10 @@ end
 function job_post_aftercast(spell, action, spellMap, eventArgs)
     if buffactive.Souleater then equip(sets.buff['Souleater']) end
 
-    if info.recastWeapon then
-        equip( {main=info.recastWeapon,sub=info.recastSub} )
-        info.recastWeapon = nil
-        info.recastSub = nil
+    -- if we changed weapons, change back.
+    if hasRecast() then
+        equip(recallRecast())
+        resetRecast()
     end
     eventArgs.handled = false
 end
@@ -561,6 +562,33 @@ function isMainChanged()
     end
 end
 
+-- sets the Recast weapon set to what is currently equipped
+-- affected slots: main sub ranged ammo
+function setRecast() 
+    sets._Recast = {
+        main = player.equipment.main,
+        sub = player.equipment.sub,
+        ranged = player.equipment.range,
+        ammo = player.equipment.ammo
+    }
+    info._RecastFlag = true
+end
+
+-- resets the Recast weapon set to nil
+function resetRecast()
+    sets._Recast = {main = nil, sub = nil, ranged = nil, ammo = nil}
+    info._RecastFlag = false
+end
+
+-- returns the Recast weapon set
+function recallRecast()
+    return sets._Recast
+end
+
+-- returns true if the recast set has been used
+function hasRecast()
+    return info._RecastFlag
+end
 
 -- check if there is something in the sub slot
 function procSub()
