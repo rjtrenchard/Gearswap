@@ -16,6 +16,9 @@
     send_command('bind ^= gs c cycle pctargetmode')
 ]]
 
+
+--TODO: fix macro changing function so it stops freaking out when you change to an undefined weapon.
+
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
@@ -175,11 +178,11 @@ function job_helper()
         ['Zulfiqar'] = 'greatsword', ['Caladbolg'] = 'greatsword',
         ['Lycurgos'] = 'greataxe',
         ['Kaja Axe']= 'axe',['Dolichenus']='axe',
-        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania']='scythe',['Woeborn']='scythe',
+        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania']='scythe',['Woeborn']='scythe',['Crepuscular Scythe']='scythe',
         ['Loxotic Mace +1'] = 'club',['Loxotic Mace'] = 'club',
         ['empty'] = 'handtohand',
         ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',["Smyth's Aspis"]='shield',["Smyth's Ecu"]='shield',["Smythe's Scutum"]='shield',["Smythe's Shield"]='shield',["Smythe's Eschuteon"]="Shield",
-        ['Utu Grip']='Grip',['Caecus Grip']='Grip'
+        ['Utu Grip']='grip',['Caecus Grip']='grip'
     }
     info.Weapons.REMA = S{'Apocalypse','Ragnarok','Caladbolg','Redemption','Liberator','Anguta','Father Time'}
     info.Weapons.REMA.Type = {
