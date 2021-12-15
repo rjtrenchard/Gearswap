@@ -70,21 +70,23 @@ function user_setup()
     include('gear_' .. player.name:lower()..'/'..player.main_job:upper()..'.lua' )
 
     state.OffenseMode:options('Normal', 'Acc')
-    state.HybridMode:options('Normal', 'PDT', 'Reraise')
+    state.HybridMode:options('Normal', 'PDT', 'Reraise', 'SubtleBlow')
     state.WeaponskillMode:options('Normal', 'Acc', 'Mod', 'Low')
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
     state.IdleMode:options('Normal', 'PDT', 'Refresh')
 
     state.StunMode = M{['description']='Stun Mode', 'default', 'Enmity'}
+    state.SIRDMode = M{['description']='SIRD Mode', 'disabled', 'enabled', 'one-time'}
     state.WeaponMode = M{['description']='Weapon Mode', 'greatsword', 'scythe', 'greataxe', 'sword', 'club'}
     state.Verbose = M{['description']='Verbosity', 'Normal', 'Verbose', 'Debug'}
     state.UseCustomTimers = M(false, 'Use Custom Timers')
     state.AutoMacro = M(true, 'Use automatic macro books')
 
+
     include_job_stats()
 
     -- Additional local binds
-    send_command('bind ^` input /ja "Scarlet Delirium"')
+    send_command('bind ^` gs c set SIRDMode one-time; input /ma "Dread Spikes"')
     send_command('bind !` input /ja "Scarlet Delirium"')
     --send_command('bind !` input /ja "Seigan" <me>')
     --send_command('bind != gs c cycle WeaponMode')
@@ -351,7 +353,14 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 
     if spell.english == 'Dread Spikes' then
-        echo('Dread Spikes [' .. calculate_dreadspikes() .. ']')
+        if S{'enabled', 'one-time'}:contains(state.SIRDMode.value) then
+            equip(sets.SIRD)
+            echo('Dread Spikes [' .. calculate_dreadspikes() .. '] [SIRD]')
+            if state.SIRDMode.value == 'one-time' then state.SIRDMode:reset() end
+        else
+            echo('Dread Spikes [' .. calculate_dreadspikes() .. ']')
+        end
+
     end
 end
 

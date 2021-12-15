@@ -35,6 +35,11 @@ function include_job_sets()
     gear.DrainFeet = { name="Yorium Sabatons", augments={'Mag. Acc.+10','"Drain" and "Aspir" potency +6',}}
     gear.DrainBody = { name="Acro Surcoat", augments={'Mag. Acc.+10','"Drain" and "Aspir" potency +7','INT+6',}}
 
+    gear.FCfeet = { name="Odyssean Greaves", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','"Fast Cast"+5','AGI+10','Mag. Acc.+11','"Mag.Atk.Bns."+6',}}
+    
+    gear.SIRDhands = { name="Yorium Gauntlets", augments={'DEF+23','Spell interruption rate down -10%','Phys. dmg. taken -4%',}}
+    gear.SIRDhead = { name="Acro Helm", augments={'DEF+22','Spell interruption rate down -10%','HP+50',}}
+    gear.SIRDfeet = gear.FCfeet
 
     -- Mainhand Sets
     sets.Weapons = {}
@@ -220,17 +225,23 @@ function include_job_sets()
     -- Miscellaneous Sets
     -------------------------------------------------------------------------------------------------------------------
     sets.HP_High = {
-        head="Ratri sallet +1",ear1="Eabani Earring",
-        body="Ignominy Cuirass +3",hands="Rat. Gadlings +1",ring1="Moonlight Ring",ring2="Regal Ring",
+        head="Ratri sallet +1",neck="Unmoving Collar +1",ear1="Odnowa Earring",ear2="Odnowa Earring +1",
+        body="Ignominy Cuirass +3",hands="Rat. Gadlings +1",ring1="Moonlight Ring",ring2="Gelatinous Ring +1",
         waist="Eschan Stone",legs="Sakpata's Cuisses",feet={name="Ratri Sollerets +1", priority=10},
     }
     sets.HP_Low = set_combine(sets.naked, {main=gear.MainHand, sub=gear.SubHand, ranged="",})
 
     sets.Sleeping = {neck="Berserker's Torque"}
 
-    sets.Enmity = {head="Loess Barbuta +1", neck="Unmoving Collar +1", ear1="Cryptic Earring", ear2="Trux Earring",
+    sets.Enmity = {ammo="Sapience Orb",
+        head="Loess Barbuta +1", neck="Unmoving Collar +1", ear1="Cryptic Earring", ear2="Trux Earring",
         body="Obviation Cuirass +1", hands="Macabre Gauntlets +1", ring1="Supershear Ring", ring2="Petrov Ring",
         waist="Trance Belt", legs="Zoar Subligar +1", feet="Eschite Greaves"}
+
+    sets.SIRD = {sub="Magic Strap",ammo="Impatiens",
+        head=gear.SIRDhead, 
+        hands=gear.SIRDhands,ring2="Evanescence Ring",
+        waist="Sanctuary Obi +1", legs="Founder's Hose",feet=gear.SIRDfeet}
     
 
     -------------------------------------------------------------------------------------------------------------------
@@ -238,18 +249,18 @@ function include_job_sets()
     -------------------------------------------------------------------------------------------------------------------
 
     sets.idle.Town = {ammo="Crepuscular pebble",
-        head="Shaded Spectacles",neck="Smithy's Torque",ear1="Ethereal Earring",ear2="Eabani Earring",
+        head="Shaded Spectacles",neck="Smithy's Torque",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Blacksmith's Smock",hands="Smithy's Mitts",ring1="Confectioner's Ring",ring2="Craftmaster's Ring",
         back=gear.melee_cape,waist="Leech Belt",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
     
     sets.idle.Field = set_combine({},{
-        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Ethereal Earring",ear2="Eabani Earring",
+        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Leech Belt",legs="Carmine Cuisses +1",feet="Sakpata's Leggings" })
     sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
     sets.idle.Weak = {ammo="Crepuscular pebble",
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Ethereal Earring",ear2="Eabani Earring",
+        head="Twilight Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Flume Belt",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
 
@@ -263,17 +274,17 @@ function include_job_sets()
     -- Defense sets
     -------------------------------------------------------------------------------------------------------------------
     sets.defense.PDT = {ammo="Iron Gobbet",
-        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Ethereal earring",ear2="Eabani Earring",
+        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Archon Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
 
     sets.defense.Reraise = {
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Ethereal earring",ear2="Eabani Earring",
+        head="Twilight Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Paguroidea Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Ignominy Flanchard +1",feet="Flamma Gambieras +2"}
 
     sets.defense.MDT = {ammo="Impatiens",
-        head="Flamma Zucchetto +2",neck="Loricate Torque +1",ear1="Ethereal earring",ear2="Eabani Earring",
+        head="Flamma Zucchetto +2",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Sakpata's Plate",hands="Flamma Manopolas +2",ring1="Defending Ring",ring2="Archon Ring",
         back=gear.melee_cape,waist="Flume Belt",legs="Ignominy Flanchard +1",feet="Flamma Gambieras +2"}
 
@@ -289,7 +300,7 @@ function include_job_sets()
     sets.precast.FC = {ammo="Sapience Orb",
         head="Sakpata's Helm",neck="Baetyl Pendant",ear1="Malignance Earring",ear2="Loquacious Earring",
         body="Sacro Breastplate",hands="Flamma Manopolas +2",ring1="Kishar Ring",ring2="Prolix Ring",
-        back=gear.casting_cape,waist="Sailfi Belt +1",legs="Carmine Cuisses +1",feet="Flamma Gambieras +2"}
+        back=gear.casting_cape,waist="Sailfi Belt +1",legs="Carmine Cuisses +1",feet="Odyssean Greaves"}
 
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
 
@@ -339,13 +350,13 @@ function include_job_sets()
         back="Niht Mantle",waist=gear.DrainWaist,legs="Fallen's Flanchard +3", feet=gear.DrainFeet})
     sets.midcast['Drain II'] = sets.midcast['Drain']
     sets.midcast['Drain III'] = set_combine( sets.midcast['Dark Magic'], {ammo="Sturm's Report",
-    head="Pixie Hairpin +1",neck="Erra Pendant",ear1="Hirudinea earring", ear2="Mani Earring",
+    head="Pixie Hairpin +1",neck="Erra Pendant",ear1="Hirudinea earring", ear2="Nehalennia Earring",
     body="Carmine Scale Mail +1", hands="Fallen's Finger Gauntlets +3",
     back="Niht Mantle",waist=gear.DrainWaist,legs="Fallen's Flanchard +3", feet={name="Ratri Sollerets +1", priority=10}})
     sets.midcast['Drain III'].DarkSeal = set_combine(sets.midcast.Drain, {head="Fallen's Burgeonet +3"})
     sets.midcast['Aspir'] = sets.midcast.Drain
     sets.midcast['Aspir II'] = sets.midcast.Aspir
-    sets.midcast['Drain'].Weapon = {main="Dacnomania", sub="Caecus Grip"}
+    sets.midcast['Drain'].Weapon = {main="Dacnomania", sub="Dark Grip"}
 
     sets.midcast.Stun = {
         head="Ignominy Burgonet +3",neck="Erra Pendant",ear1="Malignance Earring",ear2="Mani Earring",
@@ -355,7 +366,7 @@ function include_job_sets()
     sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],{head="Ignominy Burgonet +3",back=gear.casting_cape, ring1="Stikini Ring +1", ring2="Stikini Ring +1"})
     sets.midcast['Absorb-TP'] = set_combine(sets.midcast.Absorb, {hands="Heathen's Gauntlets +1"})
 
-    sets.midcast['Dread Spikes'] = set_combine(sets.HP_High, {head="Ratri sallet +1", ear1="Odnowa Earring",ear2="Odnowa Earring +1", body="Heathen's Cuirass +1", hands="Rat. Gadlings +1", feet="Rat. sollerets +1"})
+    sets.midcast['Dread Spikes'] = set_combine(sets.HP_High, {head="Ratri sallet +1", body="Heathen's Cuirass +1", hands="Rat. Gadlings +1", feet="Rat. sollerets +1"})
     sets.midcast['Dread Spikes'].Weapon = {main="Crepuscular Scythe",sub="Utu Grip"}
 
     -- Elemental Magic sets    
