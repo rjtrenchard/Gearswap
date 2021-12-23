@@ -58,6 +58,12 @@ function job_setup()
 
     state.Buff['Aftermath'] = (buffactive['Aftermath: Lv.1'] or buffactive['Aftermath: Lv.2'] or buffactive['Aftermath: Lv.3'] or buffactive['Aftermath']) or false
 
+    -- For th_action_check():
+    -- JA IDs for actions that always have TH: Provoke, Animated Flourish
+    info.default_ja_ids = S{35, 204}
+    -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -66,6 +72,7 @@ end
 
 -- Setup vars that are user-dependent.
 function user_setup()
+    include('Mote-TreasureHunter')
     job_helper()
     include('gear_' .. player.name:lower()..'/'..player.main_job:upper()..'.lua' )
 
@@ -88,8 +95,7 @@ function user_setup()
     -- Additional local binds
     send_command('bind ^` gs c set SIRDMode one-time; input /ma "Dread Spikes"')
     send_command('bind !` input /ja "Scarlet Delirium"')
-    --send_command('bind !` input /ja "Seigan" <me>')
-    --send_command('bind != gs c cycle WeaponMode')
+    send_command('bind ^= gs c cycle treasuremode')
 
     send_command('bind numpad1 gs equip sets.Weapons.greatsword')
     send_command('bind numpad2 gs equip sets.Weapons.scythe')
@@ -354,7 +360,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
     if spell.english == 'Dread Spikes' then
         if S{'enabled', 'one-time'}:contains(state.SIRDMode.value) then
-            equip(sets.SIRD)
+            equip(set_combine(sets.SIRD, sets.midcast['Dread Spikes'].Weapon))
             echo('Dread Spikes [' .. calculate_dreadspikes() .. '] [SIRD]')
             if state.SIRDMode.value == 'one-time' then state.SIRDMode:reset() end
         else
@@ -362,6 +368,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
 
     end
+
+    -- Treasure Hunter handling
+    if state.TreasureMode.value == 'Tag' and S{'Poisonga', 'Poison', 'Absorb-CHR'}:contains(spell.english) then
+        equip(sets.midcast[spell.english].TH)
+    end
+
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -480,6 +492,7 @@ end
 function job_update(cmdParams, eventArgs)
     procTime(world.time)
     update_combat_form()
+    th_update(cmdParams, eventArgs)
     --eventArgs.handled = false
 end
 
@@ -787,8 +800,20 @@ function calculate_duration_darkmagic(spellName, spellMap)
     return totalDuration
 end
 
+-- Check for various actions that we've specified in user code as being used with TH gear.
+-- This will only ever be called if TreasureMode is not 'None'.
+-- Category and Param are as specified in the action event packet.
+function th_action_check(category, param)
+    if category == 2 or -- any ranged attack
+        --category == 4 or -- any magic action
+        (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+        then return true
+    end
+end
 
--- sent a message to the game
+-- send a message to the game
 function echo(msg, verbosity_, chatmode)
     local verbosity = verbosity_ or 0
     local function getVerbosityLevel()

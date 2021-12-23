@@ -23,23 +23,30 @@ function include_job_sets()
     -- Start defining the sets
     --------------------------------------
 
-    -- individual gear
+    -- Ambuscade capes
     gear.melee_cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.ws_cape = {name="Ankou's Mantle", augments={'STR+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%'}}
     gear.torcleaver_cape = { name="Ankou's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%',}}
-    gear.casting_cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}}
+    gear.casting_cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10','Spell interruption rate down-10%',}}
 
+    -- WS augs
     gear.torcleaver_helm = { name="Odyssean Helm", augments={'Mag. Acc.+23','Weapon skill damage +3%','VIT+10','Attack+2',}}
     gear.torcleaver_gauntlets = { name="Odyssean Gauntlets", augments={'VIT+9','Enmity+5','Weapon skill damage +3%','Accuracy+13 Attack+13','Mag. Acc.+1 "Mag.Atk.Bns."+1',}}
 
+    -- Drain augs
     gear.DrainFeet = { name="Yorium Sabatons", augments={'Mag. Acc.+10','"Drain" and "Aspir" potency +6',}}
     gear.DrainBody = { name="Acro Surcoat", augments={'Mag. Acc.+10','"Drain" and "Aspir" potency +7','INT+6',}}
 
-    gear.FCfeet = { name="Odyssean Greaves", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','"Fast Cast"+5','AGI+10','Mag. Acc.+11','"Mag.Atk.Bns."+6',}}
+    gear.FCfeet = { name="Odyssean Greaves", augments={'"Fast Cast"+6','Mag. Acc.+13','"Mag.Atk.Bns."+14',}}
     
+    --SIRD augs
     gear.SIRDhands = { name="Yorium Gauntlets", augments={'DEF+23','Spell interruption rate down -10%','Phys. dmg. taken -4%',}}
     gear.SIRDhead = { name="Acro Helm", augments={'DEF+22','Spell interruption rate down -10%','HP+50',}}
     gear.SIRDfeet = gear.FCfeet
+    gear.SIRDcape = gear.casting_cape
+
+    -- Misc augs
+    gear.THhands = { name="Odyssean Gauntlets", augments={'Mag. Acc.+4 "Mag.Atk.Bns."+4','Pet: "Mag.Atk.Bns."+18','"Treasure Hunter"+2','Accuracy+7 Attack+7',}}
 
     -- Mainhand Sets
     sets.Weapons = {}
@@ -66,6 +73,8 @@ function include_job_sets()
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
 
+    sets.TreasureHunter = {head="Volte Cap", hands=gear.THhands, waist="Chaac Belt"}
+
        
     -------------------------------------------------------------------------------------------------------------------
     -- Weaponskill sets
@@ -89,7 +98,7 @@ function include_job_sets()
 
     sets.precast.WS.Magic = {ammo="Knobkierrie",
         head="Flamma Zucchetto +2", neck="Baetyl Pendant", ear1="Friomisi Earring", ear2="Malignance Earring",
-        body="Ignominy Cuirass +3", hands="Fallen's Finger Gauntlets +3", ring1="Acumen Ring", ring2="Karieyh Ring +1",
+        body="Ignominy Cuirass +3", hands="Fallen's Finger Gauntlets +3", ring1="Metamorph Ring +1", ring2="Karieyh Ring +1",
         back=gear.ws_cape, waist="Eschan Stone", legs="Fallen's Flanchard +3", feet="Sulevia's Leggings +2"}
 
     sets.precast.WS.Crit = {ammo="Yetshila +1",
@@ -109,7 +118,7 @@ function include_job_sets()
 
     sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {
         head="Ratri Sallet +1",ear1="Lugra Earring +1",ear2="Moonshade Earring",
-        body="Sakpata's breastplate",hands="Fallen's Finger gauntlets +3",
+        body="Sakpata's breastplate",hands="Fallen's Finger gauntlets +3",ring1="Metamorph Ring +1",
         back=gear.ws_cape, legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"})
     sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS.Acc, {ear2="Moonshade Earring"})
     sets.precast.WS['Entropy'].Mod = set_combine(sets.precast.WS['Entropy'], {ear2="Moonshade Earring"})
@@ -148,7 +157,10 @@ function include_job_sets()
     sets.precast.WS['Ground Strike'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Ground Strike'].Mod = set_combine(sets.precast.WS['Ground Strike'], {})
 
-    sets.precast.WS['Torcleaver'] = set_combine(sets.precast.WS.SingleHit, {head="Sakpata's Helm", neck="Abyssal Beads +2", hands="Sakpata's Gauntlets", waist="Sailfi Belt +1", back=gear.torcleaver_cape})
+    sets.precast.WS['Torcleaver'] = set_combine(sets.precast.WS.SingleHit, {
+        head="Sakpata's Helm", neck="Abyssal Beads +2", 
+        hands="Sakpata's Gauntlets", ring1="Karieyh Ring +1",ring2="Niqmaddu Ring",
+        back=gear.torcleaver_cape,waist="Sailfi Belt +1"})
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS.Acc, {head="Sakpata's Helm", hands="Sakpata's Gauntlets", back=gear.torcleaver_cape, waist="Sailfi Belt +1"})
     sets.precast.WS['Torcleaver'].Mod = set_combine(sets.precast.WS['Torcleaver'], {head=gear.torcleaver_helm, back=gear.torcleaver_cape})
 
@@ -169,6 +181,10 @@ function include_job_sets()
     sets.precast.WS['Steel Cyclone'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
     sets.precast.WS['Steel Cyclone'].Acc = set_combine(sets.precast.WS.Acc, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
     sets.precast.WS['Steel Cyclone'].Mod = set_combine(sets.precast.WS['Steel Cyclone'], {neck="Abyssal beads +2", waist="Sailfi belt +1"})
+
+    sets.precast.WS['Keen Edge'] = set_combine(sets.precast.WS.MultiHit, {})
+    sets.precast.WS['Keen Edge'].Acc = set_combine(sets.precast.WS.MultiHit, {})
+    sets.precast.WS['Keen Edge'].Mod = set_combine(sets.precast.WS.MultiHit, {})
 
     -- Axe WS's
     sets.precast.WS['Rampage'] = set_combine(sets.precast.WS.Crit, {})
@@ -241,7 +257,7 @@ function include_job_sets()
     sets.SIRD = {sub="Magic Strap",ammo="Impatiens",
         head=gear.SIRDhead, 
         hands=gear.SIRDhands,ring2="Evanescence Ring",
-        waist="Sanctuary Obi +1", legs="Founder's Hose",feet=gear.SIRDfeet}
+        back=gear.SIRDcape, waist="Sanctuary Obi +1", legs="Founder's Hose",feet=gear.SIRDfeet}
     
 
     -------------------------------------------------------------------------------------------------------------------
@@ -251,18 +267,18 @@ function include_job_sets()
     sets.idle.Town = {ammo="Crepuscular pebble",
         head="Shaded Spectacles",neck="Smithy's Torque",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Blacksmith's Smock",hands="Smithy's Mitts",ring1="Confectioner's Ring",ring2="Craftmaster's Ring",
-        back=gear.melee_cape,waist="Leech Belt",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
     
     sets.idle.Field = set_combine({},{
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Leech Belt",legs="Carmine Cuisses +1",feet="Sakpata's Leggings" })
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sakpata's Leggings" })
     sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
     sets.idle.Weak = {ammo="Crepuscular pebble",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
 
     sets.idle.PDT = set_combine(sets.idle.Field, {head="Sakpata's Helm",body="Sakpata's Plate"})
     
@@ -286,7 +302,7 @@ function include_job_sets()
     sets.defense.MDT = {ammo="Impatiens",
         head="Flamma Zucchetto +2",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Sakpata's Plate",hands="Flamma Manopolas +2",ring1="Defending Ring",ring2="Archon Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Ignominy Flanchard +1",feet="Flamma Gambieras +2"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Ignominy Flanchard +1",feet="Flamma Gambieras +2"}
 
     sets.Kiting = {head="Sakpata's Helm",body="Sakpata's Plate",feet="Carmine Cuisses +1"}
 
@@ -326,9 +342,10 @@ function include_job_sets()
 
     sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.FastRecast, {
         head="Flamma Zucchetto +2", neck="Erra Pendant",ear1="Malignance Earring",ear2="Crepuscular Earring",
-        body="Flamma Korazin +2", hands="Flamma Manopolas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1",
+        body="Flamma Korazin +2", hands="Flamma Manopolas +2", ring1="Stikini Ring +1", ring2="Metamorph Ring +1",
         back=gear.casting_cape,waist="Eschan Stone",legs="Sakpata's Cuisses", feet="Flamma Gambieras +2"
     })
+
 
     sets.midcast['Dark Magic'] = {ammo="Sturm's Report",
         head="Ignominy Burgonet +3",neck="Erra Pendant",ear1="Malignance Earring",ear2="Mani Earring",
@@ -337,7 +354,7 @@ function include_job_sets()
     sets.midcast['Dark Magic'].DarkSeal = set_combine(sets.midcast['Dark Magic'], {head="Fallen's Burgeonet +3"})
     sets.midcast['Dark Magic'].Weapon = {main="Void Scythe", sub="Caecus Grip"}
 
-    sets.midcast['Endark'] = set_combine(sets.midcast['Dark Magic'],{back="Niht Mantle",ear1="Dark Earring",legs="Heathen's Flanchard +1",ring2="Stikini Ring +1"})
+    sets.midcast['Endark'] = set_combine(sets.midcast['Dark Magic'],{back="Niht Mantle",ear1="Dark Earring",legs="Heathen's Flanchard +1",ring2="Stikini Ring +1",waist="Casso Sash"})
     sets.midcast['Endark II'] = sets.midcast['Endark']
     sets.midcast['Endark'].Weapon = {main="Woeborn", sub="Caecus Grip"}
 
@@ -353,26 +370,32 @@ function include_job_sets()
     head="Pixie Hairpin +1",neck="Erra Pendant",ear1="Hirudinea earring", ear2="Nehalennia Earring",
     body="Carmine Scale Mail +1", hands="Fallen's Finger Gauntlets +3",
     back="Niht Mantle",waist=gear.DrainWaist,legs="Fallen's Flanchard +3", feet={name="Ratri Sollerets +1", priority=10}})
-    sets.midcast['Drain III'].DarkSeal = set_combine(sets.midcast.Drain, {head="Fallen's Burgeonet +3"})
+    sets.midcast['Drain III'].DarkSeal = set_combine(sets.midcast['Drain III'], {head="Fallen's Burgeonet +3"})
     sets.midcast['Aspir'] = sets.midcast.Drain
     sets.midcast['Aspir II'] = sets.midcast.Aspir
     sets.midcast['Drain'].Weapon = {main="Dacnomania", sub="Dark Grip"}
 
     sets.midcast.Stun = {
         head="Ignominy Burgonet +3",neck="Erra Pendant",ear1="Malignance Earring",ear2="Mani Earring",
-        body="Carmine Scale Mail +1",hands="Fallen's Finger Gauntlets +3",ring1="Evanescence Ring",ring2="Stikini Ring +1",
-        back="Niht Mantle",waist="Eschan Stone",legs="Fallen's Flanchard +3",feet={name="Ratri Sollerets +1", priority=10}}
+        body="Carmine Scale Mail +1",hands="Fallen's Finger Gauntlets +3",ring1="Stikini Ring +1",ring2="Metamorph Ring +1",
+        back=gear.casting_cape,waist="Eschan Stone",legs="Fallen's Flanchard +3",feet={name="Ratri Sollerets +1", priority=10}}
 
-    sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],{head="Ignominy Burgonet +3",back=gear.casting_cape, ring1="Stikini Ring +1", ring2="Stikini Ring +1"})
+    sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],{head="Ignominy Burgonet +3",back=gear.casting_cape, ring1="Stikini Ring +1", ring2="Metamorph Ring +1"})
     sets.midcast['Absorb-TP'] = set_combine(sets.midcast.Absorb, {hands="Heathen's Gauntlets +1"})
 
     sets.midcast['Dread Spikes'] = set_combine(sets.HP_High, {head="Ratri sallet +1", body="Heathen's Cuirass +1", hands="Rat. Gadlings +1", feet="Rat. sollerets +1"})
     sets.midcast['Dread Spikes'].Weapon = {main="Crepuscular Scythe",sub="Utu Grip"}
 
+    sets.midcast['Poison'] = sets.midcast['Enfeebling Magic']
+    sets.midcast['Poison'].TH = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+    sets.midcast['Poisonga'] = sets.midcast['Enfeebling Magic']
+    sets.midcast['Poisonga'].TH = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+    sets.midcast['Absorb-CHR'] = sets.midcast.Absorb
+    sets.midcast['Absorb-CHR'].TH = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
     -- Elemental Magic sets    
     sets.midcast['Elemental Magic'] = {ammo="Seething Bomblet +1",
         head="Flamma Zucchetto +2",neck="Erra Pendant",ear1="Malignance Earring",ear2="Friomisi Earring",
-        body="Flamma Korazin +2",hands="Fallen's Finger Gauntlets +3",ring1="Stikini Ring +1",ring2="Acumen Ring",
+        body="Flamma Korazin +2",hands="Fallen's Finger Gauntlets +3",ring1="Stikini Ring +1",ring2="Metamorph Ring +1",
         back=gear.casting_cape,waist=gear.ElementalObi,legs="Fallen's Flanchard +3",feet="Flamma Gambieras +2"}
     
     sets.midcast['Impact'] = set_combine(sets.midcast['Elemental Magic'],{head="", body="Crepuscular Cloak", ring2="Stikini Ring +1"})
