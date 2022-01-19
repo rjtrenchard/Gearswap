@@ -104,14 +104,14 @@ function user_setup()
     send_command('bind numpad5 gs equip sets.Weapons.club')
     send_command('bind numpad6 gs equip sets.Weapons.ridill')
     send_command('bind numpad9 gs equip sets.HP_High')
+    send_command('bind numpad7 gs c cycle StunMode')
 
     gear.Moonshade = {}
     gear.Moonshade.name = 'Moonshade Earring'
     gear.default.Moonshade = 'Ishvara Earring'
 
     info.lastWeapon = nil
-    sets._Recast = {}
-    info._RecastFlag = false
+    initRecast()
     
 
 
@@ -172,6 +172,10 @@ function user_unload()
     send_command('unbind numpad3')
     send_command('unbind numpad4')
     send_command('unbind numpad5')
+    send_command('unbind numpad6')
+    send_command('unbind numpad7')
+    send_command('unbind numpad8')
+    send_command('unbind numpad9')
 end
 
 function job_helper()
@@ -306,9 +310,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     end
 end
 
-
-function job_midcast(spell, action, spellMap, eventArgs)
-end
+--Commented out because it is largely unused, but may be used in the future.
+--function job_midcast(spell, action, spellMap, eventArgs)
+--end
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
@@ -351,9 +355,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         adjust_timers_darkmagic(spell, spellMap)
     end
 
-    if S{'Provoke'}:contains(spell.english) then 
-        equip(sets.Enmity)
-    elseif S{'Stun'}:contains(spell.english) and state.StunMode.value == 'Enmity' then
+    if S{'Stun'}:contains(spell.english) and state.StunMode.value == 'Enmity' then
         equip(sets.Enmity)
     end
 
@@ -462,8 +464,6 @@ function job_buff_change(buff, gain)
             end
         elseif S{'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3'}:contains(buff) then
             update_combat_form()
-            job_update()
-            
         end
     
     -- when losing a buff
@@ -471,11 +471,11 @@ function job_buff_change(buff, gain)
         if buff == 'charm' then
             send_command('input /p Charm off.')
         elseif buff == 'sleep' then
-            job_update()
+            send_command('gs c update')
         elseif S{'Aftermath'}:contains(buff) then
             info.AM.level = 0
             update_combat_form()
-            job_update()
+            send_command('gs c update')
         elseif S{'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II'}:contains(buff) or buff:startswith('Absorb') then
             send_command('timers delete "'..buff..'"')
         end
@@ -505,7 +505,7 @@ end
 function job_state_change(stateField, newValue, oldValue)
     if stateField == 'WeaponMode' then
         update_weapon_mode(newValue)
-        job_update()
+        --job_update()
     end
 end
 
@@ -585,6 +585,12 @@ function isMainChanged()
         info.lastWeapon = player.equipment.main
         return true
     end
+end
+
+-- initializes weapon recast handler
+function initRecast()
+    sets._Recast = {}
+    info._RecastFlag = false
 end
 
 -- sets the Recast weapon set to what is currently equipped

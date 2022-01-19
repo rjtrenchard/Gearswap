@@ -38,12 +38,15 @@ function include_job_sets()
     gear.DrainBody = { name="Acro Surcoat", augments={'Mag. Acc.+10','"Drain" and "Aspir" potency +7','INT+6',}}
 
     gear.FCfeet = { name="Odyssean Greaves", augments={'"Fast Cast"+6','Mag. Acc.+13','"Mag.Atk.Bns."+14',}}
-    
-    --SIRD augs
-    gear.SIRDhands = { name="Yorium Gauntlets", augments={'DEF+23','Spell interruption rate down -10%','Phys. dmg. taken -4%',}}
+     
+    -- SIRD augs
+    gear.SIRDhands = { name="Acro Gauntlets", augments={'DEF+23','Spell interruption rate down -10%','HP+50',}}
     gear.SIRDhead = { name="Acro Helm", augments={'DEF+22','Spell interruption rate down -10%','HP+50',}}
     gear.SIRDfeet = gear.FCfeet
     gear.SIRDcape = gear.casting_cape
+
+    -- Enmity augs
+    gear.EnmityFeet = { name="Yorium Sabatons", augments={'Enmity+10'}}
 
     -- Misc augs
     gear.THhands = { name="Odyssean Gauntlets", augments={'Mag. Acc.+4 "Mag.Atk.Bns."+4','Pet: "Mag.Atk.Bns."+18','"Treasure Hunter"+2','Accuracy+7 Attack+7',}}
@@ -66,6 +69,7 @@ function include_job_sets()
     sets.precast.JA['Diabolic Eye'] = {hands="Fallen's Finger Gauntlets +3"}
     sets.precast.JA['Souleater'] = {head="Ignominy Burgonet +3", legs="Fallen's Flanchard +3"}
     sets.precast.JA['Nether Void'] = {legs="Heathen's Flanchard +1"}
+    sets.precast.JA['Provoke'] = sets.Enmity
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {}
@@ -102,9 +106,15 @@ function include_job_sets()
         back=gear.ws_cape, waist="Eschan Stone", legs="Fallen's Flanchard +3", feet="Sulevia's Leggings +2"}
 
     sets.precast.WS.Crit = {ammo="Yetshila +1",
-    head="Sakpata's Helm",neck="Fotia Gorget",ear1=gear.WSEarThrud,ear2="Moonshade Earring",
-    body="Ignominy Cuirass +3",hands="Flamma Manopolas +2",ring1="Regal Ring",ring2="Begrudging Ring",
-    back=gear.ws_cape,waist="Fotia Belt",legs="Fallen's Flanchard +3", feet="Sulevia's Leggings +2"}
+        head="Sakpata's Helm",neck="Fotia Gorget",ear1=gear.WSEarThrud,ear2="Moonshade Earring",
+        body="Ignominy Cuirass +3",hands="Flamma Manopolas +2",ring1="Regal Ring",ring2="Begrudging Ring",
+        back=gear.ws_cape,waist="Fotia Belt",legs="Fallen's Flanchard +3", feet="Sulevia's Leggings +2"}
+
+    sets.precast.WS.Low = {ammo="Seething Bomblet +1",
+        head="Flamma Zucchetto +2", neck="Fotia Gorget", ear1="Crepuscular Earring", ear2="Telos Earring",
+        body="Flamma Korazin +2", hands="Flamma Manopolas +2", ring1="Moonlight Ring", ring2="Karieyh Ring +1", 
+        back=gear.melee_cape, waist="Fotia Belt", legs="Carmine Cuisses +1", feet="Flamma Gambieras +2"
+    }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     -- Scythe Weaponskills
@@ -144,6 +154,10 @@ function include_job_sets()
     sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",ear2="Lugra Earring +1", hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
     sets.precast.WS['Catastrophe'].Mod = set_combine(sets.precast.WS['Catastrophe'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
 
+    sets.precast.WS['Nightmare Scythe'] = set_combine(sets.precast.WS.Low, {})
+    sets.precast.WS['Nightmare Scythe'].Acc = set_combine(sets.precast.WS.Low, {})
+    sets.precast.WS['Nightmare Scythe'].Mod = set_combine(sets.precast.WS.Low, {})
+
     -- Greatsword WS's
     sets.precast.WS['Shockwave'] = set_combine(sets.precast.WS.SingleHit, {})
     sets.precast.WS['Shockwave'].Acc = set_combine(sets.precast.WS.Acc, {})
@@ -182,9 +196,9 @@ function include_job_sets()
     sets.precast.WS['Steel Cyclone'].Acc = set_combine(sets.precast.WS.Acc, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
     sets.precast.WS['Steel Cyclone'].Mod = set_combine(sets.precast.WS['Steel Cyclone'], {neck="Abyssal beads +2", waist="Sailfi belt +1"})
 
-    sets.precast.WS['Keen Edge'] = set_combine(sets.precast.WS.MultiHit, {})
-    sets.precast.WS['Keen Edge'].Acc = set_combine(sets.precast.WS.MultiHit, {})
-    sets.precast.WS['Keen Edge'].Mod = set_combine(sets.precast.WS.MultiHit, {})
+    sets.precast.WS['Keen Edge'] = set_combine(sets.precast.WS.Low, {})
+    sets.precast.WS['Keen Edge'].Acc = set_combine(sets.precast.WS.Low, {})
+    sets.precast.WS['Keen Edge'].Mod = set_combine(sets.precast.WS.Low, {})
 
     -- Axe WS's
     sets.precast.WS['Rampage'] = set_combine(sets.precast.WS.Crit, {})
@@ -211,7 +225,6 @@ function include_job_sets()
 
     -- Magical Weaponskills
     sets.precast.WS['Shadow of Death'] = set_combine(sets.precast.WS.Magic, {head="Pixie Hairpin +1", ring1="Archon Ring"})
-    sets.precast.WS['Nightmare Scythe'] = sets.precast.WS['Shadow of Death']
     sets.precast.WS['Infernal Scythe'] = sets.precast.WS['Shadow of Death']
 
     sets.precast.WS['Gale Axe'] = sets.precast.WS.Magic
@@ -235,13 +248,13 @@ function include_job_sets()
     -------------------------------------------------------------------------------------------------------------------
     -- Resting sets
     -------------------------------------------------------------------------------------------------------------------
-    sets.resting = {neck="Sanctity Necklace",body="Lugra Cloak +1",ring1="Stikini Ring +1",ring2="Stikini Ring +1", waist="Austerity belt +1"}
+    sets.resting = {neck="Bathy Choker +1",body="Lugra Cloak +1",ring1="Stikini Ring +1",ring2="Stikini Ring +1", waist="Austerity belt +1"}
 
     -------------------------------------------------------------------------------------------------------------------
     -- Miscellaneous Sets
     -------------------------------------------------------------------------------------------------------------------
     sets.HP_High = {
-        head="Ratri sallet +1",neck="Unmoving Collar +1",ear1="Odnowa Earring",ear2="Odnowa Earring +1",
+        head="Ratri sallet +1",neck="Unmoving Collar +1",ear1="Tuisto Earring",ear2="Odnowa Earring +1",
         body="Ignominy Cuirass +3",hands="Rat. Gadlings +1",ring1="Moonlight Ring",ring2="Gelatinous Ring +1",
         waist="Eschan Stone",legs="Sakpata's Cuisses",feet={name="Ratri Sollerets +1", priority=10},
     }
@@ -251,10 +264,10 @@ function include_job_sets()
 
     sets.Enmity = {ammo="Sapience Orb",
         head="Loess Barbuta +1", neck="Unmoving Collar +1", ear1="Cryptic Earring", ear2="Trux Earring",
-        body="Obviation Cuirass +1", hands="Macabre Gauntlets +1", ring1="Supershear Ring", ring2="Petrov Ring",
-        waist="Trance Belt", legs="Zoar Subligar +1", feet="Eschite Greaves"}
+        body="Obviation Cuirass +1", hands="Macabre Gauntlets +1", ring1="Eihwaz Ring", ring2="Petrov Ring",
+        waist="Trance Belt", legs="Zoar Subligar +1", feet=gear.EnmityFeet}
 
-    sets.SIRD = {sub="Magic Strap",ammo="Impatiens",
+    sets.SIRD = {ammo="Staunch Tathlum +1",
         head=gear.SIRDhead, 
         hands=gear.SIRDhands,ring2="Evanescence Ring",
         back=gear.SIRDcape, waist="Sanctuary Obi +1", legs="Founder's Hose",feet=gear.SIRDfeet}
@@ -264,18 +277,18 @@ function include_job_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     -------------------------------------------------------------------------------------------------------------------
 
-    sets.idle.Town = {ammo="Crepuscular pebble",
+    sets.idle.Town = {ammo="Staunch Tathlum +1",
         head="Shaded Spectacles",neck="Smithy's Torque",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Blacksmith's Smock",hands="Smithy's Mitts",ring1="Confectioner's Ring",ring2="Craftmaster's Ring",
         back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
     
-    sets.idle.Field = set_combine({},{
+    sets.idle.Field = set_combine({},{ammo="Staunch Tathlum +1",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sakpata's Leggings" })
     sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
-    sets.idle.Weak = {ammo="Crepuscular pebble",
+    sets.idle.Weak = {ammo="Staunch Tathlum +1",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
@@ -299,7 +312,7 @@ function include_job_sets()
         body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Paguroidea Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Ignominy Flanchard +1",feet="Flamma Gambieras +2"}
 
-    sets.defense.MDT = {ammo="Impatiens",
+    sets.defense.MDT = {ammo="Staunch Tathlum +1",
         head="Flamma Zucchetto +2",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Sakpata's Plate",hands="Flamma Manopolas +2",ring1="Defending Ring",ring2="Archon Ring",
         back=gear.melee_cape,waist="Flume Belt +1",legs="Ignominy Flanchard +1",feet="Flamma Gambieras +2"}
