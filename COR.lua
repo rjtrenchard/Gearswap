@@ -135,7 +135,7 @@ function init_gear_sets()
         back=gear.ws_cape,waist="Fotia Belt",legs="Meghanada Chausses +1",feet="Lanun Bottes +3"}
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, 
-        {head="Malignance Chapeau", ear1="Cessance Earring", body="Malignance Tabard", hands="Malignance Gloves", legs="Malignance Tights", feet="Malignance Boots"})
+        {head="Malignance Chapeau", ear1="crepuscular earring", body="Malignance Tabard", hands="Malignance Gloves", legs="Malignance Tights", feet="Malignance Boots"})
     
     sets.precast.WS.Ranged = set_combine(sets.precast.WS, {body="laksamana's frac +3", ring2="Dingir Ring"})
 
@@ -147,7 +147,7 @@ function init_gear_sets()
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {ear2="Odr Earring", ring1="Ilabrat Ring",ring2="Epona's Ring"})
     
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {body="laksamana's frac +3",neck="Tjukurrpa Medal",waist="Sailfi Belt +1",ring2="Regal Ring", legs="herculean trousers"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {body="laksamana's frac +3",neck="Caro Necklace",waist="Sailfi Belt +1",ring2="Regal Ring", legs="herculean trousers"})
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {head="malignance chapeau",legs="Malignance Tights", hands="Meghanada gloves +2"})
 
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {})
@@ -250,23 +250,23 @@ function init_gear_sets()
     sets.idle = {ammo=gear.RAbullet,
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Carmine Cuisses +1",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Malignance Boots"}
 
     sets.idle.Town = {ammo=gear.RAbullet,
         head="Malignance Chapeau",neck="Iskur Gorget",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Carmine Cuisses +1",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Malignance Boots"}
     
     -- Defense sets
     sets.defense.PDT = {
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Beyla Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Archon Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.defense.MDT = {
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Beyla Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Archon Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
     
 
     sets.Kiting = {legs="Carmine Cuisses +1"}
@@ -280,18 +280,18 @@ function init_gear_sets()
     
     -- Normal melee group
     sets.engaged = {ammo=gear.RAbullet,
-        head="Adhemar Bonnet +1",neck="Iskur Gorget",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Adhemar Bonnet +1",neck="Iskur Gorget",ear1="Brutal Earring",ear2="crepuscular earring",
         body="Meghanada Cuirie +1",hands="Adhemar Wristbands +1",ring1="Epona's Ring",ring2="Regal Ring",
         back=gear.melee_cape,waist="Sailfi Belt +1",legs="Meghanada Chausses +1",feet="Mummu Gamashes +1"}
     sets.engaged.Melee = sets.engaged
     
     sets.engaged.Acc = {ammo=gear.RAbullet,
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Odr Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Odr Earring",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring2="Regal Ring",ring1="Epona's Ring",
-        back=gear.melee_cape,waist="Hurch'lan Sash",legs="Malignance Tights",feet="Meghanada Jambeaux +1"}
+        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Meghanada Jambeaux +1"}
 
     sets.engaged.Defense = {ammo=gear.RAbullet,
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring2="Regal Ring",ring1="Epona's Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.PDT = sets.engaged.Defense

@@ -36,7 +36,7 @@ function user_setup()
     send_command('bind !` input /ja "Seigan" <me>')
 
     gear.WSDayEar1 = "Brutal Earring"
-    gear.WSDayEar2 = "Cessance Earring"
+    gear.WSDayEar2 = "crepuscular earring"
     gear.WSNightEar1 = "Lugra Earring +1"
     gear.WSNightEar2 = "Lugra Earring"
 
@@ -127,40 +127,40 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
     
     -- Resting sets
-    sets.resting = {neck="Wiglen Gorget",ring1="Sheltered Ring",ring2="Paguroidea Ring"}
+    sets.resting = {neck="Bathy Choker +1",ring1="Sheltered Ring",ring2="Paguroidea Ring"}
     
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle.Town = {main="Tsurumaru", sub="Pole Grip",ammo="Ginsen",
         head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
-        back="Atheling Mantle",waist="Flume Belt",legs="Sakpata's Cuisses",feet="Hermes' Sandals"}
+        back="Atheling Mantle",waist="Flume Belt +1",legs="Sakpata's Cuisses",feet="Hermes' Sandals"}
     
     sets.idle.Field = {
-        head="Sakpata's Helm",neck="Wiglen Gorget",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Sakpata's Helm",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
+        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
 
     sets.idle.Weak = {
-        head="Twilight Helm",neck="Wiglen Gorget",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Twilight Helm",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Twilight Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
+        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
     
     -- Defense sets
     sets.defense.PDT = {ammo="Iron Gobbet",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2=gear.DarkRing.physical,
-        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
+        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
 
     sets.defense.Reraise = {
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Twilight Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Paguroidea Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
+        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
 
     sets.defense.MDT = {ammo="Demonry Stone",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Shadow Ring",
-        back="Engulfer Cape",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
+        back="Engulfer Cape",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
 
     sets.Kiting = {feet="Hermes' Sandals"}
 

@@ -58,12 +58,14 @@ function job_setup()
 
     state.Buff['Aftermath'] = (buffactive['Aftermath: Lv.1'] or buffactive['Aftermath: Lv.2'] or buffactive['Aftermath: Lv.3'] or buffactive['Aftermath']) or false
 
+
     -- For th_action_check():
     -- JA IDs for actions that always have TH: Provoke, Animated Flourish
     info.default_ja_ids = S{35, 204}
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
+    include('Mote-TreasureHunter')
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -72,7 +74,6 @@ end
 
 -- Setup vars that are user-dependent.
 function user_setup()
-    include('Mote-TreasureHunter')
     job_helper()
     include('gear_' .. player.name:lower()..'/'..player.main_job:upper()..'.lua' )
 
@@ -357,6 +358,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
     if S{'Stun'}:contains(spell.english) and state.StunMode.value == 'Enmity' then
         equip(sets.Enmity)
+        if player.tp < 1000 then
+            equip(sets.Enmity.Weapon)
+        end
     end
 
 

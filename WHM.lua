@@ -45,17 +45,17 @@ function init_gear_sets()
         
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 
-    sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {head="Umuthi Hat"})
+    sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {head="Befouled Crown"})
 
     sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {legs="Eber Pantaloons"})
 
     sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
-    sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {main="Daybreak", sub="Genbu's Shield", head="Piety Cap", back="Pahtli Cape"})--,sub="Genbu's Shield",ammo="Impatiens"})
+    sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {main="Daybreak", sub="Ammurapi Shield", head="Piety Cap", back="Pahtli Cape"})--,sub="Ammurapi Shield",ammo="Staunch Tathlum +1"})
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.CureSolace = set_combine(sets.precast.FC.Cure)
 
-    --sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Genbu's Shield"})
+    --sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
     --sets.midcast.FC.Dispelga = set_combine( sets.precast.FC['Dispelga'], {} )
     -- CureMelee spell map should default back to Healing Magic.
     
@@ -72,7 +72,7 @@ function init_gear_sets()
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {
         head="Inyanga Tiara +1",ear1="Roundel Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",
         back="Felicitas Cape +1",legs="Gendewitha Spats",feet="Gendewitha Galoshes"}
     
     
@@ -83,12 +83,12 @@ function init_gear_sets()
     gear.default.weaponskill_waist = "Fotia Belt"
     sets.precast.WS = {ammo="Kalboron Stone",
         head="Inyanga Tiara +1",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Karieyh Ring +1",ring2="K'ayres Ring",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Karieyh Ring +1",ring2="K'ayres Ring",
         back="Felicitas Cape +1",waist="Fotia Belt",legs="Gendewitha Spats",feet="Gendewitha Galoshes"}
     
     sets.precast.WS['Flash Nova'] = {
         head="Inyanga Tiara +1",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Karieyh Ring +1",ring2="Strendu Ring",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Karieyh Ring +1",ring2="Strendu Ring",
         back="Toro Cape",waist="Eschan Stone",legs="Gendewitha Spats",feet="Gendewitha Galoshes"}
     
 
@@ -103,27 +103,27 @@ function init_gear_sets()
     gear.default.obi_waist = "Witful Belt"
     gear.default.obi_back = "Mending Cape"
 
-    sets.midcast.CureSolace = {main="Daybreak",sub="Genbu's Shield",ammo="Incantor Stone",
-        head="Eber Cap",neck="Phalaina Locket",ear1="Glorious Earring",ear2="Nourishing Earring +1",
+    sets.midcast.CureSolace = {main="Daybreak",sub="Ammurapi Shield",ammo="Incantor Stone",
+        head="Eber Cap",neck="Nodens Gorget",ear1="Glorious Earring",ear2="Nourishing Earring +1",
         body="Eber Bliaud",hands="Theophany Mitts +1",ring1="Prolix Ring",ring2="Sirona's Ring",
         back="Oretania's Cape",waist=gear.ElementalObi,legs="Eber Pantaloons",feet="Piety Duckbills"}
 
-    sets.midcast.Cure = {main="Daybreak",sub="Genbu's Shield",ammo="Incantor Stone",
-        head="Eber Cap",neck="Phalaina Locket",ear1="Glorious Earring",ear2="Nourishing Earring +1",
+    sets.midcast.Cure = {main="Daybreak",sub="Ammurapi Shield",ammo="Incantor Stone",
+        head="Eber Cap",neck="Nodens Gorget",ear1="Glorious Earring",ear2="Nourishing Earring +1",
         body="Gendewitha Bliaut +1",hands="Theophany Mitts +1",ring1="Prolix Ring",ring2="Sirona's Ring",
         back="Oretania's Cape",waist=gear.ElementalObi,legs="Eber Pantaloons",feet="Piety Duckbills"}
 
-    sets.midcast.Curaga = {main="Daybreak",sub="Genbu's Shield",ammo="Incantor Stone",
-        head="Eber Cap",neck="Phalaina Locket",ear1="Glorious Earring",ear2="Nourishing Earring +1",
+    sets.midcast.Curaga = {main="Daybreak",sub="Ammurapi Shield",ammo="Incantor Stone",
+        head="Eber Cap",neck="Nodens Gorget",ear1="Glorious Earring",ear2="Nourishing Earring +1",
         body="Gendewitha Bliaut +1",hands="Theophany Mitts +1",ring1="Prolix Ring",ring2="Sirona's Ring",
         back="Oretania's Cape",waist=gear.ElementalObi,legs="Eber Pantaloons",feet="Piety Duckbills"}
 
     sets.midcast.CureMelee = {ammo="Incantor Stone",
-        head="Eber Cap",neck="Phalaina Locket",ear1="Glorious Earring",ear2="Nourishing Earring +1",
+        head="Eber Cap",neck="Nodens Gorget",ear1="Glorious Earring",ear2="Nourishing Earring +1",
         body="Inyanga Jubbah +2",hands="Theophany Mitts +1",ring1="Prolix Ring",ring2="Sirona's Ring",
         back="Oretania's Cape",waist=gear.ElementalObi,legs="Eber Pantaloons",feet="Piety Duckbills"}
 
-    sets.midcast.Cursna = {main="Beneficus",sub="Genbu's Shield",
+    sets.midcast.Cursna = {main="Beneficus",sub="Ammurapi Shield",
         head="Eber Cap",neck="Malison Medallion",
         body="Eber Bliaud",hands="Hieros Mittens",ring1="Ephedra Ring",ring2="Sirona's Ring",
         back="Mending Cape",waist="Witful Belt",legs="Theophany Pantaloons +1",feet="Gendewitha Galoshes"}
@@ -133,7 +133,7 @@ function init_gear_sets()
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = {main="Grioavolr",sub="Oneiros Grip",
-        head="Umuthi Hat",neck="Incanter's Torque",
+        head="Befouled Crown",neck="Incanter's Torque",
         body="Manasa Chasuble",hands="Dynasty Mitts",
         back="Mending Cape",waist="Embla Sash",legs="Piety Pantaloons",feet="Eber Duckbills"}
 
@@ -149,7 +149,7 @@ function init_gear_sets()
         body="Eber Bliaud",hands="Eber Mitts",
         back="Mending Cape",waist="Olympus Sash",legs="Piety Pantaloons",feet="Eber Duckbills"}
 
-    sets.midcast.Regen = {main="Bolelabunga",sub="Genbu's Shield",
+    sets.midcast.Regen = {main="Bolelabunga",sub="Ammurapi Shield",
         head="Inyanga Tiara +1",
         body="Piety Briault",hands="Eber Mitts",
         legs="Theophany Pantaloons +1"}
@@ -159,25 +159,25 @@ function init_gear_sets()
     sets.midcast.Shellra = {ring1="Sheltered Ring",legs="Piety Pantaloons"}
 
 
-    sets.midcast['Divine Magic'] = {main="Daybreak",sub="Genbu's Shield",
+    sets.midcast['Divine Magic'] = {main="Daybreak",sub="Ammurapi Shield",
         head="Inyanga Tiara +1",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Malignance Earring",
         body="Inyanga Jubbah +2",hands="Theophany Mitts +1",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist=gear.ElementalObi,legs="Theophany Pantaloons +1",feet="Gendewitha Galoshes"}
 
-    sets.midcast['Dark Magic'] = {main="Daybreak", sub="Genbu's Shield",
+    sets.midcast['Dark Magic'] = {main="Daybreak", sub="Ammurapi Shield",
         head="Inyanga Tiara +1",neck="Aesir Torque",ear1="Gwati Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Strendu Ring",ring2="Stikini Ring +1",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist="Demonry Sash",legs="Bokwus Slops",feet="Piety Duckbills"}
 
     -- Custom spell classes
-    sets.midcast.MndEnfeebles = {main="Daybreak", sub="Genbu's Shield",
+    sets.midcast.MndEnfeebles = {main="Daybreak", sub="Ammurapi Shield",
         head="Inyanga Tiara +1",neck="Weike Torque",ear1="Gwati Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Aquasoul Ring",ring2="Stikini Ring +1",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Aquasoul Ring",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist="Eschan Stone",legs="Bokwus Slops",feet="Piety Duckbills"}
 
-    sets.midcast.IntEnfeebles = {main="Daybreak", sub="Genbu's Shield",
+    sets.midcast.IntEnfeebles = {main="Daybreak", sub="Ammurapi Shield",
         head="Inyanga Tiara +1",neck="Sanctity Necklace",ear1="Gwati Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Icesoul Ring",ring2="Stikini Ring +1",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Icesoul Ring",ring2="Stikini Ring +1",
         back="Felicitas Cape +1",waist="Eschan Stone",legs="Bokwus Slops",feet="Piety Duckbills"}
 
     
@@ -190,7 +190,7 @@ function init_gear_sets()
     
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
-    sets.idle = {main="Bolelabunga", sub="Genbu's Shield",ammo="Homiliary",
+    sets.idle = {main="Bolelabunga", sub="Ammurapi Shield",ammo="Homiliary",
         head="Theophany cap +1",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Theophany Briault +1",hands="Theophany Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Felicitas Cape +1",waist="Fucho-no-obi",legs="Assiduity Pants +1",feet="Theophany Duckbills"}
@@ -200,7 +200,7 @@ function init_gear_sets()
         body="Inyanga Jubbah +2",hands="Theophany Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Felicitas Cape +1",waist="Witful Belt",legs="Assiduity Pants +1",feet="Crier's Gaiters"}
 
-    sets.idle.Town = {main="Bolelabunga", sub="Genbu's Shield",ammo="Homiliary",
+    sets.idle.Town = {main="Bolelabunga", sub="Ammurapi Shield",ammo="Homiliary",
         head="Theophany cap +1",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
         body="Theophany Briault +1",hands="Theophany Mitts +1",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Felicitas Cape +1",waist="Fucho-no-obi",legs="Assiduity Pants +1",feet="Crier's Gaiters"}
@@ -219,7 +219,7 @@ function init_gear_sets()
 
     sets.defense.MDT = {main="Malignance Pole",sub="Oneiros Grip",
         head="Inyanga Tiara +1",neck="Loricate Torque +1",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +1",ring1="Defending Ring",ring2="Archon Ring",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Defending Ring",ring2="Archon Ring",
         back="Oretania's Cape",legs="Bokwus Slops",feet="Gendewitha Galoshes"}
 
     sets.Kiting = {feet="Crier's Gaiters"}

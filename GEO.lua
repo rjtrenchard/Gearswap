@@ -45,12 +45,12 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = {--ammo="Impatiens",
+    sets.precast.FC = {--ammo="Staunch Tathlum +1",
         head="Nahtirah Hat",ear2="Loquacious Earring",
         body="Vanir Cotehardie",ring1="Prolix Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Orvail Pants +1",feet="Chelona Boots +1"}
 
-    sets.precast.FC.Cure = set_combine(sets.precast.FC, {main="Daybreak",sub="Genbu's Shield",back="Pahtli Cape"})
+    sets.precast.FC.Cure = set_combine(sets.precast.FC, {main="Daybreak",sub="Ammurapi Shield",back="Pahtli Cape"})
 
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {neck="Sanctity Necklace"})
 
@@ -65,7 +65,7 @@ function init_gear_sets()
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Flash Nova'] = {ammo="Dosis Tathlum",
         head="Hagondes Hat",neck="Eddy Necklace",ear1="Friomisi Earring",ear2="Crematio Earring",
-        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Acumen Ring",ring2="Strendu Ring",
+        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Metamorph Ring +1",ring2="Strendu Ring",
         back="Toro Cape",waist="Fotia Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
     sets.precast.WS['Starlight'] = {ear2="Moonshade Earring"}
@@ -94,7 +94,7 @@ function init_gear_sets()
     sets.midcast['Enfeebling Magic'] = {neck="Erra Pendant", ear1="Malignance Earring", ear2="Gwati Earring",
         ring1="Stikini Ring +1", ring2="Stikini Ring +1"}
 
-    sets.midcast.Cure = {main="Tamaxchi",sub="Genbu's Shield",
+    sets.midcast.Cure = {main="Tamaxchi",sub="Ammurapi Shield",
         body="Gendewitha Bliault +1",hands="Telchine Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Swith Cape +1",legs="Nares Trews",feet="Hagondes Sabots"}
     
@@ -110,25 +110,25 @@ function init_gear_sets()
     --------------------------------------
 
     -- Resting sets
-    sets.resting = {head="Nefer Khat +1",neck="Wiglen Gorget",
+    sets.resting = {head="Nefer Khat +1",neck="Bathy Choker +1",
         body="Gendewitha Bliault +1",hands="Serpentes Cuffs",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         waist="Austerity Belt",legs="Nares Trews",feet="Chelona Boots +1"}
 
 
     -- Idle sets
 
-    sets.idle = {main="Bolelabunga",sub="Genbu's Shield",range="Nepote Bell",
+    sets.idle = {main="Bolelabunga",sub="Ammurapi Shield",range="Nepote Bell",
         head="Nefer Khat +1",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Gendewitha Bliault +1",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Umbra Cape",waist="Goading Belt",legs="Nares Trews",feet="Crier's Gaiters"}
 
-    sets.idle.PDT = {main="Daybreak",sub="Genbu's Shield",range="Nepote Bell",
+    sets.idle.PDT = {main="Daybreak",sub="Ammurapi Shield",range="Nepote Bell",
         head="Nahtirah Hat",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Defending Ring",
         back="Umbra Cape",waist="Goading Belt",legs="Nares Trews",feet="Crier's Gaiters"}
 
     -- .Pet sets are for when Luopan is present.
-    sets.idle.Pet = {main="Solstice",sub="Genbu's Shield",range="Nepote Bell",
+    sets.idle.Pet = {main="Solstice",sub="Ammurapi Shield",range="Nepote Bell",
         head="Telchine Cap",neck="Shepherd's Chain",ear1="Handler's Earring +1",ear2="Loquacious Earring",
         body="Telchine Chasuble",hands="Telchine Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Umbra Cape",waist="Isa Belt",legs="Telchine Braconi",feet="Crier's Gaiters"}
@@ -144,25 +144,25 @@ function init_gear_sets()
     sets.idle.PDT.Indi = set_combine(sets.idle.PDT, {legs="Bagua Pants"})
     sets.idle.PDT.Pet.Indi = set_combine(sets.idle.PDT.Pet, {legs="Bagua Pants"})
 
-    sets.idle.Town = {main="Daybreak",sub="Genbu's Shield",range="Nepote Bell",
+    sets.idle.Town = {main="Daybreak",sub="Ammurapi Shield",range="Nepote Bell",
         head="Bagua Galero",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Bagua Tunic",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Umbra Cape",waist="Goading Belt",legs="Nares Trews",feet="Crier's Gaiters"}
 
-    sets.idle.Weak = {main="Daybreak",sub="Genbu's Shield",range="Nepote Bell",
-        head="Nefer Khat +1",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
+    sets.idle.Weak = {main="Daybreak",sub="Ammurapi Shield",range="Nepote Bell",
+        head="Nefer Khat +1",neck="Bathy Choker +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Gendewitha Bliault +1",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Umbra Cape",waist="Goading Belt",legs="Nares Trews",feet="Crier's Gaiters"}
 
     -- Defense sets
 
     sets.defense.PDT = {range="Nepote Bell",
-        head="Hagondes Hat",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
+        head="Hagondes Hat",neck="Bathy Choker +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2=gear.DarkRing.physical,
         back="Umbra Cape",waist="Goading Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
     sets.defense.MDT = {range="Nepote Bell",
-        head="Nahtirah Hat",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
+        head="Nahtirah Hat",neck="Bathy Choker +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Shadow Ring",
         back="Umbra Cape",waist="Goading Belt",legs="Bokwus Slops",feet="Hagondes Sabots"}
 

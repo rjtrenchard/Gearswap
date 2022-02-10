@@ -78,13 +78,13 @@ function init_gear_sets()
     sets.ExtraRegen = {head="Ocelomeh Headpiece +1"}
     sets.Kiting = {feet="Skadi's Jambeaux +1"}
 
-    sets.buff['Sneak Attack'] = {ammo="Yetshila +1",
+    sets.buff['Sneak Attack'] = {ammo="Cath Palug Stone",
         head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Odr Earring",
         body="Pillager's Vest +2",hands="Skulker's armlets",ring1="Regal Ring",ring2="Ilabrat Ring",
         back=gear.melee_cape,waist="Chaac Belt",legs="Pillager's Culottes +1",feet="Plunderer's Poulaines +1"}
 
-    sets.buff['Trick Attack'] = {ammo="Yetshila +1",
-        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Infused Earring",
+    sets.buff['Trick Attack'] = {ammo="Cath Palug Stone",
+        head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Etiolation Earring",
         body="Pillager's Vest +2",hands="Pillager's armlets +1",ring1="Regal Ring",ring2="Ilabrat Ring",
         back=gear.melee_cape,waist="Chaac Belt",legs="Pillager's Culottes +1",feet="Plunderer's Poulaines +1"}
 
@@ -123,7 +123,7 @@ function init_gear_sets()
     gear.str_ws_cape = gear.dex_ws_cape
 
     -- Waltz set (chr and vit)
-    sets.precast.Waltz = {ammo="Sonia's Plectrum",
+    sets.precast.Waltz = {
         head="Meghanada Visor +1", 
         body="Meghanada Cuirie +1",hands="Plunderer's Armlets +1",
         back="Iximulew Cape",waist="Chaac Belt",legs="Malignance Tights",feet="Plunderer's Poulaines +1"}
@@ -134,9 +134,8 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     sets.precast.FC = {ammo="Sapience Orb",
-        head="Herculean Helm",neck="Baetyl Pendant",ear2="Loquacious Earring",
-        hands="Thaumas Gloves",ring1="Kishar Ring",ring2="Prolix Ring",
-        legs="Enif Cosciales"}
+        head="Herculean Helm",neck="Baetyl Pendant",ear1="Loquacious Earring",ear2="Etiolation Earring",
+        hands="Thaumas Gloves",ring1="Kishar Ring",ring2="Prolix Ring",}
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads"})
 
@@ -184,7 +183,10 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].SATA = set_combine(sets.precast.WS['Evisceration'].Att, {})
     sets.precast.WS['Evisceration'].Low = sets.precast.WS.Low
 
-    sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {head="Pillager's Bonnet +3", neck="Tjukurrpa Medal",ear1="Odr Earring",ear2="Moonshade Earring", body="Pillager's Vest +2", back=gear.dex_ws_cape, waist="Sailfi Belt +1", legs="Herculean Trousers"})
+    sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {ammo="Cath Palug Stone",
+        head="Pillager's Bonnet +3", neck="Caro Necklace",ear1="Odr Earring",ear2="Moonshade Earring", 
+        body="Pillager's Vest +2", 
+        back=gear.dex_ws_cape, waist="Sailfi Belt +1", legs="Herculean Trousers"})
     sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {})
     sets.precast.WS["Rudra's Storm"].Att = set_combine(sets.precast.WS["Rudra's Storm"], {ring2="Ilabrat Ring"})
     sets.precast.WS["Rudra's Storm"].SA = set_combine(sets.precast.WS["Rudra's Storm"].Att, {ammo="Yetshila +1", body="Pillager's Vest +2"})
@@ -215,7 +217,7 @@ function init_gear_sets()
     sets.precast.WS['Mandalic Stab'].Low = sets.precast.WS.Low
 
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {head="Pillager's Bonnet +3", neck="Tjukurrpa Medal", ear1="Ishvara Earring", back=gear.str_ws_cape, waist="Sailfi Belt +1", legs="Herculean Trousers"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {head="Pillager's Bonnet +3", neck="Caro Necklace", ear1="Ishvara Earring", back=gear.str_ws_cape, waist="Sailfi Belt +1", legs="Herculean Trousers"})
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {})
     sets.precast.WS['Savage Blade'].Att = set_combine(sets.precast.WS['Savage Blade'], {})
     sets.precast.WS['Savage Blade'].SA = set_combine(sets.precast.WS['Savage Blade'], {ammo="Yetshila +1"})
@@ -285,19 +287,19 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
     sets.idle = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Genmei Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Etiolation Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
     sets.idle.Town = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Genmei Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Etiolation Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Leech Belt",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
     sets.idle.Weak = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Genmei Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Etiolation Earring",
         body="Malignance Tabard",hands="Malignance Glvoes",ring1="Moonlight Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
 
     -- Defense sets
@@ -305,15 +307,15 @@ function init_gear_sets()
     sets.defense.Evasion = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.defense.PDT = {ammo="Iron Gobbet",
         head="Malignance Chapeau",neck="Loricate Torque +1",
         body="Malignance Tabard",hands="Malignance Gloves",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.defense.MDT = {ammo="Demonry Stone",
-        head="Malignance Chapeau",neck="Loricate Torque +1", ear1="Eabani Earring", ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1", ear1="Eabani Earring", ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Archon Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
@@ -345,7 +347,7 @@ function init_gear_sets()
     sets.engaged.Acc.Evasion = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Ej Necklace",ear1="Eabani Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Regal Ring",
-        back="Canny Cape",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Canny Cape",waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.PDT = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Dedition Earring",ear2="Telos Earring",
@@ -366,7 +368,7 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
-function job_precast(spell, action, spellMap, eventArgs)
+function job_pretarget(spell, action, spellMap, eventArgs)
     -- remap Evisceration to Savage Blade when holding a sword.
     if spell.english == 'Evisceration' and player.equipment.main == 'Naegling' then
         eventArgs.cancel = true

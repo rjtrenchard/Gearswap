@@ -69,7 +69,7 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = {ammo="Impatiens",
+    sets.precast.FC = {ammo="Staunch Tathlum +1",
         head="Nahtirah Hat",ear2="Loquacious Earring",
         body="Vanir Cotehardie",ring1="Prolix Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Orvail Pants +1",feet="Chelona Boots +1"}
@@ -92,7 +92,7 @@ function init_gear_sets()
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Vidohunir'] = {ammo="Dosis Tathlum",
         head="Hagondes Hat",neck="Eddy Necklace",ear1="Friomisi Earring",ear2="Hecate's Earring",
-        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Icesoul Ring",ring2="Acumen Ring",
+        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Icesoul Ring",ring2="Metamorph Ring +1",
         back="Toro Cape",waist="Thunder Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
     
     
@@ -103,7 +103,7 @@ function init_gear_sets()
         body="Vanir Cotehardie",hands="Bokwus Gloves",ring1="Prolix Ring",
         back="Swith Cape +1",waist="Goading Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
-    sets.midcast.Cure = {main="Tamaxchi",sub="Genbu's Shield",
+    sets.midcast.Cure = {main="Tamaxchi",sub="Ammurapi Shield",
         head="Nahtirah Hat",neck="Incanter's Torque",ear2="Loquacious Earring",
         body="Heka's Kalasiris",hands="Bokwus Gloves",ring1="Ephedra Ring",ring2="Sirona's Ring",
         back="Pahtli Cape",waist=gear.ElementalObi,legs="Hagondes Pants",feet="Hagondes Sabots"}
@@ -151,12 +151,12 @@ function init_gear_sets()
     
     sets.midcast['Elemental Magic'] = {main="Lehbrailg +2",sub="Zuuxowu Grip",ammo="Dosis Tathlum",
         head="Hagondes Hat",neck="Eddy Necklace",ear1="Hecate's Earring",ear2="Friomisi Earring",
-        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Icesoul Ring",ring2="Acumen Ring",
+        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Icesoul Ring",ring2="Metamorph Ring +1",
         back="Toro Cape",waist=gear.ElementalObi,legs="Hagondes Pants",feet="Hagondes Sabots"}
 
     sets.midcast['Elemental Magic'].Resistant = {main="Lehbrailg +2",sub="Zuuxowu Grip",ammo="Dosis Tathlum",
         head="Hagondes Hat",neck="Eddy Necklace",ear1="Hecate's Earring",ear2="Friomisi Earring",
-        body="Hagondes Coat",hands=gear.macc_hagondes,ring1="Icesoul Ring",ring2="Acumen Ring",
+        body="Hagondes Coat",hands=gear.macc_hagondes,ring1="Icesoul Ring",ring2="Metamorph Ring +1",
         back="Toro Cape",waist=gear.ElementalObi,legs="Hagondes Pants",feet="Bokwus Boots"}
 
     sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {sub="Wizzan Grip"})
@@ -164,7 +164,7 @@ function init_gear_sets()
 
 
     -- Minimal damage gear for procs.
-    sets.midcast['Elemental Magic'].Proc = {main="Earth Staff", sub="Mephitis Grip",ammo="Impatiens",
+    sets.midcast['Elemental Magic'].Proc = {main="Earth Staff", sub="Mephitis Grip",ammo="Staunch Tathlum +1",
         head="Nahtirah Hat",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Manasa Chasuble",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Nares Trews",feet="Chelona Boots +1"}
@@ -174,7 +174,7 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
     
     -- Resting sets
-    sets.resting = {main="Daybreak",sub="Genbu's Shield",ammo="Clarus Stone",
+    sets.resting = {main="Daybreak",sub="Ammurapi Shield",ammo="Clarus Stone",
         head="Nefer Khat +1",neck="Grandiose Chain",
         body="Heka's Kalasiris",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         waist="Austerity Belt",legs="Nares Trews",feet="Serpentes Sabots"}
@@ -183,27 +183,27 @@ function init_gear_sets()
     -- Idle sets
     
     -- Normal refresh idle set
-    sets.idle = {main="Lehbrailg +2", sub="Zuuxowu Grip",ammo="Impatiens",
-        head="Nefer Khat +1",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
+    sets.idle = {main="Lehbrailg +2", sub="Zuuxowu Grip",ammo="Staunch Tathlum +1",
+        head="Nefer Khat +1",neck="Bathy Choker +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Heka's Kalasiris",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Umbra Cape",waist="Hierarch Belt",legs="Nares Trews",feet="Crier's Gaiters"}
 
     -- Idle mode that keeps PDT gear on, but doesn't prevent normal gear swaps for precast/etc.
-    sets.idle.PDT = {main="Earth Staff", sub="Zuuxowu Grip",ammo="Impatiens",
+    sets.idle.PDT = {main="Earth Staff", sub="Zuuxowu Grip",ammo="Staunch Tathlum +1",
         head="Nahtirah Hat",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2=gear.DarkRing.physical,
         back="Umbra Cape",waist="Hierarch Belt",legs="Hagondes Pants",feet="Crier's Gaiters"}
 
     -- Idle mode scopes:
     -- Idle mode when weak.
-    sets.idle.Weak = {main="Bolelabunga",sub="Genbu's Shield",ammo="Impatiens",
+    sets.idle.Weak = {main="Bolelabunga",sub="Ammurapi Shield",ammo="Staunch Tathlum +1",
         head="Hagondes Hat",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Paguroidea Ring",
         back="Umbra Cape",waist="Hierarch Belt",legs="Nares Trews",feet="Hagondes Sabots"}
     
     -- Town gear.
-    sets.idle.Town = {main="Lehbrailg +2", sub="Zuuxowu Grip",ammo="Impatiens",
-        head="Hagondes Hat",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
+    sets.idle.Town = {main="Lehbrailg +2", sub="Zuuxowu Grip",ammo="Staunch Tathlum +1",
+        head="Hagondes Hat",neck="Bathy Choker +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Umbra Cape",waist="Hierarch Belt",legs="Hagondes Pants",feet="Crier's Gaiters"}
         

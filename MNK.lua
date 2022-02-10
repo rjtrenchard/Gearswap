@@ -84,7 +84,7 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     
-    sets.precast.FC = {ammo="Impatiens",head="Haruspex hat",ear2="Loquacious Earring",hands="Thaumas Gloves"}
+    sets.precast.FC = {ammo="Staunch Tathlum +1",head="Haruspex hat",ear2="Loquacious Earring",hands="Thaumas Gloves"}
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads"})
 
@@ -104,7 +104,7 @@ function init_gear_sets()
     head="Adhemar Bonnet +1", neck="Fotia Gorget", ear1="Odr Earring", ear2="Moonshade Earring",
     body="Mummu Jacket +1", hands="Mummu Wrists +2", ring2="Begrudging Ring", ring1="Regal Ring",
     back="Atheling Mantle", waist="Fotia Belt", legs="Mummu Kecks +1", feet="Mummu Gamashes +1"}
-    sets.precast.MaxTP = {ear1="Brutal Earring",ear2="Cessance Earring"}
+    sets.precast.MaxTP = {ear1="Brutal Earring",ear2="crepuscular earring"}
     sets.precast.WS.Acc = set_combine(sets.precast.WS, sets.precast.WSAcc)
     sets.precast.WS.Mod = set_combine(sets.precast.WS, sets.precast.WSMod)
 
@@ -113,9 +113,9 @@ function init_gear_sets()
     -- legs={name="Quiahuiz Trousers", augments={'Phys. dmg. taken -2%','Magic dmg. taken -2%','STR+8'}}}
 
     sets.precast.WS['Raging Fists']    = set_combine(sets.precast.WS, {ring2="Niqmaddu Ring"}) -- TP = Damage, fTP replicating
-    sets.precast.WS['Howling Fist']    = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal",waist="Sailfi Belt +1"}) -- fTP replicating, decent fTP bonus from TP
-    sets.precast.WS['Asuran Fists']    = set_combine(sets.precast.WS, {ear1="Ethereal Earring", ring2="Niqmaddu ring"}) -- Multi-hit max attack rounds
-    sets.precast.WS["Ascetic's Fury"]  = set_combine(sets.precast.WSCrit, {neck="Tjukurrpa Medal",waist="Sailfi Belt +1"}) -- Attack boost
+    sets.precast.WS['Howling Fist']    = set_combine(sets.precast.WS, {neck="Caro Necklace",waist="Sailfi Belt +1"}) -- fTP replicating, decent fTP bonus from TP
+    sets.precast.WS['Asuran Fists']    = set_combine(sets.precast.WS, {ear1="Etiolation Earring", ring2="Niqmaddu ring"}) -- Multi-hit max attack rounds
+    sets.precast.WS["Ascetic's Fury"]  = set_combine(sets.precast.WSCrit, {neck="Caro Necklace",waist="Sailfi Belt +1"}) -- Attack boost
     sets.precast.WS["Victory Smite"]   = set_combine(sets.precast.WSCrit, {ring2="Epona's Ring"}) -- Crit WS, STR80
     sets.precast.WS['Shijin Spiral']   = set_combine(sets.precast.WS, {ear1="Odr Earring", ring2="Epona's Ring"}) -- 5hit attack, DEX73-85
     sets.precast.WS['Dragon Kick']     = set_combine(sets.precast.WS, {}) -- Kick attack WS, TP=Damage?
@@ -143,12 +143,12 @@ function init_gear_sets()
 
     sets.precast.WS['Cataclysm'] = {
         head="Herculean Helm",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Hecate's Earring",
-        body="Malignance Tabard",hands="Herculean Gloves",ring1="Acumen Ring",ring2="Demon's Ring",
+        body="Malignance Tabard",hands="Herculean Gloves",ring1="Metamorph Ring +1",ring2="Demon's Ring",
         back="Toro Cape",waist="Eschan Stone",legs="Herculean Trousers",feet="Herculean Boots"}
     
     
     -- Midcast Sets
-    sets.midcast.FastRecast = {ammo="Impatiens",
+    sets.midcast.FastRecast = {ammo="Staunch Tathlum +1",
         head="Herculean Helm",ear2="Loquacious Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Prolix Ring",
         waist="Black Belt",legs="Malignance Tights",feet="Malignance Boots"}
@@ -181,7 +181,7 @@ function init_gear_sets()
     back="Iximulew Cape",waist="Black Belt",legs="Malignance Tights",feet="Hermes' Sandals"}
     
     -- Defense sets
-    sets.defense.PDT = {head="Malignance Chapeau", neck="Loricate Torque +1", ear1="Brutal Earring", ear2="Cessance Earring",
+    sets.defense.PDT = {head="Malignance Chapeau", neck="Loricate Torque +1", ear1="Brutal Earring", ear2="crepuscular earring",
         body="Malignance Tabard", hands="Malignance Gloves", ring1="Defending Ring", ring2="Epona's Ring",
         back="Atheling Mantle",waist="Hurch'lan sash", legs="Malignance Tights", feet="Malignance Boots"}
 
@@ -209,7 +209,7 @@ function init_gear_sets()
         body="Malignance Tabard",hands="Adhemar Wristbands +1",ring1="Niqmaddu Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Hurch'lan sash",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc = {ammo="Honed Tathlum",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Telos Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Telos Earring",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
         back="Atheling Mantle",waist="Hurch'lan sash",legs="Malignance Tights",feet="Malignance Boots"}
 

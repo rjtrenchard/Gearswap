@@ -117,40 +117,40 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
     
     -- Resting sets
-    sets.resting = {neck="Wiglen Gorget",ring1="Sheltered Ring",ring2="Defending Ring"}
+    sets.resting = {neck="Bathy Choker +1",ring1="Sheltered Ring",ring2="Defending Ring"}
     
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle.Town = {sub="Utu Grip",ammo="Ginsen",
         head="Sulevia's Mask +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Atheling Mantle",waist="Flume Belt",legs="Carmine Cuisses +1",feet="Sulevia's Leggings +2"}
+        back="Atheling Mantle",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sulevia's Leggings +2"}
     
     sets.idle.Field = {
-        head="Sulevia's Mask +1",neck="Wiglen Gorget",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Sulevia's Mask +1",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Otronif Harness +1",hands="Otronif Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Carmine Cuisses +1",feet="Danzo Sune-ate"}
+        back="Shadow Mantle",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Danzo Sune-ate"}
 
     sets.idle.Weak = {
-        head="Twilight Helm",neck="Wiglen Gorget",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="Twilight Helm",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Twilight Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Carmine Cuisses +1",feet="Danzo Sune-ate"}
+        back="Shadow Mantle",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Danzo Sune-ate"}
     
     -- Defense sets
     sets.defense.PDT = {ammo="Iron Gobbet",
         head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2=gear.DarkRing.physical,
-        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
+        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
 
     sets.defense.Reraise = {
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Twilight Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
+        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
 
     sets.defense.MDT = {ammo="Demonry Stone",
         head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="Shadow Ring",
-        back="Engulfer Cape",waist="Flume Belt",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
+        back="Engulfer Cape",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
 
     sets.Kiting = {feet="Danzo Sune-ate"}
 
@@ -166,7 +166,7 @@ function init_gear_sets()
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
     sets.engaged = {ammo="Ginsen",
-        head="Flamma Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Flamma Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="crepuscular earring",
         body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Rajas Ring",ring2="Flamma Ring",
         back="Atheling Mantle",waist="Sailfi Belt +1",legs="Hizamaru Hizayoroi",feet="Flamma Gambieras +2"}
     sets.engaged.Acc = {ammo="Ginsen",

@@ -131,7 +131,7 @@ function init_gear_sets()
 	-- Sets to return to when not performing an action.
 
 	-- Resting sets
-	sets.resting = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",
+	sets.resting = {head="Ocelomeh Headpiece +1",neck="Bathy Choker +1",
 		ring1="Sheltered Ring",ring2="Paguroidea Ring"}
 
 	-- Idle sets
@@ -144,12 +144,12 @@ function init_gear_sets()
 	sets.defense.PDT = {
 		head="Whirlpool Mask",neck="Loricate Torque +1",
 		body="Orion Jerkin +1",hands="Orion Bracers +1",ring1="Defending Ring",ring2=gear.DarkRing.physical,
-		back="Mollusca Mantle",waist="Flume Belt",legs="Nahtirah Trousers",feet="Orion Socks +1"}
+		back="Mollusca Mantle",waist="Flume Belt +1",legs="Nahtirah Trousers",feet="Orion Socks +1"}
 
 	sets.defense.MDT = {
 		head="Orion Beret +1",neck="Loricate Torque +1",
 		body="Orion Jerkin +1",hands="Orion Bracers +1",ring1="Defending Ring",ring2="Shadow Ring",
-		back="Mollusca Cape",waist="Flume Belt",legs="Nahtirah Trousers",feet="Orion Socks +1"}
+		back="Mollusca Cape",waist="Flume Belt +1",legs="Nahtirah Trousers",feet="Orion Socks +1"}
 
 	sets.Kiting = {feet="Fajin Boots"}
 
@@ -161,7 +161,7 @@ function init_gear_sets()
 	sets.engaged = {
 		head="Whirlpool Mask",neck="Loricate Torque +1",ear1="Steelflash Earring",ear2="Bladeborn Earring",
 		body="Orion Jerkin +1", hands="Arcadian Bracers +1", ring1="Defending Ring",ring2="Rajas Ring",
-		back="Shadow Mantle",waist="Flume Belt",legs="Nahtirah Trousers",feet="Orion Socks +1"}
+		back="Shadow Mantle",waist="Flume Belt +1",legs="Nahtirah Trousers",feet="Orion Socks +1"}
 
 	sets.engaged.Acc = {
 		head="Whirlpool Mask",neck="Combatant's Torque",ear1="Steelflash Earring",ear2="Bladeborn Earring",

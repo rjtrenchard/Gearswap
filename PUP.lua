@@ -60,6 +60,7 @@ function job_setup()
 
     state.Buff.Overdrive = buffactive.overdrive or false
 
+    include('Mote-TreasureHunter')
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -83,9 +84,11 @@ function user_setup()
         ['Nuke'] = {'Ice Maneuver', 'Dark Maneuver', 'Light Maneuver', 'Earth Maneuver'}
     }
 
+
     update_pet_mode()
     select_default_macro_book()
 
+    send_command('bind ^= gs c cycle treasuremode')
 end
 
 -- Called when this job file is unloaded (eg: job change)
@@ -95,23 +98,58 @@ end
 
 -- Define sets used by this job file.
 function init_gear_sets()
+
+    -- Augmented Gear
+
+    gear.petDTBody={ name="Taeon Tabard", augments={'Pet: Accuracy+21 Pet: Rng. Acc.+21','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
+    gear.petDTHands={ name="Taeon Gloves", augments={'Pet: Accuracy+20 Pet: Rng. Acc.+20','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
+    gear.petDTLegs={ name="Taeon Tights", augments={'Pet: Accuracy+17 Pet: Rng. Acc.+17','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
+    gear.petDTFeet={ name="Taeon Boots", augments={'Pet: Accuracy+17 Pet: Rng. Acc.+17','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
     
+    gear.petHasteLegs={ name="Taeon Tights", augments={'Pet: Accuracy+22 Pet: Rng. Acc.+22','Pet: "Dbl. Atk."+5','Pet: Haste+5',}}
+
+    gear.RepairHead={ name="Taeon Chapeau", augments={'"Repair" potency +5%','Phalanx +3',}}
+    gear.RepairBody={ name="Taeon Tabard", augments={'"Repair" potency +5%','Phalanx +3',}}
+    gear.RepairHands={ name="Taeon Gloves", augments={'"Repair" potency +5%','Phalanx +3',}}
+    gear.RepairLegs={ name="Taeon Tights", augments={'"Repair" potency +5%','Phalanx +3',}}
+    gear.RepairFeet={ name="Taeon Boots", augments={'"Repair" potency +5%','Phalanx +3',}}
+
+    -- Misc sets
+    sets.TreasureHunter = {head="Volte Cap",waist="Chaac Belt"}
+
     -- Precast Sets
 
     -- Fast cast sets for spells
-    sets.precast.FC = {head="Herculean Helm",ear2="Loquacious Earring",ring1="Prolix Ring"}
+    sets.precast.FC = {
+        head="Herculean Helm",neck="Baetyl Pendant",ear1="Etiolation Earring",ear2="Loquacious Earring",
+        ring1="Prolix Ring"}
 
-    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads"})
+    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {})
 
     
     -- Precast sets to enhance JAs
-    sets.precast.JA['Tactical Switch'] = {feet="Cirque Scarpe +2"}
-    
-    sets.precast.JA['Repair'] = {ear1="Pratik Earring",feet="Foire Babouches"}
+    sets.precast.JA.Maneuver = {}
+    sets.precast.JA.NoOD = {main="Midnights",
+        ear2="Burana Earring",neck="Buffoon's Collar",
+        body="Karagoz Farsetto +1",hands="Foire Dastanas +1",
+        back="Visucius's Mantle"}
+    sets.precast.JA.OD = {main="Midnights",
+        ear2="Burana Earring",
+        hands="Foire Dastanas +1"}
+    sets.precast.JA.Maneuver = sets.precast.JA.NoOD
 
-    sets.precast.JA.Maneuver = {ear2="Burana Earring",neck="Buffoon's Collar",body="Cirque Farsetto +2",hands="Foire Dastanas +1",back="Visucius's Mantle"}
+    sets.precast.JA['Tactical Switch'] = {feet="Karagoz Scarpe"}
+    sets.precast.JA['Repair'] = {main="Nibiru Sainti",
+        head=gear.RepairHead,ear1="Pratik Earring",ear2="Guignol Earring",
+        body=gear.RepairBody,hands=gear.RepairHands,
+        legs=gear.RepairLegs,feet="Foire Babouches +1"}
 
-    sets.precast.JA['Overdrive'] = {}
+    sets.precast.JA['Overdrive'] = {body="Pitre Tobe"}
+    sets.precast.JA['Ventriloquy'] = {legs="Pitre churidars"}
+    sets.precast.JA['Role Reversal']= {feet="Pitre babouches"}    
+
+
+
 
 
 
@@ -127,6 +165,12 @@ function init_gear_sets()
        
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
+    sets.precast.Pet = {}
+    sets.precast.Pet.Weaponskill = {range="Animator P",
+        neck="Shulmanu Collar", ear1="Domesticator's Earring",
+        body=gear.petDTBody, hands=gear.petDTHands, 
+        waist="Klouskap Sash +1",legs=gear.petDTLegs, feet=gear.petDTFeet}
+
     sets.precast.WS = {
         head="Hizamaru Somen",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
         body="Hizamaru Haramaki",hands="Hizamaru Kote",ring1="Niqmaddu Ring",ring2="Karieyh Ring +1",
@@ -139,7 +183,7 @@ function init_gear_sets()
 
     sets.precast.WS['Shijin Spiral'] = set_combine(sets.precast.WS, {waist="Sailfi Belt +1"})
 
-    sets.precast.WS['Howling Fist'] = set_combine(sets.precast.WS,{neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Howling Fist'] = set_combine(sets.precast.WS,{neck="Caro Necklace", waist="Sailfi Belt +1"})
 
     sets.precast.WS['Raging Fists'] = set_combine(sets.precast.WS,{waist="Sailfi Belt +1"})
 
@@ -147,9 +191,9 @@ function init_gear_sets()
     -- Midcast Sets
 
     sets.midcast.FastRecast = {
-        head="Herculean Helm",ear2="Loquacious Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Prolix Ring",
-        legs="Malignance Tights",feet="Malignance Boots"}
+        head="Herculean Helm",ear1="Etiolation Earring",ear2="Loquacious Earring",
+        body=gear.RepairBody,hands="Malignance Gloves",ring1="Prolix Ring",ring2="Rahab Ring",
+        legs="Pitre Churidars",feet="Regal Pumps +1"}
         
 
     -- Midcast sets for pet actions
@@ -157,33 +201,33 @@ function init_gear_sets()
 
     sets.midcast.Pet['Elemental Magic'] = {ear2="Burana Earring",feet="Pitre Babouches"}
 
-    sets.midcast.Pet.WeaponSkill = {neck="Shulmanu Collar", ear2="Burana Earring",body="Taeon Tabard", hands="Taeon Gloves", legs="Taeon Tights", feet="Taeon Boots"}
+    
 
     
     -- Sets to return to when not performing an action.
     
     -- Resting sets
-    sets.resting = {head="Pitre Taj",neck="Sanctity Necklace",
+    sets.resting = {head="Pitre Taj",neck="Bathy Choker +1",
         ring1="Sheltered Ring",ring2="Defending Ring"}
     
 
     -- Idle sets
 
-    sets.idle = {range="Animator P",
-        head="Hizamaru Somen",neck="Empath Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
-        body="Taeon Tabard",hands="Taeon Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Hurch'lan Sash",legs="Taeon Tights",feet="Hermes' Sandals"}
+    sets.idle = {main="Ohrmazd", range="Animator P",
+        head="Hizamaru Somen",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
+        body=gear.petDTBody,hands=gear.petDTHands,ring1="Sheltered Ring",ring2="Defending Ring",
+        back="Shadow Mantle",waist="Klouskap Sash +1",legs=gear.petDTLegs,feet="Hermes' Sandals"}
 
-    sets.idle.Town = set_combine(sets.idle, {})
+    sets.idle.Town = set_combine(sets.idle, {neck="Bathy Choker"})
 
     -- Set for idle while pet is out (eg: pet regen gear)
-    sets.idle.Pet = set_combine(sets.idle, {head="Anwig Salade", back="Visucius's Mantle"})
+    sets.idle.Pet = set_combine(sets.idle, {head="Anwig Salade", back="Visucius's Mantle", feet="Hermes' Sandals"})
 
     -- Idle sets to wear while pet is engaged
-    sets.idle.Pet.Engaged = {
+    sets.idle.Pet.Engaged = {main="Ohrmazd",range="Animator P",
         head="Anwig Salade",neck="Shulmanu Collar",ear1="Enmerkar Earring",ear2="Rimeice Earring",
-        body="Taeon Tabard",hands="Taeon Gloves",ring1="Varar Ring +1",ring2="Varar Ring +1",
-        back="Visucius's Mantle",waist="Hurch'lan Sash",legs="Taeon Tights",feet="Taeon Boots"}
+        body=gear.petDTBody,hands=gear.petDTHands,ring1="Varar Ring +1",ring2="Varar Ring +1",
+        back="Visucius's Mantle",waist="Klouskap Sash +1",legs=gear.petDTLegs,feet=gear.petDTFeet}
     sets.idle.Pet.Engaged.Melee = sets.idle.Pet.Engaged
 
     sets.idle.Pet.Engaged.Ranged = set_combine(sets.idle.Pet.Engaged, {hands="Cirque Guanti +2",legs="Cirque Pantaloni +2"})
@@ -194,27 +238,27 @@ function init_gear_sets()
 
     sets.idle.Pet.Tank = set_combine(sets.idle.Pet.Engaged, {
         head="Anwig Salade", neck="Shulmanu Collar",ear1="Enmerkar Earring",ear2="Rimeice Earring",
-        body="Taeon Tabard",hands="Taeon Gloves",
-        back="Visucius's Mantle",waist="Isa Belt",legs="Taeon Tights",feet="Taeon Boots"})
+        body=gear.petDTBody,hands=gear.petDTHands,
+        back="Visucius's Mantle",waist="Isa Belt",legs=gear.petDTLegs,feet=gear.petDTFeet})
 
     sets.idle.Pet.Turtle = set_combine(sets.idle.Pet.Tank, {neck="Shepherd's Chain"})
 
-    sets.buff.Overdrive = {
-        head="Anwig Salade",neck="Shulmanu Collar",ear1="Domesticator's Earring",ear2="Rimeice Earring",
-        body="Taeon Tabard",hands="Taeon Gloves",ring1="Varar Ring +1",ring2="Varar Ring +1",
-        back="Visucius's Mantle",waist="Hurch'lan Sash",legs="Taeon Tights",feet="Taeon Boots"}
+    sets.buff.Overdrive = {main="Ohrmazd",range="Animator P",
+        head="Anwig Salade",neck="Shulmanu Collar",ear1="Enmerkar Earring",ear2="Rimeice Earring",
+        body=gear.petDTBody,hands=gear.petDTHands,ring1="Varar Ring +1",ring2="Varar Ring +1",
+        back="Visucius's Mantle",waist="Klouskap Sash +1",legs=gear.petDTLegs,feet=gear.petDTFeet}
 
     -- Defense sets
 
     sets.defense.Evasion = {
-        head="Malignance Chapeau",neck="Shulmanu Collar",ear2="Eabani Earring",
+        head="Malignance Chapeau",neck="Shulmanu Collar",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Niqmaddu Ring",ring2="Defending Ring",
-        back="Ik Cape",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Visucius's Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.defense.PDT = {
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Handler's Earring +1",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Niqmaddu Ring",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Visucius's Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.defense.MDT = set_combine(sets.defense.PDT, {ear2="Eabani Earring",ring2="Archon Ring"})
 
@@ -228,26 +272,27 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
     
     -- Normal melee group
-    sets.engaged = {
-        head="Hizamaru Somen",neck="Shulmanu Collar",ear1="Brutal Earring",ear2="Cessance Earring",
-        body="Hizamaru Haramaki",hands="Hizamaru Kote",ring1="Niqmaddu Ring",ring2="Epona's Ring",
-        back="Visucius's Mantle",waist="Hurch'lan Sash",legs="Hizamaru Hizayoroi",feet="Hizamaru Sune-ate"}
+    sets.engaged = sets.idle.Pet.Engaged
+    -- sets.engaged = {range="Animator P",
+    --     head="Malignance Chapeau",neck="Shulmanu Collar",ear1="Crepuscular Earring",ear2="Telos Earring",
+    --     body="Malignance Tabard",hands="Malignance Gloves",ring1="Niqmaddu Ring",ring2="Epona's Ring",
+    --     back="Visucius's Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc = {
-        head="Hizamaru Somen",neck="Shulmanu Collar",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Hizamaru Somen",neck="Shulmanu Collar",ear1="Crepuscular Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Niqmaddu Ring",ring2="Epona's Ring",
-        back="Visucius's Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Visucius's Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.DT = {
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Ethereal Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Epona's Ring",
-        back="Visucius's Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Visucius's Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc.DT = {
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Ethereal Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Beeline Ring",
-        back="Iximulew Cape",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Visucius's Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Pet = set_combine(sets.engaged, {
         head="Anwig Salade", neck="Shulmanu Collar", ear1="Enmerkar Earring", ear2="Burana Earring",
-        body="Taeon Tabard", hands="Taeon Gloves",
-        waist="Hurch'lan Sash", legs="Taeon Tights", feet="Taeon Boots" })
+        body=gear.petDTBody, hands=gear.petDTHands, ring1="Varar Ring +1", ring2="Varar Ring +1",
+        back="Visucius's Mantle",waist="Klouskap Sash +1", legs=gear.petDTLegs, feet=gear.petDTFeet })
 end
 
 
@@ -255,12 +300,30 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+
+
 -- Called when pet is about to perform an action
 function job_pet_midcast(spell, action, spellMap, eventArgs)
     if petWeaponskills:contains(spell.english) then
         classes.CustomClass = "Weaponskill"
     end
 end
+
+-- Run after the general midcast() is done.
+-- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
+-- function job_post_midcast(spell, action, spellMap, eventArgs)
+-- end
+
+function job_post_aftercast(spell, action, spellMap, eventArgs)
+    if pet.isvalid then
+        if pet.tp > 999 and (state.Buff.Overdrive or S{'Melee', 'Tank', 'None' }:contains(state.PetMode.value)) then
+            equip(sets.precast.Pet.Weaponskill)
+        elseif state.Buff.Overdrive then
+            equip(sets.buff.Overdrive)
+        end
+    end
+end
+
 
 
 -------------------------------------------------------------------------------------------------------------------
@@ -273,6 +336,15 @@ end
 function job_buff_change(buff, gain)
     if buff == 'Wind Maneuver' then
         handle_equipping_gear(player.status)
+    end
+    if gain then
+        if buff == 'Overdrive' then
+            sets.precast.JA.Maneuver = sets.precast.JA.OD
+        end
+    else
+        if buff == 'Overdrive' then
+            sets.precast.JA.Maneuver = sets.precast.JA.NoOD
+        end
     end
 end
 
@@ -311,15 +383,6 @@ end
 function display_current_job_state(eventArgs)
     display_pet_status()
 end
-
--- Run after the general midcast() is done.
--- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
-function job_post_midcast(spell, action, spellMap, eventArgs)
-    if state.Buff.Overdrive then
-        equip(sets.buff.Overdrive)
-    end
-end
-
 --[[
 function customize_idle_set(idleSet)
     if state.Buff.Overdrive then
@@ -416,7 +479,45 @@ function select_default_macro_book()
     else
         set_macro_page(2, 10)
     end
-    send_command( "@wait 5;input /lockstyleset 1" )
+    send_command( "@wait 5;input /lockstyleset 8" )
 end
 
+local _pet = {
+    oldTP = 0,
+    newTP = 0,
+    buffer = 0,
+    has_triggered = false
+}
+_pet.reset = function()
+    _pet.oldTP = 0
+    _pet.newTP = 0
+    _pet.buffer = 0
+    _pet.has_triggered = false
+end
 
+windower.register_event('prerender', function()
+    
+    if pet.tp and pet.isvalid and pet.hpp > 0 then
+        if pet.tp ~= _pet.newTP then
+            _pet.oldTP = _pet.newTP
+            _pet.newTP = pet.tp
+        end
+    else
+        _pet.reset()
+        return
+    end
+
+    if not _pet.newTP then 
+        _pet.reset()
+        return 
+    end
+
+    if _pet.newTP > 999 and not _pet.has_triggered then
+        send_command('gs equip sets.precast.Pet.Weaponskill')
+        _pet.has_triggered = true
+    elseif _pet.newTP < 1000 and _pet.oldTP > 999 and _pet.has_triggered == true then
+        send_command('gs c update')
+        _pet.has_triggered = false
+    end
+
+end)

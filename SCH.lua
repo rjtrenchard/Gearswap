@@ -86,7 +86,7 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = {ammo="Impatiens",
+    sets.precast.FC = {ammo="Staunch Tathlum +1",
         head="Nahtirah Hat",ear1="Malignance Earring",ear2="Loquacious Earring",
         body="Vanir Cotehardie",hands="Gendewitha Gages +1",ring1="Prolix Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Orvail Pants +1",feet="Academic's Loafers"}
@@ -97,7 +97,7 @@ function init_gear_sets()
 
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {neck="Sanctity Necklace", ear2="Barkarole Earring"})
     
-    sets.precast.FC['Stoneskin'] = set_combine(sets.precast.FC['Enhancing Magic'], {head="Umuthi Hat"})
+    sets.precast.FC['Stoneskin'] = set_combine(sets.precast.FC['Enhancing Magic'], {head="Befouled Crown"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {body="Gendewitha Bliault +1",back="Pahtli Cape"})
 
@@ -113,8 +113,8 @@ function init_gear_sets()
         body="Vanir Cotehardie",hands="Gendewitha Gages +1",ring1="Prolix Ring",
         back="Swith Cape +1",waist="Goading Belt",legs="",feet="Academic's Loafers"}
 
-    sets.midcast.Cure = {main="Daybreak",sub="Genbu's Shield",ammo="Incantor Stone",
-        head="Vanya Hood",neck="Phalaina Locket",ear1="Malignance Earring",ear2="Loquacious Earring",
+    sets.midcast.Cure = {main="Daybreak",sub="Ammurapi Shield",ammo="Incantor Stone",
+        head="Vanya Hood",neck="Nodens Gorget",ear1="Malignance Earring",ear2="Loquacious Earring",
         body="Gendewitha Bliault +1",hands="Telchine Gloves",ring1="Prolix Ring",ring2="Sirona's Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Orvail Pants +1",feet="Academic's Loafers"}
 
@@ -122,7 +122,7 @@ function init_gear_sets()
 
     sets.midcast.Curaga = sets.midcast.Cure
 
-    sets.midcast.Regen = {main="Bolelabunga",sub="Genbu's Shield",head="Savant's Bonnet +2",hands="Telchine Gloves"}
+    sets.midcast.Regen = {main="Bolelabunga",sub="Ammurapi Shield",head="Savant's Bonnet +2",hands="Telchine Gloves"}
 
     sets.midcast.Cursna = {
         neck="Malison Medallion",
@@ -186,12 +186,12 @@ function init_gear_sets()
     -- Elemental Magic sets are default for handling low-tier nukes.
     sets.midcast['Elemental Magic'] = {main="Grioavolr",sub="Zuuxowu Grip",ammo="Dosis Tathlum",
         head="Hagondes Hat",neck="Eddy Necklace",ear1="Friomisi Earring",ear2="Barkarole Earring",
-        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Icesoul Ring",ring2="Acumen Ring",
+        body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Icesoul Ring",ring2="Metamorph Ring +1",
         back="Toro Cape",waist=gear.ElementalObi,legs="Hagondes Pants",feet="Hagondes Sabots"}
 
     sets.midcast['Elemental Magic'].Resistant = {main="Grioavolr",sub="Mephitis Grip",ammo="Dosis Tathlum",
         head="Hagondes Hat",neck="Eddy Necklace",ear1="Hecate's Earring",ear2="Friomisi Earring",
-        body="Vanir Cotehardie",hands=gear.macc_hagondes,ring1="Icesoul Ring",ring2="Acumen Ring",
+        body="Vanir Cotehardie",hands=gear.macc_hagondes,ring1="Icesoul Ring",ring2="Metamorph Ring +1",
         back="Toro Cape",waist=gear.ElementalObi,legs="Hagondes Pants",feet="Bokwus Boots"}
 
     -- Custom refinements for certain nuke tiers
@@ -208,20 +208,20 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
 
     -- Resting sets
-    sets.resting = {main="Daybreak",sub="Genbu's Shield",
-        head="Nefer Khat +1",neck="Wiglen Gorget",
+    sets.resting = {main="Daybreak",sub="Ammurapi Shield",
+        head="Nefer Khat +1",neck="Bathy Choker +1",
         body="Gendewitha Bliault +1",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         waist="Austerity Belt",legs="Nares Trews",feet="Serpentes Sabots"}
 
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
-    sets.idle.Town = {main="Daybreak",sub="Genbu's Shield",ammo="Homiliary",
+    sets.idle.Town = {main="Daybreak",sub="Ammurapi Shield",ammo="Homiliary",
         head="Savant's Bonnet +2",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Savant's Gown +2",hands="Savant's Bracers +2",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Umbra Cape",waist="Hierarch Belt",legs="Savant's Pants +2",feet="Crier's Gaiters"}
 
-    sets.idle.Field = {main="Daybreak",sub="Genbu's Shield",ammo="Homiliary",
+    sets.idle.Field = {main="Daybreak",sub="Ammurapi Shield",ammo="Homiliary",
         head="Nefer Khat +1",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Gendewitha Bliault +1",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Umbra Cape",waist="Hierarch Belt",legs="Nares Trews",feet="Crier's Gaiters"}
@@ -266,8 +266,8 @@ function init_gear_sets()
 
     -- Normal melee group
     sets.engaged = {main="Malignance Pole",sub="Oneiros Grip",
-        head="Jhakri Coronal",neck="Sanctity Necklace",ear1="Brutal Earring",ear2="Cessance Earring",
-        body="Jhakri Robe +1",hands="Jhakri Cuffs",ring1="Rajas Ring",ring2="Jhakri Ring",
+        head="Jhakri Coronal",neck="Sanctity Necklace",ear1="Brutal Earring",ear2="crepuscular earring",
+        body="Jhakri Robe +1",hands="Jhakri Cuffs +2",ring1="Rajas Ring",ring2="Jhakri Ring",
         waist="Witful Belt",legs="Jhakri Slops",feet="Jhakri Pigaches"}
 
 

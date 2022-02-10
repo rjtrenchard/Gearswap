@@ -90,8 +90,8 @@ function user_setup()
 
     gear.Weapons = {}
     gear.Weapons.DW = {}
-    gear.Weapons['Sword'] = {main="Naegling", sub="Genbu's Shield"}
-    gear.Weapons['Dagger'] = {main="Aeneas", sub="Genbu's Shield"}
+    gear.Weapons['Sword'] = {main="Naegling", sub="Ammurapi Shield"}
+    gear.Weapons['Dagger'] = {main="Aeneas", sub="Ammurapi Shield"}
     gear.Weapons.DW['Sword'] = {main="Naegling", sub="Centovente"}
     gear.Weapons.DW['Dagger'] = {main="Aeneas", sub="Kaja Knife"}
     
@@ -132,7 +132,7 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     sets.precast.FC = {main="Kali",range="Gjallarhorn",
-    head="Fili Calot +1",neck="Baetyl Pendant",ear1="Aoidos' Earring",ear2="Loquac. Earring",
+    head="Fili Calot +1",neck="Baetyl Pendant",ear1="Etiolation Earring",ear2="Loquac. Earring",
     body="Inyanga Jubbah +2",hands="Gendewitha Gages +1",ring1="Prolix Ring",ring2="Kishar Ring",
     back=gear.CastingCape,waist="Embla Sash",legs="Ayanmo Cosciales +2",feet="Bihu Slippers +1"}
 
@@ -140,7 +140,10 @@ function init_gear_sets()
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
     
-    sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {head="Umuthi Hat", waist="Siegel Sash"})
+    sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {
+        main="Pukulatmuj +1", 
+        head="Umuthi Hat", 
+        waist="Siegel Sash"})
 
     sets.precast.FC.BardSong = {main="Kali",range="Gjallarhorn",
         head="Fili Calot +1",neck="Baetyl Pendant",ear1="Aoidos' Earring",ear2="Loquac. Earring",
@@ -181,7 +184,7 @@ function init_gear_sets()
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {})
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Caro Necklace", waist="Sailfi Belt +1"})
     
     
     -- Midcast Sets
@@ -190,9 +193,9 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         head="Ayanmo Zucchetto +2",ear2="Loquacious Earring",
         body="Inyanga Jubbah +2",hands="Gendewitha Gages +1",ring1="Prolix Ring",ring2="Kishar Ring",
-        back=gear.CastingCape,waist="Sailfi Belt +1",legs="Ayanmo Cosciales +2",feet="Ayanmo Gambieras +1"}
+        back=gear.CastingCape,waist="Sailfi Belt +1",legs="Ayanmo Cosciales +2",feet="Ayanmo Gambieras +2"}
 
-    sets.midcast['Enhancing Magic'] = {head="Umuthi Hat",ear1="Mimir Earring", ear2="Andoaa Earring",hands="Inyanga Dastanas +1", waist="Embla Sash", feet=gear.EnhancingFeet}
+    
         
     -- Gear to enhance certain classes of songs.  No instruments added here since Gjallarhorn is being used.
     sets.midcast.Ballad = {legs="Fili Rhingrave"}
@@ -219,21 +222,22 @@ function init_gear_sets()
         body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Prolix Ring",ring2="Kishar Ring",
         back=gear.CastingCape,waist="Corvax Sash",legs="Inyanga Shalwar +2",feet="Brioso Slippers +2"}
 
-    -- For song defbuffs (duration primary, accuracy secondary)
+    -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = {main="Kali",sub="Ammurapi Shield",range="Gjallarhorn",
         head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Gwati Earring",ear2="Crepuscular Earring",
-        body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
-        back=gear.CastingCape,waist="Eschan Stone",legs="Marduk's Shalwar +1",feet="Brioso Slippers +2"}
+        body="Fili Hongreline +1",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Metamorph Ring +1",
+        back=gear.CastingCape,waist="Acuity Belt +1",legs="Marduk's Shalwar +1",feet="Brioso Slippers +2"}
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = {main="Kali",sub="Ammurapi Shield",range="Gjallarhorn",
         head="Brioso Roundlet +2",neck="Moonbow Whistle +1",ear1="Gwati Earring",ear2="Crepuscular Earring",
-        body="Brioso Justaucorps +2",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
-        back=gear.CastingCape,waist="Eschan Stone",legs="Brioso Cannions +2",feet="Brioso Slippers +2"}
+        body="Brioso Justaucorps +2",hands="Fili Manchettes",ring1="Stikini Ring +1",ring2="Metamorph Ring +1",
+        back=gear.CastingCape,waist="Acuity Belt +1",legs="Brioso Cannions +2",feet="Brioso Slippers +2"}
 
     -- Song-specific recast reduction
-    sets.midcast.SongRecast = {ear2="Loquacious Earring",
-        ring1="Prolix Ring",ring2="Kishar Ring",
+    sets.midcast.SongRecast = {
+        neck="Baetyl Pendant",ear1="Etiolation Earring",ear2="Loquacious Earring",
+        body="Inyanga Jubbah +2", hands="Gendewitha Gages +1", ring1="Prolix Ring",ring2="Kishar Ring",
         back=gear.CastingCape,waist="Embla Sash",legs="Fili Rhingrave"}
 
     sets.midcast.Daurdabla = set_combine(sets.midcast.FastRecast, sets.midcast.SongRecast, {range=info.ExtraSongInstrument})
@@ -245,55 +249,68 @@ function init_gear_sets()
     sets.midcast.DaurdablaDummy = {main="Kali",range=info.ExtraSongInstrument,
         head="Volte Cap",neck="Incanter's Torque",ear1="Gwati Earring",ear2="Crepuscular Earring",
         body="Ayanmo corazza +2",hands="Ayanmo manopolas +2",ring1="Prolix Ring",ring2="Kishar Ring",
-        back=gear.CastingCape,waist="Embla Sash",legs="Ayanmo Cosciales +2",feet="Ayanmo Gambieras +1"}
+        back=gear.CastingCape,waist="Embla Sash",legs="Ayanmo Cosciales +2",feet="Ayanmo Gambieras +2"}
 
     -- Other general spells and classes.
-    sets.midcast.Cure = {main="Daybreak",sub="Genbu's Shield",
-        head="Vanya Hood",neck="Phalaina Locket",ear1="Regal Earring", ear2="",
-        body="Gendewitha Bliaut +1",hands=gear.CureHands,ring1="Stikini Ring +1",ring2="Stikini Ring +1",
-        back="Oretania's Cape",legs="Gendewitha Spats",feet="Gendewitha Galoshes +1"}
+    sets.midcast['Healing Magic'] = {
+        head="Vanya Hood", neck="Incanter's Torque", 
+        hands="Inyanga Dastanas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1",
+        back="Oretania's Cape"}
+
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {main="Daybreak",sub="Ammurapi Shield",
+        head="Vanya Hood",neck="Nodens Gorget",ear1="Regal Earring", ear2="",
+        body="Gendewitha Bliaut +1",hands=gear.CureHands,ring1="Stikini Ring +1",ring2="Metamorph Ring +1",
+        back="Oretania's Cape",legs="Chironic Hose",feet="Gendewitha Galoshes +1"})
         
     sets.midcast.Curaga = sets.midcast.Cure
         
-    sets.midcast.Stoneskin = {
-        head="Nahtirah Hat",
-        body="Gendewitha Bliaut +1",hands="Gendewitha Gages +1",
-        waist="Seigel Sash",legs="Gendewitha Spats",feet="Gendewitha Galoshes +1"}
+    sets.midcast.Stoneskin = set_combine(sets.midcast["Enhancing Magic"],{
+        neck="Nodens Gorget", ear1="Earthcry Earring",
+        waist="Seigel Sash",legs="Shedir Seraweels"})
         
     sets.midcast.Cursna = {
         neck="Malison Medallion",
         hands="Hieros Mittens",ring1="Ephedra Ring",
         feet="Gendewitha Galoshes +1"}
 
+    sets.midcast['Enhancing Magic'] = {main="Pukulatmuj +1",
+        head="Umuthi Hat",neck="Incanter's Torque", ear1="Mimir Earring", ear2="Andoaa Earring",
+        body="Anhur Robe",hands="Inyanga Dastanas +2", ring1="Stikini Ring +1", ring2="Stikini Ring +1",
+        back="Fi Follet Cape +1", waist="Embla Sash", legs="Shedir Seraweels", feet=gear.EnhancingFeet}
+    sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'], {legs='Shedir Seraweels'})
+    sets.midcast.BarStatus = sets.midcast.BarElement
+
+    sets.midcast.Banish = {head="Ipoca Beret"}
     
     -- Sets to return to when not performing an action.
     
     -- Resting sets
-    sets.resting = { }
+    sets.resting = {head="Befouled Crown", body="Gendewitha Bliaut +1", neck="Bathy Choker +1", ring1="Stikini Ring +1", ring2="Stikini Ring +1", legs="Assiduity Pants +1"}
     
     
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle = {range=gear.IdleInstrument,
-        head="Ayanmo Zucchetto +2",neck="Loricate Torque +1",ear1="Infused Earring",ear2="Eabani Earring",
+        head="Ayanmo Zucchetto +2",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Sheltered Ring",ring2="Defending Ring",
-        back=gear.CastingCape,waist="Flume Belt",legs="Assiduity Pants +1",feet="Fili Cothurnes +1"}
+        back=gear.CastingCape,waist="Flume Belt +1",legs="Assiduity Pants +1",feet="Fili Cothurnes +1"}
 
     sets.idle.PDT = {range=gear.IdleInstrument,
-        head="Ayanmo Zucchetto +2",neck="Loricate Torque +1",ear1="Infused Earring",ear2="Eabani Earring",
+        head="Ayanmo Zucchetto +2",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Sheltered Ring",ring2="Defending Ring",
-        back=gear.MeleeCape,waist="Flume Belt",legs="Assiduity Pants +1",feet="Ayanmo Gambieras +1"}
+        back=gear.MeleeCape,waist="Flume Belt +1",legs="Assiduity Pants +1",feet="Ayanmo Gambieras +2"}
 
-    sets.idle.Town = {main="Daybreak",sub="Genbu's Shield",range=gear.IdleInstrument,
-        head="Bihu Roundlet +2",neck="Loricate Torque +1",ear1="Infused Earring",ear2="Eabani Earring",
+    sets.idle.Town = {main="Daybreak",sub="Ammurapi Shield",range=gear.IdleInstrument,
+        head="Befouled Crown",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Bihu Jstcorps. +3",hands="Bihu Cuffs +2",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Umbra Cape",waist="Flume Belt",legs="Bihu Cannions +2",feet="Fili Cothurnes +1"}
+        back="Umbra Cape",waist="Flume Belt +1",legs="Bihu Cannions +2",feet="Fili Cothurnes +1"}
     
-    sets.idle.Weak = {main="Daybreak",sub="Genbu's Shield",range=gear.IdleInstrument,
-        head="Gendewitha Caubeen",neck="Loricate Torque +1",ear1="Infused Earring",
+    sets.idle.Weak = {main="Daybreak",sub="Ammurapi Shield",range=gear.IdleInstrument,
+        head="Gendewitha Caubeen",neck="Loricate Torque +1",ear1="Etiolation Earring",
         body="Gendewitha Bliaut +1",hands="Gendewitha Gages +1",ring1="Sheltered Ring",ring2="Defending Ring",
-        back=gear.MeleeCape,waist="Flume Belt",legs="Gendewitha Spats",feet="Fili Cothurnes +1"}
+        back=gear.MeleeCape,waist="Flume Belt +1",legs="Gendewitha Spats",feet="Fili Cothurnes +1"}
 
-    sets.idle.Refresh = {main="Kali", sub="Genbu's Shield",
+    sets.idle.Refresh = {main="Kali", sub="Ammurapi Shield",
+        head="Befouled Crown",
         body="Gendewitha Bliaut +1", ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back=gear.MeleeCape,legs="Assiduity Pants +1", feet="Fili Cothurnes +1",}
 
@@ -303,14 +320,14 @@ function init_gear_sets()
     -- Defense sets
 
     sets.defense.PDT = {main=gear.Staff.PDT,sub="Mephitis Grip",
-        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="crepuscular earring",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Moonlight Ring",ring2="Defending Ring",
-        back=gear.MeleeCape,waist="Shetal Stone",legs="Inyanga Shalwar +2",feet="Ayanmo gambieras +1"}
+        back=gear.MeleeCape,waist="Shetal Stone",legs="Inyanga Shalwar +2",feet="Ayanmo Gambieras +2"}
 
     sets.defense.MDT = {main=gear.Staff.PDT,sub="Mephitis Grip",
-        head="Ayanmo Zucchetto +2",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Ayanmo Zucchetto +2",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="crepuscular earring",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Archon Ring",ring2="Defending Ring",
-        back=gear.MeleeCape,waist="Shetal Stone",legs="Inyanga Shalwar +2",feet="Ayanmo gambieras +1"}
+        back=gear.MeleeCape,waist="Shetal Stone",legs="Inyanga Shalwar +2",feet="Ayanmo Gambieras +2"}
 
     sets.Kiting = {feet="Fili Cothurnes +1"}
 
@@ -326,17 +343,17 @@ function init_gear_sets()
 
     -- Basic set for if no TP weapon is defined.
     sets.engaged = set_combine(sets.weapons, {range=gear.MeleeInstrument,
-        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Cessance Earring",
+        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Telos Earring",ear2="crepuscular earring",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Moonlight Ring",ring2="Ilabrat Ring",
-        back=gear.MeleeCape,waist="Sailfi belt +1",legs="Ayanmo Cosciales +2",feet="Ayanmo gambieras +1"})
+        back=gear.MeleeCape,waist="Sailfi belt +1",legs="Ayanmo Cosciales +2",feet="Ayanmo Gambieras +2"})
 
     sets.engaged.PDT = set_combine(sets.engaged, {neck="Loricate Torque +1",ring2="Defending Ring"})
 
     -- Set if dual-wielding
     sets.engaged.DW = set_combine(sets.weapons, {range=gear.MeleeInstrument,
-        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Suppanomimi",
+        head="Ayanmo Zucchetto +2",neck="Combatant's Torque",ear1="Telos Earring",ear2="Suppanomimi",
         body="Ayanmo Corazza +2",hands="Ayanmo Manopolas +2",ring1="Moonlight Ring",ring2="Ilabrat Ring",
-        back=gear.MeleeCape,waist="Shetal Stone",legs="Ayanmo Cosciales +2",feet="Ayanmo gambieras +1"})
+        back=gear.MeleeCape,waist="Shetal Stone",legs="Ayanmo Cosciales +2",feet="Ayanmo Gambieras +2"})
 
     sets.engaged.DW.PDT = set_combine(sets.engaged.DW, {neck="Loricate Torque +1",ring2="Defending Ring"})
 end
@@ -345,6 +362,12 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_pretarget(spell, action, spellMap, eventArgs)
+    if spell.type ~= 'WeaponSkill' then
+        setRecast()
+    end
+end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
@@ -381,6 +404,12 @@ function job_midcast(spell, action, spellMap, eventArgs)
             if generalClass and sets.midcast[generalClass] then
                 equip(sets.midcast[generalClass])
             end
+        elseif spell.skill == 'Enhancing Magic' then
+            if spellMap == 'BarElement' then
+                equip(sets.midcast.BarElement)
+            elseif spellMap == 'BarStatus' then
+                equip(sets.midcast.BarStatus)
+            end
         end
 
     end
@@ -403,11 +432,26 @@ function job_aftercast(spell, action, spellMap, eventArgs)
         if spell.target and spell.target.type == 'SELF' then
             adjust_timers(spell, spellMap)
         end
-        state.HonorMarch:reset()
     end
     check_engaged()
-    eventArgs=false
+    eventArgs.handled = false
 end
+
+function job_post_aftercast(spell, action, spellMap, eventArgs)
+    -- if we changed weapons, change back.
+    if hasRecast() then
+        equip(recallRecast())
+        resetRecast()
+    end
+    --[[if state.OffenseMode.value == 'Magic' then
+        equip(sets.idle.Weap+
+        on)
+    end]]
+    eventArgs.handled = false
+end
+
+
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
@@ -426,6 +470,40 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
+-- initializes weapon recast handler
+function initRecast()
+    sets._Recast = {}
+    info._RecastFlag = false
+end
+
+-- sets the Recast weapon set to what is currently equipped
+-- affected slots: main sub ranged ammo
+function setRecast() 
+    if not hasRecast() then
+        sets._Recast.main = player.equipment.main
+        sets._Recast.sub = player.equipment.sub
+        sets._Recast.range = player.equipment.range
+        sets._Recast.ammo = player.equipment.ammo
+    end
+    info._RecastFlag = sets._Recast.main or sets._Recast.sub or sets._Recast.range or sets._Recast.ammo
+end
+
+-- resets the Recast weapon set to nil
+function resetRecast()
+    sets._Recast = {main = nil, sub = nil, range = nil, ammo = nil}
+    info._RecastFlag = false
+end
+
+-- returns the Recast weapon set
+function recallRecast()
+    return sets._Recast
+end
+
+-- returns true if the recast set has been used
+function hasRecast()
+    return info._RecastFlag
+end
+
 function check_engaged()
     if state.OffenseMode.value == 'SaveTP' then
         if player.status == 'Engaged' then

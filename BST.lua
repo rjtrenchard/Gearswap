@@ -85,16 +85,6 @@ function user_setup()
     gear.SIRDlegs = {name="Taeon Chapeau"}
     gear.SIRDboots = {name="Taeon Chapeau"}
 
-    gear.WSDayEar1 = "Brutal Earring"
-    gear.WSDayEar2 = "Cessance Earring"
-    gear.WSDayEar3 = "Thrud Earring"
-    gear.WSNightEar1 = "Lugra Earring"
-    gear.WSNightEar2 = "Lugra Earring +1"
-    gear.WSNightEar3 = "Lugra Earring +1"
-    gear.WSEarBrutal = {name=gear.WSDayEar1}
-    gear.WSEarCessance = {name=gear.WSDayEar2}
-    gear.WSEarThrud = {name=gear.WSDayEar3}
-
     ticker = windower.register_event('time change', function(myTime)
         if (myTime == 17*60 or myTime == 7*60) then 
             procTime(myTime)
@@ -110,15 +100,7 @@ function isNight()
 end
 
 function procTime(myTime) 
-    if isNight() then
-        gear.WSEarBrutal = gear.WSNightEar1
-        gear.WSEarCessance = gear.WSNightEar2
-        gear.WSEarThrud = gear.WSNightEar3
-    else
-        gear.WSEarBrutal = gear.WSDayEar1
-        gear.WSEarCessance = gear.WSDayEar2
-        gear.WSEarThrud = gear.WSDayEar3
-    end
+
 end
 
 -- Called when this job file is unloaded (eg: job change)
@@ -156,7 +138,7 @@ function init_gear_sets()
 
     -- CURING WALTZ
     sets.precast.Waltz = {ammo="Voluspa Tathlum",
-        head="Totemic Helm +1",neck="Phalaina Locket",ear1="",ear2="Handler's Earring +1",
+        head="Totemic Helm +1",neck="Nodens Gorget",ear1="",ear2="Handler's Earring +1",
         body="Ankusa Jackcoat +1",hands="Totemic Gloves +1",ring1="Ilabrat Ring",ring2="Asklepian Ring",
         back="Aisance Mantle +1",waist="Chaac Belt",legs="Ankusa Trousers +1",feet="Ankusa Gaiters +1"}
 
@@ -165,15 +147,15 @@ function init_gear_sets()
 
     -- STEPS
     sets.precast.Step = {ammo="Jukukik Feather",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Zwazo Earring",ear2="Cessance Earring",
+        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Zwazo Earring",ear2="crepuscular earring",
         body="Mikinaak Breastplate",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Apate Ring",
-        back="Letalis Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Letalis Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     -- VIOLENT FLOURISH
     sets.precast.Flourish1 = {}
     sets.precast.Flourish1['Violent Flourish'] = {body="Ankusa Jackcoat +1"}
 
-    sets.precast.FC = {ammo="Impatiens",neck="Orunmila's Torque",ear1="Loquacious Earring",ring1="Prolix Ring"}
+    sets.precast.FC = {ammo="Staunch Tathlum +1",neck="Orunmila's Torque",ear1="Loquacious Earring",ring1="Prolix Ring"}
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Bead Necklace"})
 
     -- WEAPONSKILLS
@@ -194,29 +176,29 @@ function init_gear_sets()
         back="Atheling Mantle",waist="Fotia Belt",legs="Meghanada Chausses +1",feet="Meghanada Jambeaux +1"}
 
     sets.precast.WS.MultiHit = {ammo="Voluspa Tathlum",
-        head="Meghanada Visor +1", neck="Fotia Gorget", ear1="Sherida Earring", ear2="Moonshade Earring",
+        head="Meghanada Visor +1", neck="Fotia Gorget", ear1="Sherida Earring", ear2="Lugra Earring +1",
         body="Meghanada Cuirie +1", hands="Meghanada Gloves +2",ring1="Epona's Ring",ring2="Regal Ring",
         back="Atheling Mantle", waist="Fotia Belt", legs="Meghanada Chausses +1", feet="Meghanada Jambeaux +1"}
 
     -- Specific weaponskill sets.
     -- Axes
-    sets.precast.WS['Mistral Axe'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
-    sets.precast.WS['Mistral Axe'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Mistral Axe'] = set_combine(sets.precast.WS, {neck="Caro Necklace", waist="Sailfi Belt +1"})
+    sets.precast.WS['Mistral Axe'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Caro Necklace", waist="Sailfi Belt +1"})
 
-    sets.precast.WS['Calamity'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
-    sets.precast.WS['Calamity'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Calamity'] = set_combine(sets.precast.WS, {neck="Caro Necklace", waist="Sailfi Belt +1"})
+    sets.precast.WS['Calamity'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Caro Necklace", waist="Sailfi Belt +1"})
 
-    sets.precast.WS['Rampage'] = set_combine(sets.precast.WS.WSCrit, {ear1=gear.WSEarThrud, ear2=gear.WSEarBrutal})
+    sets.precast.WS['Rampage'] = set_combine(sets.precast.WS.WSCrit, {ear1="Thrud Earring", ear2="Lugra Earring +1"})
     sets.precast.WS['Rampage'].Acc = set_combine(sets.precast.WS.Acc, {})
 
-    sets.precast.WS['Ruinator'] = set_combine(sets.precast.WS.MultiHit, {ear1=gear.WSEarThrud,ear2=gear.WSEarBrutal})
-    sets.precast.WS['Ruinator'].Acc = set_combine(sets.precast.WS.WSAcc, {ear1=gear.WSEarThrud,ear2=gear.WSEarBrutal})
+    sets.precast.WS['Ruinator'] = set_combine(sets.precast.WS.MultiHit, {ear1="Sherida Earring",ear2="Lugra Earring +1"})
+    sets.precast.WS['Ruinator'].Acc = set_combine(sets.precast.WS.WSAcc, {ear1="Sherida Earring",ear2="Lugra Earring +1"})
 
-    sets.precast.WS['Onslaught'] = set_combine(sets.precast.WS, {ear2=gear.WSEarBrutal,ring1="Rajas Ring"})
-    sets.precast.WS['Onslaught'].Acc = set_combine(sets.precast.WSAcc, {ring1="Rajas Ring"})
+    sets.precast.WS['Onslaught'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Onslaught'].Acc = set_combine(sets.precast.WSAcc, {})
 
-    sets.precast.WS['Decimation'] = set_combine(sets.precast.WS.MultiHit, {ear2=gear.WSEarBrutal})
-    sets.precast.WS['Decimation'].Acc = set_combine(sets.precast.WS.MultiHit, {ear2=gear.WSEarBrutal})
+    sets.precast.WS['Decimation'] = set_combine(sets.precast.WS.MultiHit, {})
+    sets.precast.WS['Decimation'].Acc = set_combine(sets.precast.WS.MultiHit, {})
 
     sets.precast.WS['Primal Rend'] = {ammo="Pemphredo Tathlum",
         head="Ankusa Helm +1",neck="Sanctity Necklace",ear1="Thrud Earring",ear2="Moonshade Earring",
@@ -226,7 +208,7 @@ function init_gear_sets()
     sets.precast.WS['Cloudsplitter'] = set_combine(sets.precast.WS['Primal Rend'], {})
 
     -- Sword
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {neck="Caro Necklace", waist="Sailfi Belt +1"})
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS.WSAcc, {})
 
     -- Dagger
@@ -234,8 +216,8 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS.WSAcc, {})
 
     -- Scythe
-    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
-    sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Tjukurrpa Medal", waist="Sailfi Belt +1"})
+    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS, {neck="Caro Necklace", waist="Sailfi Belt +1"})
+    sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.WSAcc, {neck="Caro Necklace", waist="Sailfi Belt +1"})
 
     
     --------------------------------------
@@ -245,7 +227,7 @@ function init_gear_sets()
     sets.midcast.FastRecast = {ammo="Voluspa Tathlum",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Loquacious Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Prolix Ring",ring2="Defending Ring",
-        waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.midcast.Utsusemi = set_combine(sets.midcast.FastRecast, {neck="Magoraga Bead Necklace"})
 
@@ -254,7 +236,7 @@ function init_gear_sets()
     sets.midcast.Pet.WS = {ammo="Voluspa Tathlum",
         head="Totemic Helm +1",neck="Shulmanu Collar",ear1="Domesticator's Earring",ear2="Enmerkar Earring",
         body="Ankusa Jackcoat +1",hands="Nukumi Manoplas",ring1="Varar Ring +1",ring2="Varar Ring +1",
-        back="Artio's Mantle",waist="Hurch'lan Sash",legs="Totemic Trousers +1",feet="Totemic Gaiters +1"}
+        back="Artio's Mantle",waist="Incarnation Sash",legs="Totemic Trousers +1",feet="Totemic Gaiters +1"}
     
     sets.midcast.Pet.WSMagical = set_combine(sets.midcast.Pet.Physical,{neck="Adad Necklace"})
 
@@ -278,7 +260,7 @@ function init_gear_sets()
 
     -- IDLE SETS
     sets.idle = {ammo="Voluspa Tathlum",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Infused Earring",
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Etiolation Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Sheltered Ring",
         back="Pastoralist's Mantle",waist="Muscle Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
@@ -293,7 +275,7 @@ function init_gear_sets()
     sets.idle.Pet.Engaged = {ammo="Voluspa Tathlum",
         head="Ankusa Helm +1",neck="Shulmanu Collar",ear1="Rimeice Earring",ear2="Enmerkar Earring",
         body="Ankusa Jackcoat +1",hands="Totemic Gloves +1",ring1="Varar Ring +1",ring2="Varar Ring +1",
-        back="Artio's Mantle",waist="Hurch'lan Sash",legs="Ankusa Trousers +1",feet="Taeon Boots"}
+        back="Artio's Mantle",waist="Klouskap Sash +1",legs="Ankusa Trousers +1",feet="Taeon Boots"}
 
     sets.idle.Pet.PetTank = set_combine(sets.idle.Pet.Engaged,{
         head="Anwig Salade",neck="Shepherd's Chain",ear1="Handler's Earring +1",
@@ -304,9 +286,9 @@ function init_gear_sets()
     sets.defense.PDT = {ammo="Ginsen",
         head="Malignance Chapeau",neck="Loricate Torque +1", ear1="Eabani Earring", ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring2="Epona's Ring",ring1="Defending Ring",
-        back="Mollusca Mantle",waist="Flume Belt",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Mollusca Mantle",waist="Flume Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
 
-    sets.defense.Hybrid = set_combine(sets.defense.PDT, {waist="Hurch'lan Sash"})
+    sets.defense.Hybrid = set_combine(sets.defense.PDT, {waist="Klouskap Sash +1"})
 
     sets.defense.Killer = set_combine(sets.defense.Hybrid, {body="Nukumi Gausape"})
 
@@ -329,12 +311,12 @@ function init_gear_sets()
     sets.engaged.Acc = {ammo="Voluspa Tathlum",
         head="Malignance Chapeau",neck="Shulmanu Collar",ear1="Sherida Earring",ear2="Suppanomimi",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Regal Ring",ring2="Moonlight Ring",
-        back="Atheling Mantle",waist="Hurch'lan Sash",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Atheling Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.PDT = {ammo="Voluspa Tathlum",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring", ear2="Suppanomimi",
         body="Malignance Tabard", hands="Malignance Gloves", ring1="Defending Ring", ring2="Moonlight Ring",
-        back="Atheling Mantle", waist="Hurch'lan Sash", legs="Malignance Tights", feet="Malignance Boots"}
+        back="Atheling Mantle", waist="Klouskap Sash +1", legs="Malignance Tights", feet="Malignance Boots"}
 
     sets.engaged.Killer = set_combine(sets.engaged, {head="Ankusa Helm +1",body="Nukumi Gausape", legs="Totemic Trousers +1"})
     sets.engaged.Killer.Acc = set_combine(sets.engaged.Acc, {body="Nukumi Gausape"})
@@ -363,7 +345,7 @@ function init_gear_sets()
     sets.engaged.KillerDW.PetTank.Acc = {}
     ]]
     
-    sets.engaged.PetStance = set_combine(sets.engaged,{waist="Hurch'lan Sash"})
+    sets.engaged.PetStance = set_combine(sets.engaged,{waist="Klouskap Sash +1"})
     sets.engaged.PetStance.Acc = set_combine(sets.engaged.Acc,{})
     sets.engaged.PetStance.PDT = set_combine(sets.engaged.PDT,{})
     sets.engaged.PetTank = set_combine(sets.engaged.PDT,{head="Anwig Salade", ear1="Handler's Earring +1", ear2="Enmerkar Earring", body="Taeon Tabard", hands="Taeon Gloves", legs="Taeon Tights", feet="Taeon Boots"})
