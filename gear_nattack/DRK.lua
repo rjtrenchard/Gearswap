@@ -85,7 +85,7 @@ function include_job_sets()
 
     sets.Enmity = {ammo="Sapience Orb",
         head="Loess Barbuta +1", neck="Unmoving Collar +1", ear1="Cryptic Earring", ear2="Trux Earring",
-        body="Obviation Cuirass +1", hands="Macabre Gauntlets +1", ring1="Eihwaz Ring", ring2="Petrov Ring",
+        body="Obviation Cuirass +1", hands="Macabre Gauntlets +1", ring1="Supershear Ring", ring2="Petrov Ring",
         waist="Trance Belt", legs="Zoar Subligar +1", feet=gear.EnmityFeet}
     sets.Enmity.Weapon = {main="Voay Sword +1", sub="Camaraderie Shield"}
 
@@ -112,7 +112,7 @@ function include_job_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Knobkierrie",
         head="Sakpata's Helm",neck="Abyss Beads +2",ear1="Thrud Earring",ear2="Moonshade Earring",
-        body="Ignominy Cuirass +3",hands="Sakpata's Gauntlets",ring1="Regal Ring",ring2="Karieyh Ring +1",
+        body="Ignominy Cuirass +3",hands="Sakpata's Gauntlets",ring1="Regal Ring",ring2="Epaminondas's Ring",
         back=gear.ws_cape,waist="Fotia Belt",legs="Fallen's Flanchard +3",feet="Sulevia's Leggings +2"}
     sets.precast.WS.FullTP = {ear2="Lugra Earring +1"}
 
@@ -127,7 +127,7 @@ function include_job_sets()
 
     sets.precast.WS.Magic = {ammo="Knobkierrie",
         head="Flamma Zucchetto +2", neck="Baetyl Pendant", ear1="Friomisi Earring", ear2="Malignance Earring",
-        body="Ignominy Cuirass +3", hands="Fallen's Finger Gauntlets +3", ring1="Metamorph Ring +1", ring2="Karieyh Ring +1",
+        body="Ignominy Cuirass +3", hands="Fallen's Finger Gauntlets +3", ring1="Metamorph Ring +1", ring2="Epaminondas's Ring",
         back=gear.ws_cape, waist="Eschan Stone", legs="Fallen's Flanchard +3", feet="Sulevia's Leggings +2"}
 
     sets.precast.WS.Crit = {ammo="Yetshila +1",
@@ -137,7 +137,7 @@ function include_job_sets()
 
     sets.precast.WS.Low = {ammo="Seething Bomblet +1",
         head="Flamma Zucchetto +2", neck="Fotia Gorget", ear1="Crepuscular Earring", ear2="Telos Earring",
-        body="Flamma Korazin +2", hands="Flamma Manopolas +2", ring1="Moonlight Ring", ring2="Karieyh Ring +1", 
+        body="Flamma Korazin +2", hands="Flamma Manopolas +2", ring1="Moonlight Ring", ring2="Epaminondas's Ring", 
         back=gear.melee_cape, waist="Fotia Belt", legs="Carmine Cuisses +1", feet="Flamma Gambieras +2"
     }
 
@@ -198,7 +198,7 @@ function include_job_sets()
 
     sets.precast.WS['Torcleaver'] = set_combine(sets.precast.WS.SingleHit, {
         head="Sakpata's Helm", neck="Abyssal Beads +2", 
-        hands="Sakpata's Gauntlets", ring1="Karieyh Ring +1",ring2="Niqmaddu Ring",
+        hands="Sakpata's Gauntlets", ring1="Epaminondas's Ring",ring2="Niqmaddu Ring",
         back=gear.torcleaver_cape,waist="Fotia Belt"})
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS.Acc, {head="Sakpata's Helm", hands="Sakpata's Gauntlets", back=gear.torcleaver_cape, waist="Fotia Belt"})
     sets.precast.WS['Torcleaver'].Mod = set_combine(sets.precast.WS['Torcleaver'], {head=gear.torcleaver_helm, back=gear.torcleaver_cape})
@@ -312,7 +312,7 @@ function include_job_sets()
 
     sets.defense.Reraise = {
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
-        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Paguroidea Ring",
+        body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Paguroidea Ring",
         back=gear.melee_cape,waist="Sailfi belt +1",legs="Ignominy Flanchard +1",feet="Flamma Gambieras +2"}
 
     sets.defense.MDT = {ammo="Staunch Tathlum +1",
@@ -322,7 +322,7 @@ function include_job_sets()
 
     sets.Kiting = {head="Sakpata's Helm",body="Sakpata's Plate",feet="Carmine Cuisses +1"}
 
-    sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
+    sets.Reraise = {head="Twilight Helm",body="Crepuscular Mail"}
 
 
     -------------------------------------------------------------------------------------------------------------------
@@ -452,11 +452,11 @@ function include_job_sets()
         back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
     sets.engaged.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Abyssal Beads +2",ear1="Brutal earring",ear2="Telos Earring",
-        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
+        body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
         back=gear.melee_cape,waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Acc.Reraise = {ammo="Seething Bomblet +1",
         head="Twilight Helm",neck="Abyssal Beads +2",ear1="Crepuscular earring",ear2="Telos Earring",
-        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Regal Ring",
+        body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Regal Ring",
         back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
 
     -- Dual Wield sets
@@ -537,7 +537,7 @@ function include_job_sets()
         back=gear.melee_cape, waist="Sailfi belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
     sets.engaged.Caladbolg.Acc.Reraise.AM3 = {ammo="Seething Bomblet +1",
         head="Twilight Helm", neck="Abyssal Beads +2", ear2="Telos Earring", ear1="Brutal Earring",
-        body="Twilight Mail", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
+        body="Crepuscular Mail", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
 
     -- Liberator
