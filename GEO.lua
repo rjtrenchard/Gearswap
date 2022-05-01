@@ -35,6 +35,16 @@ end
 -- Define sets and vars used by this job file.
 function init_gear_sets()
 
+    gear.EnhancingFeet = { name="Telchine Pigaches", augments={'Mag. Evasion+21','Song spellcasting time -7%','Enh. Mag. eff. dur. +9',}}
+
+    gear.CureHands = { name="Telchine Gloves", augments={'"Cure" potency +7%', '"Regen" potency +3'}}
+
+    gear.RegenHead = {name="Telchine Cap", augments={'"Regen" potency+3',}}
+    gear.RegenBody = { name="Telchine Chasuble", augments={'"Regen" potency+3',}}
+    gear.RegenHands = gear.CureHands
+    gear.RegenLegs = { name="Telchine Braconi", augments={'"Regen" potency+3',}}
+    gear.RegenFeet = { name="Telchine Pigaches", augments={'"Regen" potency+3',}}
+
     --------------------------------------
     -- Precast sets
     --------------------------------------
@@ -46,13 +56,13 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {--ammo="Staunch Tathlum +1",
-        head="Nahtirah Hat",ear2="Loquacious Earring",
-        body="Vanir Cotehardie",ring1="Prolix Ring",
+        head="Cath Palug Crown",neck="Baetyl Pendant",ear1="Malignance Earring",ear2="Loquacious Earring",
+        body="Vanir Cotehardie",ring1="Prolix Ring",ring2="Kishar Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Orvail Pants +1",feet="Chelona Boots +1"}
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {main="Daybreak",sub="Ammurapi Shield",back="Pahtli Cape"})
 
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {neck="Sanctity Necklace"})
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
 
     
     -- Weaponskill sets
@@ -83,18 +93,21 @@ function init_gear_sets()
         body="Hagondes Coat",hands="Telchine Gloves",ring1="Prolix Ring",
         back="Swith Cape +1",waist="Goading Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
-    sets.midcast.Geomancy = {range="Nepote Bell",ring1="Stikini Ring +1",ring2="Stikini Ring +1"}
+    sets.midcast.Geomancy = {range="Nepote Bell",
+    head="Azimuth ",ring1="Stikini Ring +1",ring2="Stikini Ring +1"}
     sets.midcast.Geomancy.Indi = {range="Nepote Bell",legs="Bagua Pants",ring1="Stikini Ring +1", ring2="Stikini Ring +1"}
 
     sets.midcast['Enhancing Magic'] = {main="Grioavolr",
-    neck="Erra Pendant",ear1="Andoaa Earring",ear2="Mimir Earring",
-    ring1="Stikini Ring +1",ring2="Stikini Ring +1",
-    waist="Embla Sash"}
+    head="Befouled Crown",neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Mimir Earring",
+    body="Telchine Chasuble",hands="Ayao's Gages",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
+    back="Fi Follet Cape +1",waist="Embla Sash",legs="Shedir Seraweels",feet=gear.EnhancingFeet}
 
-    sets.midcast['Enfeebling Magic'] = {neck="Erra Pendant", ear1="Malignance Earring", ear2="Gwati Earring",
+    sets.midcast['Enfeebling Magic'] = {
+        neck="Erra Pendant", ear1="Malignance Earring", ear2="Gwati Earring",
         ring1="Stikini Ring +1", ring2="Stikini Ring +1"}
 
-    sets.midcast.Cure = {main="Tamaxchi",sub="Ammurapi Shield",
+    sets.midcast.Cure = {main="Bolelabunga",sub="Ammurapi Shield",
+        head="Vanya Hood", neck="Nodens Gorget", 
         body="Gendewitha Bliault +1",hands="Telchine Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Swith Cape +1",legs="Nares Trews",feet="Hagondes Sabots"}
     
@@ -182,7 +195,7 @@ function init_gear_sets()
 
     -- Normal melee group
     sets.engaged = {range="Nepote Bell",
-        head="Zelus Tiara",neck="Peacock Charm",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+        head="",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
         body="Vanir Cotehardie",hands="Telchine Gloves",ring1="Rajas Ring",ring2="Defending Ring",
         back="Umbra Cape",waist="Goading Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 

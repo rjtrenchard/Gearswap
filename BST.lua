@@ -162,18 +162,18 @@ function init_gear_sets()
     -- Default weaponskill set.
     sets.precast.WS = {ammo="Voluspa Tathlum",
         head="Meghanada Visor +1",neck="Fotia Gorget",ear1="Thrud Earring",ear2="Moonshade Earring",
-        body="Malignance Tabard",hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Karieyh Ring +1",
+        body="Malignance Tabard",hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Epaminondas's Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.precast.WS.WSAcc = {ammo="Voluspa Tathlum",
         head="Malignance Chapeau",neck="Fotia Gorget",ear1="Zwazo Earring",ear2="Moonshade Earring",
-        body="Malignance Tabard",hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Karieyh Ring +1",
+        body="Malignance Tabard",hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Epaminondas's Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.precast.WS.WSCrit = {ammo="Voluspa Tathlum",
-        head="Meghanada visor +1", neck="Fotia Gorget",ear1="Thrud Earring",ear2="Moonshade Earring",
+        head="Blistering Sallet +1", neck="Fotia Gorget",ear1="Thrud Earring",ear2="Moonshade Earring",
         body="Meghanada cuirie +1", hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Begrudging Ring",
-        back="Atheling Mantle",waist="Fotia Belt",legs="Meghanada Chausses +1",feet="Meghanada Jambeaux +1"}
+        back="Atheling Mantle",waist="Fotia Belt",legs="Zoar Subligar +1",feet="Meghanada Jambeaux +1"}
 
     sets.precast.WS.MultiHit = {ammo="Voluspa Tathlum",
         head="Meghanada Visor +1", neck="Fotia Gorget", ear1="Sherida Earring", ear2="Lugra Earring +1",
@@ -202,7 +202,7 @@ function init_gear_sets()
 
     sets.precast.WS['Primal Rend'] = {ammo="Pemphredo Tathlum",
         head="Ankusa Helm +1",neck="Sanctity Necklace",ear1="Thrud Earring",ear2="Moonshade Earring",
-        body="Samnuha Coat",hands="Meghanada gloves +2",ring1="Regal Ring",ring2="Karieyh Ring +1",
+        body="Samnuha Coat",hands="Meghanada gloves +2",ring1="Regal Ring",ring2="Epaminondas's Ring",
         back="Argocham. Mantle",waist=gear.ElementalObi,legs="Limbo Trousers",feet="Malignance Boots"}
 
     sets.precast.WS['Cloudsplitter'] = set_combine(sets.precast.WS['Primal Rend'], {})
@@ -235,7 +235,7 @@ function init_gear_sets()
     -- PET SIC & READY MOVES
     sets.midcast.Pet.WS = {ammo="Voluspa Tathlum",
         head="Totemic Helm +1",neck="Shulmanu Collar",ear1="Domesticator's Earring",ear2="Enmerkar Earring",
-        body="Ankusa Jackcoat +1",hands="Nukumi Manoplas",ring1="Varar Ring +1",ring2="Varar Ring +1",
+        body="Ankusa Jackcoat +1",hands="Nukumi Manoplas",ring1="Varar Ring +1",ring2="Cath Palug Ring",
         back="Artio's Mantle",waist="Incarnation Sash",legs="Totemic Trousers +1",feet="Totemic Gaiters +1"}
     
     sets.midcast.Pet.WSMagical = set_combine(sets.midcast.Pet.Physical,{neck="Adad Necklace"})
@@ -255,7 +255,7 @@ function init_gear_sets()
     -- RESTING
     sets.resting = {ammo="Voluspa Tathlum",
         head="Twilight Helm",neck="Sanctity Necklace",ear1="Domesticator's Earring",ear2="Enmerkar Earring",
-        body="Twilight Mail",hands="Totemic Gloves +1",ring1="Defending Ring",ring2="Sheltered Ring",
+        body="Crepuscular Mail",hands="Totemic Gloves +1",ring1="Defending Ring",ring2="Sheltered Ring",
         back="Pastoralist's Mantle",waist="Muscle Belt +1",legs="Nukumi Quijotes",feet="Skadi's Jambeaux +1"}
 
     -- IDLE SETS
@@ -266,15 +266,15 @@ function init_gear_sets()
 
     sets.idle.Town = sets.idle
 
-    sets.idle.Refresh = {head="Wivre Hairpin",body="Twilight Mail",hands="Ogier's Gauntlets",legs="Ogier's Breeches"}
+    sets.idle.Refresh = {head="Wivre Hairpin",body="Crepuscular Mail",hands="Ogier's Gauntlets",legs="Ogier's Breeches"}
 
-    sets.idle.Reraise = set_combine(sets.idle, {head="Twilight Helm",body="Twilight Mail"})
+    sets.idle.Reraise = set_combine(sets.idle, {head="Twilight Helm",body="Crepuscular Mail"})
 
     sets.idle.Pet = set_combine(sets.idle, {ear2="Enmerkar Earring"})
 
     sets.idle.Pet.Engaged = {ammo="Voluspa Tathlum",
         head="Ankusa Helm +1",neck="Shulmanu Collar",ear1="Rimeice Earring",ear2="Enmerkar Earring",
-        body="Ankusa Jackcoat +1",hands="Totemic Gloves +1",ring1="Varar Ring +1",ring2="Varar Ring +1",
+        body="Ankusa Jackcoat +1",hands="Totemic Gloves +1",ring1="Varar Ring +1",ring2="Cath Palug Ring",
         back="Artio's Mantle",waist="Klouskap Sash +1",legs="Ankusa Trousers +1",feet="Taeon Boots"}
 
     sets.idle.Pet.PetTank = set_combine(sets.idle.Pet.Engaged,{
@@ -306,7 +306,7 @@ function init_gear_sets()
     sets.engaged = {ammo="Ginsen",
         head="Meghanada Visor +1",neck="Shulmanu Collar",ear1="Sherida Earring",ear2="Suppanomimi",
         body="Meghanada Cuirie +1",hands="Meghanada Gloves +2",ring1="Epona's Ring",ring2="Moonlight Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Meghanada chausses +1",feet="Meghanada Jambeaux +1"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Meghanada chausses +1",feet="Meghanada Jambeaux +1"}
 
     sets.engaged.Acc = {ammo="Voluspa Tathlum",
         head="Malignance Chapeau",neck="Shulmanu Collar",ear1="Sherida Earring",ear2="Suppanomimi",

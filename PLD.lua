@@ -130,12 +130,12 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Ginsen",
         head="Sulevia's Mask +1",neck="Fotia Gorget",ear1="Thrud Earring",ear2="Moonshade Earring",
-        body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Regal Ring",ring2="Karieyh Ring +1",
+        body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Regal Ring",ring2="Epaminondas's Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
 
     sets.precast.WS.Acc = {ammo="Ginsen",
         head="Sulevia's Mask +1",neck="Fotia Gorget",ear1="crepuscular earring",ear2="Moonshade Earring",
-        body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Regal Ring",ring2="Karieyh Ring +1",
+        body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Regal Ring",ring2="Epaminondas's Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -147,7 +147,7 @@ function init_gear_sets()
 
     sets.precast.WS['Sanguine Blade'] = {ammo="Ginsen",
         head="Pixie Hairpin +1",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Hecate's Earring",
-        body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Archon Ring",ring2="Karieyh Ring +1",
+        body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Archon Ring",ring2="Epaminondas's Ring",
         back="Toro Cape",waist="Eschan Stone",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
     
     sets.precast.WS['Atonement'] = {ammo="Iron Gobbet",
@@ -168,7 +168,7 @@ function init_gear_sets()
         
     sets.midcast.Enmity = {ammo="Sapience Orb",
         head="Loess Barbuta +1",neck="Unmoving Collar +1",ear1="Trux Earring", ear2="Cryptic Earring",
-        body="Obviation Cuirass +1",hands="Macabre Gauntlets +1",ring1="Eihwaz Ring", ring2="Petrov Ring",
+        body="Obviation Cuirass +1",hands="Macabre Gauntlets +1",ring1="Supershear Ring", ring2="Petrov Ring",
         back="Fierabras's Mantle",waist="Trance Belt",legs="Zoar Subligar +1",feet="Yorium Sabatons"}
 
     sets.midcast.Flash = set_combine(sets.midcast.Enmity, {})
@@ -196,7 +196,7 @@ function init_gear_sets()
     -- Idle/resting/defense/etc sets
     --------------------------------------
 
-    sets.Reraise = {head="Twilight Helm", body="Twilight Mail"}
+    sets.Reraise = {head="Twilight Helm", body="Crepuscular Mail"}
     
     sets.resting = {neck="Sanctity Necklace",
         ring1="Sheltered Ring",ring2="Defending Ring",
@@ -252,7 +252,7 @@ function init_gear_sets()
         back="Weard Mantle",waist="Creed Baudrier",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
     sets.defense.Reraise = {ammo="Iron Gobbet",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Etiolation Earring",
-        body="Twilight Mail",hands="Sulevia's Gauntlets +1",ring1="Petrov Ring",ring2="Defending Ring",
+        body="Crepuscular Mail",hands="Sulevia's Gauntlets +1",ring1="Petrov Ring",ring2="Defending Ring",
         back="Weard Mantle",waist="Nierenschutz",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
     sets.defense.Charm = {ammo="Iron Gobbet",
         head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Eabani Earring",
@@ -283,12 +283,12 @@ function init_gear_sets()
     sets.engaged.DW = {ammo="Ginsen",
         head="Flamma Zucchetto +2",neck="Sanctity Necklace",ear1="crepuscular earring",ear2="Suppanomimi",
         body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Petrov Ring",ring2="Flamma Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Flamma Dirs +1",feet="Flamma Gambieras +2"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Flamma Dirs +1",feet="Flamma Gambieras +2"}
 
     sets.engaged.DW.Acc = {ammo="Ginsen",
         head="Flamma Zucchetto +2",neck="Combatant's Torque",ear1="crepuscular earring",ear2="Suppanomimi",
         body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Petrov Ring",ring2="Flamma Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Cizin Breeches",feet="Flamma Gambieras +2"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Cizin Breeches",feet="Flamma Gambieras +2"}
 
     sets.engaged.PDT = set_combine(sets.engaged, {head="Sulevia's mask +1",body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2",neck="Loricate Torque +1",ring1="Petrov Ring"})
     sets.engaged.Acc.PDT = set_combine(sets.engaged.Acc, {head="Sulevia's mask +1",body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2",neck="Loricate Torque +1",ring1="Petrov Ring"})

@@ -131,7 +131,7 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         head="Adhemar Bonnet +1",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="laksamana's frac +3",hands="Meghanada Gloves +2",ring1="Karieyh Ring +1",ring2="Regal Ring",
+        body="laksamana's frac +3",hands="Meghanada Gloves +2",ring1="Epaminondas's Ring",ring2="Regal Ring",
         back=gear.ws_cape,waist="Fotia Belt",legs="Meghanada Chausses +1",feet="Lanun Bottes +3"}
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, 
@@ -154,24 +154,24 @@ function init_gear_sets()
 
     sets.precast.WS['Last Stand'] = {ammo=gear.WSbullet,
         head="Meghanada Visor +1",neck="Fotia Gorget", ear1="Beyla Earring",ear2="Moonshade Earring",
-        body="laksamana's frac +3",hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Karieyh Ring +1",
+        body="laksamana's frac +3",hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Epaminondas's Ring",
         back=gear.leaden_cape,waist="Fotia Belt",legs="Meghanada Chausses +1",feet="Lanun Bottes +3"}
 
     sets.precast.WS['Last Stand'].Acc = {ammo=gear.WSbullet,
         head="Malignance Chapeau",neck="Fotia Gorget",ear1="Beyla Earring",ear2="Moonshade Earring",
-        body="laksamana's frac +3",hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Karieyh Ring +1",
+        body="laksamana's frac +3",hands="Meghanada Gloves +2",ring2="Regal Ring",ring1="Epaminondas's Ring",
         back=gear.leaden_cape,waist="Fotia Belt",legs="Meghanada Chausses +1",feet="Lanun Bottes +3"}
 
 
     sets.precast.WS['Wildfire'] = {ammo=gear.MAbullet,
         head="Herculean Helm",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Hecate's Earring",
-        body="Lanun Frac +3",hands="Herculean Gloves",ring1="Karieyh Ring +1",ring2="Dingir Ring",
+        body="Lanun Frac +3",hands="Herculean Gloves",ring1="Epaminondas's Ring",ring2="Dingir Ring",
         back=gear.leaden_cape,waist=gear.ElementalObi,legs="Herculean Trousers",feet="Lanun Bottes +3"}
     sets.precast.WS['Wildfire'].Acc = set_combine(sets.precast.WS['Wildfire'], {legs="Malignance Tights", feet="Malignance Boots"})
 
     sets.precast.WS['Wildfire'].Brew = {ammo=gear.MAbullet,
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Hecate's Earring",
-        body="Lanun Frac +3",hands="Herculean Gloves",ring1="Karieyh Ring +1",ring2="Dingir Ring",
+        body="Lanun Frac +3",hands="Herculean Gloves",ring1="Epaminondas's Ring",ring2="Dingir Ring",
         back=gear.leaden_cape,waist="Svelt. Gouriz +1",legs="Herculean Trousers",feet="Lanun Bottes +3"}
     
     sets.precast.WS['Leaden Salute'] = set_combine(sets.precast.WS['Wildfire'], {head="Pixie Hairpin +1",ear2="Moonshade Earring",ring1="Archon Ring",ring2="Dingir Ring",waist=gear.ElementalObi}) 
@@ -180,7 +180,7 @@ function init_gear_sets()
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'])
 
     -- Sets for ranged WS's
-    sets.precast.WS['Hot Shot'] = set_combine(sets.precast.WS,{ear1="Beyla Earring",ear2="Telos Earring",ring1="Dingir Ring", ring2="Karieyh Ring +1"})
+    sets.precast.WS['Hot Shot'] = set_combine(sets.precast.WS,{ear1="Beyla Earring",ear2="Telos Earring",ring1="Dingir Ring", ring2="Epaminondas's Ring"})
     sets.precast.WS['Split Shot'] = sets.precast.WS['Hot Shot']
     sets.precast.WS['Sniper Shot'] = sets.precast.WS['Hot Shot']
     sets.precast.WS['Slug Shot'] = sets.precast.WS['Hot Shot']
@@ -189,7 +189,7 @@ function init_gear_sets()
     sets.precast.WS['Detonator'] = sets.precast.WS['Hot Shot']
     sets.precast.WS['Numbing Shot'] = sets.precast.WS['Hot Shot']
 
-    sets.precast.WS['Hot Shot'].Acc = set_combine(sets.precast.WS.Acc,{body="laksamana's frac +3",ear1="Beyla Earring",ear2="Telos Earring",ring1="Dingir Ring", ring2="Karieyh Ring +1"})
+    sets.precast.WS['Hot Shot'].Acc = set_combine(sets.precast.WS.Acc,{body="laksamana's frac +3",ear1="Beyla Earring",ear2="Telos Earring",ring1="Dingir Ring", ring2="Epaminondas's Ring"})
     sets.precast.WS['Split Shot'].Acc = sets.precast.WS['Hot Shot'].Acc
     sets.precast.WS['Sniper Shot'].Acc = sets.precast.WS['Hot Shot'].Acc
     sets.precast.WS['Slug Shot'].Acc = sets.precast.WS['Hot Shot'].Acc
@@ -302,13 +302,13 @@ function init_gear_sets()
     sets.engaged.DW = {ammo=gear.RAbullet,
     head="Adhemar Bonnet +1",neck="Iskur Gorget",ear1="Suppanomimi",ear2="Telos Earring",
     body="Meghanada Cuirie +1",hands="Adhemar Wristbands +1",ring1="Epona's Ring",ring2="Ilabrat Ring",
-    back=gear.melee_cape,waist="Shetal Stone",legs="Carmine Cuisses +1",feet="Mummu Gamashes +1"}
+    back=gear.melee_cape,waist="Reiki Yotai",legs="Carmine Cuisses +1",feet="Mummu Gamashes +1"}
     sets.engaged.Melee.DW = sets.engaged.DW
     
     sets.engaged.Acc.DW = {ammo=gear.RAbullet,
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring2="Epona's Ring",ring1="Ilabrat Ring",
-        back=gear.melee_cape,waist="Shetal Stone",legs="Malignance Tights",feet="Meghanada Jambeaux +1"}
+        back=gear.melee_cape,waist="Reiki Yotai",legs="Malignance Tights",feet="Meghanada Jambeaux +1"}
     sets.engaged.DW.Acc = sets.engaged.Acc.DW
 
     sets.engaged.Defense.DW = {ammo=gear.RAbullet,

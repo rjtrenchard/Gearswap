@@ -83,12 +83,12 @@ function init_gear_sets()
     gear.default.weaponskill_waist = "Fotia Belt"
     sets.precast.WS = {ammo="Kalboron Stone",
         head="Inyanga Tiara +1",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Karieyh Ring +1",ring2="K'ayres Ring",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Epaminondas's Ring",ring2="K'ayres Ring",
         back="Felicitas Cape +1",waist="Fotia Belt",legs="Gendewitha Spats",feet="Gendewitha Galoshes"}
     
     sets.precast.WS['Flash Nova'] = {
         head="Inyanga Tiara +1",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Malignance Earring",
-        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Karieyh Ring +1",ring2="Strendu Ring",
+        body="Inyanga Jubbah +2",hands="Inyanga Dastanas +2",ring1="Epaminondas's Ring",ring2="Strendu Ring",
         back="Toro Cape",waist="Eschan Stone",legs="Gendewitha Spats",feet="Gendewitha Galoshes"}
     
 

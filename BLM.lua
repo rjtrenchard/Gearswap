@@ -117,31 +117,31 @@ function init_gear_sets()
     
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
 
-    sets.midcast['Enfeebling Magic'] = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
+    sets.midcast['Enfeebling Magic'] = {main="Lehbrailg +2",sub="Enki Strap",ammo="Sturm's Report",
         head="Nahtirah Hat",neck="Weike Torque",ear1="Malignance Earring",ear2="Gwati Earring",
         body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",legs="Bokwus Slops",feet="Bokwus Boots"}
         
     sets.midcast.ElementalEnfeeble = sets.midcast['Enfeebling Magic']
 
-    sets.midcast['Dark Magic'] = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
+    sets.midcast['Dark Magic'] = {main="Lehbrailg +2",sub="Enki Strap",ammo="Sturm's Report",
         head="Nahtirah Hat",neck="Aesir Torque",ear1="Malignance Earring",ear2="Gwati Earring",
         body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",waist="Goading Belt",legs="Bokwus Slops",feet="Bokwus Boots"}
 
-    sets.midcast.Drain = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
+    sets.midcast.Drain = {main="Lehbrailg +2",sub="Enki Strap",ammo="Sturm's Report",
         head="Nahtirah Hat",neck="Aesir Torque",ear1="Malignance Earring",ear2="Gwati Earring",
         body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Excelsis Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",waist="Fucho-no-Obi",legs="Bokwus Slops",feet="Goetia Sabots +2"}
     
     sets.midcast.Aspir = sets.midcast.Drain
 
-    sets.midcast.Stun = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
+    sets.midcast.Stun = {main="Lehbrailg +2",sub="Enki Strap",ammo="Sturm's Report",
         head="Nahtirah Hat",neck="Weike Torque",ear1="Malignance Earring",ear2="Gwati Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",waist="Witful Belt",legs="Orvail Pants +1",feet="Bokwus Boots"}
 
-    sets.midcast.BardSong = {main="Lehbrailg +2",sub="Mephitis Grip",ammo="Sturm's Report",
+    sets.midcast.BardSong = {main="Lehbrailg +2",sub="Enki Strap",ammo="Sturm's Report",
         head="Nahtirah Hat",neck="Weike Torque",ear1="Malignance Earring",ear2="Gwati Earring",
         body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Strendu Ring",ring2="Stikini Ring +1",
         back="Refraction Cape",legs="Bokwus Slops",feet="Bokwus Boots"}
@@ -149,12 +149,12 @@ function init_gear_sets()
 
     -- Elemental Magic sets
     
-    sets.midcast['Elemental Magic'] = {main="Lehbrailg +2",sub="Zuuxowu Grip",ammo="Dosis Tathlum",
+    sets.midcast['Elemental Magic'] = {main="Lehbrailg +2",sub="Enki Strap",ammo="Dosis Tathlum",
         head="Hagondes Hat",neck="Eddy Necklace",ear1="Hecate's Earring",ear2="Friomisi Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Icesoul Ring",ring2="Metamorph Ring +1",
         back="Toro Cape",waist=gear.ElementalObi,legs="Hagondes Pants",feet="Hagondes Sabots"}
 
-    sets.midcast['Elemental Magic'].Resistant = {main="Lehbrailg +2",sub="Zuuxowu Grip",ammo="Dosis Tathlum",
+    sets.midcast['Elemental Magic'].Resistant = {main="Lehbrailg +2",sub="Enki Strap",ammo="Dosis Tathlum",
         head="Hagondes Hat",neck="Eddy Necklace",ear1="Hecate's Earring",ear2="Friomisi Earring",
         body="Hagondes Coat",hands=gear.macc_hagondes,ring1="Icesoul Ring",ring2="Metamorph Ring +1",
         back="Toro Cape",waist=gear.ElementalObi,legs="Hagondes Pants",feet="Bokwus Boots"}
@@ -164,7 +164,7 @@ function init_gear_sets()
 
 
     -- Minimal damage gear for procs.
-    sets.midcast['Elemental Magic'].Proc = {main="Earth Staff", sub="Mephitis Grip",ammo="Staunch Tathlum +1",
+    sets.midcast['Elemental Magic'].Proc = {main="Earth Staff", sub="Enki Strap",ammo="Staunch Tathlum +1",
         head="Nahtirah Hat",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Manasa Chasuble",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Nares Trews",feet="Chelona Boots +1"}
@@ -183,13 +183,13 @@ function init_gear_sets()
     -- Idle sets
     
     -- Normal refresh idle set
-    sets.idle = {main="Lehbrailg +2", sub="Zuuxowu Grip",ammo="Staunch Tathlum +1",
+    sets.idle = {main="Lehbrailg +2", sub="Enki Strap",ammo="Staunch Tathlum +1",
         head="Nefer Khat +1",neck="Bathy Choker +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Heka's Kalasiris",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Umbra Cape",waist="Hierarch Belt",legs="Nares Trews",feet="Crier's Gaiters"}
 
     -- Idle mode that keeps PDT gear on, but doesn't prevent normal gear swaps for precast/etc.
-    sets.idle.PDT = {main="Earth Staff", sub="Zuuxowu Grip",ammo="Staunch Tathlum +1",
+    sets.idle.PDT = {main="Earth Staff", sub="Enki Strap",ammo="Staunch Tathlum +1",
         head="Nahtirah Hat",neck="Loricate Torque +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2=gear.DarkRing.physical,
         back="Umbra Cape",waist="Hierarch Belt",legs="Hagondes Pants",feet="Crier's Gaiters"}
@@ -202,14 +202,14 @@ function init_gear_sets()
         back="Umbra Cape",waist="Hierarch Belt",legs="Nares Trews",feet="Hagondes Sabots"}
     
     -- Town gear.
-    sets.idle.Town = {main="Lehbrailg +2", sub="Zuuxowu Grip",ammo="Staunch Tathlum +1",
+    sets.idle.Town = {main="Lehbrailg +2", sub="Enki Strap",ammo="Staunch Tathlum +1",
         head="Hagondes Hat",neck="Bathy Choker +1",ear1="Bloodgem Earring",ear2="Loquacious Earring",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Umbra Cape",waist="Hierarch Belt",legs="Hagondes Pants",feet="Crier's Gaiters"}
         
     -- Defense sets
 
-    sets.defense.PDT = {main="Earth Staff",sub="Zuuxowu Grip",
+    sets.defense.PDT = {main="Earth Staff",sub="Enki Strap",
         head="Nahtirah Hat",neck="Loricate Torque +1",
         body="Hagondes Coat",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2=gear.DarkRing.physical,
         back="Umbra Cape",waist="Hierarch Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}

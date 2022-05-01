@@ -106,7 +106,7 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Ginsen",
         head="Sakpata's Helm",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Karieyh Ring +1",ring2="Regal Ring",
+        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Epaminondas's Ring",ring2="Regal Ring",
         back="Atheling Mantle",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {back="Atheling Mantle"})
 
@@ -143,7 +143,7 @@ function init_gear_sets()
 
     sets.idle.Weak = {
         head="Twilight Helm",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
+        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
     
     -- Defense sets
@@ -154,7 +154,7 @@ function init_gear_sets()
 
     sets.defense.Reraise = {
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Paguroidea Ring",
+        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Paguroidea Ring",
         back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
 
     sets.defense.MDT = {ammo="Demonry Stone",
@@ -164,7 +164,7 @@ function init_gear_sets()
 
     sets.Kiting = {feet="Hermes' Sandals"}
 
-    sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
+    sets.Reraise = {head="Twilight Helm",body="Crepuscular Mail"}
 
     -- Engaged sets
 
@@ -193,11 +193,11 @@ function init_gear_sets()
         back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
+        body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
         back="Ik Cape",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
     sets.engaged.Acc.Reraise = {ammo="Seething bomblet +1",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
+        body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
         back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
 
 end

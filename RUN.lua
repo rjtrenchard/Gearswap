@@ -48,7 +48,10 @@ end
 
 
 function init_gear_sets()
-    sets.enmity = {ammo="Aqreqaq Bomblet", hands="Futhark Gloves +1", back="Mubvumbamiri mantle", waist="Warwolf Belt"}
+    sets.enmity = {ammo="Aqreqaq Bomblet",
+    ear1="Trux Earring",ear2="Cryptic Earring",
+    hands="Futhark Gloves +1",ring1="Petrov Ring",ring2="Supershear Earring",
+    back="Mubvumbamiri mantle", waist="Warwolf Belt"}
 
 	--------------------------------------
 	-- Precast sets
@@ -68,7 +71,7 @@ function init_gear_sets()
     sets.precast.JA['Rayke'] = {feet="Futhark Bottes +1"}
     sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat 1"}
     sets.precast.JA['Swordplay'] = {hands="Futhark Mitons +1"}
-    sets.precast.JA['Embolden'] = {}
+    sets.precast.JA['Embolden'] = {back="Evasionist's Cape"}
     sets.precast.JA['Vivacious Pulse'] = {}
     sets.precast.JA['One For All'] = {}
     sets.precast.JA['Provoke'] = sets.enmity
@@ -85,7 +88,7 @@ function init_gear_sets()
 
     sets.precast.WS = {ammo="Knobkierrie",
             head="Adhemar Bonnet +1", neck="Fotia Gorget", ear1="Ishvara Earring", ear2="Moonshade Earring",
-            body="Meghanada Cuirie +1", hands="Meghanada Gloves +2", ring2="Karieyh Ring +1", ring1="Regal Ring",
+            body="Meghanada Cuirie +1", hands="Meghanada Gloves +2", ring2="Epaminondas's Ring", ring1="Regal Ring",
             back="Atheling Mantle", waist="Fotia Belt", legs="Herculean Trousers", feet="Ayanmo Gambieras +2"}
 
 	-- Weaponskill sets

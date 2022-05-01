@@ -133,7 +133,7 @@ function init_gear_sets()
 
     sets.idle.Weak = {
         head="Twilight Helm",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
+        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Danzo Sune-ate"}
     
     -- Defense sets
@@ -144,7 +144,7 @@ function init_gear_sets()
 
     sets.defense.Reraise = {
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Defending Ring",
+        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Defending Ring",
         back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
 
     sets.defense.MDT = {ammo="Demonry Stone",
@@ -154,7 +154,7 @@ function init_gear_sets()
 
     sets.Kiting = {feet="Danzo Sune-ate"}
 
-    sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
+    sets.Reraise = {head="Twilight Helm",body="Crepuscular Mail"}
 
     -- Engaged sets
 
@@ -183,11 +183,11 @@ function init_gear_sets()
         back="Letalis Mantle",waist="Goadingj Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
     sets.engaged.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
         back="Ik Cape",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
     sets.engaged.Acc.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Twilight Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
         back="Letalis Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
         
     -- Melee sets for in Adoulin, which has an extra 10 Save TP for weaponskills.
@@ -210,11 +210,11 @@ function init_gear_sets()
 --        back="Letalis Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 --    sets.engaged.Adoulin.Reraise = {ammo="Ginsen",
 --        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
---        body="Twilight Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+--        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
 --        back="Ik Cape",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 --    sets.engaged.Adoulin.Acc.Reraise = {ammo="Ginsen",
 --        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
---        body="Twilight Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+--        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
 --        back="Letalis Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 
 

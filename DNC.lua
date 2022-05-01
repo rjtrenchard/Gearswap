@@ -210,7 +210,7 @@ function init_gear_sets()
     sets.idle.Town = {main="Izhiikoh", sub="Sabebus",ammo="Ginsen",
         head="Malignance Chapeau",neck="Anu Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
     
     sets.idle.Weak = {ammo="Iron Gobbet",
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
@@ -249,11 +249,11 @@ function init_gear_sets()
     sets.engaged.Fodder = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Charis Casaque +2",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
     sets.engaged.Fodder.Evasion = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
 
     sets.engaged.Acc = {ammo="Yamarang",
         head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Suppanomimi",ear2="Brutal Earring",
@@ -262,11 +262,11 @@ function init_gear_sets()
     sets.engaged.Evasion = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Ej Necklace",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Adhemar Wristbands +1",ring1="Beeline Ring",ring2="Epona's Ring",
-        back="Toetapper Mantle",waist="Shetal Stone",legs="Kaabnax Trousers",feet="Malignance Boots"}
+        back="Toetapper Mantle",waist="Reiki Yotai",legs="Kaabnax Trousers",feet="Malignance Boots"}
     sets.engaged.PDT = {ammo="Charis Feather",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Patricius Ring",ring2="Epona's Ring",
-        back="Shadow Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Shadow Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc.Evasion = {ammo="Yamarang",
         head="Adhemar Bonnet +1",neck="Ej Necklace",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Adhemar Wristbands +1",ring1="Beeline Ring",ring2="Epona's Ring",
@@ -280,16 +280,16 @@ function init_gear_sets()
     sets.engaged.HighHaste = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Kaabnax Trousers",feet="Manibozho Boots"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Kaabnax Trousers",feet="Manibozho Boots"}
 
     sets.engaged.Fodder.HighHaste = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Charis Casaque +2",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
     sets.engaged.Fodder.Evasion.HighHaste = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Kaabnax Trousers",feet="Malignance Boots"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Kaabnax Trousers",feet="Malignance Boots"}
 
     sets.engaged.Acc.HighHaste = {ammo="Yamarang",
         head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Brutal Earring",
@@ -298,7 +298,7 @@ function init_gear_sets()
     sets.engaged.Evasion.HighHaste = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Ej Necklace",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Adhemar Wristbands +1",ring1="Beeline Ring",ring2="Epona's Ring",
-        back="Toetapper Mantle",waist="Shetal Stone",legs="Kaabnax Trousers",feet="Malignance Boots"}
+        back="Toetapper Mantle",waist="Reiki Yotai",legs="Kaabnax Trousers",feet="Malignance Boots"}
     sets.engaged.Acc.Evasion.HighHaste = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Ej Necklace",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Beeline Ring",ring2="Epona's Ring",
@@ -306,7 +306,7 @@ function init_gear_sets()
     sets.engaged.PDT.HighHaste = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Malignance Gloves",ring1="Patricius Ring",ring2="Epona's Ring",
-        back="Shadow Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Shadow Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc.PDT.HighHaste = {ammo="Yamarang",
         head="Adhemar Bonnet +1",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Iuitl Vest",hands="Adhemar Wristbands +1",ring1="Patricius Ring",ring2="Epona's Ring",
@@ -323,11 +323,11 @@ function init_gear_sets()
     sets.engaged.Fodder.MaxHaste = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Thaumas Coat",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs=gear.AugQuiahuiz,feet="Horos Toe Shoes"}
     sets.engaged.Fodder.Evasion.MaxHaste = {ammo="Charis Feather",
         head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Meghanada Cuirie +1",hands="Maxixi Bangles",ring1="Rajas Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Kaabnax Trousers",feet="Manibozho Boots"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Kaabnax Trousers",feet="Manibozho Boots"}
 
     sets.engaged.Acc.MaxHaste = {ammo="Yamarang",
         head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
@@ -535,7 +535,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function determine_haste_group()
-    -- We have three groups of DW in gear: Charis body, Charis neck + DW earrings, and Shetal Stone.
+    -- We have three groups of DW in gear: Charis body, Charis neck + DW earrings, and Reiki Yotai.
 
     -- For high haste, we want to be able to drop one of the 10% groups (body, preferably).
     -- High haste buffs:

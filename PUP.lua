@@ -115,7 +115,10 @@ function init_gear_sets()
     gear.RepairFeet={ name="Taeon Boots", augments={'"Repair" potency +5%','Phalanx +3',}}
 
     -- Misc sets
-    sets.TreasureHunter = {head="Volte Cap",waist="Chaac Belt"}
+    sets.TreasureHunter = {
+        head="Volte Cap",
+        waist="Chaac Belt",legs="Volte Hose",feet="Volte Boots"
+    }
 
     -- Precast Sets
 
@@ -168,16 +171,19 @@ function init_gear_sets()
     sets.precast.Pet = {}
     sets.precast.Pet.Weaponskill = {range="Animator P",
         neck="Shulmanu Collar", ear1="Domesticator's Earring",
-        body=gear.petDTBody, hands=gear.petDTHands, 
+        body=gear.petDTBody, hands=gear.petDTHands, ring2="Cath Palug Ring",
         waist="Klouskap Sash +1",legs=gear.petDTLegs, feet=gear.petDTFeet}
 
     sets.precast.WS = {
         head="Hizamaru Somen",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="Hizamaru Haramaki",hands="Hizamaru Kote",ring1="Niqmaddu Ring",ring2="Karieyh Ring +1",
+        body="Hizamaru Haramaki",hands="Hizamaru Kote",ring1="Niqmaddu Ring",ring2="Epaminondas's Ring",
         back="Visucius's Mantle",waist="Fotia Belt",legs="Hizamaru Hizayoroi",feet="Hizamaru Sune-ate"}
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
-    sets.precast.WS['Stringing Pummel'] = set_combine(sets.precast.WS, {ear1="Brutal Earring",ear2="Moonshade Earring",ring2="Begrudging Ring"})
+    sets.precast.WS['Stringing Pummel'] = set_combine(sets.precast.WS, {
+        head="Blistering Sallet +1",ear1="Brutal Earring",ear2="Moonshade Earring",
+        ring2="Begrudging Ring",
+        legs="Zoar Subligar +1"})
 
     sets.precast.WS['Victory Smite'] = set_combine(sets.precast.WS, {ear1="Brutal Earring",ear2="Moonshade Earring",ring2="Begrudging Ring"})
 
@@ -226,7 +232,7 @@ function init_gear_sets()
     -- Idle sets to wear while pet is engaged
     sets.idle.Pet.Engaged = {main="Ohrmazd",range="Animator P",
         head="Anwig Salade",neck="Shulmanu Collar",ear1="Enmerkar Earring",ear2="Rimeice Earring",
-        body=gear.petDTBody,hands=gear.petDTHands,ring1="Varar Ring +1",ring2="Varar Ring +1",
+        body=gear.petDTBody,hands=gear.petDTHands,ring1="Varar Ring +1",ring2="Cath Palug Ring",
         back="Visucius's Mantle",waist="Klouskap Sash +1",legs=gear.petDTLegs,feet=gear.petDTFeet}
     sets.idle.Pet.Engaged.Melee = sets.idle.Pet.Engaged
 
@@ -245,7 +251,7 @@ function init_gear_sets()
 
     sets.buff.Overdrive = {main="Ohrmazd",range="Animator P",
         head="Anwig Salade",neck="Shulmanu Collar",ear1="Enmerkar Earring",ear2="Rimeice Earring",
-        body=gear.petDTBody,hands=gear.petDTHands,ring1="Varar Ring +1",ring2="Varar Ring +1",
+        body=gear.petDTBody,hands=gear.petDTHands,ring1="Varar Ring +1",ring2="Cath Palug Ring",
         back="Visucius's Mantle",waist="Klouskap Sash +1",legs=gear.petDTLegs,feet=gear.petDTFeet}
 
     -- Defense sets
@@ -291,7 +297,7 @@ function init_gear_sets()
         back="Visucius's Mantle",waist="Klouskap Sash +1",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Pet = set_combine(sets.engaged, {
         head="Anwig Salade", neck="Shulmanu Collar", ear1="Enmerkar Earring", ear2="Burana Earring",
-        body=gear.petDTBody, hands=gear.petDTHands, ring1="Varar Ring +1", ring2="Varar Ring +1",
+        body=gear.petDTBody, hands=gear.petDTHands, ring1="Varar Ring +1", ring2="Cath Palug Ring",
         back="Visucius's Mantle",waist="Klouskap Sash +1", legs=gear.petDTLegs, feet=gear.petDTFeet })
 end
 

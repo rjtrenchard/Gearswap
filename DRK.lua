@@ -79,7 +79,7 @@ function user_setup()
 
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'PDT', 'Reraise', 'SubtleBlow')
-    state.WeaponskillMode:options('Normal', 'Acc', 'Mod', 'Low')
+    state.WeaponskillMode:options('Normal', 'Acc', 'AccHigh', 'Low')
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
     state.IdleMode:options('Normal', 'PDT', 'Refresh')
 
@@ -187,14 +187,15 @@ function job_helper()
     }
     info.Weapons = {}
     info.Weapons.Type = {
+        ['Aern Dagger']='dagger',['Aern Dagger II']='dagger',
         ['Naegling'] = 'sword',['Ridill'] = 'sword',
         ['Zulfiqar'] = 'greatsword', ['Caladbolg'] = 'greatsword',
         ['Lycurgos'] = 'greataxe',
-        ['Kaja Axe']= 'axe',['Dolichenus']='axe',
-        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania']='scythe',['Woeborn']='scythe',['Crepuscular Scythe']='scythe',
-        ['Loxotic Mace +1'] = 'club',['Loxotic Mace'] = 'club',
+        ['Kaja Axe'] = 'axe', ['Dolichenus'] = 'axe',
+        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania']='scythe', ['Misanthropy']='scythe',['Woeborn']='scythe',['Crepuscular Scythe']='scythe',
+        ['Loxotic Mace +1'] = 'club',['Loxotic Mace'] = 'club',['Warp Cudgel'] = 'club',
         ['empty'] = 'handtohand',
-        ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',["Smyth's Aspis"]='shield',["Smyth's Ecu"]='shield',["Smythe's Scutum"]='shield',["Smythe's Shield"]='shield',["Smythe's Eschuteon"]="Shield",
+        ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',["Smyth's Aspis"]='shield',["Smyth's Ecu"]='shield',["Smythe's Scutum"]='shield',["Smythe's Shield"]='shield',["Smythe's Escutcheon"]="Shield",
         ['Utu Grip']='grip',['Caecus Grip']='grip'
     }
     info.Weapons.REMA = S{'Apocalypse','Ragnarok','Caladbolg','Redemption','Liberator','Anguta','Father Time'}

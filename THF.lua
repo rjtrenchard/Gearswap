@@ -58,11 +58,27 @@ function user_setup()
     send_command('bind ^` input /ja "Flee" <me>')
     send_command('bind ^= gs c cycle treasuremode')
 
+    send_command('bind numpad7 gs equip sets.Weapons.Daggers')
+    send_command('bind numpad8 gs equip sets.Weapons.Naegling')
+
     select_default_macro_book()
 end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
+    send_command('unbind numpad1')
+    send_command('unbind numpad2')
+    send_command('unbind numpad3')
+    send_command('unbind numpad4')
+    send_command('unbind numpad5')
+    send_command('unbind numpad6')
+    send_command('unbind numpad7')
+    send_command('unbind numpad8')
+    send_command('unbind numpad9')
+    send_command('unbind !`')
+    send_command('unbind !=')
+    send_command('unbind ^=')
+    send_command('unbind ^-')
     send_command('unbind ^`')
     send_command('unbind ^=')
 end
@@ -73,7 +89,10 @@ function init_gear_sets()
     -- Special sets (required by rules)
     --------------------------------------
 
-    sets.TreasureHunter = {head="Volte Cap", hands="Plunderer's Armlets +1", waist="Chaac Belt", feet="Skulker's poulaines +1"}
+    sets.TreasureHunter = {ammo="Perfect Lucky Egg",
+        head="Volte Cap",
+        hands="Plunderer's Armlets +1",
+        waist="Chaac Belt", legs="Volte Hose",feet="Skulker's poulaines +1"}
     sets.TreasureHunterTag = {hands="Plunderer's Armlets +1", waist="Chaac Belt", feet="Skulkuer's Poulaines"}
     sets.ExtraRegen = {head="Ocelomeh Headpiece +1"}
     sets.Kiting = {feet="Skadi's Jambeaux +1"}
@@ -81,14 +100,19 @@ function init_gear_sets()
     sets.buff['Sneak Attack'] = {ammo="Cath Palug Stone",
         head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Odr Earring",
         body="Pillager's Vest +2",hands="Skulker's armlets",ring1="Regal Ring",ring2="Ilabrat Ring",
-        back=gear.melee_cape,waist="Chaac Belt",legs="Pillager's Culottes +1",feet="Plunderer's Poulaines +1"}
+        back=gear.melee_cape,waist="Chaac Belt",legs="Pillager's Culottes +1",feet="Plunderer's Poulaines +2"}
 
     sets.buff['Trick Attack'] = {ammo="Cath Palug Stone",
         head="Adhemar Bonnet +1",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Etiolation Earring",
         body="Pillager's Vest +2",hands="Pillager's armlets +1",ring1="Regal Ring",ring2="Ilabrat Ring",
-        back=gear.melee_cape,waist="Chaac Belt",legs="Pillager's Culottes +1",feet="Plunderer's Poulaines +1"}
+        back=gear.melee_cape,waist="Chaac Belt",legs="Pillager's Culottes +1",feet="Plunderer's Poulaines +2"}
 
     --sets.buff['Feint'] = {legs="Plunderer's Culottes"}
+
+    -- Normal melee group
+    sets.Weapons = {}
+    sets.Weapons.Naegling = {main="Naegling", sub="Centovente"}
+    sets.Weapons.Daggers = {main="Aeneas", sub="Shijo"}
 
     -- Actions we want to use to tag TH.
     sets.precast.Step = sets.TreasureHunter
@@ -103,14 +127,14 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA['Collaborator'] = {head="Skulker's Bonnet"}
     sets.precast.JA['Accomplice'] = {head="Skulker's Bonnet"}
-    sets.precast.JA['Flee'] = {feet="Pillager's Poulaines +1"}
+    sets.precast.JA['Flee'] = {feet="Pillager's Poulaines +2"}
     sets.precast.JA['Hide'] = {body="Pillager's Vest +2"}
     sets.precast.JA['Conspirator'] = {body="Skulker's Vest"}
-    sets.precast.JA['Steal'] = {ammo="barathrum",head="Plunderer's Bonnet",hands="Pillager's Armlets +1",legs="Pillager's Culottes +1",feet="Pillager's Poulaines +1"}
+    sets.precast.JA['Steal'] = {ammo="barathrum",head="Plunderer's Bonnet",hands="Pillager's Armlets +1",legs="Pillager's Culottes +1",feet="Pillager's Poulaines +2"}
     sets.precast.JA['Despoil'] = set_combine(sets.precast.JA['Steal'],{ammo="Barathrum",legs="Skulker's Culottes",feet="Skulker's poulaines +1"})
     sets.precast.JA['Mug'] = {ammo="Barathrum",head="Mummu Bonnet +1", neck="Magoraga bead necklace", ear1="suppanomimi",
-    body="Meghanada cuirie +1", hands="Malignance Gloves", ring1="Regal Ring", ring2="Ilabrat Ring",
-    back=gear.melee_cape,waist="Chaac belt", legs="Herculean Trousers", feet="Mummu Gamashes +1"}
+        body="Meghanada cuirie +1", hands="Malignance Gloves", ring1="Regal Ring", ring2="Ilabrat Ring",
+        back=gear.melee_cape,waist="Chaac belt", legs="Herculean Trousers", feet="Mummu Gamashes +1"}
     sets.precast.JA['Perfect Dodge'] = {hands="Plunderer's Armlets +1"}
     sets.precast.JA['Feint'] = {legs="Plunderer's Culottes"} -- {legs="Assassin's Culottes +2"}
 
@@ -126,7 +150,7 @@ function init_gear_sets()
     sets.precast.Waltz = {
         head="Meghanada Visor +1", 
         body="Meghanada Cuirie +1",hands="Plunderer's Armlets +1",
-        back="Iximulew Cape",waist="Chaac Belt",legs="Malignance Tights",feet="Plunderer's Poulaines +1"}
+        back="Iximulew Cape",waist="Chaac Belt",legs="Malignance Tights",feet="Plunderer's Poulaines +2"}
 
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
@@ -151,9 +175,12 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Seething Bomblet +1",
         head="Adhemar Bonnet +1",neck="Fotia Gorget",ear1="Sherida Earring",ear2="Moonshade Earring",
-        body="Meghanada cuirie +1",hands="Meghanada Gloves +2",ring2="Karieyh Ring +1",ring1="Regal Ring",
+        body="Meghanada cuirie +1",hands="Meghanada Gloves +2",ring2="Epaminondas's Ring",ring1="Regal Ring",
         back=gear.str_ws_cape,waist="Fotia Belt",legs="Pillager's culottes +1",feet="Meghanada Jambeaux +1"}
-    sets.precast.WS.Crit = set_combine(sets.precast.WS, {ammo="Yetshila +1", body="Pillager's Vest +2", hands="Mummu Wrists +2",ring1="Begrudging Ring", ring2="Mummu Ring", back=gear.crit_cape})
+    sets.precast.WS.Crit = set_combine(sets.precast.WS, {ammo="Yetshila +1", 
+        head="Blistering Sallet +1",
+        body="Pillager's Vest +2", hands="Mummu Wrists +2",ring1="Begrudging Ring", ring2="Mummu Ring",
+        back=gear.crit_cape, legs="Zoar Subligar +1"})
     sets.precast.WS.SingleHit = set_combine(sets.precast.WS, {})
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {ammo="Honed Tathlum"})
     sets.precast.WS.Low = set_combine(sets.naked, {main="",sub="",ranged="", head="Malignance Chapeau", neck="Fotia Gorget", body="Malignance Tabard", hands="Malignance Gloves", waist="Fotia Belt", legs="Malignance Tights", feet="Malignance Boots"})
@@ -227,7 +254,7 @@ function init_gear_sets()
 
     sets.precast.WS['Aeolian Edge'] = {ammo="Seething Bomblet +1",
         head="Herculean Helm",neck="Sanctity Necklace",ear1="Hecate's Earring",ear2="Friomisi Earring",
-        body="Malignance Tabard",hands="Herculean Gloves",ring1="Dingir Ring",ring2="Karieyh Ring +1",
+        body="Malignance Tabard",hands="Herculean Gloves",ring1="Dingir Ring",ring2="Epaminondas's Ring",
         back=gear.dex_ws_cape, waist="Eschan Stone",legs="Herculean Trousers",feet="Malignance Boots"}
     
 
@@ -252,13 +279,12 @@ function init_gear_sets()
     sets.midcast.Utsusemi = set_combine(sets.midcast.FastRecast, {neck="Magoraga Bead Necklace"})
 
     sets.midcast.FC = set_combine(sets.midcast.FastRecast, {})
-    sets.midcast.FC['Poisonga'] = set_combine(
-        {   
+    sets.midcast.FC['Poisonga'] = set_combine({
             head="Herculean Helm", body="Pillager's Vest +2", hands="Meghanada Gloves +2", ear2="Loquacious Earring",
-            legs="Meghanada Chausses +1", waist="Sailfi belt +1", feet="Plunderer's Poulaines +1", 
+            legs="Meghanada Chausses +1", waist="Sailfi belt +1", feet="Plunderer's Poulaines +2", 
             ear1="loquacious earring", ring1="Prolix ring"}, 
         sets.TreasureHunterTag)
-    sets.midcast['Poisonga'] = sets.midcast.FC['Poisonga']
+    sets.midcast['Poisonga'] = set_combine(sets.midcast.FC['Poisonga'], sets.TreasureHunterTag)
     sets.midcast['Poison'] = sets.midcast['Poisonga']
     sets.midcast['Poison'].FC = sets.midcast['Poisonga']
 
@@ -280,24 +306,23 @@ function init_gear_sets()
     --------------------------------------
 
     -- Resting sets
-    sets.resting = {neck="Sanctity Necklace",
-        ring1="Sheltered Ring"}
+    sets.resting = {neck="Bathy Choker +1",}
 
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
     sets.idle = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Etiolation Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
-
-    sets.idle.Town = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Eabani Earring",ear2="Etiolation Earring",
+        head="Malignance Chapeau",neck="Bathy Choker +1",ear1="Eabani Earring",ear2="Etiolation Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
+    sets.idle.Town = {sub="Smythe's Shield",ammo="Yamarang",
+        head="Shaded Spectacles",neck="Smithy's Torque",ear1="Eabani Earring",ear2="Etiolation Earring",
+        body="Blacksmith's Smock",hands="Smithy's Mitts",ring1="Confectioner's Ring",ring2="Craftmaster's Ring",
+        back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
+
     sets.idle.Weak = {ammo="Yamarang",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Etiolation Earring",
+        head="Malignance Chapeau",neck="Bathy Choker +1",ear1="Eabani Earring",ear2="Etiolation Earring",
         body="Malignance Tabard",hands="Malignance Glvoes",ring1="Moonlight Ring",ring2="Defending Ring",
         back=gear.melee_cape,waist="Flume Belt +1",legs="Malignance Tights",feet="Skadi's Jambeaux +1"}
 
@@ -328,35 +353,37 @@ function init_gear_sets()
     sets.engaged = {ammo="Ginsen",
         head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Dedition Earring",ear2="Telos Earring",
         body="Pillager's Vest +2",hands="Adhemar Wristbands +1",ring1="Moonlight Ring",ring2="Epona's Ring",
-        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Meghanada chausses +1",feet="Plunderer's Poulaines +1"}
+        back=gear.melee_cape,waist="Reiki Yotai",legs="Mummu Kecks +1",feet="Plunderer's Poulaines +2"}
     sets.engaged.Acc = {ammo="Seething Bomblet +1",
         head="Malignance Chapeau",neck="Combatant's Torque",ear1="Sherida Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight ring",ring2="Regal Ring",
-        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
         
     -- Mod set for behind mob
     sets.engaged.Mod = set_combine(sets.engaged,{body="Plunderer's Vest"})
 
     -- Mod set for Crits
-    sets.engaged.Crit = set_combine(sets.engaged,{ammo="Yetshila +1",head="Mummu Bonnet +1",ear2="Odr Earring",body="Mummu Jacket +1",hands="Mummu Wrists +2",legs="Mummu Kecks +1",feet="Mummu Gamashes +1"})
+    sets.engaged.Crit = set_combine(sets.engaged,{ammo="Yetshila +1",
+        head="Blistering sallet +1", ear1="Sherida Earring", ear2="Odr Earring",
+        legs="Zoar Subligar +1"})
 
     sets.engaged.Evasion = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Epona's Ring",
-        back="Canny Cape",waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Canny Cape",waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc.Evasion = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Ej Necklace",ear1="Eabani Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Regal Ring",
-        back="Canny Cape",waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Canny Cape",waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.PDT = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Dedition Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Moonlight Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc.PDT = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring",ear2="Telos Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Regal Ring",ring2="Defending Ring",
-        back=gear.melee_cape,waist="Sailfi Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
+        back=gear.melee_cape,waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
 
     sets.engaged.MDT = set_combine(sets.engaged.PDT, {ammo="Yamarang",ear2="Eabani Earring"})
     sets.engaged.Acc.MDT = set_combine(sets.engaged.MDT, {})
@@ -369,10 +396,10 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_pretarget(spell, action, spellMap, eventArgs)
-    -- remap Evisceration to Savage Blade when holding a sword.
+    -- remap Evisceration to Savage Blade when holding Naegling.
     if spell.english == 'Evisceration' and player.equipment.main == 'Naegling' then
         eventArgs.cancel = true
-        windower.send_command('@input /ja "Savage Blade"')
+        windower.send_command('@input /ws "Savage Blade <t>"')
     end
 end
 

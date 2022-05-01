@@ -51,6 +51,9 @@ end
 function job_setup()
     state.Buff["Avatar's Favor"] = buffactive["Avatar's Favor"] or false
     state.Buff["Astral Conduit"] = buffactive["Astral Conduit"] or false
+    state.Buff["Astral Flow"] = buffactive["Astral Flow"] or false
+    state.Buff["Apogee"] = buffactive["Apogee"] or false
+    state.Buff["Mana Cede"] = buffactive["Mana Cede"] or false
 
     spirits = S{"LightSpirit", "DarkSpirit", "FireSpirit", "EarthSpirit", "WaterSpirit", "AirSpirit", "IceSpirit", "ThunderSpirit"}
     avatars = S{"Carbuncle", "Fenrir", "Diabolos", "Ifrit", "Titan", "Leviathan", "Garuda", "Shiva", "Ramuh", "Odin", "Alexander", "Cait Sith", "Siren"}
@@ -170,9 +173,27 @@ function user_setup()
     gear.avatar_melee_cape = { name="Campestres's Cape", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Pet: Haste+7',}}
     gear.avatar_magic_cape = { name="Campestres's Cape", augments={'Pet: M.Acc.+3 Pet: M.Dmg.+3',}}
 
+    send_command("bind numpad7 gs equip sets.midcast.Pet.PhysicalBloodPactRage; gs disable all")
+    send_command("bind numpad8 gs equip sets.midcast.Pet.MagicalBloodPactRage; gs disable all")
+    send_command("bind numpad9 gs equip sets.midcast.Pet.HybridBloodPactRage; gs disable all")
+    send_command("bind numpad1 gs enable all")
+
+    send_command("bind numpad3 /ja Convert <me>")
+
     select_default_macro_book()
 end
 
+function user_unload()
+    send_command("unbind numpad1")
+    send_command("unbind numpad2")
+    send_command("unbind numpad3")
+    send_command("unbind numpad4")
+    send_command("unbind numpad5")
+    send_command("unbind numpad6")
+    send_command("unbind numpad7")
+    send_command("unbind numpad8")
+    send_command("unbind numpad9")
+end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
@@ -196,8 +217,7 @@ function init_gear_sets()
     sets.precast.JA['Mana Cede'] = {hands="Caller's Bracers +1"}
 
     -- Pact delay reduction gear
-    sets.precast.BloodPactWard = set_combine(sets.midcast['Summoning Magic'],
-            {main="Espiritus",ammo="Sancus Sachet +1",
+    sets.precast.BloodPactWard = set_combine(sets.midcast['Summoning Magic'], {main="Espiritus",ammo="Sancus Sachet +1",
         body="Convoker's Doublet +2",hands="Glyphic Bracers +1",
         back="Conveyance Cape",waist="Lucidity Sash",legs="Glyphic Spats +1",feet="Glyphic Pigaches +1"})
 
@@ -206,7 +226,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
     
     sets.precast.FC = {ammo="Sapience Orb",
-        head="Convoker's Horn +2",neck="Baetyl Pendant",ear1="Malignance Earring",ear2="Loquacious Earring",
+        head="Cath Palug Crown",neck="Baetyl Pendant",ear1="Malignance Earring",ear2="Loquacious Earring",
         body="Inyanga Jubbah +2",ring1="Kishar Ring",ring2="Prolix Ring",
         back="Swith Cape +1",waist="Embla Belt",legs="Orvail Pants +1",feet="Convoker's Pigaches +2"}
 
@@ -227,9 +247,15 @@ function init_gear_sets()
         body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Rajas Ring",ring2="Petrov Ring",
         back="Pahtli Cape",waist="Fotia Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}
 
+    sets.precast.WS.Elemental = {
+        head="", neck="Baetyl Pendant", ear1="", ear2="",
+        body="Amalric Doublet +1", hands="Amalric Gages +1", ring1="", ring2="",
+        back="",waist="",legs="Amalric Slops +1",feet="Amalric Nails +1"
+    }
+    
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Myrkr'] = {
-        head="Nahtirah Hat",ear1="Evans Earring",ear2="Loquacious Earring",
+        head="Amalric Coif +1",neck="Fotia Gorget", ear1="Evans Earring",ear2="Moonshade Earring",
         body="Convoker's Doublet +2",hands="Caller's Bracers +2",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Pahtli Cape",waist="Fucho-no-Obi",legs="Assiduity Pants +1",feet="Chelona Boots +1"}
 
@@ -255,7 +281,12 @@ function init_gear_sets()
         body="Beckoner's Doublet",hands="Glyphic Bracers +1",ring1="Stikini Ring +1", ring2="Stikini Ring +1",
         back="Conveyance Cape",waist="Kobo Obi",legs="Beckoner's Spats",feet="Baayami Sabots"}
 
-    sets.midcast.Stoneskin = {waist="Siegel Sash"}
+    sets.midcast.Stoneskin = {neck="Nodens Gorget",ear1="Earthcry Earring",
+        waist="Siegel Sash", legs="Shedir Seraweels"}
+
+    sets.midcast.Aquaveil = {
+        head="Amalric Coif +1",
+        waist="Emphatikos rope", legs="Shedir Seraweels"}
 
     -- Avatar pact sets.  All pacts are Ability type.
     
@@ -271,17 +302,17 @@ function init_gear_sets()
         
     sets.midcast.Pet.DebuffBloodPactWard.Acc = sets.midcast.Pet.DebuffBloodPactWard
     
-    sets.midcast.Pet.PhysicalBloodPactRage = {main="Gridarvor",sub="Elan Strap",ammo="Sancus Sachet +1",
+    sets.midcast.Pet.PhysicalBloodPactRage = {main="Gridarvor",sub="Elan Strap +1",ammo="Sancus Sachet +1",
         head="Helios Band",neck="Shulmanu Collar",ear1="Lugalbanda Earring",ear2="Gelos Earring",
         body="Convoker's Doublet +2",hands="Merlinic Dastanas",ring1="Varar Ring +1",ring2="Varar Ring +1",
-        back="Campestres Cape",waist="Incarnation Sash",legs="Apogee Slacks +1",feet="Apogee Pumps +1"}
+        back=gear.avatar_melee_cape,waist="Incarnation Sash",legs="Apogee Slacks +1",feet="Apogee Pumps +1"}
 
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = sets.midcast.Pet.PhysicalBloodPactRage
 
-    sets.midcast.Pet.MagicalBloodPactRage = {main="Espiritus",sub="Elan Strap",ammo="Sancus Sachet +1",
-        head="Apogee Crown +1",neck="Adad Amulet",ear1="Lugalbanda Earring",ear2="Gelos Earring",
+    sets.midcast.Pet.MagicalBloodPactRage = {main="Espiritus",sub="Elan Strap +1",ammo="Sancus Sachet +1",
+        head="Cath Palug Crown",neck="Adad Amulet",ear1="Lugalbanda Earring",ear2="Gelos Earring",
         body="Convoker's Doublet +2",hands="Merlinic Dastanas",ring1="Varar Ring +1",ring2="Varar Ring +1",
-        back="Campestres Cape",waist="Regal Belt",legs="Enticer's Pants",feet="Apogee Pumps +1"}
+        back=gear.avatar_magic_cape,waist="Regal Belt",legs="Enticer's Pants",feet="Apogee Pumps +1"}
 
     sets.midcast.Pet.MagicalBloodPactRage.Acc = sets.midcast.Pet.MagicalBloodPactRage
     
@@ -362,7 +393,7 @@ function init_gear_sets()
     sets.idle.Avatar.Favor = {head="Beckoner's horn +1"}--{head="Beckoner's Horn"}
     sets.idle.Avatar.Melee = {
         neck="Shulmanu Collar",ear1="Enmerkar Earring", ear2="Cath Palug Earring",
-        body="Shomonjijoe +1",hands="Convoker's Bracers +2",ring1="Varar Ring +1",ring2="Varar Ring +1",
+        body="Shomonjijoe +1",hands="Convoker's Bracers +2",ring1="Varar Ring +1",ring2="Cath Palug Ring",
         back="Campestres's Cape",waist="Klouskap Sash +1",legs="Convoker's Spats", feet="Apogee Pumps +1"}
         
     sets.perp = {}
@@ -419,16 +450,24 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-    if state.Buff['Astral Conduit'] and pet_midaction() then
-        eventArgs.handled = true
+
+    if pet_midaction() or spell.type=="Item" then
+        -- windower.add_to_chat(144,'Midaction')
+        return
+    end
+
+    if state.Buff['Astral Conduit'] or state.Buff['Apogee'] then
+        -- windower.add_to_chat(144,'AC or apogee active')
+        eventArgs.useMidcastGear = true
+
     end
 end
 
-function job_midcast(spell, action, spellMap, eventArgs)
-    if state.Buff['Astral Conduit'] and pet_midaction() then
-        eventArgs.handled = true
-    end
-end
+-- function job_midcast(spell, action, spellMap, eventArgs)
+-- end
+
+-- function job_post_midcast(spell,action,spellMap,eventArgs)
+-- end
 
 -- Runs when pet completes an action.
 function job_pet_aftercast(spell, action, spellMap, eventArgs)

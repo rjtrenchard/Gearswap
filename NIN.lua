@@ -79,6 +79,11 @@ end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
+    sets.Enmity = {ammo="Sapience Orb",
+        ear1="Trux Earring",ear2="Cryptic Earring",
+        ring1="Supershear Ring",ring2="Petrov Ring",
+    }
+
     --------------------------------------
     -- Precast sets
     --------------------------------------
@@ -87,6 +92,12 @@ function init_gear_sets()
     sets.precast.JA['Mijin Gakure'] = {legs="Mochizuki Hakama"}
     sets.precast.JA['Futae'] = {legs="Iga Tekko +2"}
     sets.precast.JA['Sange'] = {ammo=gear.SangeShuriken, legs="Mochizuki Chainmail +1"}
+
+    -- catch all for enmity spells
+    sets.precast.JA['Provoke'] = sets.Enmity
+    sets.precast["Divine Magic"] = sets.Enmity
+    sets.precast["Dark Magic"] = sets.Enmity
+    sets.precast["Blue Magic"] = sets.Enmity
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {ammo="Yamarang",
@@ -121,26 +132,26 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Seething Bomblet +1",
         head="Adhemar Bonnet +1",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Lugra Earring +1",
-        body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring2="Karieyh Ring +1",ring1="Regal Ring",
+        body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring2="Epaminondas's Ring",ring1="Regal Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Hizamaru hizayoroi",feet="Hizamaru Sune-ate"}
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {ammo="Jukukik Feather",hands="Buremte Gloves",
         back="Yokaze Mantle"})
     sets.precast.WS.Magic = {ammo="Seething Bomblet +1",
         head="Herculean Helm",neck="Sanctity Necklace",ear1="Hecate's Earring",ear2="Friomisi Earring",
-        body="Samnuha Coat",hands="Leyline Gloves", ring1="Karieyh Ring +1", ring2="Acumen Ring",
+        body="Samnuha Coat",hands="Leyline Gloves", ring1="Epaminondas's Ring", ring2="Acumen Ring",
         back="Atheling Mantle",waist=gear.ElementalObi, legs="Herculean Trousers", feet="Malignance Boots"}
 
     sets.precast.WS.Low = set_combine(sets.naked, 
         {main="meh",sub="meh",ammo="meh",neck="Fotia Gorget", ear1="Odr Earring", ear2="crepuscular earring",
-        ring1="epona's ring",ring2="Karieyh ring +1",
+        ring1="epona's ring",ring2="Epaminondas's Ring",
         back="atheling mantle",waist="Fotia belt"
     })
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {ammo="Cath Palug Stone",
-        head="Mummu Bonnet +1",ear1="Odr Earring",ear2="Lugra Earring +1",
-        body="Mummu Jacket +1",hands="Mummu Wrists +2",ring2="Karieyh Ring +1", ring1="Begrudging Ring",
-        waist="Sveltesse Gouriz +1",legs="Mummu Kecks +1",feet="Mummu Gamashes +1"})
+        head="Blistering Sallet +1",ear1="Odr Earring",ear2="Lugra Earring +1",
+        body="Mummu Jacket +1",hands="Mummu Wrists +2",ring2="Epaminondas's Ring", ring1="Begrudging Ring",
+        waist="Sveltesse Gouriz +1",legs="Zoar Subligar +1",feet="Mummu Gamashes +1"})
 
     sets.precast.WS['Blade: Jin'] = set_combine(sets.precast.WS['Blade: Hi'],{ammo="yetshila +1",
     ear1="Odr Earring",ear2="Lugra Earring +1",ring1="Ilabrat Ring",ring2="Begrudging Ring"})
@@ -148,7 +159,7 @@ function init_gear_sets()
     sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS,{ammo="Cath Palug Stone",
         ear1="Odr Earring",ear2="Lugra Earring +1",ring1="Regal Ring",ring2="Epona's Ring"})
 
-    sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS,{neck="Caro Necklace", ear1="Moonshade Earring", waist="Sailfi Belt +1", ring1="Regal Ring", ring2="Karieyh Ring +1"})
+    sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS,{neck="Caro Necklace", ear1="Moonshade Earring", waist="Sailfi Belt +1", ring1="Regal Ring", ring2="Epaminondas's Ring"})
 
     sets.precast.WS['Blade: Ku'] = sets.precast.WS['Blade: Shun']
     sets.precast.WS['Blade: Ku'].Low = sets.precast.WS.Low
@@ -229,7 +240,7 @@ function init_gear_sets()
     sets.idle.Town = {main="Raimitsukane",sub="Kaitsuburi",ammo="Togakushi Shuriken",
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="Eabani Earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Malignance Tights",feet=gear.MovementFeet}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet=gear.MovementFeet}
     
     sets.idle.Weak = {
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppamonimi",ear2="crepuscular earring",
@@ -269,53 +280,53 @@ function init_gear_sets()
     sets.engaged = {ammo="Togakushi Shuriken",
         head="Adhemar Bonnet +1",neck="Iskur Gorget",ear1="Suppanomimi",ear2="Brutal Earring",
         body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Hizamaru Hizayoroi",feet="Hizamaru sune-ate"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Hizamaru Hizayoroi",feet="Hizamaru sune-ate"}
     sets.engaged.Acc = {ammo="Togakushi Shuriken",
         head="Malignance Chapeau",neck="Combatant's Torque",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Mochizuki Chainmail +1",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Evasion = {ammo="Yamarang",
         head="Malignance Chapeau",neck="Combatant's Torque",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Hizamaru Sune-ate"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Hizamaru Sune-ate"}
     sets.engaged.Acc.Evasion = {ammo="Togakushi Shuriken",
         head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Hizamaru Sune-ate"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Hizamaru Sune-ate"}
     sets.engaged.PDT = {ammo="Togakushi Shuriken",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Acc.PDT = {ammo="Togakushi Shuriken",
         head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
 
     -- Custom melee group: High Haste (~20% DW)
     sets.engaged.HighHaste = {ammo="Togakushi Shuriken",
         head="Adhemar Bonnet +1",neck="Iskur Gorget",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Shetal Stone",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
+        back="Atheling Mantle",waist="Reiki Yotai",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
     sets.engaged.Acc.HighHaste = {ammo="Yamagarang",
         head="Malignance Chapeau",neck="Iskur Gorget",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Malignance Tabard",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Malignance Tights",feet="Malignance Boots"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Malignance Tights",feet="Malignance Boots"}
     sets.engaged.Evasion.HighHaste = {ammo="Togakushi Shuriken",
         head="Adhemar Bonnet +1",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Hachiya Chainmail +1",hands="Adhemar Wristbands +1",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
     sets.engaged.Acc.Evasion.HighHaste = {ammo="Yamarang",
         head="Adhemar Bonnet +1",neck="Sanctity Necklace",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
     sets.engaged.PDT.HighHaste = {ammo="Togakushi Shuriken",
         head="Adhemar Bonnet +1",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring1="Defending Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
     sets.engaged.Acc.PDT.HighHaste = {ammo="Togakushi Shuriken",
         head="Adhemar Bonnet +1",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="crepuscular earring",
         body="Mochizuki Chainmail +1",hands="Adhemar Wristbands +1",ring1="Defending Ring",ring2="Epona's Ring",
-        back="Yokaze Mantle",waist="Shetal Stone",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
+        back="Yokaze Mantle",waist="Reiki Yotai",legs="Hachiya Hakama",feet="Hizamaru Sune-ate"}
 
     -- Custom melee group: Embrava Haste (7% DW)
     sets.engaged.EmbravaHaste = {ammo="Togakushi Shuriken",
@@ -500,7 +511,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function determine_haste_group()
-    -- We have three groups of DW in gear: Hachiya body/legs, Iga head + Shetal Stone, and DW earrings
+    -- We have three groups of DW in gear: Hachiya body/legs, Iga head + Reiki Yotai, and DW earrings
     
     -- Standard gear set reaches near capped delay with just Haste (77%-78%, depending on HQs)
 

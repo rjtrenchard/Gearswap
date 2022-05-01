@@ -106,7 +106,7 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Ginsen",
         head="Flamma Zucchetto +2",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Apate Ring",ring2="Karieyh Ring +1",
+        body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Apate Ring",ring2="Epaminondas's Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Hizamaru Hizayoroi",feet="Flamma Gambieras +2"}
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {back="Letalis Mantle"})
 
@@ -164,7 +164,7 @@ function init_gear_sets()
 
     sets.idle.Weak = {
         head="Twilight Helm",neck="Bathy Choker +1",ear1="Brutal Earring",ear2="crepuscular earring",
-        body="Twilight Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
+        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
         back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Danzo Sune-ate"}
     
     -- Defense sets
@@ -175,7 +175,7 @@ function init_gear_sets()
 
     sets.defense.Reraise = {
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="crepuscular earring",
-        body="Twilight Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Paguroidea Ring",
+        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Paguroidea Ring",
         back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
 
     sets.defense.MDT = {ammo="Demonry Stone",
@@ -185,7 +185,7 @@ function init_gear_sets()
 
     sets.Kiting = {feet="Danzo Sune-ate"}
 
-    sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
+    sets.Reraise = {head="Twilight Helm",body="Crepuscular Mail"}
 
     -- Engaged sets
 
@@ -214,11 +214,11 @@ function init_gear_sets()
         back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
     sets.engaged.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Loricate Torque +1",ear1=" Earring",ear2="crepuscular earring",
-        body="Twilight Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
         back="Ik Cape",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
     sets.engaged.Acc.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="crepuscular earring",
-        body="Twilight Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
         back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
         
     -- Melee sets for in Adoulin, which has an extra 10 Save TP for weaponskills.
@@ -241,11 +241,11 @@ function init_gear_sets()
 --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 --    sets.engaged.Adoulin.Reraise = {ammo="Ginsen",
 --        head="Twilight Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="crepuscular earring",
---        body="Twilight Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+--        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
 --        back="Ik Cape",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 --    sets.engaged.Adoulin.Acc.Reraise = {ammo="Ginsen",
 --        head="Twilight Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="crepuscular earring",
---        body="Twilight Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+--        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
 --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 
 

@@ -93,11 +93,11 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {ammo="Knobkierrie",
         head="Adhemar Bonnet +1",neck="Fotia Gorget",ear1="Sherida Earring",ear2="Moonshade Earring",
-        body="Hizamaru Haramaki",hands="Adhemar Wristbands +1",ring2="Karieyh Ring +1",ring1="Regal Ring",
+        body="Hizamaru Haramaki",hands="Adhemar Wristbands +1",ring2="Epaminondas's Ring",ring1="Regal Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Hizamaru Hizayoroi",feet="Hizamaru sune-ate"}
     sets.precast.WSAcc = {ammo="Knobkierrie",
         head="Malignance Chapeau",neck="Fotia Gorget",ear1="Sherida Earring",ear2="Moonshade Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring2="Karieyh Ring +1",ring1="Regal Ring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring2="Epaminondas's Ring",ring1="Regal Ring",
         back="Atheling Mantle",waist="Fotia Belt",legs="Malignance Tights",feet="Malignance Boots"}
     sets.precast.WSMod = {ammo="Knobkierrie",head="Felistris Mask",legs="Hesychast's Hose +1",feet="Daihanshi Habaki"}
     sets.precast.WSCrit = {ammo="Knobkierrie",

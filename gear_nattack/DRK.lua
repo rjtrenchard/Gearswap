@@ -77,7 +77,7 @@ function include_job_sets()
     sets.HP_High = {
         head="Ratri sallet +1",neck="Unmoving Collar +1",ear1="Tuisto Earring",ear2="Odnowa Earring +1",
         body="Ignominy Cuirass +3",hands="Rat. Gadlings +1",ring1="Moonlight Ring",ring2="Gelatinous Ring +1",
-        waist="Eschan Stone",legs="Sakpata's Cuisses",feet={name="Ratri Sollerets +1", priority=10},
+        back="Reiki Cloak",waist="Eschan Stone",legs="Sakpata's Cuisses",feet={name="Ratri Sollerets +1", priority=10},
     }
     sets.HP_Low = set_combine(sets.naked, {main=gear.MainHand, sub=gear.SubHand, ranged="",})
 
@@ -131,9 +131,9 @@ function include_job_sets()
         back=gear.ws_cape, waist="Eschan Stone", legs="Fallen's Flanchard +3", feet="Sulevia's Leggings +2"}
 
     sets.precast.WS.Crit = {ammo="Yetshila +1",
-        head="Sakpata's Helm",neck="Fotia Gorget",ear1=gear.WSEarThrud,ear2="Moonshade Earring",
+        head="Blistering Sallet +1",neck="Fotia Gorget",ear1=gear.WSEarThrud,ear2="Moonshade Earring",
         body="Hjarrandi Breastplate",hands="Flamma Manopolas +2",ring1="Regal Ring",ring2="Begrudging Ring",
-        back=gear.ws_cape,waist="Fotia Belt",legs="Fallen's Flanchard +3", feet="Sulevia's Leggings +2"}
+        back=gear.ws_cape,waist="Fotia Belt",legs="Zoar Subligar +1", feet="Sulevia's Leggings +2"}
 
     sets.precast.WS.Low = {ammo="Seething Bomblet +1",
         head="Flamma Zucchetto +2", neck="Fotia Gorget", ear1="Crepuscular Earring", ear2="Telos Earring",
@@ -151,7 +151,7 @@ function include_job_sets()
     sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.Acc, {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
     sets.precast.WS['Spiral Hell'].Mod = set_combine(sets.precast.WS['Spiral Hell'], {head="Ratri Sallet +1",hands="Ratri Gadlings +1",feet={name="Ratri Sollerets +1", priority=10}})
 
-    sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {
+    sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {ammo="Ghastly Tathlum +1",
         head="Ratri Sallet +1",ear1="Lugra Earring +1",ear2="Moonshade Earring",
         body="Sakpata's breastplate",hands="Fallen's Finger gauntlets +3",ring1="Metamorph Ring +1",
         back=gear.ws_cape, legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"})
@@ -212,7 +212,6 @@ function include_job_sets()
     sets.precast.WS['Upheaval'].Acc = set_combine(sets.precast.WS.Acc, {ear2="Moonshade Earring"})
     sets.precast.WS['Upheaval'].Mod = set_combine(sets.precast.WS['Upheaval'], {ear2="Moonshade Earring"})
 
-    
     sets.precast.WS['Fell Cleave'] = set_combine(sets.precast.WS.SingleHit, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
     sets.precast.WS['Fell Cleave'].Acc = set_combine(sets.precast.WS.Acc, {neck="Abyssal beads +2", waist="Sailfi belt +1"})
     sets.precast.WS['Fell Cleave'].Mod = set_combine(sets.precast.WS['Fell Cleave'], {neck="Abyssal beads +2", waist="Sailfi belt +1"})
@@ -274,7 +273,10 @@ function include_job_sets()
     -------------------------------------------------------------------------------------------------------------------
     -- Resting sets
     -------------------------------------------------------------------------------------------------------------------
-    sets.resting = {neck="Bathy Choker +1",body="Lugra Cloak +1",ring1="Stikini Ring +1",ring2="Stikini Ring +1", waist="Austerity belt +1"}
+    sets.resting = {
+        neck="Bathy Choker +1",
+        body="Lugra Cloak +1",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
+        waist="Austerity belt +1"}
 
     -------------------------------------------------------------------------------------------------------------------
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
@@ -283,7 +285,7 @@ function include_job_sets()
     sets.idle.Town = {ammo="Staunch Tathlum +1",
         head="Shaded Spectacles",neck="Smithy's Torque",ear1="Etiolation Earring",ear2="Eabani Earring",
         body="Blacksmith's Smock",hands="Smithy's Mitts",ring1="Confectioner's Ring",ring2="Craftmaster's Ring",
-        back=gear.melee_cape,waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
+        back=gear.melee_cape,waist="Blacksmith's Belt",legs="Carmine Cuisses +1",feet="Sakpata's Leggings"}
     
     sets.idle.Field = set_combine({},{ammo="Staunch Tathlum +1",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Eabani Earring",
@@ -413,7 +415,7 @@ function include_job_sets()
     sets.midcast['Absorb-CHR'].TH = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
 
     -- Elemental Magic sets    
-    sets.midcast['Elemental Magic'] = {ammo="Seething Bomblet +1",
+    sets.midcast['Elemental Magic'] = {ammo="Ghastly Tathlum +1",
         head="Flamma Zucchetto +2",neck="Erra Pendant",ear1="Malignance Earring",ear2="Friomisi Earring",
         body="Carmine Scale Mail +1",hands="Fallen's Finger Gauntlets +3",ring1="Stikini Ring +1",ring2="Metamorph Ring +1",
         back=gear.casting_cape,waist=gear.ElementalObi,legs="Fallen's Flanchard +3",feet="Flamma Gambieras +2"}
@@ -442,6 +444,7 @@ function include_job_sets()
         head="Flamma Zucchetto +2",neck="Abyssal Beads +2",ear1="Crepuscular earring",ear2="Telos Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight ring",ring2="Regal Ring",
         back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Flamma Gambieras +2"}
+    sets.engaged.AccHigh = set_combine(sets.engaged.Acc, {hands="Gazu Bracelet +1"})
     sets.engaged.PDT = {ammo="Ginsen",
         head="Sakpata's Helm",neck="Abyssal Beads +2",ear1="Brutal earring",ear2="Telos Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
@@ -450,6 +453,7 @@ function include_job_sets()
         head="Sakpata's Helm",neck="Abyssal Beads +2",ear1="Crepucular Earring",ear2="Telos Earring",
         body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Regal Ring",
         back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
+        sets.engaged.AccHigh.PDT = set_combine(sets.engaged.Acc.PDT, {hands="Gazu Bracelet +1"})
     sets.engaged.Reraise = {ammo="Ginsen",
         head="Twilight Helm",neck="Abyssal Beads +2",ear1="Brutal earring",ear2="Telos Earring",
         body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
@@ -458,14 +462,18 @@ function include_job_sets()
         head="Twilight Helm",neck="Abyssal Beads +2",ear1="Crepuscular earring",ear2="Telos Earring",
         body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Regal Ring",
         back=gear.melee_cape,waist="Ioskeha Belt +1",legs="Ignominy Flanchard +3",feet="Sakpata's Leggings"}
+    sets.engaged.AccHigh.Reraise = set_combine(sets.engaged.Acc.Reraise, {hands="Gazu Bracelet +1"})
 
     -- Dual Wield sets
     sets.engaged.DW = sets.engaged
     sets.engaged.Acc.DW = sets.engaged.Acc
+    sets.engaged.AccHigh.DW = sets.engaged.AccHigh
     sets.engaged.PDT.DW = sets.engaged.PDT
     sets.engaged.Acc.PDT.DW = sets.engaged.Acc.PDT
+    sets.engaged.AccHigh.PDT.DW = sets.engaged.AccHigh.PDT
     sets.engaged.Reraise.DW = sets.engaged.Reraise
     sets.engaged.Acc.Reraise.DW = sets.engaged.Acc.Reraise
+    sets.engaged.AccHigh.Reraise.DW = sets.engaged.AccHigh.Reraise
 
     -- Apocalypse
     sets.engaged.Apocalypse = set_combine(sets.engaged,{ammo="Seething Bomblet +1",
@@ -473,10 +481,13 @@ function include_job_sets()
         body="Sakpata's Plate",hands="Sakpata's Gauntlets", ring1="Moonlight Ring",ring2="Niqmaddu Ring",
         feet="Flamma Gambieras +2"})
     sets.engaged.Apocalypse.Acc = set_combine(sets.engaged.Apocalypse,{hands="Sakpata's Gauntlets"})
+    sets.engaged.Apocalypse.AccHigh = set_combine(sets.engaged.Apocalypse.Acc, {hands="Gazu Bracelet +1"})
     sets.engaged.Apocalypse.PDT = sets.engaged.PDT
     sets.engaged.Apocalypse.Acc.PDT = sets.engaged.Acc.PDT
+    sets.engaged.Apocalypse.AccHigh.PDT = set_combine(sets.engaged.Apocalypse.Acc.PDT, {hands="Gazu Bracelet +1"})
     sets.engaged.Apocalypse.Reraise = sets.engaged.Reraise
     sets.engaged.Apocalypse.Acc.Reraise = sets.engaged.Acc.Reraise
+    sets.engaged.Apocalypse.AccHigh.Reraise = set_combine(sets.engaged.Apocalypse.Acc.Reraise, {hands="Gazu Bracelet +1"})
 
     sets.engaged.Apocalypse.AM = sets.engaged.Apocalypse
     sets.engaged.Apocalypse.Acc.AM = sets.engaged.Apocalypse.Acc
@@ -503,17 +514,23 @@ function include_job_sets()
     -- Caladbolg
     sets.engaged.Caladbolg = set_combine(sets.engaged, {hands="Sakpata's Gauntlets"})
     sets.engaged.Caladbolg.Acc = set_combine(sets.engaged.Acc, {hands="Sakpata's Gauntlets"})
+    sets.engaged.Caladbolg.AccHigh = set_combine(sets.engaged.Caladbolg.Acc, {hands="Gazu Bracelet +1"})
     sets.engaged.Caladbolg.PDT = sets.engaged.PDT
     sets.engaged.Caladbolg.Acc.PDT = sets.engaged.Acc.PDT
+    sets.engaged.Caladbolg.AccHigh.PDT = set_combine(sets.engaged.Caladbolg.Acc.PDT, {hands="Gazu Bracelet +1"})
     sets.engaged.Caladbolg.Reraise = sets.engaged.Reraise
     sets.engaged.Caladbolg.Acc.Reraise = sets.engaged.Acc.Reraise
+    sets.engaged.Caladbolg.AccHigh.Reraise = set_combine(sets.engaged.Caladbolg.Acc.Reraise, {hands="Gazu Bracelet +1"})
     
     sets.engaged.Caladbolg.AM = set_combine(sets.engaged, {hands="Sakpata's Gauntlets"})
     sets.engaged.Caladbolg.Acc.AM = set_combine(sets.engaged.Acc, {hands="Sakpata's Gauntlets"})
+    sets.engaged.Caladbolg.AccHigh.AM = set_combine(sets.engaged.Caladbolg.Acc.AM, {hands="Gazu Bracelet +1"})
     sets.engaged.Caladbolg.PDT.AM = sets.engaged.PDT
     sets.engaged.Caladbolg.Acc.PDT.AM = sets.engaged.Acc.PDT
+    sets.engaged.Caladbolg.AccHigh.PDT.AM = set_combine(sets.engaged.Caladbolg.Acc.PDT.AM, {hands="Gazu Bracelet +1"})
     sets.engaged.Caladbolg.Reraise.AM = sets.engaged.Reraise
     sets.engaged.Caladbolg.Acc.Reraise.AM = sets.engaged.Acc.Reraise
+    sets.engaged.Caladbolg.AccHigh.Reraise.AM = set_combine(sets.engaged.Caladbolg.Acc.Reraise.AM, {hands="Gazu Bracelet +1"})
 
     sets.engaged.Caladbolg.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear2="Telos Earring", ear1="Brutal Earring",
@@ -523,6 +540,7 @@ function include_job_sets()
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear2="Telos Earring", ear1="Crepuscular Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Moonlight Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
+    sets.engaged.Caladbolg.AccHigh.AM3 = set_combine(sets.engaged.Caladbolg.Acc.AM3, {hands="Gazu Bracelet +1"})
     sets.engaged.Caladbolg.PDT.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear2="Telos Earring", ear1="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Moonlight Ring", ring2="Niqmaddu Ring",
@@ -531,6 +549,7 @@ function include_job_sets()
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear2="Telos Earring", ear1="Crepuscular Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Moonlight Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
+        sets.engaged.Caladbolg.AccHigh.PDT.AM3 = set_combine(sets.engaged.Caladbolg.Acc.PDT.AM3, {hands="Gazu Bracelet +1"})
     sets.engaged.Caladbolg.Reraise.AM3 = {ammo="Ginsen",
         head="Sakpata's Helm", neck="Abyssal Beads +2", ear2="Telos Earring", ear1="Brutal Earring",
         body="Sakpata's Plate", hands="Sakpata's Gauntlets", ring1="Regal Ring", ring2="Niqmaddu Ring",
@@ -539,6 +558,7 @@ function include_job_sets()
         head="Twilight Helm", neck="Abyssal Beads +2", ear2="Telos Earring", ear1="Brutal Earring",
         body="Crepuscular Mail", hands="Sakpata's Gauntlets", ring1="Niqmaddu Ring", ring2="Regal Ring",
         back=gear.melee_cape, waist="Ioskeha Belt +1", legs="Ignominy Flanchard +3", feet="Sakpata's Leggings"}
+    sets.engaged.Caladbolg.AccHigh.Reraise.AM3 = set_combine(sets.engaged.Caladbolg.Acc.Reraise.AM3, {hands="Gazu Bracelet +1"})
 
     -- Liberator
     sets.engaged.Liberator = sets.engaged
