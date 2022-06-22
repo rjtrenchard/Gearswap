@@ -166,7 +166,7 @@ function init_gear_sets()
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
     sets.engaged = {ammo="Ginsen",
-        head="Flamma Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="crepuscular earring",
+        head="Flamma Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Crepuscular Earring",
         body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Rajas Ring",ring2="Flamma Ring",
         back="Atheling Mantle",waist="Sailfi Belt +1",legs="Hizamaru Hizayoroi",feet="Flamma Gambieras +2"}
     sets.engaged.Acc = {ammo="Ginsen",

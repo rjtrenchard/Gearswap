@@ -5,11 +5,10 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
-
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
@@ -21,7 +20,6 @@ function job_setup()
     info.impetus_hit_count = 0
     windower.raw_register_event('action', on_action_for_impetus)
 end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- User setup functions for this job.  Recommend that these be overridden in a sidecar file.
@@ -40,87 +38,86 @@ function user_setup()
     select_default_macro_book()
 end
 
-
 -- Define sets and vars used by this job file.
 function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    
+
     -- Precast Sets
-    
+
     -- Precast sets to enhance JAs on use
-    sets.precast.JA['Hundred Fists'] = {legs="Hesychast's Hose +1"}
-    sets.precast.JA['Boost'] = {hands="Anchorite's Gloves +1"}
-    sets.precast.JA['Dodge'] = {feet="Anchorite's Gaiters +1"}
-    sets.precast.JA['Focus'] = {head="Anchorite's Crown +1"}
-    sets.precast.JA['Counterstance'] = {feet="Hesychast's Gaiters +1"}
-    sets.precast.JA['Footwork'] = {feet="Tantra Gaiters +2"}
-    sets.precast.JA['Formless Strikes'] = {body="Hesychast's Cyclas"}
-    sets.precast.JA['Mantra'] = {feet="Hesychast's Gaiters +1"}
+    sets.precast.JA['Hundred Fists'] = { legs = "Hesychast's Hose +1" }
+    sets.precast.JA['Boost'] = { hands = "Anchorite's Gloves +1" }
+    sets.precast.JA['Dodge'] = { feet = "Anchorite's Gaiters +1" }
+    sets.precast.JA['Focus'] = { head = "Anchorite's Crown +1" }
+    sets.precast.JA['Counterstance'] = { feet = "Hesychast's Gaiters +1" }
+    sets.precast.JA['Footwork'] = { feet = "Tantra Gaiters +2" }
+    sets.precast.JA['Formless Strikes'] = { body = "Hesychast's Cyclas" }
+    sets.precast.JA['Mantra'] = { feet = "Hesychast's Gaiters +1" }
 
     sets.precast.JA['Chi Blast'] = {
-        head="Melee Crown +2",
-        body="Otronif Harness +1",hands="Hesychast's Gloves +1",
-        back="Tuilha Cape",legs="Hesychast's Hose +1",feet="Anchorite's Gaiters +1"}
+        head = "Melee Crown +2",
+        body = "Otronif Harness +1", hands = "Hesychast's Gloves +1",
+        back = "Tuilha Cape", legs = "Hesychast's Hose +1", feet = "Anchorite's Gaiters +1" }
 
-    sets.precast.JA['Chakra'] = {ammo="Iron Gobbet",
-        head="Felistris Mask",
-        body="Anchorite's Cyclas +1",hands="Hesychast's Gloves +1",ring1="Spiral Ring",
-        back="Iximulew Cape",waist="Caudata Belt",legs="Qaaxo Tights",feet="Thurandaut Boots +1"}
+    sets.precast.JA['Chakra'] = { ammo = "Iron Gobbet",
+        head = "Felistris Mask",
+        body = "Anchorite's Cyclas +1", hands = "Hesychast's Gloves +1", ring1 = "Spiral Ring",
+        back = "Iximulew Cape", waist = "Caudata Belt", legs = "Qaaxo Tights", feet = "Thurandaut Boots +1" }
 
     -- Waltz set (chr and vit)
-    sets.precast.Waltz = {ammo="Sonia's Plectrum",
-        head="Felistris Mask",
-        body="Otronif Harness +1",hands="Hesychast's Gloves +1",ring1="Spiral Ring",
-        back="Iximulew Cape",waist="Caudata Belt",legs="Qaaxo Tights",feet="Otronif Boots +1"}
-        
+    sets.precast.Waltz = { ammo = "Sonia's Plectrum",
+        head = "Felistris Mask",
+        body = "Otronif Harness +1", hands = "Hesychast's Gloves +1", ring1 = "Spiral Ring",
+        back = "Iximulew Cape", waist = "Caudata Belt", legs = "Qaaxo Tights", feet = "Otronif Boots +1" }
+
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
 
-    sets.precast.Step = {waist="Chaac Belt"}
-    sets.precast.Flourish1 = {waist="Chaac Belt"}
+    sets.precast.Step = { waist = "Chaac Belt" }
+    sets.precast.Flourish1 = { waist = "Chaac Belt" }
 
 
     -- Fast cast sets for spells
-    
-    sets.precast.FC = {ammo="Staunch Tathlum +1",head="Haruspex hat",ear2="Loquacious Earring",hands="Thaumas Gloves"}
 
-    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads"})
+    sets.precast.FC = { ammo = "Staunch Tathlum +1", head = "Haruspex hat", ear2 = "Loquacious Earring", hands = "Thaumas Gloves" }
 
-       
+    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, { neck = "Magoraga Beads" })
+
+
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {ammo="Knobkierrie",
-        head="Adhemar Bonnet +1",neck="Fotia Gorget",ear1="Sherida Earring",ear2="Moonshade Earring",
-        body="Hizamaru Haramaki",hands="Adhemar Wristbands +1",ring2="Epaminondas's Ring",ring1="Regal Ring",
-        back="Atheling Mantle",waist="Fotia Belt",legs="Hizamaru Hizayoroi",feet="Hizamaru sune-ate"}
-    sets.precast.WSAcc = {ammo="Knobkierrie",
-        head="Malignance Chapeau",neck="Fotia Gorget",ear1="Sherida Earring",ear2="Moonshade Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring2="Epaminondas's Ring",ring1="Regal Ring",
-        back="Atheling Mantle",waist="Fotia Belt",legs="Malignance Tights",feet="Malignance Boots"}
-    sets.precast.WSMod = {ammo="Knobkierrie",head="Felistris Mask",legs="Hesychast's Hose +1",feet="Daihanshi Habaki"}
-    sets.precast.WSCrit = {ammo="Knobkierrie",
-    head="Adhemar Bonnet +1", neck="Fotia Gorget", ear1="Odr Earring", ear2="Moonshade Earring",
-    body="Mummu Jacket +1", hands="Mummu Wrists +2", ring2="Begrudging Ring", ring1="Regal Ring",
-    back="Atheling Mantle", waist="Fotia Belt", legs="Mummu Kecks +1", feet="Mummu Gamashes +1"}
-    sets.precast.MaxTP = {ear1="Brutal Earring",ear2="crepuscular earring"}
+    sets.precast.WS = { ammo = "Knobkierrie",
+        head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
+        body = "Hizamaru Haramaki", hands = "Adhemar Wristbands +1", ring2 = "Epaminondas's Ring", ring1 = "Regal Ring",
+        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Hizamaru Hizayoroi", feet = "Hizamaru sune-ate" }
+    sets.precast.WSAcc = { ammo = "Knobkierrie",
+        head = "Malignance Chapeau", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring2 = "Epaminondas's Ring", ring1 = "Regal Ring",
+        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.precast.WSMod = { ammo = "Knobkierrie", head = "Felistris Mask", legs = "Hesychast's Hose +1", feet = "Daihanshi Habaki" }
+    sets.precast.WSCrit = { ammo = "Knobkierrie",
+        head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Odr Earring", ear2 = "Moonshade Earring",
+        body = "Mummu Jacket +1", hands = "Mummu Wrists +2", ring2 = "Begrudging Ring", ring1 = "Regal Ring",
+        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Mummu Kecks +1", feet = "Mummu Gamashes +1" }
+    sets.precast.MaxTP = { ear1 = "Brutal Earring", ear2 = "Crepuscular Earring" }
     sets.precast.WS.Acc = set_combine(sets.precast.WS, sets.precast.WSAcc)
     sets.precast.WS.Mod = set_combine(sets.precast.WS, sets.precast.WSMod)
 
     -- Specific weaponskill sets.
-    
+
     -- legs={name="Quiahuiz Trousers", augments={'Phys. dmg. taken -2%','Magic dmg. taken -2%','STR+8'}}}
 
-    sets.precast.WS['Raging Fists']    = set_combine(sets.precast.WS, {ring2="Niqmaddu Ring"}) -- TP = Damage, fTP replicating
-    sets.precast.WS['Howling Fist']    = set_combine(sets.precast.WS, {neck="Caro Necklace",waist="Sailfi Belt +1"}) -- fTP replicating, decent fTP bonus from TP
-    sets.precast.WS['Asuran Fists']    = set_combine(sets.precast.WS, {ear1="Etiolation Earring", ring2="Niqmaddu ring"}) -- Multi-hit max attack rounds
-    sets.precast.WS["Ascetic's Fury"]  = set_combine(sets.precast.WSCrit, {neck="Caro Necklace",waist="Sailfi Belt +1"}) -- Attack boost
-    sets.precast.WS["Victory Smite"]   = set_combine(sets.precast.WSCrit, {ring2="Epona's Ring"}) -- Crit WS, STR80
-    sets.precast.WS['Shijin Spiral']   = set_combine(sets.precast.WS, {ear1="Odr Earring", ring2="Epona's Ring"}) -- 5hit attack, DEX73-85
+    sets.precast.WS['Raging Fists']    = set_combine(sets.precast.WS, { ring2 = "Niqmaddu Ring" }) -- TP = Damage, fTP replicating
+    sets.precast.WS['Howling Fist']    = set_combine(sets.precast.WS, { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" }) -- fTP replicating, decent fTP bonus from TP
+    sets.precast.WS['Asuran Fists']    = set_combine(sets.precast.WS, { ear1 = "Etiolation Earring", ring2 = "Niqmaddu ring" }) -- Multi-hit max attack rounds
+    sets.precast.WS["Ascetic's Fury"]  = set_combine(sets.precast.WSCrit, { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" }) -- Attack boost
+    sets.precast.WS["Victory Smite"]   = set_combine(sets.precast.WSCrit, { ring2 = "Epona's Ring" }) -- Crit WS, STR80
+    sets.precast.WS['Shijin Spiral']   = set_combine(sets.precast.WS, { ear1 = "Odr Earring", ring2 = "Epona's Ring" }) -- 5hit attack, DEX73-85
     sets.precast.WS['Dragon Kick']     = set_combine(sets.precast.WS, {}) -- Kick attack WS, TP=Damage?
     sets.precast.WS['Tornado Kick']    = set_combine(sets.precast.WS, {}) -- Kick attack WS, 3fold, tpReplicating, TP=Damage
-    sets.precast.WS['Spinning Attack'] = set_combine(sets.precast.WS, {ring2="Niqmaddu ring"}) -- TP=Range, STR100
+    sets.precast.WS['Spinning Attack'] = set_combine(sets.precast.WS, { ring2 = "Niqmaddu ring" }) -- TP=Range, STR100
 
     sets.precast.WS["Raging Fists"].Acc = set_combine(sets.precast.WSAcc, sets.precast.WS["Raging Fists"])
     sets.precast.WS["Howling Fist"].Acc = set_combine(sets.precast.WSAcc, sets.precast.WS["Howling Fist"])
@@ -142,59 +139,59 @@ function init_gear_sets()
 
 
     sets.precast.WS['Cataclysm'] = {
-        head="Herculean Helm",neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Hecate's Earring",
-        body="Malignance Tabard",hands="Herculean Gloves",ring1="Metamorph Ring +1",ring2="Demon's Ring",
-        back="Toro Cape",waist="Eschan Stone",legs="Herculean Trousers",feet="Herculean Boots"}
-    
-    
-    -- Midcast Sets
-    sets.midcast.FastRecast = {ammo="Staunch Tathlum +1",
-        head="Herculean Helm",ear2="Loquacious Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Prolix Ring",
-        waist="Black Belt",legs="Malignance Tights",feet="Malignance Boots"}
-        
-    -- Specific spells
-    sets.midcast.Utsusemi = set_combine(sets.midcast.FastRecast, {neck="Magoraga Bead Necklace"})
+        head = "Herculean Helm", neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
+        body = "Malignance Tabard", hands = "Herculean Gloves", ring1 = "Metamorph Ring +1", ring2 = "Demon's Ring",
+        back = "Toro Cape", waist = "Eschan Stone", legs = "Herculean Trousers", feet = "Herculean Boots" }
 
-    
+
+    -- Midcast Sets
+    sets.midcast.FastRecast = { ammo = "Staunch Tathlum +1",
+        head = "Herculean Helm", ear2 = "Loquacious Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Rahab Ring",
+        waist = "Black Belt", legs = "Malignance Tights", feet = "Malignance Boots" }
+
+    -- Specific spells
+    sets.midcast.Utsusemi = set_combine(sets.midcast.FastRecast, { neck = "Magoraga Bead Necklace" })
+
+
     -- Sets to return to when not performing an action.
-    
+
     -- Resting sets
-    sets.resting = {head="Ocelomeh Headpiece +1",neck="Sanctity Necklace",
-        body="Hesychast's Cyclas",ring1="Sheltered Ring",ring2="Defending Ring"}
-    
+    sets.resting = { head = "Ocelomeh Headpiece +1", neck = "Sanctity Necklace",
+        body = "Hesychast's Cyclas", ring1 = "Sheltered Ring", ring2 = "Defending Ring" }
+
 
     -- Idle sets
-    sets.idle = {ammo="Ginsen",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Iximulew Cape",waist="Black Belt",legs="Malignance Tights",feet="Hermes' Sandals"}
+    sets.idle = { ammo = "Ginsen",
+        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+        back = "Iximulew Cape", waist = "Black Belt", legs = "Malignance Tights", feet = "Hermes' Sandals" }
 
-    sets.idle.Town = {ammo="Ginsen",
-    head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
-    body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-    back="Iximulew Cape",waist="Black Belt",legs="Malignance Tights",feet="Hermes' Sandals"}
-    
-    sets.idle.Weak = {ammo="Ginsen",
-    head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Eabani Earring",ear2="Eabani Earring",
-    body="Malignance Tabard",hands="Malignance Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-    back="Iximulew Cape",waist="Black Belt",legs="Malignance Tights",feet="Hermes' Sandals"}
-    
+    sets.idle.Town = { ammo = "Ginsen",
+        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+        back = "Iximulew Cape", waist = "Black Belt", legs = "Malignance Tights", feet = "Hermes' Sandals" }
+
+    sets.idle.Weak = { ammo = "Ginsen",
+        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+        back = "Iximulew Cape", waist = "Black Belt", legs = "Malignance Tights", feet = "Hermes' Sandals" }
+
     -- Defense sets
-    sets.defense.PDT = {head="Malignance Chapeau", neck="Loricate Torque +1", ear1="Brutal Earring", ear2="crepuscular earring",
-        body="Malignance Tabard", hands="Malignance Gloves", ring1="Defending Ring", ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Hurch'lan sash", legs="Malignance Tights", feet="Malignance Boots"}
+    sets.defense.PDT = { head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring", ring2 = "Epona's Ring",
+        back = "Atheling Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
 
-    sets.defense.HP = {ammo="Iron Gobbet",
-        head="Uk'uxkaj Cap",neck="Lavalier +1",ear1="Brutal Earring",ear2="Bloodgem Earring",
-        body="Hesychast's Cyclas",hands="Hesychast's Gloves +1",ring1="K'ayres Ring",ring2="Meridian Ring",
-        back="Shadow Mantle",waist="Black Belt",legs="Hesychast's Hose +1",feet="Hesychast's Gaiters +1"}
+    sets.defense.HP = { ammo = "Iron Gobbet",
+        head = "Uk'uxkaj Cap", neck = "Lavalier +1", ear1 = "Brutal Earring", ear2 = "Bloodgem Earring",
+        body = "Hesychast's Cyclas", hands = "Hesychast's Gloves +1", ring1 = "K'ayres Ring", ring2 = "Meridian Ring",
+        back = "Shadow Mantle", waist = "Black Belt", legs = "Hesychast's Hose +1", feet = "Hesychast's Gaiters +1" }
 
-    sets.defense.MDT = set_combine(sets.defense.PDT, {ear1="Eabani Earring", ring2="Archon Ring"})
+    sets.defense.MDT = set_combine(sets.defense.PDT, { ear1 = "Eabani Earring", ring2 = "Archon Ring" })
 
-    sets.Kiting = {feet="Hermes' Sandals"}
+    sets.Kiting = { feet = "Hermes' Sandals" }
 
-    sets.ExtraRegen = {head="Ocelomeh Headpiece +1"}
+    sets.ExtraRegen = { head = "Ocelomeh Headpiece +1" }
 
     -- Engaged sets
 
@@ -202,47 +199,47 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     -- Normal melee sets
-    sets.engaged = {ammo="Ginsen",
-        head="Adhemar Bonnet +1",neck="Anu Torque",ear1="Sherida Earring",ear2="Telos Earring",
-        body="Malignance Tabard",hands="Adhemar Wristbands +1",ring1="Niqmaddu Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Hurch'lan sash",legs="Malignance Tights",feet="Malignance Boots"}
-    sets.engaged.Acc = {ammo="Honed Tathlum",
-        head="Malignance Chapeau",neck="Sanctity Necklace",ear1="Telos Earring",ear2="crepuscular earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Ilabrat Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Hurch'lan sash",legs="Malignance Tights",feet="Malignance Boots"}
+    sets.engaged = { ammo = "Ginsen",
+        head = "Adhemar Bonnet +1", neck = "Anu Torque", ear1 = "Sherida Earring", ear2 = "Telos Earring",
+        body = "Malignance Tabard", hands = "Adhemar Wristbands +1", ring1 = "Niqmaddu Ring", ring2 = "Epona's Ring",
+        back = "Atheling Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.engaged.Acc = { ammo = "Honed Tathlum",
+        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Telos Earring", ear2 = "Crepuscular Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Ilabrat Ring", ring2 = "Epona's Ring",
+        back = "Atheling Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
 
     -- Defensive melee hybrid sets
-    sets.engaged.PDT = {ammo="Ginsen",
-        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Sherida Earring",ear2="Telos Earring",
-        body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Epona's Ring",
-        back="Atheling Mantle",waist="Hurch'lan sash",legs="Malignance Tights",feet="Malignance Boots"}
-    
+    sets.engaged.PDT = { ammo = "Ginsen",
+        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Sherida Earring", ear2 = "Telos Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring", ring2 = "Epona's Ring",
+        back = "Atheling Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
+
     sets.engaged.Acc.PDT = set_combine(sets.engaged.PDT, {})
-    
+
     sets.engaged.Counter = set_combine(sets.engaged, {})
     sets.engaged.Acc.Counter = set_combine(sets.engaged.Acc, {})
 
 
     -- Hundred Fists/Impetus melee set mods
     sets.engaged.HF = set_combine(sets.engaged, {})
-    sets.engaged.HF.Impetus = set_combine(sets.engaged, {body="Tantra Cyclas +2"})
+    sets.engaged.HF.Impetus = set_combine(sets.engaged, { body = "Tantra Cyclas +2" })
     sets.engaged.Acc.HF = set_combine(sets.engaged.Acc)
-    sets.engaged.Acc.HF.Impetus = set_combine(sets.engaged.Acc, {body="Tantra Cyclas +2"})
+    sets.engaged.Acc.HF.Impetus = set_combine(sets.engaged.Acc, { body = "Tantra Cyclas +2" })
     sets.engaged.Counter.HF = set_combine(sets.engaged.Counter)
-    sets.engaged.Counter.HF.Impetus = set_combine(sets.engaged.Counter, {body="Tantra Cyclas +2"})
+    sets.engaged.Counter.HF.Impetus = set_combine(sets.engaged.Counter, { body = "Tantra Cyclas +2" })
     sets.engaged.Acc.Counter.HF = set_combine(sets.engaged.Acc.Counter)
-    sets.engaged.Acc.Counter.HF.Impetus = set_combine(sets.engaged.Acc.Counter, {body="Tantra Cyclas +2"})
+    sets.engaged.Acc.Counter.HF.Impetus = set_combine(sets.engaged.Acc.Counter, { body = "Tantra Cyclas +2" })
 
 
     -- Footwork combat form
     sets.engaged.Footwork = set_combine(sets.engaged, {})
     sets.engaged.Footwork.Acc = set_combine(sets.engaged.Acc, {})
-        
+
     -- Quick sets for post-precast adjustments, listed here so that the gear can be Validated.
-    sets.impetus_body = {body="Bhikku Cyclas +2"}
-    sets.footwork_kick_feet = {feet="Anchorite's Gaiters +1"}
+    sets.impetus_body = { body = "Bhikku Cyclas +2" }
+    sets.footwork_kick_feet = { feet = "Anchorite's Gaiters +1" }
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -269,7 +266,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         elseif state.Buff.Footwork and (spell.english == "Dragon's Kick" or spell.english == "Tornado Kick") then
             equip(sets.footwork_kick_feet)
         end
-        
+
         -- Replace Moonshade Earring if we're at cap TP
         if player.tp == 3000 then
             equip(sets.precast.MaxTP)
@@ -299,15 +296,15 @@ function job_buff_change(buff, gain)
     else
         state.CombatForm:reset()
     end
-    
+
     -- Hundred Fists and Impetus modify the custom melee groups
     if buff == "Hundred Fists" or buff == "Impetus" then
         classes.CustomMeleeGroups:clear()
-        
+
         if (buff == "Hundred Fists" and gain) or buffactive['hundred fists'] then
             classes.CustomMeleeGroups:append('HF')
         end
-        
+
         if (buff == "Impetus" and gain) or buffactive.impetus then
             classes.CustomMeleeGroups:append('Impetus')
         end
@@ -319,7 +316,6 @@ function job_buff_change(buff, gain)
     end
 end
 
-
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
@@ -328,7 +324,7 @@ function customize_idle_set(idleSet)
     if player.hpp < 75 then
         idleSet = set_combine(idleSet, sets.ExtraRegen)
     end
-    
+
     return idleSet
 end
 
@@ -337,7 +333,6 @@ function job_update(cmdParams, eventArgs)
     update_combat_form()
     update_melee_groups()
 end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
@@ -353,16 +348,15 @@ end
 
 function update_melee_groups()
     classes.CustomMeleeGroups:clear()
-    
+
     if buffactive['hundred fists'] then
         classes.CustomMeleeGroups:append('HF')
     end
-    
+
     if buffactive.impetus then
         classes.CustomMeleeGroups:append('Impetus')
     end
 end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Custom event hooks.
@@ -374,8 +368,8 @@ function on_action_for_impetus(action)
         -- count melee hits by player
         if action.actor_id == player.id then
             if action.category == 1 then
-                for _,target in pairs(action.targets) do
-                    for _,action in pairs(target.actions) do
+                for _, target in pairs(action.targets) do
+                    for _, action in pairs(target.actions) do
                         -- Reactions (bitset):
                         -- 1 = evade
                         -- 2 = parry
@@ -395,8 +389,8 @@ function on_action_for_impetus(action)
                 -- Reaction always seems to be 24 (what does this value mean? 8=hit, 16=?)
                 -- Can't tell if any hits were missed, so have to assume all hit.
                 -- Increment by the minimum number of weaponskill hits: 2.
-                for _,target in pairs(action.targets) do
-                    for _,action in pairs(target.actions) do
+                for _, target in pairs(action.targets) do
+                    for _, action in pairs(target.actions) do
                         -- This will only be if the entire weaponskill missed or was parried.
                         if (action.reaction % 4) > 0 then
                             info.impetus_hit_count = 0
@@ -408,9 +402,9 @@ function on_action_for_impetus(action)
             end
         elseif action.actor_id ~= player.id and action.category == 1 then
             -- If mob hits the player, check for counters.
-            for _,target in pairs(action.targets) do
+            for _, target in pairs(action.targets) do
                 if target.id == player.id then
-                    for _,action in pairs(target.actions) do
+                    for _, action in pairs(target.actions) do
                         -- Spike effect animation:
                         -- 63 = counter
                         -- ?? = missed counter
@@ -426,18 +420,18 @@ function on_action_for_impetus(action)
                 end
             end
         end
-        
+
         --add_to_chat(123,'Current Impetus hit count = ' .. tostring(info.impetus_hit_count))
     else
         info.impetus_hit_count = 0
     end
-    
+
 end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book
-    
+
     if player.sub_job == 'DNC' then
         set_macro_page(2, 2)
     elseif player.sub_job == 'WAR' then

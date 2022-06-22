@@ -36,7 +36,7 @@ function user_setup()
     send_command('bind !` input /ja "Seigan" <me>')
 
     gear.WSDayEar1 = "Brutal Earring"
-    gear.WSDayEar2 = "crepuscular earring"
+    gear.WSDayEar2 = "Crepuscular Earring"
     gear.WSNightEar1 = "Lugra Earring +1"
     gear.WSNightEar2 = "Lugra Earring"
 

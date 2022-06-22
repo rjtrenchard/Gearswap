@@ -61,9 +61,9 @@ function job_setup()
 
     -- For th_action_check():
     -- JA IDs for actions that always have TH: Provoke, Animated Flourish
-    info.default_ja_ids = S{35, 204}
+    info.default_ja_ids = S { 35, 204 }
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
-    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
+    info.default_u_ja_ids = S { 201, 202, 203, 205, 207 }
 
     include('Mote-TreasureHunter')
 end
@@ -75,18 +75,18 @@ end
 -- Setup vars that are user-dependent.
 function user_setup()
     job_helper()
-    include('gear_' .. player.name:lower()..'/'..player.main_job:upper()..'.lua' )
+    include('gear_' .. player.name:lower() .. '/' .. player.main_job:upper() .. '.lua')
 
-    state.OffenseMode:options('Normal', 'Acc')
-    state.HybridMode:options('Normal', 'PDT', 'Reraise', 'SubtleBlow')
+    state.OffenseMode:options('Normal', 'Acc', 'SubtleBlow')
+    state.HybridMode:options('Normal', 'PDT', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc', 'AccHigh', 'Low')
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
     state.IdleMode:options('Normal', 'PDT', 'Refresh')
 
-    state.StunMode = M{['description']='Stun Mode', 'default', 'Enmity'}
-    state.SIRDMode = M{['description']='SIRD Mode', 'disabled', 'enabled', 'one-time'}
-    state.WeaponMode = M{['description']='Weapon Mode', 'greatsword', 'scythe', 'greataxe', 'sword', 'club'}
-    state.Verbose = M{['description']='Verbosity', 'Normal', 'Verbose', 'Debug'}
+    state.StunMode = M { ['description'] = 'Stun Mode', 'default', 'Enmity' }
+    state.SIRDMode = M { ['description'] = 'SIRD Mode', 'disabled', 'enabled', 'one-time' }
+    state.WeaponMode = M { ['description'] = 'Weapon Mode', 'greatsword', 'scythe', 'greataxe', 'sword', 'club' }
+    state.Verbose = M { ['description'] = 'Verbosity', 'Normal', 'Verbose', 'Debug' }
     state.UseCustomTimers = M(false, 'Use Custom Timers')
     state.AutoMacro = M(true, 'Use automatic macro books')
 
@@ -113,7 +113,7 @@ function user_setup()
 
     info.lastWeapon = nil
     initRecast()
-    
+
 
 
     -- Event driven functions
@@ -125,7 +125,7 @@ function user_setup()
             end
             determine_combat_weapon()
         end
-        if (myTime == 17*60 or myTime == 7*60) then 
+        if (myTime == 17 * 60 or myTime == 7 * 60) then
             procTime(myTime)
             if (player.status == 'Idle' or state.Kiting.value) then
                 update_combat_form()
@@ -154,11 +154,11 @@ function user_setup()
         end
         info.TP.old = old_tp
         info.TP.new = new_tp
-        echo('new: ' .. new_tp .. ' old: '.. old_tp, 2)
+        echo('new: ' .. new_tp .. ' old: ' .. old_tp, 2)
 
     end)
-    
-    echo('Job:' .. player.main_job .. '/' .. player.sub_job .. '.',2)
+
+    echo('Job:' .. player.main_job .. '/' .. player.sub_job .. '.', 2)
     select_default_macro_book()
 end
 
@@ -180,25 +180,25 @@ function user_unload()
 end
 
 function job_helper()
-    info.TP_scaling_ws = S{
-        'Spinning Scythe', 'Spiral Hell', 'Cross Reaper', 'Entropy', 
-        'Spinning Slash', 'Ground Strike', 'Torcleaver', 'Resolution', 
+    info.TP_scaling_ws = S {
+        'Spinning Scythe', 'Spiral Hell', 'Cross Reaper', 'Entropy',
+        'Spinning Slash', 'Ground Strike', 'Torcleaver', 'Resolution',
         'Upheaval', 'Steel Cyclone', 'Savage Blade', 'Judgment'
     }
     info.Weapons = {}
     info.Weapons.Type = {
-        ['Aern Dagger']='dagger',['Aern Dagger II']='dagger',
-        ['Naegling'] = 'sword',['Ridill'] = 'sword',
+        ['Aern Dagger'] = 'dagger', ['Aern Dagger II'] = 'dagger',
+        ['Naegling'] = 'sword', ['Ridill'] = 'sword',
         ['Zulfiqar'] = 'greatsword', ['Caladbolg'] = 'greatsword',
         ['Lycurgos'] = 'greataxe',
         ['Kaja Axe'] = 'axe', ['Dolichenus'] = 'axe',
-        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania']='scythe', ['Misanthropy']='scythe',['Woeborn']='scythe',['Crepuscular Scythe']='scythe',
-        ['Loxotic Mace +1'] = 'club',['Loxotic Mace'] = 'club',['Warp Cudgel'] = 'club',
+        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania'] = 'scythe', ['Misanthropy'] = 'scythe', ['Woeborn'] = 'scythe', ['Crepuscular Scythe'] = 'scythe',
+        ['Loxotic Mace +1'] = 'club', ['Loxotic Mace'] = 'club', ['Warp Cudgel'] = 'club',
         ['empty'] = 'handtohand',
-        ['Blurred Shield']= 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',["Smyth's Aspis"]='shield',["Smyth's Ecu"]='shield',["Smythe's Scutum"]='shield',["Smythe's Shield"]='shield',["Smythe's Escutcheon"]="Shield",
-        ['Utu Grip']='grip',['Caecus Grip']='grip'
+        ['Blurred Shield'] = 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield', ["Smyth's Aspis"] = 'shield', ["Smyth's Ecu"] = 'shield', ["Smythe's Scutum"] = 'shield', ["Smythe's Shield"] = 'shield', ["Smythe's Escutcheon"] = "Shield",
+        ['Utu Grip'] = 'grip', ['Caecus Grip'] = 'grip'
     }
-    info.Weapons.REMA = S{'Apocalypse','Ragnarok','Caladbolg','Redemption','Liberator','Anguta','Father Time'}
+    info.Weapons.REMA = S { 'Apocalypse', 'Ragnarok', 'Caladbolg', 'Redemption', 'Liberator', 'Anguta', 'Father Time' }
     info.Weapons.REMA.Type = {
         ['Apocalypse'] = 'relic',
         ['Ragnarok'] = 'relic',
@@ -237,40 +237,40 @@ function job_helper()
     info.Fencer[7] = 600
     info.Fencer[8] = 630
     info.Fencer.JPGift = {}
-    info.Fencer.JPGift = {bonus = 230, active=false}
+    info.Fencer.JPGift = { bonus = 230, active = false }
     --list of weapon types
-    info.Weapons.Twohanded = S{'greatsword', 'greataxe','scythe','staff','greatkatana','polearm'}
-    info.Weapons.Onehanded = S{'sword', 'club', 'katana', 'dagger', 'axe'}
-    info.Weapons.HandtoHand = S{'handtohand'}
-    info.Weapons.Ranged = S{'throwing', 'archery', 'marksmanship'}
-    info.Weapons.Shields = S{'shield'}
+    info.Weapons.Twohanded = S { 'greatsword', 'greataxe', 'scythe', 'staff', 'greatkatana', 'polearm' }
+    info.Weapons.Onehanded = S { 'sword', 'club', 'katana', 'dagger', 'axe' }
+    info.Weapons.HandtoHand = S { 'handtohand' }
+    info.Weapons.Ranged = S { 'throwing', 'archery', 'marksmanship' }
+    info.Weapons.Shields = S { 'shield' }
 
     -- macro book locations
     info.macro_sets = {}
-    info.macro_sets.subjobs = S{'SAM', 'NIN', 'WAR', 'DRG'}
-    info.macro_sets['greatsword'] = {['SAM'] = {book=8,page=2}, 
-                                     ['NIN'] = {book=8,page=4},
-                                     ['WAR'] = {book=8,page=6},
-                                     ['DRG'] = {book=8,page=10}}
-    
-    info.macro_sets['scythe'] = {    ['SAM'] = {book=8,page=1}, 
-                                     ['NIN'] = {book=8,page=3},
-                                     ['WAR'] = {book=8,page=5},
-                                     ['DRG'] = {book=8,page=9}}
+    info.macro_sets.subjobs = S { 'SAM', 'NIN', 'WAR', 'DRG' }
+    info.macro_sets['greatsword'] = { ['SAM'] = { book = 8, page = 2 },
+        ['NIN'] = { book = 8, page = 4 },
+        ['WAR'] = { book = 8, page = 6 },
+        ['DRG'] = { book = 8, page = 10 } }
 
-    info.macro_sets['greataxe'] = {  ['SAM'] = {book=8,page=8}, 
-                                     ['NIN'] = {book=8,page=8},
-                                     ['WAR'] = {book=8,page=8},
-                                     ['DRG'] = {book=8,page=8}}
+    info.macro_sets['scythe'] = { ['SAM'] = { book = 8, page = 1 },
+        ['NIN'] = { book = 8, page = 3 },
+        ['WAR'] = { book = 8, page = 5 },
+        ['DRG'] = { book = 8, page = 9 } }
 
-    info.macro_sets['sword'] = {     ['SAM'] = {book=8,page=7}, 
-                                     ['NIN'] = {book=8,page=7},
-                                     ['WAR'] = {book=8,page=7},
-                                     ['DRG'] = {book=8,page=7}}
+    info.macro_sets['greataxe'] = { ['SAM'] = { book = 8, page = 8 },
+        ['NIN'] = { book = 8, page = 8 },
+        ['WAR'] = { book = 8, page = 8 },
+        ['DRG'] = { book = 8, page = 8 } }
+
+    info.macro_sets['sword'] = { ['SAM'] = { book = 8, page = 7 },
+        ['NIN'] = { book = 8, page = 7 },
+        ['WAR'] = { book = 8, page = 7 },
+        ['DRG'] = { book = 8, page = 7 } }
 
     info.macro_sets['axe'] = info.macro_sets['sword']
     info.macro_sets['club'] = info.macro_sets['sword']
-    
+
 end
 
 -- found in gear_name/DRK.lua
@@ -285,7 +285,7 @@ end
 function job_precast(spell, action, spellMap, eventArgs)
     -- set this so we know what to come back to later
     --info.recastWeapon = player.equipment.main
-    
+
 end
 
 -- Run after the default precast() is done.
@@ -301,7 +301,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         end
     elseif spell.type:lower() == 'weaponskill' then
         if info.TP_scaling_ws:contains(spell.english) and info.TP.new > 2999 then
-            -- kinda messy, but will equip moonshade with either lugra or a specific sets 
+            -- kinda messy, but will equip moonshade with either lugra or a specific sets
             -- earring if lugra exists in the first ear slot.
             if sets.precast.WS[spell.english].ear1 == sets.precast.WS.FullTP.ear2 then
                 equip(sets.precast[spell.english].FullTP)
@@ -328,10 +328,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Dark Magic' and buffactive['Dark Seal'] then
         if spell.english == 'Drain III' then
             equip(sets.midcast['Drain III'].DarkSeal)
-        -- we're not interested in the relic bonus for these spells    
-        elseif S{'Drain','Drain II','Aspir','Aspir II','Dread Spikes'}:contains(spell.english) then
+            -- we're not interested in the relic bonus for these spells
+        elseif S { 'Drain', 'Drain II', 'Aspir', 'Aspir II', 'Dread Spikes' }:contains(spell.english) then
             equip(sets.midcast[spell.english])
-        elseif S{'Endark', 'Endark II'}:contains(spell.english) then
+        elseif S { 'Endark', 'Endark II' }:contains(spell.english) then
             equip(sets.midcast['Endark'].DarkSeal)
         else
             equip(sets.midcast['Dark Magic'].DarkSeal)
@@ -340,11 +340,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
     -- Weapon swap handling
     if spell.skill == 'Dark Magic' and player.tp < 1000 then
-        if S{'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II'}:contains(spell.english) and (sets.midcast['Drain'].Weapon.main ~= player.equipment.main) then
+        if S { 'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II' }:contains(spell.english) and (sets.midcast['Drain'].Weapon.main ~= player.equipment.main) then
             setRecast()
             equip(sets.midcast['Drain'].Weapon)
-        -- do not change weapons if AM3 is up
-        elseif S{'Endark', 'Endark II'}:contains(spell.english) and (sets.midcast['Endark'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
+            -- do not change weapons if AM3 is up
+        elseif S { 'Endark', 'Endark II' }:contains(spell.english) and (sets.midcast['Endark'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
             setRecast()
             equip(sets.midcast['Endark'].Weapon)
         elseif spell.english == 'Dread Spikes' and (sets.midcast['Dread Spikes'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
@@ -353,31 +353,19 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
 
-    if S{'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II'}:contains(spell.english) or spell.english:startswith('Absorb') then
+    if S { 'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II' }:contains(spell.english) or spell.english:startswith('Absorb') then
         adjust_timers_darkmagic(spell, spellMap)
     end
 
-    if S{'Stun'}:contains(spell.english) and state.StunMode.value == 'Enmity' then
+    if S { 'Stun' }:contains(spell.english) and state.StunMode.value == 'Enmity' then
         equip(sets.Enmity)
         if player.tp < 1000 then
             equip(sets.Enmity.Weapon)
         end
     end
 
-
-    if spell.english == 'Dread Spikes' then
-        if S{'enabled', 'one-time'}:contains(state.SIRDMode.value) then
-            equip(set_combine(sets.SIRD, sets.midcast['Dread Spikes'].Weapon))
-            echo('Dread Spikes [' .. calculate_dreadspikes() .. '] [SIRD]')
-            if state.SIRDMode.value == 'one-time' then state.SIRDMode:reset() end
-        else
-            echo('Dread Spikes [' .. calculate_dreadspikes() .. ']')
-        end
-
-    end
-
     -- Treasure Hunter handling
-    if state.TreasureMode.value == 'Tag' and S{'Poisonga', 'Poison', 'Absorb-CHR'}:contains(spell.english) then
+    if state.TreasureMode.value == 'Tag' and S { 'Poisonga', 'Poison', 'Absorb-CHR' }:contains(spell.english) then
         equip(sets.midcast[spell.english].TH)
     end
 
@@ -403,6 +391,15 @@ function job_aftercast(spell, action, spellMap, eventArgs)
                 end
             end
         end
+    elseif spell.english == 'Dread Spikes' then
+        if S { 'enabled', 'one-time' }:contains(state.SIRDMode.value) then
+            equip(set_combine(sets.SIRD, sets.midcast['Dread Spikes'].Weapon))
+            echo('Dread Spikes [' .. calculate_dreadspikes() .. '] [SIRD]')
+            if state.SIRDMode.value == 'one-time' then state.SIRDMode:reset() end
+        else
+            echo('Dread Spikes [' .. calculate_dreadspikes() .. ']')
+        end
+
     end
 end
 
@@ -425,7 +422,7 @@ function job_buff_change(buff, gain)
                 equip(sets.Sleeping)
             end
         elseif buff == 'charm' then
-            
+
             local function count_slip_debuffs()
                 local erase_dots = 0
                 if buffactive['poison'] then
@@ -440,9 +437,9 @@ function job_buff_change(buff, gain)
                 if buffactive['Burn'] then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Choke'] then 
+                if buffactive['Choke'] then
                     erase_dots = erase_dots + 1
-                end 
+                end
                 if buffactive['Shock'] then
                     erase_dots = erase_dots + 1
                 end
@@ -461,28 +458,28 @@ function job_buff_change(buff, gain)
                 return erase_dots
             end
 
-            local debuffs = count_slip_debuffs() 
+            local debuffs = count_slip_debuffs()
             if debuffs > 0 then
                 send_command('input /p Charmed and I cannot be slept.')
             else
                 send_command('input /p Charmed.')
             end
-        elseif S{'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3'}:contains(buff) then
+        elseif S { 'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3' }:contains(buff) then
             update_combat_form()
         end
-    
-    -- when losing a buff
+
+        -- when losing a buff
     else
         if buff == 'charm' then
             send_command('input /p Charm off.')
         elseif buff == 'sleep' then
             send_command('gs c update')
-        elseif S{'Aftermath'}:contains(buff) then
+        elseif S { 'Aftermath' }:contains(buff) then
             info.AM.level = 0
             update_combat_form()
             send_command('gs c update')
-        elseif S{'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II'}:contains(buff) or buff:startswith('Absorb') then
-            send_command('timers delete "'..buff..'"')
+        elseif S { 'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II' }:contains(buff) or buff:startswith('Absorb') then
+            send_command('timers delete "' .. buff .. '"')
         end
     end
 end
@@ -519,7 +516,7 @@ function update_weapon_mode(w_state)
     gear.MainHand = sets.Weapons[w_state].main
     gear.SubHand = sets.Weapons[w_state].sub
 
-    sets.weapons = {main=gear.MainHand, sub=gear.SubHand}
+    sets.weapons = { main = gear.MainHand, sub = gear.SubHand }
     equip(sets.weapons)
 end
 
@@ -533,7 +530,7 @@ function weapon_macro_book()
     if (info.Weapons.Type[currentWeapon] ~= nil or currentWeapon ~= empty) and info.macro_sets.subjobs:contains(subjob) then
         local book = info.macro_sets[info.Weapons.Type[currentWeapon]][subjob].book
         local page = info.macro_sets[info.Weapons.Type[currentWeapon]][subjob].page
-        echo('Changing macro book to <' .. book .. ',' .. page .. '>.',0,144)
+        echo('Changing macro book to <' .. book .. ',' .. page .. '>.', 0, 144)
         set_macro_page(page, book)
     end
 end
@@ -542,12 +539,12 @@ function determine_combat_weapon()
     -- if a weapon has a specific combat form, switch to that
     if info.Weapons.REMA:contains(player.equipment.main) then
         state.CombatWeapon:set(player.equipment.main)
-        echo('CombatWeapon: '.. player.equipment.main ..' set',1)
+        echo('CombatWeapon: ' .. player.equipment.main .. ' set', 1)
     else
         state.CombatWeapon:reset()
-        echo('CombatWeapon: Normal set',1)
+        echo('CombatWeapon: Normal set', 1)
     end
-    echo('CombatWeapon mode: '.. state.CombatWeapon.value,1)
+    echo('CombatWeapon mode: ' .. state.CombatWeapon.value, 1)
 end
 
 -- reset combat form, or choose a specific weapons combat form. Blind to aftermath
@@ -555,7 +552,7 @@ function reset_combat_form()
     local weapon_slot = player.equipment.main
     local sub_slot = player.equipment.sub
 
-    if S{'NIN','DNC'}:contains(player.sub_job) then
+    if S { 'NIN', 'DNC' }:contains(player.sub_job) then
         -- change to DW only if mainhanding a one handed weapon and a weapon is equipped in the sub slot
         if info.Weapons.Onehanded:contains(info.Weapons.Type[weapon_slot]) then
             if info.Weapons.Shields:contains(info.Weapons.Type[sub_slot]) or sub_slot == empty then
@@ -570,7 +567,7 @@ function reset_combat_form()
 end
 
 -- process time of day changes
-function procTime(myTime) 
+function procTime(myTime)
     if isNight() then
         gear.WSEarBrutal = gear.WSNightEar1
         gear.WSEarMoonshade = gear.WSNightEar2
@@ -584,7 +581,7 @@ end
 
 -- if the mainhand weapon changes, update it so callbacks can tell.
 function isMainChanged()
-    if info.lastWeapon == player.equipment.main then 
+    if info.lastWeapon == player.equipment.main then
         return false
     else
         info.lastWeapon = player.equipment.main
@@ -600,7 +597,7 @@ end
 
 -- sets the Recast weapon set to what is currently equipped
 -- affected slots: main sub ranged ammo
-function setRecast() 
+function setRecast()
     sets._Recast = {
         main = player.equipment.main,
         sub = player.equipment.sub,
@@ -612,7 +609,7 @@ end
 
 -- resets the Recast weapon set to nil
 function resetRecast()
-    sets._Recast = {main = nil, sub = nil, ranged = nil, ammo = nil}
+    sets._Recast = { main = nil, sub = nil, ranged = nil, ammo = nil }
     info._RecastFlag = false
 end
 
@@ -640,11 +637,11 @@ end
 
 -- return true if night
 function isNight()
-    return (world.time >= 17*60 or world.time < 7*60)
+    return (world.time >= 17 * 60 or world.time < 7 * 60)
 end
 
 -- get unchangable TP Bonus items, return 0 if we don't know any.
-function getWeaponTPBonus() 
+function getWeaponTPBonus()
     local weapon = player.equipment.main
     local sub = player.equipment.sub
     local ranged = player.equipment.range
@@ -652,13 +649,13 @@ function getWeaponTPBonus()
     local fencer = getFencerBonus()
 
     local tp_bonus = 0
-    
+
     -- check weapon slot items
     if info.Weapons.TPBonus[weapon] then
         if weapon == 'Lycurgos' then
             if player.hp <= 5000 then
                 tp_bonus = tp_bonus + (player.hp / 5)
-            else 
+            else
                 tp_bonus = tp_bonus + 1000
             end
         else
@@ -673,11 +670,11 @@ function getWeaponTPBonus()
     return tp_bonus
 end
 
-function getFencerBonus() 
+function getFencerBonus()
     local fencer = 0
     local bonus = 0
 
-    if player.job == 'WAR' then 
+    if player.job == 'WAR' then
         if player.main_job_level >= 97 then
             fencer = 5
         elseif player.main_job_level >= 84 then
@@ -698,7 +695,7 @@ function getFencerBonus()
             fencer = 1
         end
     elseif player.job == 'BRD' then
-        if player.main_job_level >= 95 then 
+        if player.main_job_level >= 95 then
             fencer = 2
         elseif player.main_job_level >= 85 then
             fencer = 1
@@ -716,9 +713,9 @@ function getFencerBonus()
 
     -- return fencer + bonus
     if fencer > 8 then fencer = 8 end
-    if info.Fencer.JPGift.active then 
+    if info.Fencer.JPGift.active then
         bonus = info.Fencer[fencer] + info.Fencer.JPGift.bonus
-    else 
+    else
         bonus = info.Fencer[fencer]
     end
     return bonus
@@ -727,10 +724,10 @@ end
 -- returns true if tp is overcapping
 function isOverMaxTP(tp, perm_bonus_tp, max_tp)
     perm_bonus_tp = perm_bonus_tp or 0
-    return (tp+perm_bonus_tp) > (max_tp or 3000)
+    return (tp + perm_bonus_tp) > (max_tp or 3000)
 end
 
-function calculate_dreadspikes() 
+function calculate_dreadspikes()
     local base = player.max_hp
     local base_absorbed = 0.5
 
@@ -751,33 +748,33 @@ function adjust_timers_darkmagic(spell, spellMap)
     if state.UseCustomTimers.value == false then
         return
     end
-    
+
     local current_time = os.time()
-    
+
     -- custom_timers contains a table of song names, with the os time when they
     -- will expire.
-    
+
     -- Eliminate songs that have already expired from our local list.
     local temp_timer_list = {}
-    for spell_name,expires in pairs(custom_timers) do
+    for spell_name, expires in pairs(custom_timers) do
         if expires < current_time then
             temp_timer_list[spell_name] = true
         end
     end
-    for spell_name,expires in pairs(temp_timer_list) do
+    for spell_name, expires in pairs(temp_timer_list) do
         custom_timers[spell_name] = nil
         custom_timers.basetime[spell_name] = nil
     end
-    
+
     local dur = calculate_duration_darkmagic(spell.name, spellMap)
     if custom_timers[spell.name] then
         if custom_timers[spell.name] < (current_time + dur) then
-            send_command('timers delete "'..spell.name..'"')
+            send_command('timers delete "' .. spell.name .. '"')
             custom_timers[spell.name] = current_time + dur
-            send_command('timers create "'..spell.name..'" '..dur..' down')
+            send_command('timers create "' .. spell.name .. '" ' .. dur .. ' down')
         end
     else
-        send_command('timers create "'..spell.name..'" '..dur..' down')
+        send_command('timers create "' .. spell.name .. '" ' .. dur .. ' down')
     end
 end
 
@@ -787,26 +784,26 @@ function calculate_duration_darkmagic(spellName, spellMap)
     local mult = 1
     local base_duration = 0
 
-    if spellMap == 'Absorb' and spellName ~= 'Absorb-Attri' and spellName ~= 'Absorb-TP' then base_duration = 1.5*60 end
+    if spellMap == 'Absorb' and spellName ~= 'Absorb-Attri' and spellName ~= 'Absorb-TP' then base_duration = 1.5 * 60 end
     --if spellName == 'Bio' then base_duration = 1*60 end
     --if spellName == 'Bio II' then base_duration = 2*60 end
     --if spellName == 'Bio III' then base_duration = 180 end
-    if spellName == 'Drain II' then base_duration = 3*60 end
-    if spellName == 'Drain III' then base_duration = 3*60 end
-    if spellName == 'Dread Spikes' then base_duration = 3*60 end
-    if spellName == "Endark" then base_duration = 3*60 end
-    if spellName == "Endark II" then base_duration = 3*60 end
+    if spellName == 'Drain II' then base_duration = 3 * 60 end
+    if spellName == 'Drain III' then base_duration = 3 * 60 end
+    if spellName == 'Dread Spikes' then base_duration = 3 * 60 end
+    if spellName == "Endark" then base_duration = 3 * 60 end
+    if spellName == "Endark II" then base_duration = 3 * 60 end
 
     if player.equipment.feet == 'Ratri Sollerets' then mult = mult + 0.2 end
     if player.equipment.feet == 'Ratri Sollerets +1' then mult = mult + 0.25 end
     if player.equipment.ring1 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult + 0.1 end
     if player.equipment.ring2 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult + 0.1 end
 
-    if buffactive.DarkSeal and S{'Abyss Burgeonet +2', "Fallen's Burgeonet","Fallen's Burgeone +1","Fallen's Burgeonet +2","Fallen's Burgeonet +3"}:contains(player.equipment.head) then
-        mult = mult + (info.JobPoints.DarkSealMerits*0.1)
+    if buffactive.DarkSeal and S { 'Abyss Burgeonet +2', "Fallen's Burgeonet", "Fallen's Burgeone +1", "Fallen's Burgeonet +2", "Fallen's Burgeonet +3" }:contains(player.equipment.head) then
+        mult = mult + (info.JobPoints.DarkSealMerits * 0.1)
     end
-    
-    local totalDuration = math.floor(mult*base_duration)
+
+    local totalDuration = math.floor(mult * base_duration)
 
     return totalDuration
 end
@@ -820,7 +817,7 @@ function th_action_check(category, param)
         (category == 3 and param == 30) or -- Aeolian Edge
         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
-        then return true
+    then return true
     end
 end
 
@@ -835,24 +832,23 @@ function echo(msg, verbosity_, chatmode)
         end
         return vlvl
     end
+
     if getVerbosityLevel() >= verbosity then
         local mode = chatmode or 144
         windower.add_to_chat(mode, msg)
     end
 end
 
-
-
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
 function update_combat_form()
-    
+
     determine_combat_weapon()
 
     classes.CustomMeleeGroups:clear()
-    
+
     if buffactive['Aftermath'] then
         info.AM.level = 1
         classes.CustomMeleeGroups:append('AM')
@@ -873,7 +869,7 @@ end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    enable('main','sub')
+    enable('main', 'sub')
     -- Default macro set/book
     if player.sub_job == 'SAM' then
         set_macro_page(1, 8)
@@ -888,7 +884,6 @@ function select_default_macro_book()
     else
         set_macro_page(6, 8)
     end
-    
-    send_command( "@wait 5;input /lockstyleset 4" )
-end
 
+    send_command("@wait 5;input /lockstyleset 4")
+end
