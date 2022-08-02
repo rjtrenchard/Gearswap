@@ -67,7 +67,8 @@ function job_setup()
         'Fire IV', 'Stone IV', 'Water IV', 'Aero IV', 'Blizzard IV', 'Thunder IV',
         'Thunderspark', 'Meteorite', 'Nether Blast',
         'Meteor Strike', 'Heavenly Strike', 'Wind Blade', 'Geocrush', 'Grand Fall', 'Thunderstorm',
-        'Holy Mist', 'Lunar Bay', 'Night Terror', 'Level ? Holy', 'Tornado II', 'Sonic Buffet' }
+        'Holy Mist', 'Lunar Bay', 'Night Terror', 'Level ? Holy', 'Tornado II', 'Sonic Buffet'
+    }
 
     hybridRagePacts = S {
         'Burning Strike', 'Flaming Crush',
@@ -247,11 +248,9 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = { ammo = "Sapience Orb",
-        head = "Cath Palug Crown", neck = "Baetyl Pendant", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Inyanga Jubbah +2", ring1 = "Kishar Ring", ring2 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Embla Belt", legs = "Orvail Pants +1", feet = "Convoker's Pigaches +2" }
-
-    sets.midcast.FC = sets.precast.FC
+        head = "Merlinic Hood", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = "Inyanga Jubbah +2", hands = "Telchine Gloves", ring1 = "Kishar Ring", ring2 = "Weatherspoon Ring +1",
+        back = "Fi Follet Cape +1", waist = "Embla Belt", legs = "Limbo Trousers", feet = "Amalric Nails +1" }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
@@ -266,12 +265,13 @@ function init_gear_sets()
     sets.precast.WS = {
         head = "Nahtirah Hat", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Rajas Ring", ring2 = "Petrov Ring",
-        back = "Pahtli Cape", waist = "Fotia Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+        back = "Pahtli Cape", waist = "Fotia Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots"
+    }
 
     sets.precast.WS.Elemental = {
-        head = "", neck = "Sibyl Scarf", ear1 = "", ear2 = "",
-        body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "", ring2 = "",
-        back = "", waist = "", legs = "Amalric Slops +1", feet = "Amalric Nails +1"
+        head = "Cath Palug Crown", neck = "Sibyl Scarf", ear1 = "Malignance Earring", ear2 = "Friomisi Earring",
+        body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Freke Ring", ring2 = "Metamorph Ring +1",
+        back = "", waist = "Austerity Belt +1", legs = "Amalric Slops +1", feet = "Amalric Nails +1"
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -279,7 +279,8 @@ function init_gear_sets()
         head = "Amalric Coif +1", neck = "Fotia Gorget", ear1 = "Evans Earring", ear2 = "Moonshade Earring",
         body = "Convoker's Doublet +2", hands = "Caller's Bracers +2", ring1 = "Stikini Ring +1",
         ring2 = "Stikini Ring +1",
-        back = "Pahtli Cape", waist = "Fucho-no-Obi", legs = "Assiduity Pants +1", feet = "Chelona Boots +1" }
+        back = "Pahtli Cape", waist = "Fucho-no-Obi", legs = "Assiduity Pants +1", feet = "Chelona Boots +1"
+    }
 
 
 
@@ -289,8 +290,8 @@ function init_gear_sets()
     --------------------------------------
 
     sets.midcast.FastRecast = { ammo = "Staunch Tathlum +1",
-        head = "Nahtirah Hat", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie", hands = "Bokwus Gloves", ring1 = "Rahab Ring",
+        head = "Cath Palug Crown", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = "Merlinic Jubbah", hands = "Bokwus Gloves", ring1 = "Rahab Ring",
         back = "Fi Follet Cape +1", waist = "Embla Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
 
     sets.midcast.Cure = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Staunch Tathlum +1",
@@ -308,7 +309,8 @@ function init_gear_sets()
 
     sets.midcast.Aquaveil = {
         head = "Amalric Coif +1",
-        waist = "Emphatikos rope", legs = "Shedir Seraweels" }
+        waist = "Emphatikos rope", legs = "Shedir Seraweels"
+    }
 
     -- Avatar pact sets.  All pacts are Ability type.
 
@@ -418,7 +420,8 @@ function init_gear_sets()
     sets.idle.Avatar.Melee = {
         neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Cath Palug Earring",
         body = "Shomonjijoe +1", hands = "Convoker's Bracers +2", ring1 = "Varar Ring +1", ring2 = "Cath Palug Ring",
-        back = "Campestres's Cape", waist = "Klouskap Sash +1", legs = "Convoker's Spats", feet = "Apogee Pumps +1" }
+        back = "Campestres's Cape", waist = "Klouskap Sash +1", legs = "Convoker's Spats", feet = "Apogee Pumps +1"
+    }
 
     sets.perp = {}
     -- Caller's Bracer's halve the perp cost after other costs are accounted for.
@@ -447,7 +450,8 @@ function init_gear_sets()
     sets.defense.MDT = {
         head = "Hagondes Hat", neck = "Loricate Torque +1", ear1 = "Evans Earring", ear2 = "Loquacious Earring",
         body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Defending Ring", ring2 = "Archon Ring",
-        back = "Umbra Cape", waist = "Fucho-no-Obi", legs = "Bokwus Slops", feet = "Hagondes Sabots" }
+        back = "Umbra Cape", waist = "Fucho-no-Obi", legs = "Bokwus Slops", feet = "Hagondes Sabots"
+    }
 
     sets.Kiting = { feet = "Crier's Gaiters" }
 

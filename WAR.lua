@@ -10,7 +10,6 @@ function get_sets()
     include('Mote-Include.lua')
 end
 
-
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
     state.Buff.Hasso = buffactive.Hasso or false
@@ -30,7 +29,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'PDT', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc', 'Mod')
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
-    
+
     -- Additional local binds
     send_command('bind ^` input /ja "Hasso" <me>')
     send_command('bind !` input /ja "Seigan" <me>')
@@ -40,11 +39,11 @@ function user_setup()
     gear.WSNightEar1 = "Lugra Earring +1"
     gear.WSNightEar2 = "Lugra Earring"
 
-    gear.WSEarBrutal = {name=gear.WSDayEar1}
-    gear.WSEarCessance = {name=gear.WSDayEar2}
+    gear.WSEarBrutal = { name = gear.WSDayEar1 }
+    gear.WSEarCessance = { name = gear.WSDayEar2 }
 
     ticker = windower.register_event('time change', function(myTime)
-        if (myTime == 17*60 or myTime == 7*60) and (player.status == 'Idle' or state.Kiting.value) then 
+        if (myTime == 17 * 60 or myTime == 7 * 60) and (player.status == 'Idle' or state.Kiting.value) then
             procTime(myTime)
             if (player.status == 'Idle' or state.Kiting.value) then
                 update_combat_form()
@@ -56,7 +55,7 @@ function user_setup()
     select_default_macro_book()
 end
 
-function procTime(myTime) 
+function procTime(myTime)
     if isNight() then
         gear.WSEarBrutal.name = gear.WSNightEar1
         gear.WSEarCessance.name = gear.WSNightEar2
@@ -69,7 +68,7 @@ function procTime(myTime)
 end
 
 function isNight()
-    return (world.time >= 17*60 or world.time < 7*60)
+    return (world.time >= 17 * 60 or world.time < 7 * 60)
 end
 
 -- Called when this job file is unloaded (eg: job change)
@@ -79,92 +78,102 @@ function user_unload()
     send_command('unbind !-')
 end
 
-
 -- Define sets and vars used by this job file.
 function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    
+    sets.enmity = { waist = "Trance Belt" }
+
+    sets.precast.FC = { ammo = "Sapience Orb",
+        head = "Sakpata's Helm", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquacious Earring",
+        body = "Sacro Breastplate", hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Rahab Ring",
+        legs = "Limbo Trousers", feet = "Odyssean Greaves"
+    }
+
     -- Precast Sets
     -- Precast sets to enhance JAs
-    sets.precast.JA.Meditate = {head="Myochin Kabuto",hands="Sakonji Kote"}
-    sets.precast.JA['Warding Circle'] = {head="Myochin Kabuto"}
-    sets.precast.JA['Blade Bash'] = {hands="Sakonji Kote"}
+    sets.precast.JA.Meditate = { head = "Myochin Kabuto", hands = "Sakonji Kote" }
+    sets.precast.JA['Warding Circle'] = { head = "Myochin Kabuto" }
+    sets.precast.JA['Blade Bash'] = { hands = "Sakonji Kote" }
 
     -- Waltz set (chr and vit)
-    sets.precast.Waltz = {ammo="Sonia's Plectrum",
-        head="Sakpata's Helm",
-        body="Sakpata's Plate",hands="Buremte Gloves",ring1="Spiral Ring",
-        back="Iximulew Cape",waist="Caudata Belt",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
-        
+    sets.precast.Waltz = { ammo = "Sonia's Plectrum",
+        head = "Sakpata's Helm",
+        body = "Sakpata's Plate", hands = "Buremte Gloves", ring1 = "Spiral Ring",
+        back = "Iximulew Cape", waist = "Caudata Belt", legs = "Karieyh Brayettes +1", feet = "Sakpata's Leggings" }
+
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
 
-       
+
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {ammo="Ginsen",
-        head="Sakpata's Helm",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Epaminondas's Ring",ring2="Regal Ring",
-        back="Atheling Mantle",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {back="Atheling Mantle"})
+    sets.precast.WS = { ammo = "Ginsen",
+        head = "Sakpata's Helm", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Epaminondas's Ring", ring2 = "Regal Ring",
+        back = "Atheling Mantle", waist = "Sailfi Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, { back = "Atheling Mantle" })
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
-    sets.precast.WS['Tachi: Fudo'] = set_combine(sets.precast.WS, {neck="Snow Gorget"})
-    sets.precast.WS['Tachi: Fudo'].Acc = set_combine(sets.precast.WS.Acc, {neck="Snow Gorget"})
-    sets.precast.WS['Tachi: Fudo'].Mod = set_combine(sets.precast.WS['Tachi: Fudo'], {waist="Snow Belt"})
+    sets.precast.WS['Tachi: Fudo'] = set_combine(sets.precast.WS, { neck = "Snow Gorget" })
+    sets.precast.WS['Tachi: Fudo'].Acc = set_combine(sets.precast.WS.Acc, { neck = "Snow Gorget" })
+    sets.precast.WS['Tachi: Fudo'].Mod = set_combine(sets.precast.WS['Tachi: Fudo'], { waist = "Snow Belt" })
 
 
 
     -- Midcast Sets
     sets.midcast.FastRecast = {
-        head="Sakpata's Helm",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",
-        legs="Phorcys Dirs",feet="Sakpata's Leggings"}
+        head = "Sakpata's Helm",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets",
+        legs = "Phorcys Dirs", feet = "Sakpata's Leggings"
+    }
 
-    
+
     -- Sets to return to when not performing an action.
-    
+
     -- Resting sets
-    sets.resting = {neck="Bathy Choker +1",ring1="Sheltered Ring",ring2="Paguroidea Ring"}
-    
+    sets.resting = { neck = "Bathy Choker +1", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring" }
+
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
-    sets.idle.Town = {main="Tsurumaru", sub="Pole Grip",ammo="Ginsen",
-        head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
-        back="Atheling Mantle",waist="Flume Belt +1",legs="Sakpata's Cuisses",feet="Hermes' Sandals"}
-    
+    sets.idle.Town = { main = "Tsurumaru", sub = "Pole Grip", ammo = "Ginsen",
+        head = "Sakpata's Helm", neck = "Combatant's Torque", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Defending Ring",
+        back = "Atheling Mantle", waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Hermes' Sandals" }
+
     sets.idle.Field = {
-        head="Sakpata's Helm",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
+        head = "Sakpata's Helm", neck = "Bathy Choker +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
+        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Hermes' Sandals"
+    }
 
     sets.idle.Weak = {
-        head="Twilight Helm",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Hermes' Sandals"}
-    
+        head = "Twilight Helm", neck = "Bathy Choker +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Crepuscular Mail", hands = "Buremte Gloves", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
+        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Hermes' Sandals"
+    }
+
     -- Defense sets
-    sets.defense.PDT = {ammo="Iron Gobbet",
-        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2=gear.DarkRing.physical,
-        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
+    sets.defense.PDT = { ammo = "Staunch Tathlum +1",
+        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = gear.DarkRing.physical,
+        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Sakpata's Leggings" }
 
     sets.defense.Reraise = {
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Paguroidea Ring",
-        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
+        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Crepuscular Mail", hands = "Buremte Gloves", ring1 = "Defending Ring", ring2 = "Paguroidea Ring",
+        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Sakpata's Leggings"
+    }
 
-    sets.defense.MDT = {ammo="Demonry Stone",
-        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Shadow Ring",
-        back="Engulfer Cape",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Sakpata's Leggings"}
+    sets.defense.MDT = { ammo = "Demonry Stone",
+        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Shadow Ring",
+        back = "Engulfer Cape", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Sakpata's Leggings" }
 
-    sets.Kiting = {feet="Hermes' Sandals"}
+    sets.Kiting = { feet = "Hermes' Sandals" }
 
-    sets.Reraise = {head="Twilight Helm",body="Crepuscular Mail"}
+    sets.Reraise = { head = "Twilight Helm", body = "Crepuscular Mail" }
 
     -- Engaged sets
 
@@ -172,36 +181,35 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
-    sets.engaged = {ammo="Ginsen",
-        head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
-        back="Atheling Mantle",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
-    sets.engaged.Acc = {ammo="Seething Bomblet +1",
-        head="Sakpata's Helm",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
-        back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
-    sets.engaged.PDT = {ammo="Ginsen",
-        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Defending Ring",
-        back="Iximulew Cape",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
-    sets.engaged.Acc.PDT = {ammo="Seething Bomblet +1",
-        head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sakpata's Plate",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Niqmaddu Ring",
-        back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
-    sets.engaged.Reraise = {ammo="Ginsen",
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
-        back="Ik Cape",waist="Sailfi Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
-    sets.engaged.Acc.Reraise = {ammo="Seething bomblet +1",
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Crepuscular Mail",hands="Sakpata's Gauntlets",ring1="Moonlight Ring",ring2="Niqmaddu Ring",
-        back="Letalis Mantle",waist="Ioskeha Belt +1",legs="Sakpata's Cuisses",feet="Sakpata's Leggings"}
+    sets.engaged = { ammo = "Ginsen",
+        head = "Sakpata's Helm", neck = "Combatant's Torque", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
+        back = "Atheling Mantle", waist = "Sailfi Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.engaged.Acc = { ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm", neck = "Combatant's Torque", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
+        back = "Letalis Mantle", waist = "Ioskeha Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.engaged.PDT = { ammo = "Ginsen",
+        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Defending Ring",
+        back = "Iximulew Cape", waist = "Sailfi Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.engaged.Acc.PDT = { ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Niqmaddu Ring",
+        back = "Letalis Mantle", waist = "Ioskeha Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.engaged.Reraise = { ammo = "Ginsen",
+        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
+        back = "Ik Cape", waist = "Sailfi Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.engaged.Acc.Reraise = { ammo = "Seething bomblet +1",
+        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
+        back = "Letalis Mantle", waist = "Ioskeha Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
 
 end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
@@ -211,9 +219,9 @@ end
 function job_pretarget(spell, action, spellMap, eventArgs)
     if spell.type == 'WeaponSkill' then
         -- Change any GK weaponskills to polearm weaponskill if we're using a polearm.
-        if player.equipment.main=='Quint Spear' or player.equipment.main=='Quint Spear' then
+        if player.equipment.main == 'Quint Spear' or player.equipment.main == 'Quint Spear' then
             if spell.english:startswith("Tachi:") then
-                send_command('@input /ws "Penta Thrust" '..spell.target.raw)
+                send_command('@input /ws "Penta Thrust" ' .. spell.target.raw)
                 eventArgs.cancel = true
             end
         end
@@ -235,7 +243,6 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         end
     end
 end
-
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
@@ -284,6 +291,5 @@ function select_default_macro_book()
     else
         set_macro_page(1, 1)
     end
-    send_command( "@wait 2; input /lockstyleset 6" )
+    send_command("@wait 2; input /lockstyleset 6")
 end
-

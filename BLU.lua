@@ -220,6 +220,8 @@ function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
+    gear.matk_head = { name = "Herculean Helm", augments = { 'Mag. Acc.+19 "Mag.Atk.Bns."+19', 'MND+1',
+        '"Mag.Atk.Bns."+14', } }
 
     gear.default.obi_waist = "Acuity Belt +1"
 
@@ -231,18 +233,26 @@ function init_gear_sets()
     sets.buff.Efflux = { legs = "Mavi Tayt +2" }
 
     -- Precast Sets
+    sets.enmity = {
+        waist = "Trance Belt"
+    }
+
     sets.SIRD = { ammo = "Staunch Tathlum +1",
-        neck = "Loricate Torque +1",
-        hands = "Amalric Gages +1", ring1 = "Evanescence Ring",
-        legs = "Carmine Cuisses +1", feet = "Amalric Nails +1"
+        neck = "Loricate Torque +1", ear1 = "Hasalz Earring", ear2 = "Magnetic Earring",
+        hands = "Rawhide Gloves", ring1 = "Evanescence Ring",
+        waist = "Resolute Belt", legs = "Carmine Cuisses +1", feet = "Amalric Nails +1"
     }
 
     sets.TreasureHunter = {
         head = "Volte Cap",
-        waist = "Chaac belt", legs = "Volte Hose", feet = "Volte Boots" }
+        waist = "Chaac belt", legs = "Volte Hose", feet = "Volte Boots"
+    }
 
     -- Precast sets to enhance JAs
     sets.precast.JA['Azure Lore'] = { hands = "Mirage Bazubands +2" }
+
+    sets.precast.RA = { range = "Albin Bane" }
+    sets.midcast.RA = sets.precast.RA
 
 
     -- Waltz set (chr and vit)
@@ -257,21 +267,22 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = { ammo = "Sapience Orb",
-        head = "Amalric Coif +1", neck = "Baetyl Pendant", ear1 = "Etiolation Earring", ear2 = "Loquacious Earring",
-        body = "Taeon Tabard", hands = "Leyline Gloves", ring1 = "Kishar Ring", ring2 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Ayanmo Cosciales +2", feet = "Amalric Nails +1" }
+        head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1",
+        ear2 = "Loquacious Earring",
+        body = "Adhemar Jacket +1", hands = "Leyline Gloves", ring1 = "Kishar Ring", ring2 = "Weatherspoon Ring +1",
+        back = "Fi Follet Cape +1", legs = "Enif Cosciales", feet = "Carmine Greaves +1" }
 
-    sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, { body = "Mavi Mintan +2" })
+    -- sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, { body = "Mavi Mintan +2" })
 
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = { ammo = "Crepuscular Pebble",
         head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
-        body = "Jhakri Robe +2", hands = "Adhemar Wristbands +1", ring1 = "Epaminondas's Ring", ring2 = "Regal Ring",
-        back = "Sacro Mantle", waist = "Fotia Belt", legs = "Carmine Cuisses +1", feet = "Jhakri Pigaches" }
+        body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Epaminondas's Ring", ring2 = "Regal Ring",
+        back = "Sacro Mantle", waist = "Fotia Belt", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
 
-    sets.precast.WS.acc = set_combine(sets.precast.WS,
+    sets.precast.WS.Acc = set_combine(sets.precast.WS,
         { head = "Malignance Chapeau", ear1 = "Crepuscular Earring", body = "Malignance Tabard",
             hands = "Malignance Gloves", legs = "Malignance Tights", feet = "Malignance Boots" })
 
@@ -283,67 +294,67 @@ function init_gear_sets()
         body = "Amalric Doublet +1", hands = "Jhakri Cuffs +2", ring1 = "Metamorph Ring +1", ring2 = "Archon Ring",
         back = "Cornflower Cape", waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS,
-        { neck = "Republican Platinum medal", hands = "Herculean Gloves", legs = "Herculean trousers",
-            waist = "Sailfi Belt +1", ring2 = "Regal Ring" })
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+        neck = "Republican Platinum medal", ear1 = "Ishvara Earring",
+        ring2 = "Regal Ring",
+        waist = "Sailfi Belt +1"
+    })
 
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
         head = "Blistering Sallet +1", ear2 = "Odr Earring",
-        body = "Ayanmo Corazza +2", ring1 = "Begrudging Ring",
-        legs = "Zoar Subligar +1" })
+        body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Begrudging Ring",
+        legs = "Gleti's Breeches", feet = "Gleti's Boots"
+    })
 
-
+    sets.midcast.Diaga = sets.TreasureHunter
 
     -- Midcast Sets
     sets.midcast.FastRecast = {
-        head = "Haruspex Hat", ear2 = "Loquacious Earring",
-        body = "Luhlaza Jubbah", hands = "Mavi Bazubands +2", ring1 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Enif Cosciales", feet = "Iuitl Gaiters +1" }
+        head = "Carmine Mask +1", ear1 = "Enchanter's Earring +1", ear2 = "Loquacious Earring",
+        body = "Adhemar Jacket +1", hands = "Leyline Gloves", ring1 = "Kishar Ring", ring2 = "Weatherspoon Ring +1",
+        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Enif Cosciales", feet = "Carmine Greaves +1"
+    }
 
     sets.midcast['Blue Magic'] = {
         head = "Malignance Chapeau", neck = "Combatant's Torque", ear1 = "Crepuscular Earring",
-        ear2 = "Dignitary's Earring",
+        ear2 = "Regal Earring",
         body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Jhakri Ring", ring2 = "Stikini Ring +1",
-        back = "Felicitas cape +1", waist = gear.ElementalObi, legs = "Malignance Tights", feet = "Malignance Boots" }
+        back = "Felicitas cape +1", waist = gear.ElementalObi, legs = "Malignance Tights", feet = "Malignance Boots"
+    }
 
     -- Physical Spells --
 
     sets.midcast['Blue Magic'].Physical = { ammo = "Ginsen",
-        head = "Adhemar Bonnet +1", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Adhemar Gloves +1", ring1 = "Epona's Ring", ring2 = "Petrov Ring",
+        head = "Adhemar Bonnet +1", neck = "Republican Platinum Medal", ear1 = "Brutal Earring", ear2 = "Telos Earring",
+        body = "Malignance Tabard", hands = "Adhemar Gloves +1", ring1 = "Hetairoi Ring", ring2 = "Epona's Ring",
         back = "Cornflower Cape", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
 
     sets.midcast['Blue Magic'].PhysicalAcc = { ammo = "Ginsen",
-        head = "Adhemar Bonnet +1", neck = "Combatant's Torque", ear1 = "Heartseeker Earring",
+        head = "Adhemar Bonnet +1", neck = "Republican Platinum Medal", ear1 = "Telos Earring",
         ear2 = "Crepuscular Earring",
         body = "Luhlaza Jubbah", hands = "Buremte Gloves", ring1 = "Rajas Ring", ring2 = "Patricius Ring",
         back = "Letalis Mantle", waist = "Sailfi Belt +1", legs = "Manibozho Brais", feet = "Qaaxo Leggings" }
 
     sets.midcast['Blue Magic'].PhysicalStr = set_combine(sets.midcast['Blue Magic'].Physical,
-        { body = "Iuitl Vest", hands = "Assimilator's Bazubands +1" })
+        {})
 
     sets.midcast['Blue Magic'].PhysicalDex = set_combine(sets.midcast['Blue Magic'].Physical,
-        { ammo = "Ginsen", body = "Iuitl Vest", hands = "Assimilator's Bazubands +1",
-            waist = "Chaac Belt", legs = "Manibozho Brais" })
+        {})
 
     sets.midcast['Blue Magic'].PhysicalVit = set_combine(sets.midcast['Blue Magic'].Physical,
-        { body = "Vanir Cotehardie", hands = "Assimilator's Bazubands +1", back = "Iximulew Cape" })
+        {})
 
     sets.midcast['Blue Magic'].PhysicalAgi = set_combine(sets.midcast['Blue Magic'].Physical,
-        { body = "Vanir Cotehardie", hands = "Malignance Gloves", ring2 = "Stormsoul Ring",
-            waist = "Chaac Belt", feet = "Iuitl Gaiters +1" })
+        {})
 
     sets.midcast['Blue Magic'].PhysicalInt = set_combine(sets.midcast['Blue Magic'].Physical,
-        { ear1 = "Dignitary's Earring", body = "Vanir Cotehardie", hands = "Assimilator's Bazubands +1",
-            ring2 = "Icesoul Ring", back = "Toro Cape", feet = "Hagondes Sabots" })
+        {})
 
     sets.midcast['Blue Magic'].PhysicalMnd = set_combine(sets.midcast['Blue Magic'].Physical,
-        { ear1 = "Crepuscular Earring", body = "Vanir Cotehardie", hands = "Assimilator's Bazubands +1",
-            ring2 = "Aquasoul Ring", back = "Refraction Cape" })
+        {})
 
     sets.midcast['Blue Magic'].PhysicalChr = set_combine(sets.midcast['Blue Magic'].Physical,
-        { body = "Vanir Cotehardie", hands = "Assimilator's Bazubands +1", back = "Refraction Cape",
-            waist = "Chaac Belt" })
+        {})
 
     sets.midcast['Blue Magic'].PhysicalHP = set_combine(sets.midcast['Blue Magic'].Physical)
 
@@ -353,7 +364,7 @@ function init_gear_sets()
     -- Magical Spells --
 
     sets.midcast['Blue Magic'].Magical = { ammo = "Pemphredo Tathlum",
-        head = "Herculean Helm", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
+        head = gear.matk_head, neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
         body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
         back = "Felicitas Cape +1", waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
 
@@ -401,12 +412,14 @@ function init_gear_sets()
     sets.midcast['Blue Magic']['White Wind'] = {
         head = "Adhemar Bonnet +1", neck = "Lavalier +1", ear1 = "Etiolation Earring", ear2 = "Loquacious Earring",
         body = "Vanir Cotehardie", hands = "Buremte Gloves", ring1 = "K'ayres Ring", ring2 = "Meridian Ring",
-        back = "Fravashi Mantle", waist = "Sailfi Belt +1", legs = "Enif Cosciales", feet = "Hagondes Sabots" }
+        back = "Fravashi Mantle", waist = "Sailfi Belt +1", legs = "Enif Cosciales", feet = "Hagondes Sabots"
+    }
 
     sets.midcast['Blue Magic'].Healing = {
         head = "Uk'uxkaj Cap", neck = "Nodens Gorget", ear1 = "Crepuscular Earring", ear2 = "Loquacious Earring",
         body = "Vanir Cotehardie", hands = "Telchine Gloves", ring1 = "Aquasoul Ring", ring2 = "Sirona's Ring",
-        back = "Pahtli Cape", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+        back = "Pahtli Cape", legs = "Hagondes Pants", feet = "Hagondes Sabots"
+    }
 
     sets.midcast['Blue Magic'].SkillBasedBuff = { ammo = "Mavi Tathlum",
         head = "Luhlaza Keffiyeh",
@@ -438,7 +451,8 @@ function init_gear_sets()
     sets.resting = {
         head = "Malignance Tabard", neck = "Bathy Choker +1",
         body = "Jhakri Robe +2", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
-        waist = "Austerity Belt", legs = "Malignance Tights", feet = "Malignance Boots" }
+        waist = "Austerity Belt", legs = "Malignance Tights", feet = "Malignance Boots"
+    }
 
     -- Idle sets
     sets.idle = { ammo = "Staunch Tathlum +1",
@@ -461,7 +475,7 @@ function init_gear_sets()
 
 
     -- Defense sets
-    sets.defense.PDT = { ammo = "Iron Gobbet",
+    sets.defense.PDT = { ammo = "Staunch Tathlum +1",
         head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Etiolation Earring",
         body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
         back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
@@ -480,12 +494,12 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = { ammo = "Ginsen",
         head = "Adhemar Bonnet +1", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Adhemar Wristbands +1", ring1 = "Petrov Ring", ring2 = "Epona's Ring",
+        body = "Malignance Tabard", hands = "Adhemar Wristbands +1", ring1 = "Hetairoi Ring", ring2 = "Epona's Ring",
         back = "Sacro Mantle", waist = "Sailfi Belt +1", legs = "Samnuha Tights", feet = "Malignance Boots" }
 
     sets.engaged.Acc = { ammo = "Ginsen",
         head = "Malignance Chapeau", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Petrov Ring", ring2 = "Epona's Ring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Hetairoi Ring", ring2 = "Epona's Ring",
         back = "Sacro Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
 
     sets.engaged.PDT = { ammo = "Ginsen",
@@ -497,10 +511,10 @@ function init_gear_sets()
     sets.engaged.Refresh = set_combine(sets.engaged, { body = "Jhakri Robe +2" })
 
     sets.engaged.DW = set_combine(sets.engaged,
-        { ear1 = "Suppanomimi", waist = "Reiki Yotai", legs = "Carmine Cuisses +1" })
+        { waist = "Reiki Yotai", legs = "Carmine Cuisses +1" })
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.Acc,
-        { ear1 = "Suppanomimi", waist = "Reiki Yotai", legs = "Carmine Cuisses +1" })
+        { waist = "Reiki Yotai", legs = "Carmine Cuisses +1" })
 
     sets.engaged.DW.Refresh = set_combine(sets.engaged.DW, { body = "Jhakri Robe +2" })
 

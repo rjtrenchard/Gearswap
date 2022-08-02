@@ -56,7 +56,9 @@ function job_setup()
     state.Buff['Dark Seal'] = buffactive['Dark Seal'] or false
     state.Buff['Blood Weapon'] = buffactive['Blood Weapon'] or false
 
-    state.Buff['Aftermath'] = (buffactive['Aftermath: Lv.1'] or buffactive['Aftermath: Lv.2'] or buffactive['Aftermath: Lv.3'] or buffactive['Aftermath']) or false
+    state.Buff['Aftermath'] = (
+        buffactive['Aftermath: Lv.1'] or buffactive['Aftermath: Lv.2'] or buffactive['Aftermath: Lv.3'] or
+            buffactive['Aftermath']) or false
 
 
     -- For th_action_check():
@@ -192,10 +194,14 @@ function job_helper()
         ['Zulfiqar'] = 'greatsword', ['Caladbolg'] = 'greatsword',
         ['Lycurgos'] = 'greataxe',
         ['Kaja Axe'] = 'axe', ['Dolichenus'] = 'axe',
-        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe', ['Anguta'] = 'scythe', ['Dacnomania'] = 'scythe', ['Misanthropy'] = 'scythe', ['Woeborn'] = 'scythe', ['Crepuscular Scythe'] = 'scythe',
+        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe',
+        ['Anguta'] = 'scythe', ['Dacnomania'] = 'scythe', ['Misanthropy'] = 'scythe', ['Woeborn'] = 'scythe',
+        ['Crepuscular Scythe'] = 'scythe',
         ['Loxotic Mace +1'] = 'club', ['Loxotic Mace'] = 'club', ['Warp Cudgel'] = 'club',
         ['empty'] = 'handtohand',
-        ['Blurred Shield'] = 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield', ["Smyth's Aspis"] = 'shield', ["Smyth's Ecu"] = 'shield', ["Smythe's Scutum"] = 'shield', ["Smythe's Shield"] = 'shield', ["Smythe's Escutcheon"] = "Shield",
+        ['Blurred Shield'] = 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',
+        ["Smyth's Aspis"] = 'shield', ["Smyth's Ecu"] = 'shield', ["Smythe's Scutum"] = 'shield',
+        ["Smythe's Shield"] = 'shield', ["Smythe's Escutcheon"] = "Shield",
         ['Utu Grip'] = 'grip', ['Caecus Grip'] = 'grip'
     }
     info.Weapons.REMA = S { 'Apocalypse', 'Ragnarok', 'Caladbolg', 'Redemption', 'Liberator', 'Anguta', 'Father Time' }
@@ -285,6 +291,9 @@ end
 function job_precast(spell, action, spellMap, eventArgs)
     -- set this so we know what to come back to later
     --info.recastWeapon = player.equipment.main
+    if buffactive['Dark Seal'] then
+        equip(set_combine(sets.precast.FC, sets.buff['Dark Seal']))
+    end
 
 end
 
@@ -310,6 +319,10 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             end
         end
     end
+
+    if buffactive['Dark Seal'] and spell.skill == 'Dark Magic' then
+        equip(sets.buff['Dark Seal'])
+    end
 end
 
 --Commented out because it is largely unused, but may be used in the future.
@@ -320,8 +333,14 @@ end
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
     -- Lock reraise items
-    if state.HybridMode.value == 'Reraise' or (state.DefenseMode.value == 'Physical' and state.PhysicalDefenseMode.value == 'Reraise') then
+    if state.HybridMode.value == 'Reraise' or
+        (state.DefenseMode.value == 'Physical' and state.PhysicalDefenseMode.value == 'Reraise') then
         equip(sets.Reraise)
+    end
+
+    -- Treasure Hunter handling
+    if state.TreasureMode.value == 'Tag' and S { 'Poisonga', 'Poison', 'Absorb-CHR' }:contains(spell.english) then
+        equip(sets.midcast[spell.english].TH)
     end
 
     -- Dark seal handling
@@ -340,20 +359,24 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
     -- Weapon swap handling
     if spell.skill == 'Dark Magic' and player.tp < 1000 then
-        if S { 'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II' }:contains(spell.english) and (sets.midcast['Drain'].Weapon.main ~= player.equipment.main) then
+        if S { 'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II' }:contains(spell.english) and
+            (sets.midcast['Drain'].Weapon.main ~= player.equipment.main) then
             setRecast()
             equip(sets.midcast['Drain'].Weapon)
             -- do not change weapons if AM3 is up
-        elseif S { 'Endark', 'Endark II' }:contains(spell.english) and (sets.midcast['Endark'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
+        elseif S { 'Endark', 'Endark II' }:contains(spell.english) and
+            (sets.midcast['Endark'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
             setRecast()
             equip(sets.midcast['Endark'].Weapon)
-        elseif spell.english == 'Dread Spikes' and (sets.midcast['Dread Spikes'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
+        elseif spell.english == 'Dread Spikes' and (sets.midcast['Dread Spikes'].Weapon.main ~= player.equipment.main)
+            and not buffactive['Aftermath: Lv.3'] then
             setRecast()
             equip(sets.midcast['Dread Spikes'].Weapon)
         end
     end
 
-    if S { 'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II' }:contains(spell.english) or spell.english:startswith('Absorb') then
+    if S { 'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II' }:contains(spell.english) or
+        spell.english:startswith('Absorb') then
         adjust_timers_darkmagic(spell, spellMap)
     end
 
@@ -364,16 +387,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
 
-    -- Treasure Hunter handling
-    if state.TreasureMode.value == 'Tag' and S { 'Poisonga', 'Poison', 'Absorb-CHR' }:contains(spell.english) then
-        equip(sets.midcast[spell.english].TH)
-    end
-
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
     -- set AM level in aftercast, this is needed for some reason because job_buff gets eaten.
-    if spell.type == 'WeaponSkill' and info.Weapons.REMA:contains(player.equipment.main) and info.AM.potential > info.AM.level then
+    if spell.type == 'WeaponSkill' and info.Weapons.REMA:contains(player.equipment.main) and
+        info.AM.potential > info.AM.level then
         info.AM.level = info.AM.potential
         classes.CustomMeleeGroups:clear()
         if data.weaponskills.relic[player.equipment.main] then
@@ -478,7 +497,8 @@ function job_buff_change(buff, gain)
             info.AM.level = 0
             update_combat_form()
             send_command('gs c update')
-        elseif S { 'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II' }:contains(buff) or buff:startswith('Absorb') then
+        elseif S { 'Dread Spikes', 'Drain II', 'Drain III', 'Endark', 'Endark II' }:contains(buff) or
+            buff:startswith('Absorb') then
             send_command('timers delete "' .. buff .. '"')
         end
     end
@@ -601,7 +621,7 @@ function setRecast()
     sets._Recast = {
         main = player.equipment.main,
         sub = player.equipment.sub,
-        ranged = player.equipment.range,
+        range = player.equipment.range,
         ammo = player.equipment.ammo
     }
     info._RecastFlag = true
@@ -609,7 +629,7 @@ end
 
 -- resets the Recast weapon set to nil
 function resetRecast()
-    sets._Recast = { main = nil, sub = nil, ranged = nil, ammo = nil }
+    sets._Recast = { main = nil, sub = nil, range = nil, ammo = nil }
     info._RecastFlag = false
 end
 
@@ -644,7 +664,7 @@ end
 function getWeaponTPBonus()
     local weapon = player.equipment.main
     local sub = player.equipment.sub
-    local ranged = player.equipment.range
+    local range = player.equipment.range
 
     local fencer = getFencerBonus()
 
@@ -796,10 +816,16 @@ function calculate_duration_darkmagic(spellName, spellMap)
 
     if player.equipment.feet == 'Ratri Sollerets' then mult = mult + 0.2 end
     if player.equipment.feet == 'Ratri Sollerets +1' then mult = mult + 0.25 end
-    if player.equipment.ring1 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult + 0.1 end
-    if player.equipment.ring2 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult + 0.1 end
+    if player.equipment.ring1 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult +
+            0.1
+    end
+    if player.equipment.ring2 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult +
+            0.1
+    end
 
-    if buffactive.DarkSeal and S { 'Abyss Burgeonet +2', "Fallen's Burgeonet", "Fallen's Burgeone +1", "Fallen's Burgeonet +2", "Fallen's Burgeonet +3" }:contains(player.equipment.head) then
+    if buffactive.DarkSeal and
+        S { 'Abyss Burgeonet +2', "Fallen's Burgeonet", "Fallen's Burgeone +1", "Fallen's Burgeonet +2",
+            "Fallen's Burgeonet +3" }:contains(player.equipment.head) then
         mult = mult + (info.JobPoints.DarkSealMerits * 0.1)
     end
 

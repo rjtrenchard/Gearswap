@@ -22,7 +22,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     state.OffenseMode:options('None', 'Normal')
-    state.CastingMode:options('Normal', 'Resistant', 'Proc')
+    state.CastingMode:options('Normal', 'Resistant', 'Low')
     state.IdleMode:options('Normal', 'PDT')
 
     state.MagicBurst = M(false, 'Magic Burst')
@@ -67,25 +67,20 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = { ammo = "Staunch Tathlum +1",
-        head = "Nahtirah Hat", ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie", ring1 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Orvail Pants +1", feet = "Chelona Boots +1" }
+    sets.precast.FC = { ammo = "Sapience Orb",
+        head = "Merlinic Hood", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = "Merlinic Jubbah", hands = "Telchine Gloves", ring1 = "Kishar Ring", ring2 = "Weatherspoon Ring +1",
+        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Lengo Pants", feet = "Amalric Nails +1" }
 
-    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
-
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, { neck = "Stoicheion Medal" })
-
-    sets.precast.FC.Cure = set_combine(sets.precast.FC, { body = "Heka's Kalasiris", back = "Pahtli Cape" })
-
-    sets.precast.FC.Curaga = sets.precast.FC.Cure
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, { head = empty, body = "Crepuscular Cloak" })
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         head = "Hagondes Hat", neck = "Combatant's Torque", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
         body = "Hagondes Coat", hands = "Yaoyotl Gloves", ring1 = "Rajas Ring", ring2 = "Icesoul Ring",
-        back = "Refraction Cape", waist = "Cognition Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+        back = "Refraction Cape", waist = "Cognition Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots"
+    }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Vidohunir'] = { ammo = "Dosis Tathlum",
@@ -99,7 +94,8 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         head = "Nahtirah Hat", ear2 = "Loquacious Earring",
         body = "Vanir Cotehardie", hands = "Bokwus Gloves", ring1 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Goading Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+        back = "Fi Follet Cape +1", waist = "Goading Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots"
+    }
 
     sets.midcast.Cure = { main = "Tamaxchi", sub = "Ammurapi Shield",
         head = "Nahtirah Hat", neck = "Incanter's Torque", ear2 = "Loquacious Earring",
@@ -109,60 +105,64 @@ function init_gear_sets()
     sets.midcast.Curaga = sets.midcast.Cure
 
     sets.midcast['Enhancing Magic'] = {
-        neck = "Incanter's Torque",
-        body = "Manasa Chasuble", hands = "Ayao's Gages",
-        waist = "Embla Sash", legs = "Portent Pants" }
+        head = "Befouled Crown", neck = "Incanter's Torque", ear1 = "Andoaa Earring", ear2 = "Mimir Earring",
+        body = "Anhur Robe", hands = "Ayao's Gages", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Shedir Seraweels", feet = "Telchine Pigaches"
+    }
 
-    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], { waist = "Siegel Sash" })
+    sets.midcast.Stoneskin = set_combine(sets.midcast["Enhancing Magic"], {
+        neck = "Nodens Gorget", ear1 = "Earthcry Earring",
+        waist = "Seigel Sash", legs = "Shedir Seraweels"
+    })
 
-    sets.midcast['Enfeebling Magic'] = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Sturm's Report",
-        head = "Nahtirah Hat", neck = "Weike Torque", ear1 = "Malignance Earring", ear2 = "Dignitary's Earring",
-        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Strendu Ring", ring2 = "Stikini Ring +1",
-        back = "Refraction Cape", legs = "Bokwus Slops", feet = "Bokwus Boots" }
+    sets.midcast['Enfeebling Magic'] = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Pemphredo Tathlum",
+        head = "Befouled Crown", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Regal Earring",
+        body = "Manasa Chasuble", ring1 = "Metamorph Ring +1", ring2 = "Stikini Ring +1",
+        back = "Refraction Cape", waist = "Luminary Sash", legs = "Bokwus Slops", feet = "Bokwus Boots" }
 
     sets.midcast.ElementalEnfeeble = sets.midcast['Enfeebling Magic']
 
-    sets.midcast['Dark Magic'] = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Sturm's Report",
-        head = "Nahtirah Hat", neck = "Aesir Torque", ear1 = "Malignance Earring", ear2 = "Dignitary's Earring",
-        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Strendu Ring", ring2 = "Stikini Ring +1",
-        back = "Refraction Cape", waist = "Goading Belt", legs = "Bokwus Slops", feet = "Bokwus Boots" }
+    sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], { main = "Daybreak", sub = "Ammurapi Shield" })
 
-    sets.midcast.Drain = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Sturm's Report",
-        head = "Nahtirah Hat", neck = "Aesir Torque", ear1 = "Malignance Earring", ear2 = "Dignitary's Earring",
-        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Excelsis Ring", ring2 = "Stikini Ring +1",
-        back = "Refraction Cape", waist = "Fucho-no-Obi", legs = "Bokwus Slops", feet = "Goetia Sabots +2" }
+    sets.midcast['Dark Magic'] = { main = "Rubicundity", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
+        head = "Pixie Hairpin +1", neck = "Aesir Torque", ear1 = "Malignance Earring", ear2 = "Mani Earring",
+        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Archon Ring", ring2 = "Evanescence Ring",
+        back = "Refraction Cape", waist = gear.DrainWaist, legs = "Bokwus Slops", feet = "Bokwus Boots" }
+
+    sets.midcast.Drain = { main = "Rubicundity", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
+        head = "Pixie Hairpin +1", neck = "Aesir Torque", ear1 = "Malignance Earring", ear2 = "Mani Earring",
+        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Archon Ring", ring2 = "Evanescence Ring",
+        back = "Refraction Cape", waist = gear.DrainWaist, legs = "Bokwus Slops", feet = "Bokwus Boots" }
 
     sets.midcast.Aspir = sets.midcast.Drain
 
-    sets.midcast.Stun = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Sturm's Report",
-        head = "Nahtirah Hat", neck = "Weike Torque", ear1 = "Malignance Earring", ear2 = "Dignitary's Earring",
-        body = "Hagondes Coat", hands = "Yaoyotl Gloves", ring1 = "Strendu Ring", ring2 = "Stikini Ring +1",
-        back = "Refraction Cape", waist = "Witful Belt", legs = "Orvail Pants +1", feet = "Bokwus Boots" }
-
-    sets.midcast.BardSong = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Sturm's Report",
-        head = "Nahtirah Hat", neck = "Weike Torque", ear1 = "Malignance Earring", ear2 = "Dignitary's Earring",
-        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Strendu Ring", ring2 = "Stikini Ring +1",
-        back = "Refraction Cape", legs = "Bokwus Slops", feet = "Bokwus Boots" }
+    sets.midcast.Stun = { main = "Rubicundity", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
+        head = "Pixie Hairpin +1", neck = "Aesir Torque", ear1 = "Malignance Earring", ear2 = "Mani Earring",
+        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Metamorph Ring +1", ring2 = "Evanescence Ring",
+        back = "Refraction Cape", waist = gear.DrainWaist, legs = "Bokwus Slops", feet = "Bokwus Boots" }
 
 
     -- Elemental Magic sets
 
     sets.midcast['Elemental Magic'] = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Dosis Tathlum",
-        head = "Hagondes Hat", neck = "Eddy Necklace", ear1 = "Hecate's Earring", ear2 = "Friomisi Earring",
-        body = "Hagondes Coat", hands = "Yaoyotl Gloves", ring1 = "Icesoul Ring", ring2 = "Metamorph Ring +1",
-        back = "Toro Cape", waist = gear.ElementalObi, legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+        head = "Cath Palug Crown", neck = "Sibyl Scarf", ear1 = "Malignance Earring", ear2 = "Regal Earring",
+        body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Freke Ring", ring2 = "Metamorph Ring +1",
+        back = "Toro Cape", waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
 
     sets.midcast['Elemental Magic'].Resistant = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Dosis Tathlum",
-        head = "Hagondes Hat", neck = "Eddy Necklace", ear1 = "Hecate's Earring", ear2 = "Friomisi Earring",
-        body = "Hagondes Coat", hands = gear.macc_hagondes, ring1 = "Icesoul Ring", ring2 = "Metamorph Ring +1",
-        back = "Toro Cape", waist = gear.ElementalObi, legs = "Hagondes Pants", feet = "Bokwus Boots" }
+        head = "Cath Palug Crown", neck = "Sibyl Scarf", ear1 = "Malignance Earring", ear2 = "Regal Earring",
+        body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Freke Ring", ring2 = "Metamorph Ring +1",
+        back = "Toro Cape", waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
 
-    sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], { sub = "Wizzan Grip" })
-    sets.midcast['Elemental Magic'].HighTierNuke.Resistant = set_combine(sets.midcast['Elemental Magic'], { sub = "Wizzan Grip" })
+    sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {})
+    sets.midcast['Elemental Magic'].HighTierNuke.Resistant = set_combine(sets.midcast['Elemental Magic'],
+        {})
+
+    sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], { head = empty, body = "Crepuscular Cloak" })
 
 
-    -- Minimal damage gear for procs.
-    sets.midcast['Elemental Magic'].Proc = { main = "Earth Staff", sub = "Enki Strap", ammo = "Staunch Tathlum +1",
+    -- Minimal damage gear for Lows.
+    sets.midcast['Elemental Magic'].Low = { main = "Earth Staff", sub = "Enki Strap", ammo = "Staunch Tathlum +1",
         head = "Nahtirah Hat", neck = "Loricate Torque +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
         body = "Manasa Chasuble", hands = "Serpentes Cuffs", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
         back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Nares Trews", feet = "Chelona Boots +1" }
@@ -173,8 +173,8 @@ function init_gear_sets()
 
     -- Resting sets
     sets.resting = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Clarus Stone",
-        head = "Nefer Khat +1", neck = "Grandiose Chain",
-        body = "Heka's Kalasiris", hands = "Serpentes Cuffs", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
+        head = "Befouled Crown", neck = "Bathy Choker +1",
+        body = "Heka's Kalasiris", hands = "Serpentes Cuffs", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
         waist = "Austerity Belt", legs = "Nares Trews", feet = "Serpentes Sabots" }
 
 
@@ -182,8 +182,8 @@ function init_gear_sets()
 
     -- Normal refresh idle set
     sets.idle = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Staunch Tathlum +1",
-        head = "Nefer Khat +1", neck = "Bathy Choker +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
-        body = "Heka's Kalasiris", hands = "Serpentes Cuffs", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
+        head = "Nefer Khat +1", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
+        body = "Heka's Kalasiris", hands = "Serpentes Cuffs", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
         back = "Umbra Cape", waist = "Hierarch Belt", legs = "Nares Trews", feet = "Crier's Gaiters" }
 
     -- Idle mode that keeps PDT gear on, but doesn't prevent normal gear swaps for precast/etc.
@@ -194,10 +194,7 @@ function init_gear_sets()
 
     -- Idle mode scopes:
     -- Idle mode when weak.
-    sets.idle.Weak = { main = "Bolelabunga", sub = "Ammurapi Shield", ammo = "Staunch Tathlum +1",
-        head = "Hagondes Hat", neck = "Loricate Torque +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
-        body = "Hagondes Coat", hands = "Yaoyotl Gloves", ring1 = "Defending Ring", ring2 = "Paguroidea Ring",
-        back = "Umbra Cape", waist = "Hierarch Belt", legs = "Nares Trews", feet = "Hagondes Sabots" }
+    sets.idle.Weak = sets.idle.PDT
 
     -- Town gear.
     sets.idle.Town = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Staunch Tathlum +1",
@@ -236,9 +233,10 @@ function init_gear_sets()
 
     -- Normal melee group
     sets.engaged = {
-        head = "Zelus Tiara", neck = "Combatant's Torque", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
-        body = "Hagondes Coat", hands = "Bokwus Gloves", ring1 = "Rajas Ring", ring2 = "K'ayres Ring",
-        back = "Umbra Cape", waist = "Goading Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+        head = "Zelus Tiara", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Crepuscular Earring",
+        body = "Hagondes Coat", hands = "Bokwus Gloves", ring1 = "Petrov Ring", ring2 = "Hetairoi Ring",
+        back = "Umbra Cape", waist = "Goading Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots"
+    }
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -252,8 +250,8 @@ function job_precast(spell, action, spellMap, eventArgs)
         gear.default.obi_waist = "Goading Belt"
     elseif spell.skill == 'Elemental Magic' then
         gear.default.obi_waist = "Sekhmet Corset"
-        if state.CastingMode.value == 'Proc' then
-            classes.CustomClass = 'Proc'
+        if state.CastingMode.value == 'Low' then
+            classes.CustomClass = 'Low'
         end
     end
 end

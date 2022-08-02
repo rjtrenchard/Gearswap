@@ -85,17 +85,18 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = { ammo = "Staunch Tathlum +1",
-        head = "Nahtirah Hat", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie", hands = "Gendewitha Gages +1", ring1 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Orvail Pants +1", feet = "Academic's Loafers" }
+    sets.precast.FC = { ammo = "Sapience Orb",
+        head = "Merlinic Hood", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = "Merlinic Jubbah", hands = "Gendewitha Gages +1", ring1 = "Weatherspoon Ring +1",
+        ring2 = { name = "Gelatinous Ring +1", priority = 10 },
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Lengo Pants", feet = "Amalric Nails +1" }
 
     sets.precast.FC['Stoneskin'] = set_combine(sets.midcast['Enhancing Magic'], { waist = "Siegel Sash" })
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC,
-        { neck = "Sanctity Necklace", ear2 = "Barkarole Earring" })
+        {})
 
     sets.precast.FC['Stoneskin'] = set_combine(sets.precast.FC['Enhancing Magic'], { head = "Befouled Crown" })
 
@@ -128,7 +129,8 @@ function init_gear_sets()
     sets.midcast.Cursna = {
         neck = "Malison Medallion",
         hands = "Hieros Mittens", ring1 = "Haoma's Ring", ring2 = "Haoma's Ring",
-        feet = "Gendewitha Galoshes +1" }
+        feet = "Gendewitha Galoshes +1"
+    }
 
     sets.midcast['Enhancing Magic'] = { main = "Grioavolr", sub = "Enki Strap", ammo = "Savant's Treatise",
         head = "Savant's Bonnet +2", neck = "Incanter's Torque",
@@ -147,8 +149,8 @@ function init_gear_sets()
 
 
     -- Custom spell classes
-    sets.midcast.MndEnfeebles = { main = "Grioavolr", sub = "Enki Strap", ammo = "Sturm's Report",
-        head = "Nahtirah Hat", neck = "Weike Torque", ear1 = "Barkarole Earring", ear2 = "Malignance Earring",
+    sets.midcast.MndEnfeebles = { main = "Grioavolr", sub = "Enki Strap", ammo = "Pemphredo Tathlum",
+        head = "Nahtirah Hat", neck = "Weike Torque", ear1 = "Regal Earring", ear2 = "Malignance Earring",
         body = "Manasa Chasuble", hands = "Yaoyotl Gloves", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
         back = "Refraction Cape", waist = "Demonry Sash", legs = "Bokwus Slops", feet = "Bokwus Boots" }
 
@@ -183,7 +185,7 @@ function init_gear_sets()
 
     -- Elemental Magic sets are default for handling low-tier nukes.
     sets.midcast['Elemental Magic'] = { main = "Grioavolr", sub = "Enki Strap", ammo = "Ghastly Tathlum +1",
-        head = "Cath Palug Crown", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Malignance Earring",
+        head = "Cath Palug Crown", neck = "Sibyl Scarf", ear1 = "Regal Earring", ear2 = "Malignance Earring",
         body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Freke Ring", ring2 = "Metamorph Ring +1",
         back = "Toro Cape", waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
 

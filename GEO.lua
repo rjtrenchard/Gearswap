@@ -37,13 +37,13 @@ function init_gear_sets()
     gear.EnhancingFeet = { name = "Telchine Pigaches",
         augments = { 'Mag. Evasion+21', 'Song spellcasting time -7%', 'Enh. Mag. eff. dur. +9', } }
 
-    gear.CureHands = { name = "Telchine Gloves", augments = { '"Cure" potency +7%', '"Regen" potency +3' } }
+    gear.CureHands = { name = "Telchine Gloves", augments = { 'Mag. Evasion+23', '"Fast Cast"+5', '"Regen" potency+3', } }
 
     gear.RegenHead = { name = "Telchine Cap", augments = { '"Regen" potency+3', } }
     gear.RegenBody = { name = "Telchine Chasuble", augments = { '"Regen" potency+3', } }
     gear.RegenHands = gear.CureHands
     gear.RegenLegs = { name = "Telchine Braconi", augments = { '"Regen" potency+3', } }
-    gear.RegenFeet = { name = "Telchine Pigaches", augments = { '"Regen" potency+3', } }
+    gear.RegenFeet = { name = "Telchine Pigaches", augments = { '"Fast Cast"+2', '"Regen" potency+3', } }
 
     gear.default.obi_waist = "Acuity Belt +1"
     gear.default.drain_waist = "Fucho-no-Obi"
@@ -67,10 +67,10 @@ function init_gear_sets()
     sets.precast.JA['Life cycle'] = { body = "Geomancy Tunic" }
 
     -- Fast cast sets for spells
-    sets.precast.FC = { --ammo="Staunch Tathlum +1",
-        head = "Cath Palug Crown", neck = "Baetyl Pendant", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie", ring1 = "Rahab Ring", ring2 = "Kishar Ring",
-        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "", feet = "" }
+    sets.precast.FC = { range = "Dunna",
+        head = "Merlinic Hood", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = "Merlinic Jubbah", hands = "Telchine Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Geomancy Pants +1", feet = "Amalric Nails +1" }
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC,
         { main = "Daybreak", sub = "Ammurapi Shield", back = "Pahtli Cape" })
@@ -139,13 +139,15 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Acc = set_combine(sets.midcast['Elemental Magic'], {
         head = empty, neck = "Incanter's Torque", ear1 = "Crepuscular Earring", ear2 = "Malignance Earring",
         body = "Cohort Cloak +1", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
-        waist = "Acuity Belt +1" })
+        waist = "Acuity Belt +1"
+    })
     sets.midcast.MagicBurst = { neck = "Mizukage-no-kubikazari", ring1 = "Jhakri Ring", ring2 = "Mujin Band",
         feet = "Jhakri Pigaches +2" }
 
     sets.midcast['Impact'] = set_combine(sets.midcast['Elemental Magic'].Acc, {
         head = empty,
-        body = "Crepuscular Cloak", ring1 = "Archon Ring" }
+        body = "Crepuscular Cloak", ring1 = "Archon Ring"
+    }
     )
 
     sets.midcast['Dark Magic'] = { main = "Rubicundity", sub = "Ammurapi Shield", ammo = "Ghastly Tathlum +1",
@@ -186,7 +188,8 @@ function init_gear_sets()
 
     sets.midcast['Enfeebling Magic'] = {
         head = "Befouled Crown", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Dignitary's Earring",
-        ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1" }
+        ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1"
+    }
     sets.midcast['Dispelga'] = set_combine(sets.midcast['Enfeebling Magic'], { main = "Daybreak" })
 
     sets.midcast.Poison = set_combine(sets.midcast['Enfeebling Magic'], {

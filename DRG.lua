@@ -10,7 +10,6 @@ function get_sets()
     include('Mote-Include.lua')
 end
 
-
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
     state.Buff.Hasso = buffactive.Hasso or false
@@ -32,7 +31,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
 
     update_combat_form()
-    
+
     -- Additional local binds
     send_command('bind ^` input /ja "Hasso" <me>')
     send_command('bind !` input /ja "Seigan" <me>')
@@ -40,24 +39,23 @@ function user_setup()
     select_default_macro_book()
 end
 
-
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
     send_command('unbind ^`')
     send_command('unbind !-')
 end
 
-
 -- Define sets and vars used by this job file.
 function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    
+    sets.enmity = { waist = "Trance Belt" }
+
     -- Precast Sets
     -- Precast sets to enhance JAs
-    sets.precast.JA['Ancient Circle'] = {head="Myochin Kabuto"}
-    sets.precast.JA['Dragonbreaker'] = {hands="Saotome Kote +2"}
+    sets.precast.JA['Ancient Circle'] = { head = "Myochin Kabuto" }
+    sets.precast.JA['Dragonbreaker'] = { hands = "Saotome Kote +2" }
     sets.precast.JA['Super Jump'] = {}
     sets.precast.JA['Spirit Link'] = {}
     sets.precast.JA['Spirit Bond'] = {}
@@ -66,24 +64,29 @@ function init_gear_sets()
     sets.precast.JA['Spirit Jump'] = sets.precast.JA['Jump']
     sets.precast.JA['Soul Jump'] = sets.precast.JA['Jump']
 
+    sets.precast.FC = { ammo = "Sapience Orb",
+        heads = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1",
+        ear2 = "Loquacious Earring",
+        body = "Sacro Breastplate", hands = "Leyline Gloves", ring1 = "Rahab Ring", ring2 = "Weatherspoon Ring +1",
+        legs = "Enif Cosciales", feet = "Carmine Greaves +1" }
 
     -- Waltz set (chr and vit)
-    sets.precast.Waltz = {ammo="Sonia's Plectrum",
-        head="Sulevia's Mask +1",
-        body="Otronif Harness +1",hands="Buremte Gloves",ring1="Spiral Ring",
-        back="Iximulew Cape",waist="Caudata Belt",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
-        
+    sets.precast.Waltz = { ammo = "Sonia's Plectrum",
+        head = "Sulevia's Mask +1",
+        body = "Otronif Harness +1", hands = "Buremte Gloves", ring1 = "Spiral Ring",
+        back = "Iximulew Cape", waist = "Caudata Belt", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1" }
+
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
 
-       
+
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {ammo="Ginsen",
-        head="Sulevia's Mask +1",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Moonshade Earring",
-        body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Rajas Ring",ring2="Spiral Ring",
-        back="Atheling Mantle",waist="Fotia Belt",legs="Sulevia's Cuisses +2",feet="Sulevia's Leggings +2"}
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {back="Letalis Mantle"})
+    sets.precast.WS = { ammo = "Ginsen",
+        head = "Sulevia's Mask +1", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Rajas Ring", ring2 = "Spiral Ring",
+        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, { back = "Letalis Mantle" })
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS, {})
@@ -98,7 +101,7 @@ function init_gear_sets()
     sets.precast.WS['Camlann\'s Torment'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Camlann\'s Torment'].Mod = set_combine(sets.precast.WS['Camlann\'s Torment'], {})
 
-    
+
     sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS, {})
     sets.precast.WS['Drakesbane'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Drakesbane'].Mod = set_combine(sets.precast.WS['Drakesbane'], {})
@@ -109,52 +112,57 @@ function init_gear_sets()
 
     -- Midcast Sets
     sets.midcast.FastRecast = {
-        head="Sulevia's Mask +1",
-        body="Otronif Harness +1",hands="Otronif Gloves",
-        legs="Flamma Dirs",feet="Otronif Boots +1"}
+        head = "Sulevia's Mask +1",
+        body = "Otronif Harness +1", hands = "Otronif Gloves",
+        legs = "Flamma Dirs", feet = "Otronif Boots +1"
+    }
 
-    
+
     -- Sets to return to when not performing an action.
-    
+
     -- Resting sets
-    sets.resting = {neck="Bathy Choker +1",ring1="Sheltered Ring",ring2="Defending Ring"}
-    
+    sets.resting = { neck = "Bathy Choker +1", ring1 = "Sheltered Ring", ring2 = "Defending Ring" }
+
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
-    sets.idle.Town = {sub="Utu Grip",ammo="Ginsen",
-        head="Sulevia's Mask +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Sulevia's Platemail +2",hands="Sulevia's Gauntlets +1",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Atheling Mantle",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Sulevia's Leggings +2"}
-    
+    sets.idle.Town = { sub = "Utu Grip", ammo = "Ginsen",
+        head = "Sulevia's Mask +1", neck = "Combatant's Torque", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring",
+        back = "Atheling Mantle", waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Sulevia's Leggings +2" }
+
     sets.idle.Field = {
-        head="Sulevia's Mask +1",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Danzo Sune-ate"}
+        head = "Sulevia's Mask +1", neck = "Bathy Choker +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Danzo Sune-ate"
+    }
 
     sets.idle.Weak = {
-        head="Twilight Helm",neck="Bathy Choker +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Sheltered Ring",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Danzo Sune-ate"}
-    
+        head = "Twilight Helm", neck = "Bathy Choker +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Crepuscular Mail", hands = "Buremte Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Danzo Sune-ate"
+    }
+
     -- Defense sets
-    sets.defense.PDT = {ammo="Iron Gobbet",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2=gear.DarkRing.physical,
-        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
+    sets.defense.PDT = { ammo = "Staunch Tathlum +1",
+        head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = gear.DarkRing.physical,
+        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1" }
 
     sets.defense.Reraise = {
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Crepuscular Mail",hands="Buremte Gloves",ring1="Defending Ring",ring2="Defending Ring",
-        back="Shadow Mantle",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
+        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Crepuscular Mail", hands = "Buremte Gloves", ring1 = "Defending Ring", ring2 = "Defending Ring",
+        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1"
+    }
 
-    sets.defense.MDT = {ammo="Demonry Stone",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="Shadow Ring",
-        back="Engulfer Cape",waist="Flume Belt +1",legs="Karieyh Brayettes +1",feet="Otronif Boots +1"}
+    sets.defense.MDT = { ammo = "Demonry Stone",
+        head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = "Shadow Ring",
+        back = "Engulfer Cape", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1" }
 
-    sets.Kiting = {feet="Danzo Sune-ate"}
+    sets.Kiting = { feet = "Danzo Sune-ate" }
 
-    sets.Reraise = {head="Twilight Helm",body="Crepuscular Mail"}
+    sets.Reraise = { head = "Twilight Helm", body = "Crepuscular Mail" }
 
     -- Engaged sets
 
@@ -162,67 +170,66 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
-    sets.engaged = {ammo="Ginsen",
-        head="Flamma Zucchetto +2",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Crepuscular Earring",
-        body="Flamma Korazin +2",hands="Flamma Manopolas +2",ring1="Rajas Ring",ring2="Flamma Ring",
-        back="Atheling Mantle",waist="Sailfi Belt +1",legs="Hizamaru Hizayoroi",feet="Flamma Gambieras +2"}
-    sets.engaged.Acc = {ammo="Ginsen",
-        head="Sulevia's Mask +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Gorney Haubert +1",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
-        back="Letalis Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
-    sets.engaged.PDT = {ammo="Ginsen",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
-        back="Iximulew Cape",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
-    sets.engaged.Acc.PDT = {ammo="Honed Tathlum",
-        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
-        back="Letalis Mantle",waist="Goadingj Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
-    sets.engaged.Reraise = {ammo="Ginsen",
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
-        back="Ik Cape",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
-    sets.engaged.Acc.Reraise = {ammo="Ginsen",
-        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
-        back="Letalis Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
-        
+    sets.engaged = { ammo = "Ginsen",
+        head = "Flamma Zucchetto +2", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
+        body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Hetairoi Ring", ring2 = "Niqmaddu Ring",
+        back = "Atheling Mantle", waist = "Sailfi Belt +1", legs = "Flamma Dirs +2", feet = "Flamma Gambieras +2" }
+    sets.engaged.Acc = { ammo = "Ginsen",
+        head = "Gleti's Mask", neck = "Combatant's Torque", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
+        body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
+        back = "Letalis Mantle", waist = "Sailfi Belt +1", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
+    sets.engaged.PDT = { ammo = "Ginsen",
+        head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Telos Earring",
+        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = "Niqmaddu Ring",
+        back = "Iximulew Cape", waist = "Sailfi Belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
+    sets.engaged.Acc.PDT = { ammo = "Ginsen",
+        head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
+        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = "Niqmaddu Ring",
+        back = "Letalis Mantle", waist = "Sailfi Belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
+    sets.engaged.Reraise = { ammo = "Ginsen",
+        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Telos Earring",
+        body = "Crepuscular Mail", hands = "Otronif Gloves", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
+        back = "Ik Cape", waist = "Sailfi Belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
+    sets.engaged.Acc.Reraise = { ammo = "Ginsen",
+        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
+        body = "Crepuscular Mail", hands = "Otronif Gloves", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
+        back = "Letalis Mantle", waist = "Sailfi Belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
+
     -- Melee sets for in Adoulin, which has an extra 10 Save TP for weaponskills.
     -- Delay 450 GK, 35 Save TP => 89 Store TP for a 4-hit (49 Store TP in gear), 2 Store TP for a 5-hit
---    sets.engaged.Adoulin = {ammo="Ginsen",
---        head="Sulevia's Mask +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
---        body="Gorney Haubert +1",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
---        back="Takaha Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}]
---    sets.engaged.Adoulin.Acc = {ammo="Ginsen",
---        head="Sulevia's Mask +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
---        body="Unkai Domaru +2",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
---        back="Letalis Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
---    sets.engaged.Adoulin.PDT = {ammo="Ginsen",
---        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
---        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
---        back="Iximulew Cape",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
---    sets.engaged.Adoulin.Acc.PDT = {ammo="Honed Tathlum",
---        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
---        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
---        back="Letalis Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
---    sets.engaged.Adoulin.Reraise = {ammo="Ginsen",
---        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
---        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
---        back="Ik Cape",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
---    sets.engaged.Adoulin.Acc.Reraise = {ammo="Ginsen",
---        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
---        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
---        back="Letalis Mantle",waist="Goading Belt",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --    sets.engaged.Adoulin = {ammo="Ginsen",
+    --        head="Sulevia's Mask +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+    --        body="Gorney Haubert +1",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
+    --        back="Takaha Mantle",waist="Sailfi Belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}]
+    --    sets.engaged.Adoulin.Acc = {ammo="Ginsen",
+    --        head="Sulevia's Mask +1",neck="Combatant's Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+    --        body="Unkai Domaru +2",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
+    --        back="Letalis Mantle",waist="Sailfi Belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --    sets.engaged.Adoulin.PDT = {ammo="Ginsen",
+    --        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+    --        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
+    --        back="Iximulew Cape",waist="Sailfi Belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --    sets.engaged.Adoulin.Acc.PDT = {ammo="Ginsen",
+    --        head="Sulevia's Mask +1",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+    --        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
+    --        back="Letalis Mantle",waist="Sailfi Belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --    sets.engaged.Adoulin.Reraise = {ammo="Ginsen",
+    --        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+    --        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+    --        back="Ik Cape",waist="Sailfi Belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --    sets.engaged.Adoulin.Acc.Reraise = {ammo="Ginsen",
+    --        head="Twilight Helm",neck="Loricate Torque +1",ear1="Bladeborn Earring",ear2="Steelflash Earring",
+    --        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+    --        back="Letalis Mantle",waist="Sailfi Belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 
 
-    sets.buff.Sekkanoki = {hands="Unkai Kote +2"}
-    sets.buff.Sengikori = {feet="Unkai Sune-ate +2"}
-    sets.buff['Meikyo Shisui'] = {feet="Sakonji Sune-ate"}
+    sets.buff.Sekkanoki = { hands = "Unkai Kote +2" }
+    sets.buff.Sengikori = { feet = "Unkai Sune-ate +2" }
+    sets.buff['Meikyo Shisui'] = { feet = "Sakonji Sune-ate" }
 end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
@@ -232,9 +239,9 @@ end
 function job_pretarget(spell, action, spellMap, eventArgs)
     if spell.type == 'WeaponSkill' then
         -- Change any GK weaponskills to polearm weaponskill if we're using a polearm.
-        if player.equipment.main=='Quint Spear' or player.equipment.main=='Quint Spear' then
+        if player.equipment.main == 'Quint Spear' or player.equipment.main == 'Quint Spear' then
             if spell.english:startswith("Tachi:") then
-                send_command('@input /ws "Penta Thrust" '..spell.target.raw)
+                send_command('@input /ws "Penta Thrust" ' .. spell.target.raw)
                 eventArgs.cancel = true
             end
         end
@@ -256,7 +263,6 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         end
     end
 end
-
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
@@ -291,7 +297,7 @@ function update_combat_form()
     --if areas.Adoulin:contains(world.area) and buffactive.ionis then
     --    state.CombatForm:set('Adoulin')
     --else
-        state.CombatForm:reset()
+    state.CombatForm:reset()
     --end
 end
 
@@ -309,6 +315,5 @@ function select_default_macro_book()
     else
         set_macro_page(1, 14)
     end
-    send_command( "@wait 2; input /lockstyleset 10" )
+    send_command("@wait 2; input /lockstyleset 10")
 end
-

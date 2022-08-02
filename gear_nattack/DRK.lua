@@ -2,6 +2,8 @@
 -- Gear and data for DRK
 -------------------------------------------------------------------------------------------------------------------
 
+-- Base HP as Tarutaru: 1907
+
 -- Setup vars that are user-dependent.
 function include_job_stats()
 
@@ -89,7 +91,7 @@ function include_job_sets()
         back = "Reiki Cloak", waist = "Eschan Stone", legs = "Sakpata's Cuisses",
         feet = { name = "Ratri Sollerets +1", priority = 10 },
     }
-    sets.HP_Low = set_combine(sets.naked, { main = gear.MainHand, sub = gear.SubHand, ranged = "", })
+    sets.HP_Low = set_combine(sets.naked, { main = gear.MainHand, sub = gear.SubHand, range = "", })
 
     sets.Sleeping = { neck = "Berserker's Torque" }
 
@@ -102,7 +104,8 @@ function include_job_sets()
     sets.SIRD = { ammo = "Staunch Tathlum +1",
         head = gear.SIRDhead,
         hands = gear.SIRDhands, ring2 = "Evanescence Ring",
-        back = gear.SIRDcape, waist = "Sanctuary Obi +1", legs = "Founder's Hose", feet = gear.SIRDfeet }
+        back = gear.SIRDcape, legs = "Founder's Hose", feet = gear.SIRDfeet }
+
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {}
 
@@ -110,7 +113,9 @@ function include_job_sets()
     sets.precast.Waltz['Healing Waltz'] = {}
 
 
-    sets.TreasureHunter = { head = "Volte Cap", hands = gear.THhands, waist = "Chaac Belt" }
+    sets.TreasureHunter = { ammo = "Perfect Lucky Egg",
+        head = "Volte Cap",
+        legs = "Volte Hose", feet = "Volte Boots" }
 
 
 
@@ -231,7 +236,8 @@ function include_job_sets()
     sets.precast.WS['Torcleaver'] = set_combine(sets.precast.WS.SingleHit, {
         head = "Sakpata's Helm", neck = "Abyssal Beads +2",
         hands = "Sakpata's Gauntlets", ring1 = "Epaminondas's Ring", ring2 = "Niqmaddu Ring",
-        back = gear.torcleaver_cape, waist = "Fotia Belt" })
+        back = gear.torcleaver_cape, waist = "Fotia Belt"
+    })
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS.Acc,
         { head = "Sakpata's Helm", hands = "Sakpata's Gauntlets", back = gear.torcleaver_cape, waist = "Fotia Belt" })
     sets.precast.WS['Torcleaver'].Mod = set_combine(sets.precast.WS['Torcleaver'],
@@ -317,7 +323,8 @@ function include_job_sets()
     sets.resting = {
         neck = "Bathy Choker +1",
         body = "Lugra Cloak +1", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        waist = "Austerity belt +1" }
+        waist = "Austerity belt +1"
+    }
 
     -------------------------------------------------------------------------------------------------------------------
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
@@ -333,7 +340,6 @@ function include_job_sets()
         head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Defending Ring",
         back = gear.melee_cape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Sakpata's Leggings" })
-    sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
     sets.idle.Weak = { ammo = "Staunch Tathlum +1",
         head = empty, neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
@@ -341,6 +347,7 @@ function include_job_sets()
         back = gear.melee_cape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Sakpata's Leggings" }
 
     sets.idle.PDT = set_combine(sets.idle.Field, { head = "Sakpata's Helm", body = "Sakpata's Plate" })
+    sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
     sets.idle.Reraise = sets.idle.Weak
 
@@ -350,7 +357,7 @@ function include_job_sets()
     -------------------------------------------------------------------------------------------------------------------
     -- Defense sets
     -------------------------------------------------------------------------------------------------------------------
-    sets.defense.PDT = { ammo = "Iron Gobbet",
+    sets.defense.PDT = { ammo = "Staunch Tathlum +1",
         head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Archon Ring",
         back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
@@ -358,7 +365,8 @@ function include_job_sets()
     sets.defense.Reraise = {
         head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
         body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Paguroidea Ring",
-        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Ignominy Flanchard +1", feet = "Flamma Gambieras +2" }
+        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Ignominy Flanchard +1", feet = "Flamma Gambieras +2"
+    }
 
     sets.defense.MDT = { ammo = "Staunch Tathlum +1",
         head = "Flamma Zucchetto +2", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
@@ -375,20 +383,17 @@ function include_job_sets()
     -------------------------------------------------------------------------------------------------------------------
 
     sets.precast.FC = { ammo = "Sapience Orb",
-        head = "Sakpata's Helm", neck = "Baetyl Pendant", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = { name = "Sacro Breastplate", priority = 10 }, hands = "Sakpata's Gauntlets", ring1 = "Kishar Ring",
-        ring2 = "Rahab Ring",
-        back = gear.casting_cape, waist = "Sailfi Belt +1", legs = "Carmine Cuisses +1", feet = "Odyssean Greaves" }
+        head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = { name = "Sacro Breastplate", priority = 9 }, hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1",
+        ring2 = { name = "Gelatinous Ring +1", priority = 10 },
+        back = gear.casting_cape, legs = "Enif Cosciales", feet = "Odyssean Greaves" }
 
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
-
-    sets.precast['Impact'] = set_combine(sets.precast.FC['Elemental Magic'], { head = "", body = "Crepuscular cloak" })
-    sets.precast.FC['Impact'] = set_combine(sets.precast.FC['Elemental Magic'], { head = "", body = "Crepuscular cloak" })
-
-    sets.precast.FC['Dark Magic'] = set_combine(sets.precast.FC, {
-        head = "Fallen's Burgeonet +3",
+    sets.precast['Impact'] = set_combine(sets.precast.FC['Elemental Magic'], {
+        head = empty, body = "Crepuscular cloak", ring2 = "Kishar Ring"
     })
-    sets.precast['Dark Magic'] = sets.precast.FC['Dark Magic']
+    sets.precast.FC['Impact'] = sets.precast.Impact
+
+    sets.precast['Dark Magic'] = sets.precast.FC
     sets.precast.FC['Drain III'] = set_combine(sets.precast.FC['Dark Magic'], { neck = "Unmoving Collar +1", })
     sets.precast.FC['Drain II'] = sets.precast.FC['Drain III']
     sets.precast.FC['Drain'] = sets.precast.FC['Drain III']
@@ -401,19 +406,21 @@ function include_job_sets()
     -- Midcast Sets
     -------------------------------------------------------------------------------------------------------------------
     sets.midcast.FastRecast = { ammo = "Sapience Orb",
-        head = "Sakpata's Helm", neck = "Baetyl Pendant", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Sacro Breastplate", hands = "Flamma Manopolas +2", ring1 = "Kishar Ring", ring2 = "Rahab Ring",
-        back = gear.casting_cape, waist = "Sailfi Belt +1", legs = "Carmine Cuisses +1", feet = "Flamma Gambieras +2" }
+        head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = "Sacro Breastplate", hands = "Leyline Gloves", ring1 = "Kishar Ring", ring2 = "Rahab Ring",
+        back = gear.casting_cape, waist = "Sailfi Belt +1", legs = "Limbo Trousers", feet = "Carmine Greaves +1" }
+
+    sets.midcast.Trust = sets.SIRD
 
     sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.FastRecast, {
-        head = "Flamma Zucchetto +2", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Crepuscular Earring",
-        body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
+        head = "Carmine Mask +1", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Vor Earring",
+        body = "Crepucular Mail", hands = "Flamma Manopolas +2", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
         back = gear.casting_cape, waist = "Eschan Stone", legs = "Sakpata's Cuisses", feet = "Flamma Gambieras +2"
     })
 
 
-    sets.midcast['Dark Magic'] = { ammo = "Sturm's Report",
-        head = "Ignominy Burgonet +3", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Mani Earring",
+    sets.midcast['Dark Magic'] = { ammo = "Pemphredo Tathlum",
+        head = "Ignominy Burgonet +3", neck = "Incanter's Torque", ear1 = "Malignance Earring", ear2 = "Mani Earring",
         body = "Carm. Sc. Mail +1", hands = "Fallen's Finger Gauntlets +3", ring1 = "Evanescence Ring",
         ring2 = "Archon Ring",
         back = gear.casting_cape, waist = "Eschan Stone", legs = "Fallen's Flanchard +3",
@@ -430,12 +437,12 @@ function include_job_sets()
     sets.midcast['Endark'].DarkSeal = set_combine(sets.midcast['Endark'], { head = "Fallen's Burgeonet +3" })
     sets.midcast['Endark II'].DarkSeal = sets.midcast['Endark'].DarkSeal
 
-    sets.midcast['Drain'] = set_combine(sets.midcast['Dark Magic'], { ammo = "Sturm's Report",
+    sets.midcast['Drain'] = set_combine(sets.midcast['Dark Magic'], { ammo = "Pemphredo Tathlum",
         head = "Pixie Hairpin +1", neck = "Erra Pendant", ear1 = "Hirudinea earring", ear2 = "Mani Earring",
         body = "Carmine Scale Mail +1", hands = "Fallen's Finger Gauntlets +3",
         back = "Niht Mantle", waist = gear.DrainWaist, legs = "Fallen's Flanchard +3", feet = gear.DrainFeet })
     sets.midcast['Drain II'] = sets.midcast['Drain']
-    sets.midcast['Drain III'] = set_combine(sets.midcast['Dark Magic'], { ammo = "Sturm's Report",
+    sets.midcast['Drain III'] = set_combine(sets.midcast['Dark Magic'], { ammo = "Pemphredo Tathlum",
         head = "Pixie Hairpin +1", neck = "Erra Pendant", ear1 = "Hirudinea earring", ear2 = "Nehalennia Earring",
         body = "Carmine Scale Mail +1", hands = "Fallen's Finger Gauntlets +3",
         back = "Niht Mantle", waist = gear.DrainWaist, legs = "Fallen's Flanchard +3",
@@ -445,12 +452,13 @@ function include_job_sets()
     sets.midcast['Aspir II'] = sets.midcast.Aspir
     sets.midcast['Drain'].Weapon = { main = "Dacnomania", sub = "Dark Grip" }
 
-    sets.midcast.Stun = {
+    sets.midcast.Stun = { ammo = "Pemphredo Tathlum",
         head = "Ignominy Burgonet +3", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Mani Earring",
         body = "Carmine Scale Mail +1", hands = "Fallen's Finger Gauntlets +3", ring1 = "Stikini Ring +1",
         ring2 = "Metamorph Ring +1",
         back = gear.casting_cape, waist = "Eschan Stone", legs = "Fallen's Flanchard +3",
-        feet = { name = "Ratri Sollerets +1", priority = 10 } }
+        feet = "Flamma Sollerets +2",
+    }
 
     sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],
         { head = "Ignominy Burgonet +3", back = gear.casting_cape, ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1" })
@@ -492,8 +500,8 @@ function include_job_sets()
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
     sets.engaged = { ammo = "Ginsen",
-        head = "Flamma Zucchetto +2", neck = "Abyssal Beads +2", ear1 = "Brutal earring", ear2 = "Telos Earring",
-        body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Moonlight ring", ring2 = "Niqmaddu Ring",
+        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear1 = "Brutal earring", ear2 = "Telos Earring",
+        body = "Sakpata's Plate", hands = "Flamma Manopolas +2", ring1 = "Moonlight ring", ring2 = "Niqmaddu Ring",
         back = gear.melee_cape, waist = "Sailfi Belt +1", legs = "Ignominy Flanchard +3", feet = "Flamma Gambieras +2" }
     sets.engaged.Acc = { ammo = "Seething Bomblet +1",
         head = "Flamma Zucchetto +2", neck = "Abyssal Beads +2", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
@@ -506,7 +514,7 @@ function include_job_sets()
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
         back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
     sets.engaged.Acc.PDT = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear1 = "Crepucular Earring", ear2 = "Telos Earring",
+        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Regal Ring",
         back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
     sets.engaged.AccHigh.PDT = set_combine(sets.engaged.Acc.PDT, { hands = "Gazu Bracelet +1" })

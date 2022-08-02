@@ -101,7 +101,8 @@ function init_gear_sets()
     -- add mnd for Chivalry
     sets.precast.JA['Chivalry'] = {
         head = "Sulevia's Mask +1",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Leviathan Ring", ring2 = "Aquasoul Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Leviathan Ring",
+        ring2 = "Aquasoul Ring",
         back = "Weard Mantle", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
 
 
@@ -119,8 +120,11 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = { ammo = "Incantor Stone",
-        head = "Cizin Helm", ear2 = "Loquacious Earring", ring1 = "Kishar Ring", ring2 = "Rahab Ring", legs = "Enif Cosciales" }
+    sets.precast.FC = { ammo = "Sapience Orb",
+        head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1",
+        ear2 = "Loquacious Earring",
+        body = "Sacro Breastplate", hands = "Leyline Gloves", ring1 = "Kishar Ring", ring2 = "Weatherspoon Ring +1",
+        legs = "Enif Cosciales", feet = "Odyssean Greaves" }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
@@ -129,12 +133,14 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = { ammo = "Ginsen",
         head = "Sulevia's Mask +1", neck = "Fotia Gorget", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Regal Ring", ring2 = "Epaminondas's Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Regal Ring",
+        ring2 = "Epaminondas's Ring",
         back = "Atheling Mantle", waist = "Fotia Belt", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
 
     sets.precast.WS.Acc = { ammo = "Ginsen",
         head = "Sulevia's Mask +1", neck = "Fotia Gorget", ear1 = "Crepuscular Earring", ear2 = "Moonshade Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Regal Ring", ring2 = "Epaminondas's Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Regal Ring",
+        ring2 = "Epaminondas's Ring",
         back = "Atheling Mantle", waist = "Fotia Belt", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -146,15 +152,17 @@ function init_gear_sets()
 
     sets.precast.WS['Sanguine Blade'] = { ammo = "Ginsen",
         head = "Pixie Hairpin +1", neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Archon Ring", ring2 = "Epaminondas's Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Archon Ring",
+        ring2 = "Epaminondas's Ring",
         back = "Toro Cape", waist = "Eschan Stone", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
 
-    sets.precast.WS['Atonement'] = { ammo = "Iron Gobbet",
+    sets.precast.WS['Atonement'] = { ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1", neck = "Fotia Gorget", ear1 = "Eabani Earring", ear2 = "Moonshade Earring",
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Regal Ring", ring2 = "Vexer Ring",
         back = "Fierabras's Mantle", waist = "Fotia Belt", legs = "Sulevia's Cuisses +2", feet = "Caballarius Leggings" }
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS,
+        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
 
     --------------------------------------
     -- Midcast sets
@@ -174,17 +182,22 @@ function init_gear_sets()
 
     sets.midcast.Stun = sets.midcast.Flash
 
-    sets.midcast.Cure = { ammo = "Iron Gobbet",
+    sets.midcast.Cure = { ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1", neck = "Nodens Gorget", ear1 = "Nourishing Earring +1", ear2 = "Nourishing Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Kunaji Ring", ring2 = "Asklepian Ring",
-        back = "Fierabras's Mantle", waist = "Chuq'aba Belt", legs = "Sulevia's Cuisses +2", feet = "Caballarius Leggings" }
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Kunaji Ring",
+        ring2 = "Asklepian Ring",
+        back = "Fierabras's Mantle", waist = "Chuq'aba Belt", legs = "Sulevia's Cuisses +2",
+        feet = "Caballarius Leggings" }
 
     sets.midcast.SIRD = { ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1", neck = "Nodens Gorget", ear1 = "Magnetic Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Kunaji Ring", ring2 = "Asklepian Ring",
-        back = "Fierabras's Mantle", waist = "Chuq'aba Belt", legs = "Sulevia's Cuisses +2", feet = "Caballarius Leggings" }
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Kunaji Ring",
+        ring2 = "Asklepian Ring",
+        back = "Fierabras's Mantle", waist = "Chuq'aba Belt", legs = "Sulevia's Cuisses +2",
+        feet = "Caballarius Leggings" }
 
-    sets.midcast['Enhancing Magic'] = { neck = "Incanter's Torque", ear1 = "Andoaa Earring", ear2 = "Mimir Earring", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1", waist = "Olympus Sash", legs = "Sulevia's Cuisses +2" }
+    sets.midcast['Enhancing Magic'] = { neck = "Incanter's Torque", ear1 = "Andoaa Earring", ear2 = "Mimir Earring",
+        ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1", waist = "Olympus Sash", legs = "Sulevia's Cuisses +2" }
 
     sets.midcast['Divine Magic'] = { neck = "Incanter's Torque", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1" }
 
@@ -203,19 +216,22 @@ function init_gear_sets()
 
 
     -- Idle sets
-    sets.idle = { ammo = "Iron Gobbet",
+    sets.idle = { ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring",
         back = "Fierabras's Mantle", waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Sulevia's Leggings +2" }
 
     sets.idle.Town = { main = "Malignance Sword", ammo = "Incantor Stone",
         head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring",
         back = "Fierabras's Mantle", waist = "Flume Belt +1", legs = "Carmine cuisses +1", feet = "Sulevia's Leggings +2" }
 
-    sets.idle.Weak = { ammo = "Iron Gobbet",
+    sets.idle.Weak = { ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1", neck = "Sanctity Necklace", ear1 = "Thrud Earring", ear2 = "Etiolation Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring",
         back = "Fierabras's Mantle", waist = "Flume Belt +1", legs = "Carmine cuisses +1", feet = "Sulevia's Leggings +2" }
 
     sets.idle.Weak.Reraise = set_combine(sets.idle.Weak, sets.Reraise)
@@ -241,27 +257,30 @@ function init_gear_sets()
 
     -- Basic defense sets.
 
-    sets.defense.PDT = { ammo = "Iron Gobbet",
+    sets.defense.PDT = { ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Buckler Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Petrov Ring", ring2 = "Defending Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Petrov Ring",
+        ring2 = "Defending Ring",
         back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
-    sets.defense.HP = { ammo = "Iron Gobbet",
+    sets.defense.HP = { ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Petrov Ring", ring2 = "Meridian Ring",
         back = "Weard Mantle", waist = "Creed Baudrier", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
-    sets.defense.Reraise = { ammo = "Iron Gobbet",
+    sets.defense.Reraise = { ammo = "Staunch Tathlum +1",
         head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
         body = "Crepuscular Mail", hands = "Sulevia's Gauntlets +1", ring1 = "Petrov Ring", ring2 = "Defending Ring",
         back = "Weard Mantle", waist = "Nierenschutz", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
-    sets.defense.Charm = { ammo = "Iron Gobbet",
+    sets.defense.Charm = { ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Petrov Ring", ring2 = "Defending Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Petrov Ring",
+        ring2 = "Defending Ring",
         back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
     -- To cap MDT with Shell IV (52/256), need 76/256 in gear.
     -- Shellra V can provide 75/256, which would need another 53/256 in gear.
     sets.defense.MDT = { ammo = "Demonry Stone",
         head = "Sulevia's Mask +1", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Archon Ring", ring2 = "Defending Ring",
+        body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Archon Ring",
+        ring2 = "Defending Ring",
         back = "Engulfer Cape", waist = "Creed Baudrier", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
 
 
@@ -270,32 +289,44 @@ function init_gear_sets()
     --------------------------------------
 
     sets.engaged = { ammo = "Ginsen",
-        head = "Flamma Zucchetto +2", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Petrov Ring", ring2 = "Flamma Ring",
-        back = "Atheling Mantle", waist = "Sailfi belt +1", legs = "Cizin Breeches", feet = "Flamma Gambieras +2" }
+        head = "Sakpata's Helm", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Telos Earring",
+        body = "Sakpata's Breastplate", hands = "Sakpata's Gauntlets", ring1 = "Petrov Ring", ring2 = "Hetairoi Ring",
+        back = "Atheling Mantle", waist = "Sailfi belt +1", legs = "Cuisses", feet = "Sakpata's Leggings" }
 
     sets.engaged.Acc = { ammo = "Ginsen",
-        head = "Flamma Zucchetto +2", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
+        head = "Flamma Zucchetto +2", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Telos Earring",
         body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Petrov Ring", ring2 = "Flamma Ring",
         back = "Atheling Mantle", waist = "Sailfi belt +1", legs = "Cizin Breeches", feet = "Flamma Gambieras +2" }
 
     sets.engaged.DW = { ammo = "Ginsen",
-        head = "Flamma Zucchetto +2", neck = "Sanctity Necklace", ear1 = "Crepuscular Earring", ear2 = "Suppanomimi",
+        head = "Flamma Zucchetto +2", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Telos Earring",
         body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Petrov Ring", ring2 = "Flamma Ring",
         back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Flamma Dirs +1", feet = "Flamma Gambieras +2" }
 
     sets.engaged.DW.Acc = { ammo = "Ginsen",
-        head = "Flamma Zucchetto +2", neck = "Combatant's Torque", ear1 = "Crepuscular Earring", ear2 = "Suppanomimi",
+        head = "Flamma Zucchetto +2", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
         body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Petrov Ring", ring2 = "Flamma Ring",
         back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Cizin Breeches", feet = "Flamma Gambieras +2" }
 
-    sets.engaged.PDT = set_combine(sets.engaged, { head = "Sulevia's mask +1", body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2", neck = "Loricate Torque +1", ring1 = "Petrov Ring" })
-    sets.engaged.Acc.PDT = set_combine(sets.engaged.Acc, { head = "Sulevia's mask +1", body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2", neck = "Loricate Torque +1", ring1 = "Petrov Ring" })
+    sets.engaged.PDT = set_combine(sets.engaged,
+        { head = "Sulevia's mask +1", body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1",
+            legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2", neck = "Loricate Torque +1",
+            ring1 = "Petrov Ring" })
+    sets.engaged.Acc.PDT = set_combine(sets.engaged.Acc,
+        { head = "Sulevia's mask +1", body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1",
+            legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2", neck = "Loricate Torque +1",
+            ring1 = "Petrov Ring" })
     sets.engaged.Reraise = set_combine(sets.engaged, sets.Reraise)
     sets.engaged.Acc.Reraise = set_combine(sets.engaged.Acc, sets.Reraise)
 
-    sets.engaged.DW.PDT = set_combine(sets.engaged.DW, { head = "Sulevia's mask +1", body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2", neck = "Loricate Torque +1", ring1 = "Petrov Ring" })
-    sets.engaged.DW.Acc.PDT = set_combine(sets.engaged.DW.Acc, { head = "Sulevia's mask +1", body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2", neck = "Loricate Torque +1", ring1 = "Petrov Ring" })
+    sets.engaged.DW.PDT = set_combine(sets.engaged.DW,
+        { head = "Sulevia's mask +1", body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1",
+            legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2", neck = "Loricate Torque +1",
+            ring1 = "Petrov Ring" })
+    sets.engaged.DW.Acc.PDT = set_combine(sets.engaged.DW.Acc,
+        { head = "Sulevia's mask +1", body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1",
+            legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2", neck = "Loricate Torque +1",
+            ring1 = "Petrov Ring" })
     sets.engaged.DW.Reraise = set_combine(sets.engaged.DW, sets.Reraise)
     sets.engaged.DW.Acc.Reraise = set_combine(sets.engaged.DW.Acc, sets.Reraise)
 
@@ -409,7 +440,9 @@ function display_current_job_state(eventArgs)
     msg = msg .. ', WS: ' .. state.WeaponskillMode.value
 
     if state.DefenseMode.value ~= 'None' then
-        msg = msg .. ', Defense: ' .. state.DefenseMode.value .. ' (' .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ')'
+        msg = msg ..
+            ', Defense: ' ..
+            state.DefenseMode.value .. ' (' .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ')'
     end
 
     if state.ExtraDefenseMode.value ~= 'None' then

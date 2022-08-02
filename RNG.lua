@@ -61,8 +61,9 @@ function init_gear_sets()
 	-- Fast cast sets for spells
 
 	sets.precast.FC = {
-		head = "Haruspex Hat", ear2 = "Loquacious Earring",
-		hands = "Thaumas Gloves", ring1 = "Rahab Ring" }
+		head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquacious Earring",
+		body = "Adhemar Jacket +1", hands = "Leyline Gloves", ring1 = "Rahab Ring", ring2 = "Weatherspoon Ring +1",
+		legs = "Limbo Trousers", feet = "Carmine Greaves +1" }
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, { neck = "Magoraga Beads" })
 
@@ -70,22 +71,26 @@ function init_gear_sets()
 	-- Ranged sets (snapshot)
 
 	sets.precast.RA = {
-		head = "Orion Beret +1",
-		body = "Sylvan Caban +2", hands = "Iuitl Wristbands",
-		waist = "Yemaya Belt", legs = "Nahtirah Trousers", feet = "Khepri Gamashes" }
+		head = "Amini Gapette +1",
+		body = "Ikenga's Vest", hands = "Alruna's Gloves +1", ring1 = "Crepuscular Ring",
+		waist = "Yemaya Belt", legs = "Adhemar Kecks +1", feet = "Meghanada Jambeaux +1" }
 
 
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
-		head = "Orion beret +1", neck = gear.ElementalGorget, ear1 = "Vulcan's Pearl", ear2 = "Vulcan's Pearl",
-		body = "Khepri Jacket", hands = "Arcadian Bracers +1", ring1 = "Pyrosoul Ring", ring2 = "Rajas Ring",
-		back = "Sylvan Chlamys", waist = gear.ElementalBelt, legs = "Nahtirah Trousers", feet = "Orion Socks +1" }
+		head = "Orion beret +2", neck = "Fotia Gorget", ear1 = "Ishvara Earring", ear2 = "Moonshade Earring",
+		hands = "Meghanada Gloves +2", ring1 = "Regal Ring", ring2 = "Epaminondas's Ring",
+		back = "Sylvan Chlamys", waist = "Fotia Belt", legs = "Arcadian Braccae +2", feet = "Orion Socks +1" }
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, { body = "Kyujutsugi", ring1 = "Hajduk Ring +1",
 		back = "Lutian Cape", legs = "Orion Braccae +1" })
 
 	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
+	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, { ammo = "Hauksbok Arrow",
+		neck = "Republican Platinum Medal", ring2 = "Epaminondas's Ring",
+		waist = "Sailfi Belt +1"
+	})
 
 
 	--------------------------------------
@@ -104,13 +109,14 @@ function init_gear_sets()
 	-- Ranged sets
 
 	sets.midcast.RA = {
-		head = "Arcadian Beret +1", neck = "Iskur Gorget", ear1 = "Telos Earring", ear2 = "Tripudio Earring",
-		body = "Kyujutsugi", hands = "Manibozho Gloves", ring1 = "Dingir Ring", ring2 = "Hajduk Ring +1",
-		back = "Lutian Cape", waist = "Elanid Belt", legs = "Nahtirah Trousers", feet = "Orion Socks +1" }
+		head = "Malignance Chapeau", neck = "Iskur Gorget", ear1 = "Telos Earring", ear2 = "Beyla Earring",
+		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Dingir Ring", ring2 = "Regal Ring",
+		back = "Lutian Cape", waist = "Yemaya Belt", legs = "Malignance Tights", feet = "Malignance Boots" }
 
-	sets.midcast.RA.Acc = set_combine(sets.midcast.RA,
-		{ head = "Orion Beret +1", neck = "Ej Necklace +1", hands = "Manibozho Gloves", ring2 = "Hajduk Ring +1",
-			back = "Lutian Cape", legs = "Orion Braccae +1" })
+	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
+		head = "Malignance Chapeau", neck = "Iskur Gorget", ear1 = "Telos Earring", ear2 = "Beyla Earring",
+		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Dingir Ring", ring2 = "Regal Ring",
+		back = "Lutian Cape", waist = "Yemaya Belt", legs = "Malignance Tights", feet = "Malignance Boots" })
 
 	sets.midcast.RA.Annihilator = set_combine(sets.midcast.RA)
 
@@ -128,27 +134,26 @@ function init_gear_sets()
 	-- Sets to return to when not performing an action.
 
 	-- Resting sets
-	sets.resting = { head = "Ocelomeh Headpiece +1", neck = "Bathy Choker +1",
-		ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring" }
+	sets.resting = { neck = "Bathy Choker +1" }
 
 	-- Idle sets
 	sets.idle = {
-		head = "Arcadian Beret +1", neck = "Ej Necklace +1", ear1 = "Vulcan's Pearl", ear2 = "Vulcan's Pearl",
-		body = "Khepri Jacket", hands = "Arcadian Bracers +1", ring1 = "Defending Ring", ring2 = "Shadow Ring",
-		back = "Shadow Mantle", waist = "Pya'ekue Belt +1", legs = "Nahtirah Trousers", feet = "Fajin Boots" }
+		head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Odnowa Earring +1", ear2 = "Etiolation Earring",
+		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring",
+		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Malignance Boots" }
 
 	-- Defense sets
 	sets.defense.PDT = {
-		head = "Whirlpool Mask", neck = "Loricate Torque +1",
-		body = "Orion Jerkin +1", hands = "Orion Bracers +1", ring1 = "Defending Ring", ring2 = gear.DarkRing.physical,
-		back = "Mollusca Mantle", waist = "Flume Belt +1", legs = "Nahtirah Trousers", feet = "Orion Socks +1" }
+		head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Odnowa Earring +1", ear2 = "Etiolation Earring",
+		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring",
+		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
 
 	sets.defense.MDT = {
-		head = "Orion Beret +1", neck = "Loricate Torque +1",
-		body = "Orion Jerkin +1", hands = "Orion Bracers +1", ring1 = "Defending Ring", ring2 = "Shadow Ring",
-		back = "Mollusca Cape", waist = "Flume Belt +1", legs = "Nahtirah Trousers", feet = "Orion Socks +1" }
+		head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Odnowa Earring +1", ear2 = "Etiolation Earring",
+		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring",
+		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
 
-	sets.Kiting = { feet = "Fajin Boots" }
+	sets.Kiting = { legs = "Carmine Cuisses +1" }
 
 
 	--------------------------------------
@@ -156,14 +161,18 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.engaged = {
-		head = "Whirlpool Mask", neck = "Loricate Torque +1", ear1 = "Steelflash Earring", ear2 = "Bladeborn Earring",
-		body = "Orion Jerkin +1", hands = "Arcadian Bracers +1", ring1 = "Defending Ring", ring2 = "Rajas Ring",
-		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Nahtirah Trousers", feet = "Orion Socks +1" }
+		head = "Malignance Chapeau", neck = "Anu Torque", ear1 = "Sherida Earring", ear2 = "Telos Earring",
+		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Epona's Ring", ring2 = "Hetairoi Ring",
+		back = "Shadow Mantle", waist = "Sailfi Belt +1", legs = "Samnuha Tights", feet = "Malignance Boots" }
 
 	sets.engaged.Acc = {
-		head = "Whirlpool Mask", neck = "Combatant's Torque", ear1 = "Steelflash Earring", ear2 = "Bladeborn Earring",
-		body = "Manibozho Jerkin", hands = "Iuitl Wristbands", ring1 = "K'ayres Ring", ring2 = "Rajas Ring",
-		back = "Letalis Mantle", waist = "Windbuffet Belt", legs = "Manibozho Brais", feet = "Iuitl Gaiters" }
+		head = "Malignance Chapeau", neck = "Combatant's Torque", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
+		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Epona's Ring", ring2 = "Hetairoi Ring",
+		back = "Shadow Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+
+	sets.engaged.DW = set_combine(sets.engaged, { waist = "Reiki Yotai" })
+
+	sets.engaged.DW.Acc = set_combine(sets.engaged.Acc, { waist = "Reiki Yotai" })
 
 	--------------------------------------
 	-- Custom buff sets
@@ -242,7 +251,9 @@ function check_ammo(spell, action, spellMap, eventArgs)
 			if player.inventory[U_Shot_Ammo[player.equipment.range]] or player.wardrobe[U_Shot_Ammo[player.equipment.range]] then
 				add_to_chat(122, "Unlimited Shot active. Using custom ammo.")
 				equip({ ammo = U_Shot_Ammo[player.equipment.range] })
-			elseif player.inventory[DefaultAmmo[player.equipment.range]] or player.wardrobe[DefaultAmmo[player.equipment.range]] then
+			elseif player.inventory[DefaultAmmo[player.equipment.range]] or
+				player.wardrobe[DefaultAmmo[player.equipment.range
+					]] then
 				add_to_chat(122, "Unlimited Shot active but no custom ammo available. Using default ammo.")
 				equip({ ammo = DefaultAmmo[player.equipment.range] })
 			else
@@ -250,7 +261,8 @@ function check_ammo(spell, action, spellMap, eventArgs)
 			end
 		end
 	else
-		if player.equipment.ammo == U_Shot_Ammo[player.equipment.range] and player.equipment.ammo ~= DefaultAmmo[player.equipment.range] then
+		if player.equipment.ammo == U_Shot_Ammo[player.equipment.range] and
+			player.equipment.ammo ~= DefaultAmmo[player.equipment.range] then
 			if DefaultAmmo[player.equipment.range] then
 				if player.inventory[DefaultAmmo[player.equipment.range]] then
 					add_to_chat(122, "Unlimited Shot not active. Using Default Ammo")
@@ -275,7 +287,10 @@ function check_ammo(spell, action, spellMap, eventArgs)
 				add_to_chat(122, "Unable to determine default ammo for current weapon.  Leaving empty.")
 			end
 		elseif player.inventory[player.equipment.ammo].count < 15 then
-			add_to_chat(122, "Ammo '" .. player.inventory[player.equipment.ammo].shortname .. "' running low (" .. player.inventory[player.equipment.ammo].count .. ")")
+			add_to_chat(122,
+				"Ammo '" ..
+				player.inventory[player.equipment.ammo].shortname ..
+				"' running low (" .. player.inventory[player.equipment.ammo].count .. ")")
 		end
 	end
 end

@@ -75,20 +75,27 @@ function user_setup()
     state.UseCustomTimers = M(true, 'Use Custom Timers')
 
     -- Augmented Gear
-    gear.RecastFeet = { name = "Telchine Pigaches", augments = { 'Mag. Evasion+21', 'Song spellcasting time -7%', 'Enh. Mag. eff. dur. +9', } }
+    gear.RecastFeet = { name = "Telchine Pigaches",
+        augments = { 'Mag. Evasion+21', '"Fast Cast"+5', 'Enh. Mag. eff. dur. +9', } }
     gear.EnhancingFeet = gear.RecastFeet
-    gear.CureHands = { name = "Telchine Gloves", augments = { '"Cure" potency +7%', '"Regen" potency +3' } }
+    gear.CureHands = { name = "Telchine Gloves", augments = { 'Mag. Evasion+23', '"Fast Cast"+5', '"Regen" potency+3', } }
 
     gear.IdleInstrument = { name = "Linos", augments = { 'Mag. Evasion+15', 'Magic dmg. taken -4%', 'HP+20', } }
     gear.MeleeInstrument = { name = "Linos", augments = { 'Accuracy+20', '"Dbl.Atk."+3', 'Quadruple Attack +3', } }
     gear.WSInstrument = { name = "Linos", augments = { 'Accuracy+15 Attack+15', 'Weapon skill damage +3%', 'STR+8', } }
+    gear.FCInstrument = { name = "Linos", augments = { '"Fast Cast"+5', } }
 
-    gear.CastingCape = { name = "Intarabus's Cape", augments = { 'CHR+20', 'Mag. Acc.+10', '"Fast Cast"+10%', 'Mag. Acc.+20/Mag. Dmg.+20' } }
-    gear.WSCape = { name = "Intarabus's Cape", augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+5', 'Weapon skill damage +10%', } }
+    gear.CastingCape = { name = "Intarabus's Cape",
+        augments = { 'CHR+20', 'Mag. Acc.+10', '"Fast Cast"+10%', 'Mag. Acc.+20/Mag. Dmg.+20' } }
+    gear.WSCape = { name = "Intarabus's Cape",
+        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+5', 'Weapon skill damage +10%', } }
     gear.MeleeCape = gear.WSCape
 
-    gear.RefreshFeet = { name = "Chironic Slippers", augments = { 'Crit. hit damage +1%', 'Sklchn.dmg.+4%', '"Refresh"+2', 'Mag. Acc.+11 "Mag.Atk.Bns."+11', } }
-    gear.RefreshHands = { name = "Chironic Gloves", augments = { 'Weapon skill damage +2%', 'Pet: Accuracy+17 Pet: Rng. Acc.+17', '"Refresh"+2', 'Mag. Acc.+17 "Mag.Atk.Bns."+17', } }
+    gear.RefreshFeet = { name = "Chironic Slippers",
+        augments = { 'Crit. hit damage +1%', 'Sklchn.dmg.+4%', '"Refresh"+2', 'Mag. Acc.+11 "Mag.Atk.Bns."+11', } }
+    gear.RefreshHands = { name = "Chironic Gloves",
+        augments = { 'Weapon skill damage +2%', 'Pet: Accuracy+17 Pet: Rng. Acc.+17', '"Refresh"+2',
+            'Mag. Acc.+17 "Mag.Atk.Bns."+17', } }
 
     info.DWsubs = S { 'NIN', 'DNC' }
 
@@ -112,7 +119,7 @@ function user_setup()
     send_command('bind != gs c cycle WeaponMode')
     send_command('bind !- gs c cycle OffenseMode')
 
-
+    gear.default.cure_waist = "Luminary Sash"
 
 
     pick_tp_weapon()
@@ -151,33 +158,32 @@ function init_gear_sets()
     sets.Weapons['Sword'] = { main = "Naegling", sub = "Ammurapi Shield" }
     sets.Weapons['Dagger'] = { main = "Aeneas", sub = "Ammurapi Shield" }
     sets.Weapons['Sword'].DW = { main = "Naegling", sub = "Centovente" }
-    sets.Weapons['Dagger'].DW = { main = "Aeneas", sub = "Kaja Knife" }
+    sets.Weapons['Dagger'].DW = { main = "Aeneas", sub = "Gleti's Knife" }
+
+    sets.enmity = {
+        head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
+        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Petrov Ring",
+        waist = "Trance Belt", legs = "Zoar Subligar +1"
+    }
 
     -- Precast Sets
 
     -- Fast cast sets for spells
-    sets.precast.FC = { main = "Kali",
-        head = "Fili Calot +1", neck = "Baetyl Pendant", ear1 = "Etiolation Earring", ear2 = "Loquac. Earring",
-        body = "Inyanga Jubbah +2", hands = "Gendewitha Gages +1", ring1 = "Rahab Ring", ring2 = "Kishar Ring",
-        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = "Bihu Slippers +1" }
+    sets.precast.FC = { range = gear.FCInstrument,
+        head = "Cath Palug Crown", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquac. Earring",
+        body = "Inyanga Jubbah +2", hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = gear.RecastFeet }
 
-    sets.precast.FC.Cure = set_combine(sets.precast.FC, { back = "Pahtli cape" })
-
-    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
-
-    sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {
-        main = "Pukulatmuj +1",
-        head = "Umuthi Hat",
-        waist = "Siegel Sash" })
-
-    sets.precast.FC.BardSong = { main = "Kali", range = "Gjallarhorn",
-        head = "Fili Calot +1", neck = "Baetyl Pendant", ear1 = "Aoidos' Earring", ear2 = "Loquac. Earring",
-        body = "Inyanga Jubbah +2", hands = "Gendewitha Gages +1", ring1 = "Rahab Ring", ring2 = "Kishar Ring",
-        back = gear.CastingCape, waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = gear.RecastFeet }
+    sets.precast.FC.BardSong = {
+        head = "Fili Calot +1", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquac. Earring",
+        body = "Inyanga Jubbah +2", hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = gear.RecastFeet
+    }
 
     sets.precast.FC.Daurdabla = set_combine(sets.precast.FC.BardSong, { range = info.ExtraSongInstrument })
 
     sets.precast['Honor March'] = set_combine(sets.precast.FC.BardSong, { range = info.HonorMarch })
+    sets.precast.FC['Honor March'] = sets.precast['Honor March']
 
 
     -- Precast sets to enhance JAs
@@ -192,15 +198,16 @@ function init_gear_sets()
     sets.precast.Waltz = {
         head = "Nahtirah Hat",
         body = "Gendewitha Bliaut +1", hands = "Buremte Gloves",
-        back = gear.CastingCape, legs = "Gendewitha Spats", feet = "Gendewitha Galoshes +1" }
+        back = gear.CastingCape, legs = "Gendewitha Spats", feet = "Gendewitha Galoshes +1"
+    }
 
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ranged = gear.WSInstrument,
+    sets.precast.WS = { range = gear.WSInstrument,
         head = "Bihu Roundlet +2", neck = "Fotia Gorget", ear1 = "Ishvara Earring", ear2 = "Moonshade Earring",
         body = "Bihu Justaucorps +3", hands = "Bihu Cuffs +2", ring1 = "Apate Ring", ring2 = "Epaminondas's Ring",
-        back = gear.WSCape, waist = "Fotia Belt", legs = "Bihu Cannions +2", feet = "Chironic Slippers" }
+        back = gear.WSCape, waist = "Fotia Belt", legs = "Bihu Cannions +2", feet = "Bihu Slippers +1" }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
@@ -211,9 +218,13 @@ function init_gear_sets()
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {})
 
-    sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
+        neck = "Moonbow Whistle +1", ear2 = "Regal Earring",
+        ring1 = "Metamorph Ring +1",
+    })
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS,
+        { neck = "Republican Platinum medal", hands = "Gazu Bracelet +1", waist = "Sailfi Belt +1" })
 
 
     -- Midcast Sets
@@ -222,7 +233,8 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         head = "Ayanmo Zucchetto +2", ear2 = "Loquacious Earring",
         body = "Inyanga Jubbah +2", hands = "Gendewitha Gages +1", ring1 = "Rahab Ring", ring2 = "Kishar Ring",
-        back = gear.CastingCape, waist = "Sailfi Belt +1", legs = "Ayanmo Cosciales +2", feet = "Ayanmo Gambieras +2" }
+        back = gear.CastingCape, waist = "Sailfi Belt +1", legs = "Ayanmo Cosciales +2", feet = "Ayanmo Gambieras +2"
+    }
 
 
 
@@ -240,9 +252,9 @@ function init_gear_sets()
         legs = "Fili Rhingrave", feet = "Fili Cothurnes +1" }
     sets.midcast["Sentinel's Scherzo"] = { feet = "Fili Cothurnes +1" }
     sets.midcast['Magic Finale'] = { legs = "Fili Rhingrave" }
-    sets.midcast['Honor March'] = set_combine(sets.midcast.SongEffect, { ranged = info.HonorMarch })
+    sets.midcast['Honor March'] = set_combine(sets.midcast.SongEffect, { range = info.HonorMarch })
 
-    sets.midcast['Horde Lullaby'] = set_combine(sets.midcast.Lullaby, { ranged = "Daurdabla" })
+    sets.midcast['Horde Lullaby'] = set_combine(sets.midcast.Lullaby, { range = "Daurdabla" })
     sets.midcast['Horde Lullaby II'] = sets.midcast['Horde Lullaby']
 
     sets.midcast.Mazurka = { range = info.ExtraSongInstrument }
@@ -250,29 +262,33 @@ function init_gear_sets()
 
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEffect = { main = "Kali", range = "Gjallarhorn",
-        head = "Fili Calot +1", neck = "Moonbow whistle +1", ear1 = "Handler's Earring +1", ear2 = "Loquacious Earring",
-        body = "Fili Hongreline +1", hands = "Fili Manchettes", ring1 = "Rahab Ring", ring2 = "Kishar Ring",
-        back = gear.CastingCape, waist = "Corvax Sash", legs = "Inyanga Shalwar +2", feet = "Brioso Slippers +2" }
+        head = "Fili Calot +1", neck = "Moonbow whistle +1",
+        body = "Fili Hongreline +1", hands = "Fili Manchettes",
+        back = gear.CastingCape, legs = "Inyanga Shalwar +2", feet = "Brioso Slippers +3" }
 
     -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongDebuff = { main = "Kali", sub = "Ammurapi Shield", range = "Gjallarhorn",
-        head = "Brioso Roundlet +2", neck = "Moonbow Whistle +1", ear1 = "Dignitary's Earring", ear2 = "Crepuscular Earring",
+        head = "Brioso Roundlet +2", neck = "Moonbow Whistle +1", ear1 = "Regal Earring",
+        ear2 = "Crepuscular Earring",
         body = "Fili Hongreline +1", hands = "Fili Manchettes", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
-        back = gear.CastingCape, waist = "Acuity Belt +1", legs = "Marduk's Shalwar +1", feet = "Brioso Slippers +2" }
+        back = gear.CastingCape, waist = "Acuity Belt +1", legs = "Marduk's Shalwar +1", feet = "Brioso Slippers +3" }
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.ResistantSongDebuff = { main = "Kali", sub = "Ammurapi Shield", range = "Gjallarhorn",
-        head = "Brioso Roundlet +2", neck = "Moonbow Whistle +1", ear1 = "Dignitary's Earring", ear2 = "Crepuscular Earring",
+        head = "Brioso Roundlet +2", neck = "Moonbow Whistle +1", ear1 = "Regal Earring",
+        ear2 = "Crepuscular Earring",
         body = "Brioso Justaucorps +2", hands = "Fili Manchettes", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
-        back = gear.CastingCape, waist = "Acuity Belt +1", legs = "Brioso Cannions +2", feet = "Brioso Slippers +2" }
+        back = gear.CastingCape, waist = "Acuity Belt +1", legs = "Brioso Cannions +2", feet = "Brioso Slippers +3" }
 
     -- Song-specific recast reduction
     sets.midcast.SongRecast = {
-        neck = "Baetyl Pendant", ear1 = "Etiolation Earring", ear2 = "Loquacious Earring",
+        neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquacious Earring",
         body = "Inyanga Jubbah +2", hands = "Gendewitha Gages +1", ring1 = "Rahab Ring", ring2 = "Kishar Ring",
-        back = gear.CastingCape, waist = "Embla Sash", legs = "Fili Rhingrave" }
+        back = gear.CastingCape, waist = "Embla Sash", legs = "Fili Rhingrave"
+    }
 
-    sets.midcast.Daurdabla = set_combine(sets.midcast.FastRecast, sets.midcast.SongRecast, { range = info.ExtraSongInstrument })
+    sets.midcast.Daurdabla = set_combine(sets.midcast.FastRecast, sets.midcast.SongRecast,
+        { range = info.ExtraSongInstrument })
 
     -- Cast spell with normal gear, except using Daurdabla instead
     sets.midcast.Daurdabla = { range = info.ExtraSongInstrument }
@@ -287,23 +303,21 @@ function init_gear_sets()
     sets.midcast['Healing Magic'] = {
         head = "Vanya Hood", neck = "Incanter's Torque",
         hands = "Inyanga Dastanas +2", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        back = "Oretania's Cape" }
+        back = "Oretania's Cape"
+    }
 
     sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak", sub = "Ammurapi Shield",
         head = "Vanya Hood", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "",
         body = "Gendewitha Bliaut +1", hands = gear.CureHands, ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
-        back = "Oretania's Cape", legs = "Chironic Hose", feet = "Gendewitha Galoshes +1" })
+        back = "Oretania's Cape", waist = gear.CureWaist, legs = "Chironic Hose", feet = "Gendewitha Galoshes +1" })
 
     sets.midcast.Curaga = sets.midcast.Cure
-
-    sets.midcast.Stoneskin = set_combine(sets.midcast["Enhancing Magic"], {
-        neck = "Nodens Gorget", ear1 = "Earthcry Earring",
-        waist = "Seigel Sash", legs = "Shedir Seraweels" })
 
     sets.midcast.Cursna = {
         neck = "Malison Medallion",
         hands = "Hieros Mittens", ring1 = "Ephedra Ring",
-        feet = "Gendewitha Galoshes +1" }
+        feet = "Gendewitha Galoshes +1"
+    }
 
     sets.midcast['Enhancing Magic'] = { main = "Pukulatmuj +1",
         head = "Umuthi Hat", neck = "Incanter's Torque", ear1 = "Mimir Earring", ear2 = "Andoaa Earring",
@@ -311,6 +325,11 @@ function init_gear_sets()
         back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Shedir Seraweels", feet = gear.EnhancingFeet }
     sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'], { legs = 'Shedir Seraweels' })
     sets.midcast.BarStatus = sets.midcast.BarElement
+
+    sets.midcast.Stoneskin = set_combine(sets.midcast["Enhancing Magic"], {
+        neck = "Nodens Gorget", ear1 = "Earthcry Earring",
+        waist = "Seigel Sash", legs = "Shedir Seraweels"
+    })
 
     sets.midcast.Banish = { head = "Ipoca Beret" }
 
@@ -320,14 +339,15 @@ function init_gear_sets()
     sets.resting = {
         head = "Befouled Crown", neck = "Bathy Choker +1",
         body = "Gendewitha Bliaut +1", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        legs = "Assiduity Pants +1" }
+        legs = "Assiduity Pants +1"
+    }
 
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle = { range = gear.IdleInstrument,
         head = "Ayanmo Zucchetto +2", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
         body = "Ayanmo Corazza +2", hands = gear.RefreshHands, ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        back = gear.CastingCape, waist = "Flume Belt +1", legs = "Assiduity Pants +1", feet = gear.RefreshFeet }
+        back = gear.CastingCape, waist = "Flume Belt +1", legs = "Assiduity Pants +1", feet = "Fili Cothurnes +1" }
 
     sets.idle.PDT = { range = gear.IdleInstrument,
         head = "Ayanmo Zucchetto +2", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
@@ -342,9 +362,9 @@ function init_gear_sets()
     sets.idle.Weak = sets.idle.PDT
 
     sets.idle.Refresh = { main = "Kali", sub = "Ammurapi Shield",
-        head = "Befouled Crown",
-        body = "Gendewitha Bliaut +1", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        back = gear.MeleeCape, legs = "Assiduity Pants +1", feet = "Fili Cothurnes +1", }
+        head = "Befouled Crown", neck = "Sibyl Scarf",
+        body = "Gendewitha Bliaut +1", hands = gear.RefreshHands, ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        back = gear.MeleeCape, legs = "Assiduity Pants +1", feet = gear.RefreshFeet }
 
     sets.idle.HonorMarch = set_combine(sets.idle, { range = info.HonorMarch })
 
@@ -383,7 +403,7 @@ function init_gear_sets()
 
     -- Set if dual-wielding
     sets.engaged.DW = set_combine(sets.weapons, { range = gear.MeleeInstrument,
-        head = "Ayanmo Zucchetto +2", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Suppanomimi",
+        head = "Ayanmo Zucchetto +2", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Brutal Earring",
         body = "Ayanmo Corazza +2", hands = "Gazu Bracelet +1", ring1 = "Moonlight Ring", ring2 = "Ilabrat Ring",
         back = gear.MeleeCape, waist = "Reiki Yotai", legs = "Ayanmo Cosciales +2", feet = "Ayanmo Gambieras +2" })
 
@@ -419,7 +439,7 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- originally for honor march, turns out i'm just an idiot and didn't define precast sets.
     --[[if spell.english == 'Honor March' then
             local delay_flag = false
-            if player.equipment.ranged == info.HonorMarch then delay_flag = true end
+            if player.equipment.range == info.HonorMarch then delay_flag = true end
             equip(sets.precast['Honor March'])
             if delay_flag then cast_delay(1.0) end
         end]]
@@ -696,7 +716,7 @@ function calculate_duration(spellName, spellMap)
     if player.equipment.legs == "Inyanga Shalwar +2" then mult = mult + 0.17 end
     if player.equipment.feet == "Brioso Slippers" then mult = mult + 0.1 end
     if player.equipment.feet == "Brioso Slippers +1" then mult = mult + 0.11 end
-    if player.equipment.feet == "Brioso Slippers +2" then mult = mult + 0.13 end
+    if player.equipment.feet == "Brioso Slippers +3" then mult = mult + 0.13 end
     if player.equipment.feet == "Brioso Slippers +3" then mult = mult + 0.15 end
 
     if spellMap == 'Paeon' and player.equipment.head == "Brioso Roundlet" then mult = mult + 0.1 end

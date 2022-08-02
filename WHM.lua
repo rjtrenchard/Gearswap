@@ -35,13 +35,16 @@ function init_gear_sets()
     -- Start defining the sets
     --------------------------------------
 
+    gear.FCFeet = { name = "Telchine Pigaches",
+        augments = { 'Mag. Evasion+21', '"Fast Cast"+5', 'Enh. Mag. eff. dur. +9', } }
+
     -- Precast Sets
 
     -- Fast cast sets for spells
-    sets.precast.FC = { main = gear.FastcastStaff, ammo = "Incantor Stone",
-        head = "Inyanga Tiara +1", neck = "Orison Locket", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Inyanga Jubbah +2", hands = "Gendewitha Gages +1", ring2 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Eber Pantaloons", feet = "Chelona Boots +1" }
+    sets.precast.FC = { ammo = "Sapience Orb",
+        head = "Cath Palug Crown", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = "Inyanga Jubbah +2", hands = "Gendewitha Gages +1", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = gear.FCFeet }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
@@ -51,7 +54,8 @@ function init_gear_sets()
 
     sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
-    sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], { main = "Daybreak", sub = "Ammurapi Shield", head = "Piety Cap", back = "Pahtli Cape" }) --,sub="Ammurapi Shield",ammo="Staunch Tathlum +1"})
+    sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'],
+        { main = "Daybreak", sub = "Ammurapi Shield", head = "Piety Cap", back = "Pahtli Cape" }) --,sub="Ammurapi Shield",ammo="Staunch Tathlum +1"})
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.CureSolace = set_combine(sets.precast.FC.Cure)
 
@@ -73,7 +77,8 @@ function init_gear_sets()
     sets.precast.Waltz = {
         head = "Inyanga Tiara +1", ear1 = "Roundel Earring",
         body = "Inyanga Jubbah +2", hands = "Inyanga Dastanas +2",
-        back = "Felicitas Cape +1", legs = "Gendewitha Spats", feet = "Gendewitha Galoshes" }
+        back = "Felicitas Cape +1", legs = "Gendewitha Spats", feet = "Gendewitha Galoshes"
+    }
 
 
     -- Weaponskill sets
@@ -87,9 +92,10 @@ function init_gear_sets()
         back = "Felicitas Cape +1", waist = "Fotia Belt", legs = "Gendewitha Spats", feet = "Gendewitha Galoshes" }
 
     sets.precast.WS['Flash Nova'] = {
-        head = "Inyanga Tiara +1", neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Malignance Earring",
+        head = "Inyanga Tiara +1", neck = "Sanctity Necklace", ear1 = "Regal Earring", ear2 = "Malignance Earring",
         body = "Inyanga Jubbah +2", hands = "Inyanga Dastanas +2", ring1 = "Epaminondas's Ring", ring2 = "Strendu Ring",
-        back = "Toro Cape", waist = "Eschan Stone", legs = "Gendewitha Spats", feet = "Gendewitha Galoshes" }
+        back = "Toro Cape", waist = "Eschan Stone", legs = "Gendewitha Spats", feet = "Gendewitha Galoshes"
+    }
 
 
     -- Midcast Sets
@@ -97,28 +103,28 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         head = "Inyanga Tiara +1", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
         body = "Inyanga Jubbah +2", hands = "Dynasty Mitts", ring1 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Gendewitha Spats", feet = "Gendewitha Galoshes" }
+        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Gendewitha Spats", feet = "Gendewitha Galoshes"
+    }
 
     -- Cure sets
-    gear.default.obi_waist = "Witful Belt"
-    gear.default.obi_back = "Mending Cape"
+    gear.default.obi_waist = "Luminary Sash"
 
-    sets.midcast.CureSolace = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Incantor Stone",
+    sets.midcast.CureSolace = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
         head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Glorious Earring", ear2 = "Nourishing Earring +1",
         body = "Eber Bliaud", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
         back = "Oretania's Cape", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
 
-    sets.midcast.Cure = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Incantor Stone",
-        head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Glorious Earring", ear2 = "Nourishing Earring +1",
+    sets.midcast.Cure = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
+        head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "Nourishing Earring +1",
         body = "Gendewitha Bliaut +1", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
         back = "Oretania's Cape", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
 
-    sets.midcast.Curaga = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Incantor Stone",
-        head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Glorious Earring", ear2 = "Nourishing Earring +1",
+    sets.midcast.Curaga = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
+        head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "Nourishing Earring +1",
         body = "Gendewitha Bliaut +1", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
         back = "Oretania's Cape", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
 
-    sets.midcast.CureMelee = { ammo = "Incantor Stone",
+    sets.midcast.CureMelee = { ammo = "Pemphredo Tathlum",
         head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Glorious Earring", ear2 = "Nourishing Earring +1",
         body = "Inyanga Jubbah +2", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
         back = "Oretania's Cape", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
@@ -129,7 +135,8 @@ function init_gear_sets()
         back = "Mending Cape", waist = "Witful Belt", legs = "Theophany Pantaloons +1", feet = "Gendewitha Galoshes" }
 
     sets.midcast.StatusRemoval = {
-        head = "Eber Cap", legs = "Piety Pantaloons" }
+        head = "Eber Cap", legs = "Piety Pantaloons"
+    }
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = { main = "Grioavolr", sub = "Oneiros Grip",
@@ -162,7 +169,8 @@ function init_gear_sets()
     sets.midcast['Divine Magic'] = { main = "Daybreak", sub = "Ammurapi Shield",
         head = "Inyanga Tiara +1", neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Malignance Earring",
         body = "Inyanga Jubbah +2", hands = "Theophany Mitts +1", ring2 = "Stikini Ring +1",
-        back = "Felicitas Cape +1", waist = gear.ElementalObi, legs = "Theophany Pantaloons +1", feet = "Gendewitha Galoshes" }
+        back = "Felicitas Cape +1", waist = gear.ElementalObi, legs = "Theophany Pantaloons +1",
+        feet = "Gendewitha Galoshes" }
 
     sets.midcast['Dark Magic'] = { main = "Daybreak", sub = "Ammurapi Shield",
         head = "Inyanga Tiara +1", neck = "Aesir Torque", ear1 = "Dignitary's Earring", ear2 = "Malignance Earring",
@@ -235,9 +243,10 @@ function init_gear_sets()
 
     -- Basic set for if no TP weapon is defined.
     sets.engaged = {
-        head = "Inyanga Tiara +1", neck = "Sanctity Necklace", ear1 = "Suppanomimi", ear2 = "Brutal Earring",
-        body = "Inyanga Jubbah +2", hands = "Dynasty Mitts", ring1 = "Rajas Ring", ring2 = "K'ayres Ring",
-        back = "Felicitas Cape +1", waist = "Eschan Stone", legs = "Gendewitha Spats", feet = "Gendewitha Galoshes" }
+        head = "Bunzi's Hat", neck = "Sanctity Necklace", ear1 = "Telos Earring", ear2 = "Brutal Earring",
+        body = "Ayanmo Corazza +2", hands = "Bunzi's Gloves", ring1 = "Petrov Ring", ring2 = "Hetairoi Ring",
+        waist = "Sailfi Belt +1", legs = "Ayanmo Cosciales +2", feet = "Bunzi's Sabots"
+    }
 
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
