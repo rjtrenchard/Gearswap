@@ -76,6 +76,11 @@ function init_gear_sets()
     -- Start defining the sets
     --------------------------------------
 
+    gear.fc_head = { name = "Merlinic Hood", augments = { '"Mag.Atk.Bns."+26', '"Fast Cast"+7', 'Mag. Acc.+11', } }
+    gear.fc_body = { name = "Merlinic Jubbah", augments = { 'Mag. Acc.+1', '"Fast Cast"+7', } }
+    gear.fc_feet = { name = "Merlinic Crackows", augments = { '"Mag.Atk.Bns."+1', '"Fast Cast"+7', 'MND+3',
+        'Mag. Acc.+14', } }
+    gear.fc_hands = { name = "Merlinic Dastanas", augments = { '"Fast Cast"+7', 'CHR+10', '"Mag.Atk.Bns."+6', } }
     -- Precast Sets
 
     -- Precast sets to enhance JAs
@@ -85,11 +90,11 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = { ammo = "Sapience Orb",
-        head = "Merlinic Hood", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Merlinic Jubbah", hands = "Gendewitha Gages +1", ring1 = "Weatherspoon Ring +1",
-        ring2 = { name = "Gelatinous Ring +1", priority = 10 },
-        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Lengo Pants", feet = "Amalric Nails +1" }
+    sets.precast.FC = { main = "Grioavolr", ammo = "Sapience Orb",
+        head = gear.fc_head, neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = gear.fc_body, hands = "Gendewitha Gages +1", ring1 = "Weatherspoon Ring +1",
+        ring2 = "Lebeche Ring",
+        back = "Perimede Cape", waist = "Embla Sash", legs = "Lengo Pants", feet = gear.fc_feet }
 
     sets.precast.FC['Stoneskin'] = set_combine(sets.midcast['Enhancing Magic'], { waist = "Siegel Sash" })
 
@@ -114,6 +119,11 @@ function init_gear_sets()
         body = "Vanir Cotehardie", hands = "Gendewitha Gages +1", ring1 = "Rahab Ring",
         back = "Fi Follet Cape +1", waist = "Goading Belt", legs = "", feet = "Academic's Loafers" }
 
+    sets.midcast['Healing Magic'] = { main = "Gada",
+        head = "Kaykaus Mitra +1", neck = "Incanter's Torque", ear1 = "Beatific Earring", ear2 = "Meili Earring",
+        body = "Pedagogy Gown +3", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+    }
+
     sets.midcast.Cure = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Incantor Stone",
         head = "Vanya Hood", neck = "Nodens Gorget", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
         body = "Gendewitha Bliault +1", hands = "Telchine Gloves", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
@@ -126,11 +136,11 @@ function init_gear_sets()
     sets.midcast.Regen = { main = "Bolelabunga", sub = "Ammurapi Shield", head = "Savant's Bonnet +2",
         hands = "Telchine Gloves" }
 
-    sets.midcast.Cursna = {
+    sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
         neck = "Malison Medallion",
         hands = "Hieros Mittens", ring1 = "Haoma's Ring", ring2 = "Haoma's Ring",
         feet = "Gendewitha Galoshes +1"
-    }
+    })
 
     sets.midcast['Enhancing Magic'] = { main = "Grioavolr", sub = "Enki Strap", ammo = "Savant's Treatise",
         head = "Savant's Bonnet +2", neck = "Incanter's Torque",

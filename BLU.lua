@@ -233,8 +233,10 @@ function init_gear_sets()
     sets.buff.Efflux = { legs = "Mavi Tayt +2" }
 
     -- Precast Sets
-    sets.enmity = {
-        waist = "Trance Belt"
+    sets.enmity = { ammo = "Sapience Orb",
+        head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
+        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
+        waist = "Trance Belt", legs = "Zoar Subligar +1"
     }
 
     sets.SIRD = { ammo = "Staunch Tathlum +1",
@@ -277,7 +279,7 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ammo = "Crepuscular Pebble",
+    sets.precast.WS = { ammo = "Oshasha's Treatise",
         head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
         body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Epaminondas's Ring", ring2 = "Regal Ring",
         back = "Sacro Mantle", waist = "Fotia Belt", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
@@ -304,6 +306,11 @@ function init_gear_sets()
         head = "Blistering Sallet +1", ear2 = "Odr Earring",
         body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Begrudging Ring",
         legs = "Gleti's Breeches", feet = "Gleti's Boots"
+    })
+
+    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
+        ear1 = "Regal Earring",
+        ring2 = "Metamorph Ring +1"
     })
 
     sets.midcast.Diaga = sets.TreasureHunter
@@ -511,10 +518,10 @@ function init_gear_sets()
     sets.engaged.Refresh = set_combine(sets.engaged, { body = "Jhakri Robe +2" })
 
     sets.engaged.DW = set_combine(sets.engaged,
-        { waist = "Reiki Yotai", legs = "Carmine Cuisses +1" })
+        { ear1 = "Suppanomimi", waist = "Reiki Yotai", legs = "Carmine Cuisses +1" })
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.Acc,
-        { waist = "Reiki Yotai", legs = "Carmine Cuisses +1" })
+        { ear1 = "Suppanomimi", waist = "Reiki Yotai", legs = "Carmine Cuisses +1" })
 
     sets.engaged.DW.Refresh = set_combine(sets.engaged.DW, { body = "Jhakri Robe +2" })
 

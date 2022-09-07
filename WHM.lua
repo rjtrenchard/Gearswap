@@ -41,7 +41,7 @@ function init_gear_sets()
     -- Precast Sets
 
     -- Fast cast sets for spells
-    sets.precast.FC = { ammo = "Sapience Orb",
+    sets.precast.FC = { main = "Grioavolr", ammo = "Sapience Orb",
         head = "Cath Palug Crown", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
         body = "Inyanga Jubbah +2", hands = "Gendewitha Gages +1", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
         back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = gear.FCFeet }
@@ -50,12 +50,15 @@ function init_gear_sets()
 
     sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], { head = "Befouled Crown" })
 
-    sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, { legs = "Eber Pantaloons" })
+    sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, { ring2 = "Lebeche Ring", legs = "Eber Pantaloons" })
 
     sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
-    sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'],
-        { main = "Daybreak", sub = "Ammurapi Shield", head = "Piety Cap", back = "Pahtli Cape" }) --,sub="Ammurapi Shield",ammo="Staunch Tathlum +1"})
+    sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
+        head = "Piety Cap",
+        ring2 = "Lebeche Ring",
+        back = "Perimede Cape", feet = "Hygieia Clogs +1"
+    })
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.CureSolace = set_combine(sets.precast.FC.Cure)
 
@@ -112,22 +115,22 @@ function init_gear_sets()
     sets.midcast.CureSolace = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
         head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Glorious Earring", ear2 = "Nourishing Earring +1",
         body = "Eber Bliaud", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
-        back = "Oretania's Cape", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
+        back = "Oretania's Cape +1", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
 
     sets.midcast.Cure = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
         head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "Nourishing Earring +1",
         body = "Gendewitha Bliaut +1", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
-        back = "Oretania's Cape", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
+        back = "Oretania's Cape +1", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
 
     sets.midcast.Curaga = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
         head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "Nourishing Earring +1",
         body = "Gendewitha Bliaut +1", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
-        back = "Oretania's Cape", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
+        back = "Oretania's Cape +1", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
 
     sets.midcast.CureMelee = { ammo = "Pemphredo Tathlum",
         head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Glorious Earring", ear2 = "Nourishing Earring +1",
         body = "Inyanga Jubbah +2", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
-        back = "Oretania's Cape", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
+        back = "Oretania's Cape +1", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
 
     sets.midcast.Cursna = { main = "Beneficus", sub = "Ammurapi Shield",
         head = "Eber Cap", neck = "Malison Medallion",
@@ -228,7 +231,7 @@ function init_gear_sets()
     sets.defense.MDT = { main = "Malignance Pole", sub = "Oneiros Grip",
         head = "Inyanga Tiara +1", neck = "Loricate Torque +1",
         body = "Inyanga Jubbah +2", hands = "Inyanga Dastanas +2", ring1 = "Defending Ring", ring2 = "Archon Ring",
-        back = "Oretania's Cape", legs = "Bokwus Slops", feet = "Gendewitha Galoshes" }
+        back = "Oretania's Cape +1", legs = "Bokwus Slops", feet = "Gendewitha Galoshes" }
 
     sets.Kiting = { feet = "Crier's Gaiters" }
 

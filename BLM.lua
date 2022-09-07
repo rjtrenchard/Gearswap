@@ -54,6 +54,12 @@ function init_gear_sets()
     -- Start defining the sets
     --------------------------------------
 
+    gear.fc_head = { name = "Merlinic Hood", augments = { '"Mag.Atk.Bns."+26', '"Fast Cast"+7', 'Mag. Acc.+11', } }
+    gear.fc_body = { name = "Merlinic Jubbah", augments = { 'Mag. Acc.+1', '"Fast Cast"+7', } }
+    gear.fc_feet = { name = "Merlinic Crackows", augments = { '"Mag.Atk.Bns."+1', '"Fast Cast"+7', 'MND+3',
+        'Mag. Acc.+14', } }
+    gear.fc_hands = { name = "Merlinic Dastanas", augments = { '"Fast Cast"+7', 'CHR+10', '"Mag.Atk.Bns."+6', } }
+
     ---- Precast Sets ----
 
     -- Precast sets to enhance JAs
@@ -66,11 +72,11 @@ function init_gear_sets()
 
 
     -- Fast cast sets for spells
-
-    sets.precast.FC = { ammo = "Sapience Orb",
-        head = "Merlinic Hood", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Merlinic Jubbah", hands = "Telchine Gloves", ring1 = "Kishar Ring", ring2 = "Weatherspoon Ring +1",
-        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Lengo Pants", feet = "Amalric Nails +1" }
+    -- FC 80, QC 10
+    sets.precast.FC = { main = "Grioavolr", ammo = "Sapience Orb",
+        head = gear.fc_head, neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = gear.fc_body, hands = gear.fc_hands, ring1 = "Lebeche Ring", ring2 = "Weatherspoon Ring +1",
+        back = "Perimede Cape", waist = "Embla Sash", legs = "Lengo Pants", feet = gear.fc_feet }
 
     sets.precast.FC.Impact = set_combine(sets.precast.FC, { head = empty, body = "Crepuscular Cloak" })
 
@@ -103,6 +109,12 @@ function init_gear_sets()
         back = "Pahtli Cape", waist = gear.ElementalObi, legs = "Hagondes Pants", feet = "Hagondes Sabots" }
 
     sets.midcast.Curaga = sets.midcast.Cure
+
+    sets.midcast.Cursna = set_combine({}, {
+        neck = "Debilis Medallion",
+        hands = "Hieros Mittens", ring1 = "Haoma's Ring", ring2 = "Haoma's Ring",
+        feet = "Gendewitha Galoshes +1"
+    })
 
     sets.midcast['Enhancing Magic'] = {
         head = "Befouled Crown", neck = "Incanter's Torque", ear1 = "Andoaa Earring", ear2 = "Mimir Earring",

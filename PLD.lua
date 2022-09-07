@@ -103,7 +103,8 @@ function init_gear_sets()
         head = "Sulevia's Mask +1",
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Leviathan Ring",
         ring2 = "Aquasoul Ring",
-        back = "Weard Mantle", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
+        back = "Weard Mantle", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2"
+    }
 
 
     -- Waltz set (chr and vit)
@@ -171,11 +172,12 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         head = "Sulevia's Mask +1",
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Kishar Ring", ring2 = "Rahab Ring",
-        waist = "Sailfi belt +1", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
+        waist = "Sailfi belt +1", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2"
+    }
 
     sets.midcast.Enmity = { ammo = "Sapience Orb",
         head = "Loess Barbuta +1", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
-        body = "Obviation Cuirass +1", hands = "Macabre Gauntlets +1", ring1 = "Supershear Ring", ring2 = "Petrov Ring",
+        body = "Obviation Cuirass +1", hands = "Macabre Gauntlets +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
         back = "Fierabras's Mantle", waist = "Trance Belt", legs = "Zoar Subligar +1", feet = "Yorium Sabatons" }
 
     sets.midcast.Flash = set_combine(sets.midcast.Enmity, {})

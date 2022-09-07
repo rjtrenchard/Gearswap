@@ -136,7 +136,7 @@ function init_gear_sets()
     sets.precast.RA = { ammo = gear.RAbullet,
         head = "Chasseur's Tricorne",
         body = "Laksamana's Frac +3", hands = "Lanun Gants", ring1 = "Crepuscular Ring",
-        back = "Navarch's Mantle", waist = "Yemaya Belt", legs = "Chasseur's Culottes", feet = "Meghanada Jambeaux +1" }
+        back = "Navarch's Mantle", waist = "Yemaya Belt", legs = "Chasseur's Culottes", feet = "Meghanada Jambeaux +2" }
 
 
     -- Weaponskill sets

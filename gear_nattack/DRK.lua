@@ -97,9 +97,11 @@ function include_job_sets()
 
     sets.Enmity = { ammo = "Sapience Orb",
         head = "Loess Barbuta +1", neck = "Unmoving Collar +1", ear1 = "Cryptic Earring", ear2 = "Trux Earring",
-        body = "Obviation Cuirass +1", hands = "Macabre Gauntlets +1", ring1 = "Supershear Ring", ring2 = "Petrov Ring",
+        body = "Obviation Cuirass +1", hands = "Macabre Gauntlets +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
         waist = "Trance Belt", legs = "Zoar Subligar +1", feet = gear.EnmityFeet }
-    sets.Enmity.Weapon = { main = "Voay Sword +1", sub = "Camaraderie Shield" }
+    sets.Enmity.Weapon = {}
+    -- sets.Enmity.Weapon = { main = "Voay Sword +1", sub = "Camaraderie Shield" }
+
 
     sets.SIRD = { ammo = "Staunch Tathlum +1",
         head = gear.SIRDhead,
@@ -117,7 +119,11 @@ function include_job_sets()
         head = "Volte Cap",
         legs = "Volte Hose", feet = "Volte Boots" }
 
-
+    sets.buff.doom = {
+        neck = "Nicander's Necklace",
+        ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
+        waist = "Gishdubar Sash", legs = "Shabti Cuisses +1"
+    }
 
 
     -------------------------------------------------------------------------------------------------------------------
@@ -483,7 +489,7 @@ function include_job_sets()
         back = gear.casting_cape, waist = gear.ElementalObi, legs = "Fallen's Flanchard +3", feet = "Flamma Gambieras +2" }
 
     sets.midcast['Impact'] = set_combine(sets.midcast['Elemental Magic'],
-        { head = "", body = "Crepuscular Cloak", ring2 = "Stikini Ring +1" })
+        { head = empty, body = "Crepuscular Cloak", ring2 = "Stikini Ring +1" })
 
     -------------------------------------------------------------------------------------------------------------------
     -- Engaged sets

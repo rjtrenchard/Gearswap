@@ -80,7 +80,7 @@ function user_setup()
     gear.EnhancingFeet = gear.RecastFeet
     gear.CureHands = { name = "Telchine Gloves", augments = { 'Mag. Evasion+23', '"Fast Cast"+5', '"Regen" potency+3', } }
 
-    gear.IdleInstrument = { name = "Linos", augments = { 'Mag. Evasion+15', 'Magic dmg. taken -4%', 'HP+20', } }
+    gear.IdleInstrument = { name = "Linos", augments = { 'Mag. Evasion+15', 'Phys. dmg. taken -5%', 'HP+20', } }
     gear.MeleeInstrument = { name = "Linos", augments = { 'Accuracy+20', '"Dbl.Atk."+3', 'Quadruple Attack +3', } }
     gear.WSInstrument = { name = "Linos", augments = { 'Accuracy+15 Attack+15', 'Weapon skill damage +3%', 'STR+8', } }
     gear.FCInstrument = { name = "Linos", augments = { '"Fast Cast"+5', } }
@@ -162,7 +162,7 @@ function init_gear_sets()
 
     sets.enmity = {
         head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
-        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Petrov Ring",
+        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
         waist = "Trance Belt", legs = "Zoar Subligar +1"
     }
 
@@ -195,10 +195,11 @@ function init_gear_sets()
     sets.precast.JA['Con Anima'] = { head = "Bihu Roundlet +2" }
 
     -- Waltz set (chr and vit)
-    sets.precast.Waltz = {
-        head = "Nahtirah Hat",
-        body = "Gendewitha Bliaut +1", hands = "Buremte Gloves",
-        back = gear.CastingCape, legs = "Gendewitha Spats", feet = "Gendewitha Galoshes +1"
+    sets.precast.Waltz = { range = "Gjallarhorn",
+        head = "Brioso Roundlet +2", neck = "Moonbow Whistle +1", ear1 = "Regal Earring", ear2 = "Handler's Earring +1",
+        body = "Brioso Justaucorps +2", hands = "Brioso Cuffs +2", ring1 = "Gelatinous Ring +1",
+        ring2 = "Metamorph Ring +1",
+        back = gear.CastingCape, legs = "Brioso Cannions +2", feet = "Brioso Slippers +3"
     }
 
 
@@ -216,7 +217,11 @@ function init_gear_sets()
         legs = "Zoar Subligar +1"
     })
 
-    sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
+        ring1 = "Ilabrat Ring", waist = "Kentarch Belt +1"
+    })
+
+    sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, { ring2 = "Ilabrat Ring" })
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
         neck = "Moonbow Whistle +1", ear2 = "Regal Earring",
@@ -296,28 +301,28 @@ function init_gear_sets()
     -- Dummy song with Daurdabla; minimize duration to make it easy to overwrite.
     sets.midcast.DaurdablaDummy = { main = "Kali", range = info.ExtraSongInstrument,
         head = "Volte Cap", neck = "Incanter's Torque", ear1 = "Dignitary's Earring", ear2 = "Crepuscular Earring",
-        body = "Ayanmo corazza +2", hands = "Ayanmo manopolas +2", ring1 = "Rahab Ring", ring2 = "Kishar Ring",
+        body = "Ayanmo corazza +2", hands = "Ayanmo manopolas +2", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
         back = gear.CastingCape, waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = "Volte Boots" }
 
     -- Other general spells and classes.
     sets.midcast['Healing Magic'] = {
         head = "Vanya Hood", neck = "Incanter's Torque",
         hands = "Inyanga Dastanas +2", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        back = "Oretania's Cape"
+        back = "Oretania's Cape +1"
     }
 
     sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak", sub = "Ammurapi Shield",
         head = "Vanya Hood", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "",
         body = "Gendewitha Bliaut +1", hands = gear.CureHands, ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
-        back = "Oretania's Cape", waist = gear.CureWaist, legs = "Chironic Hose", feet = "Gendewitha Galoshes +1" })
+        back = "Oretania's Cape +1", waist = gear.CureWaist, legs = "Chironic Hose", feet = "Gendewitha Galoshes +1" })
 
     sets.midcast.Curaga = sets.midcast.Cure
 
-    sets.midcast.Cursna = {
-        neck = "Malison Medallion",
-        hands = "Hieros Mittens", ring1 = "Ephedra Ring",
+    sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
+        neck = "Debilis Medallion",
+        hands = "Hieros Mittens", ring1 = "Haoma's Ring", ring2 = "Haoma's Ring",
         feet = "Gendewitha Galoshes +1"
-    }
+    })
 
     sets.midcast['Enhancing Magic'] = { main = "Pukulatmuj +1",
         head = "Umuthi Hat", neck = "Incanter's Torque", ear1 = "Mimir Earring", ear2 = "Andoaa Earring",
@@ -403,7 +408,7 @@ function init_gear_sets()
 
     -- Set if dual-wielding
     sets.engaged.DW = set_combine(sets.weapons, { range = gear.MeleeInstrument,
-        head = "Ayanmo Zucchetto +2", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Brutal Earring",
+        head = "Ayanmo Zucchetto +2", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Suppanomimi",
         body = "Ayanmo Corazza +2", hands = "Gazu Bracelet +1", ring1 = "Moonlight Ring", ring2 = "Ilabrat Ring",
         back = gear.MeleeCape, waist = "Reiki Yotai", legs = "Ayanmo Cosciales +2", feet = "Ayanmo Gambieras +2" })
 

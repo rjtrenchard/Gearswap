@@ -50,7 +50,11 @@ function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    sets.enmity = { waist = "Trance Belt" }
+    sets.enmity = { ammo = "Sapience Orb",
+        head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
+        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
+        waist = "Trance Belt", legs = "Zoar Subligar +1"
+    }
 
     -- Precast Sets
     -- Precast sets to enhance JAs

@@ -49,6 +49,11 @@ function init_gear_sets()
     gear.default.drain_waist = "Fucho-no-Obi"
     gear.default.cure_waist = "Embla Sash"
 
+    gear.fc_head = { name = "Merlinic Hood", augments = { '"Mag.Atk.Bns."+26', '"Fast Cast"+7', 'Mag. Acc.+11', } }
+    gear.fc_body = { name = "Merlinic Jubbah", augments = { 'Mag. Acc.+1', '"Fast Cast"+7', } }
+    gear.fc_feet = { name = "Merlinic Crackows", augments = { '"Mag.Atk.Bns."+1', '"Fast Cast"+7', 'MND+3',
+        'Mag. Acc.+14', } }
+
     --------------------------------------
     -- Misc sets
     --------------------------------------
@@ -67,10 +72,10 @@ function init_gear_sets()
     sets.precast.JA['Life cycle'] = { body = "Geomancy Tunic" }
 
     -- Fast cast sets for spells
-    sets.precast.FC = { range = "Dunna",
-        head = "Merlinic Hood", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Merlinic Jubbah", hands = "Telchine Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
-        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Geomancy Pants +1", feet = "Amalric Nails +1" }
+    sets.precast.FC = { main = "Grioavolr", range = "Dunna",
+        head = gear.fc_head, neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
+        body = gear.fc_body, hands = "Telchine Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Lebeche Ring",
+        back = "Perimede Cape", waist = "Embla Sash", legs = "Geomancy Pants +1", feet = gear.fc_feet }
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC,
         { main = "Daybreak", sub = "Ammurapi Shield", back = "Pahtli Cape" })
@@ -198,6 +203,17 @@ function init_gear_sets()
         waist = "Casso Sash", legs = "Chironic Hose",
     })
     sets.midcast['Poison II'] = sets.midcast.Poison
+
+    sets.midcast['Healing Magic'] = {
+        neck = "Incanter's Torque", ear1 = "Beatific Earring", ear2 = "Meili Earring",
+        ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1"
+    }
+
+    sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
+        neck = "Debilis Medallion",
+        hands = "Hieros Mittens", ring1 = "Haoma's Ring", ring2 = "Haoma's Ring",
+        back = "Oretania's Cape +1"
+    })
 
     sets.midcast.Cure = { main = "Bolelabunga", sub = "Ammurapi Shield",
         head = "Vanya Hood", neck = "Nodens Gorget",

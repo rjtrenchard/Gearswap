@@ -430,6 +430,11 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
         equip(recallRecast())
         resetRecast()
     end
+
+    if buffactive.doom then
+        equip(sets.buff.doom)
+    end
+
     eventArgs.handled = false
 end
 
@@ -440,11 +445,15 @@ function job_buff_change(buff, gain)
             if not buffactive['charm'] then
                 equip(sets.Sleeping)
             end
+        elseif buff == 'doom' then
+            send_command('gs equip sets.buff.doom')
+            send_command('input /p Doomed')
+
         elseif buff == 'charm' then
 
             local function count_slip_debuffs()
                 local erase_dots = 0
-                if buffactive['poison'] then
+                if buffactive['Poison'] then
                     erase_dots = erase_dots + 1
                 end
                 if buffactive['Dia'] then
@@ -489,7 +498,10 @@ function job_buff_change(buff, gain)
 
         -- when losing a buff
     else
-        if buff == 'charm' then
+        if buff == 'doom' then
+            send_command('input /p Doom off.')
+            send_command('gs c update')
+        elseif buff == 'charm' then
             send_command('input /p Charm off.')
         elseif buff == 'sleep' then
             send_command('gs c update')

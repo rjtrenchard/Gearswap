@@ -63,7 +63,8 @@ function init_gear_sets()
 	sets.precast.FC = {
 		head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquacious Earring",
 		body = "Adhemar Jacket +1", hands = "Leyline Gloves", ring1 = "Rahab Ring", ring2 = "Weatherspoon Ring +1",
-		legs = "Limbo Trousers", feet = "Carmine Greaves +1" }
+		legs = "Limbo Trousers", feet = "Carmine Greaves +1"
+	}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, { neck = "Magoraga Beads" })
 
@@ -73,7 +74,8 @@ function init_gear_sets()
 	sets.precast.RA = {
 		head = "Amini Gapette +1",
 		body = "Ikenga's Vest", hands = "Alruna's Gloves +1", ring1 = "Crepuscular Ring",
-		waist = "Yemaya Belt", legs = "Adhemar Kecks +1", feet = "Meghanada Jambeaux +1" }
+		waist = "Yemaya Belt", legs = "Adhemar Kecks +1", feet = "Meghanada Jambeaux +2"
+	}
 
 
 	-- Weaponskill sets
@@ -81,7 +83,8 @@ function init_gear_sets()
 	sets.precast.WS = {
 		head = "Orion beret +2", neck = "Fotia Gorget", ear1 = "Ishvara Earring", ear2 = "Moonshade Earring",
 		hands = "Meghanada Gloves +2", ring1 = "Regal Ring", ring2 = "Epaminondas's Ring",
-		back = "Sylvan Chlamys", waist = "Fotia Belt", legs = "Arcadian Braccae +2", feet = "Orion Socks +1" }
+		back = "Sylvan Chlamys", waist = "Fotia Belt", legs = "Arcadian Braccae +2", feet = "Orion Socks +1"
+	}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, { body = "Kyujutsugi", ring1 = "Hajduk Ring +1",
 		back = "Lutian Cape", legs = "Orion Braccae +1" })
@@ -102,7 +105,8 @@ function init_gear_sets()
 	sets.midcast.FastRecast = {
 		head = "Orion Beret +1", ear1 = "Loquacious Earring",
 		ring1 = "Rahab Ring",
-		waist = "Pya'ekue Belt +1", legs = "Orion Braccae +1", feet = "Orion Socks +1" }
+		waist = "Pya'ekue Belt +1", legs = "Orion Braccae +1", feet = "Orion Socks +1"
+	}
 
 	sets.midcast.Utsusemi = {}
 
@@ -111,12 +115,14 @@ function init_gear_sets()
 	sets.midcast.RA = {
 		head = "Malignance Chapeau", neck = "Iskur Gorget", ear1 = "Telos Earring", ear2 = "Beyla Earring",
 		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Dingir Ring", ring2 = "Regal Ring",
-		back = "Lutian Cape", waist = "Yemaya Belt", legs = "Malignance Tights", feet = "Malignance Boots" }
+		back = "Lutian Cape", waist = "Yemaya Belt", legs = "Malignance Tights", feet = "Malignance Boots"
+	}
 
 	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
 		head = "Malignance Chapeau", neck = "Iskur Gorget", ear1 = "Telos Earring", ear2 = "Beyla Earring",
 		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Dingir Ring", ring2 = "Regal Ring",
-		back = "Lutian Cape", waist = "Yemaya Belt", legs = "Malignance Tights", feet = "Malignance Boots" })
+		back = "Lutian Cape", waist = "Yemaya Belt", legs = "Malignance Tights", feet = "Malignance Boots"
+	})
 
 	sets.midcast.RA.Annihilator = set_combine(sets.midcast.RA)
 
@@ -140,18 +146,21 @@ function init_gear_sets()
 	sets.idle = {
 		head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Odnowa Earring +1", ear2 = "Etiolation Earring",
 		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring",
-		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Malignance Boots" }
+		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Malignance Boots"
+	}
 
 	-- Defense sets
 	sets.defense.PDT = {
 		head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Odnowa Earring +1", ear2 = "Etiolation Earring",
 		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring",
-		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots"
+	}
 
 	sets.defense.MDT = {
 		head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Odnowa Earring +1", ear2 = "Etiolation Earring",
 		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring",
-		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+		back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots"
+	}
 
 	sets.Kiting = { legs = "Carmine Cuisses +1" }
 
@@ -163,12 +172,14 @@ function init_gear_sets()
 	sets.engaged = {
 		head = "Malignance Chapeau", neck = "Anu Torque", ear1 = "Sherida Earring", ear2 = "Telos Earring",
 		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Epona's Ring", ring2 = "Hetairoi Ring",
-		back = "Shadow Mantle", waist = "Sailfi Belt +1", legs = "Samnuha Tights", feet = "Malignance Boots" }
+		back = "Shadow Mantle", waist = "Sailfi Belt +1", legs = "Samnuha Tights", feet = "Malignance Boots"
+	}
 
 	sets.engaged.Acc = {
 		head = "Malignance Chapeau", neck = "Combatant's Torque", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
 		body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Epona's Ring", ring2 = "Hetairoi Ring",
-		back = "Shadow Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+		back = "Shadow Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots"
+	}
 
 	sets.engaged.DW = set_combine(sets.engaged, { waist = "Reiki Yotai" })
 

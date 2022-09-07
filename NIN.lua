@@ -18,7 +18,7 @@ function job_setup()
     state.Buff.Innin = buffactive.Innin or false
     state.Buff.Futae = buffactive.Futae or false
 
-    determine_haste_group()
+    -- determine_haste_group()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -33,11 +33,13 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.PhysicalDefenseMode:options('PDT', 'Evasion')
 
+    state.DoomMode = M { ['description'] = 'Doom Mode', 'Cursna', 'Holy Water' }
+
     gear.default.obi_waist = "Eschan Stone"
 
     gear.NormalShuriken = 'Togakushi Shuriken'
     gear.SangeShuriken = 'Happo Shuriken'
-    gear.Shuriken = { name = gear.NormalShuriken }
+
 
     --options.ammo_warning_limit = 15
 
@@ -89,10 +91,11 @@ function init_gear_sets()
         --legs="Taeon Tights", feet="Taeon Boots" -- 40
     }
 
-    sets.Enmity = { ammo = "Sapience Orb",
-        neck = "Moonlight Necklace", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
-        body = "Emet Harness +1", hands = "Kurys Gloves", ring1 = "Supershear Ring", ring2 = "Petrov Ring",
-        waist = "Trance Belt" }
+    sets.enmity = { ammo = "Sapience Orb",
+        head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
+        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
+        waist = "Trance Belt", legs = "Zoar Subligar +1"
+    }
 
     --------------------------------------
     -- Precast sets
@@ -149,11 +152,10 @@ function init_gear_sets()
         body = "Mochizuki Chainmail +1", hands = "Adhemar Wristbands +1", ring1 = "Regal Ring",
         ring2 = "Epaminondas's Ring",
         back = "Atheling Mantle", waist = "Fotia Belt", legs = "Samnuha Tights", }
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, { ammo = "Jukukik Feather", hands = "Buremte Gloves",
-        back = "Yokaze Mantle" })
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
     sets.precast.WS.Magic = { ammo = "Seething Bomblet +1",
-        head = "Herculean Helm", neck = "Sanctity Necklace", ear1 = "Hecate's Earring", ear2 = "Friomisi Earring",
-        body = "Samnuha Coat", hands = "Leyline Gloves", ring1 = "Epaminondas's Ring", ring2 = "Acumen Ring",
+        head = "Herculean Helm", neck = "Sibyl Scarf", ear1 = "Hecate's Earring", ear2 = "Friomisi Earring",
+        body = "Samnuha Coat", hands = "Leyline Gloves", ring1 = "Epaminondas's Ring", ring2 = "Dingir Ring",
         back = "Atheling Mantle", waist = gear.ElementalObi, legs = "Herculean Trousers", feet = "Malignance Boots" }
 
     sets.precast.WS.Low = set_combine(sets.naked,
@@ -169,9 +171,10 @@ function init_gear_sets()
         body = "Mpaca's Doublet", hands = "Mpaca's Gloves", ring1 = "Begrudging Ring", ring2 = "Epaminondas's Ring",
         waist = "Gerdr Belt +1", legs = "Zoar Subligar +1", feet = "Mpaca's Boots" })
 
-    sets.precast.WS['Blade: Jin'] = set_combine(sets.precast.WS['Blade: Hi'], { ammo = "yetshila +1",
+    sets.precast.WS['Blade: Jin'] = set_combine(sets.precast.WS['Blade: Hi'], {
         ear1 = "Odr Earring", ear2 = "Lugra Earring +1",
-        ring1 = "Begrudging Ring", ring2 = "Ilabrat Ring" })
+        ring1 = "Begrudging Ring", ring2 = "Ilabrat Ring"
+    })
 
     sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS, { ammo = "Cath Palug Stone",
         ear1 = "Odr Earring", ear2 = "Lugra Earring +1",
@@ -202,51 +205,52 @@ function init_gear_sets()
     sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS.Magic,
         { head = 'Pixie Hairpin +1', ring2 = "Archon Ring" })
 
-    -- Magical Weaponskills
+    -- Magical/Hybrid Weaponskills
     sets.precast.WS['Blade: Teki'] = set_combine(sets.precast.WS.Magic, {})
     sets.precast.WS['Blade: Ei'] = set_combine(sets.precast.WS.Magic,
         { head = "Pixie Hairpin +1", ring2 = "Archon Ring" })
     sets.precast.WS['Blade: Yu'] = set_combine(sets.precast.WS.Magic, {})
-
-
+    sets.precast.WS['Blade: Chi'] = set_combine(sets.precast.WS.Magic, {})
 
     --------------------------------------
     -- Midcast sets
     --------------------------------------
 
+    sets.midcast.Trust = sets.SIRD
+
     sets.midcast.FastRecast = {
         head = "Herculean Helm", ear2 = "Loquacious Earring",
-        body = "Hachiya Chainmail +1", hands = "Herculean Gloves", ring1 = "Rahab Ring",
+        body = "Hachiya Chainmail +1", hands = "Herculean Gloves",
         legs = "Hachiya Hakama", feet = "Herculean Boots"
     }
 
-    sets.midcast.SIRD = { ammo = "Staunch Tathlum +1"
-    }
     sets.midcast.Utsusemi = set_combine(sets.midcast.SelfNinjutsu,
         { back = "Andartia's Mantle", feet = "Iga Kyahan +2" })
 
-    sets.midcast.ElementalNinjutsu = { ammo = "Yamarang",
-        head = "Hachiya Hatsuburi", neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
+    sets.midcast.ElementalNinjutsu = { ammo = "Ghastly Tathlum +1",
+        head = "Hachiya Hatsuburi", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
         body = "Hachiya Chainmail +1", hands = "Iga Tekko +2", ring1 = "Dingir Ring", ring2 = "Metamorph Ring +1",
         back = "Toro Cape", waist = gear.ElementalObi, legs = "Malignance Tights", feet = "Hachiya Kyahan" }
 
     sets.midcast.ElementalNinjutsu.Resistant = set_combine(sets.midcast.Ninjutsu, {
         head = "Malignance Tabard", neck = "Sanctity Necklace", ear1 = "Crepuscular Earring",
         ear2 = "Dignitary's Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
         back = "Yokaze Mantle", waist = "Eschan Stone", legs = "Malignance Tights", boots = "Malignance Boots"
     })
 
+    sets.midcast.ElementalNinjutsu.burst = set_combine(sets.midcast.ElementalNinjutsu, {})
+
     sets.midcast.NinjutsuDebuff = { ammo = "Yamarang",
-        head = "Hachiya Hatsuburi", neck = "Sanctity Necklace", ear1 = "Crepuscular Earring",
+        head = "Malignance Chapeau", neck = "Moonlight Necklace", ear1 = "Crepuscular Earring",
         ear2 = "Dignitary's Earring",
-        hands = "Mochizuki Tekko", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        back = "Yokaze Mantle", waist = "Eschan Stone", legs = "Malignance Rights", feet = "Hachiya Kyahan" }
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
+        back = "Yokaze Mantle", waist = "Eschan Stone", legs = "Malignance Tights", feet = "Malignance Boots" }
     sets.midcast['Kurayami: Ni'] = set_combine(sets.midcast.NinjutsuDebuff, { ring1 = "Archon Ring" })
     sets.midcast['Kurayami: Ichi'] = sets.midcast['Kurayami: Ni']
     sets.midcast['Yurin: Ichi'] = sets.midcast['Kurayami: Ni']
 
-    sets.midcast.NinjutsuBuff = { head = "Hachiya Hatsuburi", neck = "Sanctity Necklace", hands = "Mochizuki Tekko",
+    sets.midcast.NinjutsuBuff = { head = "Hachiya Hatsuburi", hands = "Mochizuki Tekko",
         ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1", back = "Yokaze Mantle" }
 
     sets.midcast.RA = {
@@ -271,10 +275,12 @@ function init_gear_sets()
         back = "Atheling Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = gear.MovementFeet
     }
 
-    sets.idle.Town = { main = "Raimitsukane", sub = "Kaitsuburi", ammo = "Togakushi Shuriken",
-        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Odnowa Earring +1", ear2 = "Etiolation Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
-        back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Malignance Tights", feet = gear.MovementFeet }
+    sets.idle.Town = {
+        head = "Shaded Spectacles", neck = "Smithy's Torque",
+        body = "Blacksmith's Smock", hands = "Smithy's Mitts", ring1 = "Confectioner's Ring",
+        ring2 = "Craftmaster's Ring",
+        back = gear.idle_cape, waist = "Blacksmith's Belt", feet = gear.MovementFeet
+    }
 
     sets.idle.Weak = {
         head = "Malignance Chapeau", neck = "Bathy Choker +1", ear1 = "Odnowa Earring +1", ear2 = "Etiolation Earring",
@@ -338,12 +344,61 @@ function init_gear_sets()
         back = "Yokaze Mantle", waist = "Reiki Yotai", legs = "Malignance Tights", feet = "Malignance Boots" }
 
 
+    sets.engaged.MaxDW = set_combine(sets.engaged, {})
+    sets.engaged.Acc = set_combine(sets.engaged.Acc, {})
+    sets.engaged.Evasion = set_combine(sets.engaged.Evasion, {})
+    sets.engaged.Acc.Evasion = set_combine(sets.engaged.Acc.Evasion, {})
+    sets.engaged.PDT = set_combine(sets.engaged.PDT, {})
+    sets.engaged.Acc.PDT = set_combine(sets.engaged.Acc.PDT, {})
+
+
+    -- accessories only
+    sets.DTDW = { ear1 = "Eabani Earring", ear2 = "Suppanomimi", waist = "Reiki Yotai" }
+
+    -- need 39 DW
+    sets.MaxDW = { ear2 = "Suppanomimi",
+        body = "Mochizuki Chainmail +3",
+        waist = "Reiki Yotai", legs = "Mochizuki Hakama +3", feet = "Hizamaru Sune-ate +2" }
+    sets.engaged.MaxDW = set_combine(sets.engaged, sets.MaxDW)
+    sets.engaged.Acc = set_combine(sets.engaged.Acc, sets.MaxDW)
+    sets.engaged.Evasion = set_combine(sets.engaged.Evasion, sets.DTDW)
+    sets.engaged.Acc.Evasion = set_combine(sets.engaged.Acc.Evasion, sets.DTDW)
+    sets.engaged.PDT = set_combine(sets.engaged.PDT, sets.DTDW)
+    sets.engaged.Acc.PDT = set_combine(sets.engaged.Acc.PDT, sets.DTDW)
+
+    -- need 21 DW
+    sets.MidDW = { ear2 = "Suppanomimi", waist = "Reiki Yotai", legs = "Mochizuki Hakama +3" }
+    sets.engaged.MaxDW = set_combine(sets.engaged, sets.MidDW)
+    sets.engaged.Acc = set_combine(sets.engaged.Acc, sets.MidDW)
+    sets.engaged.Evasion = set_combine(sets.engaged.Evasion, sets.DTDW)
+    sets.engaged.Acc.Evasion = set_combine(sets.engaged.Acc.Evasion, sets.DTDW)
+    sets.engaged.PDT = set_combine(sets.engaged.PDT, sets.DTDW)
+    sets.engaged.Acc.PDT = set_combine(sets.engaged.Acc.PDT, sets.DTDW)
+
+    -- need 1 DW
+    sets.MinDW = { waist = "Kentarch Belt +1" }
+    sets.engaged.MaxDW = set_combine(sets.engaged, sets.MinDW)
+    sets.engaged.Acc = set_combine(sets.engaged.Acc, sets.MinDW)
+    sets.engaged.Evasion = set_combine(sets.engaged.Evasion, sets.MinDW)
+    sets.engaged.Acc.Evasion = set_combine(sets.engaged.Acc.Evasion, sets.MinDW)
+    sets.engaged.PDT = set_combine(sets.engaged.PDT, sets.MinDW)
+    sets.engaged.Acc.PDT = set_combine(sets.engaged.Acc.PDT, sets.MinDW)
     --------------------------------------
     -- Custom buff sets
     --------------------------------------
 
-    --sets.buff.Migawari = {body="Iga Ningi +2"}
-    --sets.buff.Doom = {ring2="Saida Ring"}
+
+    sets.buff.doom = { ammo = "Staunch Tathlum +1",
+        head = "Malignance Chapeau", neck = "Nicander's Necklace",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
+        back = gear.DDCape, waist = "Gishdubar Sash", legs = "Malignance Tights", feet = "Malignance Boots" }
+
+    sets.buff.doom.HolyWater = { ammo = "Staunch Tathlum +1",
+        head = "Malignance Chapeau", neck = "Nicander's Necklace",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Blenmot's Ring +1", ring2 = "Blenmot's Ring +1",
+        back = gear.DDCape, waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+
+    sets.buff.Migawari = { body = "Hattori Ningi +2" }
     sets.buff.Yonin = {}
     sets.buff.Innin = {}
 end
@@ -352,31 +407,14 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
-
-function job_precast(spell, action, spellMap, eventArgs)
-    -- ensure there is viable shuriken
-    do_shuriken_check(spell, spellMap, eventArgs)
-
-    --handle Sange
-    if spell.english == 'Sange' then
-        gear.Shuriken = { name = gear.SangeShuriken }
-    else
-        gear.Shuriken = { name = gear.NormalShuriken }
+function job_pretarget(spell, action, spellMap, eventArgs)
+    if spell.english == 'Sange' and not shuriken_check() then
+        eventArgs.cancel = true
     end
 end
 
-function do_shuriken_check(spell, spellMap, eventArgs)
-    local shuriken_name = gear.SangeShuriken
-    local available_shuriken = player.inventory[shuriken_name] or player.wardrobe[shuriken_name] or
-        player.wardrobe2[shuriken_name] or player.wardrobe3[shuriken_name] or player.wardrobe4[shuriken_name]
-
-    -- ensure ammo exists
-    if not available_shuriken then
-        add_to_chat(104, 'No Ammo (' .. tostring(shuriken_name) .. ') available for that action.')
-        --eventArgs.cancel = true
-        return
-    end
-end
+-- function job_precast(spell, action, spellMap, eventArgs)
+-- end
 
 -- Run after the general midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
@@ -393,25 +431,80 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
+function job_post_aftercast(spell, action, spellMap, eventArgs)
+    if buffactive['Sange'] and shuriken_check() then
+        equip({ sets.SangeShuriken })
+    end
+end
+
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function shuriken_check()
+    local shuriken_name = gear.SangeShuriken
+    local available_shuriken = player.inventory[shuriken_name] or player.wardrobe[shuriken_name] or
+        player.wardrobe2[shuriken_name] or player.wardrobe3[shuriken_name] or player.wardrobe4[shuriken_name] or
+        player.wardrobe5[shuriken_name] or player.wardrobe6[shuriken_name] or player.wardrobe7[shuriken_name] or
+        player.wardrobe8[shuriken_name]
+
+    -- ensure ammo exists
+    if not available_shuriken then
+        windower.add_to_chat(104, 'No Ammo (' .. tostring(shuriken_name) .. ') available for that action.')
+        return false
+    end
+    return true
+end
 
 -- Called when a player gains or loses a buff.
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
-    -- If we gain or lose any haste buffs, adjust which gear set we target.
-    if S { 'haste', 'march', 'embrava', 'haste samba' }:contains(buff:lower()) then
-        determine_haste_group()
-        handle_equipping_gear(player.status)
-    elseif state.Buff[buff] ~= nil then
-        handle_equipping_gear(player.status)
-    end
+    -- if 'Sange' == buff then
+    --     if gain then
+    --         if not shuriken_check() then
+    --             send_command('cancel sange')
+    --             return
+    --         end
+    --         sange_event = windower.register_event('action', function(act)
+    --             if act.category == 01 then
+    --                 if player.equipment.ammo ~= gear.SangeShuriken then
+    --                     send_command('input /equip ammo ' .. gear.SangeShuriken)
+    --                 elseif player.equipment.ammo == gear.NormalShuriken and (gear.NormalShuriken ~= gear.SangeShuriken) then
+    --                     send_command('input /equip ammo')
+    --                     send_command('cancel sange')
+    --                 end
+    --             end
+    --         end)
 
-    if S { 'Sange' }:contains(buff:lower()) then
-        if not buffactive.Sange then
-            gear.Shuriken = { name = gear.NormalShuriken }
+    --     else
+    --         windower.unregister_event(sange_event)
+    --     end
+
+    -- print(buff:lower(), buffactive.haste)
+    if gain then
+        if S { 'haste', 'march', 'embrava', 'haste samba' }:contains(buff:lower()) then
+            calculate_haste()
+            send_command('gs c update')
+        elseif buff == 'charm' then
+            send_command('input /p Charmed')
+        elseif buff == 'doom' then
+            send_command('input /p Doomed')
+            if state.DoomMode.value == 'Cursna' then
+                send_command('gs equip sets.buff.doom')
+            elseif state.DoomMode.value == 'Holy Water' then
+                send_command('gs equip sets.buff.doom.HolyWater')
+            end
+        end
+    else
+        if S { 'haste', 'march', 'embrava', 'haste samba' }:contains(buff:lower()) then
+            calculate_haste()
+            send_command('gs c update')
+        elseif buff == 'charm' then
+            send_command('input /p Charm off')
+        elseif buff == 'doom' then
+            send_command('input /p Doom off')
+            send_command('gs c update')
         end
     end
 end
@@ -459,11 +552,54 @@ end
 function job_update(cmdParams, eventArgs)
     procTime(world.time)
     determine_haste_group()
+
+    if buffactive['Sange'] then send_command('input /equip ammo ' .. gear.SangeShuriken) end
 end
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function calculate_haste()
+    local haste = 0
+
+
+    if buffactive.march == 1 then
+        -- assume honor march for single march song
+        haste = haste + 16.99
+    elseif buffactive.march == 2 then
+        haste = 43.75
+    end
+
+    if buffactive.haste == 1 then
+        -- assume haste II
+        haste = haste + 30
+    elseif buffactive.haste == 2 then
+        -- cornelia active
+        haste = 43.75
+    end
+
+    if buffactive.embrava then
+        haste = haste + 25.9
+    end
+
+    if buffactive['haste samba'] then
+        haste = haste + 5
+    end
+
+    classes.CustomMeleeGroups:clear()
+    if haste <= 29 then
+        -- equip up to 64 DW
+        classes.CustomMeleeGroups:append('MaxDW')
+    elseif haste > 29 and haste < 43.75 then
+        -- equip up to 31 DW
+        classes.CustomMeleeGroups:append('MidDW')
+    elseif haste >= 43.75 then
+        -- equip 11 DW
+        classes.CustomMeleeGroups:append('MinDW')
+    end
+
+end
 
 function determine_haste_group()
     -- We have three groups of DW in gear: Hachiya body/legs, Iga head + Reiki Yotai, and DW earrings
@@ -494,19 +630,20 @@ function determine_haste_group()
     -- 7% DW (earrings) - Embrava Haste (specialized situation with embrava and haste, but no marches)
     -- 0 DW - Max Haste
 
-    classes.CustomMeleeGroups:clear()
+    -- classes.CustomMeleeGroups:clear()
 
-    if buffactive.embrava and (buffactive.march == 2 or (buffactive.march and buffactive.haste)) then
-        classes.CustomMeleeGroups:append('MaxHaste')
-    elseif buffactive.march == 2 and buffactive.haste then
-        classes.CustomMeleeGroups:append('MaxHaste')
-    elseif buffactive.embrava and (buffactive.haste or buffactive.march) then
-        classes.CustomMeleeGroups:append('EmbravaHaste')
-    elseif buffactive.march == 1 and buffactive.haste and buffactive['haste samba'] then
-        classes.CustomMeleeGroups:append('HighHaste')
-    elseif buffactive.march == 2 then
-        classes.CustomMeleeGroups:append('HighHaste')
-    end
+    -- if buffactive.embrava and (buffactive.march == 2 or (buffactive.march and buffactive.haste)) then
+    --     classes.CustomMeleeGroups:append('MaxHaste')
+    -- elseif buffactive.march == 2 and buffactive.haste then
+    --     classes.CustomMeleeGroups:append('MaxHaste')
+    -- elseif buffactive.embrava and (buffactive.haste or buffactive.march) then
+    --     classes.CustomMeleeGroups:append('EmbravaHaste')
+    -- elseif buffactive.march == 1 and buffactive.haste and buffactive['haste samba'] then
+    --     classes.CustomMeleeGroups:append('HighHaste')
+    -- elseif buffactive.march == 2 then
+    --     classes.CustomMeleeGroups:append('HighHaste')
+    -- end
+
 end
 
 function select_weaponskill_ears()

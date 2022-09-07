@@ -150,37 +150,41 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ammo = "Ginsen",
-        head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
-        body = "Gleti's Cuirass", hands = "Buremte Gloves", ring1 = "Rajas Ring", ring2 = "Epona's Ring",
-        back = "Atheling Mantle", waist = gear.ElementalBelt, legs = "Manibozho Brais", feet = "Malignance Boots" }
+    sets.precast.WS = { ammo = "Oshasha's Treatise",
+        head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
+        body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Epaminondas's Ring", ring2 = "Epona's Ring",
+        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Samnuha Tights", feet = "Gleti's Boots" }
     sets.precast.WS.Acc = set_combine(sets.precast.WS, { ammo = "Yamarang", back = "Toetapper Mantle" })
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
-    sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, { neck = "Houyi's Gorget",
-        hands = "Adhemar Wristbands +1", ring1 = "Stormsoul Ring",
-        waist = "Caudata Belt", legs = "Nahtirah Trousers" })
+    sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, { ammo = "Voluspa Tathlum",
+        ring1 = "Ilabrat Ring",
+        waist = "Fotia Belt",
+    })
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'],
-        { ammo = "Yamarang", back = "Toetapper Mantle" })
+        { ammo = "Yamarang", })
     sets.precast.WS['Exenterator'].Fodder = set_combine(sets.precast.WS['Exenterator'], { waist = gear.ElementalBelt })
 
     sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, { hands = "Adhemar Wristbands +1" })
     sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS.Acc, { hands = "Adhemar Wristbands +1" })
 
-    sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS,
-        { ammo = "Charis Feather", head = "Uk'uxkaj Cap", neck = "Rancor Collar" })
+    sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, { ammo = "Voluspa Tathlum",
+        head = "Blistering Sallet +1", ear1 = "Sherida Earring", ear2 = "Odr Earring",
+        body = "Gleti's Cuirass", ring1 = "Hetairoi Ring", ring2 = "Begrudging Ring",
+        legs = "Zoar Subligar +1", feet = "Gleti's Boots"
+    })
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'],
-        { ammo = "Yamarang", back = "Toetapper Mantle" })
+        {})
 
     sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS,
-        { ammo = "Charis Feather", ear1 = "Brutal Earring", ear2 = "Moonshade Earring" })
+        { ammo = "Oshasha's Treatise" })
     sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"],
         { ammo = "Yamarang", back = "Toetapper Mantle" })
 
-    sets.precast.WS['Aeolian Edge'] = { ammo = "Charis Feather",
-        head = "Wayfarer Circlet", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Moonshade Earring",
-        body = "Wayfarer Robe", hands = "Wayfarer Cuffs", ring1 = "Acumen Ring", ring2 = "Demon's Ring",
-        back = "Toro Cape", waist = "Chaac Belt", legs = "Shneddick Tights +1", feet = "Wayfarer Clogs" }
+    sets.precast.WS['Aeolian Edge'] = { ammo = "Ghastly Tathlum +1",
+        head = "Nyame Helm", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Moonshade Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Epaminondas's Ring", ring2 = "Acumen Ring",
+        back = "Toro Cape", waist = "Chaac Belt", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
     sets.precast.Skillchain = { hands = "Charis Bangles +2" }
 
@@ -189,13 +193,13 @@ function init_gear_sets()
 
     sets.midcast.FastRecast = {
         head = "Adhemar Bonnet +1", ear2 = "Loquacious Earring",
-        body = "Iuitl Vest", hands = "Adhemar Wristbands +1",
+        body = "Malignance Tabard", hands = "Adhemar Wristbands +1",
         legs = "Kaabnax Trousers", feet = "Malignance Boots"
     }
 
     -- Specific spells
     sets.midcast.Utsusemi = {
-        head = "Adhemar Bonnet +1", neck = "Ej Necklace", ear2 = "Loquacious Earring",
+        head = "Adhemar Bonnet +1", ear2 = "Loquacious Earring",
         body = "Iuitl Vest", hands = "Adhemar Wristbands +1", ring1 = "Beeline Ring",
         back = "Toetapper Mantle", legs = "Kaabnax Trousers", feet = "Malignance Boots"
     }

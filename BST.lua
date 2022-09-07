@@ -126,8 +126,10 @@ function init_gear_sets()
     -- Precast sets
     --------------------------------------
 
-    sets.enmity = {
-        waist = "Trance Belt"
+    sets.enmity = { ammo = "Sapience Orb",
+        head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
+        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
+        waist = "Trance Belt", legs = "Zoar Subligar +1"
     }
 
     sets.precast.JA['Killer Instinct'] = { head = "Ankusa Helm +1" }

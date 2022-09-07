@@ -83,7 +83,10 @@ function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    sets.enmity = { waist = "Trance Belt" }
+    sets.enmity = { ammo = "Sapience Orb",
+        head = "Loess Barbuta +1", neck = "Unmoving Collar +1", ear1 = "Cryptic Earring", ear2 = "Trux Earring",
+        body = "Obviation Cuirass +1", hands = "Macabre Gauntlets +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
+        waist = "Trance Belt", legs = "Zoar Subligar +1", feet = gear.EnmityFeet }
 
     sets.precast.FC = { ammo = "Sapience Orb",
         head = "Sakpata's Helm", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquacious Earring",
@@ -93,9 +96,18 @@ function init_gear_sets()
 
     -- Precast Sets
     -- Precast sets to enhance JAs
-    sets.precast.JA.Meditate = { head = "Myochin Kabuto", hands = "Sakonji Kote" }
-    sets.precast.JA['Warding Circle'] = { head = "Myochin Kabuto" }
-    sets.precast.JA['Blade Bash'] = { hands = "Sakonji Kote" }
+    sets.precast.JA['Provoke'] = sets.enmity
+    sets.precast.JA['Berserk'] = { body = "Pummeler's Lorica +2", back = "Cichol's Mantle", feet = "Agoge calligae +2" }
+    sets.precast.JA['Warcry'] = { head = "Agoge Mask +2" }
+    sets.precast.JA['Aggressor'] = { head = "Pummeler's Mask +2", body = "Agoge Lorica +2" }
+    sets.precast.JA['Retaliation'] = { hands = "Pummeler's Mufflers +1", legs = "Boii Calligae +1" }
+    sets.precast.JA['Warrior\'s Charge'] = { legs = "Agoge Cuisses +2" }
+    sets.precast.JA['Tomahawk'] = { ammo = "Throwing Tomahawk", feet = "Agoge calligae +2" }
+    sets.precast.JA['Restraint'] = { hands = "Boii Mufflers +1" }
+    sets.precast.JA['Blood Rage'] = { body = "Boii Lorica +1" }
+    sets.precast.JA['Mighty Strikes'] = { hands = "Agoge Mufflers +2" }
+
+
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = { ammo = "Sonia's Plectrum",
@@ -109,16 +121,30 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ammo = "Ginsen",
-        head = "Sakpata's Helm", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
+    sets.precast.WS = { ammo = "Knobkierrie",
+        head = "Sakpata's Helm", neck = "Fotia Gorget", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Epaminondas's Ring", ring2 = "Regal Ring",
-        back = "Atheling Mantle", waist = "Sailfi Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
     sets.precast.WS.Acc = set_combine(sets.precast.WS, { back = "Atheling Mantle" })
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
-    sets.precast.WS['Tachi: Fudo'] = set_combine(sets.precast.WS, { neck = "Snow Gorget" })
-    sets.precast.WS['Tachi: Fudo'].Acc = set_combine(sets.precast.WS.Acc, { neck = "Snow Gorget" })
-    sets.precast.WS['Tachi: Fudo'].Mod = set_combine(sets.precast.WS['Tachi: Fudo'], { waist = "Snow Belt" })
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+        neck = "Republican Platinum Medal",
+        waist = "Sailfi Belt +1"
+    })
+    sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
+
+    sets.precast.WS['Cataclysm'] = { ammo = "Knobkierrie",
+        head = "Pixie Hairpin +1", neck = "Sibyl Scarf", ear1 = "Lugra Earring +1", ear2 = "Moonshade Earring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets",
+        back = "Atheling Mantle", waist = "Eschan Stone", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings"
+    }
+
+    sets.precast.WS['Upheaval'] = set_combine(sets.precast.WS, { ammo = "Seething Bomblet +1",
+        ear1 = "Brutal Earring",
+        ring1 = "Niqmaddu Ring",
+    })
+
 
 
 
