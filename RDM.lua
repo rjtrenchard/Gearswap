@@ -253,6 +253,7 @@ function init_gear_sets()
         body = "Amalric Doublet +1", hands = "Jhakri Cuffs +2", ring1 = "Freke Ring", ring2 = "Weatherspoon Ring +1",
         back = gear.mnd_cape, waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Lethargy Houseaux +2"
     }
+    sets.precast.WS['Seraph Blade'].MaxTP = { ear2 = "Malignance Earring" }
 
     sets.precast.WS['Red Lotus Blade'] = { ammo = "Ghastly Tathlum +1",
         head = "Cath Palug Crown", neck = "Sibyl Scarf", ear1 = "Regal Earring", ear2 = "Malignance Earring",
@@ -264,6 +265,7 @@ function init_gear_sets()
         head = "Blistering Sallet +1",
         body = "Jhakri Robe +2", hands = "Atrophy Gloves +3",
         legs = "Zoar Subligar +1", feet = "Ayanmo Gambieras +2" })
+    sets.precast.WS['Chant du Cygne'].MaxTP = { ear2 = "Brutal Earring" }
 
     sets.precast.WS['Vorpal Blade'] = set_combine(sets.precast.WS.Crit, { ring2 = "Begrudging Ring" })
 
@@ -274,6 +276,7 @@ function init_gear_sets()
             head = "Malignance Chapeau", neck = "Republican Platinum medal",
             body = "Malignance Tabard", hands = "Malignance Gloves",
             waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Lethargy Houseaux +2" })
+    sets.precast.WS['Savage Blade'].MaxTP = { ear2 = "Sherida Earring" }
 
     sets.precast.WS['Death Blossom'] = set_combine(sets.precast.WS.Acc, {})
 
@@ -286,6 +289,7 @@ function init_gear_sets()
         ring2 = "Metamorph Ring +1",
         back = gear.mnd_cape, waist = "Sailfi Belt +1", legs = "Vitiation Tights +2", feet = "Lethargy Houseaux +2"
     })
+    sets.precast.WS['Black Halo'].MaxTP = { ear2 = "Ishvara Earring" }
 
     sets.precast.WS['Empyreal Arrow'] = set_combine(sets.precast.WS.Acc, { range = nil, ammo = gear.ranged_ws_ammo })
 
@@ -482,12 +486,12 @@ function init_gear_sets()
     sets.midcast.MagicBurst = { neck = "Mizukage-no-kubikazari", ring1 = "Jhakri Ring", ring2 = "Mujin Band",
         feet = "Jhakri Pigaches +2" }
 
-    sets.midcast['Dark Magic'] = { main = "Rubicundity", sub = { name = "Ammurapi Shield", priority = 10 },
-        ammo = "Regal Gem",
+    sets.midcast['Dark Magic'] = { ammo = "Regal Gem",
         head = "Malignance Chapeau", neck = "Erra Pendant", ear1 = "Mani Earring", ear2 = "Dark Earring",
         body = "Carmine Scale Mail +1", hands = "Malignance Gloves", ring1 = "Archon Ring", ring2 = "Evanescence Ring",
-        back = gear.int_cape, waist = "Casso Sash", legs = "Malignance Tights", feet = "Malignance Boots" }
-    sets.midcast['Dark Magic'].Weapon = { main = "Naegling", sub = { name = "Ammurapi Shield", priority = 10 } }
+        back = gear.int_cape, waist = "Casso Sash", legs = "Malignance Tights", feet = "Malignance Boots"
+    }
+    sets.midcast['Dark Magic'].Weapon = { main = "Rubicundity", sub = { name = "Ammurapi Shield", priority = 10 } }
     sets.midcast['Dark Magic'].DW = sets.midcast['Dark Magic'].Weapon
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], { main = "Rubicundity", sub = "Ammurapi Shield",
@@ -709,9 +713,21 @@ function job_precast(spell, action, spellMap, eventArgs)
         end
         -- elseif spell.type == 'WeaponSkill' and state.RangedMode.value == 'Normal' then
         --     disable('range', 'ammo')
+
+        -- if S{'Seraph Blade', 'Savage Blade', 'Chant du Cygne', }:contains(spell.english) then
+        --     equip(sets.precast.WS[spell.english].MaxTP)
+        -- end
     end
+end
 
-
+function job_post_precast(spell, action, spellMap, eventArts)
+    if spell.type == 'WeaponSkill' and player.tp == 3000 then
+        if sets.precast.WS[spell.english] then
+            if sets.precast.WS[spell.english].MaxTP then
+                equip(sets.precast.WS[spell.english].MaxTP)
+            end
+        end
+    end
 end
 
 function job_midcast(spell, action, spellMap, eventArgs)

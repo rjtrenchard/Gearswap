@@ -526,6 +526,7 @@ function job_buff_change(buff, gain)
 end
 
 function calculate_haste()
+    local haste = 0
     if buffactive.march == 1 then
         -- assume honor march for single march song
         haste = haste + 16.99

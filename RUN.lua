@@ -60,9 +60,12 @@ function user_setup()
     send_command('bind numpad5 input /ja "Embolden" <me>')
 
 
-    send_command('bind numpad7 input /ma "Aquaveil" <me>')
-    send_command('bind numpad8 input /ma "Cocoon" <me>')
-    send_command('bind numpad9 input /ma "Crusade" <me>')
+    -- send_command('bind numpad7 input /ma "Aquaveil" <me>')
+    -- send_command('bind numpad8 input /ma "Cocoon" <me>')
+    -- send_command('bind numpad9 input /ma "Crusade" <me>')
+
+    send_command('bind numpad7 gs equip sets.Weapons.Primary')
+    send_command('bind numpad8 gs equip sets.Weapons.DEF')
 
     send_command('bind ^= gs c cycle treasuremode')
 
@@ -106,6 +109,11 @@ function init_gear_sets()
     gear.FCCape = { name = "Ogma's Cape", augments = { 'HP+60', '"Fast Cast"+10', } }
     gear.LungeCape = gear.EnmityCape
 
+
+    sets.Weapons = {}
+    sets.Weapons.Primary = { main = "Aettir", sub = "Utu Grip" }
+    sets.Weapons.DEF = { main = "Aettir", sub = "Refined Grip +1" }
+
     sets.TreasureHunter = {
         head = "Volte Cap",
         waist = "Chaac belt", legs = "Volte Hose", feet = "Volte Boots"
@@ -126,7 +134,7 @@ function init_gear_sets()
     sets.HP_High = {
         head = "Erilaz Galea +1", neck = "Unmoving Collar +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
         body = "Runeist's Coat +2", hands = "Runeist's Mitons +2", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
-        back = "Reiki Cloak", legs = "Futhark Trousers +2", feet = "Carmine Greaves +1"
+        back = "Reiki Cloak", legs = "Futhark Trousers +3", feet = "Carmine Greaves +1"
     }
 
     sets.buff.doom = {
@@ -140,7 +148,7 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
     sets.precast.JA['Vallation'] = set_combine(sets.enmity,
-        { body = "Runeist's Coat +2", legs = "Futhark trousers +2", back = gear.EnmityCape })
+        { body = "Runeist's Coat +2", legs = "Futhark Trousers +3", back = gear.EnmityCape })
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
     sets.precast.JA['Pflug'] = set_combine(sets.enmity, { feet = "Runeist bottes +1" })
     sets.precast.JA['Battuta'] = set_combine(sets.enmity, { head = "Futhark Bandeau +2" })
@@ -174,12 +182,19 @@ function init_gear_sets()
         ring2 = "Weatherspoon Ring +1",
         back = gear.FCCape, legs = "Ayanmo Cosciales +2", feet = "Carmine Greaves +1" }
 
-    -- +9 QC, +80 FC
+    -- extra +40 FC from inspiration, +8 QC
+    sets.precast.FC.inspiration = { ammo = "Impatiens",
+        head = "Carmine Mask +1",
+        body = { name = "Adhemar Jacket +1", priority = 9 }, ring1 = "Lebeche Ring", ring2 = "Weatherspoon Ring +1",
+        back = gear.FCCape
+    }
+
+    -- +8 QC, +80 FC
     sets.precast.FC['Enhancing Magic'] = { ammo = "Impatiens",
         head = "Carmine Mask +1", neck = { name = "Unmoving Collar +1", priority = 10 }, ear1 = "Loquacious Earring",
         body = { name = "Adhemar Jacket +1", priority = 9 }, hands = "Leyline Gloves", ring1 = "Lebeche Ring",
         ring2 = "Weatherspoon Ring +1",
-        back = gear.FCCape, waist = "Siegel Sash", legs = "Futhark Trousers +2", feet = "Carmine Greaves +1"
+        back = gear.FCCape, waist = "Siegel Sash", legs = "Futhark Trousers +3", feet = "Carmine Greaves +1"
     }
     sets.precast['Enhancing Magic'] = sets.precast.FC['Enhancing Magic'] -- I never know which one to use...
 
@@ -191,8 +206,10 @@ function init_gear_sets()
         back = gear.WSCape, waist = "Fotia Belt", legs = "Samnuha Tights", feet = "Ayanmo Gambieras +2" }
 
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, { ammo = "Seething Bomblet +1",
+        ear2 = "Moonshade Earring",
         hands = "Adhemar Wristbands +1", ring1 = "Regal Ring", ring2 = "Niqmaddu Ring" })
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {})
+    sets.precast.WS['Resolution'].MaxTP = { ear2 = "Brutal Earring" }
 
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, { ammo = "Knobkierrie",
         neck = "Republican Platinum medal", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
@@ -200,11 +217,19 @@ function init_gear_sets()
         back = gear.DimCape, waist = "Kentarch Belt +1", legs = "Samnuha Tights", feet = "Nyame Sollerets"
     })
     sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {})
+    sets.precast.WS['Dimidiation'].MaxTP = { ear2 = "Ishvara Earring" }
 
     sets.precast.WS['Herculean Slash'] = set_combine(sets.precast['Lunge'], {})
     sets.precast.WS['Herculean Slash'].Acc = set_combine(sets.precast.WS['Herculean Slash'], {})
 
     sets.precast.WS['Shockwave'] = set_combine(sets.precast.WS, {})
+
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+        neck = "Republican Platinum medal", ear2 = "Moonshade Earring",
+        waist = "Sailfi Belt +1",
+    })
+    sets.precast.WS['Savage Blade'].MaxTP = { ear2 = "Telos Earring" }
+    sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
 
 
     --------------------------------------
@@ -222,12 +247,12 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         head = "Carmine Mask +1", neck = "Incanter's Torque", ear1 = "Andoaa Earring", ear2 = "Mimir Earring",
         body = "Manasa Chasuble", hands = "Runeist mitons +2", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        back = "Merciful Cape", waist = "Olympus Sash", legs = "Futhark Trousers +2"
+        back = "Merciful Cape", waist = "Olympus Sash", legs = "Carmine Cuisses +1"
     }
 
-    sets.midcast['Enhancing Magic'].Duration = { legs = "Futhark Trousers +2" }
+    sets.midcast['Enhancing Magic'].Duration = { head = "Erilaz Galea +1", legs = "Futhark Trousers +3" }
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], sets.SIRD)
+    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration, sets.SIRD)
 
     sets.midcast['Enfeebling Magic'] = {
         neck = "Incanter's Torque", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
@@ -235,7 +260,7 @@ function init_gear_sets()
     }
 
     --
-    sets.midcast.FoilVeil = set_combine(sets.enmity, { legs = "Futhark Trousers +2" })
+    sets.midcast.FoilVeil = set_combine(sets.enmity, { head = "Erilaz Galea +1", legs = "Futhark Trousers +3" })
 
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
@@ -244,7 +269,7 @@ function init_gear_sets()
         legs = gear.PhalanxLegs, feet = gear.PhalanxFeet
     })
 
-    sets.midcast['Regen'] = { head = "Runeist Bandeau +1", legs = "Futhark Trousers +2" }
+    sets.midcast['Regen'] = { head = "Runeist Bandeau +1", legs = "Futhark Trousers +3" }
     sets.midcast['Refresh'] = { head = "Erilaz Galea +1" }
 
     sets.midcast['Stoneskin'] = {
@@ -350,17 +375,22 @@ end
 ------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
-    -- if spell.english == 'Phalanx' and not buffactive['Embolden'] then
-    --     eventArgs.cancel = true
+    if buffactive['Fast Cast'] and
+        -- (spell.skill:startswith('Magic') or S { 'Ninjutsu', 'Singing' }:contains(spell.english)) then
+        S { 'WhiteMagic', 'BlackMagic', 'SummonerPact', 'Ninjutsu',
+            'BardSong', 'BlueMagic', 'Geomancy', 'Trust' }:contains(spell.type) then
+        equip(sets.precast.FC.inspiration)
+    end
+end
 
-    -- end
-
-    -- if rune_count('Lux') then
-    --     equip(sets.Lunge.Light)
-    -- end
-    -- if rune_count('Tenebrae') then
-    --     equip(sets.Lunge.Dark)
-    -- end
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' and player.tp == 3000 then
+        if sets.precast.WS[spell.english] then
+            if sets.precast.WS[spell.english].MaxTP then
+                equip(sets.precast.WS[spell.english].MaxTP)
+            end
+        end
+    end
 end
 
 -- Run after the default midcast() is done.
@@ -389,6 +419,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         equip(sets.SIRD)
     elseif st_enmity_spells:contains(spell.english) then
         equip(sets.enmity)
+    elseif spell.english:startswith('Regen') or spell.english:startswith('Protect') or spell.english:startswith('Shell')
+        or spell.english == 'Refresh' then
+        equip(sets.midcast['Enhancing Magic'].Duration)
     end
 end
 
