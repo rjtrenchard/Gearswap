@@ -453,34 +453,34 @@ function job_buff_change(buff, gain)
 
             local function count_slip_debuffs()
                 local erase_dots = 0
-                if buffactive['Poison'] then
+                if buffactive.poison then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Dia'] then
+                if buffactive.dia then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Bio'] then
+                if buffactive.bio then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Burn'] then
+                if buffactive.burn then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Choke'] then
+                if buffactive.choke then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Shock'] then
+                if buffactive.shock then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Drown'] then
+                if buffactive.drown then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Rasp'] then
+                if buffactive.rasp then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Frost'] then
+                if buffactive.frost then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive['Helix'] then
+                if buffactive.helix then
                     erase_dots = erase_dots + 1
                 end
                 return erase_dots

@@ -142,7 +142,7 @@ function include_job_sets()
     sets.precast.WS.SingleHit = set_combine(sets.precast.WS, { neck = "Abyssal Beads +2", waist = "Sailfi Belt +1" })
 
     sets.precast.WS.MultiHit = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = "Abyss Beads +2", ear1 = "Thrud Earring", ear2 = "Lugra Earring +1",
+        head = "Sakpata's Helm", neck = "Abyss Beads +2", ear1 = "Schere Earring", ear2 = "Lugra Earring +1",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Regal Ring", ring2 = "Niqmaddu Ring",
         back = gear.multi_cape, waist = "Fotia Belt", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
 
@@ -154,7 +154,7 @@ function include_job_sets()
 
     sets.precast.WS.Crit = { ammo = "Yetshila +1",
         head = "Blistering Sallet +1", neck = "Fotia Gorget", ear1 = gear.WSEarThrud, ear2 = "Moonshade Earring",
-        body = "Hjarrandi Breastplate", hands = "Flamma Manopolas +2", ring1 = "Regal Ring", ring2 = "Begrudging Ring",
+        body = "Hjarrandi Breastplate", hands = "Sakpata's Gauntlets", ring1 = "Regal Ring", ring2 = "Begrudging Ring",
         back = gear.ws_cape, waist = "Fotia Belt", legs = "Zoar Subligar +1", feet = "Sulevia's Leggings +2" }
 
     sets.precast.WS.Low = { ammo = "Seething Bomblet +1",
