@@ -238,7 +238,7 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Low = sets.precast.WS.Low
 
     sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, { ammo = "Oshasha's Treatise",
-        head = "Pillager's Bonnet +3", neck = "Republican Platinum medal", ear1 = "Ishvara Earring",
+        head = "Pillager's Bonnet +3", neck = "Caro Necklace", ear1 = "Ishvara Earring",
         ear2 = "Moonshade Earring",
         body = "Pillager's Vest +2",
         back = gear.dex_ws_cape, waist = "Kentarch Belt +1" })

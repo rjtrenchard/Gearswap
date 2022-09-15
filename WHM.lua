@@ -117,10 +117,10 @@ function init_gear_sets()
         body = "Eber Bliaud", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
         back = "Oretania's Cape +1", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
 
-    sets.midcast.Cure = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
-        head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "Nourishing Earring +1",
-        body = "Gendewitha Bliaut +1", hands = "Theophany Mitts +1", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
-        back = "Oretania's Cape +1", waist = gear.ElementalObi, legs = "Eber Pantaloons", feet = "Piety Duckbills" }
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak",
+        head = "Kaykaus Mitra +1", neck = "Elite Royal Collar", ear1 = "Regal Earring", ear2 = "Magnetic Earring",
+        body = "Kaykaus Bliaut +1", hands = "Kaykaus Cuffs +1", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
+        back = "Fi Follet Cape +1", waist = gear.CureWaist, legs = "Kaykaus Tights +1", feet = "Kaykaus Boots +1" })
 
     sets.midcast.Curaga = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
         head = "Eber Cap", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "Nourishing Earring +1",

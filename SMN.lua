@@ -380,15 +380,15 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = { main = "Malignance Pole", sub = "Oneiros Grip", ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Sanctiy Necklace", ear1 = "Evans Earring", ear2 = "Cath Palug Earring",
-        body = "Convoker's Doublet +2", hands = "Serpentes Cuffs", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Evans Earring", ear2 = "Cath Palug Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
         back = "Umbra Cape", waist = "Fucho-no-Obi", legs = "Assiduity Pants +1", feet = "Crier's Gaiters" }
 
     sets.idle.PDT = { main = gear.Staff.PDT, sub = "Enki Strap", ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Loricate Torque +1", ear1 = "Etiolation Earring",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring",
         ear2 = "Cath Palug Earring",
-        body = "Hagondes Coat", hands = "Yaoyotl Gloves", ring1 = "Defending Ring", ring2 = "Stikini Ring +1",
-        back = "Umbra Cape", waist = "Regal Belt", legs = "Hagondes Pants", feet = "Crier's Gaiters" }
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = "Stikini Ring +1",
+        back = "Umbra Cape", waist = "Regal Belt", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
     -- perp costs:
     -- spirits: 7

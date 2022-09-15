@@ -43,9 +43,6 @@ function user_setup()
     gear.WSNightEar1 = "Lugra Earring +1"
     gear.WSNightEar2 = "Lugra Earring"
 
-    gear.WSEarBrutal = { name = gear.WSDayEar1 }
-    gear.WSEarCessance = { name = gear.WSDayEar2 }
-
     ticker = windower.register_event('time change', function(myTime)
         if (myTime == 17 * 60 or myTime == 7 * 60) and (player.status == 'Idle' or state.Kiting.value) then
             procTime(myTime)
@@ -72,13 +69,11 @@ end
 
 function procTime(myTime)
     if isNight() then
-        gear.WSEarBrutal.name = gear.WSNightEar1
-        gear.WSEarCessance.name = gear.WSNightEar2
-        gear.MovementFeet = gear.NightFeet
-    else
-        gear.WSEarBrutal.name = gear.WSDayEar1
-        gear.WSEarCessance = gear.WSDayEar2
-        gear.MovementFeet = gear.DayFeet
+        --     gear.WSEarBrutal.name = gear.WSNightEar1
+        --     gear.MovementFeet = gear.NightFeet
+        -- else
+        --     gear.WSEarBrutal.name = gear.WSDayEar1
+        --     gear.MovementFeet = gear.DayFeet
     end
 end
 
@@ -228,17 +223,17 @@ function init_gear_sets()
         head = "Shaded Spectacles", neck = "Smithy's Torque", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
         body = "Blacksmith's Smock", hands = "Smithy's Mitts", ring1 = "Confectioner's Ring",
         ring2 = "Craftmaster's Ring",
-        back = gear.melee_cape, waist = "Blacksmith's Belt", legs = "Carmine Cuisses +1", feet = "Hermes' sandals" }
+        back = gear.melee_cape, waist = "Blacksmith's Belt", legs = "Sakpata's Cuisses", feet = "Hermes' sandals" }
 
     sets.idle.Field = set_combine({}, { ammo = "Staunch Tathlum +1",
         head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring2 = "Defending Ring", ring1 = "Moonlight Ring",
-        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Hermes' sandals" })
+        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Hermes' sandals" })
 
     sets.idle.Weak = { ammo = "Staunch Tathlum +1",
         head = empty, neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
         body = "Lugra Cloak +1", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Defending Ring",
-        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Sakpata's Leggings" }
+        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
 
     sets.idle.PDT = set_combine(sets.idle.Field, { head = "Sakpata's Helm", body = "Sakpata's Plate" })
     sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)

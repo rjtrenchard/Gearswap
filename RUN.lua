@@ -127,21 +127,22 @@ function init_gear_sets()
         back = gear.EnmityCape, waist = "Trance Belt", legs = "Erilaz Leg Guards +1", feet = "Erilaz Greaves +1" }
 
     sets.SIRD = { ammo = "Staunch Tathlum +1",
-        head = "Futhark Bandeau +2", neck = "Moonlight Necklace", ear1 = "Magnetic Earring", ear2 = "Halasz Earring",
-        body = "Futhark Coat +2", hands = "Rawhide Gloves", ring1 = "Defending Ring", ring2 = "Gelatinous Ring +1",
-        back = gear.SIRDCape, waist = "Audumbla Sash", legs = "Carmine Cuisses +1", feet = "Erilaz Greaves +1"
+        head = "Nyame Helm", neck = "Moonlight Necklace", ear1 = "Magnetic Earring", ear2 = "Halasz Earring",
+        body = "Nyame Mail", hands = "Rawhide Gloves", ring1 = "Evanescence Ring", ring2 = "Gelatinous Ring +1",
+        back = gear.SIRDCape, waist = "Audumbla Sash", legs = "Carmine Cuisses +1", feet = "Nyame Sollerets"
     }
     sets.HP_High = {
-        head = "Erilaz Galea +1", neck = "Unmoving Collar +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
-        body = "Runeist's Coat +2", hands = "Runeist's Mitons +2", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
-        back = "Reiki Cloak", legs = "Futhark Trousers +3", feet = "Carmine Greaves +1"
+        head = "Nyame Helm", neck = "Unmoving Collar +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
+        back = "Reiki Cloak", legs = "Nyame Flanchard", feet = "Nyame Sollerets"
     }
 
-    sets.buff.doom = {
+    sets.buff.doom = set_combine(sets.defense.PDT, {
         neck = "Nicander's Necklace",
         ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
         waist = "Gishdubar Sash"
-    }
+    })
+
     --------------------------------------
     -- Precast sets
     --------------------------------------
@@ -212,7 +213,7 @@ function init_gear_sets()
     sets.precast.WS['Resolution'].MaxTP = { ear2 = "Brutal Earring" }
 
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, { ammo = "Knobkierrie",
-        neck = "Republican Platinum medal", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
+        neck = "Caro Necklace", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
         hands = "Meghanada Gloves +2", ring1 = "Epaminondas's Ring", ring2 = "Niqmaddu Ring",
         back = gear.DimCape, waist = "Kentarch Belt +1", legs = "Samnuha Tights", feet = "Nyame Sollerets"
     })
@@ -302,9 +303,9 @@ function init_gear_sets()
     --------------------------------------
 
     sets.idle = { ammo = "Staunch Tathlum +1",
-        head = "Futhark Bandeau +2", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
-        body = "Futhark Coat +2", hands = "Runeist's mitons +2", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
-        back = gear.TankCape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Erilaz Greaves +1" }
+        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
+        back = gear.TankCape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Nyame Sollerets" }
     sets.idle.Refresh = set_combine(sets.idle, { body = "Runeist's Coat +2", waist = "Fucho-no-obi" })
 
     sets.idle.Town = {
@@ -316,21 +317,18 @@ function init_gear_sets()
 
     -- try to preserve some MP while weak
     sets.idle.Weak = { ammo = "Staunch Tathlum +1",
-        head = "Futhark Bandeau +2", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Futhark Coat +2", hands = "Runeist's mitons +2", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
-        back = gear.TankCape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Erilaz Greaves +1" }
+        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
+        back = gear.TankCape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Nyame Sollerets" }
 
 
     sets.defense.PDT = { ammo = "Staunch Tathlum +1",
-        head = "Futhark Bandeau +2", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
-        body = "Futhark Coat +2", hands = "Runeist's mitons +2", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
-        back = gear.TankCape, waist = "Flume Belt +1", legs = "Erilaz Leg Guards +1", feet = "Erilaz Greaves +1" }
+        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
+        back = gear.TankCape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
     sets.defense.MDT = set_combine(sets.defense.PDT, { ammo = "Yamarang",
-        body = "Runeist's Coat +2",
         waist = "Engraved Belt" })
-
-
 
     sets.Kiting = { legs = "Carmine Cuisses +1" }
 
@@ -340,8 +338,8 @@ function init_gear_sets()
     --------------------------------------
 
     sets.engaged = { ammo = "Staunch Tathlum +1",
-        head = "Futhark Bandeau +2", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
-        body = "Futhark Coat +2", hands = "Turms Mittens +1", ring1 = "Defending Ring", ring2 = "Gelatinous Ring +1",
+        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Turms Mittens +1", ring1 = "Defending Ring", ring2 = "Gelatinous Ring +1",
         back = gear.TankCape, waist = "Flume Belt +1", legs = "Erilaz Leg Guards +1", feet = "Turms Leggings +1" }
     sets.engaged.DD = { ammo = "Ginsen",
         head = "Adhemar Bonnet +1", neck = "Anu Torque", ear1 = "Sherida Earring", ear2 = "Telos Earring",
@@ -354,18 +352,18 @@ function init_gear_sets()
         back = gear.DDCape, waist = "Sailfi belt +1", legs = "Samnuha Tights", feet = "Ayanmo Gambieras +2" }
     sets.engaged.Acc = set_combine(sets.engaged.DD, { ammo = "Yamarang", })
     sets.engaged.PDT = { ammo = "Staunch Tathlum +1",
-        head = "Futhark Bandeau +2", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
-        body = "Futhark Coat +2", hands = "Turms Mittens +1", ring1 = "Defending Ring", ring2 = "Gelatinous Ring +1",
-        back = gear.TankCape, waist = "Flume Belt +1", legs = "Erilaz Leg Guards +1", feet = "Turms Leggings +1" }
+        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = "Gelatinous Ring +1",
+        back = gear.TankCape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
     sets.engaged.MDT = { ammo = "Yamarang",
-        head = "Futhark Bandeau +2", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
-        body = "Runeist's Coat +2", hands = "Turms Mittens +1", ring1 = "Defending Ring", ring2 = "Moonlight Ring",
+        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Turms Mittens +1", ring1 = "Defending Ring", ring2 = "Moonlight Ring",
         back = gear.TankCape, waist = "Engraved Belt", legs = "Erilaz Leg Guards +1", feet = "Turms Leggings +1" }
 
     sets.engaged.Weak = { ammo = "Staunch Tathlum +1",
-        head = "Futhark Bandeau +2", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Futhark Coat +2", hands = "Turms Mittens +1", ring1 = "Defending Ring", ring2 = "Gelatinous Ring +1",
-        back = gear.TankCape, waist = "Flume Belt +1", legs = "Erilaz Leg Guards +1", feet = "Turms Leggings +1" }
+        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = "Gelatinous Ring +1",
+        back = gear.TankCape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
 
 end

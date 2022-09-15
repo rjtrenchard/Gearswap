@@ -96,18 +96,9 @@ function init_gear_sets()
         ring2 = "Lebeche Ring",
         back = "Perimede Cape", waist = "Embla Sash", legs = "Lengo Pants", feet = gear.fc_feet }
 
-    sets.precast.FC['Stoneskin'] = set_combine(sets.midcast['Enhancing Magic'], { waist = "Siegel Sash" })
-
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC,
-        {})
 
-    sets.precast.FC['Stoneskin'] = set_combine(sets.precast.FC['Enhancing Magic'], { head = "Befouled Crown" })
-
-    sets.precast.FC.Cure = set_combine(sets.precast.FC, { body = "Gendewitha Bliault +1", back = "Pahtli Cape" })
-
-    sets.precast.FC.Curaga = sets.precast.FC.Cure
 
     sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], { head = empty, body = "Crepuscular Cloak" })
 
@@ -124,10 +115,10 @@ function init_gear_sets()
         body = "Pedagogy Gown +3", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
     }
 
-    sets.midcast.Cure = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Incantor Stone",
-        head = "Vanya Hood", neck = "Nodens Gorget", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Gendewitha Bliault +1", hands = "Telchine Gloves", ring1 = "Rahab Ring", ring2 = "Sirona's Ring",
-        back = "Fi Follet Cape +1", waist = "Witful Belt", legs = "Orvail Pants +1", feet = "Academic's Loafers" }
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak",
+        head = "Kaykaus Mitra +1", neck = "Elite Royal Collar", ear1 = "Regal Earring", ear2 = "Magnetic Earring",
+        body = "Kaykaus Bliaut +1", hands = "Kaykaus Cuffs +1", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
+        back = "Fi Follet Cape +1", waist = gear.CureWaist, legs = "Kaykaus Tights +1", feet = "Kaykaus Boots +1" })
 
     sets.midcast.CureWithLightWeather = set_combine(sets, micast.Cure, { waist = "Hachirin-no-obi" })
 

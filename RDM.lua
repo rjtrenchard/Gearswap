@@ -200,6 +200,13 @@ function init_gear_sets()
         ring1 = "Lebeche Ring", ring2 = "Weatherspoon Ring +1",
         back = "Perimede Cape", waist = "Embla Sash", feet = gear.fc_feet }
 
+    -- for when we cast spells that can't overwrite themselves, and the buff is active
+    sets.precast.FC.NoQC = { main = "Crocea Mors",
+        head = "Atrophy Chapeau +2", neck = { name = "Unmoving Collar +1", priority = 10 },
+        ear1 = { name = "Eabani Earring", priority = 9 }, ear2 = { name = "Etiolation Earring", priority = 8 },
+        ring1 = "Kishar Ring", ring2 = "Rahab Ring",
+        back = "Fi Follet Cape +1", waist = "Embla Sash", feet = gear.fc_feet }
+
     sets.precast['Dispelga'] = set_combine(sets.precast.FC, {
         main = { name = "Daybreak", priority = 10 }, sub = { name = "Ammurapi Shield", priority = 9 },
         hands = "Leyline Gloves",
@@ -309,7 +316,6 @@ function init_gear_sets()
         head = "Atrophy Chapeau +2", neck = "Orunmila's Torque", ear1 = "Loquacious Earring", ear2 = "Malignance Earring",
         body = "Vitiation Tabard +3", hands = "Vitiation Gloves +3", ring1 = "Kishar Ring", ring2 = "Rahab Ring",
         waist = "Embla Sash", legs = "Atrophy Tights +3", feet = "Vitiation boots +3" }
-    sets.midcast.FC = sets.midcast.FastRecast
 
     sets.midcast.Utsusemi = set_combine(sets.precast.FC, sets.SIRD)
 
@@ -391,9 +397,9 @@ function init_gear_sets()
     }
 
     sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak", ammo = "Regal Gem",
-        head = "Vanya Hood", neck = "Nodens Gorget", ear1 = "Snotra Earring", ear2 = "Malignance Earring",
-        body = "Gendewitha Bliaut +1", hands = "Telchine Gloves",
-        back = gear.mnd_cape, waist = gear.CureWaist, legs = "Atrophy Tights +3" })
+        head = "Kaykaus Mitra +1", neck = "Duelist's Torque +2", ear1 = "Magnetic Earring", ear2 = "Regal Earring",
+        body = "Kaykaus Bliaut +1", hands = "Kaykaus Cuffs +1", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
+        back = gear.mnd_cape, waist = gear.CureWaist, legs = "Kaykaus Tights +1", feet = "Kaykaus Boots +1" })
 
     sets.midcast.Curaga = sets.midcast.Cure
     sets.midcast.CureSelf = set_combine(sets.midcast.Cure, sets.midcast.Gishdubar)
@@ -408,7 +414,7 @@ function init_gear_sets()
 
     sets.midcast['Enfeebling Magic'] = { ammo = "Regal Gem",
         head = "Vitiation Chapeau +3", neck = "Duelist's Torque +2", ear1 = "Snotra Earring", ear2 = "Regal Earring",
-        body = "Lethargy Sayon +1", hands = "Atrophy Gloves +3", ring1 = "Kishar Ring", ring2 = "Metamorph Ring +1",
+        body = "Lethargy Sayon +2", hands = "Atrophy Gloves +3", ring1 = "Kishar Ring", ring2 = "Metamorph Ring +1",
         back = gear.mnd_cape, waist = "Acuity Belt +1", legs = "Chironic Hose", feet = "Vitiation boots +3" }
     sets.midcast['Enfeebling Magic'].Weapon = { main = "Crocea Mors", sub = { name = "Ammurapi Shield", priority = 10 } }
     sets.midcast['Enfeebling Magic'].DW = { main = "Crocea Mors", sub = "Daybreak" }
@@ -422,7 +428,7 @@ function init_gear_sets()
     -- purely skill/mnd based spells
     sets.midcast['Enfeebling Magic'].PureSkill = { ammo = "Regal Gem",
         head = "Vitiation Chapeau +3", neck = "Duelist's Torque +2", ear1 = "Snotra Earring", ear2 = "Vor Earring",
-        body = "Lethargy Sayon +1", hands = "Lethargy Gantherots +1", ring1 = "Stikini Ring +1",
+        body = "Lethargy Sayon +2", hands = "Lethargy Gantherots +1", ring1 = "Stikini Ring +1",
         ring2 = "Stikini Ring +1",
         back = gear.mnd_cape, waist = "Casso Sash", legs = "Chironic Hose", feet = "Vitiation Boots +3" }
 
@@ -430,13 +436,13 @@ function init_gear_sets()
     sets.midcast['Enfeebling Magic'].dMND = { main = "Daybreak", sub = { name = "Ammurapi Shield", priority = 10 },
         ammo = "Regal Gem",
         head = "Vitiation Chapeau +3", neck = "Duelist's Torque +2", ear1 = "Snotra Earring", ear2 = "Regal Earring",
-        body = "Lethargy Sayon +1", hands = "Vitiation Gloves +3", ring1 = "Stikini Ring +1",
+        body = "Lethargy Sayon +2", hands = "Vitiation Gloves +3", ring1 = "Stikini Ring +1",
         ring2 = "Metamorph Ring +1",
         back = gear.mnd_cape, waist = "Luminary Sash", legs = "Chironic Hose", feet = "Vitiation Boots +3" }
 
     sets.midcast['Enfeebling Magic'].Duration = set_combine(sets.midcast['Enfeebling Magic'], {
         head = "Lethargy Chappel +1",
-        body = "Lethargy Sayon +1", hands = "Lethargy Gantherots +1",
+        body = "Lethargy Sayon +2", hands = "Lethargy Gantherots +1",
         legs = "Lethargy Fuseau +1", feet = "Lethargy Houseaux +2"
     })
 
@@ -505,13 +511,13 @@ function init_gear_sets()
 
     sets.buff.ComposureOther = {
         head = "Lethargy Chappel +1",
-        body = "Lethargy Sayon +1", hands = "Atrophy Gloves +3",
+        body = "Lethargy Sayon +2", hands = "Atrophy Gloves +3",
         legs = "Lethargy Fuseau +1", feet = "Lethargy Houseaux +2"
     }
 
     sets.buff.Composure = {
         head = "Lethargy Chappel +1",
-        body = "Lethargy Sayon +1", hands = "Lethargy Gantherots +1",
+        body = "Lethargy Sayon +2", hands = "Lethargy Gantherots +1",
         legs = "Lethargy Fuseau +1", feet = "Lethargy Houseaux +2"
     }
 
@@ -537,10 +543,9 @@ function init_gear_sets()
 
 
     -- Idle sets
-    sets.idle.Weapon = { main = "Bolelabunga", sub = { name = "Ammurapi Shield", priority = 10 } }
     sets.idle = { ammo = "Staunch Tathlum +1",
         head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
+        body = "Lethargy Sayon +2", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
         back = gear.idle_cape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Malignance Boots" }
 
     sets.idle.Town = { ammo = "Homiliary",
@@ -551,12 +556,12 @@ function init_gear_sets()
 
     sets.idle.Weak = { ammo = "Homiliary",
         head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Stikini ring +1", ring2 = "Defending Ring",
+        body = "Lethargy Sayon +2", hands = "Malignance Gloves", ring1 = "Stikini ring +1", ring2 = "Defending Ring",
         back = gear.idle_cape, waist = "Fucho-no-obi", legs = "Carmine Cuisses +1", feet = "Malignance Boots" }
 
     sets.idle.PDT = { ammo = "Homiliary",
         head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
+        body = "Lethargy Sayon +2", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
         back = gear.idle_cape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Malignance Boots" }
 
     sets.idle.MDT = sets.idle.PDT
@@ -726,6 +731,15 @@ function job_post_precast(spell, action, spellMap, eventArts)
             if sets.precast.WS[spell.english].MaxTP then
                 equip(sets.precast.WS[spell.english].MaxTP)
             end
+        end
+    elseif S { 'Stoneskin', 'Blink' }:contains(spell.english) then
+        if buffactive[spell.english] then
+            equip(sets.precast.FC.NoQC)
+        end
+    elseif spell.english:startswith('Utsusemi') then
+        if buffactive['Copy Image'] or buffactive['Copy Image (2)'] or buffactive['Copy Image (3)'] or
+            buffactive['Copy Image (4+)'] then
+            equip(sets.precast.FC.NoQC)
         end
     end
 end
@@ -1156,7 +1170,7 @@ function calculate_duration_enhancing(spellName, spellMap)
     if S { 'Estq. Chappel +2', 'Lethargy Chappel +1', 'Lethargy Chappel +1 +1' }:contains(player.equipment.head) then composure_count = composure_count
             + 1
     end
-    if S { 'Estq. Sayon +2', 'Lethargy Sayon', 'Lethargy Sayon +1' }:contains(player.equipment.body) then composure_count = composure_count
+    if S { 'Estq. Sayon +2', 'Lethargy Sayon', 'Lethargy Sayon +2' }:contains(player.equipment.body) then composure_count = composure_count
             + 1
     end
     if S { 'Estq. Ganthrt. +2', 'Lethargy Gantherots', 'Lethargy Gantherots +1' }:contains(player.equipment.hands) then composure_count = composure_count

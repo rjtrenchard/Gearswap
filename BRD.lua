@@ -206,9 +206,9 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = { range = gear.WSInstrument,
-        head = "Bihu Roundlet +2", neck = "Fotia Gorget", ear1 = "Ishvara Earring", ear2 = "Moonshade Earring",
-        body = "Bihu Justaucorps +3", hands = "Bihu Cuffs +2", ring1 = "Apate Ring", ring2 = "Epaminondas's Ring",
-        back = gear.WSCape, waist = "Fotia Belt", legs = "Bihu Cannions +2", feet = "Bihu Slippers +1" }
+        head = "Nyame Helm", neck = "Fotia Gorget", ear1 = "Ishvara Earring", ear2 = "Moonshade Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Apate Ring", ring2 = "Epaminondas's Ring",
+        back = gear.WSCape, waist = "Fotia Belt", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
@@ -311,10 +311,10 @@ function init_gear_sets()
         back = "Oretania's Cape +1"
     }
 
-    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak", sub = "Ammurapi Shield",
-        head = "Vanya Hood", neck = "Nodens Gorget", ear1 = "Regal Earring", ear2 = "",
-        body = "Gendewitha Bliaut +1", hands = gear.CureHands, ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
-        back = "Oretania's Cape +1", waist = gear.CureWaist, legs = "Chironic Hose", feet = "Gendewitha Galoshes +1" })
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak",
+        head = "Kaykaus Mitra +1", neck = "Elite Royal Collar", ear1 = "Regal Earring", ear2 = "Magnetic Earring",
+        body = "Kaykaus Bliaut +1", hands = "Kaykaus Cuffs +1", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
+        back = "Fi Follet Cape +1", waist = gear.CureWaist, legs = "Kaykaus Tights +1", feet = "Kaykaus Boots +1" })
 
     sets.midcast.Curaga = sets.midcast.Cure
 
@@ -350,19 +350,20 @@ function init_gear_sets()
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle = { range = gear.IdleInstrument,
-        head = "Ayanmo Zucchetto +2", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Ayanmo Corazza +2", hands = gear.RefreshHands, ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
+        body = "Nyame Mail", hands = gear.RefreshHands, ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
         back = gear.CastingCape, waist = "Flume Belt +1", legs = "Assiduity Pants +1", feet = "Fili Cothurnes +1" }
 
     sets.idle.PDT = { range = gear.IdleInstrument,
-        head = "Ayanmo Zucchetto +2", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Ayanmo Corazza +2", hands = "Ayanmo Manopolas +2", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
-        back = gear.MeleeCape, waist = "Flume Belt +1", legs = "Assiduity Pants +1", feet = "Ayanmo Gambieras +2" }
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
+        back = gear.MeleeCape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
-    sets.idle.Town = { main = "Daybreak", sub = "Ammurapi Shield", range = gear.IdleInstrument,
-        head = "Befouled Crown", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Bihu Jstcorps. +3", hands = "Bihu Cuffs +2", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
-        back = "Umbra Cape", waist = "Flume Belt +1", legs = "Bihu Cannions +2", feet = "Fili Cothurnes +1" }
+    sets.idle.Town = { range = gear.IdleInstrument,
+        head = "Shaded Spectacles", neck = "Smithy's Torque",
+        body = "Blacksmith's Smock", hands = "Smithy's Mitts", ring1 = "Confectioner's Ring",
+        ring2 = "Craftmaster's Ring",
+        back = gear.MeleeCape, waist = "Blacksmith's Belt", feet = "Fili Cothurnes +1" }
 
     sets.idle.Weak = sets.idle.PDT
 
@@ -376,15 +377,17 @@ function init_gear_sets()
 
     -- Defense sets
 
-    sets.defense.PDT = { main = gear.Staff.PDT, sub = "Enki Strap",
-        head = "Ayanmo Zucchetto +2", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Ayanmo Corazza +2", hands = "Ayanmo Manopolas +2", ring1 = "Moonlight Ring", ring2 = "Defending Ring",
-        back = gear.MeleeCape, waist = "Reiki Yotai", legs = "Inyanga Shalwar +2", feet = "Ayanmo Gambieras +2" }
+    sets.defense.PDT = {
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Moonlight Ring", ring2 = "Defending Ring",
+        back = gear.MeleeCape, waist = "Reiki Yotai", legs = "Nyame Flanchard", feet = "Nyame Sollerets"
+    }
 
-    sets.defense.MDT = { main = gear.Staff.PDT, sub = "Enki Strap",
-        head = "Ayanmo Zucchetto +2", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Ayanmo Corazza +2", hands = "Ayanmo Manopolas +2", ring1 = "Archon Ring", ring2 = "Defending Ring",
-        back = gear.MeleeCape, waist = "Reiki Yotai", legs = "Inyanga Shalwar +2", feet = "Ayanmo Gambieras +2" }
+    sets.defense.MDT = {
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Archon Ring", ring2 = "Defending Ring",
+        back = gear.MeleeCape, waist = "Reiki Yotai", legs = "Nyame Flanchard", feet = "Nyame Sollerets"
+    }
 
     sets.Kiting = { feet = "Fili Cothurnes +1" }
 
@@ -399,18 +402,18 @@ function init_gear_sets()
     sets.weapons = { main = gear.MainHand, sub = gear.SubHand }
 
     -- Basic set for if no TP weapon is defined.
-    sets.engaged = set_combine(sets.weapons, { range = gear.MeleeInstrument,
-        head = "Ayanmo Zucchetto +2", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Crepuscular Earring",
-        body = "Ayanmo Corazza +2", hands = "Gazu Bracelet +1", ring1 = "Moonlight Ring", ring2 = "Ilabrat Ring",
-        back = gear.MeleeCape, waist = "Sailfi belt +1", legs = "Ayanmo Cosciales +2", feet = "Ayanmo Gambieras +2" })
+    sets.engaged = { range = gear.MeleeInstrument,
+        head = "Nyame Helm", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Crepuscular Earring",
+        body = "Nyame Mail", hands = "Gazu Bracelet +1", ring1 = "Moonlight Ring", ring2 = "Hetairoi Ring",
+        back = gear.MeleeCape, waist = "Sailfi belt +1", legs = "Ayanmo Cosciales +2", feet = "Ayanmo Gambieras +2" }
 
     sets.engaged.PDT = set_combine(sets.engaged, { neck = "Loricate Torque +1", ring2 = "Defending Ring" })
 
     -- Set if dual-wielding
-    sets.engaged.DW = set_combine(sets.weapons, { range = gear.MeleeInstrument,
-        head = "Ayanmo Zucchetto +2", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Suppanomimi",
-        body = "Ayanmo Corazza +2", hands = "Gazu Bracelet +1", ring1 = "Moonlight Ring", ring2 = "Ilabrat Ring",
-        back = gear.MeleeCape, waist = "Reiki Yotai", legs = "Ayanmo Cosciales +2", feet = "Ayanmo Gambieras +2" })
+    sets.engaged.DW = { range = gear.MeleeInstrument,
+        head = "Nyame Helm", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Suppanomimi",
+        body = "Nyame Mail", hands = "Gazu Bracelet +1", ring1 = "Moonlight Ring", ring2 = "Hetairoi Ring",
+        back = gear.MeleeCape, waist = "Reiki Yotai", legs = "Ayanmo Cosciales +2", feet = "Ayanmo Gambieras +2" }
 
     sets.engaged.DW.PDT = set_combine(sets.engaged.DW, { neck = "Loricate Torque +1", ring2 = "Defending Ring" })
 end
