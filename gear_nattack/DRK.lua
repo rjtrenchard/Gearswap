@@ -147,7 +147,7 @@ function include_job_sets()
         back = gear.multi_cape, waist = "Fotia Belt", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
 
     sets.precast.WS.Magic = { ammo = "Knobkierrie",
-        head = "Flamma Zucchetto +2", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Malignance Earring",
+        head = "Nyame Helm", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Malignance Earring",
         body = "Ignominy Cuirass +3", hands = "Fallen's Finger Gauntlets +3", ring1 = "Metamorph Ring +1",
         ring2 = "Epaminondas's Ring",
         back = gear.ws_cape, waist = "Eschan Stone", legs = "Fallen's Flanchard +3", feet = "Sulevia's Leggings +2" }
@@ -365,19 +365,19 @@ function include_job_sets()
     -------------------------------------------------------------------------------------------------------------------
     sets.defense.PDT = { ammo = "Staunch Tathlum +1",
         head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Archon Ring",
+        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Moonlight Ring",
         back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
 
     sets.defense.Reraise = {
         head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Paguroidea Ring",
-        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Ignominy Flanchard +1", feet = "Flamma Gambieras +2"
+        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Moonlight Ring",
+        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Ignominy Flanchard +1", feet = "Nyame Sollerets"
     }
 
     sets.defense.MDT = { ammo = "Staunch Tathlum +1",
-        head = "Flamma Zucchetto +2", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Sakpata's Plate", hands = "Flamma Manopolas +2", ring1 = "Defending Ring", ring2 = "Archon Ring",
-        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Ignominy Flanchard +1", feet = "Flamma Gambieras +2" }
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = "Archon Ring",
+        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
     sets.Kiting = { head = "Sakpata's Helm", body = "Sakpata's Plate", feet = "Carmine Cuisses +1" }
 
@@ -390,8 +390,8 @@ function include_job_sets()
 
     sets.precast.FC = { ammo = "Sapience Orb",
         head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = { name = "Sacro Breastplate", priority = 9 }, hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1",
-        ring2 = { name = "Gelatinous Ring +1", priority = 10 },
+        body = { name = "Sacro Breastplate", priority = 10 }, hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1",
+        ring2 = "Lebeche Ring",
         back = gear.casting_cape, legs = "Enif Cosciales", feet = "Odyssean Greaves" }
 
     sets.precast['Impact'] = set_combine(sets.precast.FC['Elemental Magic'], {
@@ -399,14 +399,10 @@ function include_job_sets()
     })
     sets.precast.FC['Impact'] = sets.precast.Impact
 
-    sets.precast['Dark Magic'] = sets.precast.FC
+    sets.precast.FC['Dark Magic'] = sets.precast.FC
     sets.precast.FC['Drain III'] = set_combine(sets.precast.FC['Dark Magic'], { neck = "Unmoving Collar +1", })
     sets.precast.FC['Drain II'] = sets.precast.FC['Drain III']
     sets.precast.FC['Drain'] = sets.precast.FC['Drain III']
-
-    sets.precast.FC.Cure = set_combine(sets.precast.FC, {})
-
-    sets.precast.FC.Curaga = sets.precast.FC.Cure
 
     -------------------------------------------------------------------------------------------------------------------
     -- Midcast Sets

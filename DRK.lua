@@ -471,16 +471,16 @@ function job_buff_change(buff, gain)
                 if buffactive.shock then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive.drown then
+                if buffactive['Drown'] then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive.rasp then
+                if buffactive['Rasp'] then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive.frost then
+                if buffactive['Frost'] then
                     erase_dots = erase_dots + 1
                 end
-                if buffactive.helix then
+                if buffactive['Helix'] then
                     erase_dots = erase_dots + 1
                 end
                 return erase_dots
