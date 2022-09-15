@@ -172,12 +172,12 @@ function init_gear_sets()
     sets.precast.FC = { range = gear.FCInstrument,
         head = "Cath Palug Crown", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquac. Earring",
         body = "Inyanga Jubbah +2", hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
-        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = gear.RecastFeet }
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Kaykaus Tights +1", feet = gear.RecastFeet }
 
     sets.precast.FC.BardSong = {
         head = "Fili Calot +1", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquac. Earring",
-        body = "Inyanga Jubbah +2", hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
-        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Ayanmo Cosciales +2", feet = gear.RecastFeet
+        body = "Inyanga Jubbah +2", hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Lebeche Ring",
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Kaykaus Tights +1", feet = gear.RecastFeet
     }
 
     sets.precast.FC.Daurdabla = set_combine(sets.precast.FC.BardSong, { range = info.ExtraSongInstrument })

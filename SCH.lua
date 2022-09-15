@@ -35,6 +35,7 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
+    gear.default.obi_waist = "Luminary Sash"
     info.addendumNukes = S { "Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV",
         "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
 
