@@ -256,10 +256,10 @@ function init_gear_sets()
         { hands = "Cirque Guanti +2", legs = "Cirque Pantaloni +2" })
 
     sets.idle.Pet.Engaged.Nuke = set_combine(sets.idle.Pet.Engaged,
-        { legs = "Cirque Pantaloni +2", feet = "Cirque Scarpe +2" })
+        { body = "Udug Jacket", legs = "Cirque Pantaloni +2", feet = "Cirque Scarpe +2" })
 
     sets.idle.Pet.Engaged.Magic = set_combine(sets.idle.Pet.Engaged,
-        { legs = "Cirque Pantaloni +2", feet = "Cirque Scarpe +2" })
+        { body = "Udug Jacket", legs = "Cirque Pantaloni +2", feet = "Cirque Scarpe +2" })
 
     sets.idle.Pet.Tank = set_combine(sets.idle.Pet.Engaged, {
         head = "Anwig Salade", neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Rimeice Earring",

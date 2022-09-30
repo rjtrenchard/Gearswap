@@ -93,7 +93,7 @@ function include_job_sets()
     }
     sets.HP_Low = set_combine(sets.naked, { main = gear.MainHand, sub = gear.SubHand, range = "", })
 
-    sets.Sleeping = { neck = "Berserker's Torque" }
+    sets.Sleeping = { neck = "Vim Torque +1" }
 
     sets.Enmity = { ammo = "Sapience Orb",
         head = "Loess Barbuta +1", neck = "Unmoving Collar +1", ear1 = "Cryptic Earring", ear2 = "Trux Earring",

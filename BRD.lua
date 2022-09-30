@@ -119,7 +119,7 @@ function user_setup()
     send_command('bind != gs c cycle WeaponMode')
     send_command('bind !- gs c cycle OffenseMode')
 
-    gear.default.cure_waist = "Luminary Sash"
+    gear.default.cure_waist = "Shinjutsu-no-obi +1"
 
 
     pick_tp_weapon()
@@ -158,7 +158,7 @@ function init_gear_sets()
     sets.Weapons['Sword'] = { main = "Naegling", sub = "Ammurapi Shield" }
     sets.Weapons['Dagger'] = { main = "Aeneas", sub = "Ammurapi Shield" }
     sets.Weapons['Sword'].DW = { main = "Naegling", sub = "Centovente" }
-    sets.Weapons['Dagger'].DW = { main = "Aeneas", sub = "Gleti's Knife" }
+    sets.Weapons['Dagger'].DW = { main = "Aeneas", sub = "Crepuscular Knife" }
 
     sets.enmity = {
         head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",

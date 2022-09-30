@@ -138,8 +138,8 @@ function init_gear_sets()
     -- Normal melee group
     sets.Weapons = {}
     sets.Weapons.Naegling = { main = "Naegling", sub = "Centovente" }
-    sets.Weapons.Daggers = { main = "Aeneas", sub = "Gleti's Knife" }
-    sets.Weapons.Tauret = { main = "Tauret", sub = "Gleti's Knife" }
+    sets.Weapons.Daggers = { main = "Aeneas", sub = "Crepuscular Knife" }
+    sets.Weapons.Tauret = { main = "Tauret", sub = "Crepuscular Knife" }
 
     -- Actions we want to use to tag TH.
     sets.precast.Step = sets.TreasureHunter
@@ -212,13 +212,14 @@ function init_gear_sets()
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS,
-        { hands = "Adhemar Wristbands +1", ring1 = "Ilabrat Ring" })
+        { ammo = "Cath Palug Stone", hands = "Adhemar Wristbands +1", ring1 = "Ilabrat Ring" })
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {})
     sets.precast.WS['Exenterator'].Att = set_combine(sets.precast.WS['Exenterator'], {})
     sets.precast.WS['Exenterator'].SA = set_combine(sets.precast.WS['Exenterator'].Att, {})
     sets.precast.WS['Exenterator'].TA = set_combine(sets.precast.WS['Exenterator'].Att, {})
     sets.precast.WS['Exenterator'].SATA = set_combine(sets.precast.WS['Exenterator'].Att, {})
     sets.precast.WS['Exenterator'].Low = sets.precast.WS.Low
+    sets.precast.WS['Exenterator'].MaxTP = { ear2 = "Brutal Earring" }
 
     sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS, { ring1 = "Regal Ring", legs = "Samnuha Tights" })
     sets.precast.WS['Dancing Edge'].Acc = set_combine(sets.precast.WS['Dancing Edge'], {})
@@ -251,6 +252,7 @@ function init_gear_sets()
     sets.precast.WS["Rudra's Storm"].SATA = set_combine(sets.precast.WS["Rudra's Storm"].Att,
         { ammo = "Yetshila +1", body = "Pillager's Vest +2" })
     sets.precast.WS["Rudra's Storm"].Low = sets.precast.WS.Low
+    sets.precast.WS["Rudra's Storm"].MaxTP = { ear1 = "Sherida Earring", ear2 = "Ishvara Earring" }
 
     sets.precast.WS["Shark Bite"] = set_combine(sets.precast.WS["Rudra\'s Storm"],
         { head = "Pillager's Bonnet +3", ear2 = "Moonshade Earring", ring1 = "Epona's Ring" })
@@ -276,7 +278,7 @@ function init_gear_sets()
     sets.precast.WS['Mandalic Stab'].SATA = set_combine(sets.precast.WS['Mandalic Stab'].Att, { ammo = "Yetshila +1",
         body = "Pillager's Vest +2", legs = "Pillager's Culottes +1" })
     sets.precast.WS['Mandalic Stab'].Low = sets.precast.WS.Low
-
+    sets.precast.WS['Mandalic Stab'].MaxTP = { ear1 = "Sherida Earring", ear2 = "Ishvara Earring" }
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, { ammo = "Oshasha's Treatise",
         head = "Pillager's Bonnet +3", neck = "Republican Platinum medal", ear1 = "Ishvara Earring",
@@ -288,6 +290,7 @@ function init_gear_sets()
     sets.precast.WS['Savage Blade'].TA = set_combine(sets.precast.WS['Savage Blade'], { ammo = "Yetshila +1" })
     sets.precast.WS['Savage Blade'].SATA = set_combine(sets.precast.WS['Savage Blade'], { ammo = "Yetshila +1" })
     sets.precast.WS['Savage Blade'].Low = sets.precast.WS.Low
+    sets.precast.WS['Savage Blade'].MaxTP = { ear1 = "Sherida Earring", ear2 = "Ishvara Earring" }
 
     sets.precast.WS['Aeolian Edge'] = { ammo = "Seething Bomblet +1",
         head = "Herculean Helm", neck = "Baetyl Pendant", ear1 = "Hecate's Earring", ear2 = "Friomisi Earring",
@@ -451,6 +454,15 @@ end
 
 -- Run after the general precast() is done.
 function job_post_precast(spell, action, spellMap, eventArgs)
+
+    if spell.type == 'WeaponSkill' and player.tp == 3000 then
+        if sets.precast.WS[spell.english] then
+            if sets.precast.WS[spell.english].MaxTP then
+                equip(sets.precast.WS[spell.english].MaxTP)
+            end
+        end
+    end
+
     if spell.english == 'Aeolian Edge' and state.TreasureMode.value ~= 'None' then
         equip(sets.TreasureHunter)
     elseif spell.english == 'Sneak Attack' or spell.english == 'Trick Attack' then --or spell.type == 'WeaponSkill' then

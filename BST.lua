@@ -266,7 +266,7 @@ function init_gear_sets()
         body = "Ankusa Jackcoat +1", hands = "Nukumi Manoplas", ring1 = "Varar Ring +1", ring2 = "Cath Palug Ring",
         back = "Artio's Mantle", waist = "Incarnation Sash", legs = "Totemic Trousers +1", feet = "Totemic Gaiters +1" }
 
-    sets.midcast.Pet.WSMagical = set_combine(sets.midcast.Pet.Physical, { neck = "Adad Necklace" })
+    sets.midcast.Pet.WSMagical = set_combine(sets.midcast.Pet.Physical, { neck = "Adad Necklace", body = "Udug Jacket" })
 
     sets.midcast.Pet.WSBuff = set_combine(sets.midcast.Pet.WS.Magical, {})
 

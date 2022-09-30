@@ -132,7 +132,7 @@ function init_gear_sets()
         legs = "Limbo Trousers", feet = "Odyssean Greaves"
     }
 
-    sets.Sleeping = { neck = "Berserker's Torque" }
+    sets.Sleeping = { neck = "Vim Torque +1" }
 
     sets.buff.doom = { ammo = "Staunch Tathlum +1",
         head = "Malignance Chapeau", neck = "Nicander's Necklace",
@@ -270,7 +270,7 @@ function init_gear_sets()
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
     sets.engaged = { ammo = "Ginsen",
-        head = "Sakpata's Helm", neck = "Combatant's Torque", ear1 = "Schere Earring", ear2 = "Telos Earring",
+        head = "Sakpata's Helm", neck = "Combatant's Torque", ear1 = "Schere Earring", ear2 = "Boii Earring",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
         back = gear.melee_cape, waist = "Sailfi Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
     sets.engaged.Acc = { ammo = "Seething Bomblet +1",

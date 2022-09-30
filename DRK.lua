@@ -768,6 +768,8 @@ function calculate_dreadspikes()
     if player.equipment.body == 'Bale Cuirass +2' then base_absorbed = base_absorbed + 0.125 end
     if player.equipment.body == "Heathen's Cuirass" then base_absorbed = base_absorbed + 0.125 end
     if player.equipment.body == "Heathen's Cuirass +1" then base_absorbed = base_absorbed + 0.175 end
+    if player.equipment.body == "Heathen's Cuirass +2" then base_absorbed = base_absorbed + 0.225 end
+    if player.equipment.body == "Heathen's Cuirass +3" then base_absorbed = base_absorbed + 0.275 end
     if player.equipment.main == 'Crepuscular Scythe' then base_absorbed = base_absorbed + 0.25 end
 
     return math.floor(base * base_absorbed)
