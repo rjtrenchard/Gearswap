@@ -88,7 +88,7 @@ function user_setup()
     send_command('bind ^= gs c cycle treasuremode')
 
     send_command('bind numpad1 input /ma Silence <t>')
-    send_command('bind numpad2 input /ma "Cure IV" <t>')
+    send_command('bind numpad2 input /ma "Dispel" <t>')
     send_command('bind numpad3 input /ma "Sleep II" <t>')
 
     -- send_command('bind numpad4 input /ja Accession <me>')
@@ -131,7 +131,8 @@ function init_gear_sets()
         augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%', } }
     gear.idle_cape = gear.melee_cape
 
-    gear.PhalanxHead = { name = "Taeon Chapeau", augments = { '"Repair" potency +5%', 'Phalanx +3', } }
+    gear.PhalanxHead = { name = "Merlinic Hood",
+        augments = { 'Crit. hit damage +1%', 'STR+2', 'Phalanx +4', 'Accuracy+17 Attack+17', } }
     gear.PhalanxBody = { name = "Taeon Tabard", augments = { '"Repair" potency +5%', 'Phalanx +3', } }
     gear.PhalanxHands = { name = "Taeon Gloves", augments = { '"Repair" potency +5%', 'Phalanx +3', } }
     gear.PhalanxLegs = { name = "Taeon Tights", augments = { '"Repair" potency +5%', 'Phalanx +3', } }
@@ -174,6 +175,11 @@ function init_gear_sets()
         body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
         waist = "Trance Belt", legs = "Zoar Subligar +1"
     }
+
+    sets.ConserveMP = { ammo = "Pemphredo Tathlum",
+        head = "Ipoca Beret", ear2 = "Magnetic Earring",
+        body = "Kaykaus Bliaut +1", hands = "Kaykaus Cuffs +1", ring2 = "Mephitas's Ring +1",
+        back = "Fi Follet Cape +1", waist = "Shinjutsu-no-obi +1", legs = "Lengo Pants", feet = "Kaykaus Boots +1" }
 
     -- Precast Sets
     sets.TreasureHunter = {
@@ -316,12 +322,16 @@ function init_gear_sets()
         waist = "Yemaya Belt", legs = "Malignance Tights", feet = "Malignance Boots"
     }
 
-    sets.midcast.FastRecast = { ammo = "Sapience Orb",
-        head = "Atrophy Chapeau +2", neck = "Orunmila's Torque", ear1 = "Loquacious Earring", ear2 = "Malignance Earring",
-        body = "Vitiation Tabard +3", hands = "Vitiation Gloves +3", ring1 = "Kishar Ring", ring2 = "Rahab Ring",
-        waist = "Embla Sash", legs = "Atrophy Tights +3", feet = "Vitiation boots +3" }
+    sets.midcast.FastRecast = set_combine(sets.ConserveMP, {
+        head = "Lethargy Chappel +2", neck = "Duelist's Torque +2", ear1 = "Loquacious Earring",
+        ear2 = "Magnetic Earring",
+        body = "Lethargy Sayon +2", hands = "Lethargy Gloves +2", ring1 = "Gelatinous Ring +1",
+        ring2 = "Mephitas's Ring +1",
+        back = "Fi Follet Cape +1", waist = "Shinjutsu-no-obi +1", legs = "Atrophy Tights +3",
+        feet = "Lethargy Houseaux +2"
+    })
 
-    sets.midcast.Utsusemi = set_combine(sets.precast.FC, sets.SIRD)
+    sets.midcast.Utsusemi = set_combine(sets.midcast.FastRecast, sets.SIRD)
 
     -- aims for 500 skill (476 base, 24 needed)
     sets.midcast['Enhancing Magic'] = {
@@ -336,17 +346,19 @@ function init_gear_sets()
         body = "Vitiation Tabard +3", hands = "Vitiation Gloves +3", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
         back = "Ghostfyre Cape", waist = "Olympus Sash", legs = "Atrophy Tights +3", feet = "Lethargy Houseaux +2"
     }
+
+
     sets.midcast['Enhancing Magic'].Weapon = { main = "Pukulatmuj +1", sub = "Forfend +1" }
     sets.midcast['Enhancing Magic'].DW = sets.midcast['Enhancing Magic'].Weapon
     sets.midcast['Enhancing Magic'].None = {}
 
     -- Enhancing magic skill duration, no regard for skill
-    sets.midcast['Enhancing Magic'].Duration = {
+    sets.midcast['Enhancing Magic'].Duration = set_combine(sets.ConserveMP, {
         neck = "Duelist's Torque +2", ear2 = "Magnetic Earring",
         body = "Vitiation tabard +3", hands = "Atrophy Gloves +3", ring1 = "Gelatinous Ring +1",
         ring2 = "Mephitas's Ring +1",
         back = "Sucellos's Cape", waist = "Shinjutsu-no-obi +1", feet = "Lethargy Houseaux +2"
-    }
+    })
     sets.midcast['Enhancing Magic'].Duration.Weapon = { main = gear.EnhancingWeapon,
         sub = { name = "Ammurapi Shield", priority = 10 } }
     sets.midcast['Enhancing Magic'].Duration.DW = sets.midcast['Enhancing Magic'].Duration.Weapon
@@ -402,7 +414,7 @@ function init_gear_sets()
         back = "Altruistic Cape", waist = "Bishop's Sash", legs = "Carmine Cuisses +1", feet = "Vanya Clogs"
     }
 
-    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak", ammo = "Pemphredo Tathlum",
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { ammo = "Pemphredo Tathlum",
         head = "Kaykaus Mitra +1", neck = "Duelist's Torque +2", ear1 = "Magnetic Earring",
         body = "Kaykaus Bliaut +1", hands = "Kaykaus Cuffs +1", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
         back = gear.mnd_cape, waist = gear.CureWaist, legs = "Kaykaus Tights +1", feet = "Kaykaus Boots +1" })
@@ -417,11 +429,13 @@ function init_gear_sets()
     })
     sets.midcast.CursnaSelf = set_combine(sets.midcast.Cursna, { waist = "Gishdubar Sash" })
 
+    sets.midcast.Raise = set_combine(sets.SIRD, sets.ConserveMP)
+
 
     sets.midcast['Enfeebling Magic'] = { ammo = "Regal Gem",
         head = "Vitiation Chapeau +3", neck = "Duelist's Torque +2", ear1 = "Snotra Earring", ear2 = "Regal Earring",
         body = "Lethargy Sayon +2", hands = "Atrophy Gloves +3", ring1 = "Kishar Ring", ring2 = "Metamorph Ring +1",
-        back = gear.mnd_cape, waist = "Acuity Belt +1", legs = "Chironic Hose", feet = "Vitiation boots +3" }
+        back = gear.mnd_cape, waist = "Acuity Belt +1", legs = "Lethargy Fuseau +2", feet = "Vitiation boots +3" }
     sets.midcast['Enfeebling Magic'].Weapon = { main = "Crocea Mors", sub = { name = "Ammurapi Shield", priority = 10 } }
     sets.midcast['Enfeebling Magic'].DW = { main = "Crocea Mors", sub = "Daybreak" }
 
@@ -430,14 +444,20 @@ function init_gear_sets()
         head = empty, neck = "Duelist's Torque +2", ear1 = "Snotra Earring", ear2 = "Malignance Earring",
         body = "Cohort Cloak +1", hands = "Lethargy Gantherots +2", ring1 = "Stikini Ring +1",
         ring2 = "Metamorph Ring +1",
-        back = gear.mnd_cape, waist = "Acuity Belt +1", legs = "Chironic Hose", feet = "Vitiation boots +3" }
+        back = gear.mnd_cape, waist = "Acuity Belt +1", legs = "Lethargy Fuseau +2", feet = "Vitiation boots +3" }
 
     -- purely skill/mnd based spells
     sets.midcast['Enfeebling Magic'].PureSkill = { ammo = "Regal Gem",
         head = "Vitiation Chapeau +3", neck = "Duelist's Torque +2", ear1 = "Snotra Earring", ear2 = "Vor Earring",
         body = "Lethargy Sayon +2", hands = "Lethargy Gantherots +2", ring1 = "Stikini Ring +1",
         ring2 = "Stikini Ring +1",
-        back = gear.mnd_cape, waist = "Casso Sash", legs = "Chironic Hose", feet = "Vitiation Boots +3" }
+        back = gear.mnd_cape, waist = "Casso Sash", legs = "Psycloth Lappas", feet = "Vitiation Boots +3" }
+
+    sets.midcast['Enfeebling Magic'].HighSkill = { ammo = "Regal Gem",
+        head = "Vitiation Chapeau +3", neck = "Duelist's Torque +2", ear1 = "Snotra Earring", ear2 = "Vor Earring",
+        body = "Lethargy Sayon +2", hands = "Lethargy Gantherots +2", ring1 = "Stikini Ring +1",
+        ring2 = "Stikini Ring +1",
+        back = gear.mnd_cape, waist = "Casso Sash", legs = "Lethargy Fuseau +2", feet = "Vitiation Boots +3" }
 
     -- dMND spells (Paralyze, Slow, Addle)
     sets.midcast['Enfeebling Magic'].dMND = { main = "Daybreak", sub = { name = "Ammurapi Shield", priority = 10 },
@@ -447,11 +467,12 @@ function init_gear_sets()
         ring2 = "Metamorph Ring +1",
         back = gear.mnd_cape, waist = "Luminary Sash", legs = "Chironic Hose", feet = "Vitiation Boots +3" }
 
-    sets.midcast['Enfeebling Magic'].Duration = set_combine(sets.midcast['Enfeebling Magic'], {
-        head = "Lethargy Chappel +1",
-        body = "Lethargy Sayon +2", hands = "Lethargy Gantherots +2",
-        legs = "Lethargy Fuseau +2", feet = "Lethargy Houseaux +2"
-    })
+    sets.midcast['Enfeebling Magic'].Immunobreak = { legs = "Chironic Hose" }
+
+    sets.midcast['Enfeebling Magic'].Duration = {
+        head = "Vitiation Chapeau +3", neck = "Duelist's Torque +2", ear1 = "Snotra Earring",
+        ring1 = "Kishar Ring"
+    }
 
     sets.midcast['Dispel'] = set_combine(sets.midcast['Enfeebling Magic'],
         { neck = "Duelist's Torque +2", back = gear.int_cape })
@@ -517,13 +538,13 @@ function init_gear_sets()
     -- Sets for special buff conditions on spells.
 
     sets.buff.ComposureOther = {
-        head = "Lethargy Chappel +1",
+        head = "Lethargy Chappel +2",
         body = "Lethargy Sayon +2", hands = "Atrophy Gloves +3",
         legs = "Lethargy Fuseau +2", feet = "Lethargy Houseaux +2"
     }
 
     sets.buff.Composure = {
-        head = "Lethargy Chappel +1",
+        head = "Lethargy Chappel +2",
         body = "Lethargy Sayon +2", hands = "Lethargy Gantherots +2",
         legs = "Lethargy Fuseau +2", feet = "Lethargy Houseaux +2"
     }
@@ -784,16 +805,43 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             S { 'Dispelga', 'Impact', 'Dia', 'Dia II', 'Dia III', 'Bio', 'Bio II', 'Bio III', 'Frazzle II' }:contains(spell
                 .english) then
             if info.can_DW then
-                equip(sets.midcast["Enfeebling Magic"].DW)
+                equip(sets.midcast['Enfeebling Magic'].DW)
             else
-                equip(sets.midcast["Enfeebling Magic"].Weapon)
+                equip(sets.midcast['Enfeebling Magic'].Weapon)
             end
         end
 
-        if S { 'Frazzle III', 'Distract III', 'Poison II' }:contains(spell.english) then
+        if S { 'Poison II' }:contains(spell.english) then
             equip(sets.midcast['Enfeebling Magic'].PureSkill)
+        elseif S { 'Frazzle III', 'Distract III' }:contains(spell.english) then
+            equip(sets.midcast['Enfeebling Magic'].HighSkill)
         elseif S { 'Paralyze II', 'Slow II', 'Addle II' }:contains(spell.english) then
             equip(sets.midcast['Enfeebling Magic'].dMND)
+        end
+
+        -- spells that cannot get stronger with enfeebling effect+
+        if S { 'Silence', 'Bind', 'Break', 'Breakga', 'Sleep', 'Sleep II', 'Sleepga', 'Sleepga II', }:contains(spell.english) then
+            equip(sets.midcast['Enfeebling Magic'])
+            if spell.english == 'Silence' then
+
+                if buffactive.composure then
+                    equip(sets.buff.Composure)
+                end
+                equip(sets.midcast['Enfeebling Magic'].Duration)
+            else
+                equip(sets.midcast['Enfeebling Magic'].Duration)
+                if buffactive.composure then
+                    equip(sets.buff.Composure)
+                end
+            end
+
+        end
+
+        -- Immunobreakable spells
+        if S { 'Slow', 'Slow II', 'Paralyze', 'Paralyze II', 'Addle', 'Addle II', 'Poison II', 'Blind', 'Blind II',
+            'Gravity', 'Gravity II', 'Bind', 'Break', 'Sleep', 'Sleep II', 'Sleepga', 'Sleepga II', 'Silence' }:contains(spell
+            .english) then
+            equip(sets.midcast['Enfeebling Magic'].Immunobreak)
         end
 
         if spell.english == 'Dispelga' then
@@ -883,14 +931,17 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif spell.english == 'Cursna' and spell.target.type == 'SELF' then
             equip(sets.midcast.CursnaSelf)
         end
+
     elseif spell_burstable:contains(spell.english) and state.MBurst.value == 'Magic Burst' then
         equip(sets.midcast.MagicBurst)
         state.MBurst:set('None')
         windower.add_to_chat(122, 'Magic Bursting. State reset')
+
     elseif spell.skill == 'Divine Magic' then
         if spell.english:startswith('Banish') then
             equip(sets.midcast.Banish)
         end
+
     elseif spell.skill == 'Elemental Magic' then
         if not save_TP then
             if info.can_DW then
@@ -1098,7 +1149,9 @@ function job_update(cmdParams, eventArgs)
     calculate_haste()
     th_update(cmdParams, eventArgs)
 
-    if buffactive.doom then
+    if buffactive.terror or buffactive.stun then
+        send_command('gs equip sets.idle.PDT')
+    elseif buffactive.doom then
         if state.DoomMode.value == 'Cursna' then
             send_command('gs equip sets.buff.doom')
         elseif state.DoomMode.value == 'Holy Water' then

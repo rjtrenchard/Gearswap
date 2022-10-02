@@ -166,6 +166,12 @@ function init_gear_sets()
         waist = "Trance Belt", legs = "Zoar Subligar +1"
     }
 
+    sets.ConserveMP = {
+        head = "Ipoca Beret", ear2 = "Magnetic Earring",
+        body = "Kaykaus Bliaut +1", hands = "Kaykaus Cuffs +1", ring2 = "Mephitas's Ring +1",
+        back = "Fi Follet Cape +1", waist = "Shinjutsu-no-obi +1", legs = "Lengo Pants", feet = "Kaykaus Boots +1"
+    }
+
     -- Precast Sets
 
     -- Fast cast sets for spells
@@ -323,6 +329,8 @@ function init_gear_sets()
         hands = "Hieros Mittens", ring1 = "Haoma's Ring", ring2 = "Haoma's Ring",
         feet = "Gendewitha Galoshes +1"
     })
+
+    sets.midcast.Raise = sets.ConserveMP
 
     sets.midcast['Enhancing Magic'] = { main = "Pukulatmuj +1",
         head = "Umuthi Hat", neck = "Incanter's Torque", ear1 = "Mimir Earring", ear2 = "Andoaa Earring",
