@@ -242,7 +242,7 @@ function init_gear_sets()
     sets.SIRD = { ammo = "Staunch Tathlum +1",
         neck = "Loricate Torque +1", ear1 = "Hasalz Earring", ear2 = "Magnetic Earring",
         hands = "Rawhide Gloves", ring1 = "Evanescence Ring",
-        waist = "Resolute Belt", legs = "Carmine Cuisses +1", feet = "Amalric Nails +1"
+        legs = "Carmine Cuisses +1", feet = "Amalric Nails +1"
     }
 
     sets.TreasureHunter = {

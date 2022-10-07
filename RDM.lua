@@ -189,6 +189,7 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
     sets.precast.JA['Chainspell'] = { body = "Vitiation Tabard +3" }
+    sets.precast.JA['Saboteur'] = { hands = "Lethargy Gantherots +2" } -- how long have I been forgetting this?
 
 
     -- Waltz set (chr and vit)
@@ -430,13 +431,15 @@ function init_gear_sets()
     sets.midcast.CursnaSelf = set_combine(sets.midcast.Cursna, { waist = "Gishdubar Sash" })
 
     sets.midcast.Raise = set_combine(sets.SIRD, sets.ConserveMP)
+    sets.midcast.Reraise = set_combine(sets.SIRD, sets.ConserveMP)
+
 
 
     sets.midcast['Enfeebling Magic'] = { ammo = "Regal Gem",
         head = "Vitiation Chapeau +3", neck = "Duelist's Torque +2", ear1 = "Snotra Earring", ear2 = "Regal Earring",
         body = "Lethargy Sayon +2", hands = "Atrophy Gloves +3", ring1 = "Kishar Ring", ring2 = "Metamorph Ring +1",
         back = gear.mnd_cape, waist = "Acuity Belt +1", legs = "Lethargy Fuseau +2", feet = "Vitiation boots +3" }
-    sets.midcast['Enfeebling Magic'].Weapon = { main = "Crocea Mors", sub = { name = "Ammurapi Shield", priority = 10 } }
+    sets.midcast['Enfeebling Magic'].Weapon = { main = "Daybreak", sub = { name = "Ammurapi Shield", priority = 10 } }
     sets.midcast['Enfeebling Magic'].DW = { main = "Crocea Mors", sub = "Daybreak" }
 
     sets.midcast['Enfeebling Magic'].Acc = { main = "Crocea Mors", sub = "Ammurapi Shield", range = "Ullr",
@@ -551,17 +554,6 @@ function init_gear_sets()
 
     sets.buff.Saboteur = { hands = "Lethargy Gantherots +2" }
 
-    sets.buff.doom = set_combine(sets.idle.PDT, {
-        neck = "Nicander's Necklace",
-        ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
-        waist = "Gishdubar Sash"
-    })
-
-    sets.buff.doom.HolyWater = set_combine(sets.idle.PDT, {
-        neck = "Nicander's Necklace",
-        ring1 = "Blenmot's Ring +1", ring2 = "Blenmot's Ring +1"
-    })
-
     -- Sets to return to when not performing an action.
 
     -- Resting sets
@@ -602,6 +594,16 @@ function init_gear_sets()
     sets.base.idle.PDT = sets.idle.PDT
     sets.base.idle.MDT = sets.idle.PDT
 
+    sets.buff.doom = set_combine(sets.idle.PDT, {
+        neck = "Nicander's Necklace",
+        ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
+        waist = "Gishdubar Sash"
+    })
+
+    sets.buff.doom.HolyWater = set_combine(sets.idle.PDT, {
+        neck = "Nicander's Necklace",
+        ring1 = "Blenmot's Ring +1", ring2 = "Blenmot's Ring +1"
+    })
 
     -- Defense sets
     sets.defense.PDT = { ammo = "Ginsen",
@@ -756,6 +758,7 @@ function job_precast(spell, action, spellMap, eventArgs)
         else
             equip(sets.precast.Dispelga)
         end
+
         -- elseif spell.type == 'WeaponSkill' and state.RangedMode.value == 'Normal' then
         --     disable('range', 'ammo')
 
@@ -763,6 +766,10 @@ function job_precast(spell, action, spellMap, eventArgs)
         --     equip(sets.precast.WS[spell.english].MaxTP)
         -- end
     end
+
+    -- if S { 'Paralyze II', 'Slow II', 'Addle II', 'Distract III', 'Frazzle III' }:contains(spell.english) and info.can_DW then
+    --     equip(sets.midcast['Enfeebling Magic'].Weapon)
+    -- end
 end
 
 function job_post_precast(spell, action, spellMap, eventArts)
@@ -814,25 +821,32 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if S { 'Poison II' }:contains(spell.english) then
             equip(sets.midcast['Enfeebling Magic'].PureSkill)
         elseif S { 'Frazzle III', 'Distract III' }:contains(spell.english) then
-            equip(sets.midcast['Enfeebling Magic'].HighSkill)
+            equip(set_combine(sets.midcast['Enfeebling Magic'].dMND, sets.midcast['Enfeebling Magic'].HighSkill))
         elseif S { 'Paralyze II', 'Slow II', 'Addle II' }:contains(spell.english) then
             equip(sets.midcast['Enfeebling Magic'].dMND)
+            if info.can_DW then
+                -- equip(sets.midcast['Enfeebling Magic'].DW)
+                equip(sets.midcast['Enfeebling Magic'].Weapon)
+            else
+                equip(sets.midcast['Enfeebling Magic'].Weapon)
+            end
         end
 
         -- spells that cannot get stronger with enfeebling effect+
         if S { 'Silence', 'Bind', 'Break', 'Breakga', 'Sleep', 'Sleep II', 'Sleepga', 'Sleepga II', }:contains(spell.english) then
             equip(sets.midcast['Enfeebling Magic'])
             if spell.english == 'Silence' then
+                equip(sets.midcast['Enfeebling Magic'].Duration)
+                if buffactive.composure then
+                    equip(sets.buff.Composure)
+                end
+
+            else
 
                 if buffactive.composure then
                     equip(sets.buff.Composure)
                 end
                 equip(sets.midcast['Enfeebling Magic'].Duration)
-            else
-                equip(sets.midcast['Enfeebling Magic'].Duration)
-                if buffactive.composure then
-                    equip(sets.buff.Composure)
-                end
             end
 
         end
@@ -840,7 +854,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         -- Immunobreakable spells
         if S { 'Slow', 'Slow II', 'Paralyze', 'Paralyze II', 'Addle', 'Addle II', 'Poison II', 'Blind', 'Blind II',
             'Gravity', 'Gravity II', 'Bind', 'Break', 'Sleep', 'Sleep II', 'Sleepga', 'Sleepga II', 'Silence' }:contains(spell
-            .english) then
+            .english) and not (buffactive.Stymie or buffactive['Elemental Seal']) then
             equip(sets.midcast['Enfeebling Magic'].Immunobreak)
         end
 

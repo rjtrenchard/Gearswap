@@ -65,6 +65,7 @@ function user_setup()
     options.ammo_warning_limit = 15
 
     -- Additional local binds
+    send_command('bind ^` input /ja "Bolter\'s Roll"')
     send_command('bind !` input /ja "Double-up" <me>')
     send_command('lua l autocor')
     --send_command('bind ^` input /ja "Bolter\'s Roll" <me>')
@@ -144,7 +145,7 @@ function init_gear_sets()
     sets.precast.WS = {
         head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
         body = "Laksamana's Frac +3", hands = "Meghanada Gloves +2", ring1 = "Epaminondas's Ring", ring2 = "Regal Ring",
-        back = gear.ws_cape, waist = "Fotia Belt", legs = "Meghanada Chausses +1", feet = "Lanun Bottes +3"
+        back = gear.ws_cape, waist = "Fotia Belt", legs = "Nyame Flanchard", feet = "Lanun Bottes +3"
     }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS,

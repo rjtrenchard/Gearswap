@@ -70,6 +70,7 @@ function include_job_sets()
     sets.Weapons.sword = { main = "Naegling", sub = "Blurred Shield +1" }
     sets.Weapons.club = { main = "Loxotic Mace +1", sub = "Blurred Shield +1" }
     sets.Weapons.ridill = { main = "Ridill", sub = "Blurred Shield +1" }
+    sets.Weapons.crepuscular = { main = "Crepuscular Scythe", sub = "Utu Grip" }
 
     -- Precast Sets
     -- Precast sets to enhance JAs
@@ -467,7 +468,7 @@ function include_job_sets()
     sets.midcast['Absorb-TP'] = set_combine(sets.midcast.Absorb, { hands = "Heathen's Gauntlets +1" })
 
     sets.midcast['Dread Spikes'] = set_combine(sets.HP_High,
-        { head = "Ratri sallet +1", body = "Heathen's Cuirass +1", hands = "Rat. Gadlings +1", feet = "Rat. sollerets +1" })
+        { head = "Ratri sallet +1", body = "Heathen's Cuirass +2", hands = "Rat. Gadlings +1", feet = "Rat. sollerets +1" })
     sets.midcast['Dread Spikes'].Weapon = { main = "Crepuscular Scythe", sub = "Utu Grip" }
 
     sets.midcast['Poison'] = sets.midcast['Enfeebling Magic']

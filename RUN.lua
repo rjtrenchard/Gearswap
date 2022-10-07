@@ -252,7 +252,8 @@ function init_gear_sets()
         back = "Merciful Cape", waist = "Olympus Sash", legs = "Carmine Cuisses +1"
     }
 
-    sets.midcast['Enhancing Magic'].Duration = { head = "Erilaz Galea +1", legs = "Futhark Trousers +3" }
+    sets.midcast['Enhancing Magic'].Duration = { head = "Erilaz Galea +1", ear2 = "Erilaz Earring +1",
+        legs = "Futhark Trousers +3" }
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration, sets.SIRD)
 
@@ -304,7 +305,7 @@ function init_gear_sets()
     --------------------------------------
 
     sets.idle = { ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
         body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Moonlight Ring", ring2 = "Gelatinous Ring +1",
         back = gear.TankCape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Nyame Sollerets" }
     sets.idle.Refresh = set_combine(sets.idle, { body = "Runeist's Coat +2", waist = "Fucho-no-obi" })
@@ -318,17 +319,18 @@ function init_gear_sets()
 
     -- try to preserve some MP while weak
     sets.idle.Weak = { ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
         body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Moonlight Ring", ring2 = "Gelatinous Ring +1",
         back = gear.TankCape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Nyame Sollerets" }
 
 
     sets.defense.PDT = { ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
         body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Moonlight Ring", ring2 = "Gelatinous Ring +1",
         back = gear.TankCape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
     sets.defense.MDT = set_combine(sets.defense.PDT, { ammo = "Yamarang",
+        neck = "Futhark Torque +2",
         waist = "Engraved Belt" })
 
     sets.Kiting = { legs = "Carmine Cuisses +1" }
@@ -339,7 +341,7 @@ function init_gear_sets()
     --------------------------------------
 
     sets.engaged = { ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
         body = "Nyame Mail", hands = "Turms Mittens +1", ring1 = "Moonlight Ring", ring2 = "Gelatinous Ring +1",
         back = gear.TankCape, waist = "Flume Belt +1", legs = "Erilaz Leg Guards +2", feet = "Turms Leggings +1" }
     sets.engaged.DD = { ammo = "Ginsen",
@@ -353,7 +355,7 @@ function init_gear_sets()
         back = gear.DDCape, waist = "Sailfi belt +1", legs = "Samnuha Tights", feet = "Ayanmo Gambieras +2" }
     sets.engaged.Acc = set_combine(sets.engaged.DD, { ammo = "Yamarang", })
     sets.engaged.PDT = { ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm", neck = "Futhark Torque +2", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Odnowa Earring +1",
         body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Moonlight Ring", ring2 = "Gelatinous Ring +1",
         back = gear.TankCape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
     sets.engaged.MDT = { ammo = "Yamarang",
@@ -479,23 +481,23 @@ end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    local function set_macro_page(page, book)
-        windower.send_command('input /macro book ' .. book)
-        coroutine.sleep(.5)
-        windower.send_command('input /macro set ' .. page)
+    local function l_set_macro_page(page, book)
+        windower.send_command('input /macro book ' .. book .. '; wait 0.1; input /macro set ' .. page)
+        -- coroutine.sleep(.5)
+        -- windower.send_command('input /macro set ' .. page)
     end
 
     -- Default macro set/book
     if player.sub_job == 'WAR' then
-        set_macro_page(7, 14)
+        l_set_macro_page(7, 14)
     elseif player.sub_job == 'NIN' then
-        set_macro_page(8, 14)
+        l_set_macro_page(8, 14)
     elseif player.sub_job == 'DRK' then
-        set_macro_page(6, 14)
+        l_set_macro_page(6, 14)
     elseif player.sub_job == 'BLU' then
-        set_macro_page(1, 14)
+        l_set_macro_page(1, 14)
     else
-        set_macro_page(9, 14)
+        l_set_macro_page(9, 14)
     end
 
     send_command("@wait 5;input /lockstyleset 5")

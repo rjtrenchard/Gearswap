@@ -98,16 +98,19 @@ function user_setup()
     -- Additional local binds
     send_command('bind ^` gs c set SIRDMode one-time; input /ma "Dread Spikes"')
     send_command('bind !` input /ja "Scarlet Delirium"')
+    send_command('bind ^- gs c cycle doommode')
     send_command('bind ^= gs c cycle treasuremode')
 
-    send_command('bind numpad1 gs equip sets.Weapons.greatsword')
-    send_command('bind numpad2 gs equip sets.Weapons.scythe')
-    send_command('bind numpad3 gs equip sets.Weapons.greataxe')
+    send_command('bind numpad7 gs equip sets.Weapons.greatsword')
+    send_command('bind numpad8 gs equip sets.Weapons.scythe')
+    send_command('bind numpad9 gs equip sets.Weapons.greataxe')
     send_command('bind numpad4 gs equip sets.Weapons.sword')
-    send_command('bind numpad5 gs equip sets.Weapons.club')
-    send_command('bind numpad6 gs equip sets.Weapons.ridill')
-    send_command('bind numpad9 gs equip sets.HP_High')
-    send_command('bind numpad7 gs c cycle StunMode')
+    send_command('bind numpad5 gs equip sets.Weapons.crepuscular')
+    send_command('bind numpad6 gs equip sets.Weapons.club')
+    send_command('bind numpad1 input /ma stun <t>')
+    send_command('bind numpad. gs equip sets.HP_High')
+    send_command('bind ^numpad1 gs c cycle StunMode')
+
 
     gear.Moonshade = {}
     gear.Moonshade.name = 'Moonshade Earring'
@@ -197,10 +200,10 @@ function job_helper()
         ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe',
         ['Anguta'] = 'scythe', ['Dacnomania'] = 'scythe', ['Misanthropy'] = 'scythe', ['Woeborn'] = 'scythe',
         ['Crepuscular Scythe'] = 'scythe',
-        ['Loxotic Mace +1'] = 'club', ['Loxotic Mace'] = 'club', ['Warp Cudgel'] = 'club',
+        ['Loxotic Mace +1'] = 'club', ['Loxotic Mace'] = 'club', ['Warp Cudgel'] = 'club', ['Caduceus'] = 'club',
         ['empty'] = 'handtohand',
         ['Blurred Shield'] = 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',
-        ["Smyth's Aspis"] = 'shield', ["Smyth's Ecu"] = 'shield', ["Smythe's Scutum"] = 'shield',
+        ["Smythe's Aspis"] = 'shield', ["Smyth's Ecu"] = 'shield', ["Smythe's Scutum"] = 'shield',
         ["Smythe's Shield"] = 'shield', ["Smythe's Escutcheon"] = "Shield",
         ['Utu Grip'] = 'grip', ['Caecus Grip'] = 'grip'
     }
