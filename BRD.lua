@@ -371,7 +371,7 @@ function init_gear_sets()
         head = "Shaded Spectacles", neck = "Smithy's Torque",
         body = "Blacksmith's Smock", hands = "Smithy's Mitts", ring1 = "Confectioner's Ring",
         ring2 = "Craftmaster's Ring",
-        back = gear.MeleeCape, waist = "Blacksmith's Belt", feet = "Fili Cothurnes +1" }
+        back = gear.MeleeCape, waist = "Blacksmith's Belt", legs = "Nyame Flanchard", feet = "Fili Cothurnes +1" }
 
     sets.idle.Weak = sets.idle.PDT
 

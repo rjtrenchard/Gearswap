@@ -190,9 +190,9 @@ function user_setup()
         augments = { 'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20', 'Pet: Haste+7', } }
     gear.avatar_magic_cape = { name = "Campestres's Cape", augments = { 'Pet: M.Acc.+3 Pet: M.Dmg.+3', } }
 
-    send_command("bind numpad7 gs equip sets.midcast.Pet.PhysicalBloodPactRage; gs disable all")
-    send_command("bind numpad8 gs equip sets.midcast.Pet.MagicalBloodPactRage; gs disable all")
-    send_command("bind numpad9 gs equip sets.midcast.Pet.HybridBloodPactRage; gs disable all")
+    send_command("bind numpad7 gs enable all; gs equip sets.midcast.Pet.PhysicalBloodPactRage; gs disable all; print 'Physical BP'")
+    send_command("bind numpad8 gs enable all; gs equip sets.midcast.Pet.MagicalBloodPactRage; gs disable all; print 'Magical BP'")
+    send_command("bind numpad9 gs enable all; gs equip sets.midcast.Pet.HybridBloodPactRage; gs disable all; ; print 'Hybrid BP'")
     send_command("bind numpad1 gs enable all")
 
     send_command("bind numpad3 /ja Convert <me>")
@@ -223,6 +223,9 @@ function init_gear_sets()
     gear.fc_feet = { name = "Merlinic Crackows", augments = { '"Mag.Atk.Bns."+1', '"Fast Cast"+7', 'MND+3',
         'Mag. Acc.+14', } }
     gear.fc_hands = { name = "Merlinic Dastanas", augments = { '"Fast Cast"+7', 'CHR+10', '"Mag.Atk.Bns."+6', } }
+
+    gear.bp_hands = { name = "Merlinic Dastanas", augments = { 'Pet: "Mag.Atk.Bns."+29', 'Blood Pact Dmg.+9',
+        'Pet: INT+4', } }
 
     sets.precast['Summoning Magic'] = { ammo = "Vox Grip",
         head = "Convoker's Horn +2", neck = "Incanter's Torque", ear1 = "Lodurr Earring", ear2 = "Cath Palug Earring",
@@ -258,11 +261,13 @@ function init_gear_sets()
         body = "Inyanga Jubbah +2", hands = gear.fc_hands, ring1 = "Lebeche Ring", ring2 = "Weatherspoon Ring +1",
         back = "Perimede Cape", waist = "Embla Belt", legs = "Lengo Pants", feet = gear.fc_feet }
 
+    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Embla Sash" })
+
     sets.midcast['Enhancing Magic'] = { ear2 = "Mimir earring", waist = "Embla Sash" }
 
     sets.midcast.Refresh = sets.midcast['Enhancing Magic']
 
-    sets.midcast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Embla Sash" })
+
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
@@ -343,14 +348,14 @@ function init_gear_sets()
 
     sets.midcast.Pet.PhysicalBloodPactRage = { main = "Gridarvor", sub = "Elan Strap +1", ammo = "Sancus Sachet +1",
         head = "Helios Band", neck = "Shulmanu Collar", ear1 = "Lugalbanda Earring", ear2 = "Gelos Earring",
-        body = "Convoker's Doublet +2", hands = "Merlinic Dastanas", ring1 = "Varar Ring +1", ring2 = "Varar Ring +1",
+        body = "Convoker's Doublet +2", hands = gear.bp_hands, ring1 = "Varar Ring +1", ring2 = "Varar Ring +1",
         back = gear.avatar_melee_cape, waist = "Incarnation Sash", legs = "Apogee Slacks +1", feet = "Apogee Pumps +1" }
 
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = sets.midcast.Pet.PhysicalBloodPactRage
 
     sets.midcast.Pet.MagicalBloodPactRage = { main = "Espiritus", sub = "Elan Strap +1", ammo = "Sancus Sachet +1",
         head = "Cath Palug Crown", neck = "Adad Amulet", ear1 = "Lugalbanda Earring", ear2 = "Gelos Earring",
-        body = "Convoker's Doublet +2", hands = "Merlinic Dastanas", ring1 = "Varar Ring +1", ring2 = "Varar Ring +1",
+        body = "Convoker's Doublet +2", hands = gear.bp_hands, ring1 = "Varar Ring +1", ring2 = "Varar Ring +1",
         back = gear.avatar_magic_cape, waist = "Regal Belt", legs = "Enticer's Pants", feet = "Apogee Pumps +1" }
 
     sets.midcast.Pet.MagicalBloodPactRage.Acc = sets.midcast.Pet.MagicalBloodPactRage
