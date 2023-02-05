@@ -80,7 +80,6 @@ end
 function user_setup()
     include('augments.lua')
     job_helper()
-    include('gear_' .. player.name:lower() .. '/' .. player.main_job:upper() .. '.lua')
 
     state.OffenseMode:options('Normal', 'Acc', 'SubtleBlow')
     state.HybridMode:options('Normal', 'PDT', 'Reraise')
