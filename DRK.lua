@@ -320,14 +320,6 @@ function init_gear_sets()
         augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', '"Fast Cast"+10', 'Spell interruption rate down-10%', } }
     gear.SIRD_cape = gear.casting_cape
 
-    -- Enmity augs
-    gear.EnmityFeet = { name = "Yorium Sabatons", augments = { 'Enmity+10', 'Phalanx +3' } }
-
-    -- Misc augs
-    -- gear.THhands = { name = "Odyssean Gauntlets",
-    --     augments = { 'Mag. Acc.+4 "Mag.Atk.Bns."+4', 'Pet: "Mag.Atk.Bns."+18', '"Treasure Hunter"+2',
-    --         'Accuracy+7 Attack+7', } }
-
     -- Mainhand Sets
     sets.Weapons = {}
     sets.Weapons.greatsword = { main = "Caladbolg", sub = "Utu Grip" }
@@ -369,7 +361,7 @@ function init_gear_sets()
     sets.Enmity = { ammo = "Sapience Orb",
         head = "Loess Barbuta +1", neck = "Unmoving Collar +1", ear1 = "Cryptic Earring", ear2 = "Trux Earring",
         body = "Obviation Cuirass +1", hands = "Macabre Gauntlets +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
-        waist = "Trance Belt", legs = "Zoar Subligar +1", feet = gear.EnmityFeet }
+        waist = "Trance Belt", legs = "Zoar Subligar +1", feet = gear.yorium.enmity.feet }
     sets.Enmity.Weapon = {}
     -- sets.Enmity.Weapon = { main = "Voay Sword +1", sub = "Camaraderie Shield" }
 
