@@ -23,6 +23,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
+    include('augments.lua')
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('PDT', 'Normal', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc')
@@ -132,13 +133,13 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ammo = "Ginsen",
+    sets.precast.WS = { ammo = "Coiste Bodhar",
         head = "Sulevia's Mask +1", neck = "Fotia Gorget", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Regal Ring",
         ring2 = "Epaminondas's Ring",
         back = "Atheling Mantle", waist = "Fotia Belt", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
 
-    sets.precast.WS.Acc = { ammo = "Ginsen",
+    sets.precast.WS.Acc = { ammo = "Coiste Bodhar",
         head = "Sulevia's Mask +1", neck = "Fotia Gorget", ear1 = "Crepuscular Earring", ear2 = "Moonshade Earring",
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Regal Ring",
         ring2 = "Epaminondas's Ring",
@@ -151,8 +152,8 @@ function init_gear_sets()
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {})
     sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS.Acc, {})
 
-    sets.precast.WS['Sanguine Blade'] = { ammo = "Ginsen",
-        head = "Pixie Hairpin +1", neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
+    sets.precast.WS['Sanguine Blade'] = { ammo = "Coiste Bodhar",
+        head = "Pixie Hairpin +1", neck = "Baetyl Pendant", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Archon Ring",
         ring2 = "Epaminondas's Ring",
         back = "Toro Cape", waist = "Eschan Stone", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
@@ -199,9 +200,10 @@ function init_gear_sets()
         feet = "Caballarius Leggings" }
 
     sets.midcast['Enhancing Magic'] = { neck = "Incanter's Torque", ear1 = "Andoaa Earring", ear2 = "Mimir Earring",
-        ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1", waist = "Olympus Sash", legs = "Sulevia's Cuisses +2" }
+        ring1 = gear.left_stikini, ring2 = gear.right_stikini,
+        waist = "Olympus Sash", legs = "Sulevia's Cuisses +2" }
 
-    sets.midcast['Divine Magic'] = { neck = "Incanter's Torque", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1" }
+    sets.midcast['Divine Magic'] = { neck = "Incanter's Torque", ring1 = gear.left_stikini, ring2 = gear.right_stikini }
 
     sets.midcast.Protect = { ring1 = "Sheltered Ring" }
     sets.midcast.Shell = { ring1 = "Sheltered Ring" }
@@ -210,9 +212,9 @@ function init_gear_sets()
     -- Idle/resting/defense/etc sets
     --------------------------------------
 
-    sets.Reraise = { head = "Twilight Helm", body = "Crepuscular Mail" }
+    sets.Reraise = { head = "Crepuscular Helm", body = "Crepuscular Mail" }
 
-    sets.resting = { neck = "Sanctity Necklace",
+    sets.resting = { neck = "Bathy Choker +1",
         ring1 = "Sheltered Ring", ring2 = "Defending Ring",
         waist = "Fucho-no-obi" }
 
@@ -231,7 +233,7 @@ function init_gear_sets()
         back = "Fierabras's Mantle", waist = "Flume Belt +1", legs = "Carmine cuisses +1", feet = "Sulevia's Leggings +2" }
 
     sets.idle.Weak = { ammo = "Staunch Tathlum +1",
-        head = "Sulevia's Mask +1", neck = "Sanctity Necklace", ear1 = "Thrud Earring", ear2 = "Etiolation Earring",
+        head = "Sulevia's Mask +1", neck = "Bathy Choker +1", ear1 = "Thrud Earring", ear2 = "Etiolation Earring",
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Sheltered Ring",
         ring2 = "Defending Ring",
         back = "Fierabras's Mantle", waist = "Flume Belt +1", legs = "Carmine cuisses +1", feet = "Sulevia's Leggings +2" }
@@ -269,7 +271,7 @@ function init_gear_sets()
         body = "Sulevia's Platemail +2", hands = "Sulevia's Gauntlets +1", ring1 = "Petrov Ring", ring2 = "Meridian Ring",
         back = "Weard Mantle", waist = "Creed Baudrier", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
     sets.defense.Reraise = { ammo = "Staunch Tathlum +1",
-        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
+        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
         body = "Crepuscular Mail", hands = "Sulevia's Gauntlets +1", ring1 = "Petrov Ring", ring2 = "Defending Ring",
         back = "Weard Mantle", waist = "Nierenschutz", legs = "Sulevia's Cuisses +2", feet = "Sulevia's Leggings +2" }
     sets.defense.Charm = { ammo = "Staunch Tathlum +1",
@@ -290,22 +292,22 @@ function init_gear_sets()
     -- Engaged sets
     --------------------------------------
 
-    sets.engaged = { ammo = "Ginsen",
-        head = "Sakpata's Helm", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Telos Earring",
+    sets.engaged = { ammo = "Coiste Bodhar",
+        head = "Sakpata's Helm", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
         body = "Sakpata's Breastplate", hands = "Sakpata's Gauntlets", ring1 = "Petrov Ring", ring2 = "Hetairoi Ring",
         back = "Atheling Mantle", waist = "Sailfi belt +1", legs = "Cuisses", feet = "Sakpata's Leggings" }
 
-    sets.engaged.Acc = { ammo = "Ginsen",
-        head = "Flamma Zucchetto +2", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Telos Earring",
+    sets.engaged.Acc = { ammo = "Coiste Bodhar",
+        head = "Flamma Zucchetto +2", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
         body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Petrov Ring", ring2 = "Flamma Ring",
         back = "Atheling Mantle", waist = "Sailfi belt +1", legs = "Cizin Breeches", feet = "Flamma Gambieras +2" }
 
-    sets.engaged.DW = { ammo = "Ginsen",
-        head = "Flamma Zucchetto +2", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Telos Earring",
+    sets.engaged.DW = { ammo = "Coiste Bodhar",
+        head = "Flamma Zucchetto +2", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
         body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Petrov Ring", ring2 = "Flamma Ring",
-        back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Flamma Dirs +1", feet = "Flamma Gambieras +2" }
+        back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Flamma Dirs +2", feet = "Flamma Gambieras +2" }
 
-    sets.engaged.DW.Acc = { ammo = "Ginsen",
+    sets.engaged.DW.Acc = { ammo = "Coiste Bodhar",
         head = "Flamma Zucchetto +2", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Telos Earring",
         body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Petrov Ring", ring2 = "Flamma Ring",
         back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Cizin Breeches", feet = "Flamma Gambieras +2" }

@@ -36,6 +36,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
+    include('augments.lua')
     state.OffenseMode:options('Melee', 'Acc', 'Crit', 'Ranged')
     state.HybridMode:options('Normal', 'PDT')
     state.RangedMode:options('Normal', 'Acc', 'Crit')
@@ -88,6 +89,13 @@ function init_gear_sets()
 
     gear.matk_head = { name = "Herculean Helm", augments = { 'Mag. Acc.+19 "Mag.Atk.Bns."+19', 'MND+1',
         '"Mag.Atk.Bns."+14', } }
+
+
+    sets.resist = {}
+    sets.resist.death = { main = "Odium",
+        body = "Samnuha Coat", ring1 = "Shadow Ring", ring2 = "Eihwaz Ring"
+    }
+
 
     -- Precast Sets
 
@@ -186,14 +194,14 @@ function init_gear_sets()
 
 
     sets.precast.WS['Wildfire'] = { ammo = gear.MAbullet,
-        head = gear.matk_head, neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
+        head = gear.matk_head, neck = "Baetyl Pendant", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
         body = "Lanun Frac +3", hands = "Herculean Gloves", ring1 = "Epaminondas's Ring", ring2 = "Dingir Ring",
         back = gear.leaden_cape, waist = gear.ElementalObi, legs = "Herculean Trousers", feet = "Lanun Bottes +3" }
     sets.precast.WS['Wildfire'].Acc = set_combine(sets.precast.WS['Wildfire'],
         { legs = "Malignance Tights", feet = "Malignance Boots" })
 
     sets.precast.WS['Wildfire'].Brew = { ammo = gear.MAbullet,
-        head = gear.matk_head, neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
+        head = gear.matk_head, neck = "Baetyl Pendant", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
         body = "Lanun Frac +3", hands = "Herculean Gloves", ring1 = "Epaminondas's Ring", ring2 = "Dingir Ring",
         back = gear.leaden_cape, waist = "Svelt. Gouriz +1", legs = "Herculean Trousers", feet = "Lanun Bottes +3" }
 
@@ -242,14 +250,15 @@ function init_gear_sets()
     sets.precast.CorsairShot = { head = "Blood Mask", body = "mirke wardecors", feet = "Chass. Bottes" }
 
     sets.midcast.CorsairShot = set_combine(sets.precast.WS['Wildfire'], { ammo = gear.QDbullet,
-        head = "Herculean Helm", neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
+        head = "Herculean Helm", neck = "Baetyl Pendant", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
         body = "Lanun Frac +3", hands = "Herculean Gloves", ring2 = "Regal Ring", ring1 = "Dingir Ring",
         back = gear.leaden_cape, waist = gear.ElementalObi, legs = "Herculean Trousers", feet = "Lanun Bottes +3" })
 
     sets.midcast.CorsairShot.Acc = set_combine(sets.midcast.CorsairShot, {
-        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Crepuscular Earring",
+        head = "Malignance Chapeau", neck = "Baetyl Pendant", ear1 = "Crepuscular Earring",
         ear2 = "Dignitary's Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
+        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
         back = gear.ranged_cape, waist = "Eschan Stone", legs = "Malignance Tights", feet = "Malignance Boots"
     })
 
@@ -276,7 +285,7 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
 
     -- Resting sets
-    sets.resting = { neck = "Sanctity Necklace", ring1 = "Gelatinous Ring +1", ring2 = "Defending Ring" }
+    sets.resting = { neck = "fixme", ring1 = "Gelatinous Ring +1", ring2 = "Defending Ring" }
 
 
     -- Idle sets

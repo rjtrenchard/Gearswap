@@ -22,6 +22,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
+    include('augments.lua')
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'PDT')
@@ -34,25 +35,18 @@ end
 -- Define sets and vars used by this job file.
 function init_gear_sets()
 
-    gear.EnhancingFeet = { name = "Telchine Pigaches",
-        augments = { 'Mag. Evasion+21', 'Song spellcasting time -7%', 'Enh. Mag. eff. dur. +9', } }
-
-    gear.CureHands = { name = "Telchine Gloves", augments = { 'Mag. Evasion+23', '"Fast Cast"+5', '"Regen" potency+3', } }
-
-    gear.RegenHead = { name = "Telchine Cap", augments = { '"Regen" potency+3', } }
-    gear.RegenBody = { name = "Telchine Chasuble", augments = { '"Regen" potency+3', } }
-    gear.RegenHands = gear.CureHands
-    gear.RegenLegs = { name = "Telchine Braconi", augments = { '"Regen" potency+3', } }
-    gear.RegenFeet = { name = "Telchine Pigaches", augments = { '"Fast Cast"+2', '"Regen" potency+3', } }
 
     gear.default.obi_waist = "Acuity Belt +1"
     gear.default.drain_waist = "Fucho-no-Obi"
     gear.default.cure_waist = "Embla Sash"
 
-    gear.fc_head = { name = "Merlinic Hood", augments = { '"Mag.Atk.Bns."+26', '"Fast Cast"+7', 'Mag. Acc.+11', } }
-    gear.fc_body = { name = "Merlinic Jubbah", augments = { 'Mag. Acc.+1', '"Fast Cast"+7', } }
-    gear.fc_feet = { name = "Merlinic Crackows", augments = { '"Mag.Atk.Bns."+1', '"Fast Cast"+7', 'MND+3',
-        'Mag. Acc.+14', } }
+    gear.merlinic.fc.head = { name = "Merlinic Hood",
+        augments = { '"Mag.Atk.Bns."+26', '"Fast Cast"+7', 'Mag. Acc.+11', } }
+    gear.merlinic.fc.body = { name = "Merlinic Jubbah", augments = { 'Mag. Acc.+1', '"Fast Cast"+7', } }
+    gear.merlinic.fc.feet = { name = "Merlinic Crackows", augments = { '"Mag.Atk.Bns."+1', '"Fast Cast"+7', 'MND+3',
+        'Mag. Acc.+14', }, }
+
+    gear.grioavolr.fc = { name = "Grioavolr", augments = { '"Fast Cast"+7', 'MP+101', } }
 
     --------------------------------------
     -- Misc sets
@@ -72,10 +66,11 @@ function init_gear_sets()
     sets.precast.JA['Life cycle'] = { body = "Geomancy Tunic" }
 
     -- Fast cast sets for spells
-    sets.precast.FC = { main = "Grioavolr", range = "Dunna",
-        head = gear.fc_head, neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = gear.fc_body, hands = "Telchine Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Lebeche Ring",
-        back = "Perimede Cape", waist = "Embla Sash", legs = "Geomancy Pants +1", feet = gear.fc_feet }
+    sets.precast.FC = { gear.grioavolr.fc, range = "Dunna",
+        head = gear.merlinic.fc.head, neck = "Orunmila's Torque", ear1 = "Malignance Earring",
+        ear2 = "Loquacious Earring",
+        body = gear.merlinic.fc.body, hands = "Telchine Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Lebeche Ring",
+        back = "Perimede Cape", waist = "Embla Sash", legs = "Geomancy Pants +1", feet = gear.merlinic.fc.feet }
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC,
         { main = "Daybreak", sub = "Ammurapi Shield", back = "Pahtli Cape" })
@@ -132,7 +127,7 @@ function init_gear_sets()
 
     sets.midcast.Geomancy = { range = "Nepote Bell",
         head = "Azimuth Hood +1", neck = "Bagua Charm +1",
-        body = "Bagua Tunic +1", hands = "Geomancy Mitaines +1", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1" }
+        body = "Bagua Tunic +1", hands = "Geomancy Mitaines +1", ring1 = gear.left_stikini, ring2 = gear.right_stikini }
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         legs = "Bagua Pants +1", feet = "Azimuth Gaiters +1"
     })
@@ -143,7 +138,7 @@ function init_gear_sets()
         back = gear.int_cape, waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
     sets.midcast['Elemental Magic'].Acc = set_combine(sets.midcast['Elemental Magic'], {
         head = empty, neck = "Incanter's Torque", ear1 = "Crepuscular Earring", ear2 = "Malignance Earring",
-        body = "Cohort Cloak +1", ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1",
+        body = "Cohort Cloak +1", ring1 = gear.left_stikini, ring2 = "Metamorph Ring +1",
         waist = "Acuity Belt +1"
     })
     sets.midcast.MagicBurst = { neck = "Mizukage-no-kubikazari", ring1 = "Jhakri Ring", ring2 = "Mujin Band",
@@ -173,8 +168,9 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = { main = "Grioavolr",
         head = "Befouled Crown", neck = "Incanter's Torque", ear1 = "Andoaa Earring", ear2 = "Mimir Earring",
-        body = "Telchine Chasuble", hands = "Ayao's Gages", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
-        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Shedir Seraweels", feet = gear.EnhancingFeet }
+        body = "Telchine Chasuble", hands = "Ayao's Gages", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
+        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
+        back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Shedir Seraweels", feet = gear.telchine.enh_dur.feet }
 
     sets.midcast.Aquaveil = set_combine(sets.SIRD, {
         head = "Amalric Coif +1",
@@ -193,20 +189,20 @@ function init_gear_sets()
 
     sets.midcast['Enfeebling Magic'] = {
         head = "Befouled Crown", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Dignitary's Earring",
-        ring1 = "Stikini Ring +1", ring2 = "Metamorph Ring +1"
+        ring1 = gear.left_stikini, ring2 = "Metamorph Ring +1"
     }
     sets.midcast['Dispelga'] = set_combine(sets.midcast['Enfeebling Magic'], { main = "Daybreak" })
 
     sets.midcast.Poison = set_combine(sets.midcast['Enfeebling Magic'], {
         neck = "Incanter's Torque",
-        ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        ring1 = gear.left_stikini, ring2 = gear.right_stikini,
         waist = "Casso Sash", legs = "Chironic Hose",
     })
     sets.midcast['Poison II'] = sets.midcast.Poison
 
     sets.midcast['Healing Magic'] = {
         neck = "Incanter's Torque", ear1 = "Beatific Earring", ear2 = "Meili Earring",
-        ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1"
+        ring1 = gear.left_stikini, ring2 = gear.right_stikini
     }
 
     sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
@@ -217,7 +213,8 @@ function init_gear_sets()
 
     sets.midcast.Cure = { main = "Bolelabunga", sub = "Ammurapi Shield",
         head = "Vanya Hood", neck = "Nodens Gorget",
-        body = "Gendewitha Bliault +1", hands = "Telchine Gloves", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        body = "Gendewitha Bliault +1", hands = "Telchine Gloves",
+        ring1 = gear.left_stikini, ring2 = gear.right_stikini,
         back = "Fi Follet Cape +1", legs = "Nares Trews", feet = "Hagondes Sabots" }
 
     sets.midcast.Curaga = sets.midcast.Cure
@@ -233,7 +230,8 @@ function init_gear_sets()
 
     -- Resting sets
     sets.resting = { head = "Nefer Khat +1", neck = "Bathy Choker +1",
-        body = "Gendewitha Bliault +1", hands = "Serpentes Cuffs", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        body = "Gendewitha Bliault +1", hands = "Serpentes Cuffs",
+        ring1 = gear.left_stikini, ring2 = gear.right_stikini,
         waist = "Austerity Belt", legs = "Nares Trews", feet = "Chelona Boots +1" }
 
 
@@ -241,7 +239,7 @@ function init_gear_sets()
 
     sets.idle = { main = "Bolelabunga", sub = "Ammurapi Shield", range = "Nepote Bell",
         head = "Nefer Khat +1", neck = "Loricate Torque +1", ear1 = "Lugalbanda Earring", ear2 = "Etiolation Earring",
-        body = "Jhakri Robe +2", hands = "Serpentes Cuffs", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
+        body = "Jhakri Robe +2", hands = "Serpentes Cuffs", ring1 = gear.left_stikini, ring2 = "Defending Ring",
         back = "Umbra Cape", waist = "Fucho-no-obi", legs = "Nares Trews", feet = "Crier's Gaiters" }
 
     sets.idle.PDT = { main = "Daybreak", sub = "Ammurapi Shield", range = "Nepote Bell",
@@ -252,7 +250,7 @@ function init_gear_sets()
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = { main = "Solstice", sub = "Ammurapi Shield", range = "Nepote Bell",
         head = "Telchine Cap", neck = "Shepherd's Chain", ear1 = "Handler's Earring +1", ear2 = "Etiolation Earring",
-        body = "Telchine Chasuble", hands = "Telchine Gloves", ring1 = "Stikini Ring +1", ring2 = "Defending Ring",
+        body = "Telchine Chasuble", hands = "Telchine Gloves", ring1 = gear.left_stikini, ring2 = "Defending Ring",
         back = "Umbra Cape", waist = "Isa Belt", legs = "Telchine Braconi", feet = "Crier's Gaiters" }
 
     sets.idle.PDT.Pet = { main = "Malignance Pole", sub = "Oneiros Grip", range = "Nepote Bell",

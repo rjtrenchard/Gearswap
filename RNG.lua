@@ -23,6 +23,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
+	include('augments.lua')
 	state.RangedMode:options('Normal', 'Acc')
 	state.WeaponskillMode:options('Normal', 'Acc')
 
@@ -191,6 +192,11 @@ function init_gear_sets()
 
 	sets.buff.Barrage = set_combine(sets.midcast.RA.Acc, { hands = "Orion Bracers +1" })
 	sets.buff.Camouflage = { body = "Orion Jerkin +1" }
+
+	sets.resist = {}
+	sets.resist.death = { main = "Odium",
+		body = "Samnuha Coat", ring1 = "Shadow Ring", ring2 = "Eihwaz Ring"
+	}
 end
 
 -------------------------------------------------------------------------------------------------------------------

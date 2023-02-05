@@ -25,6 +25,7 @@ end
 
 -- Setup vars that are user-dependent.
 function user_setup()
+    include('augments.lua')
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'PDT', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc', 'Mod')
@@ -113,7 +114,7 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ammo = "Ginsen",
+    sets.precast.WS = { ammo = "Coiste Bodhar",
         head = "Flamma Zucchetto +2", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
         body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Apate Ring", ring2 = "Epaminondas's Ring",
         back = "Atheling Mantle", waist = "Fotia Belt", legs = "Hizamaru Hizayoroi", feet = "Flamma Gambieras +2" }
@@ -164,7 +165,7 @@ function init_gear_sets()
 
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
-    sets.idle.Town = { main = "Tsurumaru", sub = "Pole Grip", ammo = "Ginsen",
+    sets.idle.Town = { main = "Tsurumaru", sub = "Pole Grip", ammo = "Coiste Bodhar",
         head = "Yaoyotl Helm", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
         back = "Atheling Mantle", waist = "Flume Belt +1", legs = "Phorcys Dirs", feet = "Danzo Sune-ate" }
@@ -176,7 +177,7 @@ function init_gear_sets()
     }
 
     sets.idle.Weak = {
-        head = "Twilight Helm", neck = "Bathy Choker +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
+        head = "Crepuscular Helm", neck = "Bathy Choker +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Crepuscular Mail", hands = "Buremte Gloves", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
         back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Danzo Sune-ate"
     }
@@ -188,7 +189,7 @@ function init_gear_sets()
         back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1" }
 
     sets.defense.Reraise = {
-        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
+        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Crepuscular Mail", hands = "Buremte Gloves", ring1 = "Defending Ring", ring2 = "Paguroidea Ring",
         back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1"
     }
@@ -200,7 +201,7 @@ function init_gear_sets()
 
     sets.Kiting = { feet = "Danzo Sune-ate" }
 
-    sets.Reraise = { head = "Twilight Helm", body = "Crepuscular Mail" }
+    sets.Reraise = { head = "Crepuscular Helm", body = "Crepuscular Mail" }
 
     -- Engaged sets
 
@@ -211,15 +212,15 @@ function init_gear_sets()
 
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
-    sets.engaged = { ammo = "Ginsen",
-        head = "Flamma Zucchetto +1", neck = "Sanctity Necklace", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
+    sets.engaged = { ammo = "Coiste Bodhar",
+        head = "Flamma Zucchetto +1", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Ilabrat Ring", ring2 = "Niqmaddu Ring",
         back = "Atheling Mantle", waist = "Sailfi Belt +1", legs = "Hizamaru Hizayoroi", feet = "Flamma Gambieras +2" }
-    sets.engaged.Acc = { ammo = "Ginsen",
+    sets.engaged.Acc = { ammo = "Coiste Bodhar",
         head = "Yaoyotl Helm", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Gorney Haubert +1", hands = "Otronif Gloves", ring1 = "Ilabrat Ring", ring2 = "Niqmaddu Ring",
         back = "Letalis Mantle", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
-    sets.engaged.PDT = { ammo = "Ginsen",
+    sets.engaged.PDT = { ammo = "Coiste Bodhar",
         head = "Yaoyotl Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = "K'ayres Ring",
         back = "Iximulew Cape", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
@@ -227,26 +228,26 @@ function init_gear_sets()
         head = "Yaoyotl Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = "K'ayres Ring",
         back = "Letalis Mantle", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
-    sets.engaged.Reraise = { ammo = "Ginsen",
-        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = " Earring", ear2 = "Crepuscular Earring",
+    sets.engaged.Reraise = { ammo = "Coiste Bodhar",
+        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = " Earring", ear2 = "Crepuscular Earring",
         body = "Crepuscular Mail", hands = "Otronif Gloves", ring1 = "Beeline Ring", ring2 = "K'ayres Ring",
         back = "Ik Cape", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
-    sets.engaged.Acc.Reraise = { ammo = "Ginsen",
-        head = "Twilight Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
+    sets.engaged.Acc.Reraise = { ammo = "Coiste Bodhar",
+        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
         body = "Crepuscular Mail", hands = "Otronif Gloves", ring1 = "Beeline Ring", ring2 = "K'ayres Ring",
         back = "Letalis Mantle", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
 
     -- Melee sets for in Adoulin, which has an extra 10 Save TP for weaponskills.
     -- Delay 450 GK, 35 Save TP => 89 Store TP for a 4-hit (49 Store TP in gear), 2 Store TP for a 5-hit
-    --    sets.engaged.Adoulin = {ammo="Ginsen",
+    --    sets.engaged.Adoulin = {ammo="Coiste Bodhar",
     --        head="Yaoyotl Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Crepuscular Earring",
     --        body="Gorney Haubert +1",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
     --        back="Takaha Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}]
-    --    sets.engaged.Adoulin.Acc = {ammo="Ginsen",
+    --    sets.engaged.Adoulin.Acc = {ammo="Coiste Bodhar",
     --        head="Yaoyotl Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Crepuscular Earring",
     --        body="Unkai Domaru +2",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
     --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
-    --    sets.engaged.Adoulin.PDT = {ammo="Ginsen",
+    --    sets.engaged.Adoulin.PDT = {ammo="Coiste Bodhar",
     --        head="Yaoyotl Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
     --        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
     --        back="Iximulew Cape",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
@@ -254,12 +255,12 @@ function init_gear_sets()
     --        head="Yaoyotl Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
     --        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
     --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
-    --    sets.engaged.Adoulin.Reraise = {ammo="Ginsen",
-    --        head="Twilight Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
+    --    sets.engaged.Adoulin.Reraise = {ammo="Coiste Bodhar",
+    --        head="Crepuscular Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
     --        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
     --        back="Ik Cape",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
-    --    sets.engaged.Adoulin.Acc.Reraise = {ammo="Ginsen",
-    --        head="Twilight Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
+    --    sets.engaged.Adoulin.Acc.Reraise = {ammo="Coiste Bodhar",
+    --        head="Crepuscular Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
     --        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
     --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
 

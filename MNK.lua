@@ -27,6 +27,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
+    include('augments.lua')
     state.OffenseMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'SomeAcc', 'Acc', 'Fodder')
     state.HybridMode:options('Normal', 'PDT', 'Counter')
@@ -46,6 +47,11 @@ function init_gear_sets()
 
     gear.fc_head = { name = "Herculean Helm", augments = { 'Mag. Acc.+18', '"Fast Cast"+6', 'MND+8', } }
 
+    sets.resist = {}
+    sets.resist.death = {
+        body = "Samnuha Coat", ring1 = "Shadow Ring", ring2 = "Eihwaz Ring"
+    }
+
     -- Precast Sets
 
     -- Precast sets to enhance JAs on use
@@ -61,7 +67,8 @@ function init_gear_sets()
     sets.precast.JA['Chi Blast'] = {
         head = "Melee Crown +2",
         body = "Otronif Harness +1", hands = "Hesychast's Gloves +1",
-        back = "Tuilha Cape", legs = "Hesychast's Hose +1", feet = "Anchorite's Gaiters +1" }
+        back = "Tuilha Cape", legs = "Hesychast's Hose +1", feet = "Anchorite's Gaiters +1"
+    }
 
     sets.precast.JA['Chakra'] = { ammo = "Staunch Tathlum +1",
         head = "Felistris Mask",
@@ -95,19 +102,19 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = { ammo = "Knobkierrie",
-        head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
-        body = "Malignance Tabard", hands = "Adhemar Wristbands +1", ring2 = "Epaminondas's Ring", ring1 = "Regal Ring",
-        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Samnuha Tights", feet = "Malignance Boots" }
+        head = "Mpaca's Cap", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
+        body = "Mpaca's Doublet", hands = "Mpaca's Gloves", ring2 = "Epaminondas's Ring", ring1 = "Regal Ring",
+        back = "Sacro Mantle", waist = "Fotia Belt", legs = "Mpaca's Hose", feet = "Mpaca's Boots" }
     sets.precast.WSAcc = { ammo = "Knobkierrie",
-        head = "Malignance Chapeau", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring2 = "Epaminondas's Ring", ring1 = "Regal Ring",
-        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Malignance Tights", feet = "Malignance Boots" }
+        head = "Mpaca's Cap", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Moonshade Earring",
+        body = "Mpaca's Doublet", hands = "Mpaca's Gloves", ring2 = "Epaminondas's Ring", ring1 = "Regal Ring",
+        back = "Sacro Mantle", waist = "Fotia Belt", legs = "Mpaca's Hose", feet = "Mpaca's Boots" }
     sets.precast.WSMod = { ammo = "Knobkierrie", head = "Felistris Mask", legs = "Hesychast's Hose +1",
         feet = "Daihanshi Habaki" }
     sets.precast.WSCrit = { ammo = "Knobkierrie",
-        head = "Adhemar Bonnet +1", neck = "Fotia Gorget", ear1 = "Odr Earring", ear2 = "Moonshade Earring",
-        body = "Mummu Jacket +1", hands = "Mummu Wrists +2", ring2 = "Begrudging Ring", ring1 = "Regal Ring",
-        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Mummu Kecks +1", feet = "Mummu Gamashes +1" }
+        head = "Mpaca's Cap", neck = "Fotia Gorget", ear1 = "Odr Earring", ear2 = "Moonshade Earring",
+        body = "Mpaca's Doublet", hands = "Mpaca's Gloves", ring2 = "Begrudging Ring", ring1 = "Regal Ring",
+        back = "Sacro Mantle", waist = "Fotia Belt", legs = "Mpaca's Hose", feet = "Mpaca's Boots" }
     sets.precast.MaxTP = { ear1 = "Brutal Earring", ear2 = "Crepuscular Earring" }
     sets.precast.WS.Acc = set_combine(sets.precast.WS, sets.precast.WSAcc)
     sets.precast.WS.Mod = set_combine(sets.precast.WS, sets.precast.WSMod)
@@ -149,9 +156,10 @@ function init_gear_sets()
 
 
     sets.precast.WS['Cataclysm'] = {
-        head = "Herculean Helm", neck = "Sanctity Necklace", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
+        head = "Herculean Helm", neck = "Combatant's Torque", ear1 = "Friomisi Earring", ear2 = "Hecate's Earring",
         body = "Malignance Tabard", hands = "Herculean Gloves", ring1 = "Metamorph Ring +1", ring2 = "Demon's Ring",
-        back = "Toro Cape", waist = "Eschan Stone", legs = "Herculean Trousers", feet = "Herculean Boots" }
+        back = "Toro Cape", waist = "Eschan Stone", legs = "Herculean Trousers", feet = "Herculean Boots"
+    }
 
 
     -- Midcast Sets
@@ -167,42 +175,45 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
 
     -- Resting sets
-    sets.resting = { head = "Ocelomeh Headpiece +1", neck = "Sanctity Necklace",
+    sets.resting = { head = "Ocelomeh Headpiece +1", neck = "Combatant's Torque",
         body = "Hesychast's Cyclas", ring1 = "Sheltered Ring", ring2 = "Defending Ring" }
 
 
     -- Idle sets
-    sets.idle = { ammo = "Ginsen",
-        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
+    sets.idle = { ammo = "Staunch Tathlum +1",
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Gelatinous Ring +1", ring2 = "Defending Ring",
+        back = "Iximulew Cape", waist = "Black Belt", legs = "Nyame Flanchard", feet = "Hermes' Sandals" }
+
+    sets.idle.Town = { ammo = "Staunch Tathlum +1",
+        head = "Shaded Specatles", neck = "Smithy's Torque", ear1 = "Eabani Earring", ear2 = "Odnowa Earring +1",
+        body = "Blacksmith's Smock", hands = "Smithy's Mitts", ring1 = "Confectioner's Ring",
+        ring2 = "Craftmaster's Ring",
         back = "Iximulew Cape", waist = "Black Belt", legs = "Malignance Tights", feet = "Hermes' Sandals" }
 
-    sets.idle.Town = { ammo = "Ginsen",
-        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
-        back = "Iximulew Cape", waist = "Black Belt", legs = "Malignance Tights", feet = "Hermes' Sandals" }
-
-    sets.idle.Weak = { ammo = "Ginsen",
-        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
+    sets.idle.Weak = { ammo = "Coiste Bodhar",
+        head = "Malignance Chapeau", neck = "Combatant's Torque", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
         body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
         back = "Iximulew Cape", waist = "Black Belt", legs = "Malignance Tights", feet = "Hermes' Sandals" }
 
     -- Defense sets
-    sets.defense.PDT = { head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Brutal Earring",
+    sets.defense.PDT = {
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring",
         ear2 = "Crepuscular Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring", ring2 = "Epona's Ring",
-        back = "Atheling Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = "Epona's Ring",
+        back = "Sacro Mantle", waist = "Hurch'lan sash", legs = "Nyame Flanchard", feet = "Nyame Sollerets"
+    }
 
     sets.defense.HP = { ammo = "Staunch Tathlum +1",
-        head = "Uk'uxkaj Cap", neck = "Lavalier +1", ear1 = "Brutal Earring", ear2 = "Bloodgem Earring",
-        body = "Hesychast's Cyclas", hands = "Hesychast's Gloves +1", ring1 = "K'ayres Ring", ring2 = "Meridian Ring",
-        back = "Shadow Mantle", waist = "Black Belt", legs = "Hesychast's Hose +1", feet = "Hesychast's Gaiters +1" }
+        head = "Nyame Helm", neck = "Unmoving Collar +1", ear1 = "Eabani Earring", ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Gelatinous Ring +1", ring2 = "Moonlight Ring",
+        back = "Shadow Mantle", waist = "Black Belt", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
     sets.defense.MDT = set_combine(sets.defense.PDT, { ear1 = "Eabani Earring", ring2 = "Archon Ring" })
 
     sets.Kiting = { feet = "Hermes' Sandals" }
 
-    sets.ExtraRegen = { head = "Ocelomeh Headpiece +1" }
+    sets.ExtraRegen = {}
 
     -- Engaged sets
 
@@ -212,20 +223,20 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     -- Normal melee sets
-    sets.engaged = { ammo = "Ginsen",
-        head = "Adhemar Bonnet +1", neck = "Anu Torque", ear1 = "Sherida Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Adhemar Wristbands +1", ring1 = "Niqmaddu Ring", ring2 = "Epona's Ring",
-        back = "Atheling Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
-    sets.engaged.Acc = { ammo = "Honed Tathlum",
-        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Telos Earring", ear2 = "Crepuscular Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Ilabrat Ring", ring2 = "Epona's Ring",
-        back = "Atheling Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.engaged = { ammo = "Coiste Bodhar",
+        head = "Adhemar Bonnet +1", neck = "Anu Torque", ear1 = "Sherida Earring", ear2 = "Schere Earring",
+        body = "Tatenashi Haramaki +1", hands = "Tatenashi Gote +1", ring1 = "Niqmaddu Ring", ring2 = "Gere Ring",
+        back = "Sacro Mantle", waist = "Hurch'lan sash", legs = "Tatenashi Haidate +1", feet = "Tatenashi Sune-ate +1" }
+    sets.engaged.Acc = { ammo = "Voluspa Tathlum",
+        head = "Malignance Chapeau", neck = "Combatant's Torque", ear1 = "Sherida Earring", ear2 = "Telos Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Niqmaddu Ring", ring2 = "Gere Ring",
+        back = "Sacro Mantle", waist = "Hurch'lan sash", legs = "Tatenashi Haidate +1", feet = "Tatenashi Sune-ate +1" }
 
     -- Defensive melee hybrid sets
-    sets.engaged.PDT = { ammo = "Ginsen",
-        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Sherida Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring", ring2 = "Epona's Ring",
-        back = "Atheling Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.engaged.PDT = { ammo = "Staunch Tathlum +1",
+        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Sherida Earring", ear2 = "Schere Earring",
+        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring", ring2 = "Gere Ring",
+        back = "Sacro Mantle", waist = "Hurch'lan sash", legs = "Malignance Tights", feet = "Malignance Boots" }
 
     sets.engaged.Acc.PDT = set_combine(sets.engaged.PDT, {})
 

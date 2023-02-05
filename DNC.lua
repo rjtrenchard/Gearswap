@@ -58,6 +58,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
+    include('augments.lua')
     state.OffenseMode:options('Normal', 'Acc', 'Fodder')
     state.HybridMode:options('Normal', 'Evasion', 'PDT')
     state.WeaponskillMode:options('Normal', 'Acc', 'Fodder')
@@ -98,6 +99,11 @@ function init_gear_sets()
     gear.fc_head = { name = "Herculean Helm", augments = { 'Mag. Acc.+18', '"Fast Cast"+6', 'MND+8', } }
 
 
+    sets.resist = {}
+    sets.resist.death = { main = "Odium",
+        body = "Samnuha Coat", ring1 = "Shadow Ring", ring2 = "Eihwaz Ring"
+    }
+
     -- Precast Sets
 
     -- Precast sets to enhance JAs
@@ -125,10 +131,10 @@ function init_gear_sets()
 
     sets.precast.Flourish1 = {}
     sets.precast.Flourish1['Violent Flourish'] = { ear1 = "Dignitary's Earring", ear2 = "Crepuscular Earring",
-        body = "Horos Casaque", hands = "Buremte Gloves", ring2 = "Stikini Ring +1",
+        body = "Horos Casaque", hands = "Buremte Gloves", ring2 = gear.right_stikini,
         waist = "Chaac Belt", legs = "Iuitl Tights", feet = "Malignance Boots" } -- magic accuracy
     sets.precast.Flourish1['Desperate Flourish'] = { ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1", neck = "Ej Necklace",
+        head = "Adhemar Bonnet +1", neck = "Bathy Choker +1",
         body = "Horos Casaque", hands = "Buremte Gloves", ring1 = "Beeline Ring",
         back = "Toetapper Mantle", waist = "Sailfi Belt +1", legs = "Kaabnax Trousers", feet = "Malignance Boots" } -- acc gear
 
@@ -208,7 +214,7 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
 
     -- Resting sets
-    sets.resting = { head = "Ocelomeh Headpiece +1", neck = "Sanctity Necklace",
+    sets.resting = { head = "Ocelomeh Headpiece +1", neck = "Combatant's Torque",
         ring1 = "Sheltered Ring", ring2 = "Defending Ring" }
     sets.ExtraRegen = { head = "Ocelomeh Headpiece +1" }
 
@@ -216,24 +222,24 @@ function init_gear_sets()
     -- Idle sets
 
     sets.idle = { ammo = "Staunch Tathlum +1",
-        head = "Adhemar Bonnet +1", neck = "Sanctity Necklace", ear1 = "Telos Earring", ear2 = "Brutal Earring",
+        head = "Adhemar Bonnet +1", neck = "Combatant's Torque", ear1 = "Telos Earring", ear2 = "Brutal Earring",
         body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
         back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Skadi's Jambeaux +1" }
 
-    sets.idle.Town = { main = "Izhiikoh", sub = "Sabebus", ammo = "Ginsen",
+    sets.idle.Town = { main = "Izhiikoh", sub = "Sabebus", ammo = "Coiste Bodhar",
         head = "Malignance Chapeau", neck = "Anu Torque", ear1 = "Telos Earring", ear2 = "Brutal Earring",
         body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
         back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Malignance Tights", feet = "Skadi's Jambeaux +1" }
 
     sets.idle.Weak = { ammo = "Staunch Tathlum +1",
-        head = "Malignance Chapeau", neck = "Sanctity Necklace", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
+        head = "Malignance Chapeau", neck = "Combatant's Torque", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
         body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
         back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
 
     -- Defense sets
 
     sets.defense.Evasion = {
-        head = "Malignance Chapeau", neck = "Ej Necklace", ear1 = "Eabani Earring",
+        head = "Malignance Chapeau", neck = "Bathy Choker +1", ear1 = "Eabani Earring",
         body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Beeline Ring", ring2 = gear.DarkRing.physical,
         back = "Toetapper Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots"
     }
@@ -275,7 +281,7 @@ function init_gear_sets()
         body = "Charis Casaque +2", hands = "Adhemar Wristbands +1", ring1 = "Rajas Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
     sets.engaged.Evasion = { ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1", neck = "Ej Necklace", ear1 = "Telos Earring", ear2 = "Brutal Earring",
+        head = "Adhemar Bonnet +1", neck = "Bathy Choker +1", ear1 = "Telos Earring", ear2 = "Brutal Earring",
         body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Beeline Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Reiki Yotai", legs = "Kaabnax Trousers", feet = "Malignance Boots" }
     sets.engaged.PDT = { ammo = "Charis Feather",
@@ -283,7 +289,7 @@ function init_gear_sets()
         body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Patricius Ring", ring2 = "Epona's Ring",
         back = "Shadow Mantle", waist = "Reiki Yotai", legs = "Malignance Tights", feet = "Malignance Boots" }
     sets.engaged.Acc.Evasion = { ammo = "Yamarang",
-        head = "Adhemar Bonnet +1", neck = "Ej Necklace", ear1 = "Telos Earring", ear2 = "Brutal Earring",
+        head = "Adhemar Bonnet +1", neck = "Bathy Choker +1", ear1 = "Telos Earring", ear2 = "Brutal Earring",
         body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Beeline Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
     sets.engaged.Acc.PDT = { ammo = "Yamarang",
@@ -311,11 +317,11 @@ function init_gear_sets()
         body = "Iuitl Vest", hands = "Adhemar Wristbands +1", ring1 = "Rajas Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
     sets.engaged.Evasion.HighHaste = { ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1", neck = "Ej Necklace", ear1 = "Telos Earring", ear2 = "Brutal Earring",
+        head = "Adhemar Bonnet +1", neck = "Bathy Choker +1", ear1 = "Telos Earring", ear2 = "Brutal Earring",
         body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Beeline Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Reiki Yotai", legs = "Kaabnax Trousers", feet = "Malignance Boots" }
     sets.engaged.Acc.Evasion.HighHaste = { ammo = "Yamarang",
-        head = "Malignance Chapeau", neck = "Ej Necklace", ear1 = "Telos Earring", ear2 = "Brutal Earring",
+        head = "Malignance Chapeau", neck = "Bathy Choker +1", ear1 = "Telos Earring", ear2 = "Brutal Earring",
         body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Beeline Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
     sets.engaged.PDT.HighHaste = { ammo = "Charis Feather",
@@ -349,11 +355,11 @@ function init_gear_sets()
         body = "Iuitl Vest", hands = "Adhemar Wristbands +1", ring1 = "Rajas Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Sailfi Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
     sets.engaged.Evasion.MaxHaste = { ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1", neck = "Ej Necklace", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        head = "Adhemar Bonnet +1", neck = "Bathy Choker +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
         body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Beeline Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Windbuffet Belt", legs = "Kaabnax Trousers", feet = "Malignance Boots" }
     sets.engaged.Acc.Evasion.MaxHaste = { ammo = "Yamarang",
-        head = "Adhemar Bonnet +1", neck = "Ej Necklace", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
+        head = "Adhemar Bonnet +1", neck = "Bathy Choker +1", ear1 = "Bladeborn Earring", ear2 = "Steelflash Earring",
         body = "Gleti's Cuirass", hands = "Adhemar Wristbands +1", ring1 = "Beeline Ring", ring2 = "Epona's Ring",
         back = "Toetapper Mantle", waist = "Sailfi Belt +1", legs = "Kaabnax Trousers", feet = "Malignance Boots" }
     sets.engaged.PDT.MaxHaste = { ammo = "Charis Feather",

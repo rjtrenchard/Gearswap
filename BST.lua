@@ -70,6 +70,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function user_setup()
+    include('augments.lua')
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'PDT')
     state.WeaponskillMode:options('Normal', 'Acc')
@@ -122,15 +123,40 @@ end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
+
+
+
     --------------------------------------
-    -- Precast sets
+    -- Custom buff sets
     --------------------------------------
+
+    sets.buff['Killer Instinct'] = { head = "Ankusa Helm +1", body = "Nukumi Gausape", legs = "Totemic Trousers +1" }
 
     sets.enmity = { ammo = "Sapience Orb",
         head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
         body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
         waist = "Trance Belt", legs = "Zoar Subligar +1"
     }
+
+    sets.resist = {}
+    sets.resist.death = { main = "Odium",
+        ring1 = "Shadow Ring", ring2 = "Eihwaz Ring"
+    }
+
+    sets.buff.doom = set_combine(sets.defense.PDT, {
+        neck = "Nicander's Necklace",
+        ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
+        waist = "Gishdubar Sash"
+    })
+
+    sets.buff.doom.HolyWater = set_combine(sets.buff.doom, {
+        neck = "Nicander's Necklace",
+        ring1 = "Blenmot's Ring +1", ring2 = "Blenmot's Ring +1"
+    })
+
+    --------------------------------------
+    -- Precast sets
+    --------------------------------------
 
     sets.precast.JA['Killer Instinct'] = { head = "Ankusa Helm +1" }
     sets.precast.JA['Feral Howl'] = { body = "Ankusa Jackcoat +1" }
@@ -146,8 +172,8 @@ function init_gear_sets()
         back = "Artio's Mantle", waist = "Crudelis Belt", legs = "Ankusa Trousers +1", feet = "Ankusa Gaiters +1" }
 
     sets.precast.JA['Charm'] = { ammo = "Voluspa Tathlum",
-        head = "Totemic Helm +1", neck = "Sanctity Necklace", ear1 = "Dignitary's Earring", ear2 = "Handler's Earring +1",
-        body = "Ankusa Jackcoat +1", hands = "Ankusa Gloves +1", ring1 = "Balrahn's Ring", ring2 = "Stikini Ring +1",
+        head = "Totemic Helm +1", neck = "fixme", ear1 = "Dignitary's Earring", ear2 = "Handler's Earring +1",
+        body = "Ankusa Jackcoat +1", hands = "Ankusa Gloves +1", ring1 = "Balrahn's Ring", ring2 = gear.right_stikini,
         back = "Aisance Mantle +1", waist = "Eschan Stone", legs = "Ankusa Trousers +1", feet = "Ankusa Gaiters +1" }
 
     -- CURING WALTZ
@@ -161,7 +187,7 @@ function init_gear_sets()
 
     -- STEPS
     sets.precast.Step = { ammo = "Jukukik Feather",
-        head = "", neck = "Sanctity Necklace", ear1 = "Zwazo Earring", ear2 = "Crepuscular Earring",
+        head = "", neck = "Combatant's Torque", ear1 = "Zwazo Earring", ear2 = "Crepuscular Earring",
         body = "Mikinaak Breastplate", hands = "Malignance Gloves", ring1 = "Ilabrat Ring", ring2 = "Apate Ring",
         back = "Letalis Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots" }
 
@@ -195,7 +221,7 @@ function init_gear_sets()
 
     sets.precast.WS.MultiHit = { ammo = "Voluspa Tathlum",
         head = "Gleti's Mask", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Lugra Earring +1",
-        body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Epona's Ring", ring2 = "Regal Ring",
+        body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Gere Ring", ring2 = "Epona's Ring",
         back = "Atheling Mantle", waist = "Fotia Belt", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
 
     -- Specific weaponskill sets.
@@ -226,9 +252,9 @@ function init_gear_sets()
     sets.precast.WS['Decimation'].Acc = set_combine(sets.precast.WS.MultiHit, {})
 
     sets.precast.WS['Primal Rend'] = { ammo = "Pemphredo Tathlum",
-        head = "Ankusa Helm +1", neck = "Sanctity Necklace", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
-        body = "Sacro Breastplate", hands = "Meghanada gloves +2", ring1 = "Regal Ring", ring2 = "Epaminondas's Ring",
-        back = "Argocham. Mantle", waist = gear.ElementalObi, legs = "Limbo Trousers", feet = "Malignance Boots" }
+        head = "Nyame Helm", neck = "Baetyl Pendant", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
+        body = "Nyame Mail", hands = "Meghanada gloves +2", ring1 = "Regal Ring", ring2 = "Epaminondas's Ring",
+        back = "Argocham. Mantle", waist = gear.ElementalObi, legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
     sets.precast.WS['Cloudsplitter'] = set_combine(sets.precast.WS['Primal Rend'], {})
 
@@ -282,22 +308,24 @@ function init_gear_sets()
 
     -- RESTING
     sets.resting = { ammo = "Voluspa Tathlum",
-        head = "Twilight Helm", neck = "Sanctity Necklace", ear1 = "Domesticator's Earring", ear2 = "Enmerkar Earring",
+        head = "Crepuscular Helm", neck = "Combatant's Torque", ear1 = "Domesticator's Earring",
+        ear2 = "Enmerkar Earring",
         body = "Crepuscular Mail", hands = "Totemic Gloves +1", ring1 = "Defending Ring", ring2 = "Sheltered Ring",
         back = "Pastoralist's Mantle", waist = "Muscle Belt +1", legs = "Nukumi Quijotes", feet = "Skadi's Jambeaux +1" }
 
     -- IDLE SETS
     sets.idle = { ammo = "Voluspa Tathlum",
-        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring", ring2 = "Sheltered Ring",
-        back = "Pastoralist's Mantle", waist = "Muscle Belt +1", legs = "Malignance Tights", feet = "Skadi's Jambeaux +1" }
+        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = "Sheltered Ring",
+        back = "Pastoralist's Mantle", waist = "Loricaate Torque +1", legs = "Nyame Flanchard",
+        feet = "Skadi's Jambeaux +1" }
 
     sets.idle.Town = sets.idle
 
     sets.idle.Refresh = { head = "Wivre Hairpin", body = "Crepuscular Mail", hands = "Ogier's Gauntlets",
         legs = "Ogier's Breeches" }
 
-    sets.idle.Reraise = set_combine(sets.idle, { head = "Twilight Helm", body = "Crepuscular Mail" })
+    sets.idle.Reraise = set_combine(sets.idle, { head = "Crepuscular Helm", body = "Crepuscular Mail" })
 
     sets.idle.Pet = set_combine(sets.idle, { ear2 = "Enmerkar Earring" })
 
@@ -313,7 +341,7 @@ function init_gear_sets()
     })
 
     -- DEFENSE SETS
-    sets.defense.PDT = { ammo = "Ginsen",
+    sets.defense.PDT = { ammo = "Coiste Bodhar",
         head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
         body = "Malignance Tabard", hands = "Malignance Gloves", ring2 = "Epona's Ring", ring1 = "Defending Ring",
         back = "Mollusca Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
@@ -334,9 +362,9 @@ function init_gear_sets()
     -- Engaged sets
     --------------------------------------
 
-    sets.engaged = { ammo = "Ginsen",
+    sets.engaged = { ammo = "Coiste Bodhar",
         head = "Gleti's Mask", neck = "Shulmanu Collar", ear1 = "Sherida Earring", ear2 = "Telos Earring",
-        body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Epona's Ring", ring2 = "Moonlight Ring",
+        body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Epona's Ring", ring2 = "Gere Ring",
         back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
 
     sets.engaged.Acc = { ammo = "Voluspa Tathlum",
@@ -392,11 +420,6 @@ function init_gear_sets()
     sets.engaged.PetTank.Killer.Acc = set_combine(sets.engaged, {})
 
     --sets.engaged.DW.PetStance = sets.engaged
-    --------------------------------------
-    -- Custom buff sets
-    --------------------------------------
-
-    sets.buff['Killer Instinct'] = { head = "Ankusa Helm +1", body = "Nukumi Gausape", legs = "Totemic Trousers +1" }
 
 end
 

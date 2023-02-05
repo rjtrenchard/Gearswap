@@ -21,6 +21,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
+    include('augments.lua')
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant', 'Low')
     state.IdleMode:options('Normal', 'PDT')
@@ -54,11 +55,6 @@ function init_gear_sets()
     -- Start defining the sets
     --------------------------------------
 
-    gear.fc_head = { name = "Merlinic Hood", augments = { '"Mag.Atk.Bns."+26', '"Fast Cast"+7', 'Mag. Acc.+11', } }
-    gear.fc_body = { name = "Merlinic Jubbah", augments = { 'Mag. Acc.+1', '"Fast Cast"+7', } }
-    gear.fc_feet = { name = "Merlinic Crackows", augments = { '"Mag.Atk.Bns."+1', '"Fast Cast"+7', 'MND+3',
-        'Mag. Acc.+14', } }
-    gear.fc_hands = { name = "Merlinic Dastanas", augments = { '"Fast Cast"+7', 'CHR+10', '"Mag.Atk.Bns."+6', } }
 
     ---- Precast Sets ----
 
@@ -73,10 +69,12 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     -- FC 80, QC 10
-    sets.precast.FC = { main = "Grioavolr", ammo = "Sapience Orb",
-        head = gear.fc_head, neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = gear.fc_body, hands = gear.fc_hands, ring1 = "Lebeche Ring", ring2 = "Weatherspoon Ring +1",
-        back = "Perimede Cape", waist = "Embla Sash", legs = "Lengo Pants", feet = gear.fc_feet }
+    sets.precast.FC = { main = gear.grioavolr.fc, ammo = "Impatiens",
+        head = gear.merlinic.fc.head, neck = "Orunmila's Torque", ear1 = "Malignance Earring",
+        ear2 = "Loquacious Earring",
+        body = gear.merlinic.fc.body, hands = gear.merlinic.fc.hands, ring1 = "Lebeche Ring",
+        ring2 = "Weatherspoon Ring +1",
+        back = "Perimede Cape", waist = "Embla Sash", legs = "Lengo Pants", feet = gear.merlinic.fc.feet }
 
     sets.precast.FC.Impact = set_combine(sets.precast.FC, { head = empty, body = "Crepuscular Cloak" })
 
@@ -118,7 +116,8 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = {
         head = "Befouled Crown", neck = "Incanter's Torque", ear1 = "Andoaa Earring", ear2 = "Mimir Earring",
-        body = "Anhur Robe", hands = "Ayao's Gages", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        body = "Anhur Robe", hands = "Ayao's Gages", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
+        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
         back = "Fi Follet Cape +1", waist = "Embla Sash", legs = "Shedir Seraweels", feet = "Telchine Pigaches"
     }
 
@@ -129,7 +128,7 @@ function init_gear_sets()
 
     sets.midcast['Enfeebling Magic'] = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Pemphredo Tathlum",
         head = "Befouled Crown", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Regal Earring",
-        body = "Manasa Chasuble", ring1 = "Metamorph Ring +1", ring2 = "Stikini Ring +1",
+        body = "Manasa Chasuble", ring1 = "Metamorph Ring +1", ring2 = gear.right_stikini,
         back = "Refraction Cape", waist = "Luminary Sash", legs = "Bokwus Slops", feet = "Bokwus Boots" }
 
     sets.midcast.ElementalEnfeeble = sets.midcast['Enfeebling Magic']
@@ -186,7 +185,8 @@ function init_gear_sets()
     -- Resting sets
     sets.resting = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Clarus Stone",
         head = "Befouled Crown", neck = "Bathy Choker +1",
-        body = "Heka's Kalasiris", hands = "Serpentes Cuffs", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        body = "Heka's Kalasiris", hands = "Serpentes Cuffs", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
+        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
         waist = "Austerity Belt", legs = "Nares Trews", feet = "Serpentes Sabots" }
 
 
@@ -195,7 +195,8 @@ function init_gear_sets()
     -- Normal refresh idle set
     sets.idle = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Staunch Tathlum +1",
         head = "Nefer Khat +1", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Heka's Kalasiris", hands = "Serpentes Cuffs", ring1 = "Stikini Ring +1", ring2 = "Stikini Ring +1",
+        body = "Heka's Kalasiris", hands = "Serpentes Cuffs", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
+        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
         back = "Umbra Cape", waist = "Hierarch Belt", legs = "Nares Trews", feet = "Crier's Gaiters" }
 
     -- Idle mode that keeps PDT gear on, but doesn't prevent normal gear swaps for precast/etc.
