@@ -6,19 +6,19 @@
 
 --[[
     Custom commands:
-    
+
     gs c petweather
         Automatically casts the storm appropriate for the current avatar, if possible.
-    
+
     gs c siphon
         Automatically run the process to: dismiss the current avatar; cast appropriate
         weather; summon the appropriate spirit; Elemental Siphon; release the spirit;
         and re-summon the avatar.
-        
+
         Will not cast weather you do not have access to.
         Will not re-summon the avatar if one was not out in the first place.
         Will not release the spirit if it was out before the command was issued.
-        
+
     gs c pact [PactType]
         Attempts to use the indicated pact type for the current avatar.
         PactType can be one of:
@@ -37,8 +37,6 @@
             astralflow
 
 --]]
-
-
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
@@ -56,72 +54,148 @@ function job_setup()
     state.Buff["Mana Cede"] = buffactive["Mana Cede"] or false
 
     spirits = S { "LightSpirit", "DarkSpirit", "FireSpirit", "EarthSpirit", "WaterSpirit", "AirSpirit", "IceSpirit",
-        "ThunderSpirit" }
+            "ThunderSpirit" }
     avatars = S { "Carbuncle", "Fenrir", "Diabolos", "Ifrit", "Titan", "Leviathan", "Garuda", "Shiva", "Ramuh", "Odin",
-        "Alexander", "Cait Sith", "Siren" }
+            "Alexander", "Cait Sith", "Siren" }
 
     magicalRagePacts = S {
-        'Inferno', 'Earthen Fury', 'Tidal Wave', 'Aerial Blast', 'Diamond Dust', 'Judgment Bolt', 'Searing Light',
-        'Howling Moon', 'Ruinous Omen',
-        'Fire II', 'Stone II', 'Water II', 'Aero II', 'Blizzard II', 'Thunder II',
-        'Fire IV', 'Stone IV', 'Water IV', 'Aero IV', 'Blizzard IV', 'Thunder IV',
-        'Thunderspark', 'Meteorite', 'Nether Blast',
-        'Meteor Strike', 'Heavenly Strike', 'Wind Blade', 'Geocrush', 'Grand Fall', 'Thunderstorm',
-        'Holy Mist', 'Lunar Bay', 'Night Terror', 'Level ? Holy', 'Tornado II', 'Sonic Buffet'
-    }
+            'Inferno', 'Earthen Fury', 'Tidal Wave', 'Aerial Blast', 'Diamond Dust', 'Judgment Bolt', 'Searing Light',
+            'Howling Moon', 'Ruinous Omen',
+            'Fire II', 'Stone II', 'Water II', 'Aero II', 'Blizzard II', 'Thunder II',
+            'Fire IV', 'Stone IV', 'Water IV', 'Aero IV', 'Blizzard IV', 'Thunder IV',
+            'Thunderspark', 'Meteorite', 'Nether Blast',
+            'Meteor Strike', 'Heavenly Strike', 'Wind Blade', 'Geocrush', 'Grand Fall', 'Thunderstorm',
+            'Holy Mist', 'Lunar Bay', 'Night Terror', 'Level ? Holy', 'Tornado II', 'Sonic Buffet'
+        }
 
     hybridRagePacts = S {
-        'Burning Strike', 'Flaming Crush',
-    }
+            'Burning Strike', 'Flaming Crush',
+        }
 
 
     pacts = {}
     pacts.cure = { ['Carbuncle'] = 'Healing Ruby' }
-    pacts.curaga = { ['Carbuncle'] = 'Healing Ruby II', ['Garuda'] = 'Whispering Wind', ['Leviathan'] = 'Spring Water' }
-    pacts.buffoffense = { ['Carbuncle'] = 'Glittering Ruby', ['Ifrit'] = 'Crimson Howl', ['Garuda'] = 'Hastega',
+    pacts.curaga = { ['Carbuncle'] = 'Healing Ruby II',['Garuda'] = 'Whispering Wind',['Leviathan'] = 'Spring Water' }
+    pacts.buffoffense = {
+        ['Carbuncle'] = 'Glittering Ruby',
+        ['Ifrit'] = 'Crimson Howl',
+        ['Garuda'] = 'Hastega',
         ['Ramuh'] = 'Rolling Thunder',
-        ['Fenrir'] = 'Ecliptic Growl', ['Siren'] = 'Katabatic Blades' }
-    pacts.buffdefense = { ['Carbuncle'] = 'Shining Ruby', ['Shiva'] = 'Frost Armor', ['Garuda'] = 'Aerial Armor',
+        ['Fenrir'] = 'Ecliptic Growl',
+        ['Siren'] = 'Katabatic Blades'
+    }
+    pacts.buffdefense = {
+        ['Carbuncle'] = 'Shining Ruby',
+        ['Shiva'] = 'Frost Armor',
+        ['Garuda'] = 'Aerial Armor',
         ['Titan'] = 'Earthen Ward',
-        ['Ramuh'] = 'Lightning Armor', ['Fenrir'] = 'Ecliptic Howl', ['Diabolos'] = 'Noctoshield',
-        ['Cait Sith'] = 'Reraise II', ['Siren'] = 'Chinook' }
-    pacts.buffspecial = { ['Ifrit'] = 'Inferno Howl', ['Garuda'] = 'Fleet Wind', ['Titan'] = 'Earthen Armor',
+        ['Ramuh'] = 'Lightning Armor',
+        ['Fenrir'] = 'Ecliptic Howl',
+        ['Diabolos'] = 'Noctoshield',
+        ['Cait Sith'] = 'Reraise II',
+        ['Siren'] = 'Chinook'
+    }
+    pacts.buffspecial = {
+        ['Ifrit'] = 'Inferno Howl',
+        ['Garuda'] = 'Fleet Wind',
+        ['Titan'] = 'Earthen Armor',
         ['Diabolos'] = 'Dream Shroud',
-        ['Carbuncle'] = 'Soothing Ruby', ['Fenrir'] = 'Heavenward Howl', ['Cait Sith'] = 'Raise II',
-        ['Siren'] = "Wind's Blessing" }
-    pacts.debuff1 = { ['Shiva'] = 'Diamond Storm', ['Ramuh'] = 'Shock Squall', ['Leviathan'] = 'Tidal Roar',
+        ['Carbuncle'] = 'Soothing Ruby',
+        ['Fenrir'] = 'Heavenward Howl',
+        ['Cait Sith'] = 'Raise II',
+        ['Siren'] = "Wind's Blessing"
+    }
+    pacts.debuff1 = {
+        ['Shiva'] = 'Diamond Storm',
+        ['Ramuh'] = 'Shock Squall',
+        ['Leviathan'] = 'Tidal Roar',
         ['Fenrir'] = 'Lunar Cry',
-        ['Diabolos'] = 'Pavor Nocturnus', ['Cait Sith'] = 'Eerie Eye', ['Siren'] = 'Lunatic Voice' }
-    pacts.debuff2 = { ['Shiva'] = 'Sleepga', ['Leviathan'] = 'Slowga', ['Fenrir'] = 'Lunar Roar',
-        ['Diabolos'] = 'Somnolence', ['Siren'] = 'Bitter Elegy' }
-    pacts.sleep = { ['Shiva'] = 'Sleepga', ['Diabolos'] = 'Nightmare', ['Cait Sith'] = 'Mewing Lullaby' }
-    pacts.nuke2 = { ['Ifrit'] = 'Fire II', ['Shiva'] = 'Blizzard II', ['Garuda'] = 'Aero II', ['Titan'] = 'Stone II',
-        ['Ramuh'] = 'Thunder II', ['Leviathan'] = 'Water II' }
-    pacts.nuke4 = { ['Ifrit'] = 'Fire IV', ['Shiva'] = 'Blizzard IV', ['Garuda'] = 'Aero IV', ['Titan'] = 'Stone IV',
-        ['Ramuh'] = 'Thunder IV', ['Leviathan'] = 'Water IV' }
-    pacts.bp70 = { ['Ifrit'] = 'Flaming Crush', ['Shiva'] = 'Rush', ['Garuda'] = 'Predator Claws',
+        ['Diabolos'] = 'Pavor Nocturnus',
+        ['Cait Sith'] = 'Eerie Eye',
+        ['Siren'] = 'Lunatic Voice'
+    }
+    pacts.debuff2 = {
+        ['Shiva'] = 'Sleepga',
+        ['Leviathan'] = 'Slowga',
+        ['Fenrir'] = 'Lunar Roar',
+        ['Diabolos'] = 'Somnolence',
+        ['Siren'] = 'Bitter Elegy'
+    }
+    pacts.sleep = { ['Shiva'] = 'Sleepga',['Diabolos'] = 'Nightmare',['Cait Sith'] = 'Mewing Lullaby' }
+    pacts.nuke2 = {
+        ['Ifrit'] = 'Fire II',
+        ['Shiva'] = 'Blizzard II',
+        ['Garuda'] = 'Aero II',
+        ['Titan'] = 'Stone II',
+        ['Ramuh'] = 'Thunder II',
+        ['Leviathan'] = 'Water II'
+    }
+    pacts.nuke4 = {
+        ['Ifrit'] = 'Fire IV',
+        ['Shiva'] = 'Blizzard IV',
+        ['Garuda'] = 'Aero IV',
+        ['Titan'] = 'Stone IV',
+        ['Ramuh'] = 'Thunder IV',
+        ['Leviathan'] = 'Water IV'
+    }
+    pacts.bp70 = {
+        ['Ifrit'] = 'Flaming Crush',
+        ['Shiva'] = 'Rush',
+        ['Garuda'] = 'Predator Claws',
         ['Titan'] = 'Mountain Buster',
-        ['Ramuh'] = 'Chaotic Strike', ['Leviathan'] = 'Spinning Dive', ['Carbuncle'] = 'Meteorite',
+        ['Ramuh'] = 'Chaotic Strike',
+        ['Leviathan'] = 'Spinning Dive',
+        ['Carbuncle'] = 'Meteorite',
         ['Fenrir'] = 'Eclipse Bite',
-        ['Diabolos'] = 'Nether Blast', ['Cait Sith'] = 'Regal Scratch', ['Siren'] = 'Hysteric Assault', }
-    pacts.bp75 = { ['Ifrit'] = 'Meteor Strike', ['Shiva'] = 'Heavenly Strike', ['Garuda'] = 'Wind Blade',
+        ['Diabolos'] = 'Nether Blast',
+        ['Cait Sith'] = 'Regal Scratch',
+        ['Siren'] = 'Hysteric Assault',
+    }
+    pacts.bp75 = {
+        ['Ifrit'] = 'Meteor Strike',
+        ['Shiva'] = 'Heavenly Strike',
+        ['Garuda'] = 'Wind Blade',
         ['Titan'] = 'Geocrush',
-        ['Ramuh'] = 'Thunderstorm', ['Leviathan'] = 'Grand Fall', ['Carbuncle'] = 'Holy Mist', ['Fenrir'] = 'Lunar Bay',
-        ['Diabolos'] = 'Night Terror', ['Cait Sith'] = 'Level ? Holy', ['Siren'] = "Tornado II" }
-    pacts.astralflow = { ['Ifrit'] = 'Inferno', ['Shiva'] = 'Diamond Dust', ['Garuda'] = 'Aerial Blast',
+        ['Ramuh'] = 'Thunderstorm',
+        ['Leviathan'] = 'Grand Fall',
+        ['Carbuncle'] = 'Holy Mist',
+        ['Fenrir'] = 'Lunar Bay',
+        ['Diabolos'] = 'Night Terror',
+        ['Cait Sith'] = 'Level ? Holy',
+        ['Siren'] = "Tornado II"
+    }
+    pacts.astralflow = {
+        ['Ifrit'] = 'Inferno',
+        ['Shiva'] = 'Diamond Dust',
+        ['Garuda'] = 'Aerial Blast',
         ['Titan'] = 'Earthen Fury',
-        ['Ramuh'] = 'Judgment Bolt', ['Leviathan'] = 'Tidal Wave', ['Carbuncle'] = 'Searing Light',
+        ['Ramuh'] = 'Judgment Bolt',
+        ['Leviathan'] = 'Tidal Wave',
+        ['Carbuncle'] = 'Searing Light',
         ['Fenrir'] = 'Howling Moon',
-        ['Diabolos'] = 'Ruinous Omen', ['Cait Sith'] = "Altana's Favor", ['Siren'] = "Clarsach Call" }
+        ['Diabolos'] = 'Ruinous Omen',
+        ['Cait Sith'] = "Altana's Favor",
+        ['Siren'] = "Clarsach Call"
+    }
 
     -- Wards table for creating custom timers
     wards = {}
     -- Base duration for ward pacts.
     wards.durations = {
-        ['Crimson Howl'] = 60, ['Earthen Armor'] = 60, ['Inferno Howl'] = 60, ['Heavenward Howl'] = 60,
-        ['Rolling Thunder'] = 120, ['Fleet Wind'] = 120,
-        ['Shining Ruby'] = 180, ['Frost Armor'] = 180, ['Lightning Armor'] = 180, ['Ecliptic Growl'] = 180,
-        ['Glittering Ruby'] = 180, ['Hastega'] = 180, ['Noctoshield'] = 180, ['Ecliptic Howl'] = 180,
+        ['Crimson Howl'] = 60,
+        ['Earthen Armor'] = 60,
+        ['Inferno Howl'] = 60,
+        ['Heavenward Howl'] = 60,
+        ['Rolling Thunder'] = 120,
+        ['Fleet Wind'] = 120,
+        ['Shining Ruby'] = 180,
+        ['Frost Armor'] = 180,
+        ['Lightning Armor'] = 180,
+        ['Ecliptic Growl'] = 180,
+        ['Glittering Ruby'] = 180,
+        ['Hastega'] = 180,
+        ['Noctoshield'] = 180,
+        ['Ecliptic Howl'] = 180,
         ['Dream Shroud'] = 180,
         ['Reraise II'] = 3600
     }
@@ -166,12 +240,9 @@ function job_setup()
 
     -- lua doesnt allow chaining equality in any sane way?
     macro_sets['LightSpirit'], macro_sets['DarkSpirit'], macro_sets['FireSpirit'], macro_sets['EarthSpirit'],
-        macro_sets['WaterSpirit'], macro_sets['AirSpirit'], macro_sets['IceSpirit'], macro_sets['ThunderSpirit'] = macro_sets
+    macro_sets['WaterSpirit'], macro_sets['AirSpirit'], macro_sets['IceSpirit'], macro_sets['ThunderSpirit'] = macro_sets
         .spirit, macro_sets.spirit, macro_sets.spirit, macro_sets.spirit,
         macro_sets.spirit, macro_sets.spirit, macro_sets.spirit, macro_sets.spirit
-
-
-
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -187,13 +258,18 @@ function user_setup()
 
     gear.perp_staff = { name = "Gridarvor" }
 
-    gear.avatar_melee_cape = { name = "Campestres's Cape",
-        augments = { 'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20', 'Pet: Haste+7', } }
+    gear.avatar_melee_cape = {
+        name = "Campestres's Cape",
+        augments = { 'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20', 'Pet: Haste+7', }
+    }
     gear.avatar_magic_cape = { name = "Campestres's Cape", augments = { 'Pet: M.Acc.+3 Pet: M.Dmg.+3', } }
 
-    send_command("bind numpad7 gs enable all; gs equip sets.midcast.Pet.PhysicalBloodPactRage; gs disable all; print 'Physical BP'")
-    send_command("bind numpad8 gs enable all; gs equip sets.midcast.Pet.MagicalBloodPactRage; gs disable all; print 'Magical BP'")
-    send_command("bind numpad9 gs enable all; gs equip sets.midcast.Pet.HybridBloodPactRage; gs disable all; ; print 'Hybrid BP'")
+    send_command(
+        "bind numpad7 gs enable all; gs equip sets.midcast.Pet.PhysicalBloodPactRage; gs disable all; print 'Physical BP'")
+    send_command(
+        "bind numpad8 gs enable all; gs equip sets.midcast.Pet.MagicalBloodPactRage; gs disable all; print 'Magical BP'")
+    send_command(
+        "bind numpad9 gs enable all; gs equip sets.midcast.Pet.HybridBloodPactRage; gs disable all; ; print 'Hybrid BP'")
     send_command("bind numpad1 gs enable all")
 
     send_command("bind numpad3 /ja Convert <me>")
@@ -220,41 +296,75 @@ function init_gear_sets()
     --------------------------------------
 
 
-    sets.precast['Summoning Magic'] = { ammo = "Vox Grip",
-        head = "Convoker's Horn +2", neck = "Incanter's Torque", ear1 = "Lodurr Earring", ear2 = "Cath Palug Earring",
-        body = "Beckoner's Doublet +1", hands = "Glyphic Bracers +1", ring1 = gear.left_stikini,
+    sets.precast['Summoning Magic'] = {
+        ammo = "Vox Grip",
+        head = "Convoker's Horn +2",
+        neck = "Incanter's Torque",
+        ear1 = "Lodurr Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Beckoner's Doublet +1",
+        hands = "Glyphic Bracers +1",
+        ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
-        back = "Conveyance Cape", waist = "Kobo Obi", legs = "Beckoner's Spats +1", feet = "Baayami Sabots +1" }
+        back = "Conveyance Cape",
+        waist = "Kobo Obi",
+        legs = "Beckoner's Spats +1",
+        feet = "Baayami Sabots +1"
+    }
 
     -- Precast sets to enhance JAs
     sets.precast.JA['Astral Flow'] = { head = "Glyphic Horn" }
 
     sets.precast.JA['Elemental Siphon'] = set_combine(sets.midcast['Summoning Magic'],
-        { main = "Soulscourge", sub = "Vox Grip",
-            head = gear.telchine.enh_dur.head,
-            body = gear.telchine.enh_dur.body, hands = gear.telchine.enh_dur.hands, ring1 = gear.left_stikini,
-            ring2 = gear.right_stikini,
-            back = "Conveyance Cape", waist = "Kobo Obi", legs = gear.telchine.enh_dur.legs,
-            feet = "Beckoner's Pigaches +1" })
+            {
+                main = "Soulscourge",
+                sub = "Vox Grip",
+                head = gear.telchine.enh_dur.head,
+                body = gear.telchine.enh_dur.body,
+                hands = gear.telchine.enh_dur.hands,
+                ring1 = gear.left_stikini,
+                ring2 = gear.right_stikini,
+                back = "Conveyance Cape",
+                waist = "Kobo Obi",
+                legs = gear.telchine.enh_dur.legs,
+                feet = "Beckoner's Pigaches +1"
+            })
 
     sets.precast.JA['Mana Cede'] = { hands = "Caller's Bracers +1" }
 
     -- Pact delay reduction gear
     sets.precast.BloodPactWard = set_combine(sets.midcast['Summoning Magic'],
-        { main = "Espiritus", ammo = "Sancus Sachet +1",
-            body = "Convoker's Doublet +2", hands = "Glyphic Bracers +1",
-            back = "Conveyance Cape", waist = "Kobo Obi", legs = "Glyphic Spats +1", feet = "Glyphic Pigaches +1" })
+            {
+                main = "Espiritus",
+                ammo = "Sancus Sachet +1",
+                body = "Convoker's Doublet +2",
+                hands = "Glyphic Bracers +1",
+                back = "Conveyance Cape",
+                waist = "Kobo Obi",
+                legs = "Glyphic Spats +1",
+                feet = "Glyphic Pigaches +1"
+            })
 
     sets.precast.BloodPactRage = sets.precast.BloodPactWard
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = { main = gear.grioavolr.fc, ammo = "Impatiens",
-        head = gear.merlinic.fc.head, neck = "Orunmila's Torque", ear1 = "Malignance Earring",
+    sets.precast.FC = {
+        main = gear.grioavolr.fc,
+        ammo = "Impatiens",
+        head = gear.merlinic.fc.head,
+        neck = "Orunmila's Torque",
+        ear1 = "Malignance Earring",
         ear2 = "Loquacious Earring",
-        body = "Inyanga Jubbah +2", hands = gear.merlinic.fc.hands, ring1 = "Lebeche Ring",
+        body = "Inyanga Jubbah +2",
+        hands = gear.merlinic.fc.hands,
+        ring1 = "Lebeche Ring",
         ring2 = "Weatherspoon Ring +1",
-        back = "Perimede Cape", waist = "Embla Belt", legs = "Lengo Pants", feet = gear.merlinic.fc.feet }
+        back = "Perimede Cape",
+        waist = "Embla Belt",
+        legs = "Lengo Pants",
+        feet = gear.merlinic.fc.feet
+    }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Embla Sash" })
 
@@ -267,23 +377,49 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        head = "Nahtirah Hat", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Rajas Ring", ring2 = "Petrov Ring",
-        back = "Pahtli Cape", waist = "Fotia Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots"
+        head = "Nahtirah Hat",
+        neck = "Fotia Gorget",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Vanir Cotehardie",
+        hands = "Yaoyotl Gloves",
+        ring1 = "Rajas Ring",
+        ring2 = "Petrov Ring",
+        back = "Pahtli Cape",
+        waist = "Fotia Belt",
+        legs = "Hagondes Pants",
+        feet = "Hagondes Sabots"
     }
 
     sets.precast.WS.Elemental = {
-        head = "Cath Palug Crown", neck = "Sibyl Scarf", ear1 = "Malignance Earring", ear2 = "Friomisi Earring",
-        body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Freke Ring", ring2 = "Metamorph Ring +1",
-        back = "", waist = "Austerity Belt +1", legs = "Amalric Slops +1", feet = "Amalric Nails +1"
+        head = "Cath Palug Crown",
+        neck = "Sibyl Scarf",
+        ear1 = "Malignance Earring",
+        ear2 = "Friomisi Earring",
+        body = "Amalric Doublet +1",
+        hands = "Amalric Gages +1",
+        ring1 = "Freke Ring",
+        ring2 = "Metamorph Ring +1",
+        back = "",
+        waist = "Austerity Belt +1",
+        legs = "Amalric Slops +1",
+        feet = "Amalric Nails +1"
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Myrkr'] = {
-        head = "Amalric Coif +1", neck = "Fotia Gorget", ear1 = "Evans Earring", ear2 = "Moonshade Earring",
-        body = "Convoker's Doublet +2", hands = "Caller's Bracers +2", ring1 = gear.left_stikini,
+        head = "Amalric Coif +1",
+        neck = "Fotia Gorget",
+        ear1 = "Evans Earring",
+        ear2 = "Moonshade Earring",
+        body = "Convoker's Doublet +2",
+        hands = "Caller's Bracers +2",
+        ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
-        back = "Pahtli Cape", waist = "Fucho-no-Obi", legs = "Assiduity Pants +1", feet = "Chelona Boots +1"
+        back = "Pahtli Cape",
+        waist = "Fucho-no-Obi",
+        legs = "Assiduity Pants +1",
+        feet = "Chelona Boots +1"
     }
 
 
@@ -293,73 +429,155 @@ function init_gear_sets()
     -- Midcast sets
     --------------------------------------
 
-    sets.midcast.FastRecast = { ammo = "Staunch Tathlum +1",
-        head = "Cath Palug Crown", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Merlinic Jubbah", hands = "Bokwus Gloves", ring1 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Embla Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+    sets.midcast.FastRecast = {
+        ammo = "Staunch Tathlum +1",
+        head = "Cath Palug Crown",
+        neck = "Orunmila's Torque",
+        ear1 = "Malignance Earring",
+        ear2 = "Loquacious Earring",
+        body = "Merlinic Jubbah",
+        hands = "Bokwus Gloves",
+        ring1 = "Rahab Ring",
+        back = "Fi Follet Cape +1",
+        waist = "Embla Belt",
+        legs = "Hagondes Pants",
+        feet = "Hagondes Sabots"
+    }
 
     sets.midcast['Healing Magic'] = {
-        neck = "Incanter's Torque", ear1 = "Beatific Earring", ear2 = "Meili Earring",
-        ring1 = gear.left_stikini, ring2 = gear.right_stikini
+        neck = "Incanter's Torque",
+        ear1 = "Beatific Earring",
+        ear2 = "Meili Earring",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini
     }
 
     sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
-        neck = "Debilis Medallion",
-        hands = "Hieros Mittens", ring1 = "Haoma's Ring", ring2 = "Haoma's Ring",
-        back = "Oretania's Cape +1"
-    })
+            neck = "Debilis Medallion",
+            hands = "Hieros Mittens",
+            ring1 = "Haoma's Ring",
+            ring2 = "Haoma's Ring",
+            back = "Oretania's Cape +1"
+        })
 
-    sets.midcast.Cure = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Staunch Tathlum +1",
-        head = "Vanya Hood", neck = "Nodens Gorget", ear2 = "Loquacious Earring",
-        body = "Gendewitha Bliaut +1", hands = "Telchine Gloves", ring2 = "Rahab Ring",
-        back = "Oretania's Cape +1", waist = "Embla Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+    sets.midcast.Cure = {
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        ammo = "Staunch Tathlum +1",
+        head = "Vanya Hood",
+        neck = "Nodens Gorget",
+        ear2 = "Loquacious Earring",
+        body = "Gendewitha Bliaut +1",
+        hands = "Telchine Gloves",
+        ring2 = "Rahab Ring",
+        back = "Oretania's Cape +1",
+        waist = "Embla Belt",
+        legs = "Hagondes Pants",
+        feet = "Hagondes Sabots"
+    }
 
-    sets.midcast['Summoning Magic'] = { ammo = "Vox Grip",
-        head = "Convoker's Horn +2", neck = "Incanter's Torque", ear1 = "Cath Palug Earring", ear2 = "Lodurr Earring",
-        body = "Beckoner's Doublet", hands = "Glyphic Bracers +1",
-        ring1 = gear.left_stikini, ring2 = gear.right_stikini,
-        back = "Conveyance Cape", waist = "Kobo Obi", legs = "Beckoner's Spats", feet = "Baayami Sabots" }
+    sets.midcast['Summoning Magic'] = {
+        ammo = "Vox Grip",
+        head = "Convoker's Horn +2",
+        neck = "Incanter's Torque",
+        ear1 = "Cath Palug Earring",
+        ear2 = "Lodurr Earring",
+        body = "Beckoner's Doublet",
+        hands = "Glyphic Bracers +1",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        back = "Conveyance Cape",
+        waist = "Kobo Obi",
+        legs = "Beckoner's Spats",
+        feet = "Baayami Sabots"
+    }
 
-    sets.midcast.Stoneskin = { neck = "Nodens Gorget", ear1 = "Earthcry Earring",
-        waist = "Siegel Sash", legs = "Shedir Seraweels" }
+    sets.midcast.Stoneskin = {
+        neck = "Nodens Gorget",
+        ear1 = "Earthcry Earring",
+        waist = "Siegel Sash",
+        legs = "Shedir Seraweels"
+    }
 
     sets.midcast.Aquaveil = {
         head = "Amalric Coif +1",
-        waist = "Emphatikos rope", legs = "Shedir Seraweels"
+        waist = "Emphatikos rope",
+        legs = "Shedir Seraweels"
     }
 
     -- Avatar pact sets.  All pacts are Ability type.
 
-    sets.midcast.Pet.BloodPactWard = { main = "Soulscourge", ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Incanter Torque", ear1 = "Evans Earring",
-        body = "Caller's Doublet +2", hands = "Glyphic Bracers +1",
-        ring1 = gear.left_stikini, ring2 = gear.right_stikini,
-        waist = "Diabolos's Rope", legs = "Marduk's Shalwar +1" }
+    sets.midcast.Pet.BloodPactWard = {
+        main = "Soulscourge",
+        ammo = "Sancus Sachet +1",
+        head = "Convoker's Horn +2",
+        neck = "Incanter Torque",
+        ear1 = "Evans Earring",
+        body = "Caller's Doublet +2",
+        hands = "Glyphic Bracers +1",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        waist = "Diabolos's Rope",
+        legs = "Marduk's Shalwar +1"
+    }
 
-    sets.midcast.Pet.DebuffBloodPactWard = { main = "Soulscourge", ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Incanter Torque",
-        body = "Caller's Doublet +2", hands = "Glyphic Bracers +1",
-        ring1 = gear.left_stikini, ring2 = gear.right_stikini,
-        waist = "Diabolos's Rope", legs = "Marduk's Shalwar +1" }
+    sets.midcast.Pet.DebuffBloodPactWard = {
+        main = "Soulscourge",
+        ammo = "Sancus Sachet +1",
+        head = "Convoker's Horn +2",
+        neck = "Incanter Torque",
+        body = "Caller's Doublet +2",
+        hands = "Glyphic Bracers +1",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        waist = "Diabolos's Rope",
+        legs = "Marduk's Shalwar +1"
+    }
 
     sets.midcast.Pet.DebuffBloodPactWard.Acc = sets.midcast.Pet.DebuffBloodPactWard
 
-    sets.midcast.Pet.PhysicalBloodPactRage = { main = "Gridarvor", sub = "Elan Strap +1", ammo = "Sancus Sachet +1",
-        head = "Helios Band", neck = "Shulmanu Collar", ear1 = "Lugalbanda Earring", ear2 = "Gelos Earring",
-        body = "Convoker's Doublet +2", hands = gear.merlinic.bp.hands, ring1 = "Varar Ring +1", ring2 = "Varar Ring +1",
-        back = gear.avatar_melee_cape, waist = "Incarnation Sash", legs = "Apogee Slacks +1", feet = "Apogee Pumps +1" }
+    sets.midcast.Pet.PhysicalBloodPactRage = {
+        main = "Gridarvor",
+        sub = "Elan Strap +1",
+        ammo = "Sancus Sachet +1",
+        head = "Helios Band",
+        neck = "Shulmanu Collar",
+        ear1 = "Lugalbanda Earring",
+        ear2 = "Gelos Earring",
+        body = "Convoker's Doublet +2",
+        hands = gear.merlinic.bp.hands,
+        ring1 = "Varar Ring +1",
+        ring2 = "Varar Ring +1",
+        back = gear.avatar_melee_cape,
+        waist = "Incarnation Sash",
+        legs = "Apogee Slacks +1",
+        feet = "Apogee Pumps +1"
+    }
 
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = sets.midcast.Pet.PhysicalBloodPactRage
 
-    sets.midcast.Pet.MagicalBloodPactRage = { main = gear.grioavolr.bp, sub = "Elan Strap +1", ammo = "Sancus Sachet +1",
-        head = "Cath Palug Crown", neck = "Adad Amulet", ear1 = "Lugalbanda Earring", ear2 = "Gelos Earring",
-        body = "Convoker's Doublet +2", hands = gear.merlinic.bp.hands, ring1 = "Varar Ring +1", ring2 = "Varar Ring +1",
-        back = gear.avatar_magic_cape, waist = "Regal Belt", legs = "Enticer's Pants", feet = "Apogee Pumps +1" }
+    sets.midcast.Pet.MagicalBloodPactRage = {
+        main = gear.grioavolr.bp,
+        sub = "Elan Strap +1",
+        ammo = "Sancus Sachet +1",
+        head = "Cath Palug Crown",
+        neck = "Adad Amulet",
+        ear1 = "Lugalbanda Earring",
+        ear2 = "Gelos Earring",
+        body = "Convoker's Doublet +2",
+        hands = gear.merlinic.bp.hands,
+        ring1 = "Varar Ring +1",
+        ring2 = "Varar Ring +1",
+        back = gear.avatar_magic_cape,
+        waist = "Regal Belt",
+        legs = "Enticer's Pants",
+        feet = "Apogee Pumps +1"
+    }
 
     sets.midcast.Pet.MagicalBloodPactRage.Acc = sets.midcast.Pet.MagicalBloodPactRage
 
     sets.midcast.Pet.HybridBloodPactRage = set_combine(sets.midcast.Pet.MagicalBloodPactRage,
-        { waist = "Incarnation Sash" })
+            { waist = "Incarnation Sash" })
 
 
     -- Spirits cast magic spells, which can be identified in standard ways.
@@ -376,23 +594,59 @@ function init_gear_sets()
     --------------------------------------
 
     -- Resting sets
-    sets.resting = { main = gear.Staff.HMP, ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Bathy Choker +1", ear1 = "Evans Earring", ear2 = "Cath Palug Earring",
-        body = "Hagondes Coat", hands = "Serpentes Cuffs", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
-        back = "Pahtli Cape", waist = "Fucho-no-obi", legs = "Assiduity Pants +1", feet = "Chelona Boots +1" }
+    sets.resting = {
+        main = gear.Staff.HMP,
+        ammo = "Sancus Sachet +1",
+        head = "Convoker's Horn +2",
+        neck = "Bathy Choker +1",
+        ear1 = "Evans Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Hagondes Coat",
+        hands = "Serpentes Cuffs",
+        ring1 = "Sheltered Ring",
+        ring2 = "Paguroidea Ring",
+        back = "Pahtli Cape",
+        waist = "Fucho-no-obi",
+        legs = "Assiduity Pants +1",
+        feet = "Chelona Boots +1"
+    }
 
     -- Idle sets
-    sets.idle = { main = "Malignance Pole", sub = "Oneiros Grip", ammo = "Sancus Sachet +1",
-        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Evans Earring", ear2 = "Cath Palug Earring",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
-        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
-        back = "Umbra Cape", waist = "Fucho-no-Obi", legs = "Assiduity Pants +1", feet = "Crier's Gaiters" }
-
-    sets.idle.PDT = { main = gear.Staff.PDT, sub = "Enki Strap", ammo = "Sancus Sachet +1",
-        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring",
+    sets.idle = {
+        main = "Malignance Pole",
+        sub = "Oneiros Grip",
+        ammo = "Sancus Sachet +1",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Evans Earring",
         ear2 = "Cath Palug Earring",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = gear.right_stikini,
-        back = "Umbra Cape", waist = "Regal Belt", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        back = "Umbra Cape",
+        waist = "Fucho-no-Obi",
+        legs = "Assiduity Pants +1",
+        feet = "Crier's Gaiters"
+    }
+
+    sets.idle.PDT = {
+        main = gear.Staff.PDT,
+        sub = "Enki Strap",
+        ammo = "Sancus Sachet +1",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Defending Ring",
+        ring2 = gear.right_stikini,
+        back = "Umbra Cape",
+        waist = "Regal Belt",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
 
     -- perp costs:
     -- spirits: 7
@@ -414,35 +668,92 @@ function init_gear_sets()
 
     -- Can make due without either the head or the body, and use +refresh items in those slots.
 
-    sets.idle.Avatar = { main = "Gridarvor", sub = "Oneiros Grip", ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Cath Palug Earring",
-        body = "Shomonjijoe +1", hands = "Caller's Bracers +1", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
-        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
-        back = "Campestres's Cape", waist = "Kobo Obi", legs = "Assiduity Pants +1", feet = "Apogee Pumps +1" }
+    sets.idle.Avatar = {
+        main = "Gridarvor",
+        sub = "Oneiros Grip",
+        ammo = "Sancus Sachet +1",
+        head = "Convoker's Horn +2",
+        neck = "Shulmanu Collar",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Shomonjijoe +1",
+        hands = "Caller's Bracers +1",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        back = "Campestres's Cape",
+        waist = "Kobo Obi",
+        legs = "Assiduity Pants +1",
+        feet = "Apogee Pumps +1"
+    }
 
-    sets.idle.PDT.Avatar = { main = "Gridarvor", sub = "Oneiros Grip", ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Cath Palug Earring",
-        body = "Shomonjijoe +1", hands = "Caller's Bracers +1", ring1 = gear.left_stikini, ring2 = "Defending Ring",
-        back = "Campestres's Cape", waist = "Kobo Obi", legs = "Assiduity Pants +1", feet = "Apogee Pumps +1" }
+    sets.idle.PDT.Avatar = {
+        main = "Gridarvor",
+        sub = "Oneiros Grip",
+        ammo = "Sancus Sachet +1",
+        head = "Convoker's Horn +2",
+        neck = "Shulmanu Collar",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Shomonjijoe +1",
+        hands = "Caller's Bracers +1",
+        ring1 = gear.left_stikini,
+        ring2 = "Defending Ring",
+        back = "Campestres's Cape",
+        waist = "Kobo Obi",
+        legs = "Assiduity Pants +1",
+        feet = "Apogee Pumps +1"
+    }
 
-    sets.idle.Spirit = { main = "Gridarvor", sub = "Vox Grip", ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Incanter Torque", ear1 = "Enmerkar Earring", ear2 = "Cath Palug Earring",
-        body = "Shomonjijoe +1", hands = "Caller's Bracers +1", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
-        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
-        back = "Conveyance Cape", waist = "Kobo Obi", legs = "Assiduity Pants +1", feet = "Apogee Pumps +1" }
+    sets.idle.Spirit = {
+        main = "Gridarvor",
+        sub = "Vox Grip",
+        ammo = "Sancus Sachet +1",
+        head = "Convoker's Horn +2",
+        neck = "Incanter Torque",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Shomonjijoe +1",
+        hands = "Caller's Bracers +1",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        back = "Conveyance Cape",
+        waist = "Kobo Obi",
+        legs = "Assiduity Pants +1",
+        feet = "Apogee Pumps +1"
+    }
 
-    sets.idle.Town = { main = "Malignance Pole", sub = "Oneiros Grip", ammo = "Sancus Sachet +1",
-        head = "Convoker's Horn +2", neck = "Bathy Choker +1", ear1 = "Enmerkar Earring", ear2 = "Cath Palug Earring",
-        body = "Shomonjijoe +1", hands = "Serpentes Cuffs", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
-        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
-        back = "Umbra Cape", waist = "Fucho-no-Obi", legs = "Assiduity Pants +1", feet = "Crier's Gaiters" }
+    sets.idle.Town = {
+        main = "Malignance Pole",
+        sub = "Oneiros Grip",
+        ammo = "Sancus Sachet +1",
+        head = "Convoker's Horn +2",
+        neck = "Bathy Choker +1",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Shomonjijoe +1",
+        hands = "Serpentes Cuffs",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        back = "Umbra Cape",
+        waist = "Fucho-no-Obi",
+        legs = "Assiduity Pants +1",
+        feet = "Crier's Gaiters"
+    }
 
     -- Favor uses Caller's Horn instead of Convoker's Horn for refresh
     sets.idle.Avatar.Favor = { head = "Beckoner's horn +1" } --{head="Beckoner's Horn"}
     sets.idle.Avatar.Melee = {
-        neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Cath Palug Earring",
-        body = "Shomonjijoe +1", hands = "Convoker's Bracers +2", ring1 = "Varar Ring +1", ring2 = "Cath Palug Ring",
-        back = "Campestres's Cape", waist = "Klouskap Sash +1", legs = "Convoker's Spats", feet = "Apogee Pumps +1"
+        neck = "Shulmanu Collar",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Shomonjijoe +1",
+        hands = "Convoker's Bracers +2",
+        ring1 = "Varar Ring +1",
+        ring2 = "Cath Palug Ring",
+        back = "Campestres's Cape",
+        waist = "Klouskap Sash +1",
+        legs = "Convoker's Spats",
+        feet = "Apogee Pumps +1"
     }
 
     sets.perp = {}
@@ -464,15 +775,35 @@ function init_gear_sets()
     sets.perp.staff_and_grip = { main = gear.perp_staff, sub = "Enki Strap" }
 
     -- Defense sets
-    sets.defense.PDT = { main = gear.Staff.PDT,
-        head = "Hagondes Hat", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Cath Palug Earring",
-        body = "Hagondes Coat", hands = "Hagondes Gloves", ring1 = "Defending Ring", ring2 = gear.right_stikini,
-        back = "Umbra Cape", waist = "Fucho-no-Obi", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+    sets.defense.PDT = {
+        main = gear.Staff.PDT,
+        head = "Hagondes Hat",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
+        ear2 = "Cath Palug Earring",
+        body = "Hagondes Coat",
+        hands = "Hagondes Gloves",
+        ring1 = "Defending Ring",
+        ring2 = gear.right_stikini,
+        back = "Umbra Cape",
+        waist = "Fucho-no-Obi",
+        legs = "Hagondes Pants",
+        feet = "Hagondes Sabots"
+    }
 
     sets.defense.MDT = {
-        head = "Hagondes Hat", neck = "Loricate Torque +1", ear1 = "Evans Earring", ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Defending Ring", ring2 = "Archon Ring",
-        back = "Umbra Cape", waist = "Fucho-no-Obi", legs = "Bokwus Slops", feet = "Hagondes Sabots"
+        head = "Hagondes Hat",
+        neck = "Loricate Torque +1",
+        ear1 = "Evans Earring",
+        ear2 = "Loquacious Earring",
+        body = "Vanir Cotehardie",
+        hands = "Yaoyotl Gloves",
+        ring1 = "Defending Ring",
+        ring2 = "Archon Ring",
+        back = "Umbra Cape",
+        waist = "Fucho-no-Obi",
+        legs = "Bokwus Slops",
+        feet = "Hagondes Sabots"
     }
 
     sets.Kiting = { feet = "Crier's Gaiters" }
@@ -489,7 +820,6 @@ function init_gear_sets()
         head="Zelus Tiara",neck="Combatant's Torque",ear1="Crepuscular Earring",ear2="Brutal Earring",
         body="Vanir Cotehardie",hands="Bokwus Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
         back="Umbra Cape",waist="Goading Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}]]
-
     sets.engaged = set_combine(sets.idle.Avatar, {})
 end
 
@@ -500,7 +830,6 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-
     if pet_midaction() or spell.type == "Item" then
         -- windower.add_to_chat(144,'Midaction')
         return
@@ -509,7 +838,6 @@ function job_precast(spell, action, spellMap, eventArgs)
     if state.Buff['Astral Conduit'] or state.Buff['Apogee'] then
         -- windower.add_to_chat(144,'AC or apogee active')
         eventArgs.useMidcastGear = true
-
     end
 end
 
@@ -571,7 +899,6 @@ end
 
 -- change macro book to corresponding pet name
 function choose_pet_macro_book(pet)
-
     if spirits:contains(pet) then
         set_macro_page(macro_sets.spirit.page, macro_sets.spirit.book)
     elseif avatars:contains(pet) then

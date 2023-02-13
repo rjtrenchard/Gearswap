@@ -343,9 +343,9 @@ function init_gear_sets()
     sets.precast.WS['Savage Blade'].MaxTP = { ear1 = "Sherida Earring", ear2 = "Ishvara Earring" }
 
     sets.precast.WS['Aeolian Edge'] = { ammo = "Seething Bomblet +1",
-        head = "Herculean Helm", neck = "Baetyl Pendant", ear1 = "Hecate's Earring", ear2 = "Friomisi Earring",
-        body = "Malignance Tabard", hands = "Herculean Gloves", ring1 = "Dingir Ring", ring2 = "Ilabrat Ring",
-        back = gear.dex_ws_cape, waist = "Eschan Stone", legs = gear.herculean.ws.legs, feet = "Malignance Boots" }
+        head = "Nyame Helm", neck = "Baetyl Pendant", ear1 = "Hecate's Earring", ear2 = "Friomisi Earring",
+        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Dingir Ring", ring2 = "Ilabrat Ring",
+        back = gear.dex_ws_cape, waist = "Eschan Stone", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
 
 
     --sets.precast.WS['Aeolian Edge'].TH = set_combine(sets.precast.WS['Aeolian Edge'], sets.TreasureHunter)
@@ -636,7 +636,7 @@ end
 
 -- Called by the 'update' self-command.
 function job_update(cmdParams, eventArgs)
-    herculean.th.update(cmdParams, eventArgs)
+    th_update(cmdParams, eventArgs)
 
     if buffactive.terror or buffactive.stun then
         send_command('gs equip sets.defense.PDT')
@@ -710,7 +710,7 @@ end
 -- Check for various actions that we've specified in user code as being used with TH gear.
 -- This will only ever be called if TreasureMode is not 'None'.
 -- Category and Param are as specified in the action event packet.
-function herculean.th.action_check(category, param)
+function th_action_check(category, param)
     if category == 2 or -- any ranged attack
         --category == 4 or -- any magic action
         (category == 3 and param == 30) or -- Aeolian Edge

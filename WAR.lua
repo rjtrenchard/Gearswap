@@ -287,18 +287,18 @@ function init_gear_sets()
     sets.defense.PDT = { ammo = "Brigantia Pebble",
         head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Tuisto earring", ear2 = "Odnowa Earring +1",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring2 = "Gelatinous Ring +1", ring1 = "Moonlight Ring",
-        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+        back = "Reiki Cloak", waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
 
     sets.defense.Reraise = { ammo = "Staunch Tathlum +1",
         head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Schere Earring", ear2 = "Telos Earring",
         body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring2 = "Gelatinous Ring +1", ring1 = "Moonlight Ring",
-        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings"
+        back = "Reiki Cloak", waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings"
     }
 
     sets.defense.MDT = { ammo = "Staunch Tathlum +1",
         head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Tuitso Earring", ear2 = "Odnowa Earring +1",
         body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Shadow Ring", ring2 = "Moonlight Ring",
-        back = "Engulfer Cape", waist = "Engraved Belt", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+        back = "Reiki Cloak", waist = "Engraved Belt", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
 
     sets.Kiting = { feet = "Hermes' Sandals" }
 

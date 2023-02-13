@@ -1,3 +1,6 @@
+-- Custom Augment Table
+-- holds all augmented items that can be used across classes
+
 -- define augments
 if not gear then gear = T {} end
 

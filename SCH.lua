@@ -22,9 +22,6 @@
         gs c scholar skillchain                                 Immanence
         gs c scholar addendum           Addendum: White         Addendum: Black
 --]]
-
-
-
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
@@ -37,7 +34,7 @@ end
 function job_setup()
     gear.default.obi_waist = "Luminary Sash"
     info.addendumNukes = S { "Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV",
-        "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
+            "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
 
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
     update_active_strategems()
@@ -57,8 +54,8 @@ function user_setup()
 
     info.low_nukes = S { "Stone", "Water", "Aero", "Fire", "Blizzard", "Thunder" }
     info.mid_nukes = S { "Stone II", "Water II", "Aero II", "Fire II", "Blizzard II", "Thunder II",
-        "Stone III", "Water III", "Aero III", "Fire III", "Blizzard III", "Thunder III",
-        "Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV", }
+            "Stone III", "Water III", "Aero III", "Fire III", "Blizzard III", "Thunder III",
+            "Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV", }
     info.high_nukes = S { "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
 
     send_command('bind ^` input /ma Stun <t>')
@@ -85,12 +82,22 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = { main = gear.grioavolr.fc, ammo = "Impatiens",
-        head = gear.merlinic.fc.head, neck = "Orunmila's Torque", ear1 = "Malignance Earring",
+    sets.precast.FC = {
+        main = gear.grioavolr.fc,
+        ammo = "Impatiens",
+        head = gear.merlinic.fc.head,
+        neck = "Orunmila's Torque",
+        ear1 = "Malignance Earring",
         ear2 = "Loquacious Earring",
-        body = gear.merlinic.fc.body, hands = "Gendewitha Gages +1", ring1 = "Weatherspoon Ring +1",
+        body = gear.merlinic.fc.body,
+        hands = "Gendewitha Gages +1",
+        ring1 = "Weatherspoon Ring +1",
         ring2 = "Lebeche Ring",
-        back = "Perimede Cape", waist = "Embla Sash", legs = "Lengo Pants", feet = gear.merlinic.fc.feet }
+        back = "Perimede Cape",
+        waist = "Embla Sash",
+        legs = "Lengo Pants",
+        feet = gear.merlinic.fc.feet
+    }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
@@ -101,50 +108,91 @@ function init_gear_sets()
 
     -- Midcast Sets
 
-    sets.midcast.FastRecast = { ammo = "Incantor Stone",
-        head = "Nahtirah Hat", ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie", hands = "Gendewitha Gages +1", ring1 = "Rahab Ring",
-        back = "Fi Follet Cape +1", waist = "Goading Belt", legs = "", feet = "Academic's Loafers" }
-
-    sets.midcast['Healing Magic'] = { main = "Gada",
-        head = "Kaykaus Mitra +1", neck = "Incanter's Torque", ear1 = "Beatific Earring", ear2 = "Meili Earring",
-        body = "Pedagogy Gown +3", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
-        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
+    sets.midcast.FastRecast = {
+        ammo = "Incantor Stone",
+        head = "Nahtirah Hat",
+        ear2 = "Loquacious Earring",
+        body = "Vanir Cotehardie",
+        hands = "Gendewitha Gages +1",
+        ring1 = "Rahab Ring",
+        back = "Fi Follet Cape +1",
+        waist = "Goading Belt",
+        legs = "",
+        feet = "Academic's Loafers"
     }
 
-    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], { main = "Daybreak",
-        head = "Kaykaus Mitra +1", neck = "Elite Royal Collar", ear1 = "Regal Earring", ear2 = "Magnetic Earring",
-        body = "Kaykaus Bliaut +1", hands = "Kaykaus Cuffs +1", ring1 = gear.left_stikini, ring2 = "Metamorph Ring +1",
-        back = "Fi Follet Cape +1", waist = gear.CureWaist, legs = "Kaykaus Tights +1", feet = "Kaykaus Boots +1" })
+    sets.midcast['Healing Magic'] = {
+        main = "Gada",
+        head = "Kaykaus Mitra +1",
+        neck = "Incanter's Torque",
+        ear1 = "Beatific Earring",
+        ear2 = "Meili Earring",
+        body = "Pedagogy Gown +3",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+    }
+
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {
+            main = "Daybreak",
+            head = "Kaykaus Mitra +1",
+            neck = "Elite Royal Collar",
+            ear1 = "Regal Earring",
+            ear2 = "Magnetic Earring",
+            body = "Kaykaus Bliaut +1",
+            hands = "Kaykaus Cuffs +1",
+            ring1 = gear.left_stikini,
+            ring2 = "Metamorph Ring +1",
+            back = "Fi Follet Cape +1",
+            waist = gear.CureWaist,
+            legs = "Kaykaus Tights +1",
+            feet = "Kaykaus Boots +1"
+        })
 
     sets.midcast.CureWithLightWeather = set_combine(sets, micast.Cure, { waist = "Hachirin-no-obi" })
 
     sets.midcast.Curaga = sets.midcast.Cure
 
-    sets.midcast.Regen = { main = "Bolelabunga", sub = "Ammurapi Shield", head = "Savant's Bonnet +2",
-        hands = "Telchine Gloves" }
+    sets.midcast.Regen = {
+        main = "Bolelabunga",
+        sub = "Ammurapi Shield",
+        head = "Savant's Bonnet +2",
+        hands = "Telchine Gloves"
+    }
 
     sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
-        neck = "Malison Medallion",
-        hands = "Hieros Mittens", ring1 = "Haoma's Ring", ring2 = "Haoma's Ring",
-        feet = "Gendewitha Galoshes +1"
-    })
+            neck = "Malison Medallion",
+            hands = "Hieros Mittens",
+            ring1 = "Haoma's Ring",
+            ring2 = "Haoma's Ring",
+            feet = "Gendewitha Galoshes +1"
+        })
 
-    sets.midcast['Enhancing Magic'] = { main = "Grioavolr", sub = "Enki Strap", ammo = "Savant's Treatise",
-        head = "Savant's Bonnet +2", neck = "Incanter's Torque",
-        body = "Manasa Chasuble", hands = "Ayao's Gages",
-        waist = "Embla Sash", legs = "Portent Pants", }
+    sets.midcast['Enhancing Magic'] = {
+        main = "Grioavolr",
+        sub = "Enki Strap",
+        ammo = "Savant's Treatise",
+        head = "Savant's Bonnet +2",
+        neck = "Incanter's Torque",
+        body = "Manasa Chasuble",
+        hands = "Ayao's Gages",
+        waist = "Embla Sash",
+        legs = "Portent Pants",
+    }
 
     sets.midcast['Enhancing Magic'].Duration = set_combine(sets.midcast['Enhancing Magic'], {
-        head = gear.telchine.enh_dur.head,
-        body = gear.telchine.enh_dur.body, hands = gear.telchine.enh_dur.hands,
-        legs = gear.telchine.enh_dur.legs, feet = gear.telchine.enh_dur.feet
-    })
+            head = gear.telchine.enh_dur.head,
+            body = gear.telchine.enh_dur.body,
+            hands = gear.telchine.enh_dur.hands,
+            legs = gear.telchine.enh_dur.legs,
+            feet = gear.telchine.enh_dur.feet
+        })
 
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'].Duration, {
-        neck = "Nodens Gorget", ear1 = "Earthcry Earring",
-        waist = "Siegel Sash", legs = "Shedir Seraweels"
-    })
+            neck = "Nodens Gorget",
+            ear1 = "Earthcry Earring",
+            waist = "Siegel Sash",
+            legs = "Shedir Seraweels"
+        })
 
     sets.midcast.Storm = set_combine(sets.midcast['Enhancing Magic'].Duration, { feet = "Pedagogy Loafers" })
 
@@ -156,110 +204,308 @@ function init_gear_sets()
 
 
     -- Custom spell classes
-    sets.midcast.MndEnfeebles = { main = "Grioavolr", sub = "Enki Strap", ammo = "Pemphredo Tathlum",
-        head = "Nahtirah Hat", neck = "Weike Torque", ear1 = "Regal Earring", ear2 = "Malignance Earring",
-        body = "Manasa Chasuble", hands = "Yaoyotl Gloves", ring1 = gear.left_stikini, ring2 = "Metamorph Ring +1",
-        back = "Refraction Cape", waist = "Demonry Sash", legs = "Bokwus Slops", feet = "Bokwus Boots" }
+    sets.midcast.MndEnfeebles = {
+        main = "Grioavolr",
+        sub = "Enki Strap",
+        ammo = "Pemphredo Tathlum",
+        head = "Nahtirah Hat",
+        neck = "Weike Torque",
+        ear1 = "Regal Earring",
+        ear2 = "Malignance Earring",
+        body = "Manasa Chasuble",
+        hands = "Yaoyotl Gloves",
+        ring1 = gear.left_stikini,
+        ring2 = "Metamorph Ring +1",
+        back = "Refraction Cape",
+        waist = "Demonry Sash",
+        legs = "Bokwus Slops",
+        feet = "Bokwus Boots"
+    }
 
     sets.midcast.IntEnfeebles = sets.midcast.MndEnfeebles
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
-    sets.midcast['Dark Magic'] = { main = "Rubicundity", sub = "Ammurapi Shield", ammo = "Pemphredo Tathlum",
-        neck = "Incanter's Torque", ear1 = "Mani Earring", ear2 = "Dark Earring",
-        hands = "Yaoyotl Gloves", ring1 = gear.left_stikini, ring2 = "Evanescence Ring",
-        waist = gear.ElementalObi, legs = "Pedagogy Pants", }
+    sets.midcast['Dark Magic'] = {
+        main = "Rubicundity",
+        sub = "Ammurapi Shield",
+        ammo = "Pemphredo Tathlum",
+        neck = "Incanter's Torque",
+        ear1 = "Mani Earring",
+        ear2 = "Dark Earring",
+        hands = "Yaoyotl Gloves",
+        ring1 = gear.left_stikini,
+        ring2 = "Evanescence Ring",
+        waist = gear.ElementalObi,
+        legs = "Pedagogy Pants",
+    }
 
-    sets.midcast.Kaustra = { main = "Rubicundity", ammo = "Ghastly Tathlum +1",
-        head = "Pixie Hairpin +1", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Mani Earring",
-        body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Archon Ring", ring2 = "Metamorph Ring +1",
-        back = "Toro Cape", waist = "Acuity Belt +1", legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
+    sets.midcast.Kaustra = {
+        main = "Rubicundity",
+        ammo = "Ghastly Tathlum +1",
+        head = "Pixie Hairpin +1",
+        neck = "Erra Pendant",
+        ear1 = "Malignance Earring",
+        ear2 = "Mani Earring",
+        body = "Amalric Doublet +1",
+        hands = "Amalric Gages +1",
+        ring1 = "Archon Ring",
+        ring2 = "Metamorph Ring +1",
+        back = "Toro Cape",
+        waist = "Acuity Belt +1",
+        legs = "Amalric Slops +1",
+        feet = "Amalric Nails +1"
+    }
 
-    sets.midcast.Drain = { main = "Rubicundity", sub = "Enki Strap", ammo = "Pemphredo Tathlum",
-        head = "Pixie Hairpin +1", neck = "Erra Pendant", ear1 = "Mani Earring", ear2 = "Dark Earring",
-        body = "Vanir Cotehardie", hands = "Gendewitha Gages +1", ring1 = "Evanescence Ring", ring2 = "Archon Ring",
-        back = "Refraction Cape", waist = gear.DrainWaist, legs = "Pedagogy Pants", feet = "Academic's Loafers" }
+    sets.midcast.Drain = {
+        main = "Rubicundity",
+        sub = "Enki Strap",
+        ammo = "Pemphredo Tathlum",
+        head = "Pixie Hairpin +1",
+        neck = "Erra Pendant",
+        ear1 = "Mani Earring",
+        ear2 = "Dark Earring",
+        body = "Vanir Cotehardie",
+        hands = "Gendewitha Gages +1",
+        ring1 = "Evanescence Ring",
+        ring2 = "Archon Ring",
+        back = "Refraction Cape",
+        waist = gear.DrainWaist,
+        legs = "Pedagogy Pants",
+        feet = "Academic's Loafers"
+    }
 
     sets.midcast.Aspir = sets.midcast.Drain
 
-    sets.midcast.Stun = { main = "Contemplator +1", sub = "Enki Strap", ammo = "Incantor Stone",
-        head = "Nahtirah Hat", neck = "Erra Pendant", ear1 = "Barkarole Earring", ear2 = "Malignance Earring",
-        body = "Vanir Cotehardie", hands = "Gendewitha Gages +1", ring1 = "Evanescence Ring", ring2 = gear.right_stikini,
-        back = "Refraction Cape", waist = "Witful Belt", legs = "Pedagogy Pants", feet = "Academic's Loafers" }
+    sets.midcast.Stun = {
+        main = "Contemplator +1",
+        sub = "Enki Strap",
+        ammo = "Incantor Stone",
+        head = "Nahtirah Hat",
+        neck = "Erra Pendant",
+        ear1 = "Barkarole Earring",
+        ear2 = "Malignance Earring",
+        body = "Vanir Cotehardie",
+        hands = "Gendewitha Gages +1",
+        ring1 = "Evanescence Ring",
+        ring2 = gear.right_stikini,
+        back = "Refraction Cape",
+        waist = "Witful Belt",
+        legs = "Pedagogy Pants",
+        feet = "Academic's Loafers"
+    }
 
     sets.midcast.Stun.Resistant = set_combine(sets.midcast.Stun, { main = "Lehbrailg +2" })
 
 
     -- Elemental Magic sets are default for handling low-tier nukes.
-    sets.midcast['Elemental Magic'] = { main = "Grioavolr", sub = "Enki Strap", ammo = "Ghastly Tathlum +1",
-        head = "Cath Palug Crown", neck = "Sibyl Scarf", ear1 = "Regal Earring", ear2 = "Malignance Earring",
-        body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Freke Ring", ring2 = "Metamorph Ring +1",
-        back = "Toro Cape", waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
+    sets.midcast['Elemental Magic'] = {
+        main = "Grioavolr",
+        sub = "Enki Strap",
+        ammo = "Ghastly Tathlum +1",
+        head = "Cath Palug Crown",
+        neck = "Sibyl Scarf",
+        ear1 = "Regal Earring",
+        ear2 = "Malignance Earring",
+        body = "Amalric Doublet +1",
+        hands = "Amalric Gages +1",
+        ring1 = "Freke Ring",
+        ring2 = "Metamorph Ring +1",
+        back = "Toro Cape",
+        waist = gear.ElementalObi,
+        legs = "Amalric Slops +1",
+        feet = "Amalric Nails +1"
+    }
 
-    sets.midcast['Elemental Magic'].Resistant = { main = "Grioavolr", sub = " Grip", ammo = "Pemphredo Tathlum",
-        head = "Cath Palug Crown", neck = "Eddy Necklace", ear1 = "Hecate's Earring", ear2 = "Friomisi Earring",
-        body = "Amalric Doublet +1", hands = "Amalric Gages +1", ring1 = "Freke Ring", ring2 = "Metamorph Ring +1",
-        back = "Toro Cape", waist = gear.ElementalObi, legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
+    sets.midcast['Elemental Magic'].Resistant = {
+        main = "Grioavolr",
+        sub = " Grip",
+        ammo = "Pemphredo Tathlum",
+        head = "Cath Palug Crown",
+        neck = "Eddy Necklace",
+        ear1 = "Hecate's Earring",
+        ear2 = "Friomisi Earring",
+        body = "Amalric Doublet +1",
+        hands = "Amalric Gages +1",
+        ring1 = "Freke Ring",
+        ring2 = "Metamorph Ring +1",
+        back = "Toro Cape",
+        waist = gear.ElementalObi,
+        legs = "Amalric Slops +1",
+        feet = "Amalric Nails +1"
+    }
 
     -- Custom refinements for certain nuke tiers
     sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {})
 
     sets.midcast['Elemental Magic'].HighTierNuke.Resistant = set_combine(sets.midcast['Elemental Magic'].Resistant, {})
 
-    sets.midcast.Impact = { main = "Lehbrailg +2", sub = "Enki Strap", ammo = "Ghastly Tathlum +1",
-        head = empty, neck = "Eddy Necklace", ear1 = "Barkarole Earring", ear2 = "Malignance Earring",
-        body = "Crepuscular Cloak", hands = "Amalric Gages +1", ring1 = "Freke Ring", ring2 = gear.right_stikini,
-        back = "Toro Cape", waist = "Demonry Sash", legs = "Amalric Slops +1", feet = "Amalric Nails +1" }
+    sets.midcast.Impact = {
+        main = "Lehbrailg +2",
+        sub = "Enki Strap",
+        ammo = "Ghastly Tathlum +1",
+        head = empty,
+        neck = "Eddy Necklace",
+        ear1 = "Barkarole Earring",
+        ear2 = "Malignance Earring",
+        body = "Crepuscular Cloak",
+        hands = "Amalric Gages +1",
+        ring1 = "Freke Ring",
+        ring2 = gear.right_stikini,
+        back = "Toro Cape",
+        waist = "Demonry Sash",
+        legs = "Amalric Slops +1",
+        feet = "Amalric Nails +1"
+    }
 
 
     -- Sets to return to when not performing an action.
 
     -- Resting sets
-    sets.resting = { main = "Daybreak", sub = "Ammurapi Shield",
-        head = "Nefer Khat +1", neck = "Bathy Choker +1",
-        body = "Gendewitha Bliault +1", hands = "Serpentes Cuffs",
-        ring1 = gear.left_stikini, ring2 = gear.right_stikini,
-        waist = "Austerity Belt", legs = "Nares Trews", feet = "Serpentes Sabots" }
+    sets.resting = {
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        head = "Nefer Khat +1",
+        neck = "Bathy Choker +1",
+        body = "Gendewitha Bliault +1",
+        hands = "Serpentes Cuffs",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        waist = "Austerity Belt",
+        legs = "Nares Trews",
+        feet = "Serpentes Sabots"
+    }
 
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
-    sets.idle.Town = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Homiliary",
-        head = "Savant's Bonnet +2", neck = "Loricate Torque +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
-        body = "Savant's Gown +2", hands = "Savant's Bracers +2", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
-        back = "Umbra Cape", waist = "Hierarch Belt", legs = "Savant's Pants +2", feet = "Crier's Gaiters" }
+    sets.idle.Town = {
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        ammo = "Homiliary",
+        head = "Savant's Bonnet +2",
+        neck = "Loricate Torque +1",
+        ear1 = "Bloodgem Earring",
+        ear2 = "Loquacious Earring",
+        body = "Savant's Gown +2",
+        hands = "Savant's Bracers +2",
+        ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring",
+        back = "Umbra Cape",
+        waist = "Hierarch Belt",
+        legs = "Savant's Pants +2",
+        feet = "Crier's Gaiters"
+    }
 
-    sets.idle.Field = { main = "Daybreak", sub = "Ammurapi Shield", ammo = "Homiliary",
-        head = "Nefer Khat +1", neck = "Loricate Torque +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
-        body = "Gendewitha Bliault +1", hands = "Serpentes Cuffs", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
-        back = "Umbra Cape", waist = "Hierarch Belt", legs = "Nares Trews", feet = "Crier's Gaiters" }
+    sets.idle.Field = {
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        ammo = "Homiliary",
+        head = "Nefer Khat +1",
+        neck = "Loricate Torque +1",
+        ear1 = "Bloodgem Earring",
+        ear2 = "Loquacious Earring",
+        body = "Gendewitha Bliault +1",
+        hands = "Serpentes Cuffs",
+        ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring",
+        back = "Umbra Cape",
+        waist = "Hierarch Belt",
+        legs = "Nares Trews",
+        feet = "Crier's Gaiters"
+    }
 
-    sets.idle.Field.PDT = { main = "Malignance Pole", sub = "Oneiros Grip", ammo = "Homiliary",
-        head = "Nahtirah Hat", neck = "Loricate Torque +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
-        body = "Hagondes Coat", hands = "Yaoyotl Gloves", ring1 = "Sheltered Ring", ring2 = "Defending Ring",
-        back = "Umbra Cape", waist = "Hierarch Belt", legs = "Nares Trews", feet = "Crier's Gaiters" }
+    sets.idle.Field.PDT = {
+        main = "Malignance Pole",
+        sub = "Oneiros Grip",
+        ammo = "Homiliary",
+        head = "Nahtirah Hat",
+        neck = "Loricate Torque +1",
+        ear1 = "Bloodgem Earring",
+        ear2 = "Loquacious Earring",
+        body = "Hagondes Coat",
+        hands = "Yaoyotl Gloves",
+        ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring",
+        back = "Umbra Cape",
+        waist = "Hierarch Belt",
+        legs = "Nares Trews",
+        feet = "Crier's Gaiters"
+    }
 
-    sets.idle.Field.Stun = { main = "Apamajas II", sub = "Enki Strap", ammo = "Homiliary",
-        head = "Nahtirah Hat", neck = "Loricate Torque +1", ear1 = "Barkarole Earring", ear2 = "Malignance Earring",
-        body = "Vanir Cotehardie", hands = "Gendewitha Gages +1", ring1 = "Rahab Ring", ring2 = gear.right_stikini,
-        back = "Fi Follet Cape +1", waist = "Goading Belt", legs = "Bokwus Slops", feet = "Academic's Loafers" }
+    sets.idle.Field.Stun = {
+        main = "Apamajas II",
+        sub = "Enki Strap",
+        ammo = "Homiliary",
+        head = "Nahtirah Hat",
+        neck = "Loricate Torque +1",
+        ear1 = "Barkarole Earring",
+        ear2 = "Malignance Earring",
+        body = "Vanir Cotehardie",
+        hands = "Gendewitha Gages +1",
+        ring1 = "Rahab Ring",
+        ring2 = gear.right_stikini,
+        back = "Fi Follet Cape +1",
+        waist = "Goading Belt",
+        legs = "Bokwus Slops",
+        feet = "Academic's Loafers"
+    }
 
-    sets.idle.Weak = { main = "Malignance Pole", sub = "Oneiros Grip", ammo = "Homiliary",
-        head = "Nahtirah Hat", neck = "Loricate Torque +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
-        body = "Hagondes Coat", hands = "Yaoyotl Gloves", ring1 = "Sheltered Ring", ring2 = "Meridian Ring",
-        back = "Umbra Cape", waist = "Hierarch Belt", legs = "Nares Trews", feet = "Crier's Gaiters" }
+    sets.idle.Weak = {
+        main = "Malignance Pole",
+        sub = "Oneiros Grip",
+        ammo = "Homiliary",
+        head = "Nahtirah Hat",
+        neck = "Loricate Torque +1",
+        ear1 = "Bloodgem Earring",
+        ear2 = "Loquacious Earring",
+        body = "Hagondes Coat",
+        hands = "Yaoyotl Gloves",
+        ring1 = "Sheltered Ring",
+        ring2 = "Meridian Ring",
+        back = "Umbra Cape",
+        waist = "Hierarch Belt",
+        legs = "Nares Trews",
+        feet = "Crier's Gaiters"
+    }
 
     -- Defense sets
 
-    sets.defense.PDT = { main = "Malignance Pole", sub = "Enki Strap", ammo = "Incantor Stone",
-        head = "Nahtirah Hat", neck = "Loricate Torque +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
-        body = "Hagondes Coat", hands = "Yaoyotl Gloves", ring1 = "Defending Ring", ring2 = gear.DarkRing.physical,
-        back = "Umbra Cape", waist = "Hierarch Belt", legs = "Hagondes Pants", feet = "Hagondes Sabots" }
+    sets.defense.PDT = {
+        main = "Malignance Pole",
+        sub = "Enki Strap",
+        ammo = "Incantor Stone",
+        head = "Nahtirah Hat",
+        neck = "Loricate Torque +1",
+        ear1 = "Bloodgem Earring",
+        ear2 = "Loquacious Earring",
+        body = "Hagondes Coat",
+        hands = "Yaoyotl Gloves",
+        ring1 = "Defending Ring",
+        ring2 = gear.DarkRing.physical,
+        back = "Umbra Cape",
+        waist = "Hierarch Belt",
+        legs = "Hagondes Pants",
+        feet = "Hagondes Sabots"
+    }
 
-    sets.defense.MDT = { main = "Malignance Pole", sub = "Enki Strap", ammo = "Incantor Stone",
-        head = "Nahtirah Hat", neck = "Loricate Torque +1", ear1 = "Bloodgem Earring", ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie", hands = "Yaoyotl Gloves", ring1 = "Defending Ring", ring2 = "Archon Ring",
-        back = "Tuilha Cape", waist = "Hierarch Belt", legs = "Bokwus Slops", feet = "Hagondes Sabots" }
+    sets.defense.MDT = {
+        main = "Malignance Pole",
+        sub = "Enki Strap",
+        ammo = "Incantor Stone",
+        head = "Nahtirah Hat",
+        neck = "Loricate Torque +1",
+        ear1 = "Bloodgem Earring",
+        ear2 = "Loquacious Earring",
+        body = "Vanir Cotehardie",
+        hands = "Yaoyotl Gloves",
+        ring1 = "Defending Ring",
+        ring2 = "Archon Ring",
+        back = "Tuilha Cape",
+        waist = "Hierarch Belt",
+        legs = "Bokwus Slops",
+        feet = "Hagondes Sabots"
+    }
 
     sets.Kiting = { feet = "Crier's Gaiters" }
 
@@ -273,10 +519,21 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     -- Normal melee group
-    sets.engaged = { main = "Malignance Pole", sub = "Oneiros Grip",
-        head = "Jhakri Coronal", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Jhakri Robe +1", hands = "Jhakri Cuffs +2", ring1 = "Rajas Ring", ring2 = "Jhakri Ring",
-        waist = "Witful Belt", legs = "Jhakri Slops", feet = "Jhakri Pigaches" }
+    sets.engaged = {
+        main = "Malignance Pole",
+        sub = "Oneiros Grip",
+        head = "Jhakri Coronal",
+        neck = "Combatant's Torque",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Jhakri Robe +1",
+        hands = "Jhakri Cuffs +2",
+        ring1 = "Rajas Ring",
+        ring2 = "Jhakri Ring",
+        waist = "Witful Belt",
+        legs = "Jhakri Slops",
+        feet = "Jhakri Pigaches"
+    }
 
 
 
@@ -292,8 +549,12 @@ function init_gear_sets()
 
     sets.buff['Klimaform'] = { feet = "Savant's Loafers +2" }
 
-    sets.buff.FullSublimation = { head = "Academic's Mortarboard", ear1 = "Savant's Earring", body = "Pedagogy Gown",
-        waist = "Embla Sash" }
+    sets.buff.FullSublimation = {
+        head = "Academic's Mortarboard",
+        ear1 = "Savant's Earring",
+        body = "Pedagogy Gown",
+        waist = "Embla Sash"
+    }
     sets.buff.PDTSublimation = { head = "Academic's Mortarboard", ear1 = "Savant's Earring", waist = "Embla sash" }
 
     --sets.buff['Sandstorm'] = {feet="Desert Boots"}
