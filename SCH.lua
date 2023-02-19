@@ -34,7 +34,7 @@ end
 function job_setup()
     gear.default.obi_waist = "Luminary Sash"
     info.addendumNukes = S { "Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV",
-            "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
+        "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
 
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
     update_active_strategems()
@@ -54,8 +54,8 @@ function user_setup()
 
     info.low_nukes = S { "Stone", "Water", "Aero", "Fire", "Blizzard", "Thunder" }
     info.mid_nukes = S { "Stone II", "Water II", "Aero II", "Fire II", "Blizzard II", "Thunder II",
-            "Stone III", "Water III", "Aero III", "Fire III", "Blizzard III", "Thunder III",
-            "Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV", }
+        "Stone III", "Water III", "Aero III", "Fire III", "Blizzard III", "Thunder III",
+        "Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV", }
     info.high_nukes = S { "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
 
     send_command('bind ^` input /ma Stun <t>')
@@ -133,20 +133,20 @@ function init_gear_sets()
     }
 
     sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {
-            main = "Daybreak",
-            head = "Kaykaus Mitra +1",
-            neck = "Elite Royal Collar",
-            ear1 = "Regal Earring",
-            ear2 = "Magnetic Earring",
-            body = "Kaykaus Bliaut +1",
-            hands = "Kaykaus Cuffs +1",
-            ring1 = gear.left_stikini,
-            ring2 = "Metamorph Ring +1",
-            back = "Fi Follet Cape +1",
-            waist = gear.CureWaist,
-            legs = "Kaykaus Tights +1",
-            feet = "Kaykaus Boots +1"
-        })
+        main = "Daybreak",
+        head = "Kaykaus Mitra +1",
+        neck = "Elite Royal Collar",
+        ear1 = "Regal Earring",
+        ear2 = "Magnetic Earring",
+        body = "Kaykaus Bliaut +1",
+        hands = "Kaykaus Cuffs +1",
+        ring1 = gear.left_stikini,
+        ring2 = "Metamorph Ring +1",
+        back = "Fi Follet Cape +1",
+        waist = gear.CureWaist,
+        legs = "Kaykaus Tights +1",
+        feet = "Kaykaus Boots +1"
+    })
 
     sets.midcast.CureWithLightWeather = set_combine(sets, micast.Cure, { waist = "Hachirin-no-obi" })
 
@@ -160,12 +160,12 @@ function init_gear_sets()
     }
 
     sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
-            neck = "Malison Medallion",
-            hands = "Hieros Mittens",
-            ring1 = "Haoma's Ring",
-            ring2 = "Haoma's Ring",
-            feet = "Gendewitha Galoshes +1"
-        })
+        neck = "Malison Medallion",
+        hands = "Hieros Mittens",
+        ring1 = "Haoma's Ring",
+        ring2 = "Haoma's Ring",
+        feet = "Gendewitha Galoshes +1"
+    })
 
     sets.midcast['Enhancing Magic'] = {
         main = "Grioavolr",
@@ -180,19 +180,19 @@ function init_gear_sets()
     }
 
     sets.midcast['Enhancing Magic'].Duration = set_combine(sets.midcast['Enhancing Magic'], {
-            head = gear.telchine.enh_dur.head,
-            body = gear.telchine.enh_dur.body,
-            hands = gear.telchine.enh_dur.hands,
-            legs = gear.telchine.enh_dur.legs,
-            feet = gear.telchine.enh_dur.feet
-        })
+        head = gear.telchine.enh_dur.head,
+        body = gear.telchine.enh_dur.body,
+        hands = gear.telchine.enh_dur.hands,
+        legs = gear.telchine.enh_dur.legs,
+        feet = gear.telchine.enh_dur.feet
+    })
 
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'].Duration, {
-            neck = "Nodens Gorget",
-            ear1 = "Earthcry Earring",
-            waist = "Siegel Sash",
-            legs = "Shedir Seraweels"
-        })
+        neck = "Nodens Gorget",
+        ear1 = "Earthcry Earring",
+        waist = "Siegel Sash",
+        legs = "Shedir Seraweels"
+    })
 
     sets.midcast.Storm = set_combine(sets.midcast['Enhancing Magic'].Duration, { feet = "Pedagogy Loafers" })
 
@@ -318,12 +318,12 @@ function init_gear_sets()
     }
 
     sets.midcast['Elemental Magic'].Resistant = {
-        main = "Grioavolr",
-        sub = " Grip",
+        main = "Contemplator +1",
+        sub = "Enki Strap",
         ammo = "Pemphredo Tathlum",
         head = "Cath Palug Crown",
-        neck = "Eddy Necklace",
-        ear1 = "Hecate's Earring",
+        neck = "Incanter's Torque",
+        ear1 = "Regal Earring",
         ear2 = "Friomisi Earring",
         body = "Amalric Doublet +1",
         hands = "Amalric Gages +1",

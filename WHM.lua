@@ -63,9 +63,9 @@ function init_gear_sets()
     -- sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
-            head = "Piety Cap",
-            back = "Perimede Cape",
-        })
+        head = "Piety Cap",
+        back = "Perimede Cape",
+    })
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.CureSolace = set_combine(sets.precast.FC.Cure)
 
@@ -111,12 +111,12 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {
-            neck = "Sibyl Scarf",
-            ear1 = "Regal Earring",
-            ring1 = "Epaminondas's Ring",
-            ring2 = "Strendu Ring",
-            waist = "Luminary Sash"
-        })
+        neck = "Sibyl Scarf",
+        ear1 = "Regal Earring",
+        ring1 = "Epaminondas's Ring",
+        ring2 = "Strendu Ring",
+        waist = "Luminary Sash"
+    })
     sets.precast.WS['Seraph Strike'] = set_combine(sets.precast.WS['Flash Nova'], {})
     sets.precast.WS['Shining Strike'] = sets.precast.WS['Seraph Strike']
 
@@ -140,13 +140,13 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Mystic Boon'] = set_combine(sets.precast.WS, {
-            ear1 = "Regal Earring",
-            ring2 = "Metamorph Ring +1",
-            waist = "Luminary Sash",
-        })
+        ear1 = "Regal Earring",
+        ring2 = "Metamorph Ring +1",
+        waist = "Luminary Sash",
+    })
 
     sets.precast.WS['Cataclysm'] = set_combine(sets.precast.WS['Flash Nova'],
-            { head = "Pixie Hairpin +1", ring2 = "Archon Ring" })
+        { head = "Pixie Hairpin +1", ring2 = "Archon Ring" })
 
     sets.precast.WS['Earth Crusher'] = sets.precast.WS['Flash Nova']
 
@@ -179,7 +179,7 @@ function init_gear_sets()
         back = "Altruistic cape",
         waist = "Bishop's Sash",
         legs = "Piety Pantaloons +1",
-        feet = "",
+        feet = "Bunzi's Sabots",
     }
 
     sets.midcast.CureSolace = {
@@ -200,32 +200,32 @@ function init_gear_sets()
     }
 
     sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {
-            main = "Daybreak",
-            head = "Kaykaus Mitra +1",
-            neck = "Elite Royal Collar",
-            ear1 = "Regal Earring",
-            ear2 = "Magnetic Earring",
-            body = "Kaykaus Bliaut +1",
-            hands = "Kaykaus Cuffs +1",
-            ring1 = gear.left_stikini,
-            ring2 = "Metamorph Ring +1",
-            back = "Fi Follet Cape +1",
-            waist = gear.CureWaist,
-            legs = "Kaykaus Tights +1",
-            feet = "Kaykaus Boots +1"
-        })
+        main = "Daybreak",
+        head = "Kaykaus Mitra +1",
+        neck = "Elite Royal Collar",
+        ear1 = "Regal Earring",
+        ear2 = "Magnetic Earring",
+        body = "Kaykaus Bliaut +1",
+        hands = "Kaykaus Cuffs +1",
+        ring1 = gear.left_stikini,
+        ring2 = "Metamorph Ring +1",
+        back = "Fi Follet Cape +1",
+        waist = gear.CureWaist,
+        legs = "Kaykaus Tights +1",
+        feet = "Kaykaus Boots +1"
+    })
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {})
 
     sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
-            neck = "Debilis Medallion",
-            hands = "Hieros Mittens",
-            ring1 = "Haoma's Ring",
-            ring2 = "Haoma's Ring",
-            back = "Alaunus's Cape",
-            legs = "Theophany Pantaloons +1",
-            feet = "Gendewitha Galoshes +1",
-        })
+        neck = "Debilis Medallion",
+        hands = "Hieros Mittens",
+        ring1 = "Haoma's Ring",
+        ring2 = "Haoma's Ring",
+        back = "Alaunus's Cape",
+        legs = "Theophany Pantaloons +1",
+        feet = "Gendewitha Galoshes +1",
+    })
 
     sets.midcast.StatusRemoval = {
         head = "Eber Cap", legs = "Piety Pantaloons"
@@ -250,12 +250,12 @@ function init_gear_sets()
     }
 
     sets.midcast['Enhancing Magic'].Duration = set_combine(sets.midcast['Enhancing Magic'], {
-            head = gear.telchine.enh_dur.head,
-            body = gear.telchine.enh_dur.body,
-            hands = gear.telchine.enh_dur.hands,
-            legs = gear.telchine.enh_dur.legs,
-            feet = gear.telchine.enh_dur.feet
-        })
+        head = gear.telchine.enh_dur.head,
+        body = gear.telchine.enh_dur.body,
+        hands = gear.telchine.enh_dur.hands,
+        legs = gear.telchine.enh_dur.legs,
+        feet = gear.telchine.enh_dur.feet
+    })
 
     sets.midcast.Stoneskin = {
         main = "Grioavolr",
@@ -292,34 +292,44 @@ function init_gear_sets()
     sets.midcast['Divine Magic'] = {
         main = "Daybreak",
         sub = "Ammurapi Shield",
-        head = "Inyanga Tiara +1",
-        neck = "Baetyl Pendant",
-        ear1 = "Friomisi Earring",
+        head = "Bunzi's Hat",
+        neck = "Sibyl Scarf",
+        ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
-        body = "Inyanga Jubbah +2",
-        hands = "Theophany Mitts +1",
-        ring2 = gear.right_stikini,
+        body = "Bunzi's Robe",
+        hands = "Bunzi's Gloves",
+        ring1 = "Freke Ring",
+        ring2 = "Weatherspoon Ring +1",
         back = "Felicitas Cape +1",
         waist = gear.ElementalObi,
-        legs = "Theophany Pantaloons +1",
-        feet = "Gendewitha Galoshes"
+        legs = "Bunzi's Pants",
+        feet = "Bunzi's Sabots"
     }
 
+    sets.midcast['Divine Magic']['Banish'] = set_combine(sets.midcast['Divine Magic'], {
+        head = "Ipoca Beret",
+        neck = "Jokushu Chain",
+        hands = "Piety Mitts +1",
+        ring2 = "Fenian Ring",
+        back = "Disperser's Cape",
+    })
+
+
     sets.midcast['Dark Magic'] = {
-        main = "Daybreak",
+        main = "Bunzi's Rod",
         sub = "Ammurapi Shield",
-        head = "Inyanga Tiara +1",
-        neck = "Aesir Torque",
-        ear1 = "Dignitary's Earring",
+        head = "Bunzi's Hat",
+        neck = "Sibyl Scarf",
+        ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
-        body = "Inyanga Jubbah +2",
-        hands = "Inyanga Dastanas +2",
-        ring1 = "Strendu Ring",
-        ring2 = gear.right_stikini,
+        body = "Bunzi's Robe",
+        hands = "Bunzi's Gloves",
+        ring1 = gear.left_stikini,
+        ring2 = "Metamorph Ring +1",
         back = "Felicitas Cape +1",
-        waist = "Demonry Sash",
-        legs = "Bokwus Slops",
-        feet = "Piety Duckbills"
+        waist = "Acuity Belt +1",
+        legs = "Bunzi's Pants",
+        feet = "Bunzi's Sabots"
     }
 
     sets.midcast['Enfeebling Magic'] = {
@@ -364,7 +374,7 @@ function init_gear_sets()
         ring2 = gear.right_stikini,
         back = "Felicitas Cape +1",
         waist = "Fucho-no-obi",
-        legs = "Assiduity Pants +1",
+        legs = "Nyame Flanchard",
         feet = "Crier's Gaiters"
     }
 

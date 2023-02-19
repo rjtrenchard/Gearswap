@@ -1,4 +1,4 @@
---[[ 
+--[[
     f9      F9          cycle OffenseMode
     ^f9     CTRL+F9     cycle HybridMode
     !f9     ALT+F9      cycle RangedMode
@@ -15,8 +15,6 @@
     bind ^- gs c toggle selectnpctargets')
     send_command('bind ^= gs c cycle pctargetmode')
 ]]
-
-
 --TODO: fix macro changing function so it stops freaking out when you change to an undefined weapon.
 
 -------------------------------------------------------------------------------------------------------------------
@@ -58,7 +56,7 @@ function job_setup()
 
     state.Buff['Aftermath'] = (
         buffactive['Aftermath: Lv.1'] or buffactive['Aftermath: Lv.2'] or buffactive['Aftermath: Lv.3'] or
-            buffactive['Aftermath']) or false
+        buffactive['Aftermath']) or false
 
 
     -- For th_action_check():
@@ -68,8 +66,6 @@ function job_setup()
     info.default_u_ja_ids = S { 201, 202, 203, 205, 207 }
 
     include('Mote-TreasureHunter')
-
-
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -178,7 +174,6 @@ function user_setup()
         info.TP.old = old_tp
         info.TP.new = new_tp
         echo('new: ' .. new_tp .. ' old: ' .. old_tp, 2)
-
     end)
 
     echo('Job:' .. player.main_job .. '/' .. player.sub_job .. '.', 2)
@@ -212,20 +207,39 @@ function job_helper()
     }
     info.Weapons = {}
     info.Weapons.Type = {
-        ['Aern Dagger'] = 'dagger', ['Aern Dagger II'] = 'dagger',
-        ['Naegling'] = 'sword', ['Ridill'] = 'sword',
-        ['Zulfiqar'] = 'greatsword', ['Caladbolg'] = 'greatsword',
+        ['Aern Dagger'] = 'dagger',
+        ['Aern Dagger II'] = 'dagger',
+        ['Naegling'] = 'sword',
+        ['Ridill'] = 'sword',
+        ['Zulfiqar'] = 'greatsword',
+        ['Caladbolg'] = 'greatsword',
         ['Lycurgos'] = 'greataxe',
-        ['Kaja Axe'] = 'axe', ['Dolichenus'] = 'axe',
-        ['Apocalypse'] = 'scythe', ['Father Time'] = 'scythe', ['Liberator'] = 'scythe', ['Redemption'] = 'scythe',
-        ['Anguta'] = 'scythe', ['Dacnomania'] = 'scythe', ['Misanthropy'] = 'scythe', ['Woeborn'] = 'scythe',
+        ['Kaja Axe'] = 'axe',
+        ['Dolichenus'] = 'axe',
+        ['Apocalypse'] = 'scythe',
+        ['Father Time'] = 'scythe',
+        ['Liberator'] = 'scythe',
+        ['Redemption'] = 'scythe',
+        ['Anguta'] = 'scythe',
+        ['Dacnomania'] = 'scythe',
+        ['Misanthropy'] = 'scythe',
+        ['Woeborn'] = 'scythe',
         ['Crepuscular Scythe'] = 'scythe',
-        ['Loxotic Mace +1'] = 'club', ['Loxotic Mace'] = 'club', ['Warp Cudgel'] = 'club', ['Caduceus'] = 'club',
+        ['Loxotic Mace +1'] = 'club',
+        ['Loxotic Mace'] = 'club',
+        ['Warp Cudgel'] = 'club',
+        ['Caduceus'] = 'club',
         ['empty'] = 'handtohand',
-        ['Blurred Shield'] = 'shield', ['Blurred Shield +1'] = 'shield', ['Adapa Shield'] = 'shield',
-        ["Smythe's Aspis"] = 'shield', ["Smyth's Ecu"] = 'shield', ["Smythe's Scutum"] = 'shield',
-        ["Smythe's Shield"] = 'shield', ["Smythe's Escutcheon"] = "Shield",
-        ['Utu Grip'] = 'grip', ['Caecus Grip'] = 'grip'
+        ['Blurred Shield'] = 'shield',
+        ['Blurred Shield +1'] = 'shield',
+        ['Adapa Shield'] = 'shield',
+        ["Smythe's Aspis"] = 'shield',
+        ["Smyth's Ecu"] = 'shield',
+        ["Smythe's Scutum"] = 'shield',
+        ["Smythe's Shield"] = 'shield',
+        ["Smythe's Escutcheon"] = "Shield",
+        ['Utu Grip'] = 'grip',
+        ['Caecus Grip'] = 'grip'
     }
     info.Weapons.REMA = S { 'Apocalypse', 'Ragnarok', 'Caladbolg', 'Redemption', 'Liberator', 'Anguta', 'Father Time' }
     info.Weapons.REMA.Type = {
@@ -277,29 +291,36 @@ function job_helper()
     -- macro book locations
     info.macro_sets = {}
     info.macro_sets.subjobs = S { 'SAM', 'NIN', 'WAR', 'DRG' }
-    info.macro_sets['greatsword'] = { ['SAM'] = { book = 8, page = 2 },
+    info.macro_sets['greatsword'] = {
+        ['SAM'] = { book = 8, page = 2 },
         ['NIN'] = { book = 8, page = 4 },
         ['WAR'] = { book = 8, page = 6 },
-        ['DRG'] = { book = 8, page = 10 } }
+        ['DRG'] = { book = 8, page = 10 }
+    }
 
-    info.macro_sets['scythe'] = { ['SAM'] = { book = 8, page = 1 },
+    info.macro_sets['scythe'] = {
+        ['SAM'] = { book = 8, page = 1 },
         ['NIN'] = { book = 8, page = 3 },
         ['WAR'] = { book = 8, page = 5 },
-        ['DRG'] = { book = 8, page = 9 } }
+        ['DRG'] = { book = 8, page = 9 }
+    }
 
-    info.macro_sets['greataxe'] = { ['SAM'] = { book = 8, page = 8 },
+    info.macro_sets['greataxe'] = {
+        ['SAM'] = { book = 8, page = 8 },
         ['NIN'] = { book = 8, page = 8 },
         ['WAR'] = { book = 8, page = 8 },
-        ['DRG'] = { book = 8, page = 8 } }
+        ['DRG'] = { book = 8, page = 8 }
+    }
 
-    info.macro_sets['sword'] = { ['SAM'] = { book = 8, page = 7 },
+    info.macro_sets['sword'] = {
+        ['SAM'] = { book = 8, page = 7 },
         ['NIN'] = { book = 8, page = 7 },
         ['WAR'] = { book = 8, page = 7 },
-        ['DRG'] = { book = 8, page = 7 } }
+        ['DRG'] = { book = 8, page = 7 }
+    }
 
     info.macro_sets['axe'] = info.macro_sets['sword']
     info.macro_sets['club'] = info.macro_sets['sword']
-
 end
 
 -- found in gear_name/DRK.lua
@@ -309,14 +330,22 @@ function init_gear_sets()
     --------------------------------------
 
     -- Ambuscade capes
-    gear.melee_cape = { name = "Ankou's Mantle",
-        augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dbl.Atk."+10', 'Phys. dmg. taken-10%', } }
-    gear.ws_cape = { name = "Ankou's Mantle",
-        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%' } }
-    gear.torcleaver_cape = { name = "Ankou's Mantle",
-        augments = { 'VIT+20', 'Accuracy+20 Attack+20', 'VIT+10', 'Weapon skill damage +10%', } }
-    gear.casting_cape = { name = "Ankou's Mantle",
-        augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', '"Fast Cast"+10', 'Spell interruption rate down-10%', } }
+    gear.melee_cape = {
+        name = "Ankou's Mantle",
+        augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dbl.Atk."+10', 'Phys. dmg. taken-10%', }
+    }
+    gear.ws_cape = {
+        name = "Ankou's Mantle",
+        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%' }
+    }
+    gear.torcleaver_cape = {
+        name = "Ankou's Mantle",
+        augments = { 'VIT+20', 'Accuracy+20 Attack+20', 'VIT+10', 'Weapon skill damage +10%', }
+    }
+    gear.casting_cape = {
+        name = "Ankou's Mantle",
+        augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', '"Fast Cast"+10', 'Spell interruption rate down-10%', }
+    }
     gear.SIRD_cape = gear.casting_cape
 
     -- Mainhand Sets
@@ -339,36 +368,62 @@ function init_gear_sets()
     sets.precast.JA['Diabolic Eye'] = { hands = "Fallen's Finger Gauntlets +3" }
     sets.precast.JA['Souleater'] = { head = "Ignominy Burgonet +3", legs = "Fallen's Flanchard +3" }
     sets.precast.JA['Nether Void'] = { legs = "Heathen's Flanchard +2" }
-    sets.precast.JA['Provoke'] = sets.Enmity
+    sets.precast.JA['Provoke'] = sets.enmity
 
     -------------------------------------------------------------------------------------------------------------------
     -- Miscellaneous Sets
     -------------------------------------------------------------------------------------------------------------------
     sets.HP_High = {
-        head = "Ratri sallet +1", neck = "Unmoving Collar +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
-        body = "Ignominy Cuirass +3", hands = "Rat. Gadlings +1", ring1 = "Moonlight Ring", ring2 = "Gelatinous Ring +1",
-        back = "Reiki Cloak", waist = "Eschan Stone", legs = "Sakpata's Cuisses",
+        head = "Ratri sallet +1",
+        neck = "Unmoving Collar +1",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Ignominy Cuirass +3",
+        hands = "Rat. Gadlings +1",
+        ring1 = "Moonlight Ring",
+        ring2 = "Gelatinous Ring +1",
+        back = "Reiki Cloak",
+        waist = "Eschan Stone",
+        legs = "Sakpata's Cuisses",
         feet = { name = "Ratri Sollerets +1", priority = 10 },
     }
     sets.HP_Low = set_combine(sets.naked, { main = gear.MainHand, sub = gear.SubHand, range = "", })
 
     sets.resist = {}
-    sets.resist.death = { main = "Malfeasance +1",
-        ring1 = "Shadow Ring", ring2 = "Eihwaz Ring"
+    sets.resist.death = {
+        main = "Malfeasance +1",
+        ring1 = "Shadow Ring",
+        ring2 = "Eihwaz Ring"
     }
 
-    sets.Enmity = { ammo = "Sapience Orb",
-        head = "Loess Barbuta +1", neck = "Unmoving Collar +1", ear1 = "Cryptic Earring", ear2 = "Trux Earring",
-        body = "Obviation Cuirass +1", hands = "Macabre Gauntlets +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
-        waist = "Trance Belt", legs = "Zoar Subligar +1", feet = gear.yorium.enmity.feet }
-    sets.Enmity.Weapon = {}
-    -- sets.Enmity.Weapon = { main = "Voay Sword +1", sub = "Camaraderie Shield" }
+    sets.enmity = {
+        ammo = "Sapience Orb",
+        head = "Loess Barbuta +1",
+        neck = "Unmoving Collar +1",
+        ear1 = "Cryptic Earring",
+        ear2 = "Trux Earring",
+        body = "Obviation Cuirass +1",
+        hands = "Macabre Gauntlets +1",
+        ring1 = "Supershear Ring",
+        ring2 = "Eihwaz Ring",
+        waist = "Trance Belt",
+        legs = "Zoar Subligar +1",
+        feet = gear.yorium.enmity.feet
+    }
+    sets.enmity.Weapon = {}
+    -- sets.enmity.Weapon = { main = "Voay Sword +1", sub = "Camaraderie Shield" }
 
 
-    sets.SIRD = { ammo = "Staunch Tathlum +1",
-        head = gear.acro.SIRD.head, ear2 = "Magnetic Earring",
-        hands = gear.acro.SIRD.hands, ring2 = "Evanescence Ring",
-        back = gear.SIRD_cape, legs = "Founder's Hose", feet = "Odyssean Greaves" }
+    sets.SIRD = {
+        ammo = "Staunch Tathlum +1",
+        head = gear.acro.SIRD.head,
+        ear2 = "Magnetic Earring",
+        hands = gear.acro.SIRD.hands,
+        ring2 = "Evanescence Ring",
+        back = gear.SIRD_cape,
+        legs = "Founder's Hose",
+        feet = "Odyssean Greaves"
+    }
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {}
@@ -377,21 +432,27 @@ function init_gear_sets()
     sets.precast.Waltz['Healing Waltz'] = {}
 
 
-    sets.TreasureHunter = { ammo = "Perfect Lucky Egg",
+    sets.TreasureHunter = {
+        ammo = "Perfect Lucky Egg",
         head = "Volte Cap",
-        legs = "Volte Hose", feet = "Volte Boots" }
+        legs = "Volte Hose",
+        feet = "Volte Boots"
+    }
 
     sets.buff.sleep = { neck = "Vim Torque +1" }
 
     sets.buff.doom = set_combine(sets.defense.PDT, {
         neck = "Nicander's Necklace",
-        ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
-        waist = "Gishdubar Sash", legs = "Shabti Cuisses +1"
+        ring1 = "Eshmun's Ring",
+        ring2 = "Eshmun's Ring",
+        waist = "Gishdubar Sash",
+        legs = "Shabti Cuisses +1"
     })
 
     sets.buff.doom.HolyWater = set_combine(sets.buff.doom, {
         neck = "Nicander's Necklace",
-        ring1 = "Blenmot's Ring +1", ring2 = "Blenmot's Ring +1",
+        ring1 = "Blenmot's Ring +1",
+        ring2 = "Blenmot's Ring +1",
     })
 
 
@@ -400,37 +461,93 @@ function init_gear_sets()
     -------------------------------------------------------------------------------------------------------------------
 
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ammo = "Knobkierrie",
-        head = "Nyame Helm", neck = "Abyss Beads +2", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
-        body = "Ignominy Cuirass +3", hands = "Sakpata's Gauntlets", ring1 = "Regal Ring", ring2 = "Epaminondas's Ring",
-        back = gear.ws_cape, waist = "Fotia Belt", legs = "Fallen's Flanchard +3", feet = "Heathen's Sollerets +2" }
+    sets.precast.WS = {
+        ammo = "Knobkierrie",
+        head = "Nyame Helm",
+        neck = "Abyss Beads +2",
+        ear1 = "Thrud Earring",
+        ear2 = "Moonshade Earring",
+        body = "Ignominy Cuirass +3",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Regal Ring",
+        ring2 = "Epaminondas's Ring",
+        back = gear.ws_cape,
+        waist = "Fotia Belt",
+        legs = "Fallen's Flanchard +3",
+        feet = "Heathen's Sollerets +2"
+    }
     sets.precast.WS.FullTP = { ear2 = "Lugra Earring +1" }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, { head = "Nyame Helm", ear1 = "Telos Earring",
-        waist = "Fotia Belt" })
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        head = "Nyame Helm",
+        ear1 = "Telos Earring",
+        waist = "Fotia Belt"
+    })
 
     sets.precast.WS.SingleHit = set_combine(sets.precast.WS, { neck = "Abyssal Beads +2", waist = "Sailfi Belt +1" })
 
-    sets.precast.WS.MultiHit = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = "Abyss Beads +2", ear1 = "Schere Earring", ear2 = "Lugra Earring +1",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Regal Ring", ring2 = "Niqmaddu Ring",
-        back = gear.multi_cape, waist = "Fotia Belt", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
+    sets.precast.WS.MultiHit = {
+        ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm",
+        neck = "Abyss Beads +2",
+        ear1 = "Schere Earring",
+        ear2 = "Lugra Earring +1",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Regal Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.multi_cape,
+        waist = "Fotia Belt",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
 
-    sets.precast.WS.Magic = { ammo = "Knobkierrie",
-        head = "Nyame Helm", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Malignance Earring",
-        body = "Ignominy Cuirass +3", hands = "Fallen's Finger Gauntlets +3", ring1 = "Metamorph Ring +1",
+    sets.precast.WS.Magic = {
+        ammo = "Knobkierrie",
+        head = "Nyame Helm",
+        neck = "Sibyl Scarf",
+        ear1 = "Friomisi Earring",
+        ear2 = "Malignance Earring",
+        body = "Ignominy Cuirass +3",
+        hands = "Fallen's Finger Gauntlets +3",
+        ring1 = "Metamorph Ring +1",
         ring2 = "Epaminondas's Ring",
-        back = gear.ws_cape, waist = "Eschan Stone", legs = "Fallen's Flanchard +3", feet = "Heathen's Sollerets +2" }
+        back = gear.ws_cape,
+        waist = "Eschan Stone",
+        legs = "Fallen's Flanchard +3",
+        feet = "Heathen's Sollerets +2"
+    }
 
-    sets.precast.WS.Crit = { ammo = "Yetshila +1",
-        head = "Blistering Sallet +1", neck = "Fotia Gorget", ear1 = gear.WSEarThrud, ear2 = "Moonshade Earring",
-        body = "Hjarrandi Breastplate", hands = "Sakpata's Gauntlets", ring1 = "Regal Ring", ring2 = "Begrudging Ring",
-        back = gear.ws_cape, waist = "Fotia Belt", legs = "Zoar Subligar +1", feet = "Heathen's Sollerets +2" }
+    sets.precast.WS.Crit = {
+        ammo = "Yetshila +1",
+        head = "Blistering Sallet +1",
+        neck = "Fotia Gorget",
+        ear1 = gear.WSEarThrud,
+        ear2 = "Moonshade Earring",
+        body = "Hjarrandi Breastplate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Regal Ring",
+        ring2 = "Begrudging Ring",
+        back = gear.ws_cape,
+        waist = "Fotia Belt",
+        legs = "Zoar Subligar +1",
+        feet = "Heathen's Sollerets +2"
+    }
 
-    sets.precast.WS.Low = { ammo = "Seething Bomblet +1",
-        head = "", neck = "Fotia Gorget", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
-        body = "", hands = "", ring1 = "Moonlight Ring", ring2 = "Epaminondas's Ring",
-        back = gear.melee_cape, waist = "Fotia Belt", legs = "Carmine Cuisses +1", feet = ""
+    sets.precast.WS.Low = {
+        ammo = "Seething Bomblet +1",
+        head = "",
+        neck = "Fotia Gorget",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Telos Earring",
+        body = "",
+        hands = "",
+        ring1 = "Moonlight Ring",
+        ring2 = "Epaminondas's Ring",
+        back = gear.melee_cape,
+        waist = "Fotia Belt",
+        legs = "Carmine Cuisses +1",
+        feet = ""
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -449,31 +566,56 @@ function init_gear_sets()
     sets.precast.WS['Spiral Hell'].Mod = set_combine(sets.precast.WS['Spiral Hell'],
         { head = "Ratri Sallet +1", hands = "Ratri Gadlings +1", feet = { name = "Ratri Sollerets +1", priority = 10 } })
 
-    sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, { ammo = "Ghastly Tathlum +1",
-        head = "Ratri Sallet +1", ear1 = "Lugra Earring +1", ear2 = "Moonshade Earring",
-        body = "Sakpata's breastplate", hands = "Fallen's Finger gauntlets +3", ring1 = "Metamorph Ring +1",
-        back = gear.ws_cape, legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" })
+    sets.precast.WS['Entropy'] = set_combine(sets.precast.WS.MultiHit, {
+        ammo = "Ghastly Tathlum +1",
+        head = "Ratri Sallet +1",
+        ear1 = "Lugra Earring +1",
+        ear2 = "Moonshade Earring",
+        body = "Sakpata's breastplate",
+        hands = "Fallen's Finger gauntlets +3",
+        ring1 = "Metamorph Ring +1",
+        back = gear.ws_cape,
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    })
     sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS.Acc, { ear2 = "Moonshade Earring" })
     sets.precast.WS['Entropy'].Mod = set_combine(sets.precast.WS['Entropy'], { ear2 = "Moonshade Earring" })
     sets.precast.WS['Entropy'].FullTP = { ear2 = "Malignance Earring" }
 
     sets.precast.WS['Quietus'] = set_combine(sets.precast.WS.SingleHit,
-        { head = "Ratri Sallet +1", hands = "Ratri Gadlings +1", feet = { name = "Ratri Sollerets +1", priority = 10 },
-            ear2 = "Lugra Earring +1" })
+        {
+            head = "Ratri Sallet +1",
+            hands = "Ratri Gadlings +1",
+            feet = { name = "Ratri Sollerets +1", priority = 10 },
+            ear2 = "Lugra Earring +1"
+        })
     sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS.Acc,
-        { head = "Ratri Sallet +1", hands = "Ratri Gadlings +1", feet = { name = "Ratri Sollerets +1", priority = 10 },
-            ear2 = "Lugra Earring +1" })
+        {
+            head = "Ratri Sallet +1",
+            hands = "Ratri Gadlings +1",
+            feet = { name = "Ratri Sollerets +1", priority = 10 },
+            ear2 = "Lugra Earring +1"
+        })
     sets.precast.WS['Quietus'].Mod = set_combine(sets.precast.WS['Quietus'],
-        { head = "Ratri Sallet +1", hands = "Ratri Gadlings +1", feet = { name = "Ratri Sollerets +1", priority = 10 },
-            ear2 = "Lugra Earring +1" })
+        {
+            head = "Ratri Sallet +1",
+            hands = "Ratri Gadlings +1",
+            feet = { name = "Ratri Sollerets +1", priority = 10 },
+            ear2 = "Lugra Earring +1"
+        })
 
     sets.precast.WS['Guillotine'] = set_combine(sets.precast.WS.MultiHit, {})
     sets.precast.WS['Guillotine'].Acc = set_combine(sets.precast.WS.Acc, {})
     sets.precast.WS['Guillotine'].Mod = set_combine(sets.precast.WS['Guillotine'], {})
 
     sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.SingleHit,
-        { head = "Ratri Sallet +1", hands = "Ratri Gadlings +1", neck = "Abyssal Beads +2", waist = "Sailfi Belt +1",
-            feet = { name = "Ratri Sollerets +1", priority = 10 } })
+        {
+            head = "Ratri Sallet +1",
+            hands = "Ratri Gadlings +1",
+            neck = "Abyssal Beads +2",
+            waist = "Sailfi Belt +1",
+            feet = { name = "Ratri Sollerets +1", priority = 10 }
+        })
     sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS.Acc,
         { head = "Ratri Sallet +1", hands = "Ratri Gadlings +1", feet = { name = "Ratri Sollerets +1", priority = 10 } })
     sets.precast.WS['Cross Reaper'].Mod = set_combine(sets.precast.WS,
@@ -484,11 +626,21 @@ function init_gear_sets()
     sets.precast.WS['Insurgency'].Mod = set_combine(sets.precast.WS['Insurgency'], {})
 
     sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS.SingleHit,
-        { head = "Ratri Sallet +1", neck = "Abyssal Beads +2", hands = "Ratri Gadlings +1", waist = "Sailfi Belt +1",
-            ear2 = "Lugra Earring +1", feet = { name = "Ratri Sollerets +1", priority = 10 } })
+        {
+            head = "Ratri Sallet +1",
+            neck = "Abyssal Beads +2",
+            hands = "Ratri Gadlings +1",
+            waist = "Sailfi Belt +1",
+            ear2 = "Lugra Earring +1",
+            feet = { name = "Ratri Sollerets +1", priority = 10 }
+        })
     sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS.Acc,
-        { head = "Ratri Sallet +1", ear2 = "Lugra Earring +1", hands = "Ratri Gadlings +1",
-            feet = { name = "Ratri Sollerets +1", priority = 10 } })
+        {
+            head = "Ratri Sallet +1",
+            ear2 = "Lugra Earring +1",
+            hands = "Ratri Gadlings +1",
+            feet = { name = "Ratri Sollerets +1", priority = 10 }
+        })
     sets.precast.WS['Catastrophe'].Mod = set_combine(sets.precast.WS['Catastrophe'],
         { head = "Ratri Sallet +1", hands = "Ratri Gadlings +1", feet = { name = "Ratri Sollerets +1", priority = 10 } })
 
@@ -511,8 +663,11 @@ function init_gear_sets()
 
     sets.precast.WS['Torcleaver'] = set_combine(sets.precast.WS.SingleHit, {
         neck = "Abyssal Beads +2",
-        hands = "Sakpata's Gauntlets", ring1 = "Epaminondas's Ring", ring2 = "Niqmaddu Ring",
-        back = gear.torcleaver_cape, waist = "Fotia Belt"
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Epaminondas's Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.torcleaver_cape,
+        waist = "Fotia Belt"
     })
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS.Acc,
         { hands = "Sakpata's Gauntlets", back = gear.torcleaver_cape, waist = "Fotia Belt" })
@@ -536,11 +691,18 @@ function init_gear_sets()
         { neck = "Abyssal beads +2", waist = "Sailfi belt +1" })
 
     sets.precast.WS['Full Break'] = set_combine(sets.precast.WS.SingleHit, {
-        head = "Heathen's Burgeonet +2", neck = "Abyssal Beads +2", ear1 = "Crepuscular Earring",
+        head = "Heathen's Burgeonet +2",
+        neck = "Abyssal Beads +2",
+        ear1 = "Crepuscular Earring",
         ear2 = "Dignitary Earring",
-        body = "Heathen's Cuirass +2", hands = "Heathen's Gauntlets +2", ring1 = "Chirich Ring +1",
+        body = "Heathen's Cuirass +2",
+        hands = "Heathen's Gauntlets +2",
+        ring1 = "Chirich Ring +1",
         ring2 = "Moonlight Ring",
-        back = gear.melee_cape, waist = "Fotia Belt", legs = "Heathen's Flanchard +2", feet = "Heathen's Sollerets +2"
+        back = gear.melee_cape,
+        waist = "Fotia Belt",
+        legs = "Heathen's Flanchard +2",
+        feet = "Heathen's Sollerets +2"
     })
     sets.precast.WS['Armor Break'] = sets.precast.WS['Full Break']
 
@@ -582,11 +744,19 @@ function init_gear_sets()
     -- Magical Weaponskills
     sets.precast.WS['Shadow of Death'] = set_combine(sets.precast.WS.Magic,
         { head = "Pixie Hairpin +1", ring1 = "Archon Ring" })
-    sets.precast.WS['Infernal Scythe'] = set_combine(sets.precast.WS['Shadow of Death'], { ammo = "Pemphredo Tathlum",
-        head = "Heathen's Burgeonet +2", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Crepuscular Earring",
-        body = "Heathen's Cuirass +2", hands = "Heathen's Gauntlets +2", ring1 = gear.left_stikini,
+    sets.precast.WS['Infernal Scythe'] = set_combine(sets.precast.WS['Shadow of Death'], {
+        ammo = "Pemphredo Tathlum",
+        head = "Heathen's Burgeonet +2",
+        neck = "Erra Pendant",
+        ear1 = "Malignance Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Heathen's Cuirass +2",
+        hands = "Heathen's Gauntlets +2",
+        ring1 = gear.left_stikini,
         ring2 = "Metamorph Ring +1",
-        back = gear.casting_cape, waist = "Eschan Stone", legs = "Heathen's Flanchard +2",
+        back = gear.casting_cape,
+        waist = "Eschan Stone",
+        legs = "Heathen's Flanchard +2",
         feet = "Heathen's Sollerets +2",
     })
 
@@ -613,8 +783,9 @@ function init_gear_sets()
     -------------------------------------------------------------------------------------------------------------------
     sets.resting = {
         neck = "Bathy Choker +1",
-        body = "Lugra Cloak +1", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
-        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
+        body = "Lugra Cloak +1",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
         waist = "Austerity belt +1"
     }
 
@@ -622,24 +793,59 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     -------------------------------------------------------------------------------------------------------------------
 
-    sets.idle.Town = { ammo = "Staunch Tathlum +1",
-        head = "Shaded Spectacles", neck = "Smithy's Torque", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Blacksmith's Smock", hands = "Smithy's Mitts", ring1 = "Confectioner's Ring",
+    sets.idle.Town = {
+        ammo = "Staunch Tathlum +1",
+        head = "Shaded Spectacles",
+        neck = "Smithy's Torque",
+        ear1 = "Etiolation Earring",
+        ear2 = "Eabani Earring",
+        body = "Blacksmith's Smock",
+        hands = "Smithy's Mitts",
+        ring1 = "Confectioner's Ring",
         ring2 = "Craftmaster's Ring",
-        back = gear.melee_cape, waist = "Blacksmith's Belt", legs = "Carmine Cuisses +1", feet = "Sakpata's Leggings" }
+        back = gear.melee_cape,
+        waist = "Blacksmith's Belt",
+        legs = "Carmine Cuisses +1",
+        feet = "Sakpata's Leggings"
+    }
 
-    sets.idle.Field = set_combine({}, { ammo = "Staunch Tathlum +1",
-        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Defending Ring",
-        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Sakpata's Leggings" })
+    sets.idle.Field = set_combine({}, {
+        ammo = "Staunch Tathlum +1",
+        head = "Sakpata's Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
+        ear2 = "Eabani Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Defending Ring",
+        back = gear.melee_cape,
+        waist = "Flume Belt +1",
+        legs = "Carmine Cuisses +1",
+        feet = "Sakpata's Leggings"
+    })
 
-    sets.idle.Weak = { ammo = "Staunch Tathlum +1",
-        head = empty, neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Lugra Cloak +1", hands = "Sakpata's Gauntlets", ring1 = { name = "Stikini Ring +1", bag = "wardrobe3" },
-        ring2 = { name = "Stikini Ring +1", bag = "wardrobe4" },
-        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Carmine Cuisses +1", feet = "Sakpata's Leggings" }
+    sets.idle.Weak = {
+        ammo = "Staunch Tathlum +1",
+        head = empty,
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
+        ear2 = "Eabani Earring",
+        body = "Lugra Cloak +1",
+        hands = "Sakpata's Gauntlets",
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        back = gear.melee_cape,
+        waist = "Flume Belt +1",
+        legs = "Carmine Cuisses +1",
+        feet = "Sakpata's Leggings"
+    }
 
-    sets.idle.PDT = set_combine(sets.idle.Field, { head = "Sakpata's Helm", body = "Sakpata's Plate" })
+    sets.idle.PDT = set_combine(sets.idle.Field, {
+        ammo = "Brigantia Pebble",
+        head = "Sakpata's Helm",
+        bodywa = "Sakpata's Plate"
+    })
     sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
     sets.idle.Reraise = sets.idle.Weak
@@ -650,21 +856,52 @@ function init_gear_sets()
     -------------------------------------------------------------------------------------------------------------------
     -- Defense sets
     -------------------------------------------------------------------------------------------------------------------
-    sets.defense.PDT = { ammo = "Staunch Tathlum +1",
-        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Moonlight Ring",
-        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
-
-    sets.defense.Reraise = {
-        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Defending Ring", ring2 = "Moonlight Ring",
-        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings"
+    sets.defense.PDT = {
+        ammo = "Brigantia Pebble",
+        head = "Sakpata's Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
+        ear2 = "Eabani Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Gelatinous Ring +1",
+        back = gear.melee_cape,
+        waist = "Flume Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
     }
 
-    sets.defense.MDT = { ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = "Archon Ring",
-        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
+    sets.defense.Reraise = {
+        head = "Crepuscular Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
+        ear2 = "Eabani Earring",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Defending Ring",
+        ring2 = "Moonlight Ring",
+        back = gear.melee_cape,
+        waist = "Flume Belt0 +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
+
+    sets.defense.MDT = {
+        ammo = "Staunch Tathlum +1",
+        head = "Sakpata's Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
+        ear2 = "Eabani Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Defending Ring",
+        ring2 = "Archon Ring",
+        back = gear.melee_cape,
+        waist = "Flume Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
 
     sets.Kiting = { head = "Sakpata's Helm", body = "Sakpata's Plate", feet = "Carmine Cuisses +1" }
 
@@ -676,18 +913,37 @@ function init_gear_sets()
     -------------------------------------------------------------------------------------------------------------------
 
     -- 80 FC, 6 QC
-    sets.precast.FC = { ammo = "Sapience Orb",
-        head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = { name = "Sacro Breastplate", priority = 10 }, hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1",
+    sets.precast.FC = {
+        ammo = "Sapience Orb",
+        head = "Carmine Mask +1",
+        neck = "Orunmila's Torque",
+        ear1 = "Malignance Earring",
+        ear2 = "Loquacious Earring",
+        body = { name = "Sacro Breastplate", priority = 10 },
+        hands = "Leyline Gloves",
+        ring1 = "Weatherspoon Ring +1",
         ring2 = "Lebeche Ring",
-        back = gear.casting_cape, legs = "Enif Cosciales", feet = "Odyssean Greaves" }
+        back = gear.casting_cape,
+        legs = "Enif Cosciales",
+        feet = "Odyssean Greaves"
+    }
 
     -- if hasso is active, you would need FC130
     -- this is but a humble 85, not worth using until a lot more gear is available
-    sets.precast.FC.Hasso = { ammo = "Sapience Orb",
-        head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Odyssean Chestplate", hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Kishar Ring",
-        back = gear.casting_cape, legs = "Enif Cosciales", feet = "Odyssean Greaves" }
+    sets.precast.FC.Hasso = {
+        ammo = "Sapience Orb",
+        head = "Carmine Mask +1",
+        neck = "Orunmila's Torque",
+        ear1 = "Malignance Earring",
+        ear2 = "Loquacious Earring",
+        body = "Odyssean Chestplate",
+        hands = "Leyline Gloves",
+        ring1 = "Weatherspoon Ring +1",
+        ring2 = "Kishar Ring",
+        back = gear.casting_cape,
+        legs = "Enif Cosciales",
+        feet = "Odyssean Greaves"
+    }
 
     sets.precast['Impact'] = set_combine(sets.precast.FC['Elemental Magic'], {
         head = empty, body = "Crepuscular cloak", ring2 = "Kishar Ring"
@@ -702,60 +958,115 @@ function init_gear_sets()
     -------------------------------------------------------------------------------------------------------------------
     -- Midcast Sets
     -------------------------------------------------------------------------------------------------------------------
-    sets.midcast.FastRecast = { ammo = "Sapience Orb",
-        head = "Carmine Mask +1", neck = "Orunmila's Torque", ear1 = "Malignance Earring", ear2 = "Loquacious Earring",
-        body = "Sacro Breastplate", hands = "Leyline Gloves", ring1 = "Kishar Ring", ring2 = "Rahab Ring",
-        back = gear.casting_cape, waist = "Sailfi Belt +1", legs = "Limbo Trousers", feet = "Carmine Greaves +1" }
+    sets.midcast.FastRecast = {
+        ammo = "Sapience Orb",
+        head = "Carmine Mask +1",
+        neck = "Orunmila's Torque",
+        ear1 = "Malignance Earring",
+        ear2 = "Loquacious Earring",
+        body = "Sacro Breastplate",
+        hands = "Leyline Gloves",
+        ring1 = "Kishar Ring",
+        ring2 = "Rahab Ring",
+        back = gear.casting_cape,
+        waist = "Sailfi Belt +1",
+        legs = "Limbo Trousers",
+        feet = "Carmine Greaves +1"
+    }
 
     sets.midcast.Trust = sets.SIRD
 
     sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.FastRecast, {
-        head = "Carmine Mask +1", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Vor Earring",
-        body = "Heathen's Cuirass +2", hands = "Heathen's Gauntlets +2", ring1 = gear.left_stikini,
+        head = "Carmine Mask +1",
+        neck = "Erra Pendant",
+        ear1 = "Malignance Earring",
+        ear2 = "Vor Earring",
+        body = "Heathen's Cuirass +2",
+        hands = "Heathen's Gauntlets +2",
+        ring1 = gear.left_stikini,
         ring2 = "Metamorph Ring +1",
-        back = gear.casting_cape, waist = "Eschan Stone", legs = "Heathen's Flanchard +2",
+        back = gear.casting_cape,
+        waist = "Eschan Stone",
+        legs = "Heathen's Flanchard +2",
         feet = "Heathen's Sollerets +2"
     })
 
 
-    sets.midcast['Dark Magic'] = { ammo = "Pemphredo Tathlum",
-        head = "Ignominy Burgonet +3", neck = "Incanter's Torque", ear1 = "Malignance Earring", ear2 = "Mani Earring",
-        body = "Carm. Sc. Mail +1", hands = "Fallen's Finger Gauntlets +3", ring1 = "Evanescence Ring",
+    sets.midcast['Dark Magic'] = {
+        ammo = "Pemphredo Tathlum",
+        head = "Ignominy Burgonet +3",
+        neck = "Incanter's Torque",
+        ear1 = "Malignance Earring",
+        ear2 = "Mani Earring",
+        body = "Carm. Sc. Mail +1",
+        hands = "Fallen's Finger Gauntlets +3",
+        ring1 = "Evanescence Ring",
         ring2 = "Archon Ring",
-        back = gear.casting_cape, waist = "Eschan Stone", legs = "Heathen's Flanchard +2",
-        feet = { name = "Ratri Sollerets +1", priority = 10 } }
+        back = gear.casting_cape,
+        waist = "Eschan Stone",
+        legs = "Heathen's Flanchard +2",
+        feet = { name = "Ratri Sollerets +1", priority = 10 }
+    }
     sets.midcast['Dark Magic'].DarkSeal = set_combine(sets.midcast['Dark Magic'], { head = "Fallen's Burgeonet +3" })
     sets.midcast['Dark Magic'].Weapon = { main = "Void Scythe", sub = "Caecus Grip" }
 
     sets.midcast['Endark'] = set_combine(sets.midcast['Dark Magic'],
-        { back = "Niht Mantle", ear1 = "Dark Earring", legs = "Heathen's Flanchard +2", ring2 = gear.right_stikini,
-            waist = "Casso Sash" })
+        {
+            back = "Niht Mantle",
+            ear1 = "Dark Earring",
+            legs = "Heathen's Flanchard +2",
+            ring2 = gear.right_stikini,
+            waist = "Casso Sash"
+        })
     sets.midcast['Endark II'] = sets.midcast['Endark']
     sets.midcast['Endark'].Weapon = { main = "Void Scythe", sub = "Caecus Grip" }
 
     sets.midcast['Endark'].DarkSeal = set_combine(sets.midcast['Endark'], { head = "Fallen's Burgeonet +3" })
     sets.midcast['Endark II'].DarkSeal = sets.midcast['Endark'].DarkSeal
 
-    sets.midcast['Drain'] = set_combine(sets.midcast['Dark Magic'], { ammo = "Pemphredo Tathlum",
-        head = "Pixie Hairpin +1", neck = "Erra Pendant", ear1 = "Hirudinea earring", ear2 = "Mani Earring",
-        body = "Carmine Scale Mail +1", hands = "Fallen's Finger Gauntlets +3",
-        back = "Niht Mantle", waist = gear.DrainWaist, feet = gear.yorium.drain.feet })
+    sets.midcast['Drain'] = set_combine(sets.midcast['Dark Magic'], {
+        ammo = "Pemphredo Tathlum",
+        head = "Pixie Hairpin +1",
+        neck = "Erra Pendant",
+        ear1 = "Hirudinea earring",
+        ear2 = "Mani Earring",
+        body = "Carmine Scale Mail +1",
+        hands = "Fallen's Finger Gauntlets +3",
+        back = "Niht Mantle",
+        waist = gear.DrainWaist,
+        feet = gear.yorium.drain.feet
+    })
     sets.midcast['Drain II'] = sets.midcast['Drain']
-    sets.midcast['Drain III'] = set_combine(sets.midcast['Dark Magic'], { ammo = "Pemphredo Tathlum",
-        head = "Pixie Hairpin +1", neck = "Erra Pendant", ear1 = "Hirudinea earring", ear2 = "Nehalennia Earring",
-        body = "Carmine Scale Mail +1", hands = "Fallen's Finger Gauntlets +3",
-        back = "Niht Mantle", waist = gear.DrainWaist,
-        feet = { name = "Ratri Sollerets +1", priority = 10 } })
+    sets.midcast['Drain III'] = set_combine(sets.midcast['Dark Magic'], {
+        ammo = "Pemphredo Tathlum",
+        head = "Pixie Hairpin +1",
+        neck = "Erra Pendant",
+        ear1 = "Hirudinea earring",
+        ear2 = "Nehalennia Earring",
+        body = "Carmine Scale Mail +1",
+        hands = "Fallen's Finger Gauntlets +3",
+        back = "Niht Mantle",
+        waist = gear.DrainWaist,
+        feet = { name = "Ratri Sollerets +1", priority = 10 }
+    })
     sets.midcast['Drain III'].DarkSeal = set_combine(sets.midcast['Drain III'], { head = "Fallen's Burgeonet +3" })
     sets.midcast['Aspir'] = sets.midcast.Drain
     sets.midcast['Aspir II'] = sets.midcast.Aspir
     sets.midcast['Drain'].Weapon = { main = "Dacnomania", sub = "Dark Grip" }
 
-    sets.midcast.Stun = { ammo = "Pemphredo Tathlum",
-        head = "Ignominy Burgonet +3", neck = "Erra Pendant", ear1 = "Malignance Earring", ear2 = "Mani Earring",
-        body = "Carmine Scale Mail +1", hands = "Fallen's Finger Gauntlets +3", ring1 = gear.left_stikini,
+    sets.midcast.Stun = {
+        ammo = "Pemphredo Tathlum",
+        head = "Ignominy Burgonet +3",
+        neck = "Erra Pendant",
+        ear1 = "Malignance Earring",
+        ear2 = "Mani Earring",
+        body = "Carmine Scale Mail +1",
+        hands = "Fallen's Finger Gauntlets +3",
+        ring1 = gear.left_stikini,
         ring2 = "Metamorph Ring +1",
-        back = gear.casting_cape, waist = "Eschan Stone", legs = "Heathen's Flanchard +2",
+        back = gear.casting_cape,
+        waist = "Eschan Stone",
+        legs = "Heathen's Flanchard +2",
         feet = "Ratri Sollerets +1",
     }
 
@@ -764,9 +1075,14 @@ function init_gear_sets()
     sets.midcast['Absorb-TP'] = set_combine(sets.midcast.Absorb, { hands = "Heathen's Gauntlets +1" })
 
     sets.midcast['Dread Spikes'] = set_combine(sets.HP_High,
-        { main = "Crepuscular Scythe", swarub = "Utu Grip",
-            head = "Ratri sallet +1", body = "Heathen's Cuirass +2", hands = "Rat. Gadlings +1",
-            feet = "Rat. sollerets +1" })
+        {
+            main = "Crepuscular Scythe",
+            swarub = "Utu Grip",
+            head = "Ratri sallet +1",
+            body = "Heathen's Cuirass +2",
+            hands = "Rat. Gadlings +1",
+            feet = "Rat. sollerets +1"
+        })
     sets.midcast['Dread Spikes'].Weapon = { main = "Crepuscular Scythe", sub = "Utu Grip" }
 
     sets.midcast['Poison'] = sets.midcast['Enfeebling Magic']
@@ -777,11 +1093,21 @@ function init_gear_sets()
     sets.midcast['Absorb-CHR'].TH = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
 
     -- Elemental Magic sets
-    sets.midcast['Elemental Magic'] = { ammo = "Ghastly Tathlum +1",
-        head = "Nyame Helm", neck = "Sibyl Scarf", ear1 = "Malignance Earring", ear2 = "Friomisi Earring",
-        body = "Nyame Mail", hands = "Fallen's Finger Gauntlets +3", ring1 = gear.left_stikini,
+    sets.midcast['Elemental Magic'] = {
+        ammo = "Ghastly Tathlum +1",
+        head = "Nyame Helm",
+        neck = "Sibyl Scarf",
+        ear1 = "Malignance Earring",
+        ear2 = "Friomisi Earring",
+        body = "Nyame Mail",
+        hands = "Fallen's Finger Gauntlets +3",
+        ring1 = gear.left_stikini,
         ring2 = "Metamorph Ring +1",
-        back = gear.casting_cape, waist = gear.ElementalObi, legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
+        back = gear.casting_cape,
+        waist = gear.ElementalObi,
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
 
     sets.midcast['Impact'] = set_combine(sets.midcast['Elemental Magic'],
         { head = empty, body = "Crepuscular Cloak", ring2 = gear.right_stikini })
@@ -800,38 +1126,108 @@ function init_gear_sets()
 
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
-    sets.engaged = { ammo = "Coiste Bodhar",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear1 = "Brutal earring", ear2 = "Telos Earring",
-        body = "Sakpata's Plate", hands = "Flamma Manopolas +2", ring1 = "Moonlight ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Sailfi Belt +1", legs = "Ignominy Flanchard +3", feet = "Flamma Gambieras +2" }
-    sets.engaged.Acc = { ammo = "Seething Bomblet +1",
-        head = "Flamma Zucchetto +2", neck = "Abyssal Beads +2", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight ring", ring2 = "Regal Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Ignominy Flanchard +3", feet = "Flamma Gambieras +2" }
+    sets.engaged = {
+        ammo = "Coiste Bodhar",
+        head = "Sakpata's Helm",
+        neck = "Abyssal Beads +2",
+        ear1 = "Brutal earring",
+        ear2 = "Telos Earring",
+        body = "Sakpata's Plate",
+        hands = "Flamma Manopolas +2",
+        ring1 = "Moonlight ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Sailfi Belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Flamma Gambieras +2"
+    }
+    sets.engaged.Acc = {
+        ammo = "Seething Bomblet +1",
+        head = "Flamma Zucchetto +2",
+        neck = "Abyssal Beads +2",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Telos Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight ring",
+        ring2 = "Regal Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Flamma Gambieras +2"
+    }
     sets.engaged.SubtleBlow = {
-        neck = "Bathy Choker +1", ear2 = "Dignitary's Earring",
-        body = "Dagon Breastplate", hands = "Sakpata's Gauntlets", ring1 = "Chirich Ring +1", ring2 = "Niqmaddu Ring",
+        neck = "Bathy Choker +1",
+        ear2 = "Dignitary's Earring",
+        body = "Dagon Breastplate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Chirich Ring +1",
+        ring2 = "Niqmaddu Ring",
     }
     sets.engaged.AccHigh = set_combine(sets.engaged.Acc, { hands = "Gazu Bracelet +1" })
-    sets.engaged.PDT = { ammo = "Coiste Bodhar",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear1 = "Brutal earring", ear2 = "Telos Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
-    sets.engaged.Acc.PDT = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Regal Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
+    sets.engaged.PDT = {
+        ammo = "Coiste Bodhar",
+        head = "Sakpata's Helm",
+        neck = "Abyssal Beads +2",
+        ear1 = "Brutal earring",
+        ear2 = "Telos Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Sailfi belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
+    sets.engaged.Acc.PDT = {
+        ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm",
+        neck = "Abyssal Beads +2",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Telos Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Regal Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
     sets.engaged.AccHigh.PDT = set_combine(sets.engaged.Acc.PDT, { hands = "Gazu Bracelet +1" })
     sets.engaged.SubtleBlow.PDT = {}
     sets.engaged.AccHigh.PDT = {}
-    sets.engaged.Reraise = { ammo = "Coiste Bodhar",
-        head = "Crepuscular Helm", neck = "Abyssal Beads +2", ear1 = "Brutal earring", ear2 = "Telos Earring",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Sailfi Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
-    sets.engaged.Acc.Reraise = { ammo = "Seething Bomblet +1",
-        head = "Crepuscular Helm", neck = "Abyssal Beads +2", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Regal Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
+    sets.engaged.Reraise = {
+        ammo = "Coiste Bodhar",
+        head = "Crepuscular Helm",
+        neck = "Abyssal Beads +2",
+        ear1 = "Brutal earring",
+        ear2 = "Telos Earring",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Sailfi Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
+    sets.engaged.Acc.Reraise = {
+        ammo = "Seething Bomblet +1",
+        head = "Crepuscular Helm",
+        neck = "Abyssal Beads +2",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Telos Earring",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Regal Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
     sets.engaged.SubtleBlow.Reraise = {}
     sets.engaged.AccHigh.Reraise = set_combine(sets.engaged.Acc.Reraise, { hands = "Gazu Bracelet +1" })
 
@@ -850,10 +1246,17 @@ function init_gear_sets()
     sets.engaged.AccHigh.Reraise.DW = sets.engaged.AccHigh.Reraise
 
     -- Apocalypse
-    sets.engaged.Apocalypse = set_combine(sets.engaged, { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", ear1 = "Telos Earring", ear2 = "Brutal Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        feet = "Flamma Gambieras +2" })
+    sets.engaged.Apocalypse = set_combine(sets.engaged, {
+        ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm",
+        ear1 = "Telos Earring",
+        ear2 = "Brutal Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Niqmaddu Ring",
+        feet = "Flamma Gambieras +2"
+    })
     sets.engaged.Apocalypse.Acc = set_combine(sets.engaged.Apocalypse, { hands = "Sakpata's Gauntlets" })
     sets.engaged.Apocalypse.SubtleBlow = set_combine(sets.engaged.Apocalypse, { hands = "Sakpata's Gauntlets" })
     sets.engaged.Apocalypse.AccHigh = set_combine(sets.engaged.Apocalypse.Acc, { hands = "Gazu Bracelet +1" })
@@ -924,35 +1327,101 @@ function init_gear_sets()
     sets.engaged.Caladbolg.AccHigh.Reraise.AM = set_combine(sets.engaged.Caladbolg.Acc.Reraise.AM,
         { hands = "Gazu Bracelet +1" })
 
-    sets.engaged.Caladbolg.AM3 = { ammo = "Coiste Bodhar",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear2 = "Telos Earring", ear1 = "Brutal Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Regal Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
-    sets.engaged.Caladbolg.Acc.AM3 = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear2 = "Telos Earring", ear1 = "Crepuscular Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Regal Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
+    sets.engaged.Caladbolg.AM3 = {
+        ammo = "Coiste Bodhar",
+        head = "Sakpata's Helm",
+        neck = "Abyssal Beads +2",
+        ear2 = "Telos Earring",
+        ear1 = "Brutal Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Regal Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Sailfi belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
+    sets.engaged.Caladbolg.Acc.AM3 = {
+        ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm",
+        neck = "Abyssal Beads +2",
+        ear2 = "Telos Earring",
+        ear1 = "Crepuscular Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Regal Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
     sets.engaged.Caladbolg.SubtleBlow.AM3 = set_combine(sets.engaged.Caladbolg.SubtleBlow, {})
     sets.engaged.Caladbolg.AccHigh.AM3 = set_combine(sets.engaged.Caladbolg.Acc.AM3, { hands = "Gazu Bracelet +1" })
-    sets.engaged.Caladbolg.PDT.AM3 = { ammo = "Coiste Bodhar",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear2 = "Telos Earring", ear1 = "Brutal Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
-    sets.engaged.Caladbolg.Acc.PDT.AM3 = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear2 = "Telos Earring", ear1 = "Crepuscular Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Regal Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
+    sets.engaged.Caladbolg.PDT.AM3 = {
+        ammo = "Coiste Bodhar",
+        head = "Sakpata's Helm",
+        neck = "Abyssal Beads +2",
+        ear2 = "Telos Earring",
+        ear1 = "Brutal Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Sailfi belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
+    sets.engaged.Caladbolg.Acc.PDT.AM3 = {
+        ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm",
+        neck = "Abyssal Beads +2",
+        ear2 = "Telos Earring",
+        ear1 = "Crepuscular Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Regal Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
     sets.engaged.Caladbolg.SubtleBlow.PDT.AM3 = set_combine(sets.engaged.Caladbolg.SubtleBlow, {})
     sets.engaged.Caladbolg.AccHigh.PDT.AM3 = set_combine(sets.engaged.Caladbolg.Acc.PDT.AM3,
         { hands = "Gazu Bracelet +1" })
-    sets.engaged.Caladbolg.Reraise.AM3 = { ammo = "Coiste Bodhar",
-        head = "Sakpata's Helm", neck = "Abyssal Beads +2", ear2 = "Telos Earring", ear1 = "Brutal Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Regal Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Sailfi belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
-    sets.engaged.Caladbolg.Acc.Reraise.AM3 = { ammo = "Seething Bomblet +1",
-        head = "Crepuscular Helm", neck = "Abyssal Beads +2", ear2 = "Telos Earring", ear1 = "Brutal Earring",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Niqmaddu Ring", ring2 = "Regal Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Ignominy Flanchard +3", feet = "Sakpata's Leggings" }
+    sets.engaged.Caladbolg.Reraise.AM3 = {
+        ammo = "Coiste Bodhar",
+        head = "Sakpata's Helm",
+        neck = "Abyssal Beads +2",
+        ear2 = "Telos Earring",
+        ear1 = "Brutal Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Regal Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Sailfi belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
+    sets.engaged.Caladbolg.Acc.Reraise.AM3 = {
+        ammo = "Seething Bomblet +1",
+        head = "Crepuscular Helm",
+        neck = "Abyssal Beads +2",
+        ear2 = "Telos Earring",
+        ear1 = "Brutal Earring",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Niqmaddu Ring",
+        ring2 = "Regal Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Ignominy Flanchard +3",
+        feet = "Sakpata's Leggings"
+    }
     sets.engaged.Caladbolg.SubtleBlow.Reraise.AM3 = set_combine(sets.engaged.Caladbolg.SubtleBlow.Reraise, {})
     sets.engaged.Caladbolg.AccHigh.Reraise.AM3 = set_combine(sets.engaged.Caladbolg.Acc.Reraise.AM3,
         { hands = "Gazu Bracelet +1" })
@@ -1034,11 +1503,20 @@ function init_gear_sets()
     --more weapons here
 
     -- Low Damage/Omen objectives
-    sets.engaged.Low = { ammo = "Seething Bomblet +1",
-        head = "Flamma Zucchetto +2", neck = "Combatant's Torque", ear1 = "Crepuscular Earring",
+    sets.engaged.Low = {
+        ammo = "Seething Bomblet +1",
+        head = "Flamma Zucchetto +2",
+        neck = "Combatant's Torque",
+        ear1 = "Crepuscular Earring",
         ear2 = "Dignitary's Earring",
-        body = "Sacro Plate", hands = "Gazu Bracelet +1", ring1 = "Regal Ring", ring2 = "Moonlight Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Ignomingy Flanchard +3", feet = "Flamma Gambieras +2"
+        body = "Sacro Plate",
+        hands = "Gazu Bracelet +1",
+        ring1 = "Regal Ring",
+        ring2 = "Moonlight Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Ignomingy Flanchard +3",
+        feet = "Flamma Gambieras +2"
     }
     sets.engaged.Low.Acc = sets.engaged.Low
     sets.engaged.Low.SubtleBlow = sets.engaged.Low
@@ -1058,7 +1536,6 @@ function init_gear_sets()
     sets.buff['Arcane Circle'] = { feet = "Ignominy Sollerets +1" }
     sets.buff['Nether Void'] = { legs = "Heathen's Flanchard +2" }
     sets.buff['Dark Seal'] = { head = "Fallen's Burgeonet +3" }
-
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1097,7 +1574,6 @@ function filtered_action(spell)
             -- elseif spell.english == "Insurgency" then
             -- elseif spell.english == "Guillotine" then
             -- elseif spell.english == "Quietus" then
-
         elseif spell.english == "Nightmare Scythe" then
             if main == 'Lycurgos' or main == "Hepatizon Axe" or main == "Hepatizon Axe +1" then
                 send_command('input /ws "Keen Edge" ' .. spell.target.raw)
@@ -1152,7 +1628,6 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 
     setRecast()
-
 end
 
 -- Run after the default precast() is done.
@@ -1244,12 +1719,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     if S { 'Stun' }:contains(spell.english) and state.StunMode.value == 'Enmity' then
-        equip(sets.Enmity)
+        equip(sets.enmity)
         if player.tp < 1000 then
-            equip(sets.Enmity.Weapon)
+            equip(sets.enmity.Weapon)
         end
     end
-
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -1284,7 +1758,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             equip(sets.buff.doom.HolyWater)
         end
     end
-
 end
 
 function job_post_aftercast(spell, action, spellMap, eventArgs)
@@ -1320,7 +1793,6 @@ function job_buff_change(buff, gain)
         elseif buff == 'terror' or buff == 'stun' then
             send_command('gs equip sets.idle.PDT')
         elseif buff == 'charm' then
-
             local function count_slip_debuffs()
                 local erase_dots = 0
                 if buffactive.poison then
@@ -1410,7 +1882,6 @@ function job_update(cmdParams, eventArgs)
             send_command('gs equip sets.buff.doom.HolyWater')
         end
     end
-
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
@@ -1713,10 +2184,12 @@ function calculate_duration_darkmagic(spellName, spellMap)
 
     if player.equipment.feet == 'Ratri Sollerets' then mult = mult + 0.2 end
     if player.equipment.feet == 'Ratri Sollerets +1' then mult = mult + 0.25 end
-    if player.equipment.ring1 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult +
+    if player.equipment.ring1 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then
+        mult = mult +
             0.1
     end
-    if player.equipment.ring2 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then mult = mult +
+    if player.equipment.ring2 == 'Kishar Ring' and spellMap == 'Absorb' and spellName ~= 'Absorb-TP' then
+        mult = mult +
             0.1
     end
 
@@ -1740,7 +2213,8 @@ function th_action_check(category, param)
         (category == 3 and param == 30) or -- Aeolian Edge
         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
-    then return true
+    then
+        return true
     end
 end
 
@@ -1749,9 +2223,12 @@ function echo(msg, verbosity_, chatmode)
     local verbosity = verbosity_ or 0
     local function getVerbosityLevel()
         local vlvl = 0
-        if state.Verbose.value == "Normal" then vlvl = 0
-        elseif state.Verbose.value == 'Verbose' then vlvl = 1
-        elseif state.Verbose.value == 'Debug' then vlvl = 2
+        if state.Verbose.value == "Normal" then
+            vlvl = 0
+        elseif state.Verbose.value == 'Verbose' then
+            vlvl = 1
+        elseif state.Verbose.value == 'Debug' then
+            vlvl = 2
         end
         return vlvl
     end
@@ -1767,7 +2244,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function update_combat_form()
-
     determine_combat_weapon()
 
     classes.CustomMeleeGroups:clear()
