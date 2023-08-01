@@ -23,27 +23,22 @@ function job_setup()
         ['Harlequin Head' .. 'Valoredge Frame'] = 'Melee',
         ['Harlequin Head' .. 'Sharpshot Frame'] = 'Melee',
         ['Harlequin Head' .. 'Stormwaker Frame'] = 'Magic',
-
         ['Sharpshot Head' .. 'Harlequin Frame'] = 'Ranged',
         ['Sharpshot Head' .. 'Valoredge Frame'] = 'Ranged',
         ['Sharpshot Head' .. 'Sharpshot Frame'] = 'Ranged',
         ['Sharpshot Head' .. 'Stormwaker Frame'] = 'Ranged',
-
         ['Valoredge Head' .. 'Harlequin Frame'] = 'Tank',
         ['Valoredge Head' .. 'Valoredge Frame'] = 'Tank',
         ['Valoredge Head' .. 'Sharpshot Frame'] = 'Tank',
         ['Valoredge Head' .. 'Stormwaker Frame'] = 'Tank',
-
         ['Stormwaker Head' .. 'Harlequin Frame'] = 'Magic',
         ['Stormwaker Head' .. 'Valoredge Frame'] = 'Melee',
         ['Stormwaker Head' .. 'Sharpshot Frame'] = 'Melee',
         ['Stormwaker Head' .. 'Stormwaker Frame'] = 'Magic',
-
         ['Soulsoother Head' .. 'Harlequin Frame'] = 'Heal',
         ['Soulsoother Head' .. 'Valoredge Frame'] = 'Tank',
         ['Soulsoother Head' .. 'Sharpshot Frame'] = 'Melee',
         ['Soulsoother Head' .. 'Stormwaker Frame'] = 'Heal',
-
         ['Spiritreaver Head' .. 'Harlequin Frame'] = 'Nuke',
         ['Spiritreaver Head' .. 'Valoredge Frame'] = 'Melee',
         ['Spiritreaver Head' .. 'Sharpshot Frame'] = 'Melee',
@@ -70,6 +65,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Normal', 'Acc', 'Pet')
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal', 'Acc')
@@ -99,13 +96,14 @@ end
 
 -- Define sets used by this job file.
 function init_gear_sets()
-
     -- Augmented Gear
 
     -- Misc sets
     sets.TreasureHunter = {
         head = "Volte Cap",
-        waist = "Chaac Belt", legs = "Volte Hose", feet = "Volte Boots"
+        waist = "Chaac Belt",
+        legs = "Volte Hose",
+        feet = "Volte Boots"
     }
 
     sets.resist = {}
@@ -117,10 +115,15 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     sets.precast.FC = {
-        head = gear.herculean.fc.head, neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1",
+        head = gear.herculean.fc.head,
+        neck = "Orunmila's Torque",
+        ear1 = "Enchanter's Earring +1",
         ear2 = "Loquacious Earring",
-        ring1 = "Rahab Ring", ring2 = "Weatherspoon Ring +1",
-        back = "Fi Follet Cape +1", legs = "Gyve Trousers", feet = "Regal Pumps +1"
+        ring1 = "Rahab Ring",
+        ring2 = "Weatherspoon Ring +1",
+        back = "Fi Follet Cape +1",
+        legs = "Gyve Trousers",
+        feet = "Regal Pumps +1"
     }
 
     sets.precast.FC.Utsusemi = sets.precast.FC
@@ -128,20 +131,32 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
     sets.precast.JA.Maneuver = {}
-    sets.precast.JA.NoOD = { main = "Midnights",
-        ear2 = "Burana Earring", neck = "Buffoon's Collar",
-        body = "Karagoz Farsetto +1", hands = "Foire Dastanas +1",
-        back = "Visucius's Mantle" }
-    sets.precast.JA.OD = { main = "Midnights",
+    sets.precast.JA.NoOD = {
+        main = "Midnights",
         ear2 = "Burana Earring",
-        hands = "Foire Dastanas +1" }
+        neck = "Buffoon's Collar",
+        body = "Karagoz Farsetto +1",
+        hands = "Foire Dastanas +1",
+        back = "Visucius's Mantle"
+    }
+    sets.precast.JA.OD = {
+        main = "Midnights",
+        ear2 = "Burana Earring",
+        hands = "Foire Dastanas +1"
+    }
     sets.precast.JA.Maneuver = sets.precast.JA.NoOD
 
     sets.precast.JA['Tactical Switch'] = { feet = "Karagoz Scarpe" }
-    sets.precast.JA['Repair'] = { main = "Nibiru Sainti",
-        head = gear.taeon.repair.head, ear1 = "Pratik Earring", ear2 = "Guignol Earring",
-        body = gear.taeon.repair.body, hands = gear.taeon.repair.hands,
-        legs = gear.taeon.repair.legs, feet = "Foire Babouches +1" }
+    sets.precast.JA['Repair'] = {
+        main = "Nibiru Sainti",
+        head = gear.taeon.repair.head,
+        ear1 = "Pratik Earring",
+        ear2 = "Guignol Earring",
+        body = gear.taeon.repair.body,
+        hands = gear.taeon.repair.hands,
+        legs = gear.taeon.repair.legs,
+        feet = "Foire Babouches +1"
+    }
 
     sets.precast.JA['Overdrive'] = { body = "Pitre Tobe" }
     sets.precast.JA['Ventriloquy'] = { legs = "Pitre churidars" }
@@ -154,9 +169,13 @@ function init_gear_sets()
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {
-        head = "Malignance Chapeau", ear1 = "Roundel Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Niqmaddu Ring",
-        legs = "Malignance Tights", feet = "Malignance Boots"
+        head = "Malignance Chapeau",
+        ear1 = "Roundel Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Niqmaddu Ring",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
     }
 
     -- Don't need any special gear for Healing Waltz.
@@ -166,20 +185,38 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.Pet = {}
-    sets.precast.Pet.Weaponskill = { range = "Animator P",
-        neck = "Shulmanu Collar", ear1 = "Domesticator's Earring",
-        body = gear.taeon.petdt.body, hands = gear.taeon.petdt.hands, ring2 = "Cath Palug Ring",
-        waist = "Klouskap Sash +1", legs = gear.taeon.petdt.legs, feet = gear.taeon.petdt.feet }
+    sets.precast.Pet.Weaponskill = {
+        range = "Animator P",
+        neck = "Shulmanu Collar",
+        ear1 = "Domesticator's Earring",
+        body = gear.taeon.petdt.body,
+        hands = gear.taeon.petdt.hands,
+        ring2 = "Cath Palug Ring",
+        waist = "Klouskap Sash +1",
+        legs = gear.taeon.petdt.legs,
+        feet = gear.taeon.petdt.feet
+    }
 
     sets.precast.WS = {
-        head = "Mpaca's Cap", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
-        body = "Mpaca's Doublet", hands = "Mpaca's Gloves", ring1 = "Niqmaddu Ring", ring2 = "Epaminondas's Ring",
-        back = "Visucius's Mantle", waist = "Fotia Belt", legs = "Mpaca's Hose", feet = "Mpaca's Boots"
+        head = "Mpaca's Cap",
+        neck = "Fotia Gorget",
+        ear1 = "Brutal Earring",
+        ear2 = "Moonshade Earring",
+        body = "Mpaca's Doublet",
+        hands = "Mpaca's Gloves",
+        ring1 = "Niqmaddu Ring",
+        ring2 = "Epaminondas's Ring",
+        back = "Visucius's Mantle",
+        waist = "Fotia Belt",
+        legs = "Mpaca's Hose",
+        feet = "Mpaca's Boots"
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Stringing Pummel'] = set_combine(sets.precast.WS, {
-        head = "Blistering Sallet +1", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
+        head = "Blistering Sallet +1",
+        ear1 = "Brutal Earring",
+        ear2 = "Moonshade Earring",
         ring2 = "Begrudging Ring",
         legs = "Zoar Subligar +1"
     })
@@ -198,9 +235,15 @@ function init_gear_sets()
     -- Midcast Sets
 
     sets.midcast.FastRecast = {
-        head = "Herculean Helm", ear1 = "Enchanter's Earring +1", ear2 = "Loquacious Earring",
-        body = gear.taeon.repair.body, hands = "Malignance Gloves", ring1 = "Rahab Ring", ring2 = "Rahab Ring",
-        legs = "Pitre Churidars", feet = "Regal Pumps +1"
+        head = "Herculean Helm",
+        ear1 = "Enchanter's Earring +1",
+        ear2 = "Loquacious Earring",
+        body = gear.taeon.repair.body,
+        hands = "Malignance Gloves",
+        ring1 = "Rahab Ring",
+        ring2 = "Rahab Ring",
+        legs = "Pitre Churidars",
+        feet = "Regal Pumps +1"
     }
 
 
@@ -215,16 +258,32 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
 
     -- Resting sets
-    sets.resting = { head = "Pitre Taj", neck = "Bathy Choker +1",
-        ring1 = "Sheltered Ring", ring2 = "Defending Ring" }
+    sets.resting = {
+        head = "Pitre Taj",
+        neck = "Bathy Choker +1",
+        ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring"
+    }
 
 
     -- Idle sets
 
-    sets.idle = { main = "Ohrmazd", range = "Animator P",
-        head = "Hizamaru Somen", neck = "Loricate Torque +1", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = gear.taeon.petdt.body, hands = gear.taeon.petdt.hands, ring1 = "Sheltered Ring", ring2 = "Defending Ring",
-        back = "Shadow Mantle", waist = "Klouskap Sash +1", legs = gear.taeon.petdt.legs, feet = "Hermes' Sandals" }
+    sets.idle = {
+        main = "Ohrmazd",
+        range = "Animator P",
+        head = "Hizamaru Somen",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
+        ear2 = "Eabani Earring",
+        body = gear.taeon.petdt.body,
+        hands = gear.taeon.petdt.hands,
+        ring1 = "Sheltered Ring",
+        ring2 = "Defending Ring",
+        back = "Moonlight Cape",
+        waist = "Klouskap Sash +1",
+        legs = gear.taeon.petdt.legs,
+        feet = "Hermes' Sandals"
+    }
 
     sets.idle.Town = set_combine(sets.idle, { neck = "Bathy Choker" })
 
@@ -233,11 +292,22 @@ function init_gear_sets()
         { head = "Anwig Salade", back = "Visucius's Mantle", feet = "Hermes' Sandals" })
 
     -- Idle sets to wear while pet is engaged
-    sets.idle.Pet.Engaged = { main = "Ohrmazd", range = "Animator P",
-        head = "Anwig Salade", neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Rimeice Earring",
-        body = gear.taeon.petdt.body, hands = gear.taeon.petdt.hands, ring1 = "Varar Ring +1", ring2 = "Cath Palug Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = gear.taeon.petdt.legs,
-        feet = gear.taeon.petdt.feet }
+    sets.idle.Pet.Engaged = {
+        main = "Ohrmazd",
+        range = "Animator P",
+        head = "Anwig Salade",
+        neck = "Shulmanu Collar",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Rimeice Earring",
+        body = gear.taeon.petdt.body,
+        hands = gear.taeon.petdt.hands,
+        ring1 = "Varar Ring +1",
+        ring2 = "Cath Palug Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = gear.taeon.petdt.legs,
+        feet = gear.taeon.petdt.feet
+    }
     sets.idle.Pet.Engaged.Melee = sets.idle.Pet.Engaged
 
     sets.idle.Pet.Engaged.Ranged = set_combine(sets.idle.Pet.Engaged,
@@ -250,31 +320,66 @@ function init_gear_sets()
         { body = "Udug Jacket", legs = "Cirque Pantaloni +2", feet = "Cirque Scarpe +2" })
 
     sets.idle.Pet.Tank = set_combine(sets.idle.Pet.Engaged, {
-        head = "Anwig Salade", neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Rimeice Earring",
-        body = gear.taeon.petdt.body, hands = gear.taeon.petdt.hands,
-        back = "Visucius's Mantle", waist = "Isa Belt", legs = gear.taeon.petdt.legs, feet = gear.taeon.petdt.feet
+        head = "Anwig Salade",
+        neck = "Shulmanu Collar",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Rimeice Earring",
+        body = gear.taeon.petdt.body,
+        hands = gear.taeon.petdt.hands,
+        back = "Visucius's Mantle",
+        waist = "Isa Belt",
+        legs = gear.taeon.petdt.legs,
+        feet = gear.taeon.petdt.feet
     })
 
     sets.idle.Pet.Turtle = set_combine(sets.idle.Pet.Tank, { neck = "Shepherd's Chain" })
 
-    sets.buff.Overdrive = { main = "Ohrmazd", range = "Animator P",
-        head = "Anwig Salade", neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Rimeice Earring",
-        body = gear.taeon.petdt.body, hands = gear.taeon.petdt.hands, ring1 = "Varar Ring +1", ring2 = "Cath Palug Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = gear.taeon.petdt.legs,
-        feet = gear.taeon.petdt.feet }
+    sets.buff.Overdrive = {
+        main = "Ohrmazd",
+        range = "Animator P",
+        head = "Anwig Salade",
+        neck = "Shulmanu Collar",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Rimeice Earring",
+        body = gear.taeon.petdt.body,
+        hands = gear.taeon.petdt.hands,
+        ring1 = "Varar Ring +1",
+        ring2 = "Cath Palug Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = gear.taeon.petdt.legs,
+        feet = gear.taeon.petdt.feet
+    }
 
     -- Defense sets
 
     sets.defense.Evasion = {
-        head = "Malignance Chapeau", neck = "Shulmanu Collar", ear1 = "Etiolation Earring", ear2 = "Eabani Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Niqmaddu Ring", ring2 = "Defending Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots"
+        head = "Malignance Chapeau",
+        neck = "Shulmanu Collar",
+        ear1 = "Etiolation Earring",
+        ear2 = "Eabani Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Niqmaddu Ring",
+        ring2 = "Defending Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
     }
 
     sets.defense.PDT = {
-        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Handler's Earring +1",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Niqmaddu Ring", ring2 = "Defending Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots"
+        head = "Malignance Chapeau",
+        neck = "Loricate Torque +1",
+        ear1 = "Handler's Earring +1",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Niqmaddu Ring",
+        ring2 = "Defending Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
     }
 
     sets.defense.MDT = set_combine(sets.defense.PDT, { ear2 = "Eabani Earring", ring2 = "Archon Ring" })
@@ -289,31 +394,75 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     -- Normal melee group
-    sets.engaged = { range = "Animator P",
-        head = "Malignance Chapeau", neck = "Shulmanu Collar", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Niqmaddu Ring", ring2 = "Gere Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.engaged = {
+        range = "Animator P",
+        head = "Malignance Chapeau",
+        neck = "Shulmanu Collar",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Telos Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Niqmaddu Ring",
+        ring2 = "Gere Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
+    }
     sets.engaged.Acc = {
-        head = "Malignance Chapeau", neck = "Shulmanu Collar", ear1 = "Crepuscular Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Niqmaddu Ring", ring2 = "Gere Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots"
+        head = "Malignance Chapeau",
+        neck = "Shulmanu Collar",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Telos Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Niqmaddu Ring",
+        ring2 = "Gere Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
     }
     sets.engaged.DT = {
-        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Etiolation Earring",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
         ear2 = "Crepuscular Earring",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Niqmaddu Ring", ring2 = "Defending Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets"
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Niqmaddu Ring",
+        ring2 = "Defending Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
     sets.engaged.Acc.DT = {
-        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Etiolation Earring",
+        head = "Malignance Chapeau",
+        neck = "Loricate Torque +1",
+        ear1 = "Etiolation Earring",
         ear2 = "Crepuscular Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring", ring2 = "Beeline Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots"
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Defending Ring",
+        ring2 = "Beeline Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
     }
     sets.engaged.Pet = set_combine(sets.engaged, {
-        head = "Anwig Salade", neck = "Shulmanu Collar", ear1 = "Enmerkar Earring", ear2 = "Burana Earring",
-        body = gear.taeon.petdt.body, hands = gear.taeon.petdt.hands, ring1 = "Varar Ring +1", ring2 = "Cath Palug Ring",
-        back = "Visucius's Mantle", waist = "Klouskap Sash +1", legs = gear.taeon.petdt.legs,
+        head = "Anwig Salade",
+        neck = "Shulmanu Collar",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Burana Earring",
+        body = gear.taeon.petdt.body,
+        hands = gear.taeon.petdt.hands,
+        ring1 = "Varar Ring +1",
+        ring2 = "Cath Palug Ring",
+        back = "Visucius's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = gear.taeon.petdt.legs,
         feet = gear.taeon.petdt.feet
     })
 end
@@ -418,7 +567,6 @@ function customize_melee_set(meleeSet)
     return meleeSet
 end
 ]]
-
 -------------------------------------------------------------------------------------------------------------------
 -- User self-commands.
 -------------------------------------------------------------------------------------------------------------------
@@ -517,7 +665,6 @@ _pet.reset = function()
 end
 
 windower.register_event('prerender', function()
-
     if pet.tp and pet.isvalid and pet.hpp > 0 then
         if pet.tp ~= _pet.newTP then
             _pet.oldTP = _pet.newTP
@@ -540,5 +687,4 @@ windower.register_event('prerender', function()
         send_command('gs c update')
         _pet.has_triggered = false
     end
-
 end)

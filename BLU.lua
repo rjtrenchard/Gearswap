@@ -27,6 +27,7 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S { 201, 202, 203, 205, 207 }
 
+    include('helper_functions')
     include('Mote-TreasureHunter')
 
     blue_magic_maps = {}
@@ -103,7 +104,7 @@ function job_setup()
         'Ice Break', 'Leafstorm', 'Maelstrom', 'Rail Cannon', 'Regurgitation', 'Rending Deluge',
         'Retinal Glare', 'Subduction', 'Tem. Upheaval', 'Water Bomb',
         'Entomb', 'Silent Storm', 'Anvil Lightning', 'Spectral Floe',
-        'Scouring Spate', 'Blinding Fulgor', 'Searing Tempest',
+        'Scouring Spate', 'Blinding Fulgor', 'Searing Tempest', 'Cesspool', 'Tearing Gust'
 
     }
 
@@ -151,7 +152,7 @@ function job_setup()
         'Geist Wall', 'Hecatomb Wave', 'Infrasonics', 'Jettatura', 'Light of Penance',
         'Lowing', 'Mind Blast', 'Mortal Ray', 'MP Drainkiss', 'Osmosis', 'Reaving Wind',
         'Sandspin', 'Sandspray', 'Sheep Song', 'Soporific', 'Sound Blast', 'Stinking Gas',
-        'Sub-zero Smash', 'Venom Shell', 'Voracious Trunk', 'Yawn'
+        'Sub-zero Smash', 'Venom Shell', 'Voracious Trunk', 'Yawn', 'Cruel Joke',
     }
 
     -- Breath-based spells
@@ -193,7 +194,8 @@ function job_setup()
     unbridled_spells = S {
         'Absolute Terror', 'Bilgestorm', 'Blistering Roar', 'Bloodrake', 'Carcharian Verve',
         'Crashing Thunder', 'Droning Whirlwind', 'Gates of Hades', 'Harden Shell', 'Polar Roar',
-        'Pyric Bulwark', 'Thunderbolt', 'Tourbillion', 'Uproot', 'Mighty Guard', 'Cruel Joke'
+        'Pyric Bulwark', 'Thunderbolt', 'Tourbillion', 'Uproot', 'Mighty Guard', 'Cruel Joke',
+        'Cesspool', 'Tearing Gust'
     }
 end
 
@@ -204,10 +206,12 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Normal', 'Acc', 'PDT', 'Learning')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal', 'PDT', 'Learning', 'Refresh')
+    state.IdleMode:options('Normal', 'PDT', 'Refresh', 'Regen')
     state.DoomMode = M { ['description'] = 'Doom Mode', 'Cursna', 'Holy Water', 'None' }
 
     gear.default.obi_waist = "Sacro Cord"
@@ -221,8 +225,8 @@ function user_setup()
 
 
 
-    send_command('bind numpad7 gs equip sets.Weapons.Naegling')
-    send_command('bind numpad8 gs equip sets.Weapons.magicatk')
+    send_command('bind numpad7 gs equip sets.weapons.Naegling')
+    send_command('bind numpad8 gs equip sets.weapons.magicatk')
 
     send_command('bind numpad1 input /ma "Sudden Lunge" <t>')
     send_command('bind numpad3 input /ma "Cruel Joke" <t>')
@@ -248,9 +252,9 @@ function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    sets.Weapons = {}
-    sets.Weapons.Naegling = { main = "Naegling", sub = "Thibron" }
-    sets.Weapons.magicatk = { main = "Maxentius", sub = "Bunzi's Rod" }
+    sets.weapons = {}
+    sets.weapons.Naegling = { main = "Naegling", sub = "Thibron" }
+    sets.weapons.magicatk = { main = "Maxentius", sub = "Bunzi's Rod" }
 
     gear.default.obi_waist = "Acuity Belt +1"
 
@@ -336,12 +340,12 @@ function init_gear_sets()
     sets.precast.Waltz = {
         ammo = "Sonia's Plectrum",
         head = "Uk'uxkaj Cap",
-        body = "Vanir Cotehardie",
-        hands = "Buremte Gloves",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
         ring1 = "Spiral Ring",
         back = "Iximulew Cape",
         waist = "Caudata Belt",
-        legs = "Hagondes Pants",
+        legs = "Gleti's Cuisses",
         feet = "Iuitl Gaiters +1"
     }
 
@@ -433,7 +437,8 @@ function init_gear_sets()
         ear2 = "Odr Earring",
         body = "Gleti's Cuirass",
         hands = "Gleti's Gauntlets",
-        ring1 = "Begrudging Ring",
+        ring2 = "Begrudging Ring",
+        ring1 = "Lehko's Ring",
         legs = "Gleti's Breeches",
         feet = "Gleti's Boots"
     })
@@ -485,7 +490,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Malignance Tabard",
         hands = "Adhemar Gloves +1",
-        ring1 = "Hetairoi Ring",
+        ring1 = "Lehko's Ring",
         ring2 = "Epona's Ring",
         back = "Cornflower Cape",
         waist = "Sailfi Belt +1",
@@ -549,7 +554,7 @@ function init_gear_sets()
         hands = "Amalric Gages +1",
         ring1 = gear.left_stikini,
         ring2 = "Metamorph Ring +1",
-        back = "Cornflower Cape",
+        back = "Aurist's Cape +1",
         waist = gear.ElementalObi,
         legs = "Amalric Slops +1",
         feet = "Amalric Nails +1"
@@ -577,29 +582,36 @@ function init_gear_sets()
         { ring1 = "Weatherspoon Ring +1" })
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
-        ammo = "Mavi Tathlum",
-        head = "Luhlaza Keffiyeh",
-        neck = "Combatant's Torque",
+        ammo = "Pemphredo Tathlum",
+        head = "Malignance Chapeau",
+        neck = "Erra Pendant",
         ear1 = "Crepuscular Earring",
         ear2 = "Dignitary's Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Metamorph Ring +1",
         ring2 = gear.right_stikini,
+        back = "Aurist's Cape +1",
+        waist = "Acuity Belt +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots",
     }
 
     -- Breath Spells --
 
     sets.midcast['Blue Magic'].Breath = {
-        ammo = "Mavi Tathlum",
-        head = "Luhlaza Keffiyeh",
-        neck = "Combatant's Torque",
-        ear1 = "Crepuscular Earring",
-        ear2 = "Dignitary's Earring",
-        body = "Vanir Cotehardie",
-        hands = "Assimilator's Bazubands +1",
-        ring1 = "K'ayres Ring",
-        ring2 = "Beeline Ring",
-        back = "Refraction Cape",
-        legs = "Enif Cosciales",
-        feet = "Iuitl Gaiters +1"
+        ammo = "Happy Egg",
+        head = "Nyame Helm",
+        neck = "Unmoving Collar +1",
+        ear1 = "Odnowa Earring +1",
+        ear2 = "Tuisto Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Eihwaz Ring",
+        ring2 = "Gelatinous Ring +1",
+        back = "Moonlight Cape",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
     -- Other Types --
@@ -611,14 +623,14 @@ function init_gear_sets()
         neck = "Lavalier +1",
         ear1 = "Etiolation Earring",
         ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie",
-        hands = "Buremte Gloves",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
         ring1 = "K'ayres Ring",
         ring2 = "Meridian Ring",
         back = "Fravashi Mantle",
         waist = "Sailfi Belt +1",
         legs = "Enif Cosciales",
-        feet = "Hagondes Sabots"
+        feet = "Gleti's Boots"
     }
 
     sets.midcast['Blue Magic'].Healing = {
@@ -689,11 +701,11 @@ function init_gear_sets()
             main = "Sakpata's Sword",
             sub = "Pukulatmuj +1",
             head = gear.taeon.phalanx.head,
-            body = gear.taeon.phalanx.body,
-            hands = gear.taeon.phalanx.hands,
-            wait = "Embla Sash",
-            legs = gear.taeon.phalanx.legs,
-            feet = gear.taeon.phalanx.feet,
+            body = gear.herculean.phalanx.body,
+            hands = gear.herculean.phalanx.hands,
+            waist = "Embla Sash",
+            legs = gear.herculean.phalanx.legs,
+            feet = gear.herculean.phalanx.feet,
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration,
@@ -750,7 +762,7 @@ function init_gear_sets()
         hands = "Malignance Gloves",
         ring1 = gear.left_stikini,
         ring2 = "Defending Ring",
-        waist = "Austerity Belt",
+        waist = "Austerity Belt +1",
         legs = "Malignance Tights",
         feet = "Malignance Boots"
     }
@@ -766,27 +778,31 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
         ring2 = "Gelatinous Ring +1",
-        back = "Shadow Mantle",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Carmine Cuisses +1",
         feet = "Nyame Sollerets"
     }
 
     sets.idle.PDT = {
-        ammo = "Staunch Tathlum +1",
+        ammo = "Brigantia Pebble",
         head = "Nyame Helm",
-        neck = "Bathy Choker +1",
+        neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
         ear2 = "Eabani Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_stikini,
-        ring2 = "Gelatinous Ring +1",
-        back = "Shadow Mantle",
+        ring2 = "Paguroidea Ring",
+        ring1 = "Gelatinous Ring +1",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
-        legs = "Nyame Flanchard",
+        legs = "Carmine Cuisses +1",
         feet = "Nyame Sollerets"
     }
+
+    sets.idle.Regen = set_combine(sets.idle, {
+        neck = "Bathy Choker +1", ring1 = "Paguroidea Ring", ring2 = "Chirich Ring +1"
+    })
 
     sets.idle.Town = {
         ammo = "Staunch Tathlum +1",
@@ -798,7 +814,7 @@ function init_gear_sets()
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
         ring2 = "Craftmaster's Ring",
-        back = "Shadow Mantle",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Carmine Cuisses +1",
         feet = "Nyame Sollerets"
@@ -812,27 +828,29 @@ function init_gear_sets()
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
         waist = "Fucho-no-obi",
-        legs = "Lengo pants"
+        -- legs = "Lengo pants"
     })
 
 
     -- Defense sets
     sets.defense.PDT = {
-        ammo = "Staunch Tathlum +1",
-        head = "Malignance Chapeau",
+        ammo = "Brigantia Pebble",
+        head = "Nyame Helm",
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
-        body = "Malignance Tabard",
-        hands = "Malignance Gloves",
-        ring1 = gear.left_stikini,
-        ring2 = "Defending Ring",
-        back = "Shadow Mantle",
+        ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Paguroidea Ring",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
-    sets.defense.MDT = set_combine(sets.defense.PDT, { ear2 = "Eabani Earring", ring1 = "Archon Ring" })
+    sets.defense.MDT = set_combine(sets.defense.PDT,
+        { ear2 = "Eabani Earring", ring1 = "Archon Ring", waist = "Platinum Moogle Belt", })
 
     sets.Kiting = { legs = "Carmine Cuisses +1" }
 
@@ -852,7 +870,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Malignance Tabard",
         hands = "Adhemar Wristbands +1",
-        ring1 = "Hetairoi Ring",
+        ring1 = "Lehko's Ring",
         ring2 = "Epona's Ring",
         back = "Cornflower Cape",
         waist = "Sailfi Belt +1",
@@ -868,7 +886,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
-        ring1 = "Hetairoi Ring",
+        ring1 = "Lehko's Ring",
         ring2 = "Epona's Ring",
         back = "Cornflower Cape",
         waist = "Sailfi Belt +1",
@@ -944,7 +962,7 @@ end
 function job_pretarget(spell, action, spellMap, eventArgs)
     if spell.type ~= 'WeaponSkill' then setRecast() end
     if unbridled_spells:contains(spell.english) and (not (state.Buff['SP Ability II'] or
-        state.Buff['Unbridled Learning']) or state.Buff['Unbridled Wisdom']) then
+            state.Buff['Unbridled Learning']) or state.Buff['Unbridled Wisdom']) then
         eventArgs.cancel = true
         local recasts = windower.ffxi.get_ability_recasts() or T {}
         local unbridled_recast = recasts[81] or 0
@@ -987,9 +1005,9 @@ end
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_post_precast(spell, action, spellMap, eventArgs)
     if (blue_magic_maps.Magical + blue_magic_maps.MagicalDarkness
-        + blue_magic_maps.MagicalLight + blue_magic_maps.MagicalMnd
-        + blue_magic_maps.MagicalChr + blue_magic_maps.MagicalVit
-        + blue_magic_maps.MagicalDex):contains(spell.english) then
+            + blue_magic_maps.MagicalLight + blue_magic_maps.MagicalMnd
+            + blue_magic_maps.MagicalChr + blue_magic_maps.MagicalVit
+            + blue_magic_maps.MagicalDex):contains(spell.english) then
         equip(sets.precast.FC.Weapon)
         eventArgs.handled = false
     end

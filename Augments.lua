@@ -8,7 +8,11 @@ if not gear then gear = T {} end
 gear.taeon = {}
 gear.taeon.phalanx = {}
 gear.taeon.phalanx.head = { name = "Taeon Chapeau", augments = { '"Repair" potency +5%', 'Phalanx +3', } }
-gear.taeon.phalanx.body = { name = "Taeon Tabard", augments = { '"Repair" potency +5%', 'Phalanx +3', } }
+gear.taeon.phalanx.body = {
+    name = "Taeon Tabard",
+    augments = { 'DEF+20', 'Spell interruption rate down -10%',
+        'Phalanx +3', }
+}
 gear.taeon.phalanx.hands = { name = "Taeon Gloves", augments = { '"Repair" potency +5%', 'Phalanx +3', } }
 gear.taeon.phalanx.legs = { name = "Taeon Tights", augments = { '"Repair" potency +5%', 'Phalanx +3' } }
 gear.taeon.phalanx.feet = { name = "Taeon Boots", augments = { '"Repair" potency +5%', 'Phalanx +3', } }
@@ -17,6 +21,7 @@ gear.taeon.repair = {}
 gear.taeon.repair = gear.taeon.phalanx
 
 gear.taeon.SIRD = {}
+gear.taeon.SIRD.body = gear.taeon.phalanx.body
 gear.taeon.SIRD.head = { name = "Taeon Chapeau", augments = { 'DEF+20', 'Spell interruption rate down -10%', 'HP+50' } }
 gear.taeon.SIRD.legs = { name = "Taeon Tights", augments = { 'DEF+20', 'Spell interruption rate down -10%', 'HP+50', } }
 
@@ -47,14 +52,17 @@ gear.taeon.pethaste.legs = {
 -- Telchine
 gear.telchine = {}
 gear.telchine.enh_dur = {}
-gear.telchine.enh_dur.head = { name = "Telchine Cap", augments = { '"Elemental Siphon"+30', 'Enh. Mag. eff. dur. +10', } }
+gear.telchine.enh_dur.head = {
+    name = "Telchine Cap",
+    augments = { '"Elemental Siphon"+30', 'Enh. Mag. eff. dur. +10', }
+}
 gear.telchine.enh_dur.body = {
     name = "Telchine Chas.",
     augments = { '"Elemental Siphon"+35', 'Enh. Mag. eff. dur. +10', }
 }
 gear.telchine.enh_dur.hands = {
     name = "Telchine Gloves",
-    augments = { '"Elemental Siphon"+30', 'Enh. Mag. eff. dur. +9', }
+    augments = { '"Elemental Siphon"+30', 'Enh. Mag. eff. dur. +10', }
 }
 gear.telchine.enh_dur.legs = {
     name = "Telchine Braconi",
@@ -62,7 +70,7 @@ gear.telchine.enh_dur.legs = {
 }
 gear.telchine.enh_dur.feet = {
     name = "Telchine Pigaches",
-    augments = { 'Mag. Evasion+21', '"Fast Cast"+5', 'Enh. Mag. eff. dur. +9' },
+    augments = { 'Mag. Evasion+21', '"Fast Cast"+5', 'Enh. Mag. eff. dur. +10' },
 }
 
 gear.telchine.siphon = {}
@@ -74,7 +82,10 @@ gear.telchine.fc.feet = gear.telchine.enh_dur.feet
 gear.telchine.regen = {}
 gear.telchine.regen.head = { name = "Telchine Cap", augments = { '"Regen" potency+3', } }
 gear.telchine.regen.body = { name = "Telchine Chasuble", augments = { '"Regen" potency+3', } }
-gear.telchine.regen.hands = gear.telchine.enh_dur.hands
+gear.telchine.regen.hands = {
+    name = "Telchine Pigaches",
+    augments = { 'Mag. Evasion+23', '"Fast Cast"+5', '"Regen" potency+3' },
+}
 gear.telchine.regen.legs = { name = "Telchine Braconi", augments = { '"Regen" potency+3', } }
 gear.telchine.regen.feet = { name = "Telchine Pigaches", augments = { '"Fast Cast"+2', '"Regen" potency+3', } }
 
@@ -98,6 +109,17 @@ gear.acro.SIRD.head = { name = "Acro Helm", augments = { 'DEF+22', 'Spell interr
 gear.acro.drain = {}
 gear.acro.drain.body = { name = "Acro Surcoat", augments = { 'Mag. Acc.+10', '"Drain" and "Aspir" potency +7', 'INT+6', } }
 
+-- Helios
+gear.helios = {}
+gear.helios.physicalbp = {}
+gear.helios.physicalbp.head = {
+    name = "Helios Band",
+    augments = { 'Pet: Accuracy+29 Pet: Rng. Acc.+29', 'Pet: "Dbl. Atk."+8', 'Blood Pact Dmg.+7', }
+}
+gear.helios.physicalbp.feet = {
+    name = "Helios Boots",
+    augments = { 'Pet: Accuracy+29 Pet: Rng. Acc.+29', 'Pet: "Dbl. Atk."+8', 'Blood Pact Dmg.+7', }
+}
 -- Merlinic
 gear.merlinic = {}
 gear.merlinic.fc = {}
@@ -110,12 +132,22 @@ gear.merlinic.fc.feet = {
 }
 gear.merlinic.fc.hands = { name = "Merlinic Dastanas", augments = { '"Fast Cast"+7', 'CHR+10', '"Mag.Atk.Bns."+6' } }
 
-gear.merlinic.bp = {}
-gear.merlinic.bp.hands = {
+gear.merlinic.bp_magical = {}
+gear.merlinic.bp_magical.hands = {
     name = "Merlinic Dastanas",
-    augments = { 'Pet: "Mag.Atk.Bns."+29', 'Blood Pact Dmg.+9',
-        'Pet: INT+4', },
+    augments = { 'Pet: Mag. Acc.+24 Pet: "Mag.Atk.Bns."+24', 'Blood Pact Dmg.+10', 'Pet: INT+8', 'Pet: Mag. Acc.+12',
+        'Pet: "Mag.Atk.Bns."+13',
+    },
 }
+
+gear.merlinic.bp_physical = {}
+gear.merlinic.bp_physical.hands = {
+    name = "Merlinic Dastanas",
+    augments = { 'Pet: Attack+24 Pet: Rng.Atk.+24', 'Blood Pact Dmg.+9', 'Pet: STR+12', 'Pet: Mag. Acc.+1',
+        'Pet: "Mag.Atk.Bns."+4',
+    },
+}
+
 
 gear.merlinic.phalanx = {}
 gear.merlinic.phalanx.head = {
@@ -136,9 +168,16 @@ gear.chironic.refresh.hands = {
         'Mag. Acc.+17 "Mag.Atk.Bns."+17', },
 }
 
+gear.chironic.enfeebling = {}
+gear.chironic.enfeebling.legs = { name = "Chironic Hose" }
+
 -- Herculean
 gear.herculean = {}
 gear.herculean.phalanx = {}
+gear.herculean.phalanx.hands = {
+    name = "Herculean Gloves",
+    augments = { 'Pet: INT+15', 'Attack+1', 'Phalanx +4', 'Mag. Acc.+16 "Mag.Atk.Bns."+16' },
+}
 gear.herculean.phalanx.legs = {
     name = "Herculean Trousers",
     augments = { 'Enmity-6', 'Pet: Mag. Acc.+3 Pet: "Mag.Atk.Bns."+3', 'Phalanx +4', 'Mag. Acc.+8 "Mag.Atk.Bns."+8', }
@@ -146,6 +185,12 @@ gear.herculean.phalanx.legs = {
 gear.herculean.phalanx.feet = {
     name = "Herculean Boots",
     augments = { '"Store TP"+2', '"Mag.Atk.Bns."+20', 'Phalanx +4', }
+}
+
+gear.herculean.phalanx.body = {
+    name = "Herculean Vest",
+    augments = { 'Mag. Acc.+28', '"Repair" potency +1%',
+        'Phalanx +4', }
 }
 
 gear.herculean.fc = {}
@@ -183,6 +228,10 @@ gear.grioavolr.bp = {
     name = "Grioavolr",
     augments = { 'Blood Pact Dmg.+9', 'Pet: STR+19', 'Pet: Mag. Acc.+18', 'Pet: "Mag.Atk.Bns."+24' },
 }
+
+-- Gada
+gear.gada = {}
+gear.gada.enh_dur = { name = "Gada", augments = { 'Enh. Mag. eff. dur. +5', 'VIT+8', '"Mag.Atk.Bns."+19', 'DMG:+11', } }
 
 -- Colada
 gear.colada = {}

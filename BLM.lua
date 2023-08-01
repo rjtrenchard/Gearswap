@@ -22,6 +22,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant', 'Low')
     state.IdleMode:options('Normal', 'PDT')
@@ -34,7 +36,7 @@ function user_setup()
         'Stonega', 'Waterga', 'Aeroga', 'Firaga', 'Blizzaga', 'Thundaga',
         'Stonega II', 'Waterga II', 'Aeroga II', 'Firaga II', 'Blizzaga II', 'Thundaga II' }
 
-    gear.macc_hagondes = { name = "Hagondes Cuffs", augments = { 'Phys. dmg. taken -3%', 'Mag. Acc.+29' } }
+
 
     -- Additional local binds
     send_command('bind ^` input /ma Stun <t>')
@@ -91,66 +93,66 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        head = "Hagondes Hat",
+        head = "Agwu's Cap",
         neck = "Combatant's Torque",
         ear1 = "Bladeborn Earring",
         ear2 = "Steelflash Earring",
-        body = "Hagondes Coat",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Rajas Ring",
         ring2 = "Icesoul Ring",
         back = "Refraction Cape",
         waist = "Cognition Belt",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Vidohunir'] = {
         ammo = "Dosis Tathlum",
-        head = "Hagondes Hat",
-        neck = "Eddy Necklace",
+        head = "Agwu's Cap",
+        neck = "Erra Pendant",
         ear1 = "Friomisi Earring",
         ear2 = "Regal Earring",
-        body = "Hagondes Coat",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Icesoul Ring",
         ring2 = "Metamorph Ring +1",
-        back = "Toro Cape",
+        back = "Aurist's Cape +1",
         waist = "Thunder Belt",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
 
     ---- Midcast Sets ----
 
     sets.midcast.FastRecast = {
-        head = "Nahtirah Hat",
+        head = "Agwu's Cap",
         ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie",
-        hands = "Bokwus Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Rahab Ring",
         back = "Fi Follet Cape +1",
-        waist = "Goading Belt",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        waist = "Cornelia's Belt",
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.midcast.Cure = {
         main = "Tamaxchi",
         sub = "Ammurapi Shield",
-        head = "Nahtirah Hat",
+        head = "Agwu's Cap",
         neck = "Incanter's Torque",
         ear2 = "Loquacious Earring",
         body = "Heka's Kalasiris",
-        hands = "Bokwus Gloves",
+        hands = "Agwu's Gages",
         ring1 = "Ephedra Ring",
         ring2 = "Sirona's Ring",
         back = "Pahtli Cape",
         waist = gear.ElementalObi,
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.midcast.Curaga = sets.midcast.Cure
@@ -158,7 +160,7 @@ function init_gear_sets()
     sets.midcast.Cursna = set_combine({}, {
         neck = "Debilis Medallion",
         hands = "Hieros Mittens",
-        ring1 = "Haoma's Ring",
+        ring1 = "Menelaus's Ring",
         ring2 = "Haoma's Ring",
         feet = "Gendewitha Galoshes +1"
     })
@@ -196,10 +198,10 @@ function init_gear_sets()
         body = "Manasa Chasuble",
         ring1 = "Metamorph Ring +1",
         ring2 = gear.right_stikini,
-        back = "Refraction Cape",
+        back = "Aurist's Cape +1",
         waist = "Luminary Sash",
-        legs = "Bokwus Slops",
-        feet = "Bokwus Boots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.midcast.ElementalEnfeeble = sets.midcast['Enfeebling Magic']
@@ -214,14 +216,14 @@ function init_gear_sets()
         neck = "Aesir Torque",
         ear1 = "Malignance Earring",
         ear2 = "Mani Earring",
-        body = "Vanir Cotehardie",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Archon Ring",
         ring2 = "Evanescence Ring",
-        back = "Refraction Cape",
+        back = "Aurist's Cape +1",
         waist = gear.DrainWaist,
-        legs = "Bokwus Slops",
-        feet = "Bokwus Boots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.midcast.Drain = {
@@ -232,14 +234,14 @@ function init_gear_sets()
         neck = "Aesir Torque",
         ear1 = "Malignance Earring",
         ear2 = "Mani Earring",
-        body = "Vanir Cotehardie",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Archon Ring",
         ring2 = "Evanescence Ring",
-        back = "Refraction Cape",
+        back = "Merciful Cape",
         waist = gear.DrainWaist,
-        legs = "Bokwus Slops",
-        feet = "Bokwus Boots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.midcast.Aspir = sets.midcast.Drain
@@ -252,14 +254,14 @@ function init_gear_sets()
         neck = "Aesir Torque",
         ear1 = "Malignance Earring",
         ear2 = "Mani Earring",
-        body = "Vanir Cotehardie",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Metamorph Ring +1",
         ring2 = "Evanescence Ring",
-        back = "Refraction Cape",
+        back = "Aurist's Cape +1",
         waist = gear.DrainWaist,
-        legs = "Bokwus Slops",
-        feet = "Bokwus Boots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
 
@@ -277,7 +279,7 @@ function init_gear_sets()
         hands = "Amalric Gages +1",
         ring1 = "Freke Ring",
         ring2 = "Metamorph Ring +1",
-        back = "Toro Cape",
+        back = "Aurist's Cape +1",
         waist = gear.ElementalObi,
         legs = "Amalric Slops +1",
         feet = "Amalric Nails +1"
@@ -295,7 +297,7 @@ function init_gear_sets()
         hands = "Amalric Gages +1",
         ring1 = "Freke Ring",
         ring2 = "Metamorph Ring +1",
-        back = "Toro Cape",
+        back = "Aurist's Cape +1",
         waist = gear.ElementalObi,
         legs = "Amalric Slops +1",
         feet = "Amalric Nails +1"
@@ -313,17 +315,17 @@ function init_gear_sets()
         main = "Earth Staff",
         sub = "Enki Strap",
         ammo = "Staunch Tathlum +1",
-        head = "Nahtirah Hat",
+        head = "Agwu's Cap",
         neck = "Loricate Torque +1",
-        ear1 = "Bloodgem Earring",
+        ear1 = "Etiolation Earring",
         ear2 = "Loquacious Earring",
         body = "Manasa Chasuble",
         hands = "Serpentes Cuffs",
         ring1 = "Sheltered Ring",
-        ring2 = "Paguroidea Ring",
+        ring2 = "Shadow Ring",
         back = "Fi Follet Cape +1",
         waist = "Witful Belt",
-        legs = "Nares Trews",
+        legs = "Agwu's Slops",
         feet = "Chelona Boots +1"
     }
 
@@ -342,8 +344,8 @@ function init_gear_sets()
         hands = "Serpentes Cuffs",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
-        waist = "Austerity Belt",
-        legs = "Nares Trews",
+        waist = "Austerity Belt +1",
+        legs = "Agwu's Slops",
         feet = "Serpentes Sabots"
     }
 
@@ -364,8 +366,8 @@ function init_gear_sets()
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
         back = "Umbra Cape",
-        waist = "Hierarch Belt",
-        legs = "Nares Trews",
+        waist = "Shinjutsu-no-obi +1",
+        legs = "Agwu's Slops",
         feet = "Crier's Gaiters"
     }
 
@@ -374,17 +376,17 @@ function init_gear_sets()
         main = "Earth Staff",
         sub = "Enki Strap",
         ammo = "Staunch Tathlum +1",
-        head = "Nahtirah Hat",
+        head = "Agwu's Cap",
         neck = "Loricate Torque +1",
-        ear1 = "Bloodgem Earring",
+        ear1 = "Etiolation Earring",
         ear2 = "Loquacious Earring",
-        body = "Hagondes Coat",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Defending Ring",
         ring2 = gear.DarkRing.physical,
         back = "Umbra Cape",
-        waist = "Hierarch Belt",
-        legs = "Hagondes Pants",
+        waist = "Shinjutsu-no-obi +1",
+        legs = "Agwu's Slops",
         feet = "Crier's Gaiters"
     }
 
@@ -397,18 +399,33 @@ function init_gear_sets()
         main = "Lehbrailg +2",
         sub = "Enki Strap",
         ammo = "Staunch Tathlum +1",
-        head = "Hagondes Hat",
+        head = "Agwu's Cap",
         neck = "Bathy Choker +1",
-        ear1 = "Bloodgem Earring",
+        ear1 = "Etiolation Earring",
         ear2 = "Loquacious Earring",
-        body = "Hagondes Coat",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Sheltered Ring",
-        ring2 = "Paguroidea Ring",
+        ring2 = "Shadow Ring",
         back = "Umbra Cape",
-        waist = "Hierarch Belt",
-        legs = "Hagondes Pants",
+        waist = "Shinjutsu-no-obi +1",
+        legs = "Agwu's Slops",
         feet = "Crier's Gaiters"
+    }
+
+    sets.idle.Refresh = {
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        ammo = "Homiliary",
+        head = "Befouled Crown",
+        neck = "Sibyl Scarf",
+        body = "Shamash Robe",
+        hands = gear.chironic.refresh.hands,
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        waist = "Fucho-no-obi",
+        legs = "Assiduity Pants +1",
+        feet = gear.chironic.refresh.feet
     }
 
     -- Defense sets
@@ -416,30 +433,30 @@ function init_gear_sets()
     sets.defense.PDT = {
         main = "Earth Staff",
         sub = "Enki Strap",
-        head = "Nahtirah Hat",
+        head = "Agwu's Cap",
         neck = "Loricate Torque +1",
-        body = "Hagondes Coat",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Defending Ring",
         ring2 = gear.DarkRing.physical,
         back = "Umbra Cape",
-        waist = "Hierarch Belt",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        waist = "Platinum Moogle Belt",
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.defense.MDT = {
-        ammo = "Demonry Stone",
-        head = "Nahtirah Hat",
+        ammo = "Staunch Tathlum +1",
+        head = "Agwu's Cap",
         neck = "Loricate Torque +1",
-        body = "Vanir Cotehardie",
-        hands = "Yaoyotl Gloves",
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Defending Ring",
         ring2 = "Shadow Ring",
-        back = "Tuilha Cape",
-        waist = "Hierarch Belt",
-        legs = "Bokwus Slops",
-        feet = "Hagondes Sabots"
+        back = "Moonlight Cape",
+        waist = "Platinum Moogle Belt",
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.Kiting = { feet = "Crier's Gaiters" }
@@ -467,8 +484,8 @@ function init_gear_sets()
         ear2 = "Crepuscular Earring",
         body = "Nyame Mail",
         hands = "Gazu Bracelets +1",
-        ring1 = "Petrov Ring",
-        ring2 = "Hetairoi Ring",
+        ring1 = "Chirich Ring +1",
+        ring2 = "Lehko's Ring",
         back = "Umbra Cape",
         waist = "Windbuffet Belt +1",
         legs = "Nyame Flanchard",
@@ -484,7 +501,7 @@ end
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
     if spellMap == 'Cure' or spellMap == 'Curaga' then
-        gear.default.obi_waist = "Goading Belt"
+        gear.default.obi_waist = "Cornelia's Belt"
     elseif spell.skill == 'Elemental Magic' then
         gear.default.obi_waist = "Sekhmet Corset"
         if state.CastingMode.value == 'Low' then

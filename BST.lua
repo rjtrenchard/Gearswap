@@ -6,11 +6,10 @@
 
 --[[
     Custom commands:
-    
+
     Ctrl-F8 : Cycle through available pet food options.
     Alt-F8 : Cycle through correlation modes for pet attacks.
 ]]
-
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
@@ -71,6 +70,8 @@ end
 
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'PDT')
     state.WeaponskillMode:options('Normal', 'Acc')
@@ -80,14 +81,22 @@ function user_setup()
     gear.default.ElementalObi = "Eschan Stone"
 
     gear.PetPDThead = 'Anwig Salade'
-    gear.PetPDTbody = { name = "Taeon Tabard",
-        augments = { 'Pet: Damage Taken -4%', 'Pet: Accuracy+21 Rng. Acc.+21', 'Pet: "Double Attack"+5%' } }
-    gear.PetPDThands = { name = "Taeon Gloves",
-        augments = { 'Pet: Damage Taken -4%', 'Pet: Accuracy+20 Rng. Acc.+20', 'Pet: "Double Attack"+5%' } }
-    gear.PetPDTlegs = { name = "Taeon Tights",
-        augments = { 'Pet: Damage Taken -4%', 'Pet: Accuracy+17 Rng. Acc.+17', 'Pet: "Double Attack"+5%' } }
-    gear.PetPDTboots = { name = "Taeon Boots",
-        augments = { 'Pet: Damage Taken -4%', 'Pet: Accuracy+17 Rng. Acc.+17', 'Pet: "Double Attack"+5%' } }
+    gear.PetPDTbody = {
+        name = "Taeon Tabard",
+        augments = { 'Pet: Damage Taken -4%', 'Pet: Accuracy+21 Rng. Acc.+21', 'Pet: "Double Attack"+5%' }
+    }
+    gear.PetPDThands = {
+        name = "Taeon Gloves",
+        augments = { 'Pet: Damage Taken -4%', 'Pet: Accuracy+20 Rng. Acc.+20', 'Pet: "Double Attack"+5%' }
+    }
+    gear.PetPDTlegs = {
+        name = "Taeon Tights",
+        augments = { 'Pet: Damage Taken -4%', 'Pet: Accuracy+17 Rng. Acc.+17', 'Pet: "Double Attack"+5%' }
+    }
+    gear.PetPDTboots = {
+        name = "Taeon Boots",
+        augments = { 'Pet: Damage Taken -4%', 'Pet: Accuracy+17 Rng. Acc.+17', 'Pet: "Double Attack"+5%' }
+    }
 
     gear.SIRDhead = { name = "Taeon Chapeau" }
     gear.SIRDbody = { name = "Taeon Chapeau" }
@@ -123,35 +132,43 @@ end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
-
-
-
     --------------------------------------
     -- Custom buff sets
     --------------------------------------
 
-    sets.buff['Killer Instinct'] = { head = "Ankusa Helm +1", body = "Nukumi Gausape", legs = "Totemic Trousers +1" }
+    sets.buff['Killer Instinct'] = { head = "Ankusa Helm +1", body = "Nukumi Gausape +1", legs = "Totemic Trousers +1" }
 
-    sets.enmity = { ammo = "Sapience Orb",
-        head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
-        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
-        waist = "Trance Belt", legs = "Zoar Subligar +1"
+    sets.enmity = {
+        ammo = "Sapience Orb",
+        head = "Halitus Helm",
+        neck = "Unmoving Collar +1",
+        ear1 = "Trux Earring",
+        ear2 = "Cryptic Earring",
+        body = "Emet Harness +1",
+        ring1 = "Supershear Ring",
+        ring2 = "Eihwaz Ring",
+        waist = "Trance Belt",
+        legs = "Zoar Subligar +1"
     }
 
     sets.resist = {}
-    sets.resist.death = { main = "Odium",
-        ring1 = "Shadow Ring", ring2 = "Eihwaz Ring"
+    sets.resist.death = {
+        main = "Odium",
+        ring1 = "Shadow Ring",
+        ring2 = "Eihwaz Ring"
     }
 
     sets.buff.doom = set_combine(sets.defense.PDT, {
         neck = "Nicander's Necklace",
-        ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
+        ring1 = "Eshmun's Ring",
+        ring2 = "Eshmun's Ring",
         waist = "Gishdubar Sash"
     })
 
     sets.buff.doom.HolyWater = set_combine(sets.buff.doom, {
         neck = "Nicander's Necklace",
-        ring1 = "Blenmot's Ring +1", ring2 = "Blenmot's Ring +1"
+        ring1 = "Blenmot's Ring +1",
+        ring2 = "Blenmot's Ring +1"
     })
 
     --------------------------------------
@@ -164,65 +181,158 @@ function init_gear_sets()
     sets.precast.JA['Bestial Loyalty'] = sets.precast.JA['Call Beast']
     sets.precast.JA['Familiar'] = { legs = "Ankusa Trousers +1" }
     sets.precast.JA['Tame'] = { head = "Totemic Helm +1", ear1 = "Tamer's Earring", legs = "Stout Kecks" }
-    sets.precast.JA['Spur'] = { feet = "Nukumi Ocreae" }
+    sets.precast.JA['Spur'] = { feet = "Nukumi Ocreae +1" }
 
-    sets.precast.JA['Reward'] = { ammo = RewardFood,
-        head = "Ankusa Helm +1", neck = "Phaliana Locket", ear1 = "Crepuscular Earring", ear2 = "Pratik Earring",
-        body = "Totemic Jackcoat +1", hands = "Malignance Gloves", ring1 = "Aquasoul Ring", ring2 = "Aquasoul Ring",
-        back = "Artio's Mantle", waist = "Crudelis Belt", legs = "Ankusa Trousers +1", feet = "Ankusa Gaiters +1" }
+    sets.precast.JA['Reward'] = {
+        ammo = RewardFood,
+        head = "Ankusa Helm +1",
+        neck = "Phaliana Locket",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Pratik Earring",
+        body = "Totemic Jackcoat +1",
+        hands = "Malignance Gloves",
+        ring1 = "Aquasoul Ring",
+        ring2 = "Aquasoul Ring",
+        back = "Artio's Mantle",
+        waist = "Crudelis Belt",
+        legs = "Ankusa Trousers +1",
+        feet = "Ankusa Gaiters +1"
+    }
 
-    sets.precast.JA['Charm'] = { ammo = "Voluspa Tathlum",
-        head = "Totemic Helm +1", neck = "fixme", ear1 = "Dignitary's Earring", ear2 = "Handler's Earring +1",
-        body = "Ankusa Jackcoat +1", hands = "Ankusa Gloves +1", ring1 = "Balrahn's Ring", ring2 = gear.right_stikini,
-        back = "Aisance Mantle +1", waist = "Eschan Stone", legs = "Ankusa Trousers +1", feet = "Ankusa Gaiters +1" }
+    sets.precast.JA['Charm'] = {
+        ammo = "Voluspa Tathlum",
+        head = "Totemic Helm +1",
+        ear1 = "Dignitary's Earring",
+        ear2 = "Handler's Earring +1",
+        body = "Ankusa Jackcoat +1",
+        hands = "Ankusa Gloves +1",
+        ring1 = "Balrahn's Ring",
+        ring2 = gear.right_stikini,
+        back = "Aisance Mantle +1",
+        waist = "Eschan Stone",
+        legs = "Ankusa Trousers +1",
+        feet = "Ankusa Gaiters +1"
+    }
 
     -- CURING WALTZ
-    sets.precast.Waltz = { ammo = "Voluspa Tathlum",
-        head = "Totemic Helm +1", neck = "Nodens Gorget", ear1 = "", ear2 = "Handler's Earring +1",
-        body = "Ankusa Jackcoat +1", hands = "Totemic Gloves +1", ring1 = "Ilabrat Ring", ring2 = "Asklepian Ring",
-        back = "Aisance Mantle +1", waist = "Chaac Belt", legs = "Ankusa Trousers +1", feet = "Ankusa Gaiters +1" }
+    sets.precast.Waltz = {
+        ammo = "Voluspa Tathlum",
+        head = "Totemic Helm +1",
+        neck = "Nodens Gorget",
+        ear1 = "",
+        ear2 = "Handler's Earring +1",
+        body = "Ankusa Jackcoat +1",
+        hands = "Totemic Gloves +1",
+        ring1 = "Ilabrat Ring",
+        ring2 = "Asklepian Ring",
+        back = "Aisance Mantle +1",
+        waist = "Chaac Belt",
+        legs = "Ankusa Trousers +1",
+        feet = "Ankusa Gaiters +1"
+    }
 
     -- HEALING WALTZ
     sets.precast.Waltz['Healing Waltz'] = {}
 
     -- STEPS
-    sets.precast.Step = { ammo = "Jukukik Feather",
-        head = "", neck = "Combatant's Torque", ear1 = "Zwazo Earring", ear2 = "Crepuscular Earring",
-        body = "Mikinaak Breastplate", hands = "Malignance Gloves", ring1 = "Ilabrat Ring", ring2 = "Apate Ring",
-        back = "Letalis Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.precast.Step = {
+        ammo = "Jukukik Feather",
+        head = "",
+        neck = "Combatant's Torque",
+        ear1 = "Zwazo Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Mikinaak Breastplate",
+        hands = "Malignance Gloves",
+        ring1 = "Ilabrat Ring",
+        ring2 = "Apate Ring",
+        back = "Letalis Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
+    }
 
     -- VIOLENT FLOURISH
     sets.precast.Flourish1 = {}
     sets.precast.Flourish1['Violent Flourish'] = { body = "Ankusa Jackcoat +1" }
 
-    sets.precast.FC = { ammo = "Sapience Orb",
-        neck = "Orunmila's Torque", ear1 = "Loquacious Earring", ear2 = "Enchanter's Earring +1",
-        body = "Sacro Breastplate", hands = "Leyline Gloves", ring1 = "Rahab Ring", ring2 = "Weatherspoon Ring +1",
+    sets.precast.FC = {
+        ammo = "Sapience Orb",
+        neck = "Orunmila's Torque",
+        ear1 = "Loquacious Earring",
+        ear2 = "Enchanter's Earring +1",
+        body = "Sacro Breastplate",
+        hands = "Leyline Gloves",
+        ring1 = "Rahab Ring",
+        ring2 = "Weatherspoon Ring +1",
         legs = "Limbo Trousers",
     }
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, { neck = "Magoraga Bead Necklace" })
 
     -- WEAPONSKILLS
     -- Default weaponskill set.
-    sets.precast.WS = { ammo = "Voluspa Tathlum",
-        head = "Gleti's Mask", neck = "Fotia Gorget", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
-        body = "Gleti's Cuirass", hands = "Meghanada Gloves +2", ring2 = "Regal Ring", ring1 = "Epaminondas's Ring",
-        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
+    sets.precast.WS = {
+        ammo = "Voluspa Tathlum",
+        head = "Gleti's Mask",
+        neck = "Fotia Gorget",
+        ear1 = "Thrud Earring",
+        ear2 = "Moonshade Earring",
+        body = "Gleti's Cuirass",
+        hands = "Meghanada Gloves +2",
+        ring2 = "Regal Ring",
+        ring1 = "Epaminondas's Ring",
+        back = "Atheling Mantle",
+        waist = "Fotia Belt",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
+    }
 
-    sets.precast.WS.WSAcc = { ammo = "Voluspa Tathlum",
-        head = "Malignance Chapeau", neck = "Fotia Gorget", ear1 = "Zwazo Earring", ear2 = "Moonshade Earring",
-        body = "Malignance Tabard", hands = "Meghanada Gloves +2", ring2 = "Regal Ring", ring1 = "Epaminondas's Ring",
-        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.precast.WS.WSAcc = {
+        ammo = "Voluspa Tathlum",
+        head = "Malignance Chapeau",
+        neck = "Fotia Gorget",
+        ear1 = "Zwazo Earring",
+        ear2 = "Moonshade Earring",
+        body = "Malignance Tabard",
+        hands = "Meghanada Gloves +2",
+        ring2 = "Regal Ring",
+        ring1 = "Epaminondas's Ring",
+        back = "Atheling Mantle",
+        waist = "Fotia Belt",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
+    }
 
-    sets.precast.WS.WSCrit = { ammo = "Voluspa Tathlum",
-        head = "Blistering Sallet +1", neck = "Fotia Gorget", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
-        body = "Gleti's Cuirass", hands = "Meghanada Gloves +2", ring2 = "Hetairoi Ring", ring1 = "Begrudging Ring",
-        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
+    sets.precast.WS.WSCrit = {
+        ammo = "Voluspa Tathlum",
+        head = "Blistering Sallet +1",
+        neck = "Fotia Gorget",
+        ear1 = "Thrud Earring",
+        ear2 = "Moonshade Earring",
+        body = "Gleti's Cuirass",
+        hands = "Meghanada Gloves +2",
+        ring2 = "Lehko's Ring",
+        ring1 = "Begrudging Ring",
+        back = "Atheling Mantle",
+        waist = "Fotia Belt",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
+    }
 
-    sets.precast.WS.MultiHit = { ammo = "Voluspa Tathlum",
-        head = "Gleti's Mask", neck = "Fotia Gorget", ear1 = "Sherida Earring", ear2 = "Lugra Earring +1",
-        body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Gere Ring", ring2 = "Epona's Ring",
-        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
+    sets.precast.WS.MultiHit = {
+        ammo = "Voluspa Tathlum",
+        head = "Gleti's Mask",
+        neck = "Fotia Gorget",
+        ear1 = "Sherida Earring",
+        ear2 = "Lugra Earring +1",
+        body = "Gleti's Cuirass",
+        hands = "Gleti's Gauntlets",
+        ring1 = "Gere Ring",
+        ring2 = "Epona's Ring",
+        back = "Atheling Mantle",
+        waist = "Fotia Belt",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
+    }
 
     -- Specific weaponskill sets.
     -- Axes
@@ -251,12 +361,23 @@ function init_gear_sets()
     sets.precast.WS['Decimation'] = set_combine(sets.precast.WS.MultiHit, {})
     sets.precast.WS['Decimation'].Acc = set_combine(sets.precast.WS.MultiHit, {})
 
-    sets.precast.WS['Primal Rend'] = { ammo = "Pemphredo Tathlum",
-        head = "Nyame Helm", neck = "Baetyl Pendant", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
-        body = "Nyame Mail", hands = "Meghanada gloves +2", ring1 = "Regal Ring", ring2 = "Epaminondas's Ring",
-        back = "Argocham. Mantle", waist = gear.ElementalObi, legs = "Nyame Flanchard", feet = "Nyame Sollerets" }
+    sets.precast.WS['Primal Rend'] = {
+        ammo = "Oshasha's Treatise",
+        head = "Nyame Helm",
+        neck = "Baetyl Pendant",
+        ear1 = "Thrud Earring",
+        ear2 = "Moonshade Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Weatherspoon Ring +1",
+        ring2 = "Epaminondas's Ring",
+        back = "Argocham. Mantle",
+        waist = gear.ElementalObi,
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
 
-    sets.precast.WS['Cloudsplitter'] = set_combine(sets.precast.WS['Primal Rend'], {})
+    sets.precast.WS['Cloudsplitter'] = set_combine(sets.precast.WS['Primal Rend'], { ring1 = "Regal Ring" })
 
     -- Sword
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS,
@@ -278,19 +399,39 @@ function init_gear_sets()
     -- Midcast sets
     --------------------------------------
 
-    sets.midcast.FastRecast = { ammo = "Voluspa Tathlum",
-        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Loquacious Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Rahab Ring", ring2 = "Defending Ring",
-        waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.midcast.FastRecast = {
+        ammo = "Voluspa Tathlum",
+        head = "Malignance Chapeau",
+        neck = "Loricate Torque +1",
+        ear1 = "Loquacious Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Rahab Ring",
+        ring2 = "Weatherspoon Ring +1",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
+    }
 
     sets.midcast.Utsusemi = set_combine(sets.midcast.FastRecast, { neck = "Magoraga Bead Necklace" })
 
 
     -- PET SIC & READY MOVES
-    sets.midcast.Pet.WS = { ammo = "Voluspa Tathlum",
-        head = "Totemic Helm +1", neck = "Shulmanu Collar", ear1 = "Domesticator's Earring", ear2 = "Enmerkar Earring",
-        body = "Ankusa Jackcoat +1", hands = "Nukumi Manoplas", ring1 = "Varar Ring +1", ring2 = "Cath Palug Ring",
-        back = "Artio's Mantle", waist = "Incarnation Sash", legs = "Totemic Trousers +1", feet = "Totemic Gaiters +1" }
+    sets.midcast.Pet.WS = {
+        ammo = "Voluspa Tathlum",
+        head = "Totemic Helm +1",
+        neck = "Shulmanu Collar",
+        ear1 = "Domesticator's Earring",
+        ear2 = "Enmerkar Earring",
+        body = "Ankusa Jackcoat +1",
+        hands = "Nukumi Manoplas +1",
+        ring1 = "Varar Ring +1",
+        ring2 = "Cath Palug Ring",
+        back = "Artio's Mantle",
+        waist = "Incarnation Sash",
+        legs = "Totemic Trousers +1",
+        feet = "Totemic Gaiters +1"
+    }
 
     sets.midcast.Pet.WSMagical = set_combine(sets.midcast.Pet.Physical, { neck = "Adad Necklace", body = "Udug Jacket" })
 
@@ -299,7 +440,7 @@ function init_gear_sets()
     sets.midcast.Pet.WS.Unleash = set_combine(sets.midcast.Pet.WS, { hands = "Scorpion Mittens" })
 
     sets.midcast.Pet.Neutral = {}
-    sets.midcast.Pet.Favorable = { head = "Nukumi Cabasset" }
+    sets.midcast.Pet.Favorable = { head = "Nukumi Cabasset +1" }
 
 
     --------------------------------------
@@ -307,52 +448,106 @@ function init_gear_sets()
     --------------------------------------
 
     -- RESTING
-    sets.resting = { ammo = "Voluspa Tathlum",
-        head = "Crepuscular Helm", neck = "Combatant's Torque", ear1 = "Domesticator's Earring",
+    sets.resting = {
+        ammo = "Voluspa Tathlum",
+        head = "Crepuscular Helm",
+        neck = "Combatant's Torque",
+        ear1 = "Domesticator's Earring",
         ear2 = "Enmerkar Earring",
-        body = "Crepuscular Mail", hands = "Totemic Gloves +1", ring1 = "Defending Ring", ring2 = "Sheltered Ring",
-        back = "Pastoralist's Mantle", waist = "Muscle Belt +1", legs = "Nukumi Quijotes", feet = "Skadi's Jambeaux +1" }
+        body = "Crepuscular Mail",
+        hands = "Totemic Gloves +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Sheltered Ring",
+        back = "Pastoralist's Mantle",
+        waist = "Muscle Belt +1",
+        legs = "Nukumi Quijotes +1",
+        feet = "Skadi's Jambeaux +1"
+    }
 
     -- IDLE SETS
-    sets.idle = { ammo = "Voluspa Tathlum",
-        head = "Nyame Helm", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Etiolation Earring",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Defending Ring", ring2 = "Sheltered Ring",
-        back = "Pastoralist's Mantle", waist = "Loricaate Torque +1", legs = "Nyame Flanchard",
-        feet = "Skadi's Jambeaux +1" }
+    sets.idle = {
+        ammo = "Voluspa Tathlum",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Odnowa Earring +1",
+        ear2 = "Tuisto Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Sheltered Ring",
+        back = "Pastoralist's Mantle",
+        waist = "Loricate Torque +1",
+        legs = "Nyame Flanchard",
+        feet = "Skadi's Jambeaux +1"
+    }
 
     sets.idle.Town = sets.idle
 
-    sets.idle.Refresh = { head = "Wivre Hairpin", body = "Crepuscular Mail", hands = "Ogier's Gauntlets",
-        legs = "Ogier's Breeches" }
+    sets.idle.Refresh = {
+        head = "Wivre Hairpin",
+        body = "Crepuscular Mail",
+        hands = "Ogier's Gauntlets",
+        legs = "Ogier's Breeches"
+    }
 
     sets.idle.Reraise = set_combine(sets.idle, { head = "Crepuscular Helm", body = "Crepuscular Mail" })
 
     sets.idle.Pet = set_combine(sets.idle, { ear2 = "Enmerkar Earring" })
 
-    sets.idle.Pet.Engaged = { ammo = "Voluspa Tathlum",
-        head = "Ankusa Helm +1", neck = "Shulmanu Collar", ear1 = "Rimeice Earring", ear2 = "Enmerkar Earring",
-        body = "Ankusa Jackcoat +1", hands = "Totemic Gloves +1", ring1 = "Varar Ring +1", ring2 = "Cath Palug Ring",
-        back = "Artio's Mantle", waist = "Klouskap Sash +1", legs = "Ankusa Trousers +1", feet = "Taeon Boots" }
+    sets.idle.Pet.Engaged = {
+        ammo = "Voluspa Tathlum",
+        head = "Ankusa Helm +1",
+        neck = "Shulmanu Collar",
+        ear1 = "Rimeice Earring",
+        ear2 = "Enmerkar Earring",
+        body = "Ankusa Jackcoat +1",
+        hands = "Totemic Gloves +1",
+        ring1 = "Varar Ring +1",
+        ring2 = "Cath Palug Ring",
+        back = "Artio's Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Ankusa Trousers +1",
+        feet = "Taeon Boots"
+    }
 
     sets.idle.Pet.PetTank = set_combine(sets.idle.Pet.Engaged, {
-        head = "Anwig Salade", neck = "Shepherd's Chain", ear1 = "Handler's Earring +1",
-        body = "Taeon Tabard", hands = "Taeon Gloves",
-        legs = "Taeon Tights", feet = "Taeon Boots"
+        head = "Anwig Salade",
+        neck = "Shepherd's Chain",
+        ear1 = "Handler's Earring +1",
+        body = "Taeon Tabard",
+        hands = "Taeon Gloves",
+        legs = "Taeon Tights",
+        feet = "Taeon Boots"
     })
 
     -- DEFENSE SETS
-    sets.defense.PDT = { ammo = "Coiste Bodhar",
-        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Eabani Earring", ear2 = "Eabani Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring2 = "Epona's Ring", ring1 = "Defending Ring",
-        back = "Mollusca Mantle", waist = "Flume Belt +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.defense.PDT = {
+        ammo = "Brigantia Pebble",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Moonlight Ring",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
 
     sets.defense.Hybrid = set_combine(sets.defense.PDT, { waist = "Klouskap Sash +1" })
 
-    sets.defense.Killer = set_combine(sets.defense.Hybrid, { body = "Nukumi Gausape" })
+    sets.defense.Killer = set_combine(sets.defense.Hybrid, { body = "Nukumi Gausape +1" })
 
     sets.defense.MDT = set_combine(sets.defense.PDT, {
-        ear1 = "Eabani Earring", ear2 = gear.WSEarCessance,
-        ring1 = "Archon Ring"
+        ammo = "Staunch Tathlum",
+        ear1 = "Eabani Earring",
+        ear2 = "Odnowa Earring +1",
+        ring1 = "Archon Ring",
+        ring2 = "Shadow Ring",
+        waist = "Engraved Belt",
     })
 
     sets.Kiting = set_combine(sets.defense.PDT, { feet = "Skadi's Jambeaux +1" })
@@ -362,24 +557,57 @@ function init_gear_sets()
     -- Engaged sets
     --------------------------------------
 
-    sets.engaged = { ammo = "Coiste Bodhar",
-        head = "Gleti's Mask", neck = "Shulmanu Collar", ear1 = "Sherida Earring", ear2 = "Telos Earring",
-        body = "Gleti's Cuirass", hands = "Gleti's Gauntlets", ring1 = "Epona's Ring", ring2 = "Gere Ring",
-        back = "Atheling Mantle", waist = "Reiki Yotai", legs = "Gleti's Breeches", feet = "Gleti's Boots" }
+    sets.engaged = {
+        ammo = "Coiste Bodhar",
+        head = "Gleti's Mask",
+        neck = "Shulmanu Collar",
+        ear1 = "Sherida Earring",
+        ear2 = "Telos Earring",
+        body = "Gleti's Cuirass",
+        hands = "Gleti's Gauntlets",
+        ring1 = "Epona's Ring",
+        ring2 = "Gere Ring",
+        back = "Atheling Mantle",
+        waist = "Reiki Yotai",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
+    }
 
-    sets.engaged.Acc = { ammo = "Voluspa Tathlum",
-        head = "Malignance Chapeau", neck = "Shulmanu Collar", ear1 = "Sherida Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Regal Ring", ring2 = "Moonlight Ring",
-        back = "Atheling Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.engaged.Acc = {
+        ammo = "Voluspa Tathlum",
+        head = "Malignance Chapeau",
+        neck = "Shulmanu Collar",
+        ear1 = "Sherida Earring",
+        ear2 = "Telos Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Regal Ring",
+        ring2 = "Moonlight Ring",
+        back = "Atheling Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
+    }
 
-    sets.engaged.PDT = { ammo = "Voluspa Tathlum",
-        head = "Malignance Chapeau", neck = "Loricate Torque +1", ear1 = "Sherida Earring", ear2 = "Telos Earring",
-        body = "Malignance Tabard", hands = "Malignance Gloves", ring1 = "Defending Ring", ring2 = "Moonlight Ring",
-        back = "Atheling Mantle", waist = "Klouskap Sash +1", legs = "Malignance Tights", feet = "Malignance Boots" }
+    sets.engaged.PDT = {
+        ammo = "Voluspa Tathlum",
+        head = "Malignance Chapeau",
+        neck = "Loricate Torque +1",
+        ear1 = "Sherida Earring",
+        ear2 = "Telos Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Moonlight Ring",
+        back = "Atheling Mantle",
+        waist = "Klouskap Sash +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
+    }
 
     sets.engaged.Killer = set_combine(sets.engaged,
-        { head = "Ankusa Helm +1", body = "Nukumi Gausape", legs = "Totemic Trousers +1" })
-    sets.engaged.Killer.Acc = set_combine(sets.engaged.Acc, { body = "Nukumi Gausape" })
+        { head = "Ankusa Helm +1", body = "NukumiGausape +1", legs = "Totemic Trousers +1" })
+    sets.engaged.Killer.Acc = set_combine(sets.engaged.Acc, { body = "Nukumi Gausape +1" })
 
 
     -- EXAMPLE SETS WITH PET MODES
@@ -404,23 +632,33 @@ function init_gear_sets()
     sets.engaged.KillerDW.PetTank= {}
     sets.engaged.KillerDW.PetTank.Acc = {}
     ]]
-
     sets.engaged.PetStance = set_combine(sets.engaged, { waist = "Klouskap Sash +1" })
     sets.engaged.PetStance.Acc = set_combine(sets.engaged.Acc, {})
     sets.engaged.PetStance.PDT = set_combine(sets.engaged.PDT, {})
     sets.engaged.PetTank = set_combine(sets.engaged.PDT,
-        { head = "Anwig Salade", ear1 = "Handler's Earring +1", ear2 = "Enmerkar Earring", body = "Taeon Tabard",
-            hands = "Taeon Gloves", legs = "Taeon Tights", feet = "Taeon Boots" })
+        {
+            head = "Anwig Salade",
+            ear1 = "Handler's Earring +1",
+            ear2 = "Enmerkar Earring",
+            body = "Taeon Tabard",
+            hands = "Taeon Gloves",
+            legs = "Taeon Tights",
+            feet = "Taeon Boots"
+        })
     sets.engaged.PetTank.Acc = set_combine(sets.engaged.Acc,
-        { ear1 = "Handler's Earring +1", body = "Taeon Tabard", hands = "Taeon Gloves", legs = "Taeon Tights",
-            feet = "Taeon Boots" })
+        {
+            ear1 = "Handler's Earring +1",
+            body = "Taeon Tabard",
+            hands = "Taeon Gloves",
+            legs = "Taeon Tights",
+            feet = "Taeon Boots"
+        })
     sets.engaged.PetStance.Killer = set_combine(sets.engaged, {})
     sets.engaged.PetStance.Killer.Acc = set_combine(sets.engaged, {})
     sets.engaged.PetTank.Killer = set_combine(sets.engaged, {})
     sets.engaged.PetTank.Killer.Acc = set_combine(sets.engaged, {})
 
     --sets.engaged.DW.PetStance = sets.engaged
-
 end
 
 -------------------------------------------------------------------------------------------------------------------

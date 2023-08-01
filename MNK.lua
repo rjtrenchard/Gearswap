@@ -28,6 +28,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'SomeAcc', 'Acc', 'Fodder')
     state.HybridMode:options('Normal', 'PDT', 'Counter')
@@ -66,9 +68,9 @@ function init_gear_sets()
 
     sets.precast.JA['Chi Blast'] = {
         head = "Melee Crown +2",
-        body = "Otronif Harness +1",
+        body = "Mpaca's Doublet",
         hands = "Hesychast's Gloves +1",
-        back = "Tuilha Cape",
+        back = "Moonlight Cape",
         legs = "Hesychast's Hose +1",
         feet = "Anchorite's Gaiters +1"
     }
@@ -89,13 +91,13 @@ function init_gear_sets()
     sets.precast.Waltz = {
         ammo = "Sonia's Plectrum",
         head = "Felistris Mask",
-        body = "Otronif Harness +1",
+        body = "Mpaca's Doublet",
         hands = "Hesychast's Gloves +1",
         ring1 = "Spiral Ring",
         back = "Iximulew Cape",
         waist = "Caudata Belt",
         legs = "Qaaxo Tights",
-        feet = "Otronif Boots +1"
+        feet = "Mpaca's boots"
     }
 
     -- Don't need any special gear for Healing Waltz.
@@ -184,18 +186,18 @@ function init_gear_sets()
 
     -- legs={name="Quiahuiz Trousers", augments={'Phys. dmg. taken -2%','Magic dmg. taken -2%','STR+8'}}}
 
-    sets.precast.WS['Raging Fists']       = set_combine(sets.precast.WS, { ring2 = "Niqmaddu Ring" }) -- TP = Damage, fTP replicating
+    sets.precast.WS['Raging Fists']       = set_combine(sets.precast.WS, { ring2 = "Niqmaddu Ring" })                      -- TP = Damage, fTP replicating
     sets.precast.WS['Howling Fist']       = set_combine(sets.precast.WS,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" }) -- fTP replicating, decent fTP bonus from TP
+        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })                                                  -- fTP replicating, decent fTP bonus from TP
     sets.precast.WS['Asuran Fists']       = set_combine(sets.precast.WS,
-        { ear1 = "Etiolation Earring", ring2 = "Niqmaddu ring" }) -- Multi-hit max attack rounds
+        { ear1 = "Etiolation Earring", ring2 = "Niqmaddu ring" })                                                          -- Multi-hit max attack rounds
     sets.precast.WS["Ascetic's Fury"]     = set_combine(sets.precast.WSCrit,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" }) -- Attack boost
-    sets.precast.WS["Victory Smite"]      = set_combine(sets.precast.WSCrit, { ring2 = "Epona's Ring" }) -- Crit WS, STR80
+        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })                                                  -- Attack boost
+    sets.precast.WS["Victory Smite"]      = set_combine(sets.precast.WSCrit, { ring2 = "Epona's Ring" })                   -- Crit WS, STR80
     sets.precast.WS['Shijin Spiral']      = set_combine(sets.precast.WS, { ear1 = "Odr Earring", ring2 = "Epona's Ring" }) -- 5hit attack, DEX73-85
-    sets.precast.WS['Dragon Kick']        = set_combine(sets.precast.WS, {}) -- Kick attack WS, TP=Damage?
-    sets.precast.WS['Tornado Kick']       = set_combine(sets.precast.WS, {}) -- Kick attack WS, 3fold, tpReplicating, TP=Damage
-    sets.precast.WS['Spinning Attack']    = set_combine(sets.precast.WS, { ring2 = "Niqmaddu ring" }) -- TP=Range, STR100
+    sets.precast.WS['Dragon Kick']        = set_combine(sets.precast.WS, {})                                               -- Kick attack WS, TP=Damage?
+    sets.precast.WS['Tornado Kick']       = set_combine(sets.precast.WS, {})                                               -- Kick attack WS, 3fold, tpReplicating, TP=Damage
+    sets.precast.WS['Spinning Attack']    = set_combine(sets.precast.WS, { ring2 = "Niqmaddu ring" })                      -- TP=Range, STR100
 
     sets.precast.WS["Raging Fists"].Acc   = set_combine(sets.precast.WSAcc, sets.precast.WS["Raging Fists"])
     sets.precast.WS["Howling Fist"].Acc   = set_combine(sets.precast.WSAcc, sets.precast.WS["Howling Fist"])
@@ -336,7 +338,7 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
         ring2 = "Moonlight Ring",
-        back = "Shadow Mantle",
+        back = "Moonlight Cape",
         waist = "Black Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"

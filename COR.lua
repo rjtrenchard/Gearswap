@@ -35,6 +35,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Melee', 'Acc', 'Crit', 'Ranged')
     state.HybridMode:options('Normal', 'PDT')
     state.RangedMode:options('Normal', 'Acc', 'Crit')
@@ -183,7 +185,7 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        head = "Adhemar Bonnet +1",
+        head = "Nyame Helm",
         neck = "Fotia Gorget",
         ear1 = "Brutal Earring",
         ear2 = "Moonshade Earring",
@@ -239,7 +241,7 @@ function init_gear_sets()
             legs = "herculean trousers"
         })
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'],
-        { head = "malignance chapeau", legs = "Malignance Tights", hands = "Meghanada gloves +2" })
+        {})
 
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {})
 
@@ -450,18 +452,18 @@ function init_gear_sets()
     -- Idle sets
     sets.idle = {
         ammo = gear.RAbullet,
-        head = "Malignance Chapeau",
+        head = "Nyame Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Eabani Earring",
-        ear2 = "Eabani Earring",
-        body = "Malignance Tabard",
-        hands = "Malignance Gloves",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
-        ring2 = "Defending Ring",
+        ring2 = "Paguroidea Ring",
         back = gear.melee_cape,
         waist = "Flume Belt +1",
         legs = "Carmine Cuisses +1",
-        feet = "Malignance Boots"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Town = {
@@ -482,18 +484,18 @@ function init_gear_sets()
 
     -- Defense sets
     sets.defense.PDT = {
-        head = "Malignance Chapeau",
+        head = "Nyame Helm",
         neck = "Loricate Torque +1",
         ear1 = "Beyla Earring",
         ear2 = "Telos Earring",
-        body = "Malignance Tabard",
-        hands = "Malignance Gloves",
-        ring1 = "Defending Ring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Gelatinous Ring +1",
         ring2 = "Archon Ring",
         back = gear.melee_cape,
         waist = "Flume Belt +1",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
     sets.defense.MDT = {
@@ -531,7 +533,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Adhemar Wristbands +1",
         ring1 = "Epona's Ring",
-        ring2 = "Hetairoi Ring",
+        ring2 = "Lehko's Ring",
         back = gear.melee_cape,
         waist = "Sailfi Belt +1",
         legs = "Samnuha Tights",
@@ -548,7 +550,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Epona's Ring",
-        ring2 = "Regal Ring",
+        ring2 = "Lehko's Ring",
         back = gear.melee_cape,
         waist = "Sailfi Belt +1",
         legs = "Malignance Tights",
@@ -585,7 +587,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Adhemar Wristbands +1",
         ring1 = "Epona's Ring",
-        ring2 = "Hetairoi Ring",
+        ring2 = "Lehko's Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
         legs = "Samnuha Tights",
@@ -602,7 +604,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Epona's Ring",
-        ring2 = "Hetairoi Ring",
+        ring2 = "Lehko's Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
         legs = "Malignance Tights",
@@ -619,7 +621,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Epona's Ring",
-        ring2 = "Hetairoi Ring",
+        ring2 = "Lehko's Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
         legs = "Malignance Tights",
@@ -646,7 +648,7 @@ function init_gear_sets()
         hands = "Malignance Gloves",
         ring1 = "Dingir Ring",
         ring2 = "Longshot Ring",
-        back = "Shadow Mantle",
+        back = "Moonlight Cape",
         waist = "Eschan Stone",
         legs = "Malignance Tights",
         feet = "Malignance Boots"

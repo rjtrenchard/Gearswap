@@ -23,18 +23,21 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'PDT')
 
-    gear.default.weaponskill_waist = "Windbuffet Belt"
+
 
     select_default_macro_book()
 end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
-    gear.default.obi_waist = "Acuity Belt +1"
+    gear.default.weaponskill_waist = "Windbuffet Belt +1"
+    gear.default.obi_waist = "Sacro Cord"
     gear.default.drain_waist = "Fucho-no-Obi"
     gear.default.cure_waist = "Embla Sash"
 
@@ -274,12 +277,21 @@ function init_gear_sets()
 
 
     sets.midcast['Enfeebling Magic'] = {
-        head = "Befouled Crown",
+        main = "Contemplator +1",
+        sub = "Enki Strap",
+        ammo = "Pemphredo Tathlum",
+        head = "Agwu's Cap",
         neck = "Erra Pendant",
         ear1 = "Malignance Earring",
         ear2 = "Dignitary's Earring",
+        body = "Agwu's robe",
+        hands = "Agwu's Gages",
         ring1 = gear.left_stikini,
-        ring2 = "Metamorph Ring +1"
+        ring2 = "Metamorph Ring +1",
+        back = "Aurist's Cape +1",
+        waist = "Acuity Belt +1",
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches",
     }
     sets.midcast['Dispelga'] = set_combine(sets.midcast['Enfeebling Magic'], { main = "Daybreak" })
 
@@ -303,7 +315,7 @@ function init_gear_sets()
     sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
         neck = "Debilis Medallion",
         hands = "Hieros Mittens",
-        ring1 = "Haoma's Ring",
+        ring1 = "Menelaus's Ring",
         ring2 = "Haoma's Ring",
         back = "Oretania's Cape +1"
     })
@@ -318,8 +330,8 @@ function init_gear_sets()
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
         back = "Fi Follet Cape +1",
-        legs = "Nares Trews",
-        feet = "Hagondes Sabots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.midcast.Curaga = sets.midcast.Cure
@@ -341,8 +353,8 @@ function init_gear_sets()
         hands = "Serpentes Cuffs",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
-        waist = "Austerity Belt",
-        legs = "Nares Trews",
+        waist = "Austerity Belt +1",
+        legs = "Agwu's Slops",
         feet = "Chelona Boots +1"
     }
 
@@ -363,7 +375,7 @@ function init_gear_sets()
         ring2 = "Defending Ring",
         back = "Umbra Cape",
         waist = "Fucho-no-obi",
-        legs = "Nares Trews",
+        legs = "Agwu's Slops",
         feet = "Crier's Gaiters"
     }
 
@@ -371,17 +383,17 @@ function init_gear_sets()
         main = "Daybreak",
         sub = "Ammurapi Shield",
         range = "Nepote Bell",
-        head = "Nahtirah Hat",
+        head = "Agwu's Cap",
         neck = "Loricate Torque +1",
         ear1 = "Lugalbanda Earring",
         ear2 = "Etiolation Earring",
         body = "Jhakri Robe +2",
-        hands = "Yaoyotl Gloves",
+        hands = "Agwu's Gages",
         ring1 = "Gelatinous Ring +1",
         ring2 = "Defending Ring",
         back = "Umbra Cape",
         waist = "Fucho-no-obi",
-        legs = "Nares Trews",
+        legs = "Agwu's Slops",
         feet = "Crier's Gaiters"
     }
 
@@ -418,7 +430,7 @@ function init_gear_sets()
         ring2 = "Defending Ring",
         back = "Umbra Cape",
         waist = "Isa Belt",
-        legs = "Nares Trews",
+        legs = "Agwu's Slops",
         feet = "Crier's Gaiters"
     }
 
@@ -442,7 +454,7 @@ function init_gear_sets()
         ring2 = "Defending Ring",
         back = "Umbra Cape",
         waist = "Fucho-no-obi",
-        legs = "Nares Trews",
+        legs = "Agwu's Slops",
         feet = "Crier's Gaiters"
     }
 
@@ -460,7 +472,7 @@ function init_gear_sets()
         ring2 = "Defending Ring",
         back = "Umbra Cape",
         waist = "Fucho-no-obi",
-        legs = "Nares Trews",
+        legs = "Agwu's Slops",
         feet = "Crier's Gaiters"
     }
 
@@ -468,34 +480,34 @@ function init_gear_sets()
 
     sets.defense.PDT = {
         range = "Nepote Bell",
-        head = "Hagondes Hat",
+        head = "Agwu's Cap",
         neck = "Bathy Choker +1",
         ear1 = "Lugalbanda Earring",
         ear2 = "Etiolation Earring",
         body = "Jhakri Robe +2",
-        hands = "Yaoyotl Gloves",
+        hands = "Agwu's Gages",
         ring1 = "Defending Ring",
         ring2 = gear.DarkRing.physical,
         back = "Umbra Cape",
         waist = "Fucho-no-obi",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.defense.MDT = {
         range = "Nepote Bell",
-        head = "Nahtirah Hat",
+        head = "Agwu's Cap",
         neck = "Bathy Choker +1",
         ear1 = "Lugalbanda Earring",
         ear2 = "Etiolation Earring",
         body = "Jhakri Robe +2",
-        hands = "Yaoyotl Gloves",
+        hands = "Agwu's Gages",
         ring1 = "Defending Ring",
         ring2 = "Shadow Ring",
         back = "Umbra Cape",
         waist = "Fucho-no-obi",
-        legs = "Bokwus Slops",
-        feet = "Hagondes Sabots"
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     sets.Kiting = { feet = "Crier's Gaiters" }
@@ -519,14 +531,14 @@ function init_gear_sets()
         neck = "Combatant's Torque",
         ear1 = "Bladeborn Earring",
         ear2 = "Steelflash Earring",
-        body = "Vanir Cotehardie",
+        body = "Agwu's Robe",
         hands = "Telchine Gloves",
         ring1 = "Rajas Ring",
         ring2 = "Defending Ring",
         back = "Umbra Cape",
-        waist = "Goading Belt",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        waist = "Cornelia's Belt",
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
     }
 
     --------------------------------------

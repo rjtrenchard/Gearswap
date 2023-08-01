@@ -44,6 +44,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Normal', 'Acc', 'Crit')
     state.HybridMode:options('Normal', 'PDT', 'MDT', 'Evasion')
     state.RangedMode:options('Normal', 'Acc')
@@ -57,10 +59,10 @@ function user_setup()
     send_command('bind ^= gs c cycle treasuremode')
     send_command('bind ^- gs c cycle DoomMode')
 
-    send_command('bind numpad7 gs equip sets.Weapons.Daggers')
-    send_command('bind numpad8 gs equip sets.Weapons.Naegling')
-    send_command('bind numpad9 gs equip sets.Weapons.Tauret')
-    send_command('bind numpad4 gs equip sets.Weapons.DI')
+    send_command('bind numpad7 gs equip sets.weapons.Daggers')
+    send_command('bind numpad8 gs equip sets.weapons.Naegling')
+    send_command('bind numpad9 gs equip sets.weapons.Tauret')
+    send_command('bind numpad4 gs equip sets.weapons.DI')
 
     select_default_macro_book()
 end
@@ -96,7 +98,8 @@ function init_gear_sets()
 
     gear.crit_cape = {
         name = "Toutatis's Cape",
-        augments = { 'DEX+3', 'Accuracy+20 Attack+20', 'Crit.hit rate+7', 'DEX+4' }
+        augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'DEX+9',
+            'Crit.hit rate+10', },
     }
     gear.dex_ws_cape = {
         name = "Toutatis's Cape",
@@ -124,8 +127,8 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Moonlight Ring",
-        ring2 = "Defending Ring",
-        back = gear.melee_cape,
+        ring2 = "Gelatinous Ring +1",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
         feet = "Skadi's Jambeaux +1"
@@ -168,15 +171,15 @@ function init_gear_sets()
     }
 
     sets.defense.PDT = {
-        ammo = "Staunch Tathlum +1",
+        ammo = "Brigantia Pebble",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
         ear1 = "Odnowa Earring +1",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Moonlight Ring",
-        ring2 = "Defending Ring",
-        back = gear.melee_cape,
+        ring2 = "Gelatinous Ring +1",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
@@ -191,7 +194,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Archon Ring",
-        ring2 = "Defending Ring",
+        ring2 = "Shadow Ring",
         back = gear.melee_cape,
         waist = "Sailfi Belt +1",
         legs = "Malignance Tights",
@@ -224,11 +227,11 @@ function init_gear_sets()
     --sets.buff['Feint'] = {legs="Plunderer's Culottes"}
 
     -- Normal melee group
-    sets.Weapons = {}
-    sets.Weapons.Naegling = { main = "Naegling", sub = "Centovente" }
-    sets.Weapons.Daggers = { main = "Aeneas", sub = "Crepuscular Knife" }
-    sets.Weapons.Tauret = { main = "Tauret", sub = "Crepuscular Knife" }
-    sets.Weapons.DI = { main = "Voluspa Knife", sub = "Crepuscular Knife" }
+    sets.weapons = {}
+    sets.weapons.Naegling = { main = "Naegling", sub = "Centovente" }
+    sets.weapons.Daggers = { main = "Aeneas", sub = "Crepuscular Knife" }
+    sets.weapons.Tauret = { main = "Tauret", sub = "Crepuscular Knife" }
+    sets.weapons.DI = { main = "Voluspa Knife", sub = "Crepuscular Knife" }
 
     -- Actions we want to use to tag TH.
     sets.precast.Step = sets.TreasureHunter
@@ -355,17 +358,17 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo = "Seething Bomblet +1",
-        head = "Adhemar Bonnet +1",
+        head = "Nyame Helm",
         neck = "Fotia Gorget",
         ear1 = "Sherida Earring",
         ear2 = "Moonshade Earring",
-        body = "Gleti's Cuirass",
+        body = "Nyame Mail",
         hands = "Meghanada Gloves +2",
         ring1 = "Regal Ring",
         ring2 = "Epaminondas's Ring",
         back = gear.str_ws_cape,
         waist = "Fotia Belt",
-        legs = "Samnuha Tights",
+        legs = "Nyame Flanchard",
         feet = "Plunderer's poulaines +3"
     }
     sets.precast.WS.Crit = set_combine(sets.precast.WS, {
@@ -375,7 +378,7 @@ function init_gear_sets()
         body = "Pillager's Vest +2",
         hands = "Gleti's Gauntlets",
         ring1 = "Begrudging Ring",
-        ring2 = "Hetairoi Ring",
+        ring2 = "Lehko's Ring",
         back = gear.crit_cape,
         legs = "Gleti's Breeches",
         feet = "Gleti's Boots",
@@ -437,7 +440,6 @@ function init_gear_sets()
         neck = "Caro Necklace",
         ear1 = "Ishvara Earring",
         ear2 = "Moonshade Earring",
-        body = "Pillager's Vest +2",
         back = gear.dex_ws_cape,
         waist = "Kentarch Belt +1"
     })
@@ -517,13 +519,13 @@ function init_gear_sets()
     sets.precast.WS['Aeolian Edge'] = {
         ammo = "Seething Bomblet +1",
         head = "Nyame Helm",
-        neck = "Baetyl Pendant",
+        neck = "Sibyl Scarf",
         ear1 = "Crematio Earring",
         ear2 = "Friomisi Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Dingir Ring",
-        ring2 = "Ilabrat Ring",
+        ring2 = "Epaminondas Ring",
         back = gear.dex_ws_cape,
         waist = "Eschan Stone",
         legs = "Nyame Flanchard",
@@ -538,6 +540,11 @@ function init_gear_sets()
     sets.precast.WS['Energy Drain'] = set_combine(sets.precast.WS['Aeolian Edge'],
         { head = "Pixie Hairpin +1", ring2 = "Archon Ring" })
     sets.precast.WS['Energy Steal'] = sets.precast.WS['Energy Drain']
+    sets.precast.WS['Sanguine Blade'] = sets.precast.WS['Energy Drain']
+
+    sets.precast.WS['Seraph Blade'] = sets.precast.WS['Aeolian Edge']
+    -- sets.precast.WS[' Blade'] = sets.precast.WS['Aeolian Edge']
+
 
 
     --------------------------------------
@@ -597,14 +604,14 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = {
         ammo = "Coiste Bodhar",
-        head = "Adhemar Bonnet +1",
+        head = "Malignance Chapeau",
         neck = "Anu Torque",
         ear1 = "Sherida Earring",
         ear2 = "Skulker's Earring +1",
-        body = "Gleti's Cuirass",
+        body = "Malignance Tabard",
         hands = "Adhemar Wristbands +1",
         ring1 = "Gere Ring",
-        ring2 = "Hetairoi Ring",
+        ring2 = "Lehko's Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
         legs = "Samnuha Tights",
@@ -619,7 +626,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Gere Ring",
-        ring2 = "Hetairoi Ring",
+        ring2 = "Lehko's Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
         legs = "Malignance Tights",
@@ -627,13 +634,13 @@ function init_gear_sets()
     }
 
     sets.engaged.MaxDW = set_combine(sets.engaged,
-        { ear1 = "Eabani Earring", ear2 = "Suppanomimi", waist = "Reiki Yotai" })
-    sets.engaged.MidDW = set_combine(sets.engaged, { ear2 = "Suppanomimi", waist = "Reiki Yotai" })
+        { ear2 = "Eabani Earring", ear1 = "Suppanomimi", waist = "Reiki Yotai" })
+    sets.engaged.MidDW = set_combine(sets.engaged, { ear1 = "Suppanomimi", waist = "Reiki Yotai" })
     sets.engaged.MinDW = set_combine(sets.engaged, { waist = "Reiki Yotai" })
 
     sets.engaged.Acc.MaxDW = set_combine(sets.engaged,
-        { ear1 = "Eabani Earring", ear2 = "Suppanomimi", waist = "Reiki Yotai" })
-    sets.engaged.Acc.MidDW = set_combine(sets.engaged, { ear2 = "Suppanomimi", waist = "Reiki Yotai" })
+        { ear2 = "Eabani Earring", ear1 = "Suppanomimi", waist = "Reiki Yotai" })
+    sets.engaged.Acc.MidDW = set_combine(sets.engaged, { ear1 = "Suppanomimi", waist = "Reiki Yotai" })
     sets.engaged.Acc.MinDW = set_combine(sets.engaged, { waist = "Reiki Yotai" })
 
 
@@ -646,6 +653,7 @@ function init_gear_sets()
         head = "Blistering sallet +1",
         ear1 = "Sherida Earring",
         ear2 = "Odr Earring",
+        body = "Gleti's Cuirass",
         legs = "Gleti's Breeches"
     })
 
@@ -682,33 +690,33 @@ function init_gear_sets()
 
     sets.engaged.PDT = {
         ammo = "Coiste Bodhar",
-        head = "Malignance Chapeau",
+        head = "Nyame Helm",
         neck = "Anu Torque",
         ear1 = "Suppanomimi",
         ear2 = "Skulker's Earring +1",
-        body = "Malignance Tabard",
-        hands = "Malignance Gloves",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
         ring1 = "Moonlight Ring",
         ring2 = "Gere Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
     sets.engaged.Acc.PDT = {
-        ammo = "Yamarang",
-        head = "Malignance Chapeau",
+        ammo = "Coiste Bodhar",
+        head = "Nyame Helm",
         neck = "Loricate Torque +1",
         ear1 = "Sherida Earring",
         ear2 = "Skulker's Earring +1",
-        body = "Malignance Tabard",
-        hands = "Malignance Gloves",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
         ring1 = "Regal Ring",
-        ring2 = "Defending Ring",
+        ring2 = "Gelatinous Ring +1",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
     sets.engaged.MDT = set_combine(sets.engaged.PDT,
@@ -738,9 +746,10 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         end
     end
 
-    if spell.english == 'Aeolian Edge' and state.TreasureMode.value ~= 'None' then
+    if spell.english == 'Cyclone' and state.TreasureMode.value ~= 'None' then
         equip(sets.TreasureHunter)
-    elseif spell.english == 'Sneak Attack' or spell.english == 'Trick Attack' then --or spell.type == 'WeaponSkill' then
+    end
+    if spell.english == 'Sneak Attack' or spell.english == 'Trick Attack' then --or spell.type == 'WeaponSkill' then
         if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
             equip(sets.TreasureHunter)
         end
@@ -981,7 +990,8 @@ end
 function th_action_check(category, param)
     if category == 2 or -- any ranged attack
         --category == 4 or -- any magic action
-        (category == 3 and param == 30) or -- Aeolian Edge
+        -- (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 3 and param == 20) or                         -- Cyclone
         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
     then

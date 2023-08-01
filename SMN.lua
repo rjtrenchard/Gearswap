@@ -37,6 +37,8 @@
             astralflow
 
 --]]
+-- res = include('resources.lua')
+
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
@@ -54,28 +56,28 @@ function job_setup()
     state.Buff["Mana Cede"] = buffactive["Mana Cede"] or false
 
     spirits = S { "LightSpirit", "DarkSpirit", "FireSpirit", "EarthSpirit", "WaterSpirit", "AirSpirit", "IceSpirit",
-            "ThunderSpirit" }
+        "ThunderSpirit" }
     avatars = S { "Carbuncle", "Fenrir", "Diabolos", "Ifrit", "Titan", "Leviathan", "Garuda", "Shiva", "Ramuh", "Odin",
-            "Alexander", "Cait Sith", "Siren" }
+        "Alexander", "Cait Sith", "Siren" }
 
     magicalRagePacts = S {
-            'Inferno', 'Earthen Fury', 'Tidal Wave', 'Aerial Blast', 'Diamond Dust', 'Judgment Bolt', 'Searing Light',
-            'Howling Moon', 'Ruinous Omen',
-            'Fire II', 'Stone II', 'Water II', 'Aero II', 'Blizzard II', 'Thunder II',
-            'Fire IV', 'Stone IV', 'Water IV', 'Aero IV', 'Blizzard IV', 'Thunder IV',
-            'Thunderspark', 'Meteorite', 'Nether Blast',
-            'Meteor Strike', 'Heavenly Strike', 'Wind Blade', 'Geocrush', 'Grand Fall', 'Thunderstorm',
-            'Holy Mist', 'Lunar Bay', 'Night Terror', 'Level ? Holy', 'Tornado II', 'Sonic Buffet'
-        }
+        'Inferno', 'Earthen Fury', 'Tidal Wave', 'Aerial Blast', 'Diamond Dust', 'Judgment Bolt', 'Searing Light',
+        'Howling Moon', 'Ruinous Omen',
+        'Fire II', 'Stone II', 'Water II', 'Aero II', 'Blizzard II', 'Thunder II',
+        'Fire IV', 'Stone IV', 'Water IV', 'Aero IV', 'Blizzard IV', 'Thunder IV',
+        'Thunderspark', 'Meteorite', 'Nether Blast',
+        'Meteor Strike', 'Heavenly Strike', 'Wind Blade', 'Geocrush', 'Grand Fall', 'Thunderstorm',
+        'Holy Mist', 'Lunar Bay', 'Night Terror', 'Level ? Holy', 'Tornado II', 'Sonic Buffet'
+    }
 
     hybridRagePacts = S {
-            'Burning Strike', 'Flaming Crush',
-        }
+        'Burning Strike', 'Flaming Crush',
+    }
 
 
     pacts = {}
     pacts.cure = { ['Carbuncle'] = 'Healing Ruby' }
-    pacts.curaga = { ['Carbuncle'] = 'Healing Ruby II',['Garuda'] = 'Whispering Wind',['Leviathan'] = 'Spring Water' }
+    pacts.curaga = { ['Carbuncle'] = 'Healing Ruby II', ['Garuda'] = 'Whispering Wind', ['Leviathan'] = 'Spring Water' }
     pacts.buffoffense = {
         ['Carbuncle'] = 'Glittering Ruby',
         ['Ifrit'] = 'Crimson Howl',
@@ -121,7 +123,7 @@ function job_setup()
         ['Diabolos'] = 'Somnolence',
         ['Siren'] = 'Bitter Elegy'
     }
-    pacts.sleep = { ['Shiva'] = 'Sleepga',['Diabolos'] = 'Nightmare',['Cait Sith'] = 'Mewing Lullaby' }
+    pacts.sleep = { ['Shiva'] = 'Sleepga', ['Diabolos'] = 'Nightmare', ['Cait Sith'] = 'Mewing Lullaby' }
     pacts.nuke2 = {
         ['Ifrit'] = 'Fire II',
         ['Shiva'] = 'Blizzard II',
@@ -201,16 +203,16 @@ function job_setup()
     }
     -- Icons to use when creating the custom timer.
     wards.icons = {
-        ['Earthen Armor']   = 'spells/00299.png', -- 00299 for Titan
-        ['Shining Ruby']    = 'spells/00043.png', -- 00043 for Protect
-        ['Dream Shroud']    = 'spells/00304.png', -- 00304 for Diabolos
-        ['Noctoshield']     = 'spells/00106.png', -- 00106 for Phalanx
-        ['Inferno Howl']    = 'spells/00298.png', -- 00298 for Ifrit
-        ['Hastega']         = 'spells/00358.png', -- 00358 for Hastega
-        ['Rolling Thunder'] = 'spells/00104.png', -- 00358 for Enthunder
-        ['Frost Armor']     = 'spells/00250.png', -- 00250 for Ice Spikes
-        ['Lightning Armor'] = 'spells/00251.png', -- 00251 for Shock Spikes
-        ['Reraise II']      = 'spells/00135.png', -- 00135 for Reraise
+        ['Earthen Armor']   = 'spells/00299.png',    -- 00299 for Titan
+        ['Shining Ruby']    = 'spells/00043.png',    -- 00043 for Protect
+        ['Dream Shroud']    = 'spells/00304.png',    -- 00304 for Diabolos
+        ['Noctoshield']     = 'spells/00106.png',    -- 00106 for Phalanx
+        ['Inferno Howl']    = 'spells/00298.png',    -- 00298 for Ifrit
+        ['Hastega']         = 'spells/00358.png',    -- 00358 for Hastega
+        ['Rolling Thunder'] = 'spells/00104.png',    -- 00358 for Enthunder
+        ['Frost Armor']     = 'spells/00250.png',    -- 00250 for Ice Spikes
+        ['Lightning Armor'] = 'spells/00251.png',    -- 00251 for Shock Spikes
+        ['Reraise II']      = 'spells/00135.png',    -- 00135 for Reraise
         ['Fleet Wind']      = 'abilities/00074.png', --
     }
     -- Flags for code to get around the issue of slow skill updates.
@@ -252,6 +254,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('None', 'Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'PDT')
@@ -313,37 +317,37 @@ function init_gear_sets()
     }
 
     -- Precast sets to enhance JAs
-    sets.precast.JA['Astral Flow'] = { head = "Glyphic Horn" }
+    sets.precast.JA['Astral Flow'] = { head = "Glyphic Horn +1" }
 
     sets.precast.JA['Elemental Siphon'] = set_combine(sets.midcast['Summoning Magic'],
-            {
-                main = "Soulscourge",
-                sub = "Vox Grip",
-                head = gear.telchine.enh_dur.head,
-                body = gear.telchine.enh_dur.body,
-                hands = gear.telchine.enh_dur.hands,
-                ring1 = gear.left_stikini,
-                ring2 = gear.right_stikini,
-                back = "Conveyance Cape",
-                waist = "Kobo Obi",
-                legs = gear.telchine.enh_dur.legs,
-                feet = "Beckoner's Pigaches +1"
-            })
+        {
+            main = "Soulscourge",
+            sub = "Vox Grip",
+            head = gear.telchine.enh_dur.head,
+            body = gear.telchine.enh_dur.body,
+            hands = gear.telchine.enh_dur.hands,
+            ring1 = gear.left_stikini,
+            ring2 = gear.right_stikini,
+            back = "Conveyance Cape",
+            waist = "Kobo Obi",
+            legs = gear.telchine.enh_dur.legs,
+            feet = "Beckoner's Pigaches +1"
+        })
 
     sets.precast.JA['Mana Cede'] = { hands = "Caller's Bracers +1" }
 
     -- Pact delay reduction gear
     sets.precast.BloodPactWard = set_combine(sets.midcast['Summoning Magic'],
-            {
-                main = "Espiritus",
-                ammo = "Sancus Sachet +1",
-                body = "Convoker's Doublet +2",
-                hands = "Glyphic Bracers +1",
-                back = "Conveyance Cape",
-                waist = "Kobo Obi",
-                legs = "Glyphic Spats +1",
-                feet = "Glyphic Pigaches +1"
-            })
+        {
+            main = "Espiritus",
+            ammo = "Sancus Sachet +1",
+            body = "Convoker's Doublet +2",
+            hands = "Glyphic Bracers +1",
+            back = "Conveyance Cape",
+            waist = "Kobo Obi",
+            legs = "Glyphic Spats +1",
+            feet = "Glyphic Pigaches +1"
+        })
 
     sets.precast.BloodPactRage = sets.precast.BloodPactWard
 
@@ -372,23 +376,40 @@ function init_gear_sets()
 
     sets.midcast.Refresh = sets.midcast['Enhancing Magic']
 
+    sets.midcast['Enfeebling Magic'] = {
+        main = "Contemplator +1",
+        sub = "Enki Strap",
+        ammo = "Pemphredo Tathlum",
+        head = "Bunzi's Hat",
+        neck = "Incanter's Torque",
+        ear1 = "Dignitary Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Bunzi's Robe",
+        hands = "Bunzi's Gloves",
+        ring1 = gear.left_stikini,
+        ring2 = "Metamorph Ring +1",
+        back = "Aurist's Cape +1",
+        waist = "Acuity Belt +1",
+        legs = "Bunzi's Pants",
+        feet = "Bunzi's Sabots"
+    }
 
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        head = "Nahtirah Hat",
+        head = "Bunzi's Hat",
         neck = "Fotia Gorget",
         ear1 = "Brutal Earring",
         ear2 = "Crepuscular Earring",
-        body = "Vanir Cotehardie",
-        hands = "Yaoyotl Gloves",
+        body = "Bunzi's Robe",
+        hands = "Bunzi's Gloves",
         ring1 = "Rajas Ring",
-        ring2 = "Petrov Ring",
+        ring2 = "Shukuyu Ring",
         back = "Pahtli Cape",
         waist = "Fotia Belt",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        legs = "Bunzi's Pants",
+        feet = "Bunzi's Sabots"
     }
 
     sets.precast.WS.Elemental = {
@@ -436,12 +457,12 @@ function init_gear_sets()
         ear1 = "Malignance Earring",
         ear2 = "Loquacious Earring",
         body = "Merlinic Jubbah",
-        hands = "Bokwus Gloves",
+        hands = "Bunzi's Gloves",
         ring1 = "Rahab Ring",
         back = "Fi Follet Cape +1",
         waist = "Embla Belt",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        legs = "Bunzi's Pants",
+        feet = "Bunzi's Sabots"
     }
 
     sets.midcast['Healing Magic'] = {
@@ -453,12 +474,12 @@ function init_gear_sets()
     }
 
     sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
-            neck = "Debilis Medallion",
-            hands = "Hieros Mittens",
-            ring1 = "Haoma's Ring",
-            ring2 = "Haoma's Ring",
-            back = "Oretania's Cape +1"
-        })
+        neck = "Debilis Medallion",
+        hands = "Hieros Mittens",
+        ring1 = "Menelaus's Ring",
+        ring2 = "Haoma's Ring",
+        back = "Oretania's Cape +1"
+    })
 
     sets.midcast.Cure = {
         main = "Daybreak",
@@ -472,8 +493,8 @@ function init_gear_sets()
         ring2 = "Rahab Ring",
         back = "Oretania's Cape +1",
         waist = "Embla Belt",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        legs = "Bunzi's Pants",
+        feet = "Bunzi's Sabots"
     }
 
     sets.midcast['Summoning Magic'] = {
@@ -540,18 +561,18 @@ function init_gear_sets()
         main = "Gridarvor",
         sub = "Elan Strap +1",
         ammo = "Sancus Sachet +1",
-        head = "Helios Band",
+        head = gear.helios.physicalbp.head,
         neck = "Shulmanu Collar",
         ear1 = "Lugalbanda Earring",
         ear2 = "Gelos Earring",
-        body = "Convoker's Doublet +2",
-        hands = gear.merlinic.bp.hands,
+        body = "Glyphic Doublet +3",
+        hands = gear.merlinic.bp_physical.hands,
         ring1 = "Varar Ring +1",
         ring2 = "Varar Ring +1",
         back = gear.avatar_melee_cape,
         waist = "Incarnation Sash",
         legs = "Apogee Slacks +1",
-        feet = "Apogee Pumps +1"
+        feet = gear.helios.physicalbp.feet
     }
 
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = sets.midcast.Pet.PhysicalBloodPactRage
@@ -565,7 +586,7 @@ function init_gear_sets()
         ear1 = "Lugalbanda Earring",
         ear2 = "Gelos Earring",
         body = "Convoker's Doublet +2",
-        hands = gear.merlinic.bp.hands,
+        hands = gear.merlinic.bp_magical.hands,
         ring1 = "Varar Ring +1",
         ring2 = "Varar Ring +1",
         back = gear.avatar_magic_cape,
@@ -577,7 +598,7 @@ function init_gear_sets()
     sets.midcast.Pet.MagicalBloodPactRage.Acc = sets.midcast.Pet.MagicalBloodPactRage
 
     sets.midcast.Pet.HybridBloodPactRage = set_combine(sets.midcast.Pet.MagicalBloodPactRage,
-            { waist = "Incarnation Sash" })
+        { waist = "Incarnation Sash" })
 
 
     -- Spirits cast magic spells, which can be identified in standard ways.
@@ -601,10 +622,10 @@ function init_gear_sets()
         neck = "Bathy Choker +1",
         ear1 = "Evans Earring",
         ear2 = "Cath Palug Earring",
-        body = "Hagondes Coat",
+        body = "Bunzi's Robe",
         hands = "Serpentes Cuffs",
         ring1 = "Sheltered Ring",
-        ring2 = "Paguroidea Ring",
+        ring2 = "Shadow Ring",
         back = "Pahtli Cape",
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
@@ -625,7 +646,7 @@ function init_gear_sets()
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
         back = "Umbra Cape",
-        waist = "Fucho-no-Obi",
+        waist = "Platinum Moogle Belt",
         legs = "Assiduity Pants +1",
         feet = "Crier's Gaiters"
     }
@@ -643,7 +664,7 @@ function init_gear_sets()
         ring1 = "Defending Ring",
         ring2 = gear.right_stikini,
         back = "Umbra Cape",
-        waist = "Regal Belt",
+        waist = "Platinum Moogle Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
@@ -759,9 +780,9 @@ function init_gear_sets()
     sets.perp = {}
     -- Caller's Bracer's halve the perp cost after other costs are accounted for.
     -- Using -10 (Gridavor, ring, Conv.feet), standard avatars would then cost 5, halved to 2.
-    -- We can then use Hagondes Coat and end up with the same net MP cost, but significantly better defense.
+    -- We can then use Bunzi's Robe and end up with the same net MP cost, but significantly better defense.
     -- Weather is the same, but we can also use the latent on the pendant to negate the last point lost.
-    sets.perp.Day = {} --{hands="Caller's Bracers +1"}
+    sets.perp.Day = {}     --{hands="Caller's Bracers +1"}
     sets.perp.Weather = {} --neck="Caller's Pendant",
     --hands="Caller's Bracers +1"}
     -- Carby: Mitts+Conv.feet = 1/tick perp.  Everything else should be +refresh
@@ -777,33 +798,33 @@ function init_gear_sets()
     -- Defense sets
     sets.defense.PDT = {
         main = gear.Staff.PDT,
-        head = "Hagondes Hat",
+        head = "Bunzi's Hat",
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
         ear2 = "Cath Palug Earring",
-        body = "Hagondes Coat",
-        hands = "Hagondes Gloves",
+        body = "Bunzi's Robe",
+        hands = "Bunzi's Gloves",
         ring1 = "Defending Ring",
         ring2 = gear.right_stikini,
         back = "Umbra Cape",
         waist = "Fucho-no-Obi",
-        legs = "Hagondes Pants",
-        feet = "Hagondes Sabots"
+        legs = "Bunzi's Pants",
+        feet = "Bunzi's Sabots"
     }
 
     sets.defense.MDT = {
-        head = "Hagondes Hat",
+        head = "Bunzi's Hat",
         neck = "Loricate Torque +1",
         ear1 = "Evans Earring",
         ear2 = "Loquacious Earring",
-        body = "Vanir Cotehardie",
-        hands = "Yaoyotl Gloves",
+        body = "Bunzi's Robe",
+        hands = "Bunzi's Gloves",
         ring1 = "Defending Ring",
         ring2 = "Archon Ring",
         back = "Umbra Cape",
         waist = "Fucho-no-Obi",
-        legs = "Bokwus Slops",
-        feet = "Hagondes Sabots"
+        legs = "Bunzi's Pants",
+        feet = "Bunzi's Sabots"
     }
 
     sets.Kiting = { feet = "Crier's Gaiters" }
@@ -818,14 +839,35 @@ function init_gear_sets()
     -- Normal melee group
     --[[sets.engaged = {ammo="Sancus Sachet +1",
         head="Zelus Tiara",neck="Combatant's Torque",ear1="Crepuscular Earring",ear2="Brutal Earring",
-        body="Vanir Cotehardie",hands="Bokwus Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
-        back="Umbra Cape",waist="Goading Belt",legs="Hagondes Pants",feet="Hagondes Sabots"}]]
+        body="Bunzi's Robe",hands="Bunzi's Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
+        back="Umbra Cape",waist="Cornelia's Belt",legs="Bunzi's Pants",feet="Bunzi's Sabots"}]]
     sets.engaged = set_combine(sets.idle.Avatar, {})
 end
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+-- function filtered_action(spell)
+--     print(spell.id)
+-- end
+
+function job_pretarget(spell, action, spellMap, eventArgs)
+    -- print(spell.type)
+    -- when AFAC, auto convert when out of MP
+    if (buffactive['Astral Flow'] and buffactive['Astral Conduit'] and player.sub_job == 'RDM') then
+        if player.mp < spell.mp_cost and player.mp > 0 then
+            eventArgs.cancel = true
+            send_command('input /ja "Convert" <me>')
+        end
+        -- When AF up and AC down, auto Apogee
+    elseif (buffactive['Astral Flow'] and not buffactive['Astral Conduit']) and spell.type == 'BloodPactRage' or spell.type == 'BloodPactWard' then
+        if windower.ffxi.get_ability_recasts()[108] == 0 then
+            eventArgs.cancel = true
+            send_command('input /ja Apogee <me>')
+        end
+    end
+end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
@@ -868,6 +910,14 @@ function job_buff_change(buff, gain)
         handle_equipping_gear(player.status)
     elseif storms:contains(buff) then
         handle_equipping_gear(player.status)
+    end
+
+    if buff == 'Astral Conduit' and not gain then
+        send_command('gs enable all')
+    end
+
+    if buff == 'Weakness' and gain then
+        send_command('wait 2; input macro set 1')
     end
 end
 

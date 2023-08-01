@@ -23,6 +23,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'PDT')
@@ -220,7 +222,7 @@ function init_gear_sets()
     sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'], {
         neck = "Debilis Medallion",
         hands = "Hieros Mittens",
-        ring1 = "Haoma's Ring",
+        ring1 = "Menelaus's Ring",
         ring2 = "Haoma's Ring",
         back = "Alaunus's Cape",
         legs = "Theophany Pantaloons +1",
@@ -335,18 +337,18 @@ function init_gear_sets()
     sets.midcast['Enfeebling Magic'] = {
         main = "Contemplator +1",
         sub = "Enki Strap",
-        head = "Befouled Crown",
+        head = "Bunzi's Hat",
         neck = "Incanter's Torque +1",
         ear1 = "Enfeebling Earring",
         ear2 = "Vor Earring",
-        body = "Theophany Bliaut +1",
-        hands = "Piety Mitts +1",
+        body = "Bunzi's Robe",
+        hands = "Bunzi's Gloves",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
-        back = "Altruistic Cape",
+        back = "Aurist's Cape +1",
         waist = "Rumination Sash",
         legs = "Chironic Hose",
-        feet = "Theophany Duckbills +1"
+        feet = "Bunzi's Sabots"
     }
 
 
@@ -406,7 +408,7 @@ function init_gear_sets()
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
         ring2 = "Craftmaster's Ring",
-        back = gear.idle_cape,
+        back = "Moonlight Cape",
         waist = "Blacksmith's Belt",
         legs = "Carmine Cuisses +1",
         feet = "Nyame Sollerets"
@@ -428,6 +430,21 @@ function init_gear_sets()
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
         feet = "Crier's Gaiters"
+    }
+
+    sets.idle.Refresh = {
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        ammo = "Homiliary",
+        head = "Befouled Crown",
+        neck = "Sibyl Scarf",
+        body = "Shamash Robe",
+        hands = gear.chironic.refresh.hands,
+        ring1 = gear.left_stikini,
+        ring2 = gear.right_stikini,
+        waist = "Fucho-no-obi",
+        legs = "Assiduity Pants +1",
+        feet = gear.chironic.refresh.feet
     }
 
     -- Defense sets
@@ -487,8 +504,8 @@ function init_gear_sets()
         ear2 = "Brutal Earring",
         body = "Bunzi's Robe",
         hands = "Bunzi's Gloves",
-        ring1 = "Petrov Ring",
-        ring2 = "Hetairoi Ring",
+        ring1 = "Chirich Ring +1",
+        ring2 = "Lehko's Ring",
         waist = "Sailfi Belt +1",
         legs = "Ayanmo Cosciales +2",
         feet = "Bunzi's Sabots"
@@ -514,7 +531,7 @@ function job_precast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Healing Magic' then
         gear.default.obi_back = "Mending Cape"
     else
-        gear.default.obi_back = "Toro Cape"
+        gear.default.obi_back = "Aurist's Cape +1"
     end
 end
 

@@ -75,6 +75,8 @@ end
 -- Setup vars that are user-dependent.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     job_helper()
 
     state.OffenseMode:options('Normal', 'Acc', 'SubtleBlow')
@@ -118,6 +120,7 @@ function user_setup()
     send_command('bind numpad9 gs equip sets.Weapons.greataxe')
     send_command('bind ^numpad9 gs equip sets.Weapons.greataxe.hepatizon')
     send_command('bind numpad4 gs equip sets.Weapons.sword')
+    send_command('bind ^numpad4 gs equip sets.Weapons.ridill')
     send_command('bind numpad5 gs equip sets.Weapons.crepuscular')
     send_command('bind numpad6 gs equip sets.Weapons.club')
     send_command('bind numpad1 input /ma stun <t>')
@@ -221,7 +224,6 @@ function job_helper()
         ['Liberator'] = 'scythe',
         ['Redemption'] = 'scythe',
         ['Anguta'] = 'scythe',
-        ['Dacnomania'] = 'scythe',
         ['Misanthropy'] = 'scythe',
         ['Woeborn'] = 'scythe',
         ['Crepuscular Scythe'] = 'scythe',
@@ -336,7 +338,7 @@ function init_gear_sets()
     }
     gear.ws_cape = {
         name = "Ankou's Mantle",
-        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%' }
+        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%', 'Phys. dmg. taken-10%' }
     }
     gear.torcleaver_cape = {
         name = "Ankou's Mantle",
@@ -374,6 +376,7 @@ function init_gear_sets()
     -- Miscellaneous Sets
     -------------------------------------------------------------------------------------------------------------------
     sets.HP_High = {
+        ammo = "Happy Egg",
         head = "Ratri sallet +1",
         neck = "Unmoving Collar +1",
         ear1 = "Tuisto Earring",
@@ -382,8 +385,8 @@ function init_gear_sets()
         hands = "Rat. Gadlings +1",
         ring1 = "Moonlight Ring",
         ring2 = "Gelatinous Ring +1",
-        back = "Reiki Cloak",
-        waist = "Eschan Stone",
+        back = "Moonlight Cape",
+        waist = "Platinum Moogle Belt",
         legs = "Sakpata's Cuisses",
         feet = { name = "Ratri Sollerets +1", priority = 10 },
     }
@@ -415,14 +418,14 @@ function init_gear_sets()
 
 
     sets.SIRD = {
-        ammo = "Staunch Tathlum +1",
-        head = gear.acro.SIRD.head,
-        ear2 = "Magnetic Earring",
-        hands = gear.acro.SIRD.hands,
-        ring2 = "Evanescence Ring",
-        back = gear.SIRD_cape,
-        legs = "Founder's Hose",
-        feet = "Odyssean Greaves"
+        ammo = "Staunch Tathlum +1",  -- +11
+        head = gear.acro.SIRD.head,   -- 10
+        ear2 = "Magnetic Earring",    -- 5
+        hands = gear.acro.SIRD.hands, -- 10
+        ring2 = "Evanescence Ring",   -- 5
+        back = gear.SIRD_cape,        -- 10
+        legs = "Founder's Hose",      -- 30
+        feet = "Odyssean Greaves"     -- 20
     }
 
     -- Waltz set (chr and vit)
@@ -468,7 +471,7 @@ function init_gear_sets()
         ear1 = "Thrud Earring",
         ear2 = "Moonshade Earring",
         body = "Ignominy Cuirass +3",
-        hands = "Sakpata's Gauntlets",
+        hands = "Nyame Gauntlets",
         ring1 = "Regal Ring",
         ring2 = "Epaminondas's Ring",
         back = gear.ws_cape,
@@ -484,7 +487,8 @@ function init_gear_sets()
         waist = "Fotia Belt"
     })
 
-    sets.precast.WS.SingleHit = set_combine(sets.precast.WS, { neck = "Abyssal Beads +2", waist = "Sailfi Belt +1" })
+    sets.precast.WS.SingleHit = set_combine(sets.precast.WS,
+        { neck = "Abyssal Beads +2", waist = "Sailfi Belt +1" })
 
     sets.precast.WS.MultiHit = {
         ammo = "Seething Bomblet +1",
@@ -803,7 +807,7 @@ function init_gear_sets()
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
         ring2 = "Craftmaster's Ring",
-        back = gear.melee_cape,
+        back = "Moonlight Cape",
         waist = "Blacksmith's Belt",
         legs = "Carmine Cuisses +1",
         feet = "Sakpata's Leggings"
@@ -813,13 +817,13 @@ function init_gear_sets()
         ammo = "Staunch Tathlum +1",
         head = "Sakpata's Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Etiolation Earring",
-        ear2 = "Eabani Earring",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
         ring1 = "Moonlight Ring",
-        ring2 = "Defending Ring",
-        back = gear.melee_cape,
+        ring2 = "Gelatinous Ring +1",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Carmine Cuisses +1",
         feet = "Sakpata's Leggings"
@@ -844,7 +848,7 @@ function init_gear_sets()
     sets.idle.PDT = set_combine(sets.idle.Field, {
         ammo = "Brigantia Pebble",
         head = "Sakpata's Helm",
-        bodywa = "Sakpata's Plate"
+        body = "Sakpata's Plate"
     })
     sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
@@ -860,13 +864,13 @@ function init_gear_sets()
         ammo = "Brigantia Pebble",
         head = "Sakpata's Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Etiolation Earring",
-        ear2 = "Eabani Earring",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
         ring1 = "Moonlight Ring",
         ring2 = "Gelatinous Ring +1",
-        back = gear.melee_cape,
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Sakpata's Cuisses",
         feet = "Sakpata's Leggings"
@@ -895,10 +899,10 @@ function init_gear_sets()
         ear2 = "Eabani Earring",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring1 = "Defending Ring",
+        ring1 = "Shadow Ring",
         ring2 = "Archon Ring",
         back = gear.melee_cape,
-        waist = "Flume Belt +1",
+        waist = "Platinum Moogle Belt",
         legs = "Sakpata's Cuisses",
         feet = "Sakpata's Leggings"
     }
@@ -967,7 +971,7 @@ function init_gear_sets()
         body = "Sacro Breastplate",
         hands = "Leyline Gloves",
         ring1 = "Kishar Ring",
-        ring2 = "Rahab Ring",
+        ring2 = "Lehko's Ring",
         back = gear.casting_cape,
         waist = "Sailfi Belt +1",
         legs = "Limbo Trousers",
@@ -1052,7 +1056,7 @@ function init_gear_sets()
     sets.midcast['Drain III'].DarkSeal = set_combine(sets.midcast['Drain III'], { head = "Fallen's Burgeonet +3" })
     sets.midcast['Aspir'] = sets.midcast.Drain
     sets.midcast['Aspir II'] = sets.midcast.Aspir
-    sets.midcast['Drain'].Weapon = { main = "Dacnomania", sub = "Dark Grip" }
+    sets.midcast['Drain'].Weapon = { main = "Misanthropy", sub = "Dark Grip" }
 
     sets.midcast.Stun = {
         ammo = "Pemphredo Tathlum",
@@ -1086,11 +1090,11 @@ function init_gear_sets()
     sets.midcast['Dread Spikes'].Weapon = { main = "Crepuscular Scythe", sub = "Utu Grip" }
 
     sets.midcast['Poison'] = sets.midcast['Enfeebling Magic']
-    sets.midcast['Poison'].TH = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+    sets.midcast['Poison'].TH = set_combine(sets.midcast.SIRD, sets.TreasureHunter)
     sets.midcast['Poisonga'] = sets.midcast['Enfeebling Magic']
-    sets.midcast['Poisonga'].TH = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+    sets.midcast['Poisonga'].TH = set_combine(sets.midcast.SIRD, sets.TreasureHunter)
     sets.midcast['Absorb-CHR'] = sets.midcast.Absorb
-    sets.midcast['Absorb-CHR'].TH = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+    sets.midcast['Absorb-CHR'].TH = set_combine(sets.midcast.SIRD, sets.TreasureHunter)
 
     -- Elemental Magic sets
     sets.midcast['Elemental Magic'] = {
@@ -1134,7 +1138,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Sakpata's Plate",
         hands = "Flamma Manopolas +2",
-        ring1 = "Moonlight ring",
+        ring1 = "Lehko's Ring",
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Sailfi Belt +1",
@@ -1150,7 +1154,7 @@ function init_gear_sets()
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
         ring1 = "Moonlight ring",
-        ring2 = "Regal Ring",
+        ring2 = "Chirich Ring +1",
         back = gear.melee_cape,
         waist = "Ioskeha Belt +1",
         legs = "Ignominy Flanchard +3",
@@ -1173,7 +1177,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring1 = "Moonlight Ring",
+        ring1 = "Lehko's Ring",
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Sailfi belt +1",
@@ -1335,7 +1339,7 @@ function init_gear_sets()
         ear1 = "Brutal Earring",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring1 = "Regal Ring",
+        ring1 = "Lehko's Ring",
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Sailfi belt +1",
@@ -1367,7 +1371,7 @@ function init_gear_sets()
         ear1 = "Brutal Earring",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring1 = "Moonlight Ring",
+        ring1 = "Lehko's Ring",
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Sailfi belt +1",
@@ -1383,7 +1387,7 @@ function init_gear_sets()
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
         ring1 = "Moonlight Ring",
-        ring2 = "Regal Ring",
+        ring2 = "Chirich Ring +1",
         back = gear.melee_cape,
         waist = "Ioskeha Belt +1",
         legs = "Ignominy Flanchard +3",
@@ -1400,7 +1404,7 @@ function init_gear_sets()
         ear1 = "Brutal Earring",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring1 = "Regal Ring",
+        ring1 = "Lehko's Ring",
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Sailfi belt +1",
@@ -1616,9 +1620,9 @@ function filtered_action(spell)
     -- end
 end
 
--- function job_pretarget(spell, action, spellMap, evtArgs)
-
--- end
+function job_pretarget(spell, action, spellMap, evtArgs)
+    -- print(spell.id)
+end
 
 function job_precast(spell, action, spellMap, eventArgs)
     -- set this so we know what to come back to later
@@ -1627,7 +1631,7 @@ function job_precast(spell, action, spellMap, eventArgs)
         equip(set_combine(sets.precast.FC, sets.buff['Dark Seal']))
     end
 
-    setRecast()
+    if spell.type:endswith('Magic') then setRecast() end
 end
 
 -- Run after the default precast() is done.
@@ -1691,19 +1695,19 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     -- Weapon swap handling
-    if spell.skill == 'Dark Magic' and player.tp < 1000 then
+    if spell.skill == 'Dark Magic' and player.tp < 600 then -- < 600 is a good number, as it wont eat a full meditate
         if S { 'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II' }:contains(spell.english) and
             (sets.midcast['Drain'].Weapon.main ~= player.equipment.main) then
-            setRecast()
+            -- setRecast()
             equip(sets.midcast['Drain'].Weapon)
             -- do not change weapons if AM3 is up
         elseif S { 'Endark', 'Endark II' }:contains(spell.english) and
             (sets.midcast['Endark'].Weapon.main ~= player.equipment.main) and not buffactive['Aftermath: Lv.3'] then
-            setRecast()
+            -- setRecast()
             equip(sets.midcast['Endark'].Weapon)
         elseif spell.english == 'Dread Spikes' and (sets.midcast['Dread Spikes'].Weapon.main ~= player.equipment.main)
             and not buffactive['Aftermath: Lv.3'] then
-            setRecast()
+            -- setRecast()
             equip(sets.midcast['Dread Spikes'].Weapon)
         end
     end
@@ -1899,8 +1903,8 @@ end
 
 -- update weapon sets
 function update_weapon_mode(w_state)
-    gear.MainHand = sets.Weapons[w_state].main
-    gear.SubHand = sets.Weapons[w_state].sub
+    gear.MainHand = sets.weapons[w_state].main
+    gear.SubHand = sets.weapons[w_state].sub
 
     sets.weapons = { main = gear.MainHand, sub = gear.SubHand }
     equip(sets.weapons)
@@ -2208,9 +2212,9 @@ end
 -- This will only ever be called if TreasureMode is not 'None'.
 -- Category and Param are as specified in the action event packet.
 function th_action_check(category, param)
-    if category == 2 or -- any ranged attack
+    if category == 2 or                                            -- any ranged attack
         --category == 4 or -- any magic action
-        (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 3 and param == 30) or                         -- Aeolian Edge
         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
     then

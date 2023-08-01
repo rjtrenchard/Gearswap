@@ -24,6 +24,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('PDT', 'Normal', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc')
@@ -342,7 +344,7 @@ function init_gear_sets()
 
     sets.idle.Town = {
         main = "Malignance Sword",
-        ammo = "Incantor Stone",
+        ammo = "Sapience Orb",
         head = "Sulevia's Mask +1",
         neck = "Loricate Torque +1",
         ear1 = "Eabani Earring",
@@ -391,7 +393,7 @@ function init_gear_sets()
 
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here
     -- when activating or changing defense mode:
-    sets.PhysicalShield = { main = "Anahera Sword", sub = "Killedar Shield" } -- Ochain
+    sets.PhysicalShield = { main = "Anahera Sword", sub = "Killedar Shield" }   -- Ochain
     sets.MagicalShield = { main = "Anahera Sword", sub = "Beatific Shield +1" } -- Aegis
 
     -- Basic defense sets.
@@ -406,7 +408,7 @@ function init_gear_sets()
         hands = "Sulevia's Gauntlets +1",
         ring1 = "Petrov Ring",
         ring2 = "Defending Ring",
-        back = "Shadow Mantle",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Sulevia's Cuisses +2",
         feet = "Sulevia's Leggings +2"
@@ -451,7 +453,7 @@ function init_gear_sets()
         hands = "Sulevia's Gauntlets +1",
         ring1 = "Petrov Ring",
         ring2 = "Defending Ring",
-        back = "Shadow Mantle",
+        back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Sulevia's Cuisses +2",
         feet = "Sulevia's Leggings +2"
@@ -459,7 +461,7 @@ function init_gear_sets()
     -- To cap MDT with Shell IV (52/256), need 76/256 in gear.
     -- Shellra V can provide 75/256, which would need another 53/256 in gear.
     sets.defense.MDT = {
-        ammo = "Demonry Stone",
+        ammo = "Staunch Tathlum +1",
         head = "Sulevia's Mask +1",
         neck = "Loricate Torque +1",
         ear1 = "Eabani Earring",
@@ -488,7 +490,7 @@ function init_gear_sets()
         body = "Sakpata's Breastplate",
         hands = "Sakpata's Gauntlets",
         ring1 = "Petrov Ring",
-        ring2 = "Hetairoi Ring",
+        ring2 = "Lehko's Ring",
         back = "Atheling Mantle",
         waist = "Sailfi belt +1",
         legs = "Cuisses",

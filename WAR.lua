@@ -28,6 +28,8 @@ end
 -- Setup vars that are user-dependent.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Normal', 'Acc', 'Crit')
     state.HybridMode:options('Normal', 'PDT', 'Reraise')
     state.DefenseMode:options('None', 'Physical', 'Magical', 'Reraise')
@@ -59,16 +61,16 @@ function user_setup()
     gear.tp_neck_vim = { name = "War. Beads +2" }
     gear.tp_neck = gear.tp_neck_vim
 
-    send_command('bind numpad4 gs equip sets.Weapons.Sword')
-    send_command('bind ^numpad4 gs equip sets.Weapons.Ridill')
-    send_command('bind numpad5 gs equip sets.Weapons.Club')
-    send_command('bind ^numpad5 gs equip sets.Weapons.Dagger')
-    send_command('bind numpad6 gs equip sets.Weapons.Fists')
+    send_command('bind numpad4 gs equip sets.weapons.Sword')
+    send_command('bind ^numpad4 gs equip sets.weapons.Ridill')
+    send_command('bind numpad5 gs equip sets.weapons.Club')
+    send_command('bind ^numpad5 gs equip sets.weapons.Dagger')
+    send_command('bind numpad6 gs equip sets.weapons.Fists')
 
-    send_command('bind numpad7 gs equip sets.Weapons.GAxe')
-    send_command('bind ^numpad7 gs equip sets.Weapons.Axe')
-    send_command('bind numpad8 gs equip sets.Weapons.Spear')
-    send_command('bind numpad9 gs equip sets.Weapons.Staff')
+    send_command('bind numpad7 gs equip sets.weapons.GAxe')
+    send_command('bind ^numpad7 gs equip sets.weapons.Axe')
+    send_command('bind numpad8 gs equip sets.weapons.Spear')
+    send_command('bind numpad9 gs equip sets.weapons.Staff')
 
 
     send_command('bind ^f11 gs c set DefenseMode Reraise')
@@ -118,57 +120,103 @@ function init_gear_sets()
     -- Start defining the sets
     --------------------------------------
 
-    gear.melee_cape = { name = "Cichol's Mantle",
-        augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dbl.Atk."+10', 'Phys. dmg. taken-10%', } }
-    gear.str_ws_cape = { name = "Cichol's Mantle",
-        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%' }, }
-    gear.magic_ws_cape = { name = "Cichol's Mantle",
-        augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'Weapon skill damage +10%', } }
+    gear.melee_cape = {
+        name = "Cichol's Mantle",
+        augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dbl.Atk."+10', 'Phys. dmg. taken-10%', }
+    }
+    gear.str_ws_cape = {
+        name = "Cichol's Mantle",
+        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%' },
+    }
+    gear.magic_ws_cape = {
+        name = "Cichol's Mantle",
+        augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'Weapon skill damage +10%', }
+    }
     gear.multi_ws_cape = gear.str_ws_cape
 
-    sets.Weapons = {}
-    sets.Weapons.Sword = { main = "Naegling", sub = "Blurred Shield +1" }
-    sets.Weapons.Ridill = { main = "Ridill", sub = "Blurred Shield +1" }
-    sets.Weapons.Dagger = { main = "Crepuscular Knife", sub = "Blurred Shield +1" }
-    sets.Weapons.Club = { main = "Loxotic Mace +1", sub = "Blurred Shield +1" }
-    sets.Weapons.GAxe = { main = "Chango", sub = "Utu Grip" }
-    sets.Weapons.Spear = { main = "Shining One", sub = "Utu Grip" }
-    sets.Weapons.Staff = { main = "Xoanon", sub = "Utu Grip" }
-    sets.Weapons.Fists = { main = "Karambit" }
-    sets.Weapons.Axe = { main = "Dolichenus", sun = "Blurred Shield +1" }
+    sets.weapons = {}
+    sets.weapons.Sword = { main = "Naegling", sub = "Blurred Shield +1" }
+    sets.weapons.Ridill = { main = "Ridill", sub = "Blurred Shield +1" }
+    sets.weapons.Dagger = { main = "Crepuscular Knife", sub = "Blurred Shield +1" }
+    sets.weapons.Club = { main = "Loxotic Mace +1", sub = "Blurred Shield +1" }
+    sets.weapons.GAxe = { main = "Chango", sub = "Utu Grip" }
+    sets.weapons.Spear = { main = "Shining One", sub = "Utu Grip" }
+    sets.weapons.Staff = { main = "Xoanon", sub = "Utu Grip" }
+    sets.weapons.Fists = { main = "Karambit" }
+    sets.weapons.Axe = { main = "Dolichenus", sun = "Blurred Shield +1" }
 
 
     sets.TreasureHunter = {
         head = "Volte Cap",
-        waist = "Chaac belt", legs = "Volte Hose", feet = "Volte Boots"
+        waist = "Chaac belt",
+        legs = "Volte Hose",
+        feet = "Volte Boots"
     }
 
-    sets.enmity = { ammo = "Sapience Orb",
-        head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Cryptic Earring", ear2 = "Trux Earring",
-        body = "Obviation Cuirass +1", hands = "Macabre Gauntlets +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
-        waist = "Trance Belt", legs = "Zoar Subligar +1", feet = gear.yorium.enmity.feet }
+    sets.enmity = {
+        ammo = "Sapience Orb",
+        head = "Halitus Helm",
+        neck = "Unmoving Collar +1",
+        ear1 = "Cryptic Earring",
+        ear2 = "Trux Earring",
+        body = "Obviation Cuirass +1",
+        hands = "Macabre Gauntlets +1",
+        ring1 = "Supershear Ring",
+        ring2 = "Eihwaz Ring",
+        waist = "Trance Belt",
+        legs = "Zoar Subligar +1",
+        feet = gear.yorium.enmity.feet
+    }
 
-    sets.precast.FC = { ammo = "Sapience Orb",
-        head = "Sakpata's Helm", neck = "Orunmila's Torque", ear1 = "Enchanter's Earring +1", ear2 = "Loquacious Earring",
-        body = "Sacro Breastplate", hands = "Leyline Gloves", ring1 = "Weatherspoon Ring +1", ring2 = "Rahab Ring",
-        legs = "Limbo Trousers", feet = "Odyssean Greaves"
+    sets.precast.FC = {
+        ammo = "Sapience Orb",
+        head = "Sakpata's Helm",
+        neck = "Orunmila's Torque",
+        ear1 = "Enchanter's Earring +1",
+        ear2 = "Loquacious Earring",
+        body = "Sacro Breastplate",
+        hands = "Leyline Gloves",
+        ring1 = "Weatherspoon Ring +1",
+        ring2 = "Rahab Ring",
+        legs = "Limbo Trousers",
+        feet = "Odyssean Greaves"
     }
 
     sets.Sleeping = { neck = "Vim Torque +1" }
 
-    sets.buff.doom = { ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm", neck = "Nicander's Necklace",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Eshmun's Ring", ring2 = "Eshmun's Ring",
-        back = gear.DDCape, waist = "Gishdubar Sash", legs = "Shabti Cuisses +1", feet = "Nyame Sollerets" }
+    sets.buff.doom = {
+        ammo = "Staunch Tathlum +1",
+        head = "Nyame Helm",
+        neck = "Nicander's Necklace",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Eshmun's Ring",
+        ring2 = "Eshmun's Ring",
+        back = gear.DDCape,
+        waist = "Gishdubar Sash",
+        legs = "Shabti Cuisses +1",
+        feet = "Nyame Sollerets"
+    }
 
-    sets.buff.doom.HolyWater = { ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm", neck = "Nicander's Necklace",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Blenmot's Ring +1", ring2 = "Blenmot's Ring +1",
-        back = gear.DDCape, waist = "Flume Belt +1", legs = "Nyame Flanchard", feet = "Nyame Sollerets", }
+    sets.buff.doom.HolyWater = {
+        ammo = "Staunch Tathlum +1",
+        head = "Nyame Helm",
+        neck = "Nicander's Necklace",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Blenmot's Ring +1",
+        ring2 = "Blenmot's Ring +1",
+        back = gear.DDCape,
+        waist = "Flume Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets",
+    }
 
     sets.resist = {}
-    sets.resist.death = { main = "Odium",
-        ring1 = "Shadow Ring", ring2 = "Eihwaz Ring"
+    sets.resist.death = {
+        main = "Odium",
+        ring1 = "Shadow Ring",
+        ring2 = "Eihwaz Ring"
     }
 
     -- Precast Sets
@@ -187,36 +235,89 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ammo = "Knobkierrie",
-        head = "Nyame Helm", neck = "Fotia Gorget", ear1 = "Thrud Earring", ear2 = "Moonshade Earring",
-        body = "Pummeler's Lorica +3", hands = "Boii Mufflers +2", ring1 = "Epaminondas's Ring",
+    sets.precast.WS = {
+        ammo = "Knobkierrie",
+        head = "Nyame Helm",
+        neck = "Fotia Gorget",
+        ear1 = "Thrud Earring",
+        ear2 = "Moonshade Earring",
+        body = "Pummeler's Lorica +3",
+        hands = "Boii Mufflers +2",
+        ring1 = "Epaminondas's Ring",
         ring2 = "Niqmaddu Ring",
-        back = gear.str_ws_cape, waist = "Fotia Belt", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings", }
+        back = gear.str_ws_cape,
+        waist = "Fotia Belt",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets",
+    }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, { ammo = "Seething Bomblet +1",
-        head = "Nyame Helm", neck = "Fotia Gorget", ear1 = "Telos Earring", ear2 = "Dignitary Earring",
-        body = "Tatanashi Haramaki +1", hands = "Tatenashi Gote +1", ring1 = "Moonlight Ring", ring2 = "Chirich Ring +1",
-        back = gear.str_ws_cape, waist = "Fotia Belt", legs = "Tatanashi Haidate +1", feet = "Tatenashi Sune-ate +1"
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        ammo = "Seething Bomblet +1",
+        head = "Nyame Helm",
+        neck = "Fotia Gorget",
+        ear1 = "Telos Earring",
+        ear2 = "Dignitary Earring",
+        body = "Tatanashi Haramaki +1",
+        hands = "Tatenashi Gote +1",
+        ring1 = "Moonlight Ring",
+        ring2 = "Chirich Ring +1",
+        back = gear.str_ws_cape,
+        waist = "Fotia Belt",
+        legs = "Tatanashi Haidate +1",
+        feet = "Tatenashi Sune-ate +1"
     })
 
-    sets.precast.WS.MultiHit = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = "Fotia Gorget", ear1 = "Schere Earring", ear2 = "Moonshade Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Regal Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Fotia Belt", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.precast.WS.MultiHit = {
+        ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm",
+        neck = "Fotia Gorget",
+        ear1 = "Schere Earring",
+        ear2 = "Moonshade Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Regal Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Fotia Belt",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
 
-    sets.precast.WS.Crit = { ammo = "Yetshila +1",
-        head = "Blistering Sallet +1", neck = "Fotia Gorget", ear1 = "Schere Earring", ear2 = "Moonshade Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Begrudging Ring", ring2 = "Niqmaddu Ring",
-        back = gear.str_ws_cape, waist = "Fotia Belt", legs = "Zoar Subligar +1", feet = "Sakpata's Leggings" }
+    sets.precast.WS.Crit = {
+        ammo = "Yetshila +1",
+        head = "Blistering Sallet +1",
+        neck = "Fotia Gorget",
+        ear1 = "Schere Earring",
+        ear2 = "Moonshade Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Begrudging Ring",
+        ring2 = "Lehko's Ring",
+        back = gear.str_ws_cape,
+        waist = "Fotia Belt",
+        legs = "Zoar Subligar +1",
+        feet = "Sakpata's Leggings"
+    }
 
-    sets.precast.WS.Magic = { ammo = "Knobkierrie",
-        head = "Nyame Helm", neck = "Sibyl Scarf", ear1 = "Friomisi Earring", ear2 = "Lugra Earring +1",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Epaminondas's Ring", ring2 = "Regal Ring",
-        back = gear.magic_ws_cape, waist = "Eschan Stone", legs = "Nyame Flanchard", feet = "Nyame Sollerets"
+    sets.precast.WS.Magic = {
+        ammo = "Knobkierrie",
+        head = "Nyame Helm",
+        neck = "Sibyl Scarf",
+        ear1 = "Friomisi Earring",
+        ear2 = "Lugra Earring +1",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Epaminondas's Ring",
+        ring2 = "Regal Ring",
+        back = gear.magic_ws_cape,
+        waist = "Eschan Stone",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
-    sets.precast.WS['Upheaval'] = set_combine(sets.precast.WS.MultiHit, { ammo = "Seething Bomblet +1",
+    sets.precast.WS['Upheaval'] = set_combine(sets.precast.WS.MultiHit, {
+        ammo = "Seething Bomblet +1",
         ear1 = "Schere Earring",
         ring1 = "Niqmaddu Ring",
     })
@@ -227,10 +328,20 @@ function init_gear_sets()
     })
     sets.precast.WS['Savage Blade'].MaxTP = { ear2 = "Lugra Earring +1" }
 
-    sets.precast.WS['Cataclysm'] = { ammo = "Knobkierrie",
-        head = "Pixie Hairpin +1", neck = "Sibyl Scarf", ear1 = "Lugra Earring +1", ear2 = "Moonshade Earring",
-        body = "Nyame Mail", hands = "Nyame Gauntlets", ring1 = "Epaminondas's Ring", ring2 = "Archon Ring",
-        back = gear.magic_ws_cape, waist = "Eschan Stone", legs = "Nyame Flanchard", feet = "Nyame Sollerets",
+    sets.precast.WS['Cataclysm'] = {
+        ammo = "Knobkierrie",
+        head = "Pixie Hairpin +1",
+        neck = "Sibyl Scarf",
+        ear1 = "Lugra Earring +1",
+        ear2 = "Moonshade Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Epaminondas's Ring",
+        ring2 = "Archon Ring",
+        back = gear.magic_ws_cape,
+        waist = "Eschan Stone",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets",
     }
     sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS['Cataclysm'], { back = gear.str_ws_cape })
 
@@ -251,8 +362,10 @@ function init_gear_sets()
     -- Midcast Sets
     sets.midcast.FastRecast = {
         head = "Sakpata's Helm",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets",
-        legs = "Phorcys Dirs", feet = "Sakpata's Leggings"
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        legs = "Phorcys Dirs",
+        feet = "Sakpata's Leggings"
     }
 
 
@@ -263,42 +376,106 @@ function init_gear_sets()
 
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
-    sets.idle.Town = { ammo = "Staunch Tathlum +1",
-        head = "Shaded Spectacles", neck = "Smithy's Torque", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
-        body = "Blacksmith's Smock", hands = "Smithy's Mitts", ring1 = "Confectioner's Ring",
+    sets.idle.Town = {
+        ammo = "Staunch Tathlum +1",
+        head = "Shaded Spectacles",
+        neck = "Smithy's Torque",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Blacksmith's Smock",
+        hands = "Smithy's Mitts",
+        ring1 = "Confectioner's Ring",
         ring2 = "Craftmaster's Ring",
-        back = gear.melee_cape, waist = "Blacksmith's Belt", legs = "Sakpata's Cuisses", feet = "Hermes' sandals" }
+        back = "Moonlight Cape",
+        waist = "Blacksmith's Belt",
+        legs = "Sakpata's Cuisses",
+        feet = "Hermes' sandals"
+    }
 
-    sets.idle.Field = set_combine({}, { ammo = "Staunch Tathlum +1",
-        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring2 = "Gelatinous Ring +1", ring1 = "Moonlight Ring",
-        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Hermes' sandals" })
+    sets.idle.Field = set_combine({}, {
+        ammo = "Staunch Tathlum +1",
+        head = "Sakpata's Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring2 = "Gelatinous Ring +1",
+        ring1 = "Moonlight Ring",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Hermes' sandals"
+    })
 
-    sets.idle.Weak = { ammo = "Staunch Tathlum +1",
-        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Tuisto Earring", ear2 = "Odnowa Earring +1",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Gelatinous Ring +1",
-        back = gear.melee_cape, waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.idle.Weak = {
+        ammo = "Staunch Tathlum +1",
+        head = "Crepuscular Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Gelatinous Ring +1",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
 
     sets.idle.PDT = set_combine(sets.idle.Field, { head = "Sakpata's Helm", body = "Sakpata's Plate" })
     sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
     sets.idle.Reraise = sets.idle.Weak
     -- Defense sets
-    sets.defense.PDT = { ammo = "Brigantia Pebble",
-        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Tuisto earring", ear2 = "Odnowa Earring +1",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring2 = "Gelatinous Ring +1", ring1 = "Moonlight Ring",
-        back = "Reiki Cloak", waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
-
-    sets.defense.Reraise = { ammo = "Staunch Tathlum +1",
-        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Schere Earring", ear2 = "Telos Earring",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring2 = "Gelatinous Ring +1", ring1 = "Moonlight Ring",
-        back = "Reiki Cloak", waist = "Flume Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings"
+    sets.defense.PDT = {
+        ammo = "Brigantia Pebble",
+        head = "Sakpata's Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Tuisto earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring2 = "Gelatinous Ring +1",
+        ring1 = "Moonlight Ring",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
     }
 
-    sets.defense.MDT = { ammo = "Staunch Tathlum +1",
-        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Tuitso Earring", ear2 = "Odnowa Earring +1",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Shadow Ring", ring2 = "Moonlight Ring",
-        back = "Reiki Cloak", waist = "Engraved Belt", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
+    sets.defense.Reraise = {
+        ammo = "Staunch Tathlum +1",
+        head = "Crepuscular Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Schere Earring",
+        ear2 = "Telos Earring",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring2 = "Gelatinous Ring +1",
+        ring1 = "Moonlight Ring",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
+
+    sets.defense.MDT = {
+        ammo = "Staunch Tathlum +1",
+        head = "Sakpata's Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Tuitso Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Shadow Ring",
+        ring2 = "Moonlight Ring",
+        back = "Moonlight Cape",
+        waist = "Engraved Belt",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
 
     sets.Kiting = { feet = "Hermes' Sandals" }
 
@@ -313,37 +490,111 @@ function init_gear_sets()
 
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
-    sets.engaged = { ammo = "Coiste Bodhar",
-        head = "Sakpata's Helm", neck = gear.tp_neck, ear1 = "Schere Earring", ear2 = "Boii Earring",
-        body = "Tatenashi Haramaki +1", hands = "Tatenashi Gote +1", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Windbuffet Belt +1", legs = "Tatenashi Haidate +1",
-        feet = "Tatenashi Sune-ate +1" }
-    sets.engaged.Acc = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = gear.tp_neck, ear1 = "Telos Earring", ear2 = "Boii Earring",
-        body = "Tatenashi Haramaki +1", hands = "Tatenashi Gote +1", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Tatenashi Haidate +1", feet = "Tatenashi Sune-ate +1", }
-    sets.engaged.Crit = { ammo = "Yetshila +1",
-        head = "Blistering Sallet +1", neck = gear.tp_neck, ear1 = "Schere Earring", ear2 = "Boii Earring",
-        body = "Tatenashi Haramaki +1", hands = "Flamma Manopolas +2", ring1 = "Moonlight ring", ring2 = "Niqmaddu Ring",
-        back = gear.crit_cape, waist = "Sailfi Belt +1", legs = "Zoar Subligar +1", feet = "Thereoid Greaves"
+    sets.engaged = {
+        ammo = "Coiste Bodhar",
+        head = "Sakpata's Helm",
+        neck = gear.tp_neck,
+        ear1 = "Schere Earring",
+        ear2 = "Boii Earring",
+        body = "Tatenashi Haramaki +1",
+        hands = "Tatenashi Gote +1",
+        ring1 = "Lehko's Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Windbuffet Belt +1",
+        legs = "Tatenashi Haidate +1",
+        feet = "Tatenashi Sune-ate +1"
     }
-    sets.engaged.PDT = { ammo = "Coiste Bodhar",
-        head = "Sakpata's Helm", neck = gear.tp_neck, ear1 = "Schere Earring", ear2 = "Boii Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Kentarch Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
-    sets.engaged.Acc.PDT = { ammo = "Seething Bomblet +1",
-        head = "Sakpata's Helm", neck = "Loricate Torque +1", ear1 = "Telos Earring", ear2 = "Boii Earring",
-        body = "Sakpata's Plate", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
-    sets.engaged.Reraise = { ammo = "Coiste Bodhar",
-        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Schere Earring", ear2 = "Telos Earring",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Sailfi Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
-    sets.engaged.Acc.Reraise = { ammo = "Seething bomblet +1",
-        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Schere Earring", ear2 = "Telos Earring",
-        body = "Crepuscular Mail", hands = "Sakpata's Gauntlets", ring1 = "Moonlight Ring", ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape, waist = "Ioskeha Belt +1", legs = "Sakpata's Cuisses", feet = "Sakpata's Leggings" }
-
+    sets.engaged.Acc = {
+        ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm",
+        neck = gear.tp_neck,
+        ear1 = "Telos Earring",
+        ear2 = "Boii Earring",
+        body = "Tatenashi Haramaki +1",
+        hands = "Tatenashi Gote +1",
+        ring1 = "Moonlight Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Tatenashi Haidate +1",
+        feet = "Tatenashi Sune-ate +1",
+    }
+    sets.engaged.Crit = {
+        ammo = "Yetshila +1",
+        head = "Blistering Sallet +1",
+        neck = gear.tp_neck,
+        ear1 = "Schere Earring",
+        ear2 = "Boii Earring",
+        body = "Tatenashi Haramaki +1",
+        hands = "Flamma Manopolas +2",
+        ring1 = "Lehko's Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.crit_cape,
+        waist = "Sailfi Belt +1",
+        legs = "Zoar Subligar +1",
+        feet = "Thereoid Greaves"
+    }
+    sets.engaged.PDT = {
+        ammo = "Coiste Bodhar",
+        head = "Sakpata's Helm",
+        neck = gear.tp_neck,
+        ear1 = "Schere Earring",
+        ear2 = "Boii Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Lehko's Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Kentarch Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Tatenashi Sune-Ate +1"
+    }
+    sets.engaged.Acc.PDT = {
+        ammo = "Seething Bomblet +1",
+        head = "Sakpata's Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Telos Earring",
+        ear2 = "Boii Earring",
+        body = "Sakpata's Plate",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
+    sets.engaged.Reraise = {
+        ammo = "Coiste Bodhar",
+        head = "Crepuscular Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Schere Earring",
+        ear2 = "Telos Earring",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Sailfi Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
+    sets.engaged.Acc.Reraise = {
+        ammo = "Seething bomblet +1",
+        head = "Crepuscular Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Schere Earring",
+        ear2 = "Telos Earring",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring1 = "Moonlight Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Ioskeha Belt +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
+    }
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -456,10 +707,7 @@ function job_buff_change(buff, gain)
             elseif state.DoomMode.value == 'Holy Water' then
                 equip(sets.buff.doom.HolyWater)
             end
-
-
         elseif buff == 'charm' then
-
             local function count_slip_debuffs()
                 local erase_dots = 0
                 if buffactive.poison then
@@ -538,7 +786,6 @@ function job_update(cmdParams, eventArgs)
             equip(sets.buff.doom.HolyWater)
         end
     end
-
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.

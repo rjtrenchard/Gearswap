@@ -26,6 +26,8 @@ end
 -- Setup vars that are user-dependent.
 function user_setup()
     include('augments.lua')
+    include('default_sets.lua')
+
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'PDT', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc', 'Mod')
@@ -84,15 +86,28 @@ function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    sets.enmity = { ammo = "Sapience Orb",
-        head = "Halitus Helm", neck = "Unmoving Collar +1", ear1 = "Trux Earring", ear2 = "Cryptic Earring",
-        body = "Emet Harness +1", ring1 = "Supershear Ring", ring2 = "Eihwaz Ring",
-        waist = "Trance Belt", legs = "Zoar Subligar +1"
+    sets.enmity = {
+        ammo = "Sapience Orb",
+        head = "Halitus Helm",
+        neck = "Unmoving Collar +1",
+        ear1 = "Trux Earring",
+        ear2 = "Cryptic Earring",
+        body = "Emet Harness +1",
+        ring1 = "Supershear Ring",
+        ring2 = "Eihwaz Ring",
+        waist = "Trance Belt",
+        legs = "Zoar Subligar +1"
     }
 
-    sets.precast.FC = { ammo = "Sapience Orb",
-        neck = "Orunmila's Torque", ear1 = "Loquacious Earring", ear2 = "Enchanter's Earring +1",
-        body = "Sacro Breastplate", hands = "Leyline Gloves", ring1 = "Rahab Ring", ring2 = "Weatherspoon Ring +1",
+    sets.precast.FC = {
+        ammo = "Sapience Orb",
+        neck = "Orunmila's Torque",
+        ear1 = "Loquacious Earring",
+        ear2 = "Enchanter's Earring +1",
+        body = "Sacro Breastplate",
+        hands = "Leyline Gloves",
+        ring1 = "Rahab Ring",
+        ring2 = "Weatherspoon Ring +1",
         legs = "Limbo Trousers"
     }
 
@@ -103,10 +118,17 @@ function init_gear_sets()
     sets.precast.JA['Blade Bash'] = { hands = "Saotome Kote +2" }
 
     -- Waltz set (chr and vit)
-    sets.precast.Waltz = { ammo = "Sonia's Plectrum",
-        head = "Yaoyotl Helm",
-        body = "Otronif Harness +1", hands = "Buremte Gloves", ring1 = "Spiral Ring",
-        back = "Iximulew Cape", waist = "Caudata Belt", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1" }
+    sets.precast.Waltz = {
+        ammo = "Sonia's Plectrum",
+        head = "Nyame Helm",
+        body = "Mpaca's Doublet",
+        hands = "Nyame Gauntlets",
+        ring1 = "Spiral Ring",
+        back = "Iximulew Cape",
+        waist = "Caudata Belt",
+        legs = "Nyame Flanchard",
+        feet = "Mpaca's boots"
+    }
 
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
@@ -114,10 +136,21 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = { ammo = "Coiste Bodhar",
-        head = "Flamma Zucchetto +2", neck = "Fotia Gorget", ear1 = "Brutal Earring", ear2 = "Moonshade Earring",
-        body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Apate Ring", ring2 = "Epaminondas's Ring",
-        back = "Atheling Mantle", waist = "Fotia Belt", legs = "Hizamaru Hizayoroi", feet = "Flamma Gambieras +2" }
+    sets.precast.WS = {
+        ammo = "Coiste Bodhar",
+        head = "Nyame Helm",
+        neck = "Fotia Gorget",
+        ear1 = "Thrud Earring",
+        ear2 = "Moonshade Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Niqmaddu Ring",
+        ring2 = "Epaminondas's Ring",
+        back = "Atheling Mantle",
+        waist = "Sailfi Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
     sets.precast.WS.Acc = set_combine(sets.precast.WS, { back = "Letalis Mantle" })
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -152,52 +185,115 @@ function init_gear_sets()
 
     -- Midcast Sets
     sets.midcast.FastRecast = {
-        head = "Yaoyotl Helm",
-        body = "Otronif Harness +1", hands = "Otronif Gloves",
-        legs = "Phorcys Dirs", feet = "Otronif Boots +1"
+        head = "Nyame Helm",
+        body = "Mpaca's Doublet",
+        hands = "Mpaca's gloves",
+        legs = "Phorcys Dirs",
+        feet = "Mpaca's boots"
     }
 
 
     -- Sets to return to when not performing an action.
 
     -- Resting sets
-    sets.resting = { neck = "Bathy Choker +1", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring" }
+    sets.resting = { neck = "Bathy Choker +1", ring1 = "Sheltered Ring", ring2 = "Shadow Ring" }
 
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
-    sets.idle.Town = { main = "Tsurumaru", sub = "Pole Grip", ammo = "Coiste Bodhar",
-        head = "Yaoyotl Helm", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
-        back = "Atheling Mantle", waist = "Flume Belt +1", legs = "Phorcys Dirs", feet = "Danzo Sune-ate" }
+    sets.idle.Town = {
+        ammo = "Coiste Bodhar",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Mpaca's Doublet",
+        hands = "Mpaca's gloves",
+        ring1 = "Sheltered Ring",
+        ring2 = "Gelatinous Ring +1",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Danzo Sune-ate"
+    }
 
     sets.idle.Field = {
-        head = "Yaoyotl Helm", neck = "Bathy Choker +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
-        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Danzo Sune-ate"
+        ammo = "Coiste Bodhar",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Mpaca's Doublet",
+        hands = "Mpaca's gloves",
+        ring1 = "Sheltered Ring",
+        ring2 = "Gelatinous Ring +1",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Danzo Sune-ate"
     }
 
     sets.idle.Weak = {
-        head = "Crepuscular Helm", neck = "Bathy Choker +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Crepuscular Mail", hands = "Buremte Gloves", ring1 = "Sheltered Ring", ring2 = "Paguroidea Ring",
-        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Danzo Sune-ate"
+        head = "Crepuscular Helm",
+        neck = "Bathy Choker +1",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Crepuscular Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Sheltered Ring",
+        ring2 = "Shadow Ring",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Danzo Sune-ate"
     }
 
     -- Defense sets
-    sets.defense.PDT = { ammo = "Staunch Tathlum +1",
-        head = "Yaoyotl Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = gear.DarkRing.physical,
-        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1" }
-
-    sets.defense.Reraise = {
-        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Crepuscular Mail", hands = "Buremte Gloves", ring1 = "Defending Ring", ring2 = "Paguroidea Ring",
-        back = "Shadow Mantle", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1"
+    sets.defense.PDT = {
+        ammo = "Brigantia Pebble",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring +1",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shadow Ring",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
-    sets.defense.MDT = { ammo = "Demonry Stone",
-        head = "Yaoyotl Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = "Shadow Ring",
-        back = "Engulfer Cape", waist = "Flume Belt +1", legs = "Karieyh Brayettes +1", feet = "Otronif Boots +1" }
+    sets.defense.Reraise = {
+        head = "Crepuscular Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Crepuscular Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shadow Ring",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Mpaca's boots"
+    }
+
+    sets.defense.MDT = {
+        ammo = "Staunch Tathlum +1",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shadow Ring",
+        back = "Moonlight Cape",
+        waist = "Flume Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
 
     sets.Kiting = { feet = "Danzo Sune-ate" }
 
@@ -212,57 +308,123 @@ function init_gear_sets()
 
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
-    sets.engaged = { ammo = "Coiste Bodhar",
-        head = "Flamma Zucchetto +1", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Flamma Korazin +2", hands = "Flamma Manopolas +2", ring1 = "Ilabrat Ring", ring2 = "Niqmaddu Ring",
-        back = "Atheling Mantle", waist = "Sailfi Belt +1", legs = "Hizamaru Hizayoroi", feet = "Flamma Gambieras +2" }
-    sets.engaged.Acc = { ammo = "Coiste Bodhar",
-        head = "Yaoyotl Helm", neck = "Combatant's Torque", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Gorney Haubert +1", hands = "Otronif Gloves", ring1 = "Ilabrat Ring", ring2 = "Niqmaddu Ring",
-        back = "Letalis Mantle", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
-    sets.engaged.PDT = { ammo = "Coiste Bodhar",
-        head = "Yaoyotl Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = "K'ayres Ring",
-        back = "Iximulew Cape", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
-    sets.engaged.Acc.PDT = { ammo = "Honed Tathlum",
-        head = "Yaoyotl Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Otronif Harness +1", hands = "Otronif Gloves", ring1 = "Defending Ring", ring2 = "K'ayres Ring",
-        back = "Letalis Mantle", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
-    sets.engaged.Reraise = { ammo = "Coiste Bodhar",
-        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = " Earring", ear2 = "Crepuscular Earring",
-        body = "Crepuscular Mail", hands = "Otronif Gloves", ring1 = "Beeline Ring", ring2 = "K'ayres Ring",
-        back = "Ik Cape", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
-    sets.engaged.Acc.Reraise = { ammo = "Coiste Bodhar",
-        head = "Crepuscular Helm", neck = "Loricate Torque +1", ear1 = "Brutal Earring", ear2 = "Crepuscular Earring",
-        body = "Crepuscular Mail", hands = "Otronif Gloves", ring1 = "Beeline Ring", ring2 = "K'ayres Ring",
-        back = "Letalis Mantle", waist = "Sailfi belt +1", legs = "Unkai Haidate +2", feet = "Otronif Boots +1" }
+    sets.engaged = {
+        ammo = "Coiste Bodhar",
+        head = "Mpaca's Cap",
+        neck = "Combatant's Torque",
+        ear1 = "Brutal Earring",
+        ear2 = "Schere Earring",
+        body = "Mpaca's doublet",
+        hands = "Mpaca's gloves",
+        ring1 = "Lehko's Ring",
+        ring2 = "Niqmaddu Ring",
+        back = "Atheling Mantle",
+        waist = "Sailfi Belt +1",
+        legs = "Mpaca's Hose",
+        feet = "Mpaca's Boots"
+    }
+    sets.engaged.Acc = {
+        ammo = "Coiste Bodhar",
+        head = "Nyame Helm",
+        neck = "Combatant's Torque",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Gorney Haubert +1",
+        hands = "Mpaca's gloves",
+        ring1 = "Ilabrat Ring",
+        ring2 = "Niqmaddu Ring",
+        back = "Letalis Mantle",
+        waist = "Sailfi belt +1",
+        legs = "Unkai Haidate +2",
+        feet = "Mpaca's boots"
+    }
+    sets.engaged.PDT = {
+        ammo = "Coiste Bodhar",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Mpaca's Doublet",
+        hands = "Mpaca's gloves",
+        ring1 = "Defending Ring",
+        ring2 = "K'ayres Ring",
+        back = "Iximulew Cape",
+        waist = "Sailfi belt +1",
+        legs = "Unkai Haidate +2",
+        feet = "Mpaca's boots"
+    }
+    sets.engaged.Acc.PDT = {
+        ammo = "Honed Tathlum",
+        head = "Nyame Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Mpaca's Doublet",
+        hands = "Mpaca's gloves",
+        ring1 = "Defending Ring",
+        ring2 = "K'ayres Ring",
+        back = "Letalis Mantle",
+        waist = "Sailfi belt +1",
+        legs = "Unkai Haidate +2",
+        feet = "Mpaca's boots"
+    }
+    sets.engaged.Reraise = {
+        ammo = "Coiste Bodhar",
+        head = "Crepuscular Helm",
+        neck = "Loricate Torque +1",
+        ear1 = " Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Crepuscular Mail",
+        hands = "Mpaca's gloves",
+        ring1 = "Beeline Ring",
+        ring2 = "K'ayres Ring",
+        back = "Ik Cape",
+        waist = "Sailfi belt +1",
+        legs = "Unkai Haidate +2",
+        feet = "Mpaca's boots"
+    }
+    sets.engaged.Acc.Reraise = {
+        ammo = "Coiste Bodhar",
+        head = "Crepuscular Helm",
+        neck = "Loricate Torque +1",
+        ear1 = "Brutal Earring",
+        ear2 = "Crepuscular Earring",
+        body = "Crepuscular Mail",
+        hands = "Mpaca's gloves",
+        ring1 = "Beeline Ring",
+        ring2 = "K'ayres Ring",
+        back = "Letalis Mantle",
+        waist = "Sailfi belt +1",
+        legs = "Unkai Haidate +2",
+        feet = "Mpaca's boots"
+    }
 
     -- Melee sets for in Adoulin, which has an extra 10 Save TP for weaponskills.
     -- Delay 450 GK, 35 Save TP => 89 Store TP for a 4-hit (49 Store TP in gear), 2 Store TP for a 5-hit
     --    sets.engaged.Adoulin = {ammo="Coiste Bodhar",
-    --        head="Yaoyotl Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Crepuscular Earring",
-    --        body="Gorney Haubert +1",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
-    --        back="Takaha Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}]
+    --        head="Nyame Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Crepuscular Earring",
+    --        body="Gorney Haubert +1",hands="Mpaca's gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
+    --        back="Takaha Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Mpaca's boots"}]
     --    sets.engaged.Adoulin.Acc = {ammo="Coiste Bodhar",
-    --        head="Yaoyotl Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Crepuscular Earring",
-    --        body="Unkai Domaru +2",hands="Otronif Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
-    --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --        head="Nyame Helm",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Crepuscular Earring",
+    --        body="Unkai Domaru +2",hands="Mpaca's gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
+    --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Mpaca's boots"}
     --    sets.engaged.Adoulin.PDT = {ammo="Coiste Bodhar",
-    --        head="Yaoyotl Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
-    --        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
-    --        back="Iximulew Cape",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --        head="Nyame Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
+    --        body="Mpaca's Doublet",hands="Mpaca's gloves",ring1="Defending Ring",ring2="K'ayres Ring",
+    --        back="Iximulew Cape",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Mpaca's boots"}
     --    sets.engaged.Adoulin.Acc.PDT = {ammo="Honed Tathlum",
-    --        head="Yaoyotl Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
-    --        body="Otronif Harness +1",hands="Otronif Gloves",ring1="Defending Ring",ring2="K'ayres Ring",
-    --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --        head="Nyame Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
+    --        body="Mpaca's Doublet",hands="Mpaca's gloves",ring1="Defending Ring",ring2="K'ayres Ring",
+    --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Mpaca's boots"}
     --    sets.engaged.Adoulin.Reraise = {ammo="Coiste Bodhar",
     --        head="Crepuscular Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
-    --        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
-    --        back="Ik Cape",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --        body="Crepuscular Mail",hands="Mpaca's gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+    --        back="Ik Cape",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Mpaca's boots"}
     --    sets.engaged.Adoulin.Acc.Reraise = {ammo="Coiste Bodhar",
     --        head="Crepuscular Helm",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Crepuscular Earring",
-    --        body="Crepuscular Mail",hands="Otronif Gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
-    --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Otronif Boots +1"}
+    --        body="Crepuscular Mail",hands="Mpaca's gloves",ring1="Beeline Ring",ring2="K'ayres Ring",
+    --        back="Letalis Mantle",waist="Sailfi belt +1",legs="Unkai Haidate +2",feet="Mpaca's boots"}
 
 
     sets.buff.Sekkanoki = { hands = "Unkai Kote +2" }
