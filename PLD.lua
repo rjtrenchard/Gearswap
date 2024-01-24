@@ -83,6 +83,7 @@ function user_unload()
     send_command('unbind !f11')
     send_command('unbind @f10')
     send_command('unbind @f11')
+    unbind_numpad()
 end
 
 -- Define sets and vars used by this job file.
@@ -164,7 +165,7 @@ function init_gear_sets()
         ear2 = "Moonshade Earring",
         body = "Sulevia's Platemail +2",
         hands = "Sulevia's Gauntlets +1",
-        ring1 = "Regal Ring",
+        ring1 = gear.TrustRing,
         ring2 = "Epaminondas's Ring",
         back = "Atheling Mantle",
         waist = "Fotia Belt",
@@ -198,7 +199,7 @@ function init_gear_sets()
     sets.precast.WS['Sanguine Blade'] = {
         ammo = "Coiste Bodhar",
         head = "Pixie Hairpin +1",
-        neck = "Baetyl Pendant",
+        neck = "Sibyl Scarf",
         ear1 = "Friomisi Earring",
         ear2 = "Crematio Earring",
         body = "Sulevia's Platemail +2",
@@ -490,7 +491,7 @@ function init_gear_sets()
         body = "Sakpata's Breastplate",
         hands = "Sakpata's Gauntlets",
         ring1 = "Petrov Ring",
-        ring2 = "Lehko's Ring",
+        ring2 = gear.right_moonlight,
         back = "Atheling Mantle",
         waist = "Sailfi belt +1",
         legs = "Cuisses",

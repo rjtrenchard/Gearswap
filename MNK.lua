@@ -28,6 +28,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc')
@@ -39,6 +40,10 @@ function user_setup()
     update_melee_groups()
 
     select_default_macro_book()
+end
+
+function user_unload()
+    unbind_numpad()
 end
 
 -- Define sets and vars used by this job file.
@@ -136,7 +141,7 @@ function init_gear_sets()
         body = "Mpaca's Doublet",
         hands = "Mpaca's Gloves",
         ring2 = "Epaminondas's Ring",
-        ring1 = "Regal Ring",
+        ring1 = gear.TrustRing,
         back = "Sacro Mantle",
         waist = "Fotia Belt",
         legs = "Mpaca's Hose",
@@ -268,7 +273,7 @@ function init_gear_sets()
         ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Eabani Earring",
+        ear1 = "Infused Earring",
         ear2 = "Odnowa Earring +1",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
@@ -284,7 +289,7 @@ function init_gear_sets()
         ammo = "Staunch Tathlum +1",
         head = "Shaded Specatles",
         neck = "Smithy's Torque",
-        ear1 = "Eabani Earring",
+        ear1 = "Infused Earring",
         ear2 = "Odnowa Earring +1",
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
@@ -301,7 +306,7 @@ function init_gear_sets()
         head = "Malignance Chapeau",
         neck = "Combatant's Torque",
         ear1 = "Eabani Earring",
-        ear2 = "Eabani Earring",
+        ear2 = "Infused Earring",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Sheltered Ring",
@@ -337,9 +342,9 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
-        ring2 = "Moonlight Ring",
+        ring2 = gear.right_moonlight,
         back = "Moonlight Cape",
-        waist = "Black Belt",
+        waist = "Platinum Moogle belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }

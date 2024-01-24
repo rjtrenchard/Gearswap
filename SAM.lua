@@ -77,6 +77,7 @@ end
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
     windower.unregister_event(ticker)
+    unbind_numpad()
     send_command('unbind ^`')
     send_command('unbind !-')
 end
@@ -106,7 +107,7 @@ function init_gear_sets()
         ear2 = "Enchanter's Earring +1",
         body = "Sacro Breastplate",
         hands = "Leyline Gloves",
-        ring1 = "Rahab Ring",
+        ring1 = "Medada's Ring",
         ring2 = "Weatherspoon Ring +1",
         legs = "Limbo Trousers"
     }
@@ -316,7 +317,7 @@ function init_gear_sets()
         ear2 = "Schere Earring",
         body = "Mpaca's doublet",
         hands = "Mpaca's gloves",
-        ring1 = "Lehko's Ring",
+        ring1 = gear.left_chirich,
         ring2 = "Niqmaddu Ring",
         back = "Atheling Mantle",
         waist = "Sailfi Belt +1",
@@ -331,7 +332,7 @@ function init_gear_sets()
         ear2 = "Crepuscular Earring",
         body = "Gorney Haubert +1",
         hands = "Mpaca's gloves",
-        ring1 = "Ilabrat Ring",
+        ring1 = gear.left_chirich,
         ring2 = "Niqmaddu Ring",
         back = "Letalis Mantle",
         waist = "Sailfi belt +1",

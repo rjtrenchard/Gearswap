@@ -27,8 +27,10 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S { 201, 202, 203, 205, 207 }
 
-    include('helper_functions')
     include('Mote-TreasureHunter')
+    include('Augments.lua')
+    include('helper_functions.lua')
+    include('default_sets.lua')
 
     blue_magic_maps = {}
 
@@ -208,7 +210,7 @@ function user_setup()
     include('augments.lua')
     include('default_sets.lua')
 
-    state.OffenseMode:options('Normal', 'Acc', 'PDT', 'Learning')
+    state.OffenseMode:options('Normal', 'Acc', 'PDT', 'Crit')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'PDT', 'Refresh', 'Regen')
@@ -235,7 +237,6 @@ function user_setup()
     send_command('bind ^- gs c cycle DoomMode')
     send_command('bind numpad0 gs equip sets.resist.death')
 
-    initRecast()
     update_combat_form()
     select_default_macro_book()
 end
@@ -311,15 +312,17 @@ function init_gear_sets()
     }
 
     sets.SIRD = {
-        ammo = "Staunch Tathlum +1",
-        head = gear.taeon.SIRD.head,
-        neck = "Loricate Torque +1",
-        ear1 = "Hasalz Earring",
-        ear2 = "Magnetic Earring",
-        hands = "Rawhide Gloves",
-        ring1 = "Evanescence Ring",
-        legs = "Carmine Cuisses +1",
-        feet = "Amalric Nails +1"
+        ammo = "Staunch Tathlum +1", -- 11
+        head = gear.taeon.SIRD.head, -- 10
+        neck = "Loricate Torque +1", -- 5
+        ear1 = "Hasalz Earring",     -- 5
+        ear2 = "Magnetic Earring",   -- 8
+        hands = "Amalric Gages +1",  -- 11
+        ring1 = "Evanescence Ring",  -- 5
+        ring2 = gear.dark_ring.SIRD, -- 4
+        waist = "Emphatikos Rope",   -- 12
+        legs = "Carmine Cuisses +1", -- 20
+        feet = "Amalric Nails +1"    -- 16
     }
 
     sets.TreasureHunter = {
@@ -332,8 +335,13 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA['Azure Lore'] = { hands = "Mirage Bazubands +2" }
 
-    sets.precast.RA = { range = "Albin Bane" }
-    sets.midcast.RA = sets.precast.RA
+    sets.precast.RA = {
+        range = "Albin Bane",
+        body = "Volte Harness",
+        ring1 = "Crepuscular Ring",
+        legs = "Adhemar Kecks +1",
+    }
+    sets.midcast.RA = { range = "Albin Bane" }
 
 
     -- Waltz set (chr and vit)
@@ -355,7 +363,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {
-        ammo = "Impatiens",
+        ammo = "Sapience Orb",
         head = "Carmine Mask +1",
         neck = "Orunmila's Torque",
         ear1 = "Enchanter's Earring +1",
@@ -369,14 +377,14 @@ function init_gear_sets()
         feet = "Carmine Greaves +1"
     }
     sets.precast.FC.Weapon = {
-        main = "Sakpata's Sword",
-        sub = "Colada",
-        ammo = "Impatiens",
-        ring1 = "Lebeche Ring",
-        back = "Perimede cape"
+        -- main = "Sakpata's Sword",
+        -- sub = "Colada",
+        -- ammo = "Impatiens",
+        -- ring1 = "Lebeche Ring",
+        -- back = "Perimede cape"
     }
     -- sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, { body = "Mavi Mintan +2" })
-    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Seigel Sash" })
+    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
 
     -- Weaponskill sets
@@ -390,7 +398,7 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Shukuyu Ring",
+        ring2 = "Sroda Ring",
         back = "Cornflower Cape",
         waist = "Fotia Belt",
         legs = "Nyame Flanchard",
@@ -438,7 +446,7 @@ function init_gear_sets()
         body = "Gleti's Cuirass",
         hands = "Gleti's Gauntlets",
         ring2 = "Begrudging Ring",
-        ring1 = "Lehko's Ring",
+        ring1 = "Apate Ring",
         legs = "Gleti's Breeches",
         feet = "Gleti's Boots"
     })
@@ -490,7 +498,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Malignance Tabard",
         hands = "Adhemar Gloves +1",
-        ring1 = "Lehko's Ring",
+        ring1 = gear.left_chirich,
         ring2 = "Epona's Ring",
         back = "Cornflower Cape",
         waist = "Sailfi Belt +1",
@@ -506,7 +514,7 @@ function init_gear_sets()
         ear2 = "Crepuscular Earring",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
-        ring1 = "Chirich Ring +1",
+        ring1 = gear.left_chirich,
         ring2 = "Varar Ring +1",
         back = "Cornflower Cape",
         waist = "Sailfi Belt +1",
@@ -552,7 +560,7 @@ function init_gear_sets()
         ear2 = "Regal Earring",
         body = "Cohort Cloak +1",
         hands = "Amalric Gages +1",
-        ring1 = gear.left_stikini,
+        ring1 = "Medada's ring",
         ring2 = "Metamorph Ring +1",
         back = "Aurist's Cape +1",
         waist = gear.ElementalObi,
@@ -576,10 +584,10 @@ function init_gear_sets()
     })
 
     sets.midcast['Blue Magic'].MagicalDarkness = set_combine(sets.midcast['Blue Magic'].Magical,
-        { head = "Pixie Hairpin +1", body = "Amalric Doublet +1", ring1 = "Archon Ring" })
+        { head = "Pixie Hairpin +1", body = "Amalric Doublet +1", ring2 = "Archon Ring" })
 
     sets.midcast['Blue Magic'].MagicalLight = set_combine(sets.midcast['Blue Magic'].Magical,
-        { ring1 = "Weatherspoon Ring +1" })
+        { ring2 = "Weatherspoon Ring +1" })
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
         ammo = "Pemphredo Tathlum",
@@ -589,8 +597,8 @@ function init_gear_sets()
         ear2 = "Dignitary's Earring",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
-        ring1 = "Metamorph Ring +1",
-        ring2 = gear.right_stikini,
+        ring2 = "Metamorph Ring +1",
+        ring1 = "Medada's Ring",
         back = "Aurist's Cape +1",
         waist = "Acuity Belt +1",
         legs = "Malignance Tights",
@@ -664,7 +672,7 @@ function init_gear_sets()
         head = "Luhlaza Keffiyeh",
         body = "Assimilator's Jubbah +1",
         ring1 = gear.left_stikini,
-        ring2 = "Stiikini Ring +1",
+        ring2 = gear.right_stikini,
         back = "Cornflower Cape",
         legs = "Mavi Tayt +2",
         feet = "Luhlaza Charuqs"
@@ -708,8 +716,8 @@ function init_gear_sets()
             feet = gear.herculean.phalanx.feet,
         })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration,
-        { waist = "Emphatikos Rope", legs = "Shedir Seraweels", })
+    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration, sets.SIRD,
+        { body = gear.taeon.SIRD.body, waist = "Emphatikos Rope", legs = "Shedir Seraweels", })
 
 
 
@@ -773,13 +781,13 @@ function init_gear_sets()
         head = "Nyame Helm",
         neck = "Bathy Choker +1",
         ear1 = "Etiolation Earring",
-        ear2 = "Eabani Earring",
-        body = "Nyame Mail",
+        ear2 = "Infused Earring",
+        body = "Jhakri Robe +2",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = "Gelatinous Ring +1",
+        ring2 = gear.right_stikini,
         back = "Moonlight Cape",
-        waist = "Flume Belt +1",
+        waist = "Fucho-no-obi",
         legs = "Carmine Cuisses +1",
         feet = "Nyame Sollerets"
     }
@@ -788,9 +796,9 @@ function init_gear_sets()
         ammo = "Brigantia Pebble",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Etiolation Earring",
-        ear2 = "Eabani Earring",
-        body = "Nyame Mail",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa earring +1",
+        body = "Adamantite Armor",
         hands = "Nyame Gauntlets",
         ring2 = "Paguroidea Ring",
         ring1 = "Gelatinous Ring +1",
@@ -801,15 +809,18 @@ function init_gear_sets()
     }
 
     sets.idle.Regen = set_combine(sets.idle, {
-        neck = "Bathy Choker +1", ring1 = "Paguroidea Ring", ring2 = "Chirich Ring +1"
+        neck = "Bathy Choker +1",
+        ear2 = "Infused Earring",
+        ring1 = "Paguroidea Ring",
+        ring2 = gear.right_chirich
     })
 
     sets.idle.Town = {
         ammo = "Staunch Tathlum +1",
         head = "Shaded Spectacles",
         neck = "Smithy's Torque",
-        ear1 = "Etiolation Earring",
-        ear2 = "Eabani Earring",
+        ear1 = "Infused Earring",
+        ear2 = "Etiolation Earring",
         body = "Blksmith. Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
@@ -839,7 +850,7 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
         ear2 = "Odnowa Earring +1",
-        body = "Nyame Mail",
+        body = "Adamantite Armor",
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
         ring2 = "Paguroidea Ring",
@@ -868,9 +879,9 @@ function init_gear_sets()
         neck = "Combatant's Torque",
         ear1 = "Brutal Earring",
         ear2 = "Telos Earring",
-        body = "Malignance Tabard",
+        body = "Gleti's Cuirass",
         hands = "Adhemar Wristbands +1",
-        ring1 = "Lehko's Ring",
+        ring1 = gear.left_chirich,
         ring2 = "Epona's Ring",
         back = "Cornflower Cape",
         waist = "Sailfi Belt +1",
@@ -886,7 +897,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
-        ring1 = "Lehko's Ring",
+        ring1 = gear.left_chirich,
         ring2 = "Epona's Ring",
         back = "Cornflower Cape",
         waist = "Sailfi Belt +1",
@@ -909,6 +920,17 @@ function init_gear_sets()
         legs = "Malignance Tights",
         feet = "Malignance Boots"
     }
+
+    sets.engaged.Crit = set_combine(sets.engaged, {
+        head = "Gleti's Mask",
+        ear1 = "Odr Earring",
+        body = "Gleti's Cuirass",
+        hands = "Gleti's Gauntlets",
+        ring1 = "Hetairoi Ring",
+        ring2 = "Begrudging Ring",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
+    })
 
 
     sets.engaged.Refresh = set_combine(sets.engaged, { body = "Jhakri Robe +2" })
@@ -955,12 +977,15 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
--- function filtered_action(s)
---     windower.add_to_chat("Filtered Action: " .. s)
--- end
+function filtered_action(spell)
+    -- remap phalanx to barrier tusk if it is not available
+    if spell.english == "Phalanx" then
+        cancel_spell()
+        send_command("input /ma \"Barrier Tusk\" <me>")
+    end
+end
 
 function job_pretarget(spell, action, spellMap, eventArgs)
-    if spell.type ~= 'WeaponSkill' then setRecast() end
     if unbridled_spells:contains(spell.english) and (not (state.Buff['SP Ability II'] or
             state.Buff['Unbridled Learning']) or state.Buff['Unbridled Wisdom']) then
         eventArgs.cancel = true
@@ -1000,6 +1025,10 @@ end
 --         eventArgs.cancel = true
 --     end
 -- end
+
+function job_precast(spell, action, spellMap, eventArgs)
+    if spell.type ~= 'WeaponSkill' then set_recast() end
+end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
@@ -1059,10 +1088,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_aftercast(spell, action, spellMap, eventArgs)
-    if hasRecast() then
-        equip(recallRecast())
-        resetRecast()
-    end
+    equip_recast()
 
     if buffactive.doom then
         if state.DoomMode.value == 'Cursna' then
@@ -1073,44 +1099,6 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
     end
 
     eventArgs.handled = false
-end
-
--- initializes weapon recast handler
-function initRecast()
-    sets._Recast = {}
-    info._RecastFlag = false
-end
-
--- sets the Recast weapon set to what is currently equipped
--- affected slots: main sub ranged ammo
-function setRecast()
-    if not hasRecast() then
-        sets._Recast.main = player.equipment.main
-        sets._Recast.sub = player.equipment.sub
-        sets._Recast.range = player.equipment.range
-        sets._Recast.ammo = player.equipment.ammo
-    end
-    info._RecastFlag = sets._Recast.main or sets._Recast.sub or sets._Recast.range or sets._Recast.ammo
-end
-
--- resets the Recast weapon set to nil
-function resetRecast()
-    sets._Recast = { main = nil, sub = nil, range = nil, ammo = nil }
-    info._RecastFlag = false
-end
-
--- returns the Recast weapon set
-function recallRecast()
-    return sets._Recast
-end
-
--- returns true if the recast set has been used
-function hasRecast()
-    return info._RecastFlag
-end
-
-function check_DW()
-    return T(windower.ffxi.get_abilities().job_traits):contains(18)
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1251,7 +1239,7 @@ end
 
 function update_combat_form()
     -- Check for H2H or single-wielding
-    if check_DW() then
+    if can_DW() then
         calculate_haste()
     else
         classes.CustomMeleeGroups:clear()

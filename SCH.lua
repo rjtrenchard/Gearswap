@@ -52,14 +52,39 @@ function user_setup()
     include('helper_functions.lua')
     state.OffenseMode:options('None', 'Normal')
     state.HybridMode:options('Normal')
-    state.CastingMode:options('Normal', 'Resistant', 'Low')
+    state.CastingMode:options('Normal', 'Low')
     state.RangedMode:options('None')
     state.IdleMode:options('Normal', 'PDT', 'Refresh')
 
 
-    state.MagicBurst = M { ['description'] = "Magic Burst", "Normal", "Once", "Always" }
+    state.MagicBurst = M { ['description'] = "Magic Burst", "Normal", "Always" }
     state.SkillchainMode = M { ['description'] = 'Skillchain', 'Normal', 'Skillchain' }
     state.RegenMode = M { ['description'] = 'Regen', 'Duration', 'Potency' }
+    state.HelixMode = M { ['description'] = 'Helices', 'Normal', 'Helix' } -- if helix is set, next standard elemental magic will be
+
+    info.helices = T {
+        ['None'] = nil,
+        ['Light'] = "Luminohelix II",
+        ['Dark'] = "Noctohelix II",
+        ['Fire'] = "Pyrohelix II",
+        ['Earth'] = "Geohelix II",
+        ['Water'] = "Hydrohelix II",
+        ['Wind'] = "Anemohelix II",
+        ['Ice'] = "Cryohelix II",
+        ['Lightning'] = "Ionohelix II"
+    }
+
+    info.helix_base = T {
+        ['None'] = nil,
+        ['Banish'] = "Luminohelix",
+        ['Comet'] = "Noctohelix",
+        ['Fire'] = "Pyrohelix",
+        ['Stone'] = "Geohelix",
+        ['Water'] = "Hydrohelix",
+        ['Aero'] = "Anemohelix",
+        ['Blizzard'] = "Cryohelix",
+        ['Thunder'] = "Ionohelix"
+    }
 
     info.low_nukes = S { "Stone", "Water", "Aero", "Fire", "Blizzard", "Thunder" }
     info.mid_nukes = S { "Stone II", "Water II", "Aero II", "Fire II", "Blizzard II", "Thunder II",
@@ -68,7 +93,6 @@ function user_setup()
     info.high_nukes = S { "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
 
     send_command('bind ` input /ja "Sublimation" <me>')
-
 
     -- send_command('bind numpad1 input /ma Stun <t>')
     send_command('bind !` gs c cycle MagicBurst')
@@ -86,9 +110,13 @@ function user_setup()
 
     send_command('bind numpad4 input /ja "Accession" <me>')
     send_command('bind numpad5 input /ja "Immanence" <me>')
-    send_command('bind ^numpad5 gs c cycle SkillchainMode')
+    send_command('bind !numpad5 input /ja "Immanence" <me>; gs c helix_on_dark_arts true')
+    send_command('bind ^numpad5 input /ja "Immanence" <me>; gs c helix_on_dark_arts')
+    -- send_command('bind ^numpad5 gs c cycle SkillchainMode')
     send_command('bind numpad6 input /ja "Ebullience" <me>')
-    send_command('bind ^numpad6 gs c set MagicBurst Once')
+    send_command('bind !numpad6 input /ja "Ebullience" <me>; gs c helix_on_dark_arts true')
+    send_command('bind ^numpad6 input /ja "Ebullience" <me>; gs c helix_on_dark_arts')
+    send_command('bind ~numpad6 gs c cycle HelixMode')
 
     send_command('bind numpad7 gs equip sets.weapons.Malignance')
     send_command('bind ^numpad7 gs equip sets.weapons.Malignance.DD')
@@ -98,12 +126,11 @@ function user_setup()
     send_command('bind ^numpad9 gs equip sets.weapons.Musa.DD')
     send_command('bind !numpad9 gs equip sets.weapons.Mpaca')
 
-    init_helper_functions()
     select_default_macro_book()
 end
 
 function user_unload()
-    send_command('unbind ^`')
+    unbind_numpad()
 end
 
 -- Define sets and vars used by this job file.
@@ -118,10 +145,15 @@ function init_gear_sets()
         augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'INT+10', '"Mag.Atk.Bns."+10', }
     }
 
+    gear.idle_cape = {
+        name = "Lugh's Cape",
+        augments = { 'HP+60', 'Eva.+20 /Mag. Eva.+20', 'Phys. dmg. taken-10%' }
+    }
+
     -- Misc sets
     sets.weapons = {}
-    sets.weapons.Malignance = { main = "Malignance Pole", sub = "Oneiros Grip" }
-    sets.weapons.Malignance.DD = { main = "Malignance Pole", sub = "Khonsu" }
+    -- sets.weapons.Malignance = { main = "Malignance Pole", sub = "Oneiros Grip" }
+    -- sets.weapons.Malignance.DD = { main = "Malignance Pole", sub = "Khonsu" }
     sets.weapons.Xoanon = { main = "Xoanon", sub = "Oneiros Grip" }
     sets.weapons.Xoanon.DD = { main = "Xoanon", sub = "Khonsu" }
     sets.weapons.Musa = { main = "Musa", sub = "Oneiros Grip" }
@@ -144,12 +176,19 @@ function init_gear_sets()
         -- feet = "Amalric Nails +1", -- 15
     }
 
+    sets.Empyrean = {
+        head = "Arbatel Bonnet +2",
+        body = "Arbatel Gown +1",
+        hands = "Arbatel Bracers +2",
+        legs = "Arbatel Pants +2",
+        feet = "Arbatel Loafers +2"
+    }
 
     -- Precast Sets
 
     -- Precast sets to enhance JAs
 
-    sets.precast.JA['Tabula Rasa'] = { legs = "Pedagogy Pants +2" }
+    sets.precast.JA['Tabula Rasa'] = { legs = "Pedagogy Pants +3" }
 
 
     -- Weaponskill precast sets
@@ -228,13 +267,14 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {
-        main = gear.grioavolr.fc,       -- 11
+        main = "Musa",                -- 11
         sub = "Khonsu",
-        ammo = "Impatiens",             -- +2QC
-        head = gear.merlinic.fc.head,   -- 15
-        neck = "Orunmila's Torque",     -- 5
-        ear1 = "Malignance Earring",    -- 4
-        ear2 = "Loquacious Earring",    -- 2
+        ammo = "Impatiens",           -- +2QC
+        head = gear.merlinic.fc.head, -- 15
+        neck = "Orunmila's Torque",   -- 5
+        ear1 = "Malignance Earring",  -- 4
+        ear2 = "Etiolation Earring",
+        -- ear2 = "Loquacious Earring",    -- 2
         body = gear.merlinic.fc.body,   -- 13
         hands = "Gendewitha Gages +1",  -- 7
         ring1 = "Weatherspoon Ring +1", -- 6
@@ -242,43 +282,55 @@ function init_gear_sets()
         back = { name = "Moonlight Cape", priority = 10 },
         waist = "Embla Sash",        -- 5
         legs = "Kaykaus Tights +1",  -- 7
-        feet = "Pedagogy Loafers +3" -- 7
+        feet = "Pedagogy Loafers +3" -- 8
     }
 
-    sets.precast.FC.WithArts = set_combine(sets.precast.FC, { legs = "Nyame Flanchard" })       -- need 70 FC
-    sets.precast.FC.AgainstArts = set_combine(sets.precast.FC, { back = "Fi Follet Cape +1", }) -- need 90 FC
+    sets.precast.FC.WithArts = set_combine(sets.precast.FC,
+        { head = "Pedagogy Mortarboard +3", ring2 = "Medada's Ring", feet = "Academic's Loafers +3" }) -- need 70 FC
+    sets.precast.FC.AgainstArts = set_combine(sets.precast.FC,
+        { ear2 = "Loquacious Earring", ring2 = "Medada's Ring", back = "Fi Follet Cape +1", })         -- need 90 FC
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, { head = empty, body = "Crepuscular Cloak" })
+    sets.precast.FC.Impact = set_combine(sets.precast.FC,
+        { head = empty, body = "Crepuscular Cloak", ring2 = "Medada's Ring", back = "Fi Follet Cape +1" })
     sets.precast.Impact = sets.precast.FC.Impact
 
     sets.precast.FC.SubRDM = {
         -- +15 FC
-        main = gear.grioavolr.fc,
+        main = "Musa",               -- 11
         ammo = "Impatiens",
-        neck = "Orunmila's Torque",
-        ear1 = "Malignance Earring",
-        ear2 = "Loquacious Earring",
-        body = gear.merlinic.fc.body,
-        hands = "Gendewitha Gages +1",
-        ring1 = "Weatherspoon Ring +1",
+        neck = "Orunmila's Torque",  -- 5
+        ear1 = "Malignance Earring", -- 4
+        -- ear2 = "Loquacious Earring", -- 2
+        ear2 = "Etiolation Earring",
+        body = gear.merlinic.fc.body,   -- 13
+        hands = "Gendewitha Gages +1",  -- 7
+        ring1 = "Weatherspoon Ring +1", -- 6
         ring2 = "Lebeche Ring",
         back = "Perimede Cape",
-        waist = "Embla Sash",
-        legs = "Kaykaus Tights +1",
-        feet = gear.merlinic.fc.feet
+        waist = "Embla Sash",        -- 5
+        legs = "Kaykaus Tights +1",  -- 7
+        feet = "Pedagogy Loafers +3" -- 8
     }
-    sets.precast.FC.SubRDM.WithArts = set_combine(sets.precast.FC.SubRDM, { head = "Pedagogy Mortarboard +2" })
-    sets.precast.FC.SubRDM.AgainstArts = set_combine(sets.precast.FC.SubRDM, { head = gear.merlinic.fc.head })
-    sets.precast.FC.SubRDM['Enhancing Magic'] = set_combine(sets.precast.FC.SubRDM, { waist = "Seigel Sash" })
-    sets.precast.FC.SubRDM['Enhancing Magic'].WithArts = { waist = "Seigel Sash", ear2 = "Etiolation Earring" }
-    sets.precast.FC.SubRDM['Enhancing Magic'].AgainstArts = { waist = "Seigel Sash" }
+    sets.precast.FC.SubRDM.WithArts = set_combine(sets.precast.FC.SubRDM,
+        { head = "Pedagogy Mortarboard +3", feet = "Academic's Loafers +3" })
+    sets.precast.FC.SubRDM.AgainstArts = set_combine(sets.precast.FC.SubRDM,
+        { head = gear.merlinic.fc.head, ring2 = "Medada's Ring", })
+    sets.precast.FC.SubRDM['Enhancing Magic'] = set_combine(sets.precast.FC.SubRDM, { waist = "Siegel Sash" })
+    sets.precast.FC.SubRDM['Enhancing Magic'].WithArts = {
+        head = "Pedagogy Mortarboard +3",
+        ear2 = "Etiolation Earring",
+        waist = "Siegel Sash",
+        feet = "Academic's Loafers +3"
+    }
+    sets.precast.FC.SubRDM['Enhancing Magic'].AgainstArts = { waist = "Siegel Sash" }
+
     sets.precast.FC.SubRDM['Impact'] = sets.precast.FC.Impact
 
     sets.precast.FC.SubRDM.NoQC = {
         -- +15 FC
-        main = gear.grioavolr.fc,
+        main = "Musa",
         neck = "Orunmila's Torque",
         ear1 = "Malignance Earring",
         ear2 = "Loquacious Earring",
@@ -292,7 +344,7 @@ function init_gear_sets()
     }
 
     sets.precast.FC.NoQC = {
-        main = gear.grioavolr.fc,
+        main = "Musa",
         head = gear.merlinic.fc.head,
         neck = "Orunmila's Torque",
         ear1 = "Malignance Earring",
@@ -325,17 +377,17 @@ function init_gear_sets()
     }
 
     sets.midcast.FastRecast.NoDMG = {
-        main = "Malignance Pole",
-        sub = "Khonsu",
+        main = empty,
+        sub = empty,
         ammo = "Sapience Orb",
         head = empty,
         neck = "Orunmila's Torque",
         ear1 = "Loquacious Earring",
         ear2 = "Enchanter's Earring",
         body = empty,
-        hands = "Gazu Bracelets +1",
-        ring1 = "Kishar Ring",
-        ring2 = "Lehko's Ring",
+        hands = empty,
+        ring1 = empty,
+        ring2 = empty,
         back = "Fi Follet Cape +1",
         waist = "Embla Sash",
         legs = empty,
@@ -381,7 +433,7 @@ function init_gear_sets()
         main = "Musa",
         sub = "Khonsu",
         ammo = "Savant's Treatise",
-        head = "Arbatel Bonnet +1",
+        head = "Arbatel Bonnet +2",
         neck = "Incanter's Torque",
         ear1 = "Andoaa Earring",
         ear2 = "Mimir Earring",
@@ -399,7 +451,7 @@ function init_gear_sets()
         main = "Musa",
         sub = "Khonsu",
         head = gear.telchine.enh_dur.head,
-        body = gear.telchine.enh_dur.body,
+        body = "Pedagogy Gown +3",
         hands = gear.telchine.enh_dur.hands,
         ring2 = "Mephitas's Ring +1",
         waist = "Embla Sash",
@@ -414,7 +466,7 @@ function init_gear_sets()
     sets.midcast.RegenPotency = set_combine(sets.midcast['Enhancing Magic'].Duration, {
         main = "Musa",
         sub = "Khonsu",
-        head = "Arbatel Bonnet +1",
+        head = "Arbatel Bonnet +2",
         body = gear.telchine.regen.body,
         hands = gear.telchine.regen.hands,
         waist = "Embla Sash",
@@ -425,7 +477,7 @@ function init_gear_sets()
     sets.midcast.RegenDuration = set_combine(sets.midcast['Enhancing Magic'].Duration, {
         main = "Musa",
         sub = "Khonsu",
-        head = "Arbatel Bonnet +1",
+        head = "Arbatel Bonnet +2",
         body = "Pedagogy Gown +3",
         hands = gear.telchine.enh_dur.hands,
         waist = "Embla Sash",
@@ -499,8 +551,8 @@ function init_gear_sets()
         ring2 = "Metamorph Ring +1",
         back = "Aurist's Cape +1",
         waist = "Obstinate Sash",
-        legs = "Agwu's Slops",
-        feet = "Bunzi's Sabots"
+        legs = "Arbatel Pants +2",
+        feet = "Arbatel Loafers +2"
     }
 
     -- Custom spell classes
@@ -517,8 +569,8 @@ function init_gear_sets()
         ring2 = "Metamorph Ring +1",
         back = "Aurist's Cape +1",
         waist = "Obstinate Sash",
-        legs = gear.chironic.enfeebling.legs,
-        feet = "Bunzi's Sabots"
+        legs = "Arbatel Pants +2",
+        feet = "Arbatel Loafers +2"
     }
 
     sets.midcast.Dia = set_combine(sets.midcast['Enfeebling Magic'], {
@@ -542,7 +594,7 @@ function init_gear_sets()
         ring1 = gear.left_stikini,
         ring2 = "Evanescence Ring",
         waist = gear.ElementalObi,
-        legs = "Pedagogy Pants +2",
+        legs = "Pedagogy Pants +3",
     }
 
     sets.midcast.Kaustra = {
@@ -555,12 +607,12 @@ function init_gear_sets()
         ear2 = "Regal Earring",
         body = "Agwu's Robe",
         hands = "Agwu's Gages",
-        ring1 = "Freke Ring",
-        ring2 = "Metamorph Ring +1",
+        ring2 = "Medada's Ring",
+        ring1 = "Metamorph Ring +1",
         back = gear.int_cape,
-        waist = "Hachirin-no-obi",
+        waist = gear.ElementalObi,
         legs = "Agwu's Slops",
-        feet = "Amalric Nails +1"
+        feet = "Arbatel Loafers +2"
     }
 
     sets.midcast.Drain = {
@@ -577,7 +629,7 @@ function init_gear_sets()
         ring2 = "Archon Ring",
         back = "Merciful Cape",
         waist = gear.DrainWaist,
-        legs = "Pedagogy Pants +2",
+        legs = "Pedagogy Pants +3",
         feet = "Academic's Loafers +1"
     }
 
@@ -594,10 +646,10 @@ function init_gear_sets()
         body = "Agwu's Robe",
         hands = "Gendewitha Gages +1",
         ring1 = "Evanescence Ring",
-        ring2 = gear.right_stikini,
+        ring2 = "Medada's Ring",
         back = "Aurist's Cape +1",
         waist = "Witful Belt",
-        legs = "Pedagogy Pants +2",
+        legs = "Pedagogy Pants +3",
         feet = "Academic's Loafers +1"
     }
 
@@ -609,46 +661,65 @@ function init_gear_sets()
         main = "Bunzi's Rod",
         sub = "Ammurapi Shield",
         ammo = "Ghastly Tathlum +1",
-        head = "Cath Palug Crown",
+        head = "Arbatel Bonnet +2",
         neck = "Sibyl Scarf",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
-        body = "Amalric Doublet +1",
-        hands = "Amalric Gages +1",
+        body = "Arbatel Gown +2",
+        hands = "Arbatel Bracers +2",
         ring1 = "Freke Ring",
-        ring2 = "Metamorph Ring +1",
+        ring2 = "Medada's Ring",
         back = gear.int_cape,
         waist = gear.ElementalObi,
-        legs = "Amalric Slops +1",
-        feet = "Amalric Nails +1"
+        legs = "Arbatel Pants +2",
+        feet = "Arbatel Loafers +2"
     }
 
     sets.midcast['Elemental Magic'].Resistant = {
         main = "Contemplator +1",
         sub = "Khonsu",
         ammo = "Pemphredo Tathlum",
-        head = "Cath Palug Crown",
+        head = "Arbatel Bonnet +2",
         neck = "Argute Stole +2",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
-        body = "Amalric Doublet +1",
-        hands = "Amalric Gages +1",
-        ring1 = "Freke Ring",
-        ring2 = "Metamorph Ring +1",
+        body = "Arbatel Gown +2",
+        hands = "Arbetel Bracers +2",
+        ring1 = "Metamorph Ring +1",
+        ring2 = "Medada's Ring",
         back = "Aurist's Cape +1",
         waist = gear.ElementalObi,
-        legs = "Amalric Slops +1",
-        feet = "Amalric Nails +1"
+        legs = "Arbatel Pants +2",
+        feet = "Arbatel Loafers +2"
+    }
+
+    sets.midcast['Elemental Magic'].Low = {
+        main = empty,
+        sub = empty,
+        ammo = empty,
+        head = empty,
+        neck = empty,
+        ear1 = "Loquacious earring",
+        ear2 = "Enchanter's Earring +1",
+        body = empty,
+        hands = empty,
+        ring1 = empty,
+        ring2 = empty,
+        back = empty,
+        waist = empty,
+        legs = empty,
+        feet = empty
     }
 
     sets.midcast.MagicBurst = {
-        head = "Pedagogy Mortarboard +2",
+        head = "Pedagogy Mortarboard +3",
         neck = "Argute Stole +2",
         body = "Agwu's Robe",
-        hands = "Agwu's Gages",
+        hands = "Arbatel Bracers +2",
         ring2 = "Mujin Band",
         legs = "Agwu's Slops",
-        feet = "Agwu's Pigaches"
+        feet = "Arbatel Loafers +2"
+
     }
 
     sets.midcast.Helix = set_combine(sets.midcast['Elemental Magic'],
@@ -720,11 +791,11 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
         ear2 = "Lugalbanda Earring",
-        body = "Shamash Robe",
+        body = "Arbatel Gown +2",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
-        back = "Moonlight Cape",
+        back = gear.idle_cape,
         waist = "Platinum Moogle Belt",
         legs = "Nyame Flanchard",
         feet = "Crier's Gaiters"
@@ -752,13 +823,13 @@ function init_gear_sets()
         ammo = "Homiliary",
         head = "Befouled Crown",
         neck = "Sibyl Scarf",
-        body = "Shamash Robe",
+        body = "Arbatel Gown +2",
         hands = gear.chironic.refresh.hands,
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
-        feet = gear.chironic.refresh.feet
+        feet = "Crier's Gaiters"
     }
 
     sets.idle.Field.Stun = {
@@ -769,9 +840,9 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
-        body = "Shamash Robe",
+        body = "Arbatel Gown +2",
         hands = "Gendewitha Gages +1",
-        ring1 = "Rahab Ring",
+        ring1 = "Medada's Ring",
         ring2 = gear.right_stikini,
         back = "Fi Follet Cape +1",
         waist = "Cornelia's Belt",
@@ -780,14 +851,14 @@ function init_gear_sets()
     }
 
     sets.idle.Weak = {
-        main = "Malignance Pole",
-        sub = "Khonsu",
+        -- main = "Malignance Pole",
+        -- sub = "Khonsu",
         ammo = "Homiliary",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
         ear2 = "Loquacious Earring",
-        body = "Nyame Mail",
+        body = "Arbatel Gown +2",
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
         ring2 = "Paguroidea Ring",
@@ -800,8 +871,8 @@ function init_gear_sets()
     -- Defense sets
 
     sets.defense.PDT = {
-        main = "Malignance Pole",
-        sub = "Enki Strap",
+        -- main = "Malignance Pole",
+        -- sub = "Enki Strap",
         ammo = "Sapience Orb",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
@@ -818,8 +889,8 @@ function init_gear_sets()
     }
 
     sets.defense.MDT = {
-        main = "Malignance Pole",
-        sub = "Enki Strap",
+        -- main = "Malignance Pole",
+        -- sub = "Enki Strap",
         ammo = "Sapience Orb",
         head = "Agwu's Cap",
         neck = "Loricate Torque +1",
@@ -856,8 +927,8 @@ function init_gear_sets()
         ear2 = "Crepuscular Earring",
         body = "Nyame Mail",
         hands = "Gazu Bracelets +1",
-        ring1 = "Chirich Ring +1",
-        ring2 = "Lehko's Ring",
+        ring1 = gear.left_chirich,
+        ring2 = gear.right_chirich,
         waist = "Windbuffet Belt +1",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
@@ -866,18 +937,18 @@ function init_gear_sets()
 
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-    sets.buff['Ebullience'] = { head = "Arbatel Bonnet +1" }
-    sets.buff['Rapture'] = { head = "Arbatel Bonnet +1" }
+    sets.buff['Ebullience'] = { head = "Arbatel Bonnet +2" }
+    sets.buff['Rapture'] = { head = "Arbatel Bonnet +2" }
     sets.buff['Perpetuance'] = { hands = "Arbatel Bracers +2" }
     sets.buff['Immanence'] = { hands = "Arbatel Bracers +2" }
-    sets.buff['Penury'] = { legs = "Arbatel Pants +1" }
-    sets.buff['Parsimony'] = { legs = "Arbatel Pants +1" }
+    sets.buff['Penury'] = { legs = "Arbatel Pants +2" }
+    sets.buff['Parsimony'] = { legs = "Arbatel Pants +2" }
     sets.buff['Celerity'] = { feet = "Pedagogy Loafers +3" }
     sets.buff['Alacrity'] = { feet = "Pedagogy Loafers +3" }
     sets.buff['Tranquility'] = { hands = "Pedagogy Bracers +2" }
     sets.buff['Equanimity'] = sets.buff['Tranquility']
 
-    sets.buff['Klimaform'] = { feet = "Arbatel Loafers +1" }
+    sets.buff['Klimaform'] = { feet = "Arbatel Loafers +2" }
 
     sets.buff.FullSublimation = {
         head = "Academic's Mortarboard +3",
@@ -897,6 +968,20 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function filtered_action(spell)
+    -- when casting in helix mode, remap comet and banish to helixes
+    if (spell.english:contains('Banish') or spell.english == 'Comet')
+        and state.HelixMode.value == 'Helix' then
+        cancel_spell()
+        local spell_remap = info.helix_base[get_spell_base(spell)]
+
+        if state.CastingMode.value == 'Low' or
+            (buffactive['Immanence'] and not buffactive['Ebullience']) then
+            send_command('input /ma "' .. spell_remap .. '" ' .. spell.target.raw)
+        else
+            send_command('input /ma "' .. spell_remap .. ' II" ' .. spell.target.raw)
+        end
+    end
+
     local light_stratagems = S { "Penury", "Addendum: White", "Celerity",
         "Accession", "Rapture", "Altruism", "Tranquility", "Perpetuance", }
 
@@ -964,39 +1049,29 @@ function filtered_action(spell)
 end
 
 function job_pretarget(spell, action, spellMap, eventArgs)
-    -- print(spell.english, spell.action_type)
-
-    if not buffactive['Reraise'] and not spell.english:contains('Reraise') then
-        windower.add_to_chat(144, "INFO: Reraise not active.")
-    end
-
-    if not (buffactive['Sublimation: Activated'] or buffactive['Sublimation: Complete']) and spell.action_type == 'Magic' then
-        local recasts = windower.ffxi.get_ability_recasts() or T {}
-        local sublimation_recast = recasts[234] or 0
-        if sublimation_recast <= 0.2 then
-            windower.add_to_chat(144, "INFO: Sublimation not active.")
-        end
-    end
-    if not (buffactive['Light Arts'] or buffactive['Dark Arts'] or buffactive['Addendum: White'] or buffactive['Addendum: Black']) and not string.find(spell.english, ' Arts') and spell.action_type == 'Magic' then
-        windower.add_to_chat(144, "INFO: No book active.")
-    end
-
-    -- use low tier nukes when in low+skillchain mode
-    if spell.skill == 'Elemental Magic'
-        and state.CastingMode.value == 'Low'
-        and state.MagicBurst.value ~= 'Once'
-        and state.SkillchainMode.value == 'Skillchain' then
-        if spell.english:endswith('I') or spell.english:endswith('V') and not string.find(spell.english, 'helix') then
+    -- use low tier nukes when in low+skillchain mode//gs
+    if S { 'Elemental Magic' }:contains(spell.skill)
+        and buffactive['Immanence']
+        and (state.MagicBurst.value == 'Normal' or not buffactive['Ebullience']) then
+        if (spell.english:endswith('II') and not string.find(spell.english, 'helix')) then
             windower.add_to_chat(144, 'INFO: Remapping to low tier nuke')
-            local spellBase = ""
-            for v in spell.english:gmatch("[^%s]+") do
-                spellBase = v
-                break
-            end
+            local spellBase = get_spell_base(spell)
             eventArgs.cancel = true
-            send_command('input /ma "' .. spellBase .. '" ' .. spell.target.raw)
+            if state.HelixMode.value == 'Helix' then
+                send_command('input /ma "' .. info.helix_base[spellBase] .. '" ' .. spell.target.raw)
+            else
+                send_command('input /ma "' .. spellBase .. '" ' .. spell.target.raw)
+            end
             return
         end
+    end
+
+    -- remap spell to helix when in helix modes
+    if S { 'Elemental Magic' }:contains(spell.skill) and state.HelixMode.value == 'Helix' and not spell.english:find('helix') then
+        local spellBase = get_spell_base(spell)
+        send_command('input /ma "' .. info.helix_base[spellBase] .. ' II" ' .. spell.target.raw)
+        eventArgs.cancel = true
+        return
     end
 
     -- prepop immanence when in skillchain mode
@@ -1012,36 +1087,51 @@ function job_pretarget(spell, action, spellMap, eventArgs)
             return
         end
     end
-    set_recast()
+
+    local info_msg = ""
+    if not buffactive['Reraise'] and not spell.english:contains('Reraise') then
+        info_msg = info_msg .. "Reraise not active! "
+    end
+
+    if (buffactive['Dark Arts'] or buffactive['Addendum: Black'])
+        and not buffactive['Klimaform'] then
+        info_msg = info_msg .. "Klimaform not active! "
+    end
+
+    if not (buffactive['Sublimation: Activated'] or buffactive['Sublimation: Complete']) and spell.name ~= "Sublimation" then
+        local recasts = windower.ffxi.get_ability_recasts() or T {}
+        local sublimation_recast = recasts[234] or 0
+        if sublimation_recast <= 0.2 then
+            info_msg = info_msg .. "Sublimation not active! "
+        end
+    end
+
+    if not (buffactive['Light Arts'] or buffactive['Dark Arts'] or buffactive['Addendum: White'] or buffactive['Addendum: Black']) and not string.find(spell.english, ' Arts') and spell.action_type == 'Magic' then
+        info_msg = info_msg .. "No book active! "
+    end
+
+    if info_msg ~= "" then
+        windower.add_to_chat(144, "INFO: " .. info_msg)
+    end
 end
 
-function job_precast(spell, action, spellMap, eventArgs)
-    -- print(spell.action_type)
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type ~= 'WeaponSkill' then set_recast() end
 
+    -- handle lightarts/darkarts fast cast correction
     if spell.action_type == 'Magic' then
-        local withOrAgainst = nil
+        local withOrAgainst = is_with_arts(spell)
 
-
-        -- print(spell.type)
-        if (spell.type == "WhiteMagic" and (buffactive["Light Arts"] or buffactive['Addendum: White']))
-            or (spell.type == "BlackMagic" and (buffactive['Dark Arts'] or buffactive['Addendum: Black'])) then
-            withOrAgainst = "WithArts"
-        elseif (spell.type == "WhiteMagic" and (buffactive['Dark Arts'] or buffactive['Addendum: Black']))
-            or (spell.type == "BlackMagic" and (buffactive["Light Arts"] or buffactive['Addendum: White'])) then
-            withOrAgainst = "AgainstArts"
-        end
-        if withOrAgainst and spell.action_type == 'Magic' then
-            -- eventArgs.handled = true
+        if withOrAgainst ~= 'NA' then
             if player.sub_job == 'RDM' and player.sub_job_level >= 35 then
                 if S { 'Sneak', 'Invisible', 'Deodorize', 'Stoneskin' }:contains(spell.english) then
                     equip(sets.precast.FC.SubRDM.NoQC)
                 elseif spell.skill == 'Enhancing Magic' then
-                    equip(sets.precast.FC.SubRDM[withOrAgainst],
-                        sets.precast.FC['Enhancing Magic'][withOrAgainst])
+                    equip(sets.precast.FC.SubRDM[withOrAgainst], sets.precast.FC['Enhancing Magic'][withOrAgainst])
                 elseif spell.english == "Impact" then
                     equip(sets.precast.FC[withOrAgainst], sets.precast.FC.Impact.SubRDM)
                 else
-                    equip(sets.precast.FC.SubRDM)
+                    equip(sets.precast.FC.SubRDM[withOrAgainst])
                 end
             else
                 if S { 'Sneak', 'Invisible', 'Deodorize', 'Stoneskin' }:contains(spell.english) then
@@ -1051,12 +1141,11 @@ function job_precast(spell, action, spellMap, eventArgs)
                 elseif spell.english == "Impact" then
                     equip(sets.precast.FC[withOrAgainst], sets.precast.FC.Impact)
                 else
-                    equip(sets.precast.FC)
+                    equip(sets.precast.FC[withOrAgainst])
                 end
             end
         elseif spell.action_type == 'Magic' and player.sub_job == 'RDM' and player.sub_job_level >= 35 and not spell == 'Impact' then
             equip(sets.precast.FC.SubRDM)
-            -- eventArgs.handled = true
         end
 
         if spell.english == 'Impact' then
@@ -1064,10 +1153,49 @@ function job_precast(spell, action, spellMap, eventArgs)
         elseif spell.english == 'Dispelga' then
             equip(sets.precast.Dispelga)
         end
+
+
+        -- if spell.action_type == 'Magic' then
+        --     local withOrAgainst = nil
+
+        --     if (spell.type == "WhiteMagic" and (buffactive["Light Arts"] or buffactive['Addendum: White']))
+        --         or (spell.type == "BlackMagic" and (buffactive['Dark Arts'] or buffactive['Addendum: Black'])) then
+        --         withOrAgainst = "WithArts"
+        --     elseif (spell.type == "WhiteMagic" and (buffactive['Dark Arts'] or buffactive['Addendum: Black']))
+        --         or (spell.type == "BlackMagic" and (buffactive["Light Arts"] or buffactive['Addendum: White'])) then
+        --         withOrAgainst = "AgainstArts"
+        --     end
+
+        --     -- print(withOrAgainst, spell.type, player.sub_job, player.sub_job_level)
+
+        --     if withOrAgainst and spell.action_type == 'Magic' then
+        --         -- eventArgs.handled = true
+        --         if player.sub_job == 'RDM' and player.sub_job_level >= 35 then
+        --             if S { 'Sneak', 'Invisible', 'Deodorize', 'Stoneskin' }:contains(spell.english) then
+        --                 equip(sets.precast.FC.SubRDM.NoQC)
+        --             elseif spell.skill == 'Enhancing Magic' then
+        --                 equip(sets.precast.FC.SubRDM[withOrAgainst], sets.precast.FC['Enhancing Magic'][withOrAgainst])
+        --             elseif spell.english == "Impact" then
+        --                 equip(sets.precast.FC[withOrAgainst], sets.precast.FC.Impact.SubRDM)
+        --             else
+        --                 equip(sets.precast.FC.SubRDM[withOrAgainst])
+        --             end
+        --         else
+        --             if S { 'Sneak', 'Invisible', 'Deodorize', 'Stoneskin' }:contains(spell.english) then
+        --                 equip(sets.precast.FC.NoQC)
+        --             elseif spell.skill == 'Enhancing Magic' then
+        --                 equip(sets.precast.FC[withOrAgainst], sets.precast.FC['Enhancing Magic'][withOrAgainst])
+        --             elseif spell.english == "Impact" then
+        --                 equip(sets.precast.FC[withOrAgainst], sets.precast.FC.Impact)
+        --             else
+        --                 equip(sets.precast.FC[withOrAgainst])
+        --             end
+        --         end
+        --     elseif spell.action_type == 'Magic' and player.sub_job == 'RDM' and player.sub_job_level >= 35 and not spell == 'Impact' then
+        --         equip(sets.precast.FC.SubRDM)
+        --         -- eventArgs.handled = true
+        --     end
     end
-    -- if spell.action_type == 'Magic' then
-    --     apply_grimoire_bonuses(spell, action, spellMap, eventArgs)
-    -- end
 end
 
 -- function job_midcast(spell, action, spellMap, evtargs)
@@ -1086,25 +1214,21 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.midcast['Enhancing Magic'].Duration)
         elseif spell.english:startswith('Regen') then
             equip(sets.midcast.Regen)
+        elseif sets.midcast[spell.english] then
+            equip(sets.midcast[spell.english])
         else
             equip(sets.midcast['Enhancing Magic'].Duration)
         end
         -- eventArgs.handled = true
     else
-        if S { 'Elemental Magic', 'Dark Magic', 'Divine Magic' }:contains(spell.skill) and S { 'Once', 'Always' }:contains(state.MagicBurst.value) then
-            windower.add_to_chat(144, "INFO: Magic burst: " .. state.MagicBurst.value)
-            equip(sets.midcast.MagicBurst)
-            if state.MagicBurst.value == 'Once' then
-                state.MagicBurst:reset()
-            end
-        end
-
         -- if spell.skill == 'Elemental Magic' or spell.skill == 'Dark Magic' or spell.skill ==  then end
         -- if low and not a helix spell, cast in low nukes
         if spell.skill == 'Elemental Magic'
             and state.CastingMode.value == 'Low'
             and not spell.english:endswith('helix II') then
             -- and not state.MagicBurst.value == "Once" then
+
+            -- set helix mode to normal after a single low cast
             windower.add_to_chat(144, "INFO: Magic casting is in low mode")
             equip(sets.midcast.FastRecast.NoDMG)
             eventArgs.handled = true
@@ -1112,6 +1236,14 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.midcast['Elemental Magic'].Wind)
         elseif spell.skill == 'Elemental Magic' and spell.element == 'Dark' then
             equip(sets.midcast['Elemental Magic'].Dark)
+        end
+
+        if S { 'Elemental Magic', 'Dark Magic', 'Divine Magic' }:contains(spell.skill) and S { 'Once', 'Always' }:contains(state.MagicBurst.value) then
+            windower.add_to_chat(144, "INFO: Magic burst: " .. state.MagicBurst.value)
+            equip(sets.midcast.MagicBurst)
+            if state.MagicBurst.value == 'Once' then
+                state.MagicBurst:reset()
+            end
         end
 
         if spell.english == 'Impact' then
@@ -1131,6 +1263,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if buffactive['Immanence'] and state.CastingMode.value == 'Low' then
         equip({ main = "", sub = "" })
     end
+
+    state.HelixMode:set('Normal')
 end
 
 function job_post_aftercast(spell, action, spellMap, eventArgs)
@@ -1152,6 +1286,7 @@ function job_buff_change(buff, gain)
     if gain then
         if buff == 'Light Arts' then
             set_macro_page(6, 20)
+            state.HelixMode:set('Normal')
         elseif buff == 'Dark Arts' then
             set_macro_page(7, 20)
         end
@@ -1261,21 +1396,9 @@ function job_self_command(cmdParams, eventArgs)
         windower.add_to_chat(144, 'INFO: returning to default arts macro page')
         return_to_macro()
     elseif cmdParams[1]:lower() == 'helix' then
-        local helices = T {
-            ['None'] = nil,
-            ['Light'] = "Luminohelix II",
-            ['Dark'] = "Noctohelix II",
-            ['Fire'] = "Pyrohelix II",
-            ['Earth'] = "Geohelix II",
-            ['Water'] = "Hydrohelix II",
-            ['Wind'] = "Anemohelix II",
-            ['Ice'] = "Cryohelix II",
-            ['Lightning'] = "Ionohelix II"
-        }
-
         local element = world.weather_element ~= 'None' and world.weather_element or world.day_element
 
-        send_command('input /ma ' .. helices[element] .. ' <t>')
+        send_command('input /ma ' .. info.helices[element] .. ' <t>')
     elseif cmdParams[1]:lower() == 'sixstep' then
         --Custom 6 step skillchain macro w/o Tabula Rasa
 
@@ -1363,12 +1486,24 @@ function job_self_command(cmdParams, eventArgs)
             'wait 1.9',
             'input /ma "Aero" <t>',
         }, ';'))
+    elseif cmdParams[1]:lower() == 'helix_on_dark_arts' then
+        helix_if_in_dark_arts(cmdParams[2])
     end
 end
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function helix_if_in_dark_arts(use_helix)
+    if buffactive['Dark Arts'] or buffactive['Addendum: Black'] then
+        if use_helix then
+            send_command('gs c set HelixMode Helix')
+        else
+            send_command('gs c set HelixMode Normal')
+        end
+    end
+end
 
 function return_to_macro()
     local function l_set_macro_page(page, book)

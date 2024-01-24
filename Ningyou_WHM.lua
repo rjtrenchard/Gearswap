@@ -23,18 +23,16 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
     include('default_sets.lua')
+    include('helper_functions.lua')
 
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'PDT')
 
-    select_default_macro_book()
-end
+    send_command('bind ^G input /mount raptor')
 
-function user_unload()
-    unbind_numpad()
+    select_default_macro_book()
 end
 
 -- Define sets and vars used by this job file.
@@ -47,7 +45,7 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     sets.precast.FC = {
-        -- main = gear.grioavolr.fc,
+        main = gear.grioavolr.fc,
         ammo = "Impatiens",
         head = "Bunzi's Hat",
         neck = "Orunmila's Torque",
@@ -56,7 +54,7 @@ function init_gear_sets()
         body = "Inyanga Jubbah +2",
         hands = "Gendewitha Gages +1",
         ring1 = "Weatherspoon Ring +1",
-        ring2 = "Medada's Ring",
+        ring2 = "Lebeche Ring",
         back = "Fi Follet Cape +1",
         waist = "Embla Sash",
         legs = "Kaykaus Tights +1",
@@ -283,7 +281,7 @@ function init_gear_sets()
     sets.midcast.BarElement = { main = "Beneficus", legs = "", }
 
     sets.midcast.Regen = {
-        -- main = "Bolelabunga",
+        main = "Bolelabunga",
         sub = "Ammurapi Shield",
         head = "Inyanga Tiara +1",
         body = "Piety Briault",
@@ -363,22 +361,22 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
 
     -- Resting sets
-    -- sets.resting = { main = "Bolelabunga" }
+    sets.resting = { main = "Bolelabunga" }
 
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle = {
-        -- main = "Bolelabunga",
-        -- sub = "Ammurapi Shield",
+        main = "Bolelabunga",
+        sub = "Ammurapi Shield",
         ammo = "Homiliary",
         head = "Nyame Helm",
         neck = "Sibyl Scarf",
-        ear1 = "Infused Earring",
+        ear1 = "Eabani Earring",
         ear2 = "Etiolation Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick ring",
         back = "Felicitas Cape +1",
         waist = "Fucho-no-obi",
         legs = "Nyame Flanchard",
@@ -386,17 +384,17 @@ function init_gear_sets()
     }
 
     sets.idle.PDT = {
-        -- main = "Malignance Pole",
-        -- sub = "Oneiros Grip",
+        main = "Malignance Pole",
+        sub = "Oneiros Grip",
         ammo = "Brigantia Pebble",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Infused Earring",
+        ear1 = "Eabani Earring",
         ear2 = "Etiolation Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring1 = "Defending Ring",
+        ring2 = "Shneddick Ring",
         back = "Felicitas Cape +1",
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
@@ -407,12 +405,12 @@ function init_gear_sets()
         ammo = "Homiliary",
         head = "Shaded Spectacles",
         neck = "Smithy's Torque",
-        ear1 = "Infused Earring",
+        ear1 = "Eabani Earring",
         ear2 = "Etiolation Earring",
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring",
         back = "Moonlight Cape",
         waist = "Blacksmith's Belt",
         legs = "Carmine Cuisses +1",
@@ -420,17 +418,15 @@ function init_gear_sets()
     }
 
     sets.idle.Weak = {
-        -- main = "Malignance Pole",
-        -- sub = "Oneiros Grip",
         ammo = "Homiliary",
         head = "Nyame Helm",
         neck = "Sibyl Scarf",
-        ear1 = "Infused Earring",
+        ear1 = "Eabani Earring",
         ear2 = "Etiolation Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring",
         back = "Felicitas Cape +1",
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
@@ -455,12 +451,12 @@ function init_gear_sets()
     -- Defense sets
 
     sets.defense.PDT = {
-        -- main = "Malignance Pole",
-        -- sub = "Oneiros Grip",
+        main = "Malignance Pole",
+        sub = "Oneiros Grip",
         ammo = "Brigantia Pebble",
         head = "Nyame Helm",
         neck = "Sibyl Scarf",
-        ear1 = "Infused Earring",
+        ear1 = "Eabani Earring",
         ear2 = "Etiolation Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
@@ -473,12 +469,12 @@ function init_gear_sets()
     }
 
     sets.defense.MDT = {
-        -- main = "Malignance Pole",
-        -- sub = "Oneiros Grip",
+        main = "Malignance Pole",
+        sub = "Oneiros Grip",
         ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         neck = "Sibyl Scarf",
-        ear1 = "Infused Earring",
+        ear1 = "Eabani Earring",
         ear2 = "Etiolation Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
@@ -524,6 +520,18 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+-- function filtered_action(spell)
+--     print(spell.english, spell.type)
+--     if spell.english == 'Chocobo' then
+--         cancel_spell()
+--         send_command('input /mount Raptor')
+--     end
+-- end
+
+-- function job_pretarget(s, a, sM, evt)
+--     print(s.english, s.type)
+-- end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
@@ -619,5 +627,5 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     set_macro_page(1, 3)
-    send_command("@wait 5;input /lockstyleset 11")
+    send_command("@wait 5;input /lockstyleset 1")
 end

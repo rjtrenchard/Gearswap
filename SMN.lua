@@ -254,6 +254,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('None', 'Normal', 'Acc')
@@ -282,15 +283,7 @@ function user_setup()
 end
 
 function user_unload()
-    send_command("unbind numpad1")
-    send_command("unbind numpad2")
-    send_command("unbind numpad3")
-    send_command("unbind numpad4")
-    send_command("unbind numpad5")
-    send_command("unbind numpad6")
-    send_command("unbind numpad7")
-    send_command("unbind numpad8")
-    send_command("unbind numpad9")
+    unbind_numpad()
 end
 
 -- Define sets and vars used by this job file.
@@ -354,7 +347,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {
-        main = gear.grioavolr.fc,
+        -- main = gear.grioavolr.fc,
         ammo = "Impatiens",
         head = gear.merlinic.fc.head,
         neck = "Orunmila's Torque",
@@ -362,7 +355,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Inyanga Jubbah +2",
         hands = gear.merlinic.fc.hands,
-        ring1 = "Lebeche Ring",
+        ring1 = "Medada's Ring",
         ring2 = "Weatherspoon Ring +1",
         back = "Perimede Cape",
         waist = "Embla Belt",
@@ -634,8 +627,8 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {
-        main = "Malignance Pole",
-        sub = "Oneiros Grip",
+        -- main = "Malignance Pole",
+        -- sub = "Oneiros Grip",
         ammo = "Sancus Sachet +1",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
@@ -744,8 +737,8 @@ function init_gear_sets()
     }
 
     sets.idle.Town = {
-        main = "Malignance Pole",
-        sub = "Oneiros Grip",
+        -- main = "Malignance Pole",
+        -- sub = "Oneiros Grip",
         ammo = "Sancus Sachet +1",
         head = "Convoker's Horn +2",
         neck = "Bathy Choker +1",

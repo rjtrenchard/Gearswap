@@ -66,6 +66,7 @@ end
 function user_setup()
     include('augments.lua')
     include('default_sets.lua')
+    include('helper_functions.lua')
 
     state.OffenseMode:options('Normal', 'Acc', 'Pet')
     state.HybridMode:options('Normal', 'DT')
@@ -92,6 +93,7 @@ end
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
     send_command('unbind ^f8')
+    unbind_numpad()
 end
 
 -- Define sets used by this job file.

@@ -83,7 +83,7 @@ gear.telchine.regen = {}
 gear.telchine.regen.head = { name = "Telchine Cap", augments = { '"Regen" potency+3', } }
 gear.telchine.regen.body = { name = "Telchine Chasuble", augments = { '"Regen" potency+3', } }
 gear.telchine.regen.hands = {
-    name = "Telchine Pigaches",
+    name = "Telchine Gloves",
     augments = { 'Mag. Evasion+23', '"Fast Cast"+5', '"Regen" potency+3' },
 }
 gear.telchine.regen.legs = { name = "Telchine Braconi", augments = { '"Regen" potency+3', } }
@@ -105,6 +105,7 @@ gear.acro = {}
 gear.acro.SIRD = {}
 gear.acro.SIRD.hands = { name = "Acro Gauntlets", augments = { 'DEF+23', 'Spell interruption rate down -10%', 'HP+50', } }
 gear.acro.SIRD.head = { name = "Acro Helm", augments = { 'DEF+22', 'Spell interruption rate down -10%', 'HP+50' } }
+gear.acro.SIRD.body = { name = "Acro Surcoat", augments = { 'Spell interruption rate down -10%', 'HP+49', } }
 
 gear.acro.drain = {}
 gear.acro.drain.body = { name = "Acro Surcoat", augments = { 'Mag. Acc.+10', '"Drain" and "Aspir" potency +7', 'INT+6', } }
@@ -240,3 +241,18 @@ gear.colada.enh_dur = { name = "Colada", augments = { 'Enh. Mag. eff. dur. +4', 
 -- Stinky rings
 gear.left_stikini = { name = "Stikini Ring +1", bag = "wardrobe3" }
 gear.right_stikini = { name = "Stikini Ring +1", bag = "wardrobe4" }
+
+-- Moonlight rings
+gear.left_moonlight = { name = "Moonlight Ring", bag = "wardrobe" }
+gear.right_moonlight = { name = "Moonlight Ring", bag = "wardrobe2" }
+
+-- Chirich rings
+gear.left_chirich = { name = "Chirich Ring +1", bag = "wardrobe8" }
+gear.right_chirich = { name = "Chirich Ring +1", bag = "wardrobe6" }
+
+-- Dark rings
+gear.dark_ring = {}
+gear.dark_ring.SIRD = {
+    name = "Dark Ring",
+    augments = { 'Enemy crit. hit rate -2', 'Magic dmg. taken -3%', 'Spell interruption rate down -4%', }
+}

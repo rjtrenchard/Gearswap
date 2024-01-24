@@ -24,6 +24,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	include('augments.lua')
+	include('helper_functions.lua')
 	include('default_sets.lua')
 
 	state.RangedMode:options('Normal', 'Acc')
@@ -43,6 +44,7 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
+	unbind_numpad()
 	send_command('unbind f9')
 	send_command('unbind ^f9')
 end
@@ -253,7 +255,7 @@ function init_gear_sets()
 		body = "Malignance Tabard",
 		hands = "Malignance Gloves",
 		ring1 = "Epona's Ring",
-		ring2 = "Lehko's Ring",
+		ring2 = gear.right_chirich,
 		back = "Moonlight Cape",
 		waist = "Sailfi Belt +1",
 		legs = "Samnuha Tights",
@@ -268,7 +270,7 @@ function init_gear_sets()
 		body = "Malignance Tabard",
 		hands = "Malignance Gloves",
 		ring1 = "Epona's Ring",
-		ring2 = "Lehko's Ring",
+		ring2 = gear.right_chirich,
 		back = "Moonlight Cape",
 		waist = "Sailfi Belt +1",
 		legs = "Malignance Tights",

@@ -26,6 +26,7 @@ end
 -- Setup vars that are user-dependent.
 function user_setup()
     include('augments.lua')
+    include('helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc')
@@ -46,6 +47,7 @@ end
 function user_unload()
     send_command('unbind ^`')
     send_command('unbind !-')
+    unbind_numpad()
 end
 
 -- Define sets and vars used by this job file.
@@ -283,7 +285,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Flamma Korazin +2",
         hands = "Flamma Manopolas +2",
-        ring1 = "Lehko's Ring",
+        ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
         back = "Atheling Mantle",
         waist = "Sailfi Belt +1",
@@ -298,7 +300,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Gleti's Cuirass",
         hands = "Gleti's Gauntlets",
-        ring1 = "Moonlight Ring",
+        ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
         back = "Letalis Mantle",
         waist = "Sailfi Belt +1",
@@ -343,7 +345,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Crepuscular Mail",
         hands = "Gleti's Gauntlets",
-        ring1 = "Moonlight Ring",
+        ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
         back = "Ik Cape",
         waist = "Sailfi Belt +1",
@@ -358,7 +360,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Crepuscular Mail",
         hands = "Gleti's Gauntlets",
-        ring1 = "Moonlight Ring",
+        ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
         back = "Letalis Mantle",
         waist = "Sailfi Belt +1",

@@ -1,10 +1,5 @@
 res = require('resources')
 
-function init_helper_functions()
-    init_recast()
-    init_DW_class()
-end
-
 local MAX_MAGIC_HASTE = 448 / 1024 * 100
 local MIN_MAGIC_HASTE = -0.5 * 100
 local MAX_JOB_HASTE = 256 / 1024 * 100
@@ -22,14 +17,48 @@ end
 
 -- sets the Recast weapon set to what is currently equipped
 -- affected slots: main sub ranged ammo
-function set_recast()
-    if not has_recast() then
-        sets._Recast.main = player.equipment.main
-        sets._Recast.sub = player.equipment.sub
-        sets._Recast.range = player.equipment.range
-        sets._Recast.ammo = player.equipment.ammo
+-- passing a string naming that slot will disable the slot for recall
+-- ie, set_recast('main') would ignore the main slot
+function set_recast(...)
+    if has_recast() then return end
+
+    local e_main = true
+    local e_sub = true
+    local e_range = true
+    local e_ammo = true
+
+    sets._next = {}
+
+    for k, v in ipairs(arg) do
+        if tostring(v) == 'main' then
+            e_main = false
+        elseif tostring(v) == 'sub' then
+            e_sub = false
+        elseif tostring(v) == 'range' then
+            e_range = false
+        elseif tostring(v) == 'ammo' then
+            e_ammo = false
+        end
     end
-    info._RecastFlag = sets._Recast.main or sets._Recast.sub or sets._Recast.range or sets._Recast.ammo
+
+    if e_main then
+        sets._Recast.main = player.equipment.main
+        sets._next.main = player.equipment.main
+    end
+    if e_sub then
+        sets._Recast.sub = player.equipment.sub
+        sets._next.sub = player.equipment.sub
+    end
+    if e_range then
+        sets._Recast.range = player.equipment.range
+        sets._next.range = player.equipment.range
+    end
+    if e_ammo then
+        sets._Recast.ammo = player.equipment.ammo
+        sets._next.ammo = player.equipment.ammo
+    end
+
+    info._RecastFlag = (sets._Recast.main or sets._Recast.sub or sets._Recast.range or sets._Recast.ammo) or false
 end
 
 -- resets the Recast weapon set to nil
@@ -49,10 +78,26 @@ function has_recast()
 end
 
 function equip_recast()
-    if has_recast then
+    if has_recast() then
         equip(recall_recast())
         reset_recast()
     end
+end
+
+function next_recast_weapon()
+    return sets._next and sets._next.main
+end
+
+function next_recast_sub()
+    return sets._next and sets._next.sub
+end
+
+function next_recast_range()
+    return sets._next and sets._next.range
+end
+
+function next_recast_ammo()
+    return sets._next and sets._next.ammo
 end
 
 ---------------------------------------------
@@ -91,8 +136,7 @@ end
 ---------------------------------------------
 
 function can_DW()
-    local dual_wield_id = 18
-    return T(windower.ffxi.get_abilities().job_traits):contains(dual_wield_id)
+    return T(windower.ffxi.get_abilities().job_traits):contains(res.job_traits:with('english', 'Dual Wield').id)
 end
 
 -- when blu, calculate how much DW they have
@@ -224,8 +268,8 @@ function doom_update(buff)
     end
 end
 
--- tallys haste amounts from buffs
-function get_haste_from_buffs()
+-- tallys haste amounts from buffactive
+function get_haste_from_buffactive()
     local magic_haste = 0
     local debuff_slow = 0
     local job_haste = 0
@@ -278,6 +322,10 @@ function get_haste_from_buffs()
     return get_total_haste(magic_haste, job_haste, debuff_slow)
 end
 
+function is_stunned()
+    return buffactive and (buffactive.terror or buffactive.stun or buffactive.petrification)
+end
+
 -- calculates the total haste vs debuff
 function get_total_haste(magic, job, debuff)
     -- set defaults
@@ -327,25 +375,95 @@ end
 
 function is_healer_role()
     return S { 'WHM', 'SCH', 'RDM' }:contains(player.sub_job) or buffactive['Light Arts'] or
-    buffactive['Addendum: Light']
+        buffactive['Addendum: Light']
+end
+
+-- returns WithArts, AgainstArts, or NA based on spell type and buff active
+function is_with_arts(spell)
+    spell = spell or nil
+    if not spell then return end
+
+    local book = (function()
+        if buffactive['Light Arts'] or buffactive['Addendum: Light'] then
+            return 'Light Arts'
+        elseif buffactive['Dark Arts'] or buffactive['Addendum: Dark'] then
+            return 'Dark Arts'
+        else
+            return 'NA'
+        end
+    end)()
+
+    if book == 'Dark Arts' then
+        if spell.type == 'BlackMagic' then
+            return 'WithArts'
+        elseif spell.type == 'WhiteMagic' then
+            return 'AgainstArts'
+        else
+            return 'NA'
+        end
+    elseif book == 'Light Arts' then
+        if spell.type == 'WhiteMagic' then
+            return 'WithArts'
+        elseif spell.type == 'BlackMagic' then
+            return 'AgainstArts'
+        else
+            return 'NA'
+        end
+    else
+        return 'NA'
+    end
 end
 
 -- sets the custom melee group
 function set_DW_class()
     if not can_DW() then return end
-    local DW_class = get_DW_class(get_haste_from_buffs())
-    if classes.CustomMeleeGroups:contains(DW_class) then return end
-    classes.CustomMeleeGroups:clear()
+    local DW_class = get_DW_class(get_haste_from_buffactive())
+
+    -- reset DW groups
     classes.CustomMeleeGroups:append(DW_class)
+end
+
+function set_tp_class()
+    if player.tp == 3000 then
+        classes.CustomMeleeGroups:append('FullTP')
+    elseif buffactive['Aftermath'] or buffactive['Aftermath: Lv.1'] or buffactive['Aftermath: Lv.2'] then
+        classes.CustomMeleeGroups:append('AM')
+    elseif buffactive['Aftermath: Lv.3'] then
+        classes.CustomMeleeGroups:append('AM3')
+    end
+end
+
+function determine_melee_groups()
+    -- reset groups
+    classes.CustomMeleeGroups:clear()
+
+    -- determine DW first
+    set_DW_class()
+
+    -- find AM class or fullTP
+    set_tp_class()
+end
+
+function start_tp_ticker()
+    -- only allow one ticker
+    if _tp_ticker then return end
+
+
+    _tp_ticker = windower.register_event('tp change', function(new_tp, old_tp)
+        -- update if TP reaches or leaves 3000
+        if (old_tp < 3000 and new_tp == 3000) or (old_tp == 3000 and new_tp < 3000) then
+            determine_melee_groups()
+            send_command('gs c update')
+        end
+    end)
+end
+
+function stop_tp_ticker()
+    windower.unregister_event(_tp_ticker)
 end
 
 -- make sure you set your initial class, or you'll be in regular melee mode upon loading the lua
 init_DW_class = set_DW_class
-
-function init_helper_functions()
-    init_recast()
-    init_DW_class()
-end
 
 --TODO:
 function calculate_MA(delay, bonus)
@@ -359,10 +477,12 @@ function get_FC_amount(blu_trait_bonus, RDM)
 
     local player_data = windower.ffxi.get_player()
 
-    local rdm_points = player_data.job_points.rdm.jp_spent
+    local rdm_fc = get_RDM_FC_amount()
+    local blu_fc = get_BLU_FC_amount()
 end
 
-function get_BLU_FC_amount(blu_trait_bonus)
+-- returns the amount of fc blu or blu sub has.
+function get_BLU_FC_amount()
     local player_data = windower.ffxi.get_player()
     local blu_data = nil
 
@@ -377,4 +497,566 @@ function get_BLU_FC_amount(blu_trait_bonus)
     end
 end
 
-init_helper_functions();
+-- returns the amount of fastcast rdm or rdm sub has.
+function get_RDM_FC_amount()
+    local player_data = windower.ffxi.get_player()
+    if player_data.main_job == 'RDM' then
+        local mj_level = player_data.main_job_level
+        if mj_level >= 99 then
+            local jp_level = player_data.job_points.rdm.jp_spent
+            if jp_level >= 2000 then
+                return 38
+            elseif jp_level >= 1125 then
+                return 36
+            elseif jp_level >= 500 then
+                return 34
+            elseif jp_level >= 150 then
+                return 32
+            else
+                return 30
+            end
+        elseif mj_level >= 89 then
+            return 30
+        elseif mj_level >= 76 then
+            return 25
+        elseif mj_level >= 55 then
+            return 20
+        elseif mj_level >= 35 then
+            return 15
+        elseif mj_level >= 15 then
+            return 10
+        end
+    elseif player_data.sub_job == 'RDM' then
+        local sj_level = player_data.sub_job_level
+        if sj_level >= 55 then
+            return 20
+        elseif sj_level >= 15 then
+            return 15
+        elseif sj_level >= 35 then
+            return 10
+        end
+    else
+        return 0
+    end
+end
+
+-- returns true if a slip debuff is active
+-- send buffactive table
+function has_poison_debuff()
+    return buffactive and
+        (((buffactive.poison or 0)
+            + (buffactive['Bio'] or 0)
+            + (buffactive['Dia'] or 0)
+            + (buffactive['Drown'] or 0)
+            + (buffactive['Shock'] or 0)
+            + (buffactive['Choke'] or 0)
+            + (buffactive['Frost'] or 0)
+            + (buffactive['Rasp'] or 0)
+            + (buffactive['Helix'] or 0)
+            + (buffactive['Sublimation: Activated'] or 0)
+            + (buffactive['Requiem'] or 0)
+            + (buffactive['Kaustra'] or 0)
+            + (buffactive['taint'] or 0)) > 0)
+end
+
+-- returns true if the player has a huge amount of attack
+function has_PDL_buffs()
+    return buffactive
+        -- and (buffactive['Last Resort'] or buffactive['Berserk']) -- has last resort or berserk
+        and (buffactive['Minuet'] and buffactive['Minuet'] >= 2) -- has two or more minuets
+        and (buffactive['Chaos Roll'])                           -- has chaos roll
+end
+
+function equip_PDL_WS_set(spell)
+    if sets.precast.WS[spell.english] and sets.precast.WS[spell.english].PDL then
+        equip(sets.precast.WS[spell.english].PDL)
+    end
+end
+
+-- Find item in equippable inventory
+function has_equippable(name)
+    return player.inventory[name]
+        or (function(name)
+            for _, wardrobe_number in ipairs({ '', '2', '3', '4', '5', '6', '7', '8' }) do
+                local wardrobe = 'wardrobe' .. wardrobe_number
+                if player[wardrobe] and player[wardrobe][name] then return player[wardrobe][name] end
+            end
+        end)()
+end
+
+--@type string
+function get_spell_base(spell)
+    for spellBase in spell.english:gmatch("[^%s]+") do
+        return spellBase
+    end
+end
+
+-- returns the tier of a given spell as a string, 1 returns an empty string
+-- if include_space_flag is true, do not trim the space. It will return like " II" for "Cure II"
+-- normal return will be "II" with no space
+function get_spell_tier(spell, include_space_flag)
+    include_space_flag = (include_space_flag and "") or "%s+"
+    for spellTier in spell.english:gmatch("%s[IV]+$") do
+        return spellTier:gsub(include_space_flag, "") or ""
+    end
+end
+
+function get_ninjutsu_tier(spell)
+    for ninTier in spell.english:gmatch("%s%w+$") do
+        return ninTier
+    end
+end
+
+-- maps a roman numeral string to a numerical digit
+-- anything not in the list is assume to be a first tier
+function numeral_to_digit(roman_numeral)
+    local tierMap = T {
+        ["II"] = 2,
+        ["III"] = 3,
+        ["IV"] = 4,
+        ["V"] = 5,
+        ["VI"] = 6,
+        ["VII"] = 7,
+        ["VIII"] = 8,
+        ["IX"] = 9,
+    }
+    return tierMap[roman_numeral] or 1;
+end
+
+-- maps a digit to a roman numeral string.
+-- if no_space_flag is true then the string will not prepend a space on return
+-- 1 or less returns an empty string
+function digit_to_numeral(digit, no_space_flag)
+    if digit == nil or digit < 2 then return "" end
+    no_space_flag = (no_space_flag and "") or " "
+    local tierMap = T {
+        "",
+        "II",
+        "III",
+        "IV",
+        "V",
+        "VI",
+        "VII",
+        "VIII",
+        "IX",
+    }
+    return no_space_flag .. tierMap[digit]
+end
+
+function digit_to_jp_num(digit, no_space_flag)
+    if digit == nil or digit < 1 then return "" end
+    no_space_flag = (no_space_flag and "") or ": "
+    local tierMap = T {
+        "Ichi",
+        "Ni",
+        "San",
+        "Shi"
+    }
+    return no_space_flag .. tierMap[digit]
+end
+
+function jp_num_to_digit(jp_num)
+    local tierMap = T {
+        ["Ichi"] = 1,
+        ["Ni"] = 2,
+        ["San"] = 3,
+        ["Shi"] = 4,
+    }
+    return tierMap[jp_num] or 1;
+end
+
+-- subtracts one tier from a spell
+function send_downgraded_spell_tier(spell, eventArgs)
+    local new_spell = get_spell_base(spell) .. digit_to_numeral(numeral_to_digit(get_spell_tier(spell)) - 1)
+    -- if spell is the same, dont make an infinite loop
+    if new_spell ~= spell.english then
+        eventArgs.cancel = true
+        send_command('input /ma "' .. new_spell .. '" ' .. spell.target.raw)
+    end
+end
+
+function downgrade_ninjutsu_tier(spell)
+    return '"' .. spell.english .. digit_to_jp_num(jp_num_to_digit(get_ninjutsu_tier(spell) - 1)) .. '"'
+end
+
+function is_spell_ready(spell)
+    return windower.ffxi.get_spell_recasts()[spell.recast_id] == 0
+end
+
+function get_3D_distance(target, optional_base)
+    optional_base = optional_base or player
+    target = target or nil
+    if not target then return -1 end
+
+    local target_space = { x = target.x, y = target.y, z = target.z }
+    local base_space = { x = optional_base.x, y = optional_base.y, z = optional_base.z }
+
+    if "number" == type(target_space.x) == type(target_space.y) == type(target_space.z) == type(base_space.x) == type(base_space.y) == type(base_space.z) then
+        return math.sqrt(
+            (target_space.x - base_space.x) ^ 2 +
+            (target_space.y - base_space.y) ^ 2 +
+            (target_space.z - base_space.z) ^ 2
+        )
+    else
+        return -1
+    end
+end
+
+-- returns a trust count in party
+function count_trusts()
+    if windower.ffxi.get_party().alliance_leader then return 0 end
+    local p1 = (windower.ffxi.get_mob_by_target("p1") and windower.ffxi.get_mob_by_target("p1").is_npc) and 1 or 0
+    local p2 = (windower.ffxi.get_mob_by_target("p2") and windower.ffxi.get_mob_by_target("p2").is_npc) and 1 or 0
+    local p3 = (windower.ffxi.get_mob_by_target("p3") and windower.ffxi.get_mob_by_target("p3").is_npc) and 1 or 0
+    local p4 = (windower.ffxi.get_mob_by_target("p4") and windower.ffxi.get_mob_by_target("p4").is_npc) and 1 or 0
+    local p5 = (windower.ffxi.get_mob_by_target("p5") and windower.ffxi.get_mob_by_target("p5").is_npc) and 1 or 0
+    return p1 + p2 + p3 + p4 + p5
+end
+
+-- unbinds the numpad and other common keys,
+-- useful for when you have a lot of special keybinds
+function unbind_numpad()
+    for i = 0, 9, 1 do
+        unbind_key_all_meta('numpad' .. i)
+    end
+
+    unbind_key_all_meta('numpad.')
+    unbind_key_all_meta('`')
+    unbind_key_all_meta('-')
+    unbind_key_all_meta('=')
+end
+
+function unbind_key_all_meta(key)
+    for k, metakey in ipairs({ '', '!', '^', '~', '@' }) do
+        send_command('unbind ' .. metakey .. key)
+    end
+end
+
+-- send a message to the game
+function echo(msg, verbosity, chatmode)
+    local verbosity = verbosity or 0
+    local function getVerbosityLevel()
+        local vlvl = 0
+        if state.Verbose.value == "Normal" then
+            vlvl = 0
+        elseif state.Verbose.value == 'Verbose' then
+            vlvl = 1
+        elseif state.Verbose.value == 'Debug' then
+            vlvl = 2
+        end
+        return vlvl
+    end
+
+    if getVerbosityLevel() >= verbosity then
+        local mode = chatmode or 144
+        windower.add_to_chat(mode, msg)
+    end
+end
+
+function calculate_dreadspikes()
+    local base = player.max_hp
+    local base_absorbed = 0 -- as a percent, 20 = 20%
+
+    -- get dread spikes bonus from JP
+    local has_dreadspikes_jp_gift = windower.ffxi.get_player()['job_points']['drk']['jp_spent'] >= 1200
+    if has_dreadspikes_jp_gift and player.main_job == "DRK" and player.main_job_level == 99 then
+        base_absorbed = base_absorbed + 20
+    end
+
+
+    -- get bodypiece
+    base_absorbed = base_absorbed + (function(body)
+        if body == "Heath. Cuirass +3" then
+            return 55
+        elseif body == "Heath. Cuirass +2" then
+            return 45
+        elseif body == "Heath. Cuirass +1" then
+            return 35
+        elseif body == "Heathen's Cuirass" then
+            return 25
+        elseif body == 'Bale Cuirass +2' then
+            return 25
+        elseif body == 'Bale Cuirass +1' then
+            return 12.5
+        else
+            return 0
+        end
+    end)(player.equipment.body)
+
+    -- get main
+    if player.equipment.main == "Crepuscular Scythe" then base_absorbed = base_absorbed + 50 end
+
+    return math.floor(base * ((100 + base_absorbed) / 200))
+end
+
+function update_if_weapon(weapon)
+    if (info and info.Weapons and info.Weapons.REMA and info.Weapons.Special) -- check if table exists
+        and (info.Weapons.REMA + info.Weapons.Special):contains(weapon) then
+        send_command('gs c update')
+    end
+end
+
+function check_FullTP()
+    if player.tp == 3000 and not classes.CustomMeleeGroups:contains('AM3') then
+        classes.CustomMeleeGroups:clear()
+        classes.CustomMeleeGroups:append("FullTP")
+    elseif not classes.CustomMeleeGroups:contains('AM3') then
+        classes.CustomMeleeGroups:clear()
+    end
+end
+
+function is_night()
+    return (world.time >= 17 * 60 or world.time < 7 * 60)
+end
+
+function job_custom_weapon_equip(arg)
+    if can_DW() then
+        if sets.weapons[arg] and sets.weapons[arg].DW then
+            send_command('gs equip sets.weapons.' .. arg .. '.DW')
+        else
+            send_command('gs equip sets.weapons.' .. arg)
+        end
+    else
+        send_command('gs equip sets.weapons' .. arg)
+    end
+end
+
+function define_jugpet_data()
+    jugpet = T {
+        ["Homunculus"] = "Mandragora",
+        ["HareFamiliar"] = "Rabbit",
+        ["KeenearedSteffi"] = "Rabbit",
+        ["CrabFamiliar"] = "Crab",
+        ["CourierCarrie"] = "Crab",
+        ["SheepFamiliar"] = "Sheep",
+        ["LullabyMelodia"] = "Sheep",
+        ["SlipperySilas"] = "Frog",
+        ["FlytrapFamiliar"] = "Flytrap",
+        ["VoraciousAudrey"] = "Flytrap",
+        ["FlowerpotBill"] = "Mandragora",
+        ["FlowerpotBen"] = "Mandragora",
+        ["TigerFamiliar"] = "Tiger",
+        ["SaberSiravarde"] = "Tiger",
+        ["MayflyFamiliar"] = "Fly",
+        ["ShellbusterOrob"] = "Fly",
+        ["LizardFamiliar"] = "Lizard",
+        ["ColdbloodComo"] = "Lizard",
+        ["EftFamiliar"] = "Eft",
+        ["AmbusherAllie"] = "Eft",
+        ["FungaurFamiliar"] = "Fungaur",
+        ["AntlionFamiliar"] = "Antlion",
+        ["ChopsueyChucky"] = "Antlion",
+        ["BeetleFamiliar"] = "Beetle",
+        ["PanzerGalahad"] = "Beetle",
+        ["MiteFamiliar"] = "Diremite",
+        ["LifedrinkerLars"] = "Diremite",
+        ["TurbidToloi"] = "Pugil",
+        ["AmigoSabotender"] = "Sabotender",
+        ["DapperMac"] = "Apkallu",
+        ["CraftyClyvonne"] = "Coeurl",
+        ["NurseryNazuna"] = "Sheep",
+        ["LuckyLulush"] = "Rabbit",
+        ["FlowerpotMerle"] = "Mandragora",
+        ["DipperYuly"] = "Ladybug",
+        ["DiscreetLouise"] = "Fungaur",
+        ["FatsoFargann"] = "Leech",
+        ["PrestoJulio"] = "Flytrap",
+        ["AudaciousAnna"] = "Lizard",
+        ["MailbusterCetas"] = "Fly",
+        ["FaithfulFalcorr"] = "Hippogryph",
+        ["SwiftSieghard"] = "Raptor",
+        ["BloodclawShasra"] = "Coeurl",
+        ["BugeyedBroncha"] = "Eft",
+        ["GorefangHobs"] = "Tiger",
+        ["GooeyGerard"] = "Slug",
+        ["CrudeRaphie"] = "Adamantoise",
+        ["AmiableRoche"] = "Pugil",
+        ["SweetCaroline"] = "Mandragora",
+        ["HeadbreakerKen"] = "Fly",
+        ["AnklebiterJedd"] = "Diremite",
+        ["CursedAnnabelle"] = "Antlion",
+        ["BrainyWaluis"] = "Fungaur",
+        ["SlimeFamiliar"] = "Slime",
+        ["SultryPatrice"] = "Slime",
+        ["GenerousArthur"] = "Slug",
+        ["RedolentCandi"] = "Snapweed",
+        ["AlluringHoney"] = "Snapweed",
+        ["LynxFamiliar"] = "Coeurl",
+        ["VivaciousGaston"] = "Coeurl",
+        ["CaringKiyomaro"] = "Raaz",
+        ["VivaciousVickie"] = "Raaz",
+        ["SuspiciousAlice"] = "Eft",
+        ["SurgingStorm"] = "Apkallu",
+        ["SubmergedIyo"] = "Apkallu",
+        ["WarlikePatrick"] = "Lizard",
+        ["RhymingShizuna"] = "Sheep",
+        ["BlackbeardRandy"] = "Tiger",
+        ["ThreestarLynn"] = "Ladybug",
+        ["HurlerPercival"] = "Beetle",
+        ["AcuexFamiliar"] = "Acuex",
+        ["FluffyBredo"] = "Acuex",
+        ["WeevilFamiliar"] = "Ladybug",
+        ["StalwartAngelina"] = "Ladybug",
+        ["FleetReinhard"] = "Raptor",
+        ["SharpwitHermes"] = "Mandragora",
+        ["PorterCrabFamiliar"] = "Crab",
+        ["JovialEdwin"] = "Crab",
+        ["AttentiveIbuki"] = "Tulfaire",
+        ["SwoopingZhivago"] = "Tulfaire",
+        ["SunburstMalfik"] = "Crab",
+        ["AgedAngus"] = "Crab",
+        ["ScissorlegXerin"] = "Chapuli",
+        ["BouncingBertha"] = "Chapuli",
+        ["SpiderFamiliar"] = "Spider",
+        ["GussyHachirobe"] = "Spider",
+        ["ColibriFamiliar"] = "Colibri",
+        ["ChoralLeera"] = "Colibri",
+        ["DroopyDortwin"] = "Rabbit",
+        ["PonderingPeter"] = "Rabbit",
+        ["HeraldHenry"] = "Crab",
+        ["HippogryphFamiliar"] = "Hippogryph",
+        ["DaringRoland"] = "Hippogryph",
+        ["MosquitoFamiliar"] = "Mosquito",
+        ["Left-HandedYoko"] = "Mosquito",
+        ["BraveHeroGlenn"] = "Frog",
+        ["YellowBeetleFamiliar"] = "Beetle",
+        ["EnergizedSefina"] = "Beetle",
+    }
+
+    monster_species = T {
+        ["Rabbit"] = "Beast",
+        ["Mandragora"] = "Plantoid",
+        ["Crab"] = "Aquan",
+        ["Sheep"] = "Beast",
+        ["Frog"] = "Aquan",
+        ["Flytrap"] = "Vermin",
+        ["Tiger"] = "Beast",
+        ["Eft"] = "Lizard",
+        ["Fungaur"] = "Plantoid",
+        ["Antlion"] = "Vermin",
+        ["Beetle"] = "Vermin",
+        ["Diremite"] = "Vermin",
+        ["Pugil"] = "Aquan",
+        ["Sabotender"] = "Plantoid",
+        ["Apkallu"] = "Bird",
+        ["Ladybug"] = "Vermin",
+        ["Leech"] = "Amorph",
+        ["Raptor"] = "Lizard",
+        ["Hippogryph"] = "Bird",
+        ["Coeurl"] = "Beast",
+        ["Fly"] = "Insect",
+        ["Adamantoise"] = "Aquan",
+        ["Slug"] = "Amorph",
+        ["Snapweed"] = "Plantoid",
+        ["Raaz"] = "Beast",
+        ["Acuex"] = "Amorph",
+        ["Tulfaire"] = "Bird",
+        ["Chapuli"] = "Vermin",
+        ["Spider"] = "Vermin",
+        ["Colibri"] = "Bird",
+        ["Mosquito"] = "Vermin",
+        ["Slime"] = "Aquan",
+    }
+
+    monster_family_killer = T {
+        ["Beast"] = "Lizard",
+        ["Lizard"] = "Vermin",
+        ["Vermin"] = "Plantoid",
+        ["Plantoid"] = "Beast",
+        ["Aquan"] = "Amorph",
+        ["Amorph"] = "Bird",
+        ["Bird"] = "Aquan",
+
+        ["Undead"] = "Arcana",
+        ["Arcana"] = "Undead",
+        ["Dragon"] = "Demon",
+        ["Demon"] = "Dragon"
+    }
+end
+
+function get_pet_killer_trait(pet_name)
+    if not jugpet then define_jugpet_data() end
+    return monster_family_killer[monster_species[jugpet[pet_name or 'No'] or 'No'] or 'No'] or "No"
+end
+
+function announce_pet_killer()
+    local pet_name = (pet and pet.is_valid) and pet.name
+    if pet_name then
+        windower.add_to_chat(144, "Using " .. get_pet_killer_trait(pet_name) .. " Killer.")
+    end
+end
+
+-- put in filtered_action for easy stratagem handling.
+function agnostic_stratagems(spell)
+    if spell.type ~= 'Scholar' then return end
+    local light_stratagems = S { "Penury", "Addendum: White", "Celerity",
+        "Accession", "Rapture", "Altruism", "Tranquility", "Perpetuance", }
+
+    local dark_stratagems = S { "Parsimony", "Addendum: Black", "Manifestation",
+        "Alacrity", "Ebullience", "Focalization", "Equanimity", "Immanence", }
+
+    local stratagems = light_stratagems + dark_stratagems
+
+    local book_arts = (buffactive['Dark Arts'] or buffactive['Light Arts'] or buffactive['Addendum: Black'] or buffactive['Addendum: White'])
+
+    if S { 'Light Arts', 'Dark Arts' }:contains(spell.english) then
+        return_to_macro()
+    end
+
+    -- make arts-agnostic stratagems
+    -- check if we're in a book, open appropriate book if not.
+    if stratagems:contains(spell.english) and book_arts then
+        cancel_spell()
+    elseif stratagems:contains(spell.english) and not book_arts then
+        cancel_spell()
+        if light_stratagems:contains(spell.english) then
+            send_command('input /ja "Light Arts" <me>')
+        else
+            send_command('input /ja "Dark Arts" <me>')
+        end
+    end
+
+    if buffactive['Dark Arts'] or buffactive['Addendum: Black'] then
+        if spell.english == "Penury" then
+            send_command('input /ja "Parsimony <me>')
+        elseif spell.english == "Addendum: White" then
+            send_command('input /ja "Addendum: Black" <me>')
+        elseif spell.english == "Celerity" then
+            send_command('input /ja "Alacrity" <me>')
+        elseif spell.english == "Accession" then
+            send_command('input /ja "Manifestation" <me>')
+        elseif spell.english == "Rapture" then
+            send_command('input /ja "Ebullience" <me>')
+        elseif spell.english == "Altruism" then
+            send_command('input /ja "Focalization" <me>')
+        elseif spell.english == "Tranquility" then
+            send_command('input /ja "Equanimity" <me>')
+        elseif spell.english == "Perpetuance" then
+            send_command('input /ja "Immanence" <me>')
+        end
+    elseif buffactive['Light Arts'] or buffactive['Addendum: White'] then
+        if spell.english == "Parsimony" then
+            send_command('input /ja "Penury" <me>')
+        elseif spell.english == "Alacrity" then
+            send_command('input /ja "Celerity" <me>')
+        elseif spell.english == "Addendum: Black" then
+            send_command('input /ja "Addendum: White" <me>')
+        elseif spell.english == "Manifestation" then
+            send_command('input /ja "Accession" <me>')
+        elseif spell.english == "Ebullience" then
+            send_command('input /ja "Rapture" <me>')
+        elseif spell.english == "Focalization" then
+            send_command('input /ja "Altruism" <me>')
+        elseif spell.english == "Equanimity" then
+            send_command('input /ja "Tranquility" <me>')
+        elseif spell.english == "Immanence" then
+            send_command('input /ja "Perpetuance" <me>')
+        end
+    end
+end
+
+(function()
+    state.Verbose = state.Verbose or M { ['description'] = 'Verbosity', 'Normal', 'Verbose', 'Debug' }
+    init_recast()
+    init_DW_class()
+end)();

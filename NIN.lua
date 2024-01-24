@@ -109,6 +109,7 @@ end
 
 function user_unload()
     windower.unregister_event(ticker)
+    unbind_numpad()
 end
 
 -- Define sets and vars used by this job file.
@@ -262,7 +263,7 @@ function init_gear_sets()
 
     sets.Kiting = { feet = gear.MovementFeet }
 
-    sets.SIRD = {
+    sets.SIRD = {                    -- 5 merit
         ammo = "Staunch Tathlum +1", -- 11
         head = gear.taeon.SIRD.head, -- 10
         neck = "Moonlight Necklace", -- 15
@@ -270,11 +271,11 @@ function init_gear_sets()
         ear2 = "Magnetic Earring",   -- 8
         body = gear.taeon.SIRD.body,
         -- hands = "Rawhide Gloves",    -- 15
-        ring1 = "Evanescence Ring", -- 5
-        ring2 = "Dark Ring",        -- 4
-        back = gear.SIRDCape,       -- 10
-        waist = "Audumbla Sash",    -- 10
-        legs = gear.taeon.SIRD.legs,
+        ring1 = "Evanescence Ring",  -- 5
+        ring2 = "Dark Ring",         -- 4
+        back = gear.SIRDCape,        -- 10
+        waist = "Audumbla Sash",     -- 10
+        legs = gear.taeon.SIRD.legs, -- 10
     }
 
     sets.enmity = {
@@ -361,7 +362,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
-        ring1 = "Kishar Ring",
+        ring1 = "Medada's Ring",
         ring2 = "Weatherspoon Ring +1",
         back = gear.fc_cape,
         legs = "Gyve Trousers",
@@ -384,7 +385,7 @@ function init_gear_sets()
         ear2 = "Lugra Earring +1",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Regal Ring",
+        ring1 = gear.TrustRing,
         ring2 = "Epaminondas's Ring",
         back = gear.str_ws_cape,
         waist = "Fotia Belt",
@@ -416,7 +417,7 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Dingir Ring",
+        ring2 = "Medada's Ring",
         back = gear.magic_ws_cape,
         waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
@@ -431,7 +432,7 @@ function init_gear_sets()
             neck = "Fotia Gorget",
             ear1 = "Sherida Earring",
             ear2 = "Crepuscular Earring",
-            ring1 = "Lehko's Ring",
+            ring1 = gear.left_chirich,
             ring2 = "Epona's Ring",
             waist = "Fotia belt"
         })
@@ -455,7 +456,7 @@ function init_gear_sets()
         ear1 = "Odr Earring",
         ear2 = "Lugra Earring +1",
         ring1 = "Begrudging Ring",
-        ring2 = "Lehko's Ring"
+        ring2 = gear.right_chirich
     })
 
     sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS.MultiHit, {
@@ -475,7 +476,7 @@ function init_gear_sets()
         neck = "Republican Platinum medal",
         ear1 = "Moonshade Earring",
         hands = "Nyame Gauntlets",
-        ring1 = "Regal Ring",
+        ring1 = gear.TrustRing,
         ring2 = "Epaminondas's Ring",
         waist = "Sailfi Belt +1",
     })
@@ -488,13 +489,13 @@ function init_gear_sets()
     sets.precast.WS['Aeolian Edge'] = {
         ammo = "Seething Bomblet +1",
         head = "Herculean Helm",
-        neck = "Baetyl Pendant",
+        neck = "Sibyl Scarf",
         ear1 = "Friomisi Earring",
         ear2 = "Moonshade Earring",
         body = "Malignance Tabard",
         hands = "Herculean Gloves",
         ring1 = "Dingir Ring",
-        ring2 = "Regal Ring",
+        ring2 = "Medada's Ring",
         back = gear.magic_ws_cape,
         waist = gear.ElementalObi,
         legs = "Herculean Trousers",
@@ -506,8 +507,6 @@ function init_gear_sets()
         neck = "Republican Platinum medal",
         ear1 = "Lugra Earring +1",
         ear2 = "Moonshade Earring",
-        ring1 = "Regal Ring",
-        ring2 = "Epaminondas's Ring",
         waist = "Sailfi Belt +1"
     })
 
@@ -579,8 +578,8 @@ function init_gear_sets()
         neck = "Moonlight Necklace",
         ear1 = "Crepuscular Earring",
         ear2 = "Dignitary's Earring",
-        ring1 = gear.left_stikini,
-        ring2 = "Metamorph Ring +1",
+        ring2 = "Medada's Ring",
+        ring1 = "Metamorph Ring +1",
         waist = "Eschan Stone",
     })
 
@@ -600,7 +599,7 @@ function init_gear_sets()
         ear2 = "Dignitary's Earring",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
-        ring1 = gear.left_stikini,
+        ring1 = "Medada's Ring",
         ring2 = "Metamorph Ring +1",
         back = gear.matk_cape,
         waist = "Eschan Stone",
@@ -657,7 +656,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
-        ring1 = "Lehko's Ring",
+        ring1 = gear.left_chirich,
         ring2 = "Gere Ring",
         back = gear.stp_cape,
         waist = "Reiki Yotai",
@@ -672,7 +671,7 @@ function init_gear_sets()
         ear2 = "Telos Earring",
         body = "Tatenashi Haramaki +1",
         hands = "Tatenashi Gote +1",
-        ring1 = "Chirich Ring +1",
+        ring1 = gear.left_chirich,
         ring2 = "Gere Ring",
         back = gear.stp_cape,
         waist = "Reiki Yotai",
@@ -687,7 +686,7 @@ function init_gear_sets()
         ear2 = "Brutal Earring",
         body = "Hattori Ningi +2",
         hands = "Mpaca's Gloves",
-        ring1 = "Lehko's Ring",
+        ring1 = gear.left_chirich,
         ring2 = "Gere Ring",
         back = gear.blade_hi_cape,
         waist = "Kentarch Belt +1",

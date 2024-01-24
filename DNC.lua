@@ -57,6 +57,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc')
@@ -88,6 +89,7 @@ function user_unload()
     send_command('unbind !=')
     send_command('unbind ^-')
     send_command('unbind !-')
+    unbind_numpad()
 end
 
 -- Define sets and vars used by this job file.
@@ -225,7 +227,7 @@ function init_gear_sets()
         ear1 = "Sherida Earring",
         ear2 = "Odr Earring",
         body = "Gleti's Cuirass",
-        ring1 = "Lehko's Ring",
+        ring1 = gear.left_chirich,
         ring2 = "Begrudging Ring",
         legs = "Zoar Subligar +1",
         feet = "Gleti's Boots"
@@ -303,7 +305,7 @@ function init_gear_sets()
         ear2 = "Odnowa Earring +1",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Moonlight Ring",
+        ring1 = gear.left_moonlight,
         ring2 = "Gelatinous Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
@@ -336,7 +338,7 @@ function init_gear_sets()
         ear1 = "Eabani Earring",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
-        ring1 = "Moonlight Ring",
+        ring1 = gear.left_moonlight,
         ring2 = "Gelatinous Ring +1",
         back = "Toetapper Mantle",
         waist = "Flume Belt +1",
@@ -350,7 +352,7 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Moonlight Ring",
+        ring1 = gear.left_moonlight,
         ring2 = "Gelatinous Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
@@ -379,7 +381,7 @@ function init_gear_sets()
         ear2 = "Sherida Earring",
         body = "Gleti's Cuirass",
         hands = "Adhemar Wristbands +1",
-        ring1 = "Moonlight Ring",
+        ring1 = gear.left_moonlight,
         ring2 = "Gere Ring",
         back = "Sacro Mantle",
         waist = "Sailfi Belt +1",
