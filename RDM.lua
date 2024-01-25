@@ -66,13 +66,13 @@ function user_setup()
 
     select_default_macro_book()
 
-    send_command('bind numpad4 gs equip Enspell; gs c update')
-    send_command('bind numpad9 gs equip Maxentius; gs c update')
-    send_command('bind numpad7 gs equip CroceaMors; gs c update')
-    send_command('bind numpad8 gs equip Naegling; gs c update')
-    send_command('bind numpad6 gs equip Dagger; gs c update')
-    send_command('bind !numpad6 gs equip DaggerLow; gs c update')
-    send_command('bind ^numpad6 gs equip AeolianEdge; gs c update')
+    send_command('bind numpad4 gs c equip Enspell; gs c update')
+    send_command('bind numpad9 gs c equip Maxentius; gs c update')
+    send_command('bind numpad7 gs c equip CroceaMors; gs c update')
+    send_command('bind numpad8 gs c equip Naegling; gs c update')
+    send_command('bind numpad6 gs c equip Dagger; gs c update')
+    send_command('bind !numpad6 gs c equip DaggerLow; gs c update')
+    send_command('bind ^numpad6 gs c equip AeolianEdge; gs c update')
 
     send_command('bind numpad0 gs equip sets.resist.death')
 
@@ -1719,17 +1719,17 @@ function update_combat_form()
 end
 
 function bind_weapons()
-    if can_DW() then
-        send_command('bind numpad4 gs c equip Enspell; gs c update')
-        send_command('bind numpad9 gs c equip Maxentius; gs c update')
-        send_command('bind numpad7 gs equip sets.weapons.CroceaMors.DW; gs c update')
-        send_command('bind numpad8 gs equip sets.weapons.Naegling.DW; gs c update')
-        send_command('bind numpad6 gs equip sets.weapons.Dagger.DW; gs c update')
-        send_command('bind !numpad6 gs equip sets.weapons.DaggerLow.DW; gs c update')
-        send_command('bind ^numpad6 gs equip sets.weapons.AeolianEdge.DW; gs c update')
-    else
+    --     if can_DW() then
+    --         send_command('bind numpad4 gs c equip Enspell; gs c update')
+    --         send_command('bind numpad9 gs c equip Maxentius; gs c update')
+    --         send_command('bind numpad7 gs equip sets.weapons.CroceaMors.DW; gs c update')
+    --         send_command('bind numpad8 gs equip sets.weapons.Naegling.DW; gs c update')
+    --         send_command('bind numpad6 gs equip sets.weapons.Dagger.DW; gs c update')
+    --         send_command('bind !numpad6 gs equip sets.weapons.DaggerLow.DW; gs c update')
+    --         send_command('bind ^numpad6 gs equip sets.weapons.AeolianEdge.DW; gs c update')
+    --     else
 
-    end
+    --     end
 end
 
 -- for use in buff/gain
@@ -1954,6 +1954,7 @@ function job_self_command(cmdParams, eventArgs)
     -- /console gs c cb "Bubbly Broth"
     if false then
     elseif command == 'equip' then
+        -- print(arg)
         job_custom_weapon_equip(arg)
     end
 end

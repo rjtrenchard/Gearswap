@@ -810,6 +810,16 @@ function is_night()
 end
 
 function job_custom_weapon_equip(arg)
+    if not sets then return end
+    if not sets.weapons then
+        print('Error: no sets.weapons table')
+        return
+    end
+    if not sets.weapons[arg] then
+        print("Error: no set found: sets.weapons." .. arg)
+        return
+    end
+
     if can_DW() then
         if sets.weapons[arg] and sets.weapons[arg].DW then
             send_command('gs equip sets.weapons.' .. arg .. '.DW')
@@ -817,7 +827,7 @@ function job_custom_weapon_equip(arg)
             send_command('gs equip sets.weapons.' .. arg)
         end
     else
-        send_command('gs equip sets.weapons' .. arg)
+        send_command('gs equip sets.weapons.' .. arg)
     end
 end
 
