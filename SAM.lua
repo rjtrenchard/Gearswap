@@ -27,6 +27,7 @@ end
 function user_setup()
     include('augments.lua')
     include('default_sets.lua')
+    include('natty_includes.lua')
 
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'PDT', 'Reraise')
@@ -108,13 +109,17 @@ function init_gear_sets()
         body = "Sacro Breastplate",
         hands = "Leyline Gloves",
         ring1 = "Medada's Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Rahab Ring",
         legs = "Limbo Trousers"
     }
 
     -- Precast Sets
     -- Precast sets to enhance JAs
-    sets.precast.JA.Meditate = { head = "Myochin Kabuto", hands = "Saotome Kote +2" }
+    sets.precast.JA.Meditate = {
+        head = "Wakido Kabuto +1",
+        hands = "Sakonji Kote +1",
+        back = "Smertrios's Mantle"
+    }
     sets.precast.JA['Warding Circle'] = { head = "Myochin Kabuto" }
     sets.precast.JA['Blade Bash'] = { hands = "Saotome Kote +2" }
 
@@ -209,12 +214,12 @@ function init_gear_sets()
         ear2 = "Odnowa Earring +1",
         body = "Mpaca's Doublet",
         hands = "Mpaca's gloves",
-        ring1 = "Sheltered Ring",
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Danzo Sune-ate"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Field = {
@@ -223,14 +228,14 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Tuisto Earring",
         ear2 = "Odnowa Earring +1",
-        body = "Mpaca's Doublet",
-        hands = "Mpaca's gloves",
-        ring1 = "Sheltered Ring",
-        ring2 = "Gelatinous Ring +1",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Danzo Sune-ate"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Weak = {
@@ -240,12 +245,12 @@ function init_gear_sets()
         ear2 = "Crepuscular Earring",
         body = "Crepuscular Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Sheltered Ring",
-        ring2 = "Shadow Ring",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Danzo Sune-ate"
+        feet = "Nyame Sollerets"
     }
 
     -- Defense sets

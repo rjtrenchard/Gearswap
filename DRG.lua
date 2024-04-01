@@ -26,7 +26,7 @@ end
 -- Setup vars that are user-dependent.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc')
@@ -89,7 +89,7 @@ function init_gear_sets()
         body = "Sacro Breastplate",
         hands = "Leyline Gloves",
         ring1 = "Rahab Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Medada's ring",
         legs = "Enif Cosciales",
         feet = "Carmine Greaves +1"
     }
@@ -126,7 +126,7 @@ function init_gear_sets()
         back = "Atheling Mantle",
         waist = "Fotia Belt",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
     sets.precast.WS.Acc = set_combine(sets.precast.WS, { back = "Letalis Mantle" })
 
@@ -179,11 +179,11 @@ function init_gear_sets()
         body = "Sulevia's Platemail +2",
         hands = "Sulevia's Gauntlets +1",
         ring1 = "Sheltered Ring",
-        ring2 = "Defending Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Atheling Mantle",
         waist = "Flume Belt +1",
-        legs = "Carmine Cuisses +1",
-        feet = "Sulevia's Leggings +2"
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Field = {
@@ -194,7 +194,7 @@ function init_gear_sets()
         body = "Gleti's Cuirass",
         hands = "Gleti's Gauntlets",
         ring1 = "Sheltered Ring",
-        ring2 = "Defending Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Carmine Cuisses +1",

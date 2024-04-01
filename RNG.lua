@@ -24,7 +24,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	include('augments.lua')
-	include('helper_functions.lua')
+	include('natty_helper_functions.lua')
 	include('default_sets.lua')
 
 	state.RangedMode:options('Normal', 'Acc')
@@ -73,7 +73,7 @@ function init_gear_sets()
 		body = "Adhemar Jacket +1",
 		hands = "Leyline Gloves",
 		ring1 = "Rahab Ring",
-		ring2 = "Weatherspoon Ring +1",
+		ring2 = "Medada's Ring",
 		legs = "Limbo Trousers",
 		feet = "Carmine Greaves +1"
 	}
@@ -101,7 +101,7 @@ function init_gear_sets()
 		neck = "Fotia Gorget",
 		ear1 = "Ishvara Earring",
 		ear2 = "Moonshade Earring",
-		hands = "Meghanada Gloves +2",
+		hands = "Nyame Gauntlets",
 		ring1 = "Regal Ring",
 		ring2 = "Epaminondas's Ring",
 		back = "Sylvan Chlamys",

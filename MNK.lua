@@ -28,7 +28,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc')
@@ -122,7 +122,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Medada's ring",
         ring2 = "Rahab Ring",
         legs = "Limbo Trousers"
     }
@@ -278,11 +278,11 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
-        ring2 = "Defending Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Iximulew Cape",
         waist = "Black Belt",
         legs = "Nyame Flanchard",
-        feet = "Hermes' Sandals"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Town = {
@@ -294,11 +294,11 @@ function init_gear_sets()
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Iximulew Cape",
         waist = "Black Belt",
-        legs = "Malignance Tights",
-        feet = "Hermes' Sandals"
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Weak = {
@@ -310,11 +310,11 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Sheltered Ring",
-        ring2 = "Defending Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Iximulew Cape",
         waist = "Black Belt",
         legs = "Malignance Tights",
-        feet = "Hermes' Sandals"
+        feet = "Nyame Sollerets"
     }
 
     -- Defense sets

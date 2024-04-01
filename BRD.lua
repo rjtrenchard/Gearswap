@@ -48,9 +48,8 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
+    include('natty_includes.lua')
     include('augments.lua')
-    include('default_sets.lua')
-    include('helper_functions.lua')
     state.OffenseMode:options('Normal', 'Acc', 'Crit')
     state.HybridMode:options('Normal', 'PDT', 'SubtleBlow')
     state.WeaponskillMode:options('Normal', 'Acc')
@@ -87,7 +86,7 @@ function user_setup()
     info.ExtraSongs = 2
 
     -- Set this to false if you don't want to use custom timers.
-    state.UseCustomTimers = M(true, 'Use Custom Timers')
+    state.UseCustomTimers = M(false, 'Use Custom Timers')
 
     info.DWsubs = S { 'NIN', 'DNC' }
 
@@ -102,6 +101,8 @@ function user_setup()
         gear.right_idle_ear = { name = "Infused Earring" }
         gear.left_idle_ring = gear.left_stikini
     end
+
+    define_spell_priority()
 
     send_command('bind numpad7 gs c equip Carnwenhan; gs c update')
     send_command('bind ^numpad7 gs c equip Dagger; gs c update')
@@ -138,6 +139,8 @@ function user_setup()
     gear.default.obi_waist = "Eschan Stone"
 
     info.songs_casted = 0
+
+    state.AutoPianissimo:set('Strict')
 
     update_weapon_mode()
 
@@ -367,12 +370,12 @@ function init_gear_sets()
         ear2 = "Odnowa Earring +1",
         body = "Adamantite Armor",
         hands = "Nyame Gauntlets",
-        ring2 = gear.right_moonlight,
+        ring2 = "Shneddick Ring +1",
         ring1 = "Gelatinous Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Fili Cothurnes +2"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Evasion = {
@@ -385,10 +388,9 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = gear.left_moonlight,
         ring2 = gear.right_moonlight,
-        -- back="",
         waist = "Svelt. Gouriz +1",
         legs = "Nyame Flanchard",
-        feet = "Nyame Sollerets"
+        feet = "Fili Cothurnes +2"
     }
 
     -- sets.idle.Town = { range = gear.IdleInstrument,
@@ -473,9 +475,9 @@ function init_gear_sets()
         neck = "Orunmila's Torque", -- 5
         -- ear1 = "Enchanter's Earring +1", -- 2
         -- ear2 = "Loquac. Earring",        -- 2
-        body = "Inyanga Jubbah +2",     -- 14
-        hands = "Leyline Gloves",       -- 8
-        ring1 = "Weatherspoon Ring +1", -- 6
+        body = "Inyanga Jubbah +2", -- 14
+        hands = "Leyline Gloves",   -- 8
+        ring1 = "Kishar Ring",      -- 6
         ring2 = "Lebeche Ring",
         -- ring2 = "Medada's Ring",         -- 10
         back = "Fi Follet Cape +1", -- 10
@@ -492,7 +494,7 @@ function init_gear_sets()
         -- ear2 = "Loquac. Earring", -- 2
         body = { name = "Brioso Justaucorps +3", priority = 9 }, -- 15
         hands = "Leyline Gloves",                                -- 8
-        ring1 = "Weatherspoon Ring +1",                          -- 6
+        ring1 = "Kishar Ring",                                   -- 6
         ring2 = "Medada's Ring",                                 -- 10
         back = { name = "Moonlight Cape", priority = 10 },       -- 0
         waist = { name = "Platinum Moogle Belt", priority = 8 }, -- 0
@@ -547,7 +549,7 @@ function init_gear_sets()
         neck = "Fotia Gorget",
         ear1 = "Ishvara Earring",
         ear2 = "Moonshade Earring",
-        body = "Bihu Justaucorps +3",
+        body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Shukuyu Ring",
         ring2 = "Epaminondas's Ring",
@@ -662,7 +664,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Inyanga Jubbah +2",
         hands = "Gazu Bracelets +1",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Kishar Ring",
         ring2 = "Medada's Ring",
         back = gear.CastingCape,
         waist = "Sailfi Belt +1",
@@ -676,8 +678,8 @@ function init_gear_sets()
     sets.midcast.Madrigal = { head = "Fili Calot +2", back = "Intarabus's Cape" }
     sets.midcast.Prelude = { back = "Intarabus's Cape" }
     sets.midcast.March = { hands = "Fili Manchettes +2" }
-    sets.midcast.Minuet = { body = "Fili Hongreline +3" }
-    sets.midcast.Minne = {}
+    sets.midcast.Minuet = { body = "Fili Hongreline +3", feet = "Fili Cothurnes +2", }
+    sets.midcast.Minne = { feet = "Fili Cothurnes +2" }
     sets.midcast.Paeon = { head = "Brioso Roundlet +3" }
     sets.midcast.Carol = {
         head = "Fili Calot +2",
@@ -686,6 +688,8 @@ function init_gear_sets()
         legs = "Fili Rhingrave +2",
         feet = "Fili Cothurnes +2"
     }
+    sets.midcast.Mambo = { feet = "Mousai Crackows +1" }
+    sets.midcast.Dirge = {}
     sets.midcast["Sentinel's Scherzo"] = { feet = "Fili Cothurnes +2" }
     sets.midcast['Magic Finale'] = { legs = "Fili Rhingrave +2" }
     sets.midcast['Honor March'] = set_combine(sets.midcast.SongEffect, { range = info.HonorMarch })
@@ -725,18 +729,18 @@ function init_gear_sets()
             sub = "Ammurapi Shield",
         },
         range = "Gjallarhorn",
-        head = "Brioso Roundlet +3",
+        head = "Brioso Roundlet +3", -- 1
         neck = "Moonbow Whistle +1",
-        ear1 = "Regal Earring",
+        ear1 = "Regal Earring",      -- 4
         ear2 = "Crepuscular Earring",
         body = "Fili Hongreline +3",
-        hands = "Brioso Cuffs +3",
+        hands = "Brioso Cuffs +3", -- 2
         ring1 = "Metamorph Ring +1",
         ring2 = "Medada's Ring",
         back = gear.CastingCape,
         waist = "Acuity Belt +1",
         legs = "Inyanga Shalwar +2",
-        feet = "Brioso Slippers +3"
+        feet = "Brioso Slippers +3" -- 3
     }
     -- when dual wielding
     sets.midcast.SongDebuffDW = set_combine(sets.midcast.SongDebuff, {})
@@ -793,7 +797,7 @@ function init_gear_sets()
         ear2 = "Eabani Earring",
         body = "Inyanga Jubbah +2",
         hands = "Leyline Gloves",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Kishar Ring",
         ring2 = "Medada's Ring",
         back = { name = "Moonlight Cape", priority = 10 },
         waist = "Embla Sash",
@@ -1088,6 +1092,12 @@ function job_pretarget(spell, action, spellMap, eventArgs)
     end
 
     if spell.type == 'BardSong' then
+        if state.EnmityMode.value == 'Enmity' and is_mapped_enmity_spell(spell) and not is_spell_ready(spell) then
+            cancel_spell()
+            send_command("input /ma \"" .. downgrade_enmity_spell(spell, eventArgs) .. "\" " .. spell.target.raw)
+            return
+        end
+
         if spell.english == 'Honor March' or spell.english == 'Aria of Passion' or spell.english == 'Marcato' then
             state.ExtraSongsMode:reset()
         elseif spell.english == 'Foe Lullaby II' or spell.english == 'Horde Lullaby II' then
@@ -1131,9 +1141,6 @@ function job_pretarget(spell, action, spellMap, eventArgs)
             windower.add_to_chat(36, 'Error: Not targeting self and in strict pianissimo mode')
         end
     end
-
-    -- local recasts = windower.ffxi.get_ability_recasts()
-    -- print(recasts[spell.recast_id])
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -1163,6 +1170,9 @@ function job_precast(spell, action, spellMap, eventArgs)
 
     if spell.type == 'BardSong' and state.ExtraSongsMode.value == "Dummy" then
         windower.add_to_chat(144, "INFO: Dummy songs mode enabled")
+    end
+    if spell.type == 'BardSong' and state.LowSongsMode.value == "Dummy" then
+        windower.add_to_chat(144, "INFO: Low songs mode enabled")
     end
 end
 
@@ -1208,9 +1218,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if spell.english == 'Honor March' then
             equip(sets.midcast['Honor March'])
         else
-            if state.ExtraSongsMode.value == 'FullLength' then
-                equip(sets.midcast.Daurdabla)
-            end
             if spell.english:startswith('Horde Lullaby') then
                 if state.LullabyMode.value == 'Range' then
                     equip(sets.Lullaby.range)
@@ -1224,7 +1231,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             end
 
             -- if state.EnmityMode.value == 'Enmity' and get_song_class(spell):contains('Debuff') then
-            if state.EnmityMode.value == 'Enmity' and S { 'Carnage Elegy', 'Horde Lullaby', 'Horde Lullaby II' }:contains(spell.english) then
+            if state.EnmityMode.value == 'Enmity' and S { 'Carnage Elegy', 'Battlefield Elegy', 'Pining Nocturne', 'Foe Lullaby', 'Foe Lullaby II', 'Earth Threnody', 'Earth Threnody II' }:contains(spell.english) then
                 equip(sets.enmity)
             end
             -- if spell.english == 'Horde Lullaby' and state.TreasureMode.value == "Tag" then
@@ -1233,24 +1240,16 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
 
         -- autodummy
-        if state.AutoDummy.value == 'Enabled'
-            and get_song_class(spell) == 'SongEffect'
-            and not S { 'Honor March', 'Aria of Passion' }:contains(spell.english)
-            and not buffactive['Pianissimo'] then
-            local casted_songs = get_buff_song_count()
-            local total_songs = 4
-            local base_songs = 2
-
-            if buffactive['Clarion Call'] then
-                total_songs = 5
-                base_songs = 3
-            end
-
-            if casted_songs >= base_songs and casted_songs < total_songs then
+        if is_auto_dummy(spell) and has_less_songs() then
+            if has_less_songs() then
                 equip(sets.midcast.DaurdablaDummy)
             end
         end
 
+        if not has_less_songs() then
+            local song_type = get_song_type(spell)
+            if sets.midcast[song_type] then equip(sets.midcast[song_type]) end
+        end
         -- state.ExtraSongsMode:reset()
     end
 end
@@ -1260,6 +1259,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if spell.type == 'BardSong' and not spell.interrupted then
         if spell.target and spell.target.type == 'SELF' then
             adjust_timers(spell, spellMap)
+        end
+        if spell.interrupted == false then
+            show_overwrite_timer(spell)
         end
     end
     -- check_engaged()
@@ -1319,7 +1321,7 @@ function job_buff_change(buff, gain)
                 send_command('input /p Charmed.')
             end
         elseif S { 'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3' }:contains(buff) then
-            -- update_combat_form()
+            update_combat_form()
         elseif buff == 'Soul Voice' then
             info.songs_casted = 0
         elseif buff == 'Level Restriction' then
@@ -1345,6 +1347,14 @@ function job_buff_change(buff, gain)
             bind_weapons()
         end
     end
+
+    if buff == 'Nightingale' then
+        if gain then
+            send_command('dressup blinking self always on')
+        else
+            send_command('dressup blinking self always off')
+        end
+    end
 end
 
 -- Handle notifications of general user state change.
@@ -1358,6 +1368,23 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
+
+function is_auto_dummy(spell)
+    return state.AutoDummy.value == 'Enabled'
+        and get_song_class(spell) == 'SongEffect'
+        and not S { 'Honor March', 'Aria of Passion' }:contains(spell.english)
+        and not buffactive['Pianissimo']
+end
+
+-- true if you have less songs than your total
+-- and more than your base amount of songs
+function has_less_songs()
+    local casted_songs = get_buff_song_count()
+    local total_songs = 2 + info.ExtraSongs + (buffactive['Clarion Call'] or 0)
+    local base_songs = 2 + (buffactive['Clarion Call'] or 0)
+
+    return casted_songs < total_songs and casted_songs >= base_songs
+end
 
 function check_engaged()
     -- if state.OffenseMode.value == 'SaveTP' then
@@ -1373,10 +1400,7 @@ end
 
 -- Called by the 'update' self-command.
 function job_update(cmdParams, eventArgs)
-    update_weapon_mode()
-    -- update_idle_gear()
-
-
+    update_combat_form()
 
     if buffactive.doom then
         if state.DoomMode.value == 'Cursna' then
@@ -1479,6 +1503,11 @@ function get_song_class(spell)
     end
 end
 
+function get_song_type(spell)
+    -- get second word, unless its Aria of Passion
+    return (spell.english:startswith("Aria") and "Aria") or spell.english:match("%s+(%a+)")
+end
+
 -- Function to create custom buff-remaining timers with the Timers plugin,
 -- keeping only the actual valid songs rather than spamming the default
 -- buff remaining timers.
@@ -1551,6 +1580,16 @@ function adjust_timers(spell, spellMap)
                 send_command('timers create "' .. spell.name .. '" ' .. dur .. ' down')
             end
         end
+    end
+end
+
+-- simple overwrite timer
+function show_overwrite_timer(spell)
+    local song = get_song_type(spell)
+    local tier = get_spell_tier(spell)
+    local overwrite = 21
+    if song == 'Minuet' then
+        send_command(string.format('timers c "Overwrite %s %s" %d down', song, tier, overwrite))
     end
 end
 
@@ -1640,28 +1679,50 @@ function calculate_duration(spellName, spellMap)
     return totalDuration
 end
 
+function downgrade_enmity_spell(spell, eventArgs)
+    if is_mapped_enmity_spell(spell) then
+        -- eventArgs.cancel = true
+        for i, v in pairs(enmity_spell_priority) do
+            if spell.english == v then
+                -- return the next element in the array
+                return enmity_spell_priority[i + 1]
+                    -- or if it exceeds the length, return the last element of the array
+                    or enmity_spell_priority[enmity_spell_priority:length()]
+            end
+        end
+    end
+end
+
+function is_mapped_enmity_spell(spell)
+    return enmity_spell_priority and enmity_spell_priority:contains(spell.english)
+end
+
+-- Spell priority for elemental nukes
+function define_spell_priority()
+    enmity_spell_priority = T {
+        "Carnage Elegy",
+        "Battlefield Elegy",
+        "Pining Nocturne",
+        "Foe Lullaby II",
+        "Foe Lullaby",
+        "Earth Threnody II",
+        "Earth Threnody"
+    }
+end
+
 function update_weapon_mode(w_state)
     if player.equipment.main == 'Xoanon' then
-        state.CombatForm:reset()
         state.CombatWeapon:set('Xoanon')
-    elseif check_DW() then
-        state.CombatWeapon:reset()
-        state.CombatForm:set('DW')
+        determine_melee_groups('pass')
     else
-        state.CombatWeapon:reset()
-        state.CombatForm:reset()
+        determine_melee_groups('DW')
     end
-    -- overwrite weapons and equip
-    update_sets()
+
     --equip(sets.weapons)
 end
 
-function update_sets()
-
-end
-
-function check_DW()
-    return T(windower.ffxi.get_abilities().job_traits):contains(18)
+function update_combat_form()
+    update_weapon_mode()
 end
 
 function job_self_command(cmdParams, eventArgs)

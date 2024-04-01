@@ -94,7 +94,7 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
     sets.precast.JA['Invincible'] = { legs = "Caballarius Breeches" }
-    sets.precast.JA['Holy Circle'] = { feet = "Sulevia's Leggings +2" }
+    sets.precast.JA['Holy Circle'] = { feet = "Nyame Sollerets" }
     sets.precast.JA['Shield Bash'] = { hands = "Caballarius Gauntlets" }
     sets.precast.JA['Sentinel'] = { feet = "Caballarius Leggings" }
     sets.precast.JA['Rampart'] = { head = "Caballarius Coronet" }
@@ -111,7 +111,7 @@ function init_gear_sets()
         ring2 = "Aquasoul Ring",
         back = "Weard Mantle",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
 
@@ -127,7 +127,7 @@ function init_gear_sets()
         back = "Iximulew Cape",
         waist = "Chaac Belt",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
     -- Don't need any special gear for Healing Waltz.
@@ -147,7 +147,7 @@ function init_gear_sets()
         body = "Sacro Breastplate",
         hands = "Leyline Gloves",
         ring1 = "Kishar Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Medada's Ring",
         legs = "Enif Cosciales",
         feet = "Odyssean Greaves"
     }
@@ -170,7 +170,7 @@ function init_gear_sets()
         back = "Atheling Mantle",
         waist = "Fotia Belt",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
     sets.precast.WS.Acc = {
@@ -186,7 +186,7 @@ function init_gear_sets()
         back = "Atheling Mantle",
         waist = "Fotia Belt",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -209,7 +209,7 @@ function init_gear_sets()
         back = "Toro Cape",
         waist = "Eschan Stone",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
     sets.precast.WS['Atonement'] = {
@@ -243,7 +243,7 @@ function init_gear_sets()
         ring2 = "Rahab Ring",
         waist = "Sailfi belt +1",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
     sets.midcast.Enmity = {
@@ -340,7 +340,7 @@ function init_gear_sets()
         back = "Fierabras's Mantle",
         waist = "Flume Belt +1",
         legs = "Carmine Cuisses +1",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Town = {
@@ -357,7 +357,7 @@ function init_gear_sets()
         back = "Fierabras's Mantle",
         waist = "Flume Belt +1",
         legs = "Carmine cuisses +1",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Weak = {
@@ -373,7 +373,7 @@ function init_gear_sets()
         back = "Fierabras's Mantle",
         waist = "Flume Belt +1",
         legs = "Carmine cuisses +1",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Weak.Reraise = set_combine(sets.idle.Weak, sets.Reraise)
@@ -412,7 +412,7 @@ function init_gear_sets()
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
     sets.defense.HP = {
         ammo = "Staunch Tathlum +1",
@@ -427,7 +427,7 @@ function init_gear_sets()
         back = "Weard Mantle",
         waist = "Creed Baudrier",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
     sets.defense.Reraise = {
         ammo = "Staunch Tathlum +1",
@@ -442,7 +442,7 @@ function init_gear_sets()
         back = "Weard Mantle",
         waist = "Nierenschutz",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
     sets.defense.Charm = {
         ammo = "Staunch Tathlum +1",
@@ -457,7 +457,7 @@ function init_gear_sets()
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
     -- To cap MDT with Shell IV (52/256), need 76/256 in gear.
     -- Shellra V can provide 75/256, which would need another 53/256 in gear.
@@ -474,7 +474,7 @@ function init_gear_sets()
         back = "Engulfer Cape",
         waist = "Creed Baudrier",
         legs = "Sulevia's Cuisses +2",
-        feet = "Sulevia's Leggings +2"
+        feet = "Nyame Sollerets"
     }
 
 
@@ -552,7 +552,7 @@ function init_gear_sets()
             body = "Sulevia's Platemail +2",
             hands = "Sulevia's Gauntlets +1",
             legs = "Sulevia's Cuisses +2",
-            feet = "Sulevia's Leggings +2",
+            feet = "Nyame Sollerets",
             neck = "Loricate Torque +1",
             ring1 = "Petrov Ring"
         })
@@ -562,7 +562,7 @@ function init_gear_sets()
             body = "Sulevia's Platemail +2",
             hands = "Sulevia's Gauntlets +1",
             legs = "Sulevia's Cuisses +2",
-            feet = "Sulevia's Leggings +2",
+            feet = "Nyame Sollerets",
             neck = "Loricate Torque +1",
             ring1 = "Petrov Ring"
         })
@@ -575,7 +575,7 @@ function init_gear_sets()
             body = "Sulevia's Platemail +2",
             hands = "Sulevia's Gauntlets +1",
             legs = "Sulevia's Cuisses +2",
-            feet = "Sulevia's Leggings +2",
+            feet = "Nyame Sollerets",
             neck = "Loricate Torque +1",
             ring1 = "Petrov Ring"
         })
@@ -585,7 +585,7 @@ function init_gear_sets()
             body = "Sulevia's Platemail +2",
             hands = "Sulevia's Gauntlets +1",
             legs = "Sulevia's Cuisses +2",
-            feet = "Sulevia's Leggings +2",
+            feet = "Nyame Sollerets",
             neck = "Loricate Torque +1",
             ring1 = "Petrov Ring"
         })

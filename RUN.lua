@@ -41,7 +41,7 @@ end
 
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Hybrid', 'DD')
@@ -224,6 +224,8 @@ function init_gear_sets()
         ring2 = "Blenmot's Ring +1"
     })
 
+    sets.buff['Embolden'] = { back = "Evasionist's Cape" }
+
     sets.Arebati = {
         main = "Epeolatry",
         sub = "Utu Grip",              -- 3
@@ -293,7 +295,7 @@ function init_gear_sets()
     sets.Lunge = {}
     sets.Lunge.Dark = set_combine(sets.precast['Lunge'],
         { head = "Pixie Hairpin +1", body = "Agwu's Robe", ring2 = "Archon Ring" })
-    sets.Lunge.Light = set_combine(sets.precast['Lunge'], { ring2 = "Weatherspoon Ring +1" })
+    sets.Lunge.Light = set_combine(sets.precast['Lunge'], { ring2 = "Kishar Ring" })
 
     -- Fast cast sets for spells
     -- 80 FC
@@ -304,14 +306,14 @@ function init_gear_sets()
         neck = "Orunmila's Torque",  -- 5
         ear1 = { name = "Tuisto Earring", priority = 10 },
         ear2 = { name = "Odnowa Earring", priority = 9 },
-        body = "Erilaz Surcoat +3",     -- 13
-        hands = "Leyline Gloves",       -- 8
-        ring1 = "Medada's Ring",        -- 10
-        ring2 = "Weatherspoon Ring +1", -- 6
-        back = gear.FCCape,             -- 10
+        body = "Erilaz Surcoat +3", -- 13
+        hands = "Leyline Gloves",   -- 8
+        ring1 = "Medada's Ring",    -- 10
+        ring2 = "Kishar Ring",      -- 6
+        back = gear.FCCape,         -- 10
         waist = { name = "Platinum Moogle Belt", priority = 8 },
-        legs = "Agwu's Slops",          -- 7
-        feet = "Carmine Greaves +1"     -- 8
+        legs = "Agwu's Slops",      -- 7
+        feet = "Carmine Greaves +1" -- 8
     }
 
     sets.precast.FC.inspiration = {}
@@ -328,10 +330,10 @@ function init_gear_sets()
         neck = "Orunmila's Torque",  -- 5
         ear1 = { name = "Tuisto Earring", priority = 10 },
         ear2 = { name = "Odnowa Earring", priority = 9 },
-        body = "Erilaz Surcoat +3",     -- 13
-        hands = "Leyline Gloves",       -- 8
-        ring1 = "Medada's Ring",        -- 10
-        ring2 = "Weatherspoon Ring +1", -- 6
+        body = "Erilaz Surcoat +3", -- 13
+        hands = "Leyline Gloves",   -- 8
+        ring1 = "Medada's Ring",    -- 10
+        ring2 = "Kishar Ring",      -- 6
         back = { name = "Moonlight Cape", priority = 8 },
         waist = { name = "Platinum Moogle Belt", priority = 7 },
         legs = "Agwu's Slops",      -- 7
@@ -342,7 +344,7 @@ function init_gear_sets()
     -- sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
     --     ammo = "Impatiens",
     --     ring1 = "Lebeche Ring",
-    --     ring2 = "Weatherspoon Ring +1",
+    --     ring2 = "Kishar Ring",
     --     back = gear.FCCape,
     --     waist = "Siegel Sash",
     --     legs = "Futhark Trousers +3",
@@ -382,7 +384,7 @@ function init_gear_sets()
         neck = "Caro Necklace",
         ear1 = "Sherida Earring",
         ear2 = "Moonshade Earring",
-        hands = "Meghanada Gloves +2",
+        hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
         ring2 = "Niqmaddu Ring",
         back = gear.DimCape,
@@ -432,7 +434,7 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         neck = "Orunmila's Torque",
         ring1 = "Medada's Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Kishar Ring",
         waist = "Sailfi Belt +1"
     }
 
@@ -477,8 +479,9 @@ function init_gear_sets()
         body = gear.herculean.phalanx.body,
         hands = gear.herculean.phalanx.hands,
         legs = gear.herculean.phalanx.legs,
-        feet = gear.herculean.phalanx.feet
+        feet = gear.herculean.phalanx.feet,
     }
+    sets.PhalanxEmb = set_combine(sets.Phalanx, sets.buff['Embolden'])
 
     sets.midcast.Phalanx = set_combine(sets.midcast['Enhancing Magic'], sets.Phalanx)
 
@@ -549,11 +552,11 @@ function init_gear_sets()
         ear2 = "Odnowa Earring +1",
         body = "Erilaz surcoat +3",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_moonlight,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = gear.TankCape,
         waist = "Flume Belt +1",
-        legs = "Carmine Cuisses +1",
+        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
@@ -565,6 +568,7 @@ function init_gear_sets()
         hands = "Regal Gauntlets",
         ring1 = "Paguroidea Ring",
         ring2 = gear.right_chirich,
+        legs = "Carmine Cuisses +1",
         back = gear.TankCape
     })
 
@@ -605,10 +609,10 @@ function init_gear_sets()
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring +1",
         back = gear.TankCape,
         waist = "Blacksmith's Belt",
-        legs = "Carmine Cuisses +1",
+        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
@@ -621,11 +625,11 @@ function init_gear_sets()
         ear2 = "Infused Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_moonlight,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = gear.TankCape,
         waist = "Flume Belt +1",
-        legs = "Carmine Cuisses +1",
+        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
@@ -941,6 +945,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         equip(sets.midcast.Aquaveil)
     end
 
+    if spell.skill == 'Enhancing Magic' and buffactive['Embolden'] then
+        equip(sets.buff['Embolden'])
+    end
+
     if spell.english:startswith('Poison') and state.TreasureMode.value == 'Tag' then
         equip(sets.TreasureHunter)
     end
@@ -965,6 +973,10 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
         elseif state.DoomMode.value == 'Holy Water' then
             equip(sets.buff.doom.HolyWater)
         end
+    end
+
+    if buffactive['Embolden'] then
+        equip(sets.buff['Embolden'])
     end
 
     if S { 'Souleater', 'Last Resort' }:contains(spell.english) and state.OffenseMode.value ~= "DD" then
@@ -1203,7 +1215,8 @@ end
 
 function ask_for_phalanx()
     send_command('input /p Phalanx set equipped!')
-    send_command('gs equip sets.Phalanx')
+
+    send_command('gs equip sets.PhalanxEmb')
 end
 
 -- Remove the oldest rune(s) from the table, until we're below the max_runes limit.

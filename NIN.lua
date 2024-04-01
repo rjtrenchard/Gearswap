@@ -18,7 +18,7 @@ function job_setup()
     state.Buff.Innin = buffactive.Innin or false
     state.Buff.Futae = buffactive.Futae or false
 
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     -- calculate_haste()
     include('Mote-TreasureHunter')
 
@@ -363,7 +363,7 @@ function init_gear_sets()
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
         ring1 = "Medada's Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Kishar Ring",
         back = gear.fc_cape,
         legs = "Gyve Trousers",
     }
@@ -809,13 +809,13 @@ function init_gear_sets()
 
 
     -- need 21 DW
-    sets.HasteMidDW = { ear1 = "Suppanomimi", waist = "Reiki Yotai", legs = "Mochizuki Hakama +3" }
-    sets.engaged.HasteMidDW = set_combine(sets.engaged, sets.HasteMidDW)
-    sets.engaged.HasteMidDW.Acc = set_combine(sets.engaged.Acc, sets.HasteMidDW)
-    sets.engaged.HasteMidDW.Evasion = set_combine(sets.engaged.Evasion, sets.DTDW)
-    sets.engaged.HasteMidDW.Acc.Evasion = set_combine(sets.engaged.Acc.Evasion, sets.DTDW)
-    sets.engaged.HasteMidDW.PDT = set_combine(sets.engaged.PDT, sets.DTDW)
-    sets.engaged.HasteMidDW.Acc.PDT = set_combine(sets.engaged.Acc.PDT, sets.DTDW)
+    sets.HasteDW = { ear1 = "Suppanomimi", waist = "Reiki Yotai", legs = "Mochizuki Hakama +3" }
+    sets.engaged.HasteDW = set_combine(sets.engaged, sets.HasteDW)
+    sets.engaged.HasteDW.Acc = set_combine(sets.engaged.Acc, sets.HasteDW)
+    sets.engaged.HasteDW.Evasion = set_combine(sets.engaged.Evasion, sets.DTDW)
+    sets.engaged.HasteDW.Acc.Evasion = set_combine(sets.engaged.Acc.Evasion, sets.DTDW)
+    sets.engaged.HasteDW.PDT = set_combine(sets.engaged.PDT, sets.DTDW)
+    sets.engaged.HasteDW.Acc.PDT = set_combine(sets.engaged.Acc.PDT, sets.DTDW)
 
 
     -- need 1 DW
@@ -1161,7 +1161,7 @@ function calculate_haste()
         classes.CustomMeleeGroups:append('NormalDW')
     elseif haste > 29 and haste < 43.75 then
         -- equip up to 21 DW
-        classes.CustomMeleeGroups:append('HasteMidDW')
+        classes.CustomMeleeGroups:append('HasteDW')
     elseif haste >= 43.75 then
         -- equip 1 DW
         classes.CustomMeleeGroups:append('HasteMaxDW')

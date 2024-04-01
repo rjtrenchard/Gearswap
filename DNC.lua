@@ -57,7 +57,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc')
@@ -183,7 +183,7 @@ function init_gear_sets()
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
         ring1 = "Rahab Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Medada's Ring",
     }
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, { neck = "Magoraga Beads" })
@@ -305,12 +305,12 @@ function init_gear_sets()
         ear2 = "Odnowa Earring +1",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_moonlight,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Skadi's Jambeaux +1"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Town = {
@@ -322,11 +322,11 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Sheltered Ring",
-        ring2 = "Defending Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Atheling Mantle",
         waist = "Reiki Yotai",
         legs = "Malignance Tights",
-        feet = "Skadi's Jambeaux +1"
+        feet = "Malignance Boots"
     }
 
     sets.idle.Weak = sets.idle

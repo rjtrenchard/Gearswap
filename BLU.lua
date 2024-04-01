@@ -29,7 +29,7 @@ function job_setup()
 
     include('Mote-TreasureHunter')
     include('Augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     blue_magic_maps = {}
@@ -371,7 +371,7 @@ function init_gear_sets()
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
         ring1 = "Lebeche Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Kishar Ring",
         back = "Fi Follet Cape +1",
         legs = "Enif Cosciales",
         feet = "Carmine Greaves +1"
@@ -425,7 +425,7 @@ function init_gear_sets()
         ear1 = "Friomisi Earring",
         ear2 = "Regal Earring",
         body = "Amalric Doublet +1",
-        hands = "Jhakri Cuffs +2",
+        hands = "Nyame Gauntlets",
         ring1 = "Metamorph Ring +1",
         ring2 = "Archon Ring",
         back = "Cornflower Cape",
@@ -466,7 +466,7 @@ function init_gear_sets()
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
         ring1 = "Kishar Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Medada's ring",
         back = "Fi Follet Cape +1",
         waist = "Witful Belt",
         legs = "Enif Cosciales",
@@ -587,7 +587,7 @@ function init_gear_sets()
         { head = "Pixie Hairpin +1", body = "Amalric Doublet +1", ring2 = "Archon Ring" })
 
     sets.midcast['Blue Magic'].MagicalLight = set_combine(sets.midcast['Blue Magic'].Magical,
-        { ring2 = "Weatherspoon Ring +1" })
+        {})
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
         ammo = "Pemphredo Tathlum",
@@ -785,10 +785,10 @@ function init_gear_sets()
         body = "Jhakri Robe +2",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Fucho-no-obi",
-        legs = "Carmine Cuisses +1",
+        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
@@ -800,11 +800,11 @@ function init_gear_sets()
         ear2 = "Odnowa earring +1",
         body = "Adamantite Armor",
         hands = "Nyame Gauntlets",
-        ring2 = "Paguroidea Ring",
-        ring1 = "Gelatinous Ring +1",
+        ring2 = "Gelatinous Ring +1",
+        ring1 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
-        legs = "Carmine Cuisses +1",
+        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
@@ -1238,12 +1238,7 @@ function calculate_haste()
 end
 
 function update_combat_form()
-    -- Check for H2H or single-wielding
-    if can_DW() then
-        calculate_haste()
-    else
-        classes.CustomMeleeGroups:clear()
-    end
+
 end
 
 -- Select default macro book on initial load or subjob change.

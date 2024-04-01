@@ -66,7 +66,7 @@ end
 function user_setup()
     include('augments.lua')
     include('default_sets.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
 
     state.OffenseMode:options('Normal', 'Acc', 'Pet')
     state.HybridMode:options('Normal', 'DT')
@@ -122,7 +122,7 @@ function init_gear_sets()
         ear1 = "Enchanter's Earring +1",
         ear2 = "Loquacious Earring",
         ring1 = "Rahab Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Medada's Ring",
         back = "Fi Follet Cape +1",
         legs = "Gyve Trousers",
         feet = "Regal Pumps +1"

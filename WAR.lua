@@ -28,7 +28,7 @@ end
 -- Setup vars that are user-dependent.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc', 'Crit')
@@ -49,35 +49,53 @@ function user_setup()
     gear.WSNightEar1 = "Lugra Earring +1"
     gear.WSNightEar2 = "Lugra Earring"
 
-    -- ticker = windower.register_event('time change', function(myTime)
-    --     if (myTime == 17 * 60 or myTime == 7 * 60) and (player.status == 'Idle' or state.Kiting.value) then
-    --         procTime(myTime)
-    --         if (player.status == 'Idle' or state.Kiting.value) then
-    --             update_combat_form()
-    --         end
-    --     end
-    -- end)
-
     gear.tp_neck_regular = { name = "War. Beads +2" }
     gear.tp_neck_vim = { name = "War. Beads +2" }
     gear.tp_neck = gear.tp_neck_vim
 
-    send_command('bind numpad4 gs equip sets.weapons.Sword')
-    send_command('bind ^numpad4 gs equip sets.weapons.Ridill')
-    send_command('bind numpad5 gs equip sets.weapons.Club')
-    send_command('bind ^numpad5 gs equip sets.weapons.Dagger')
-    send_command('bind numpad6 gs equip sets.weapons.Fists')
+    send_command('bind numpad4 gs c equip Sword')
+    send_command('bind !numpad4 gs c equip Ridill')
+    send_command('bind numpad5 gs c equip Club')
+    send_command('bind ^numpad5 gs c equip Dagger')
+    send_command('bind numpad6 gs c equip Axe')
 
-    send_command('bind numpad7 gs equip sets.weapons.GAxe')
-    send_command('bind ^numpad7 gs equip sets.weapons.Axe')
-    send_command('bind numpad8 gs equip sets.weapons.Spear')
-    send_command('bind numpad9 gs equip sets.weapons.Staff')
-
+    send_command('bind numpad7 gs c equip GAxe')
+    send_command('bind numpad8 gs c equip Spear')
+    send_command('bind numpad9 gs c equip Staff')
+    send_command('bind ^numpad9 gs c equip Fists')
 
     send_command('bind ^f11 gs c set DefenseMode Reraise')
 
     send_command('bind ^- gs c cycle DoomMode')
     send_command('bind ^= gs c cycle treasuremode')
+
+
+    info.magic_ws = S {
+        'Aeolian Edge',
+        'Cyclone',
+        'Gust Slash',
+        'Catacylsm',
+        'Spirit Taker',
+        'Sunburst',
+        'Starburst',
+        'Earth Crusher',
+        'Sanguine Blade',
+        'Seraph Blade',
+        'Shining Blade',
+        'Red Lotus Blade',
+        'Burning Blade',
+        'Freezebite',
+        'Frostbite',
+        'Cloudsplitter',
+        'Shadow of Death',
+        'Dark Harvest',
+        'Infernal Scythe',
+        'Raiden Thrust',
+        'Thunder Thrust',
+        'Seraph Strike',
+        'Shining Strike',
+        'Flash Nova',
+    }
 
     update_combat_form()
     select_default_macro_book()
@@ -116,13 +134,15 @@ function init_gear_sets()
     }
     gear.str_ws_cape = {
         name = "Cichol's Mantle",
-        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%' },
+        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%', 'Phys. dmg. taken-10%', },
     }
     gear.magic_ws_cape = {
         name = "Cichol's Mantle",
         augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'Weapon skill damage +10%', }
     }
     gear.multi_ws_cape = gear.str_ws_cape
+
+    gear.crit_cape = gear.str_ws_cape
 
     sets.weapons = {}
     sets.weapons.Sword = { main = "Naegling", sub = "Blurred Shield +1" }
@@ -133,7 +153,7 @@ function init_gear_sets()
     sets.weapons.Spear = { main = "Shining One", sub = "Utu Grip" }
     sets.weapons.Staff = { main = "Xoanon", sub = "Utu Grip" }
     sets.weapons.Fists = { main = "Karambit" }
-    sets.weapons.Axe = { main = "Dolichenus", sun = "Blurred Shield +1" }
+    sets.weapons.Axe = { main = "Ikenga's Axe", sub = "Blurred Shield +1" }
 
 
     sets.TreasureHunter = {
@@ -180,11 +200,28 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Sacro Breastplate",
         hands = "Leyline Gloves",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Rahab Ring",
         ring2 = "Medada's Ring",
         legs = "Limbo Trousers",
         feet = gear.odyssean.fc.feet
     }
+
+    sets.FullTP = {
+        ammo = "Coiste Bodhar",
+        head = "Flamma Zucchetto +2",
+        neck = "Vim Torque +1",
+        ear1 = "Telos Earring",
+        ear2 = "Dedition Earring",
+        body = "Crepuscular Mail",
+        hands = "Sakpata's Gauntlets",
+        ring1 = gear.left_chirich,
+        ring2 = gear.right_chirich,
+        back = gear.melee_cape,
+        waist = "Kentarch Belt +1",
+        legs = "Volte Tights",
+        feet = "Flamma Gambieras +2"
+    }
+    sets.Volte = set_combine(sets.FullTP, { body = "Volte Harness" })
 
     sets.Sleeping = { neck = "Vim Torque +1" }
 
@@ -216,6 +253,20 @@ function init_gear_sets()
         feet = "Nyame Sollerets",
     }
 
+    sets.buff['Retaliation'] = {
+        hands = "Boii Mufflers +3"
+    }
+
+    sets.buff['Brazen Rush'] = {
+        head = "Sakpata's Helm",
+        legs = "Agoge Cuisses +3",
+    }
+
+    sets.buff['Mighty Strikes'] = {
+        ammo = "Yetshila +1",
+        feet = "Boii Calligae +3"
+    }
+
     sets.resist = {}
     sets.resist.death = {
         main = "Odium",
@@ -226,19 +277,31 @@ function init_gear_sets()
     -- Precast Sets
     -- Precast sets to enhance JAs
     sets.precast.JA['Provoke'] = sets.enmity
-    sets.precast.JA['Berserk'] = { body = "Pummeler's Lorica +3", back = "Cichol's Mantle", feet = "Agoge calligae +2" }
-    sets.precast.JA['Warcry'] = { head = "Agoge Mask +1" }
+    sets.precast.JA['Berserk'] = { body = "Pummeler's Lorica +3", back = gear.melee_cape, feet = "Agoge Calligae +3" }
+    sets.precast.JA['Warcry'] = { head = "Agoge Mask +3" }
     sets.precast.JA['Aggressor'] = { head = "Pummeler's Mask +1", body = "Agoge Lorica +1" }
-    sets.precast.JA['Retaliation'] = { hands = "Pummeler's Mufflers +1", legs = "Boii Calligae +1" }
-    sets.precast.JA['Warrior\'s Charge'] = { legs = "Agoge Cuisses +2" }
-    sets.precast.JA['Tomahawk'] = { ammo = "Throwing Tomahawk", feet = "Agoge calligae +1" }
-    sets.precast.JA['Restraint'] = { hands = "Boii Mufflers +2" }
-    sets.precast.JA['Blood Rage'] = { body = "Boii Lorica +1" }
+    sets.precast.JA['Retaliation'] = { hands = "Pummeler's Mufflers +1", legs = "Boii Calligae +3" }
+    sets.precast.JA['Warrior\'s Charge'] = { legs = "Agoge Cuisses +3" }
+    sets.precast.JA['Tomahawk'] = { ammo = "Throwing Tomahawk", feet = "Agoge Calligae +3" }
+    sets.precast.JA['Restraint'] = { hands = "Boii Mufflers +3" }
+    sets.precast.JA['Blood Rage'] = { body = "Boii Lorica +3" }
     sets.precast.JA['Mighty Strikes'] = { hands = "Agoge Mufflers +1" }
 
 
     sets.precast.JA['Jump'] = {
-
+        ammo = "Coiste Bodhar",
+        head = "Flamma Zucchetto +2",
+        neck = "Vim Torque +1",
+        ear1 = "Schere Earring",
+        ear2 = "Boii earring +1",
+        body = "Boii Lorica +3",
+        hands = "Sakpata's Gauntlets",
+        ring1 = gear.left_moonlight,
+        ring2 = "Niqmaddu Ring",
+        back = gear.melee_cape,
+        waist = "Kentarch Belt +1",
+        legs = "Tatenashi Haidate +1",
+        feet = "Tatenashi Sune-ate +1"
     }
     sets.precast.JA['High Jump'] = sets.precast.JA['Jump']
 
@@ -247,17 +310,17 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo = "Knobkierrie",
-        head = "Nyame Helm",
+        head = "Agoge Mask +3",
         neck = "Fotia Gorget",
         ear1 = "Thrud Earring",
         ear2 = "Moonshade Earring",
-        body = "Pummeler's Lorica +3",
-        hands = "Boii Mufflers +2",
+        body = "Nyame Mail",
+        hands = "Boii Mufflers +3",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Niqmaddu Ring",
+        ring2 = "Sroda Ring",
         back = gear.str_ws_cape,
         waist = "Fotia Belt",
-        legs = "Nyame Flanchard",
+        legs = "Boii Cuisses +3",
         feet = "Nyame Sollerets",
     }
 
@@ -267,35 +330,35 @@ function init_gear_sets()
         neck = "Fotia Gorget",
         ear1 = "Telos Earring",
         ear2 = "Dignitary Earring",
-        body = "Tatanashi Haramaki +1",
-        hands = "Tatenashi Gote +1",
+        body = "Boii Lorica +3",
+        hands = "Boii Mufflers +3",
         ring1 = gear.left_moonlight,
         ring2 = gear.right_moonlight,
         back = gear.str_ws_cape,
         waist = "Fotia Belt",
-        legs = "Tatanashi Haidate +1",
-        feet = "Tatenashi Sune-ate +1"
+        legs = "Boii Cuisses +3",
+        feet = "Boii Calligae +3"
     })
 
     sets.precast.WS.MultiHit = {
-        ammo = "Seething Bomblet +1",
+        ammo = "Crepuscular Pebble",
         head = "Sakpata's Helm",
         neck = "Fotia Gorget",
         ear1 = "Schere Earring",
         ear2 = "Moonshade Earring",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring1 = "Regal Ring",
+        ring1 = "Sroda Ring",
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Fotia Belt",
-        legs = "Sakpata's Cuisses",
+        legs = "Agoge Cuisses +3",
         feet = "Sakpata's Leggings"
     }
 
     sets.precast.WS.Crit = {
         ammo = "Yetshila +1",
-        head = "Blistering Sallet +1",
+        head = "Boii Mask +3",
         neck = "Fotia Gorget",
         ear1 = "Schere Earring",
         ear2 = "Moonshade Earring",
@@ -306,7 +369,7 @@ function init_gear_sets()
         back = gear.str_ws_cape,
         waist = "Fotia Belt",
         legs = "Zoar Subligar +1",
-        feet = "Sakpata's Leggings"
+        feet = "Boii Calligae +3"
     }
 
     sets.precast.WS.Magic = {
@@ -325,18 +388,85 @@ function init_gear_sets()
         feet = "Nyame Sollerets"
     }
 
-    -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
+    -- Greataxe
     sets.precast.WS['Upheaval'] = set_combine(sets.precast.WS.MultiHit, {
-        ammo = "Seething Bomblet +1",
         ear1 = "Schere Earring",
-        ring1 = "Niqmaddu Ring",
+    })
+    sets.precast.WS['Upheaval']['Mighty Strikes'] = {
+        ammo = "Yetshila +1",
+        feet = "Boii Calligae +3"
+    }
+
+    sets.precast.WS['Full Break'] = set_combine(sets.precast.WS, {
+        ear1 = "Crepuscular Earring",
+        ear2 = "Boii Earring +1",
     })
 
+    sets.precast.WS['Fell Cleave'] = set_combine(sets.precast.WS)
+
+    -- Sword
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
         neck = "Warrior's Bead Necklace +2",
-        waist = "Sailfi Belt +1"
+        waist = "Sailfi Belt +1",
+        legs = "Boii Cuisses +3",
     })
     sets.precast.WS['Savage Blade'].MaxTP = { ear2 = "Lugra Earring +1" }
+    sets.precast.WS['Savage Blade']['Mighty Strikes'] = {
+        ammo = "Yetshila +1",
+        feet = "Boii Calligae +3"
+    }
+
+    sets.precast.WS['Vorpal Blade'] = set_combine(sets.precast.WS.Crit)
+
+    sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS['Cataclysm'], { back = gear.str_ws_cape })
+
+    -- Axe
+    sets.precast.WS['Calamity'] = sets.precast.WS['Savage Blade']
+    sets.precast.WS['Mistral Axe'] = sets.precast.WS['Savage Blade']
+
+    sets.precast.WS['Decimation'] = sets.precast.WS.MultiHit
+
+    sets.precast.WS['Rampage'] = set_combine(sets.precast.WS.Crit)
+
+    sets.precast.WS['Cloudsplitter'] = set_combine(sets.precast.WS.Magic)
+
+    -- Spear
+    sets.precast.WS['Impulse Drive'] = set_combine(sets.precast.WS['Savage Blade'], {
+        ammo = "Yetshila +1",
+        head = "Boii Mask +3",
+        ear1 = "Moonshade Earring",
+        ear2 = "Boii Earring +1",
+        body = "Hjarrandi Breastplate",
+        ring1 = "Begrudging Ring",
+        ring2 = "Niqmaddu Ring",
+        back = gear.crit_cape,
+        feet = "Boii Calligae +3"
+    })
+    sets.precast.WS['Impulse Drive'].FullTP = {
+        ear1 = "Thrud Earring"
+    }
+
+    sets.precast.WS['Stardiver'] = sets.precast.WS['Upheaval']
+
+    -- Club
+    sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
+
+    sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
+
+    sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS['Upheaval'],
+        { ring1 = "Sroda Ring", ring2 = "Metamorph Ring +1" })
+
+    sets.precast.WS['True Strike'] = set_combine(
+        sets.precast.WS['Impulse Drive'],
+        { legs = "Nyame Flanchard" }
+    )
+
+
+
+    -- Staff
+    sets.precast.WS['Retribution'] = sets.precast.WS['Savage Blade']
+
+    sets.precast.WS['Shattersoul'] = sets.precast.WS.MultiHit
 
     sets.precast.WS['Cataclysm'] = {
         ammo = "Knobkierrie",
@@ -348,22 +478,21 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
         ring2 = "Archon Ring",
-        back = gear.magic_ws_cape,
+        back = gear.str_ws_cape,
         waist = "Eschan Stone",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets",
     }
     sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS['Cataclysm'], { back = gear.str_ws_cape })
 
-    sets.precast.WS['Impulse Drive'] = sets.precast.WS['Savage Blade']
-    sets.precast.WS['Stardiver'] = sets.precast.WS['Upheaval']
-
-    sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
-
-    sets.precast.WS['Retribution'] = sets.precast.WS['Savage Blade']
-
+    -- H2H?
     sets.precast.WS['Asuran Fists'] = sets.precast.WS.Acc
+    sets.precast.WS['Asuran Fists']['Mighty Strikes'] = {
+        ammo = "Yetshila +1",
+        feet = "Boii Calligae +3"
+    }
 
+    -- Dagger
     sets.precast.WS['Aeolian Edge'] = {
         ammo = "Knobkierrie",
         head = "Nyame Helm",
@@ -379,13 +508,14 @@ function init_gear_sets()
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
+    sets.precast.WS['Eviscaration'] = sets.precast.WS.Crit
 
     -- Midcast Sets
     sets.midcast.FastRecast = {
         head = "Sakpata's Helm",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Rahab Ring",
         ring2 = "Medada's Ring",
         legs = "Sakpata's Cuisses",
         feet = gear.odyssean.fc.feet
@@ -411,27 +541,27 @@ function init_gear_sets()
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Blacksmith's Belt",
         legs = "Sakpata's Cuisses",
-        feet = "Hermes' sandals"
+        feet = "Sakpata's Leggings"
     }
 
     sets.idle.Field = set_combine({}, {
         ammo = "Staunch Tathlum +1",
         head = "Sakpata's Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Tuisto Earring",
+        ear1 = "Brachyura Earring",
         ear2 = "Odnowa Earring +1",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring2 = "Gelatinous Ring +1",
-        ring1 = gear.left_moonlight,
-        back = "Moonlight Cape",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
+        back = gear.melee_cape,
         waist = "Flume Belt +1",
         legs = "Sakpata's Cuisses",
-        feet = "Hermes' sandals"
+        feet = "Sakapta's Leggings"
     })
 
     sets.idle.Weak = {
@@ -442,8 +572,8 @@ function init_gear_sets()
         ear2 = "Odnowa Earring +1",
         body = "Crepuscular Mail",
         hands = "Sakpata's Gauntlets",
-        ring1 = gear.left_moonlight,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Sakpata's Cuisses",
@@ -521,37 +651,37 @@ function init_gear_sets()
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
     sets.engaged = {
         ammo = "Coiste Bodhar",
-        head = "Sakpata's Helm",
+        head = "Sakpata's Helm", -- 7
         neck = gear.tp_neck,
         ear1 = "Schere Earring",
         ear2 = "Boii earring +1",
-        body = "Tatenashi Haramaki +1",
-        hands = "Tatenashi Gote +1",
-        ring1 = gear.left_moonlight,
+        body = "Boii Lorica +3",       -- 13
+        hands = "Sakpata's Gauntlets", -- 8
+        ring1 = gear.left_moonlight,   -- 5
         ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape,
-        waist = "Windbuffet Belt +1",
-        legs = "Tatenashi Haidate +1",
-        feet = "Tatenashi Sune-ate +1"
+        back = gear.melee_cape,        -- 10
+        waist = "Sailfi Belt +1",
+        legs = "Sakpata's Cuisses",    -- 9
+        feet = "Sakpata's Leggings"
     }
     sets.engaged.Acc = {
         ammo = "Seething Bomblet +1",
         head = "Sakpata's Helm",
         neck = gear.tp_neck,
-        ear1 = "Telos Earring",
+        ear1 = "Schere Earring",
         ear2 = "Boii earring +1",
-        body = "Tatenashi Haramaki +1",
-        hands = "Tatenashi Gote +1",
+        body = "Boii Lorica +3",
+        hands = "Boii Mufflers +3",
         ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Ioskeha Belt +1",
-        legs = "Tatenashi Haidate +1",
+        legs = "Boii Cuisses +3",
         feet = "Tatenashi Sune-ate +1",
     }
     sets.engaged.Crit = {
         ammo = "Yetshila +1",
-        head = "Blistering Sallet +1",
+        head = "Boii Mask +3",
         neck = gear.tp_neck,
         ear1 = "Schere Earring",
         ear2 = "Boii earring +1",
@@ -568,16 +698,16 @@ function init_gear_sets()
         ammo = "Coiste Bodhar",
         head = "Sakpata's Helm",
         neck = gear.tp_neck,
-        ear1 = "Schere Earring",
+        ear1 = "Telos Earring",
         ear2 = "Boii earring +1",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
         ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
-        waist = "Kentarch Belt +1",
+        waist = "Sailfi Belt +1",
         legs = "Sakpata's Cuisses",
-        feet = "Tatenashi Sune-Ate +1"
+        feet = "Sakpata's Leggings"
     }
     sets.engaged.Acc.PDT = {
         ammo = "Seething Bomblet +1",
@@ -631,14 +761,14 @@ function init_gear_sets()
         neck = gear.tp_neck,
         ear1 = "Schere Earring",
         ear2 = "Boii earring +1",
-        body = "Tatenashi Haramaki +1",
-        hands = "Tatenashi Gote +1",
+        body = "Boii Lorica +3",
+        hands = "Sakpata's Gauntlets",
         ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Windbuffet Belt +1",
-        legs = "Tatenashi Haidate +1",
-        feet = "Tatenashi Sune-ate +1"
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings"
     }
     sets.engaged.DW.Acc = {
         ammo = "Seething Bomblet +1",
@@ -646,18 +776,18 @@ function init_gear_sets()
         neck = gear.tp_neck,
         ear1 = "Telos Earring",
         ear2 = "Boii earring +1",
-        body = "Tatenashi Haramaki +1",
-        hands = "Tatenashi Gote +1",
+        body = "Boii Lorica +3",
+        hands = "Boii Mufflers +3",
         ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Ioskeha Belt +1",
-        legs = "Tatenashi Haidate +1",
-        feet = "Tatenashi Sune-ate +1",
+        legs = "Sakpata's Cuisses",
+        feet = "Sakpata's Leggings",
     }
     sets.engaged.DW.Crit = {
         ammo = "Yetshila +1",
-        head = "Blistering Sallet +1",
+        head = "Boii Mask +3",
         neck = gear.tp_neck,
         ear1 = "Schere Earring",
         ear2 = "Boii earring +1",
@@ -739,32 +869,48 @@ end
 function filtered_action(spell)
     -- weapon agnostic remap
     if spell.type == 'WeaponSkill' then
-        cancel_spell()
         local main = player.equipment.main
         if spell.english == 'Upheaval' then
             if main == 'Naegling' then
                 send_command('input /ws "Savage Blade" ' .. spell.target.raw)
+                cancel_spell()
             elseif main == 'Loxotic Mace +1' then
                 send_command('input /ws "Judgment" ' .. spell.target.raw)
+                cancel_spell()
+            elseif main == 'Ikenga\'s Axe' then
+                send_command('input /ws "Calamity" ' .. spell.target.raw)
+                cancel_spell()
             elseif main == 'Shining One' then
-                send_command('input /ws "Stardiver" ' .. spell.target.raw)
+                send_command('input /ws "Impulse Drive" ' .. spell.target.raw)
+                cancel_spell()
             elseif main == 'Xoanon' then
                 send_command('input /ws "Retribution" ' .. spell.target.raw)
+                cancel_spell()
             elseif main == 'Karambit' then
                 send_command('input /ws "Asuran Fists" ' .. spell.target.raw)
+                cancel_spell()
             end
         elseif spell.english == "Steel Cyclone" then
             if main == 'Shining One' then
-                send_command('input /ws "Impulse Drive" ' .. spell.target.raw)
+                send_command('input /ws "Stardiver" ' .. spell.target.raw)
+                cancel_spell()
+            elseif main == 'Ikenga\'s Axe' then
+                send_command('input /ws "Mistral Axe" ' .. spell.target.raw)
+                cancel_spell()
             end
         elseif spell.english == "Fell Cleave" then
             if main == "Shining One" then
                 send_command('input /ws "Sonic Thrust" ' .. spell.target.raw)
+                cancel_spell()
             elseif main == 'Xoanon' then
                 send_command('input /ws "Cataclysm" ' .. spell.target.raw)
+                cancel_spell()
+            elseif main == 'Crepuscular Knife' then
+                send_command('input /ws "Aeolian Edge" ' .. spell.target.raw)
+                cancel_spell()
             end
         end
-    elseif spell.type == 'JobAbility' then
+    elseif spell.type == 'JobAbility' and player.sub_job_level ~= 0 then
         if player.sub_job == 'DRG' then
             if spell.english == 'Hasso' then
                 cancel_spell()
@@ -781,6 +927,17 @@ function filtered_action(spell)
                 cancel_spell()
                 send_command('input /ma "Utsusemi: Ichi" <me>')
             end
+        elseif player.sub_job == 'SAM' then
+            if spell.english == "Jump" then
+                cancel_spell()
+                send_command('input /ja "Hasso"')
+            elseif spell.english == "High Jump" then
+                cancel_spell()
+                send_command('input /ja "Meditate"')
+            elseif spell.english == "Super Jump" then
+                cancel_spell()
+                send_command('input /ja "Sekkanoki"')
+            end
         end
     end
 end
@@ -796,11 +953,19 @@ end
 -- Run after the default precast() is done.
 -- eventArgs is the same one used in job_precast, in case information needs to be persisted.
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if spell.type == 'WeaponSkill' and player.tp == 3000 then
-        if sets.precast.WS[spell.english] then
-            if sets.precast.WS[spell.english].MaxTP then
-                equip(sets.precast.WS[spell.english].MaxTP)
+    if spell.type == 'WeaponSkill' then
+        if player.tp == 3000 then
+            if sets.precast.WS[spell.english] then
+                if sets.precast.WS[spell.english].MaxTP then
+                    equip(sets.precast.WS[spell.english].MaxTP)
+                end
             end
+        end
+        if buffactive['Mighty Strikes'] and not info.magic_ws:contains(spell.english) then
+            equip(sets.buff['Mighty Strikes'])
+        end
+        if buffactive['Brazen Rush'] and not info.magic_ws:contains(spell.english) then
+            equip(sets.buff['Brazen Rush'])
         end
     end
 end
@@ -820,6 +985,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_aftercast(spell, action, spellMap, eventArgs)
+    if buffactive['Mighty Strikes'] and player.status == 'Engaged' then
+        equip(sets.buff['Mighty Strikes'])
+    end
+    if buffactive['Brazen Rush'] and player.status == 'Engaged' then
+        equip(sets.buff['Brazen Rush'])
+    end
     if buffactive.doom then
         if state.DoomMode.value == 'Cursna' then
             equip(sets.buff.doom)
@@ -836,6 +1007,7 @@ function job_buff_change(buff, gain)
             if not buffactive['charm'] then
                 equip(sets.Sleeping)
             end
+            send_command('cancel stoneskin')
         elseif buff == 'doom' then
             if state.DoomMode.value == 'Cursna' then
                 equip(sets.buff.doom)
@@ -903,6 +1075,16 @@ function job_buff_change(buff, gain)
             send_command('gs c update')
         end
     end
+
+    if buff:lower():contains('defense down') then
+        if gain then
+            windower.add_to_chat(144, "Defense down gained!")
+        end
+    elseif buff:lower():contains('max hp down') then
+        if gain then
+            windower.add_to_chat(144, "Max HP down!")
+        end
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -932,6 +1114,34 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_self_command(cmdParams, eventArgs)
+    local command = cmdParams[1]:lower()
+
+    local function second_arg(cmdParams)
+        t = T {}
+        for k, v in pairs(cmdParams) do
+            -- print(k, v)
+            if k ~= 1 then t:append(v) end
+        end
+        if t:length() < 1 then return nil else return t end
+    end
+
+    local arg = second_arg(cmdParams) or nil
+    if arg then arg = arg:sconcat() end
+
+    -- call with:
+    -- gs c cb "Bubbly Broth"
+    -- or in a macro
+    -- /console gs c cb "Bubbly Broth"
+    if false then
+    elseif command == 'equip' then
+        -- print(arg)
+        job_custom_weapon_equip(arg)
+    end
+end
+
+-------
+
 function update_combat_form()
     -- state.CombatForm:reset()
 end
@@ -953,14 +1163,17 @@ function select_default_macro_book()
     send_command("@wait 2; input /lockstyleset 6")
 end
 
-windower.register_event('hpp change', function(new_hpp, old_hpp)
-    -- print(new_hpp, old_hpp)
-    if buffactive.sleep and new_hpp > 10 then return end
-    if new_hpp < 80 and old_hpp >= 80 then
-        gear.tp_neck.name = gear.tp_neck_regular.name
-        send_command('gs c update')
-    elseif new_hpp > 80 and old_hpp <= 80 then
-        gear.tp_neck.name = gear.tp_neck_vim.name
-        send_command('gs c update')
-    end
-end)
+-- windower.register_event('hpp change', function(new_hpp, old_hpp)
+--     -- print(new_hpp, old_hpp)
+--     if buffactive.sleep and new_hpp > 10 then return end
+--     if new_hpp < 80 and old_hpp >= 80 then
+--         gear.tp_neck.name = gear.tp_neck_regular.name
+--         -- send_command('gs c update')
+--     elseif new_hpp > 80 and old_hpp <= 80 then
+--         gear.tp_neck.name = gear.tp_neck_vim.name
+--         -- send_command('gs c update')
+--     end
+--     if player.status == 'Engaged' then
+--         send_command('gs c update')
+--     end
+-- end)

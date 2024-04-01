@@ -35,7 +35,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Melee', 'Acc', 'Crit', 'Ranged')
@@ -193,7 +193,7 @@ function init_gear_sets()
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
         ring2 = "Medada'S Ring",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Kishar Ring",
         legs = "Limbo Trousers",
         feet = "Carmine Greaves +1",
     }
@@ -223,7 +223,7 @@ function init_gear_sets()
         ear1 = "Brutal Earring",
         ear2 = "Moonshade Earring",
         body = "Laksa. Frac +3",
-        hands = "Meghanada Gloves +2",
+        hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
         ring2 = "Sroda Ring",
         back = gear.ws_cape,
@@ -285,7 +285,7 @@ function init_gear_sets()
         ear1 = "Moonshade Earring",
         ear2 = "Chasseur's Earring +1",
         body = "Laksa. Frac +3",
-        hands = "Meghanada Gloves +2",
+        hands = "Nyame Gauntlets",
         ring2 = "Regal Ring",
         ring1 = "Epaminondas's Ring",
         back = gear.ranged_ws_cape,

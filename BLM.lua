@@ -23,14 +23,15 @@ end
 function user_setup()
     include('augments.lua')
     include('default_sets.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
 
     state.CastingMode:options('Normal', 'Resistant', 'Low')
-    state.OffenseMode:options('None', 'Normal')
+    state.OffenseMode:options('Normal', 'None')
     state.IdleMode:options('Normal', 'PDT')
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.MPReturn = M(false, 'MP Return')
+    state.AutoMPReturn = M(true, 'Auto MP Return')
 
     lowTierNukes = S { 'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder',
         'Stone II', 'Water II', 'Aero II', 'Fire II', 'Blizzard II', 'Thunder II',
@@ -66,8 +67,9 @@ function user_setup()
     define_spell_priority()
 
     -- Additional local binds
-    send_command('bind !` gs c cycle MagicBurst')
-    send_command('bind ` gs c cycle MPReturn')
+    send_command('bind ` gs c cycle MagicBurst')
+    send_command('bind ^` gs c cycle MPReturn')
+    send_command('bind !` gs c cycle AutoMPReturn')
 
     select_default_macro_book()
 end
@@ -191,7 +193,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",                      -- 2
         body = gear.merlinic.fc.body,                     -- 13
         hands = "Agwu's Gages",                           -- 6
-        ring1 = "Weatherspoon Ring +1",                   -- 6
+        ring1 = "Kishar Ring",                            -- 6
         ring2 = "Medada's Ring",                          -- 10
         back = { name = "Moonlight Cape", priority = 9 }, -- 0
         waist = { name = "Platinum Moogle Belt", priority = 10 },
@@ -199,16 +201,17 @@ function init_gear_sets()
         feet = gear.merlinic.fc.feet                      -- 12
     }
 
-    --
+    -- avoid instant cast for elemental magic.
     sets.precast.FC['Elemental Magic'] = {
         -- elemental celerity           -- 38
-        ammo = "Impatiens",
-        head = "Wicce Petasos +2",      -- 16
-        body = "Wicce Coat +2",         -- 15
-        hands = "Agwu's Gages",         -- 6
-        ring1 = "Weatherspoon Ring +1", -- 6
+        ammo = "",
+        head = "Wicce Petasos +2", -- 16
+        body = "Wicce Coat +3",    -- 15
+        hands = "Agwu's Gages",    -- 6
+        -- ring1 = "Kishar Ring", -- 6
         ring2 = { name = "Gelatinous Ring +1", priority = 9 },
-        back = "Perimede Cape",
+        -- back = "Perimede Cape",
+        back = "Fi Follet Cape +1",
         waist = { name = "Platinum Moogle Belt", priority = 10 },
         -- legs = "Agwu's Slops", -- 7
     }
@@ -233,7 +236,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",                         -- 2
         body = gear.merlinic.fc.body,                        -- 13
         hands = "Agwu's Gages",                              -- 6
-        ring1 = "Weatherspoon Ring +1",                      -- 6
+        ring1 = "Kishar Ring",                               -- 6
         ring2 = "Medada's Ring",                             -- 10
         back = { name = "Fi Follet Cape +1", priority = 9 }, -- 10
         waist = { name = "Shinjutsu-no-obi +1", priority = 10 },
@@ -246,7 +249,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo = "Oshasha's Treatise",
         head = "Nyame Helm",
-        neck = "Combatant's Torque",
+        neck = "Fotia Gorget",
         ear1 = "Telos Earring",
         ear2 = "Moonshade Earring",
         body = "Nyame mail",
@@ -254,7 +257,7 @@ function init_gear_sets()
         ring1 = gear.left_chirich,
         ring2 = gear.right_chirich,
         back = "Aurist's Cape +1",
-        waist = "Cornelia's Belt",
+        waist = "Fotia Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame sollerets"
     }
@@ -292,15 +295,15 @@ function init_gear_sets()
     sets.precast.WS['Cataclysm'] = sets.precast.WS['Vidohunir']
 
     sets.precast.WS['Shining Strike'] = set_combine(sets.precast.WS.Magical, {
-        ring1 = "Weatherspoon Ring +1",
     })
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
+        neck = "Sorcerer's stole +2",
         ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
-        waist = "Cornelia's Belt",
+        ear2 = "Wicce Earring +2",
+        waist = "Luminary Sash",
         ring1 = "Metamorph Ring +1",
-        ring2 = "Epaminondas's Ring"
+        ring2 = "Epaminondas's Ring",
     })
 
 
@@ -311,7 +314,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Agwu's Robe",
         hands = "Agwu's Gages",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Kishar Ring",
         ring2 = "Medada's Ring",
         back = "Fi Follet Cape +1",
         waist = "Cornelia's Belt",
@@ -474,13 +477,13 @@ function init_gear_sets()
         neck = "Sibyl Scarf",
         ear1 = "Malignance Earring",
         ear2 = "Regal Earring",
-        body = "Wicce Coat +2",
+        body = "Wicce Coat +3",
         hands = "Wicce Gloves +2",
         ring1 = "Archon Ring",
         ring2 = "Medada's Ring",
         back = gear.casting_cape,
         waist = gear.ElementalObi,
-        legs = "Wicce Chausses +2",
+        legs = "Wicce Chausses +3",
         feet = "Wicce Sabots +2"
     }
 
@@ -488,16 +491,16 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'] = {
         ammo = "Pemphredo Tathlum",
         head = "Wicce Petasos +2",
-        neck = "Sibyl Scarf",
+        neck = "Sorcerer's Stole +2",
         ear1 = "Malignance Earring",
-        ear2 = "Regal Earring",
-        body = "Wicce Coat +2",
+        ear2 = "Wicce Earring +2",
+        body = "Wicce Coat +3",
         hands = "Wicce Gloves +2",
         ring1 = "Freke Ring",
         ring2 = "Medada's Ring",
         back = gear.casting_cape,
         waist = gear.ElementalObi,
-        legs = "Wicce Chausses +2",
+        legs = "Wicce Chausses +3",
         feet = "Wicce Sabots +2"
     }
     sets.midcast['Elemental Magic'].weapon = {
@@ -515,13 +518,13 @@ function init_gear_sets()
     --     neck = "Sibyl Scarf",
     --     ear1 = "Malignance Earring",
     --     ear2 = "Regal Earring",
-    --     body = "Wicce Coat +2",
+    --     body = "Wicce Coat +3",
     --     hands = "Wicce Gloves +2",
     --     ring1 = "Freke Ring",
     --     ring2 = "Medada's Ring",
     --     back = gear.casting_cape,
     --     waist = gear.ElementalObi,
-    --     legs = "Wicce Chausses +2",
+    --     legs = "Wicce Chausses +3",
     --     feet = "Wicce Sabots +2"
     -- }
 
@@ -533,13 +536,13 @@ function init_gear_sets()
         neck = "Sibyl Scarf",
         ear1 = "Malignance Earring",
         ear2 = "Regal Earring",
-        body = "Wicce Coat +2",
+        body = "Wicce Coat +3",
         hands = "Amalric Gages +1",
         ring1 = "Metamorph Ring +1",
         ring2 = "Medada's Ring",
         back = "Aurist's Cape +1",
         waist = "Acuity Belt +1",
-        legs = "Wicce Chausses +2",
+        legs = "Wicce Chausses +3",
         feet = "Wicce Sabots +2"
     }
 
@@ -561,8 +564,6 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Light = {
         weapon = { main = "Daybreak", sub = "Ammurapi Shield" },
-        ring2 =
-        "Weatherspoon Ring +1"
     }
     sets.midcast['Elemental Magic'].Dark = { head = "Pixie Hairpin +1", ring2 = "Archon Ring" }
 
@@ -573,7 +574,7 @@ function init_gear_sets()
         neck = "Sibyl Scarf",
         ear1 = "Malignance Earring",
         ear2 = "Regal Earring",
-        body = "Wicce Coat +2",
+        body = "Wicce Coat +3",
         hands = "Wicce Gloves +2",
         ring1 = "Metamorph Ring +1",
         ring2 = "Medada's Ring",
@@ -590,7 +591,7 @@ function init_gear_sets()
         body = "Spaekona's Coat +3"
     })
     sets.midcast.CumulativeMagic = set_combine(sets.midcast['Elemental Magic'], {
-        legs = "Wicce Chausses +2" })
+        legs = "Wicce Chausses +3" })
     sets.midcast.AncientMagic = set_combine(sets.midcast['Elemental Magic'], {
         -- head = "Achmage's Petasos +3",
     })
@@ -604,7 +605,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Spaekona's Coat +3",
         hands = "Gazu Bracelets +1",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Rahab Ring",
         ring2 = "Kishar Ring",
         back = "Fi Follet Cape +1",
         waist = "Embla Sash",
@@ -634,14 +635,14 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Infused Earring",
         ear2 = "Etiolation Earring",
-        body = "Shamash Robe",
+        body = "Wicce Coat +3",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Fucho-no-obi",
         legs = "Nyame Flanchard",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     -- Idle mode that keeps PDT gear on, but doesn't prevent normal gear swaps for precast/etc.
@@ -653,12 +654,12 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Adamantite Armor",
         hands = "Nyame Gauntlets",
-        ring1 = "Paguroidea Ring",
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Platinum Moogle Belt",
         legs = "Nyame Flanchard",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     -- Idle mode scopes:
@@ -675,11 +676,11 @@ function init_gear_sets()
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring +1",
         back = gear.TankCape,
         waist = "Blacksmith's Belt",
         legs = "Nyame Flanchard",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Refresh = {
@@ -688,7 +689,7 @@ function init_gear_sets()
         body = "Jhakri Robe +2",
         hands = gear.chironic.refresh.hands,
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
         feet = gear.chironic.refresh.feet
@@ -733,11 +734,14 @@ function init_gear_sets()
     sets.buff['Mana Wall'] = { feet = "Wicce Sabots +2" }
 
     sets.magic_burst = {
-        head = "Eat Hat +1",
-        neck = "Mizukage-no-Kubikazari",
-        body = "Wicce Coat +2",
-        hands = "Archmage's Gloves +3",
-        ring1 = "Mujin Band",
+        head = "Ea Hat +1",
+        neck = "Sorcerer's Stole +2",
+        body = "Wicce Coat +3",
+        hands = "Agwu's Gages",
+        legs = "Wicce Chausses +3",
+        feet = "Agwu's Pigaches"
+
+
     }
 
     -- Engaged sets
@@ -923,6 +927,14 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             end
         end
     end
+
+    if state.AutoMPReturn.value then
+        if player.mp < 666 then
+            state.MPReturn:set(true)
+        elseif player.mpp > 80 then
+            state.MPReturn:set(false)
+        end
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -988,6 +1000,16 @@ function downgrade_st_spell(spell, eventArgs)
 end
 
 -- traverses the spell priority tree
+-- spell_priority_array is in form of
+-- {
+--    ["Fire"] = {
+--       "First Fire Spell",
+--       "Second Spell",
+--       ...
+--    },
+--    [""] = ...
+-- }
+
 function downgrade_aoe_spell(spell, eventArgs)
     if is_mapped_aoe_spell(spell) then
         eventArgs.cancel = true

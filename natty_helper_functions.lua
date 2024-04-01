@@ -1,3 +1,4 @@
+require('natty_helper_data.lua')
 res = require('resources')
 
 local MAX_MAGIC_HASTE = 448 / 1024 * 100
@@ -135,8 +136,77 @@ end
 -- Dual Wield functions
 ---------------------------------------------
 
+-- true if sub slot is not a shield or a grip.
+function equipped_DW()
+    local special_names = S {
+        'Khonsu',
+        'Aegis',
+        'Ochain',
+        'Duban',
+        'Ageist',
+        'Mandraguard',
+        'Regis',
+        'Troth',
+        'Pelte',
+        'Clipeus',
+        'Ancile',
+        'Adamas',
+        'Ajax',
+        'Ajax +1',
+        'Culminus',
+        'Deliverance',
+        'Deliverance +1',
+        'Evalach',
+        'Evalach +1',
+        'Kaidate',
+        'Priwen',
+        'Srivatsa',
+        'Svalinn',
+        'Kupayopl',
+    }
+    return player and not
+        (player.equipment.sub == 'empty'
+            and special_names:contains(player.equipment.sub)
+            and player.equipment.sub:endswith('Strap')
+            and player.equipment.sub:endswith('Strap +1')
+            and player.equipment.sub:endswith('Grip')
+            and player.equipment.sub:endswith('Grip +1')
+            and player.equipment.sub:endswith('Shield')
+            and player.equipment.sub:endswith('Shield -1')
+            and player.equipment.sub:endswith('Shield +1')
+            and player.equipment.sub:endswith('Aspis')
+            and player.equipment.sub:endswith('Aspis -1')
+            and player.equipment.sub:endswith('Aspis +1')
+            and player.equipment.sub:endswith('Buckler')
+            and player.equipment.sub:endswith('Buckler +1')
+            and player.equipment.sub:endswith('Buckler -1')
+            and player.equipment.sub:endswith('Bulwark')
+            and player.equipment.sub:endswith('Bulwark -1')
+            and player.equipment.sub:endswith('Bulwark +1')
+            and player.equipment.sub:endswith('Escutcheon')
+            and player.equipment.sub:endswith('Scutum')
+            and player.equipment.sub:endswith('Scutum -1')
+            and player.equipment.sub:endswith('Scutum +1')
+            and player.equipment.sub:endswith('Ecu')
+            and player.equipment.sub:endswith('Ecu -1')
+            and player.equipment.sub:endswith('Ecu +1')
+            and player.equipment.sub:endswith('Targe')
+            and player.equipment.sub:endswith('Targe -1')
+            and player.equipment.sub:endswith('Targe +1')
+            and player.equipment.sub:endswith('Hoplon')
+            and player.equipment.sub:endswith('Hoplon -1')
+            and player.equipment.sub:endswith('Hoplon +1')
+            and player.equipment.sub:endswith('Sipar')
+            and player.equipment.sub:endswith('Sipar -1')
+            and player.equipment.sub:endswith('Sipar +1')
+            and player.equipment.sub:endswith('Guard')
+            and player.equipment.sub:endswith('Guard +1'))
+end
+
 function can_DW()
-    return T(windower.ffxi.get_abilities().job_traits):contains(res.job_traits:with('english', 'Dual Wield').id)
+    return T(windower.ffxi.get_abilities().job_traits)
+        :contains(res.job_traits:with('english', 'Dual Wield').id)
+        and equipped_DW()
 end
 
 -- when blu, calculate how much DW they have
@@ -367,7 +437,7 @@ function get_DW_class(total_haste)
     elseif total_haste <= 29 then
         return 'NormalDW'
     elseif total_haste > 29 and total_haste < 43.75 then
-        return 'HasteMidDW'
+        return 'HasteDW'
     elseif total_haste >= 43.75 then
         return 'HasteMaxDW'
     end
@@ -415,12 +485,27 @@ function is_with_arts(spell)
 end
 
 -- sets the custom melee group
-function set_DW_class()
+function set_DW_class(custom_DW)
     if not can_DW() then return end
+
+    if info.DW_exclude_offhand and info.DW_exclude_offhand:contains(player.equipment.sub) then
+        state.CombatForm:reset()
+        return
+    end
+
+    if custom_DW then
+        if custom_DW == 'pass' then
+            state.CombatForm:reset()
+        else
+            state.CombatForm:set(custom_DW)
+        end
+        return
+    end
+
     local DW_class = get_DW_class(get_haste_from_buffactive())
 
     -- reset DW groups
-    classes.CustomMeleeGroups:append(DW_class)
+    state.CombatForm:set(DW_class)
 end
 
 function set_tp_class()
@@ -433,12 +518,12 @@ function set_tp_class()
     end
 end
 
-function determine_melee_groups()
+function determine_melee_groups(custom_DW)
     -- reset groups
     classes.CustomMeleeGroups:clear()
 
     -- determine DW first
-    set_DW_class()
+    set_DW_class(custom_DW)
 
     -- find AM class or fullTP
     set_tp_class()
@@ -458,8 +543,41 @@ function start_tp_ticker()
     end)
 end
 
+function is_tp_ticker()
+    return _tp_ticker ~= 0
+end
+
 function stop_tp_ticker()
     windower.unregister_event(_tp_ticker)
+
+    print(_tp_ticker)
+end
+
+function melee_groups_to_string()
+    local msg = ""
+    if classes.CustomMeleeGroups:contains('SlowMaxDW') then
+        msg = msg .. ' (SlowMaxDW)'
+    elseif classes.CustomMeleeGroups:contains('SlowDW') then
+        msg = msg .. ' (SlowDW)'
+    elseif classes.CustomMeleeGroups:contains('NormalDW') then
+        msg = msg .. ' (NormalDW)'
+    elseif classes.CustomMeleeGroups:contains('HasteDW') then
+        msg = msg .. ' (HasteDW)'
+    elseif classes.CustomMeleeGroups:contains('HasteMaxDW') then
+        msg = msg .. ' (HasteMaxDW)'
+    end
+
+    if classes.CustomMeleeGroups:contains('AM') then
+        msg = msg .. ' (AM)'
+    end
+    if classes.CustomMeleeGroups:contains('AM3') then
+        msg = msg .. ' (AM3)'
+    end
+    if classes.CustomMeleeGroups:contains('FullTP') then
+        msg = msg .. ' (FullTP)'
+    end
+
+    return msg
 end
 
 -- make sure you set your initial class, or you'll be in regular melee mode upon loading the lua
@@ -705,12 +823,12 @@ end
 -- returns a trust count in party
 function count_trusts()
     if windower.ffxi.get_party().alliance_leader then return 0 end
-    local p1 = (windower.ffxi.get_mob_by_target("p1") and windower.ffxi.get_mob_by_target("p1").is_npc) and 1 or 0
-    local p2 = (windower.ffxi.get_mob_by_target("p2") and windower.ffxi.get_mob_by_target("p2").is_npc) and 1 or 0
-    local p3 = (windower.ffxi.get_mob_by_target("p3") and windower.ffxi.get_mob_by_target("p3").is_npc) and 1 or 0
-    local p4 = (windower.ffxi.get_mob_by_target("p4") and windower.ffxi.get_mob_by_target("p4").is_npc) and 1 or 0
-    local p5 = (windower.ffxi.get_mob_by_target("p5") and windower.ffxi.get_mob_by_target("p5").is_npc) and 1 or 0
-    return p1 + p2 + p3 + p4 + p5
+    local trust_count = 0
+    for i = 1, 5, 1 do
+        trust_count = trust_count +
+            ((windower.ffxi.get_mob_by_target("p" .. tostring(i)) and windower.ffxi.get_mob_by_target("p" .. tostring(i)).is_npc) and 1 or 0)
+    end
+    return trust_count
 end
 
 -- unbinds the numpad and other common keys,
@@ -753,6 +871,7 @@ function echo(msg, verbosity, chatmode)
     end
 end
 
+-- place in job_aftercast()
 function calculate_dreadspikes()
     local base = player.max_hp
     local base_absorbed = 0 -- as a percent, 20 = 20%
@@ -831,162 +950,8 @@ function job_custom_weapon_equip(arg)
     end
 end
 
-function define_jugpet_data()
-    jugpet = T {
-        ["Homunculus"] = "Mandragora",
-        ["HareFamiliar"] = "Rabbit",
-        ["KeenearedSteffi"] = "Rabbit",
-        ["CrabFamiliar"] = "Crab",
-        ["CourierCarrie"] = "Crab",
-        ["SheepFamiliar"] = "Sheep",
-        ["LullabyMelodia"] = "Sheep",
-        ["SlipperySilas"] = "Frog",
-        ["FlytrapFamiliar"] = "Flytrap",
-        ["VoraciousAudrey"] = "Flytrap",
-        ["FlowerpotBill"] = "Mandragora",
-        ["FlowerpotBen"] = "Mandragora",
-        ["TigerFamiliar"] = "Tiger",
-        ["SaberSiravarde"] = "Tiger",
-        ["MayflyFamiliar"] = "Fly",
-        ["ShellbusterOrob"] = "Fly",
-        ["LizardFamiliar"] = "Lizard",
-        ["ColdbloodComo"] = "Lizard",
-        ["EftFamiliar"] = "Eft",
-        ["AmbusherAllie"] = "Eft",
-        ["FungaurFamiliar"] = "Fungaur",
-        ["AntlionFamiliar"] = "Antlion",
-        ["ChopsueyChucky"] = "Antlion",
-        ["BeetleFamiliar"] = "Beetle",
-        ["PanzerGalahad"] = "Beetle",
-        ["MiteFamiliar"] = "Diremite",
-        ["LifedrinkerLars"] = "Diremite",
-        ["TurbidToloi"] = "Pugil",
-        ["AmigoSabotender"] = "Sabotender",
-        ["DapperMac"] = "Apkallu",
-        ["CraftyClyvonne"] = "Coeurl",
-        ["NurseryNazuna"] = "Sheep",
-        ["LuckyLulush"] = "Rabbit",
-        ["FlowerpotMerle"] = "Mandragora",
-        ["DipperYuly"] = "Ladybug",
-        ["DiscreetLouise"] = "Fungaur",
-        ["FatsoFargann"] = "Leech",
-        ["PrestoJulio"] = "Flytrap",
-        ["AudaciousAnna"] = "Lizard",
-        ["MailbusterCetas"] = "Fly",
-        ["FaithfulFalcorr"] = "Hippogryph",
-        ["SwiftSieghard"] = "Raptor",
-        ["BloodclawShasra"] = "Coeurl",
-        ["BugeyedBroncha"] = "Eft",
-        ["GorefangHobs"] = "Tiger",
-        ["GooeyGerard"] = "Slug",
-        ["CrudeRaphie"] = "Adamantoise",
-        ["AmiableRoche"] = "Pugil",
-        ["SweetCaroline"] = "Mandragora",
-        ["HeadbreakerKen"] = "Fly",
-        ["AnklebiterJedd"] = "Diremite",
-        ["CursedAnnabelle"] = "Antlion",
-        ["BrainyWaluis"] = "Fungaur",
-        ["SlimeFamiliar"] = "Slime",
-        ["SultryPatrice"] = "Slime",
-        ["GenerousArthur"] = "Slug",
-        ["RedolentCandi"] = "Snapweed",
-        ["AlluringHoney"] = "Snapweed",
-        ["LynxFamiliar"] = "Coeurl",
-        ["VivaciousGaston"] = "Coeurl",
-        ["CaringKiyomaro"] = "Raaz",
-        ["VivaciousVickie"] = "Raaz",
-        ["SuspiciousAlice"] = "Eft",
-        ["SurgingStorm"] = "Apkallu",
-        ["SubmergedIyo"] = "Apkallu",
-        ["WarlikePatrick"] = "Lizard",
-        ["RhymingShizuna"] = "Sheep",
-        ["BlackbeardRandy"] = "Tiger",
-        ["ThreestarLynn"] = "Ladybug",
-        ["HurlerPercival"] = "Beetle",
-        ["AcuexFamiliar"] = "Acuex",
-        ["FluffyBredo"] = "Acuex",
-        ["WeevilFamiliar"] = "Ladybug",
-        ["StalwartAngelina"] = "Ladybug",
-        ["FleetReinhard"] = "Raptor",
-        ["SharpwitHermes"] = "Mandragora",
-        ["PorterCrabFamiliar"] = "Crab",
-        ["JovialEdwin"] = "Crab",
-        ["AttentiveIbuki"] = "Tulfaire",
-        ["SwoopingZhivago"] = "Tulfaire",
-        ["SunburstMalfik"] = "Crab",
-        ["AgedAngus"] = "Crab",
-        ["ScissorlegXerin"] = "Chapuli",
-        ["BouncingBertha"] = "Chapuli",
-        ["SpiderFamiliar"] = "Spider",
-        ["GussyHachirobe"] = "Spider",
-        ["ColibriFamiliar"] = "Colibri",
-        ["ChoralLeera"] = "Colibri",
-        ["DroopyDortwin"] = "Rabbit",
-        ["PonderingPeter"] = "Rabbit",
-        ["HeraldHenry"] = "Crab",
-        ["HippogryphFamiliar"] = "Hippogryph",
-        ["DaringRoland"] = "Hippogryph",
-        ["MosquitoFamiliar"] = "Mosquito",
-        ["Left-HandedYoko"] = "Mosquito",
-        ["BraveHeroGlenn"] = "Frog",
-        ["YellowBeetleFamiliar"] = "Beetle",
-        ["EnergizedSefina"] = "Beetle",
-    }
-
-    monster_species = T {
-        ["Rabbit"] = "Beast",
-        ["Mandragora"] = "Plantoid",
-        ["Crab"] = "Aquan",
-        ["Sheep"] = "Beast",
-        ["Frog"] = "Aquan",
-        ["Flytrap"] = "Vermin",
-        ["Tiger"] = "Beast",
-        ["Eft"] = "Lizard",
-        ["Fungaur"] = "Plantoid",
-        ["Antlion"] = "Vermin",
-        ["Beetle"] = "Vermin",
-        ["Diremite"] = "Vermin",
-        ["Pugil"] = "Aquan",
-        ["Sabotender"] = "Plantoid",
-        ["Apkallu"] = "Bird",
-        ["Ladybug"] = "Vermin",
-        ["Leech"] = "Amorph",
-        ["Raptor"] = "Lizard",
-        ["Hippogryph"] = "Bird",
-        ["Coeurl"] = "Beast",
-        ["Fly"] = "Insect",
-        ["Adamantoise"] = "Aquan",
-        ["Slug"] = "Amorph",
-        ["Snapweed"] = "Plantoid",
-        ["Raaz"] = "Beast",
-        ["Acuex"] = "Amorph",
-        ["Tulfaire"] = "Bird",
-        ["Chapuli"] = "Vermin",
-        ["Spider"] = "Vermin",
-        ["Colibri"] = "Bird",
-        ["Mosquito"] = "Vermin",
-        ["Slime"] = "Aquan",
-    }
-
-    monster_family_killer = T {
-        ["Beast"] = "Lizard",
-        ["Lizard"] = "Vermin",
-        ["Vermin"] = "Plantoid",
-        ["Plantoid"] = "Beast",
-        ["Aquan"] = "Amorph",
-        ["Amorph"] = "Bird",
-        ["Bird"] = "Aquan",
-
-        ["Undead"] = "Arcana",
-        ["Arcana"] = "Undead",
-        ["Dragon"] = "Demon",
-        ["Demon"] = "Dragon"
-    }
-end
-
 function get_pet_killer_trait(pet_name)
-    if not jugpet then define_jugpet_data() end
-    return monster_family_killer[monster_species[jugpet[pet_name or 'No'] or 'No'] or 'No'] or "No"
+    return mon and mon.monster_family_killer[mon.monster_species[mon.jugpet[pet_name or 'No'] or 'No'] or 'No'] or "No"
 end
 
 function announce_pet_killer()

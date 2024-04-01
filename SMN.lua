@@ -254,7 +254,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('None', 'Normal', 'Acc')
@@ -356,7 +356,7 @@ function init_gear_sets()
         body = "Inyanga Jubbah +2",
         hands = gear.merlinic.fc.hands,
         ring1 = "Medada's Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Kishar Ring",
         back = "Perimede Cape",
         waist = "Embla Belt",
         legs = "Lengo Pants",

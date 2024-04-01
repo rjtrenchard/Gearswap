@@ -44,7 +44,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc', 'Crit')
@@ -121,12 +121,12 @@ function init_gear_sets()
         ear2 = "Etiolation Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_moonlight,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Skadi's Jambeaux +1"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.PDT = {
@@ -137,12 +137,12 @@ function init_gear_sets()
         ear2 = "Tuisto Earring",
         body = "Adamntite Armor",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_moonlight,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Skadi's Jambeaux +1"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Refresh = set_combine(sets.idle.PDT, {
@@ -150,7 +150,6 @@ function init_gear_sets()
         ear1 = "Infused Earring",
         ear2 = "Etiolation Earring",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini
     })
 
     sets.idle.Town = {
@@ -162,11 +161,11 @@ function init_gear_sets()
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring +1",
         back = gear.melee_cape,
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Skadi's Jambeaux +1"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Weak = sets.idle
@@ -288,9 +287,8 @@ function init_gear_sets()
     sets.precast.JA.Provoke = set_combine(sets.enmity, sets.TreasureHunterTag)
     sets.precast.JA.Warcry = sets.enmity
 
-
     sets.buff['Sneak Attack'] = {
-        ammo = "Cath Palug Stone",
+        ammo = "Coiste Bodhar",
         -- head = "Adhemar Bonnet +1",
         neck = "Combatant's Torque",
         ear1 = "Sherida Earring",
@@ -385,7 +383,7 @@ function init_gear_sets()
         ear2 = "Enchanter's Earring +1",
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Rahab Ring",
         ring2 = "Medada's Ring",
         legs = "Enif Cosciales"
     }
@@ -402,7 +400,7 @@ function init_gear_sets()
         ear1 = "Sherida Earring",
         ear2 = "Moonshade Earring",
         body = "Nyame Mail",
-        hands = "Meghanada Gloves +2",
+        hands = "Nyame Gauntlets",
         ring1 = gear.TrustRing,
         ring2 = "Epaminondas's Ring",
         back = gear.str_ws_cape,
@@ -426,7 +424,7 @@ function init_gear_sets()
     sets.precast.WS.SingleHit = set_combine(sets.precast.WS, {
         head = "Nyame Helm",
         body = "Nyame Mail",
-        hands = "Meghanada Gloves +2",
+        hands = "Nyame Gauntlets",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets",
     })
@@ -597,7 +595,7 @@ function init_gear_sets()
         ear1 = "Enchanter's Earring +1",
         ear2 = "Loquacious Earring",
         body = "Malignance Tabard",
-        hands = "Weatherspoon Ring +1",
+        hands = "Medada's ring",
         ring1 = "Rahab Ring",
         ring2 = "Medada's Ring",
         waist = "Sailfi Belt +1",
@@ -611,7 +609,10 @@ function init_gear_sets()
     sets.midcast['Poisonga'] = set_combine({ sets.idle.Refresh }, sets.TreasureHunterTag)
     sets.midcast['Poison'] = sets.midcast['Poisonga']
     sets.midcast['Stun'] = set_combine(sets.precast.FC, sets.enmity, sets.TreasureHunterTag)
+    sets.midcast['Diaga'] = set_combine(sets.precast.FC, sets.enmity, sets.TreasureHunterTag)
     -- sets.midcast['Stun'] = set_combine(sets.precast.FC, sets.TreasureHunterTag)
+
+    sets.midcast['Phalanx'] = set_combine({ head = gear.taeon.phalanx.head }, gear.herculean.phalanx)
 
     -- Ranged gear
 

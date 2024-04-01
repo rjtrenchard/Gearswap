@@ -49,7 +49,7 @@ end
 function user_setup()
     include('augments.lua')
     include('default_sets.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     state.OffenseMode:options('None', 'Normal')
     state.HybridMode:options('Normal')
     state.CastingMode:options('Normal', 'Low')
@@ -179,7 +179,7 @@ function init_gear_sets()
     sets.Empyrean = {
         head = "Arbatel Bonnet +2",
         body = "Arbatel Gown +1",
-        hands = "Arbatel Bracers +2",
+        hands = "Arbatel Bracers +3",
         legs = "Arbatel Pants +2",
         feet = "Arbatel Loafers +2"
     }
@@ -250,13 +250,13 @@ function init_gear_sets()
 
     sets.precast.WS['Spirit Taker'] = sets.precast.WS['Shattersoul']
 
-    sets.precast.WS['Sunburst'] = set_combine(sets.precast.WS['Cataclysm'], { ring2 = "Weatherspoon Ring +1" })
+    sets.precast.WS['Sunburst'] = set_combine(sets.precast.WS['Cataclysm'], {})
     sets.precast.WS['Starburst'] = sets.precast.WS['Sunburst']
     sets.precast.WS['Earth Crusher'] = set_combine(sets.precast.WS['Cataclysm'],
         { head = "Nyame Helm", ring2 = "Freke Ring" })
 
 
-    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Earth Crusher'], { ring2 = "Weatherspoon Ring +1" })
+    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Earth Crusher'], {})
     sets.precast.WS['Shining Strike'] = sets.precast.WS['Flash Nova']
     sets.precast.WS['Seraph Strike'] = sets.precast.WS['Shining Strike']
 
@@ -275,14 +275,14 @@ function init_gear_sets()
         ear1 = "Malignance Earring",  -- 4
         ear2 = "Etiolation Earring",
         -- ear2 = "Loquacious Earring",    -- 2
-        body = gear.merlinic.fc.body,   -- 13
-        hands = "Gendewitha Gages +1",  -- 7
-        ring1 = "Weatherspoon Ring +1", -- 6
-        ring2 = "Lebeche Ring",
+        body = gear.merlinic.fc.body, -- 13
+        -- hands = "Gendewitha Gages +1",  -- 7
+        ring1 = "Kishar Ring",        -- 6
+        ring2 = "Medada's Ring",      -- 10
         back = { name = "Moonlight Cape", priority = 10 },
-        waist = "Embla Sash",        -- 5
-        legs = "Kaykaus Tights +1",  -- 7
-        feet = "Pedagogy Loafers +3" -- 8
+        waist = "Embla Sash",         -- 5
+        legs = "Kaykaus Tights +1",   -- 7
+        feet = "Pedagogy Loafers +3"  -- 8
     }
 
     sets.precast.FC.WithArts = set_combine(sets.precast.FC,
@@ -304,10 +304,10 @@ function init_gear_sets()
         ear1 = "Malignance Earring", -- 4
         -- ear2 = "Loquacious Earring", -- 2
         ear2 = "Etiolation Earring",
-        body = gear.merlinic.fc.body,   -- 13
-        hands = "Gendewitha Gages +1",  -- 7
-        ring1 = "Weatherspoon Ring +1", -- 6
-        ring2 = "Lebeche Ring",
+        body = gear.merlinic.fc.body, -- 13
+        -- hands = "Gendewitha Gages +1",  -- 7
+        ring1 = "Kishar Ring",        -- 6
+        ring2 = "Medada's Ring",
         back = "Perimede Cape",
         waist = "Embla Sash",        -- 5
         legs = "Kaykaus Tights +1",  -- 7
@@ -666,7 +666,7 @@ function init_gear_sets()
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
         body = "Arbatel Gown +2",
-        hands = "Arbatel Bracers +2",
+        hands = "Arbatel Bracers +3",
         ring1 = "Freke Ring",
         ring2 = "Medada's Ring",
         back = gear.int_cape,
@@ -715,7 +715,7 @@ function init_gear_sets()
         head = "Pedagogy Mortarboard +3",
         neck = "Argute Stole +2",
         body = "Agwu's Robe",
-        hands = "Arbatel Bracers +2",
+        hands = "Arbatel Bracers +3",
         ring2 = "Mujin Band",
         legs = "Agwu's Slops",
         feet = "Arbatel Loafers +2"
@@ -778,11 +778,11 @@ function init_gear_sets()
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Blacksmith's Belt",
         legs = "Assiduity Pants +1",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Field = {
@@ -794,11 +794,11 @@ function init_gear_sets()
         body = "Arbatel Gown +2",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         back = gear.idle_cape,
         waist = "Platinum Moogle Belt",
         legs = "Nyame Flanchard",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Field.PDT = {
@@ -810,11 +810,11 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Paguroidea Ring",
-        ring2 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Platinum Moogle Belt",
         legs = "Nyame Flanchard",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Field.Refresh = {
@@ -826,10 +826,10 @@ function init_gear_sets()
         body = "Arbatel Gown +2",
         hands = gear.chironic.refresh.hands,
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Field.Stun = {
@@ -861,11 +861,11 @@ function init_gear_sets()
         body = "Arbatel Gown +2",
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
-        ring2 = "Paguroidea Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Platinum Moogle Belt",
         legs = "Nyame Flanchard",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     -- Defense sets
@@ -906,7 +906,7 @@ function init_gear_sets()
         feet = "Agwu's Pigaches"
     }
 
-    sets.Kiting = { feet = "Crier's Gaiters" }
+    sets.Kiting = { ring2 = "Shneddick Ring +1" }
 
     sets.latent_refresh = { waist = "Fucho-no-obi" }
 
@@ -939,8 +939,8 @@ function init_gear_sets()
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
     sets.buff['Ebullience'] = { head = "Arbatel Bonnet +2" }
     sets.buff['Rapture'] = { head = "Arbatel Bonnet +2" }
-    sets.buff['Perpetuance'] = { hands = "Arbatel Bracers +2" }
-    sets.buff['Immanence'] = { hands = "Arbatel Bracers +2" }
+    sets.buff['Perpetuance'] = { hands = "Arbatel Bracers +3" }
+    sets.buff['Immanence'] = { hands = "Arbatel Bracers +3" }
     sets.buff['Penury'] = { legs = "Arbatel Pants +2" }
     sets.buff['Parsimony'] = { legs = "Arbatel Pants +2" }
     sets.buff['Celerity'] = { feet = "Pedagogy Loafers +3" }

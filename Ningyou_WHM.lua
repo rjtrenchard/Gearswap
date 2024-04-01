@@ -24,7 +24,7 @@ end
 function user_setup()
     include('augments.lua')
     include('default_sets.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
 
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant')

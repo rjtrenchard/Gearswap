@@ -24,7 +24,7 @@ end
 function user_setup()
     include('augments.lua')
     include('default_sets.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
 
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant')
@@ -119,7 +119,7 @@ function init_gear_sets()
         -- ear2 = "Loquacious Earring",    -- 2
         body = gear.merlinic.fc.body,   -- 13
         hands = gear.merlinic.fc.hands, -- 7
-        ring1 = "Weatherspoon Ring +1", -- 6
+        ring1 = "Kishar Ring",          -- 6
         ring2 = "Medada's Ring",        -- 10
         back = "Perimede Cape",
         -- waist = "Embla Sash",           -- 5
@@ -153,7 +153,7 @@ function init_gear_sets()
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
-    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, { ring2 = "Weatherspoon Ring +1" })
+    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {})
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {})
 
@@ -184,7 +184,7 @@ function init_gear_sets()
         ear1 = "Malignance earring",
         ear2 = "Loquacious Earring",
         hands = "Telchine Gloves",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Kishar Ring",
     }
 
@@ -205,7 +205,7 @@ function init_gear_sets()
         main = "Bunzi's Rod",
         sub = "Ammurapi Shield",
         ammo = "Ghastly Tathlum +1",
-        head = "Cath Palug Crown",
+        head = "Agwu's Cap",
         neck = "Sibyl Scarf",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
@@ -230,10 +230,13 @@ function init_gear_sets()
     })
 
     sets.magic_burst = {
-        -- head = "Ea Hat +1",              -- 7
+        head = "Ea Hat +1",              -- 7
         neck = "Mizukage-no-kubikazari", -- 10
-        -- hands = "Bagua Mitaines +3",    -- 12
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
         ring1 = "Mujin Band",
+        legs = "Agwu's Slops",
+        feet = "Agwu's Pigaches"
         -- legs= "Azimuth Tights +2",  -- 15
     }
 
@@ -404,12 +407,12 @@ function init_gear_sets()
         ear2 = "Etiolation Earring",
         body = "Shamash Robe",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_stikini,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Fucho-no-obi",
         legs = "Nyame Flanchard",
-        feet = "Geomancy Sandals +1"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.PDT = {
@@ -420,12 +423,12 @@ function init_gear_sets()
         ear2 = "Etiolation Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Paguroidea Ring",
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Fucho-no-obi",
         legs = "Nyame Flanchard",
-        feet = "Geomancy Sandals +1"
+        feet = "Nyame Sollerets"
     }
 
     -- .Pet sets are for when Luopan is present.
@@ -439,8 +442,8 @@ function init_gear_sets()
         ear2 = "Rimeice Earring",
         body = "Telchine Chasuble",
         hands = "Geomancy Mitaines +1",
-        ring1 = gear.left_stikini,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Isa Belt",
         legs = "Telchine Braconi",
@@ -477,9 +480,9 @@ function init_gear_sets()
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring +1",
         waist = "Blacksmith's Belt",
-        feet = "Geomancy Sandals +1"
+
     }
 
     sets.idle.Weak = {
@@ -492,12 +495,12 @@ function init_gear_sets()
         ear2 = "Etiolation Earring",
         body = "Jhakri Robe +2",
         hands = "Serpentes Cuffs",
-        ring1 = "Sheltered Ring",
-        ring2 = "Defending Ring",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Umbra Cape",
         waist = "Fucho-no-obi",
         legs = "Agwu's Slops",
-        feet = "Geomancy Sandals +1"
+        feet = "Nyame Sollerets"
     }
 
     -- Defense sets

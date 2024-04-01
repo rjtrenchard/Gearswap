@@ -55,8 +55,7 @@ function job_setup()
         'Bubble Shower',
         'Silence Gas', 'Dark Spore', 'Fireball', 'Plague Breath',
         'Snow Cloud',
-        'Drainkiss', 'Acid Mist', 'Choke Breath', 'Charged Whisker', 'Purulent Ooze',
-        'Corrosive Ooze',
+        'Drainkiss', 'Acid Mist', 'Choke Breath', 'Charged Whisker',
         'Aqua Breath', 'Molting Plumage',
         'Stink Bomb', 'Nectarous Deluge', 'Nepenthic Plunge'
     }
@@ -64,7 +63,7 @@ function job_setup()
         'Sheep Song', 'Dust Cloud', 'Scream', 'Dream Flower', 'Roar', 'Gloeosuccus', 'Palsy Pollen', 'Soporific',
         'Venom', 'Geist Wall', 'Toxic Spit', 'Numbing Noise', 'Spoil', 'Hi-Freq Field', 'Sandpit', 'Sandblast',
         'Venom Spray', 'Spore', 'Filamented Hold', 'Infrasonics', 'Chaotic Eye', 'Blaster', 'Intimidate', 'TP Drainkiss', 'Jettatura',
-        'Noisome Powder'
+        'Noisome Powder', 'Purulent Ooze', 'Corrosive Ooze',
     }
     -- Buffs and heal based ready skills
     ready_buff = S { 'Harden Shell', 'Secretion', 'Rage', 'Zealous Snort', 'Water Wall', 'Metallic Body', 'Scissor Guard',
@@ -88,14 +87,14 @@ end
 
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
-    state.OffenseMode:options('Normal', 'Acc')
+    state.OffenseMode:options('Normal', 'Acc', 'Pet')
     state.HybridMode:options('Normal', 'PDT')
     state.DefenseMode:options('None', 'Physical', 'Magical', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc')
-    state.IdleMode:options('Normal', 'PDT', 'Reraise', 'PetDT')
+    state.IdleMode:options('Normal', 'PDT', 'Reraise') -- pet mode will mirror this mode
     state.PhysicalDefenseMode:options('PDT', 'Hybrid', 'Killer', 'Reraise')
 
     state.DoomMode = M { ['description'] = 'Doom Mode', 'Cursna', 'Holy Water', 'None' }
@@ -103,11 +102,11 @@ function user_setup()
     gear.default.ElementalObi = "Eschan Stone"
 
     send_command('bind numpad7 gs c equip axes')
-    send_command('bind numpad8 gs c equip Dolichenus')
-    send_command('bind !numpad8 gs c equip AE')
-    send_command('bind numpad9 gs c equip tp_bonus')
-    send_command('bind !numpad9 gs c equip sword')
-    send_command('bind ^numpad9 gs c equip scythe')
+    send_command('bind ^numpad7 gs c equip axes_DT')
+    send_command('bind numpad8 gs c equip axes_petDT')
+    send_command('bind ^numpad8 gs c equip sword')
+    send_command('bind numpad9 gs c equip scythe')
+    send_command('bind ^numpad9 gs c equip AE')
 
     send_command('bind ^` gs c cycle PetMode')
     send_command('bind !` gs c cycle CorrelationMode')
@@ -124,6 +123,8 @@ function user_setup()
 
     send_command('bind ^f11 gs c set DefenseMode Reraise')
 
+    def_new_melee_set()
+    start_tp_ticker()
     update_combat_form()
     select_default_macro_book()
 end
@@ -141,12 +142,14 @@ function init_gear_sets()
     --------------------------------------
 
     sets.weapons = {}
-    sets.weapons.axes = { main = "Agwu's Axe", sub = "Kaidate" }
-    sets.weapons.axes.DW = { main = "Dolichenus", sub = "Agwu's Axe" }
-    sets.weapons.tp_bonus = { main = "Agwu's Axe", sub = "Kaidate" }
-    sets.weapons.tp_bonus.DW = { main = "Agwu's Axe", sub = "Fernagu" }
-    sets.weapons.Dolichenus = { main = "Dolichenus", sub = "Kaidate" }
-    sets.weapons.Dolichenus.DW = { main = "Dolichenus", sub = "Agwu's Axe" }
+    sets.weapons.axes = { main = "Aymur", sub = "Kaidate" }
+    sets.weapons.axes.DW = { main = "Aymur", sub = "Agwu's Axe" }
+    sets.weapons.axes_DT = { main = "Aymur", sub = "Sacro Bulwark" }
+    sets.weapons.axes_DT.DW = { main = "Aymur", sub = "Fernagu" }
+    -- sets.weapons.Dolichenus = { main = "Dolichenus", sub = "Kaidate" }
+    -- sets.weapons.Dolichenus.DW = { main = "Dolichenus", sub = "Agwu's Axe" }
+    sets.weapons.axes_petDT = { main = "Pangu", sub = "Sacro Bulwark" }
+    sets.weapons.axes_petDT.DW = { main = "Pangu", sub = "Kumbhakarna" }
     sets.weapons.sword = { main = "Naegling", sub = "Kaidate" }
     sets.weapons.sword.DW = { main = "Naegling", sub = "Fernagu" }
     sets.weapons.AE = { main = "Crepuscular Knife", sub = "Fernagu" }
@@ -157,7 +160,9 @@ function init_gear_sets()
     gear.pet_phys_cape = { name = "Artio's Mantle", augments = { 'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20', 'Eva.+20 /Mag. Eva.+20', 'Pet: Haste+10', 'System: 1 ID: 1246 Val: 4', } }
     gear.pet_mag_cape = { name = "Artio's Mantle", augments = { 'Pet: M.Acc.+20 Pet: M.Dmg.+20', 'Eva.+20 /Mag. Eva.+20', 'Pet: "Regen"+10', 'Pet: "Regen"+5', } }
 
-    gear.melee_cape = { name = "Artio's Mantle", augments = { 'DEX+20', 'Accuracy+20 Attack+20', '"Dbl.Atk."+10', 'Phys. dmg. taken-10%', } }
+    gear.melee_cape = { name = "Artio's Mantle", augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dbl.Atk."+10', 'Phys. dmg. taken-10%' } }
+    gear.stp_cape = { name = "Artio's Mantle", augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Store TP"+10', 'Phys. dmg. taken-10%' } }
+    gear.dw_cape = { name = "Artio's Mantle", augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dual Wield"+10', 'Phys. dmg. taken-10%' } }
 
     gear.str_ws_cape = { name = "Artio's Mantle", augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%', } }
     gear.primalrend_cape = { name = "Artio's Mantle", augments = { 'CHR+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'CHR+10', 'Weapon skill damage +10%', 'Phys. dmg. taken-10%', } }
@@ -226,6 +231,23 @@ function init_gear_sets()
         ring2 = "Blenmot's Ring +1"
     })
 
+    sets.FullTP = {
+        ammo = "Coiste Bodhar",
+        head = "Malignance Chapeau",
+        neck = "Ainia Collar",
+        ear1 = "Sherida Earring",
+        ear2 = "Dedition Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = gear.left_chirich,
+        ring2 = gear.right_chirich,
+        back = gear.stp_cape,
+        waist = "Kentarch Belt +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots",
+
+    }
+
     --------------------------------------
     -- Precast sets
     --------------------------------------
@@ -279,7 +301,7 @@ function init_gear_sets()
 
     -- STEPS
     sets.precast.Step = {
-        ammo = "Voluspa Tathlum",
+        ammo = "Hesperiidae",
         head = "Malignance Chapeau",
         neck = "Combatant's Torque",
         ear1 = "Crepuscular Earring",
@@ -306,7 +328,7 @@ function init_gear_sets()
         body = "Sacro Breastplate",      -- 10
         hands = "Leyline Gloves",        -- 8
         ring1 = "Medada's Ring",         -- 10
-        ring2 = "Weatherspoon Ring +1",  -- 6
+        ring2 = "Rahab Ring",            -- 6
         legs = "Limbo Trousers",         -- 3
     }
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {})
@@ -314,15 +336,15 @@ function init_gear_sets()
     -- WEAPONSKILLS
     -- Default weaponskill set.
     sets.precast.WS = {
-        ammo = "Voluspa Tathlum",
+        ammo = "Crepuscular Pebble",
         head = "Ankusa Helm +3",
-        neck = "Fotia Gorget",
+        neck = "Beastmaster collar +2",
         ear1 = "Moonshade Earring",
         ear2 = "Thrud Earring",
         body = "Nukumi Gausape +3",
-        hands = "Meghanada Gloves +2",
-        ring2 = gear.TrustRing,
+        hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
+        ring2 = "Sroda Ring",
         back = gear.str_ws_cape,
         waist = "Fotia Belt",
         legs = "Nyame Flanchard",
@@ -335,7 +357,7 @@ function init_gear_sets()
     sets.precast.WS.WSAcc = {
         ammo = "Crepuscular Pebble",
         head = "Nyame Helm",
-        neck = "Fotia Gorget",
+        neck = "Beastmaster Collar +2",
         ear1 = "Telos Earring",
         ear2 = "Nukumi Earring +1",
         body = "Nyame Mail",
@@ -351,7 +373,7 @@ function init_gear_sets()
     sets.precast.WS.WSCrit = {
         ammo = "Crepuscular Pebble",
         head = "Blistering Sallet +1",
-        neck = "Fotia Gorget",
+        neck = "Beastmaster Collar +2",
         ear1 = "Moonshade Earring",
         ear2 = "Lugra Earring +1",
         body = "Gleti's Cuirass",
@@ -383,15 +405,15 @@ function init_gear_sets()
     -- Specific weaponskill sets.
     -- Axes
     sets.precast.WS['Mistral Axe'] = set_combine(sets.precast.WS,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+        { neck = "Beastmaster Collar +2", waist = "Sailfi Belt +1" })
     sets.precast.WS['Mistral Axe'].Acc = set_combine(sets.precast.WS.WSAcc,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+        { neck = "Beastmaster Collar +2", waist = "Sailfi Belt +1" })
     sets.precast.WS['Mistral Axe'].FullTP = sets.precast.WS.FullTP
 
     sets.precast.WS['Calamity'] = set_combine(sets.precast.WS,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+        { neck = "Beastmaster Collar +2", waist = "Sailfi Belt +1" })
     sets.precast.WS['Calamity'].Acc = set_combine(sets.precast.WS.WSAcc,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+        { neck = "Beastmaster Collar +2", waist = "Sailfi Belt +1" })
     sets.precast.WS['Calamity'].FullTP = sets.precast.WS.FullTP
 
     sets.precast.WS['Rampage'] = set_combine(sets.precast.WS.WSCrit,
@@ -418,7 +440,7 @@ function init_gear_sets()
         ear2 = "Friomisi Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Metamorph Ring +1",
         ring2 = "Epaminondas's Ring",
         back = gear.primalrend_cape,
         waist = gear.ElementalObi,
@@ -439,7 +461,8 @@ function init_gear_sets()
     -- Sword
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS,
         {
-            neck = "Republican Platinum medal",
+            ring2 = "Regal Ring",
+            neck = "Beastmaster Collar +2",
             waist = "Sailfi Belt +1",
         })
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS.WSAcc, {})
@@ -454,9 +477,9 @@ function init_gear_sets()
 
     -- Scythe
     sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+        { neck = "Beastmaster Collar +2", waist = "Sailfi Belt +1" })
     sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.WSAcc,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+        { neck = "Beastmaster Collar +2", waist = "Sailfi Belt +1" })
     sets.precast.WS['Spiral Hell'].FullTP = sets.precast.WS.FullTP
 
 
@@ -473,7 +496,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Medada's Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Rahab Ring",
         waist = "Klouskap Sash +1",
         legs = "Malignance Tights",
         feet = "Malignance Boots"
@@ -484,33 +507,37 @@ function init_gear_sets()
 
     -- PET SIC & READY MOVES
     -- default
+    sets.precast.Pet = { weapon = { main = "Aymur" } }
+
     sets.midcast.Pet = {
     }
 
     sets.midcast.Pet.WS = {
         ammo = "Hesperiidae",
         head = "Emicho Coronet +1",
-        neck = "Shulmanu Collar",
+        neck = "Beastmaster Collar +2",
         ear1 = "Sroda Earring",
         ear2 = "Nukumi Earring +1",
-        body = "Ankusa Jackcoat +3",
+        body = "Nukumi Gausape +3",
         hands = "Nukumi Manoplas +3",
         ring1 = "Varar Ring +1",
         ring2 = "Cath Palug Ring",
         back = gear.pet_phys_cape,
         waist = "Incarnation Sash",
-        legs = "Totemic Trousers +2",
+        legs = "Totemic Trousers +3",
         feet = "Gleti's Boots"
     }
     sets.midcast.Pet.WS.Unleash = {}
+
+    sets.midcast.Pet.WS.weapon = { main = "Aymur" }
 
     -- pet magical debuff attacks
     sets.midcast.Pet.WSMagEffect = {
         ammo = "Hesperiidae",
         head = "Nukumi Cabasset +3",
         neck = "Beastmaster collar +2",
-        ear1 = "Handler's Earring +1",
-        ear2 = "Crepuscular earring",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Nukumi Earring +1",
         body = "Nukumi Gausape +3",
         hands = "Nukumi Manoplas +3",
         ring1 = "Varar Ring +1",
@@ -522,6 +549,7 @@ function init_gear_sets()
     }
     sets.midcast.Pet.WSMagEffect.Unleash = {}
 
+
     -- pet magical attacks
     sets.midcast.Pet.WSMagical = set_combine(sets.midcast.Pet.WSMagEffect, {
         ammo = "Hesperiidae",
@@ -532,6 +560,7 @@ function init_gear_sets()
         waist = "Incarnation Sash",
     })
     sets.midcast.Pet.WSMagical.Unleash = {}
+    --
 
     sets.midcast.Pet.WSBuff = set_combine(sets.midcast.Pet.WS.Magical, {})
 
@@ -560,11 +589,11 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
-        ring2 = gear.right_moonlight,
+        ring2 = "Shneddick Ring +1",
         back = gear.melee_cape,
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
-        feet = "Skadi's Jambeaux +1"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.PDT = set_combine(sets.idle, { body = "Adamantite Armor" })
@@ -575,26 +604,27 @@ function init_gear_sets()
         head = "Sibyl Scarf",
         body = "Crepuscular Mail",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini
+        ring2 = "Shneddick Ring +1"
     }
 
     sets.idle.Reraise = set_combine(sets.idle, { head = "Crepuscular Helm", body = "Crepuscular Mail" })
 
     sets.idle.Pet = set_combine(sets.idle, {
-        ear1 = "Handler's Earring +1",
-        ear2 = "Enmerkar Earring",
+        ear1 = "Enmerkar Earring",
+        ear2 = "Handler's Earring +1",
         head = "Nukumi Cabasset +3",
         body = "Nyame Mail",
         hands = "Gleti's Gauntlets",
         legs = "Nukumi Quijotes +3",
         waist = "Isa Belt",
-        back = gear.pet_mag_cape
+        back = gear.pet_mag_cape,
+        feet = "Gleti's Boots"
     })
 
     sets.idle.Pet.Engaged = {
         ammo = "Hesperiidae",
         head = "Nukumi Cabasset +3",
-        neck = "Shulmanu Collar",
+        neck = "Bst. Collar +2",
         ear1 = "Rimeice Earring",
         ear2 = "Nukumi Earring +1",
         body = "Ankusa Jackcoat +3",
@@ -607,15 +637,32 @@ function init_gear_sets()
         feet = "Gleti's Boots"
     }
 
-    sets.idle.Pet.PetTank = set_combine(sets.idle.Pet.Engaged, {
-        head = "Anwig Salade",
-        neck = "Shepherd's Chain",
-        ear1 = "Handler's Earring +1",
-        ear2 = "Rimeice Earring",
-        body = gear.taeon.petdt.body,
-        hands = "Gleti's Gauntlets",
-        legs = gear.taeon.petdt.legs,
-        feet = gear.taeon.petdt.feet
+    sets.idle.PDT.Pet = set_combine(sets.idle.PDT, {
+        -- "Ankusa Axe +2"                 -- 15
+        -- That other axes              -- 4
+        head = "Anwig Salade",         -- 10
+        neck = "Shepherd's Chain",     -- 2
+        ear1 = "Enmerkar Earring",     -- 3
+        ear2 = "Handler's Earring +1", -- 4
+        body = gear.taeon.petdt.body,  -- 10   -- bst body, actually
+        hands = "Gleti's Gauntlets",   -- 8
+        waist = "Isa Belt",            -- 3
+        legs = "Nukumi Quijotes +3",   -- 8
+        feet = gear.taeon.petdt.feet   -- 4
+    })
+
+    sets.idle.PDT.Pet.Engaged = set_combine(sets.idle.PDT, sets.idle.Pet.Engaged, {
+        -- "Ankusa Axe +2"                 -- 15
+        -- That other axes              -- 4
+        head = "Anwig Salade",         -- 10
+        neck = "Shepherd's Chain",     -- 2
+        ear1 = "Enmerkar Earring",     -- 3
+        ear2 = "Handler's Earring +1", -- 4
+        body = gear.taeon.petdt.body,  -- 10   -- bst body, actually
+        hands = "Gleti's Gauntlets",   -- 8
+        waist = "Isa Belt",            -- 3
+        legs = "Nukumi Quijotes +3",   -- 8
+        feet = gear.taeon.petdt.feet   -- 4
     })
 
     -- DEFENSE SETS
@@ -666,7 +713,7 @@ function init_gear_sets()
     sets.engaged = {
         ammo = "Coiste Bodhar",
         head = "Malignance Chapeau",
-        neck = "Shulmanu Collar",
+        neck = "Anu Torque",
         ear1 = "Telos Earring",
         ear2 = "Sherida Earring",
         body = "Gleti's Cuirass",
@@ -680,7 +727,7 @@ function init_gear_sets()
     }
 
     sets.engaged.Acc = {
-        ammo = "Voluspa Tathlum",
+        ammo = "Hesperiidae",
         head = "Nukumi Cabasset +3",
         neck = "Shulmanu Collar",
         ear1 = "Sherida Earring",
@@ -696,7 +743,7 @@ function init_gear_sets()
     }
 
     sets.engaged.PDT = {
-        ammo = "Voluspa Tathlum",
+        ammo = "Coiste Bodhar",
         head = "Malignance Chapeau",
         neck = "Loricate Torque +1",
         ear1 = "Sherida Earring",
@@ -712,25 +759,28 @@ function init_gear_sets()
     }
 
     sets.engaged.Killer = set_combine(sets.engaged,
-        { head = "Ankusa Helm +3", body = "Nukumi Gausape +3", legs = "Totemic Trousers +2" })
+        { head = "Ankusa Helm +3", body = "Nukumi Gausape +3", legs = "Totemic Trousers +3" })
     sets.engaged.Killer.Acc = set_combine(sets.engaged.Acc, { body = "Nukumi Gausape +3" })
 
-    sets.engaged.HasteMaxDW = set_combine(sets.engaged, {
+    -- dual wield defaults
+    sets.HasteMaxDW = {
         ear1 = "Eabani Earring",
         waist = "Reiki Yotai"
-    })
-
-    sets.engaged.HasteMidDW = set_combine(sets.engaged, {
-        ear1 = "Eabani Earring",
-        ear2 = "Suppanomimi",
-        waist = "Reiki Yotai"
-    })
-
-    sets.engaged.NormalDW = set_combine(sets.engaged, {
+    }
+    sets.HasteDW = {
         ear1 = "Eabani Earring",
         ear2 = "Suppanomimi",
         waist = "Reiki Yotai"
-    })
+    }
+    sets.NormalDW = sets.HasteDW
+    sets.SlowDW = sets.NormalDW
+    sets.SlowMaxDW = sets.NormalDW
+
+    sets.engaged.HasteMaxDW = set_combine(sets.engaged, sets.HasteMaxDW)
+
+    sets.engaged.HasteDW = set_combine(sets.engaged, sets.HasteDW)
+
+    sets.engaged.NormalDW = set_combine(sets.engaged, sets.NormalDW)
     sets.engaged.SlowDW = sets.engaged.NormalDW
     sets.engaged.SlowMaxDW = sets.engaged.NormalDW
     -- EXAMPLE SETS WITH PET MODES
@@ -752,34 +802,146 @@ function init_gear_sets()
     -- sets.engaged.KillerDW.PetTank= {}
     -- sets.engaged.KillerDW.PetTank.Acc = {}
 
-    sets.engaged.PetStance = set_combine(sets.engaged, { waist = "Klouskap Sash +1", feet = "Gleti's Boots" })
-    sets.engaged.PetStance.Acc = set_combine(sets.engaged.Acc, { waist = "Klouskap Sash +1", feet = "Gleti's Boots" })
-    sets.engaged.PetStance.PDT = set_combine(sets.engaged.PDT, { waist = "Klouskap Sash +1", feet = "Gleti's Boots" })
-    sets.engaged.PetTank = set_combine(sets.engaged.PDT,
-        {
-            head = "Anwig Salade",          --10
-            ear1 = "Handler's Earring +1",  -- 4
-            ear2 = "Enmerkar Earring",      -- 3
-            ring2 = "Cath Palug Ring",
-            body = gear.taeon.petdt.body,   -- 4
-            hands = gear.taeon.petdt.hands, -- 4
-            legs = "Nukumi Quijotes +3",    -- 8
-            feet = gear.taeon.petdt.feet    -- 4
-        })
-    sets.engaged.PetTank.Acc = set_combine(sets.engaged.Acc,
-        {
-            ear1 = "Handler's Earring +1",
-            body = gear.taeon.petdt.body,
-            hands = gear.taeon.petdt.hands,
-            legs = gear.taeon.petdt.legs,
-            feet = gear.taeon.petdt.feet
-        })
-    sets.engaged.PetStance.Killer = set_combine(sets.engaged, {})
-    sets.engaged.PetStance.Killer.Acc = set_combine(sets.engaged, {})
-    sets.engaged.PetTank.Killer = set_combine(sets.engaged, {})
-    sets.engaged.PetTank.Killer.Acc = set_combine(sets.engaged, {})
+    sets.PetStance = {
+        ear2 = "Nukumi Earring +1",
+        hands = "Gleti's Gauntlets",
+        ring2 = "Cath Palug Ring",
+        back = gear.pet_phys_cape,
+        waist = "Klouskap Sash +1",
+        feet = "Gleti's Boots"
+    }
 
-    --sets.engaged.DW.PetStance = sets.engaged
+    sets.PetTank = {
+        head = "Anwig Salade",         --10
+        ear1 = "Enmerkar Earring",     -- 3
+        ear2 = "Handler's Earring +1", -- 4
+        ring2 = "Cath Palug Ring",
+        body = gear.taeon.petdt.body,  -- 4
+        hands = "Gleti's Gauntlets",   -- 8
+        legs = "Nukumi Quijotes +3",   -- 8
+        feet = gear.taeon.petdt.feet   -- 4
+    }
+
+    sets.engaged.PetStance = set_combine(sets.engaged, sets.PetStance)
+    sets.engaged.PetStance.Acc = set_combine(sets.engaged.Acc, sets.PetStance)
+    sets.engaged.PetStance.PDT = set_combine(sets.engaged.PDT, sets.PetStance)
+    sets.engaged.PetStance.Killer = set_combine(sets.engaged, sets.PetStance)
+    sets.engaged.PetStance.Killer.Acc = set_combine(sets.engaged.Killer.Acc, sets.PetStance)
+
+    sets.engaged.PetTank = set_combine(sets.engaged.PDT, sets.PetTank)
+    sets.engaged.PetTank.Acc = set_combine(sets.engaged.Acc, sets.PetTank)
+    sets.engaged.PetTank.Killer = set_combine(sets.engaged, sets.PetTank)
+    sets.engaged.PetTank.Killer.Acc = set_combine(sets.engaged, sets.PetTank)
+
+    sets.engaged.Aymur = sets.engaged
+    sets.engaged.Aymur.Acc = sets.engaged.Acc
+    sets.engaged.Aymur.PDT = sets.engaged.PDT
+
+    sets.engaged.Aymur.PetStance = sets.engaged.PetStance
+    sets.engaged.Aymur.PetStance.Acc = sets.engaged.PetStance.Acc
+    sets.engaged.Aymur.PetStance.PDT = sets.engaged.PetStance.PDT
+    sets.engaged.Aymur.PetStance.Killer = sets.engaged.PetStance.Killer
+
+    sets.engaged.Aymur.PetTank = sets.engaged.PetTank
+    sets.engaged.Aymur.PetTank.Acc = sets.engaged.PetTank.Acc
+    sets.engaged.Aymur.PetTank.PDT = sets.engaged.PetTank.PDT
+    sets.engaged.Aymur.PetTank.Killer = sets.engaged.PetTank.Killer
+
+    sets.engaged.Aymur.AM3 = {
+        ammo = "Coiste Bodhar",
+        head = "Malignance Chapeau",
+        neck = "Ainia Collar",
+        ear1 = "Telos Earring",
+        ear2 = "Dedition Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = gear.left_moonlight,
+        ring2 = gear.right_moonlight,
+        back = gear.stp_cape,
+        waist = "Kentarch Belt +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
+    }
+    sets.engaged.Aymur.Acc.AM3 = set_combine(sets.engaged.Aymur.AM3,
+        { neck = "Beastmaster Collar +2", ear2 = "Crepuscular Earring" })
+    sets.engaged.Aymur.PDT.AM3 = sets.engaged.Aymur.AM3
+
+    -- sets.engaged.Aymur.HasteMaxDW = set_combine(sets.engaged.Aymur, {
+    --     ear1 = "Eabani Earring",
+    --     waist = "Reiki Yotai"
+    -- })
+
+    -- sets.engaged.Aymur.HasteDW = set_combine(sets.engaged.Aymur, {
+    --     ear1 = "Eabani Earring",
+    --     ear2 = "Suppanomimi",
+    --     waist = "Reiki Yotai"
+    -- })
+
+    -- sets.engaged.Aymur.NormalDW = set_combine(sets.engaged.Aymur, {
+    --     ear1 = "Eabani Earring",
+    --     ear2 = "Suppanomimi",
+    --     waist = "Reiki Yotai"
+    -- })
+    -- sets.engaged.Aymur.SlowDW = sets.engaged.Aymur.NormalDW
+    -- sets.engaged.Aymur.SlowMaxDW = sets.engaged.Aymur.NormalDW
+
+    -- sets.engaged.Aymur.HasteMaxDW.AM3 = set_combine(sets.engaged.Aymur.AM3, {
+    --     ear1 = "Eabani Earring",
+    --     waist = "Reiki Yotai"
+    -- })
+
+    -- sets.engaged.Aymur.HasteDW.AM3 = set_combine(sets.engaged.Aymur.AM3, {
+    --     ear1 = "Eabani Earring",
+    --     ear2 = "Suppanomimi",
+    --     waist = "Reiki Yotai"
+    -- })
+
+    -- sets.engaged.Aymur.NormalDW.AM3 = set_combine(sets.engaged.Aymur.AM3, {
+    --     ear1 = "Eabani Earring",
+    --     ear2 = "Suppanomimi",
+    --     waist = "Reiki Yotai"
+    -- })
+    -- sets.engaged.Aymur.SlowDW.AM3 = sets.engaged.Aymur.NormalDW.AM3
+    -- sets.engaged.Aymur.SlowMaxDW.AM3 = sets.engaged.Aymur.NormalDW.AM3
+
+    sets.engaged.HasteMaxDW.Aymur = set_combine(sets.engaged.Aymur, sets.HasteMaxDW)
+    sets.engaged.HasteDW.Aymur = set_combine(sets.engaged.Aymur, sets.HasteDW)
+    sets.engaged.NormalDW.Aymur = set_combine(sets.engaged.Aymur, sets.NormalDW)
+    sets.engaged.SlowDW.Aymur = sets.engaged.NormalDW.Aymur
+    sets.engaged.SlowMaxDW.Aymur = sets.engaged.NormalDW.Aymur
+
+    sets.engaged.HasteMaxDW.Aymur.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteMaxDW)
+    sets.engaged.HasteDW.Aymur.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteDW)
+    sets.engaged.NormalDW.Aymur.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.NormalDW)
+    sets.engaged.SlowDW.Aymur.AM3 = sets.engaged.NormalDW.Aymur.AM3
+    sets.engaged.SlowMaxDW.Aymur.AM3 = sets.engaged.NormalDW.Aymur.AM3
+
+    -- Pet Stance with dual weild and Aymur
+    sets.engaged.HasteMaxDW.Aymur.PetStance = set_combine(sets.engaged.Aymur, sets.HasteMaxDW, sets.PetStance)
+    sets.engaged.HasteDW.Aymur.PetStance = set_combine(sets.engaged.Aymur, sets.HasteDW, sets.PetStance)
+    sets.engaged.NormalDW.Aymur.PetStance = set_combine(sets.engaged.Aymur, sets.HasteDW, sets.PetStance)
+    sets.engaged.SlowDW.Aymur.PetStance = sets.engaged.NormalDW.Aymur.PetStance
+    sets.engaged.SlowMaxDW.Aymur.PetStance = sets.engaged.NormalDW.Aymur.PetStance
+
+    sets.engaged.HasteMaxDW.Aymur.PetStance.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteMaxDW, sets.PetStance)
+    sets.engaged.HasteDW.Aymur.PetStance.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteDW, sets.PetStance)
+    sets.engaged.NormalDW.Aymur.PetStance.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.NormalDW, sets.PetStance)
+    sets.engaged.SlowDW.Aymur.PetStance.AM3 = sets.engaged.NormalDW.Aymur.PetStance.AM3
+    sets.engaged.SlowMaxDW.Aymur.PetStance.AM3 = sets.engaged.NormalDW.Aymur.PetStance.AM3
+
+
+    -- Pet Tank with dual weild and Aymur
+    sets.engaged.HasteMaxDW.Aymur.PetTank = set_combine(sets.engaged.Aymur, sets.HasteMaxDW, sets.PetTank)
+    sets.engaged.HasteDW.Aymur.PetTank = set_combine(sets.engaged.Aymur, sets.HasteDW, sets.PetTank)
+    sets.engaged.NormalDW.Aymur.PetTank = set_combine(sets.engaged.Aymur, sets.NormalDW, sets.PetTank)
+    sets.engaged.SlowDW.Aymur.PetTank = sets.engaged.NormalDW.Aymur.PetTank
+    sets.engaged.SlowMaxDW.Aymur.PetTank = sets.engaged.NormalDW.Aymur.PetTank
+
+    sets.engaged.HasteMaxDW.Aymur.PetTank.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteMaxDW, sets.PetTank)
+    sets.engaged.HasteDW.Aymur.PetTank.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteDW, sets.PetTank)
+    sets.engaged.NormalDW.Aymur.PetTank.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.NormalDW, sets.PetTank)
+    sets.engaged.SlowDW.Aymur.PetTank.AM3 = sets.engaged.NormalDW.Aymur.PetTank.AM3
+    sets.engaged.SlowMaxDW.Aymur.PetTank.AM3 = sets.engaged.NormalDW.Aymur.PetTank.AM3
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -787,7 +949,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function filtered_action(spell)
-    if spell.type == 'Weaponskill' then
+    if spell.type == 'WeaponSkill' then
         local main = player.equipment.main
         if S { "Crepuscular Knife", "Tauret" }:contains(main) then
             if spell.english == 'Primal Rend' or spell.english == 'Mistral Axe' then
@@ -795,7 +957,7 @@ function filtered_action(spell)
                 send_command('input /ws "Aeolian Edge"')
             end
         elseif S { "Naegling" }:contains(main) then
-            if spell.english == 'Primal Rend' then
+            if spell.english == 'Primal Rend' or spell.english == 'Calamity' then
                 cancel_spell()
                 send_command('input /ws "Savage Blade"')
             end
@@ -811,12 +973,13 @@ function filtered_action(spell)
                 send_command('input /ws "Spinning Scythe"')
             end
         end
+    elseif spell.type == 'JobAbility' then
     end
 end
 
 function job_pretarget(spell, action, spellMap, eventArgs)
     -- auto engage on ready action
-    if spell.type == 'Monster' and pet.status ~= 'Engaged' and player.target.type == 'MONSTER' then
+    if spell.type == 'Monster' and pet.status == 'Idle' and player.target.type == 'MONSTER' then
         eventArgs.cancel = true
         send_command("input /pet Fight <t>")
     end
@@ -839,6 +1002,10 @@ function job_precast(spell, action, spellMap, eventArgs)
             state.PetWSMode:set("WSBuff")
         else
             state.PetWSMode:set("WS")
+        end
+
+        if state.OffenseMode.value == 'Pet' then
+            equip(sets.precast.Pet.weapon)
         end
     end
 end
@@ -869,6 +1036,11 @@ function job_pet_midcast(spell, action, spellMap, eventArgs)
             equip(sets.midcast.Pet.WS.Unleash)
         end
     end
+
+    if state.OffenseMode.value == 'Pet' and sets.midcast.Pet[state.PetWSMode].weapon then
+        equip(sets.midcast.Pet[state.PetWSMode].weapon)
+    end
+
     if state.CorrelationMode.value == 'Favorable' then
         equip(sets.midcast.Pet.Favorable)
     end
@@ -890,6 +1062,8 @@ function job_buff_change(buff, gain)
         handle_equipping_gear(player.status)
     elseif S { 'haste', 'march', 'embrava', 'haste samba', 'slow', 'elegy' }:contains(buff:lower()) then
         set_DW_class()
+        send_command('gs c update')
+    elseif buff:startswith('Aftermath') then
         send_command('gs c update')
     end
 
@@ -934,12 +1108,7 @@ function job_buff_change(buff, gain)
 end
 
 function bind_weapons()
-    send_command('bind numpad7 gs c equip axes')
-    send_command('bind numpad8 gs c equip Dolichenus')
-    send_command('bind !numpad8 gs c equip AE')
-    send_command('bind numpad9 gs c equip tp_bonus')
-    send_command('bind !numpad9 gs c equip sword')
-    send_command('bind ^numpad9 gs c equip scythe')
+
 end
 
 -- function job_pet_change(pet, gain)
@@ -973,7 +1142,7 @@ function job_state_change(stateField, newValue, oldValue)
         -- Theta, Zeta or Eta
         gear.reward_food.name = "Pet Food " .. newValue
     elseif stateField == 'Pet Mode' then
-        state.CombatWeapon:set(newValue)
+        -- state.CombatWeapon:set(newValue)
     end
 end
 
@@ -985,27 +1154,34 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_update(cmdParams, eventArgs)
     update_combat_form()
+    -- print(player.equipment.sub)
+end
+
+function determine_combat_weapon()
+    -- if a weapon has a specific combat form, switch to that
+    if player and player.equipment and player.equipment.main and player.equipment.main:contains('Aymur') then
+        state.CombatWeapon:set(player.equipment.main)
+        echo('CombatWeapon: ' .. player.equipment.main .. ' set', 1)
+    else
+        state.CombatWeapon:reset()
+        echo('CombatWeapon: Normal set', 1)
+    end
+    echo('CombatWeapon mode: ' .. state.CombatWeapon.value, 1)
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
 function display_current_job_state(eventArgs)
     local msg = 'Melee'
 
+    if state.CombatWeapon.has_value then
+        msg = msg .. ' (' .. state.CombatWeapon.value .. ')'
+    end
+
     if state.CombatForm.has_value then
         msg = msg .. ' (' .. state.CombatForm.value .. ')'
     end
 
-    if classes.CustomMeleeGroups:contains('SlowMaxDW') then
-        msg = msg .. ' (SlowMaxDW)'
-    elseif classes.CustomMeleeGroups:contains('SlowDW') then
-        msg = msg .. ' (SlowDW)'
-    elseif classes.CustomMeleeGroups:contains('NormalDW') then
-        msg = msg .. ' (NormalDW)'
-    elseif classes.CustomMeleeGroups:contains('HasteMidDW') then
-        msg = msg .. ' (HasteMidDW)'
-    elseif classes.CustomMeleeGroups:contains('HasteMaxDW') then
-        msg = msg .. ' (HasteMaxDW)'
-    end
+    msg = msg .. melee_groups_to_string()
 
     msg = msg .. ': '
 
@@ -1033,6 +1209,8 @@ function display_current_job_state(eventArgs)
     msg = msg .. ', Reward: ' .. state.RewardMode.value .. ', Correlation: ' .. state.CorrelationMode.value
 
     add_to_chat(122, msg)
+
+    display_pet_status()
 
     eventArgs.handled = true
 end
@@ -1098,6 +1276,8 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function update_combat_form()
+    determine_combat_weapon()
+    determine_melee_groups()
 end
 
 -- Select default macro book on initial load or subjob change.
@@ -1107,3 +1287,66 @@ function select_default_macro_book()
 
     send_command("@wait 5;input /lockstyleset 7")
 end
+
+-- overwrite get_melee_set to work with pet modes
+
+-- Returns the appropriate melee set based on current state values.
+-- Set construction order (all sets after sets.engaged are optional):
+--   sets.engaged[state.CombatForm][state.CombatWeapon][state.PetMode][state.OffenseMode][state.DefenseMode][classes.CustomMeleeGroups (any number)]
+def_new_melee_set = (function()
+    function get_melee_set()
+        local meleeSet = sets.engaged
+
+        if not meleeSet then
+            return {}
+        end
+
+        mote_vars.set_breadcrumbs:append('sets')
+        mote_vars.set_breadcrumbs:append('engaged')
+
+        if state.CombatForm.has_value and meleeSet[state.CombatForm.value] then
+            meleeSet = meleeSet[state.CombatForm.value]
+            mote_vars.set_breadcrumbs:append(state.CombatForm.value)
+        end
+
+        if state.CombatWeapon.has_value and meleeSet[state.CombatWeapon.value] then
+            meleeSet = meleeSet[state.CombatWeapon.value]
+            mote_vars.set_breadcrumbs:append(state.CombatWeapon.value)
+        end
+
+        if state.PetMode.has_value and meleeSet[state.PetMode.value] then
+            meleeSet = meleeSet[state.PetMode.value]
+            mote_vars.set_breadcrumbs:append(state.PetMode.value)
+        end
+
+        if meleeSet[state.OffenseMode.current] then
+            meleeSet = meleeSet[state.OffenseMode.current]
+            mote_vars.set_breadcrumbs:append(state.OffenseMode.current)
+        end
+
+        if meleeSet[state.HybridMode.current] then
+            meleeSet = meleeSet[state.HybridMode.current]
+            mote_vars.set_breadcrumbs:append(state.HybridMode.current)
+        end
+
+        for _, group in ipairs(classes.CustomMeleeGroups) do
+            if meleeSet[group] then
+                meleeSet = meleeSet[group]
+                mote_vars.set_breadcrumbs:append(group)
+            end
+        end
+
+        meleeSet = apply_defense(meleeSet)
+        meleeSet = apply_kiting(meleeSet)
+
+        if customize_melee_set then
+            meleeSet = customize_melee_set(meleeSet)
+        end
+
+        if user_customize_melee_set then
+            meleeSet = user_customize_melee_set(meleeSet)
+        end
+
+        return meleeSet
+    end
+end)

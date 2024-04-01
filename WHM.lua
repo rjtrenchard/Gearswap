@@ -23,7 +23,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
-    include('helper_functions.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('None', 'Normal')
@@ -55,7 +55,7 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Inyanga Jubbah +2",
         hands = "Gendewitha Gages +1",
-        ring1 = "Weatherspoon Ring +1",
+        ring1 = "Kishar Ring",
         ring2 = "Medada's Ring",
         back = "Fi Follet Cape +1",
         waist = "Embla Sash",
@@ -257,6 +257,7 @@ function init_gear_sets()
     }
 
     sets.midcast['Enhancing Magic'].Duration = set_combine(sets.midcast['Enhancing Magic'], {
+        sub = "Ammurapi Shield",
         head = gear.telchine.enh_dur.head,
         body = gear.telchine.enh_dur.body,
         hands = gear.telchine.enh_dur.hands,
@@ -306,7 +307,7 @@ function init_gear_sets()
         body = "Bunzi's Robe",
         hands = "Bunzi's Gloves",
         ring1 = "Freke Ring",
-        ring2 = "Weatherspoon Ring +1",
+        ring2 = "Medada's Ring",
         back = "Felicitas Cape +1",
         waist = gear.ElementalObi,
         legs = "Bunzi's Pants",
@@ -378,11 +379,11 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         back = "Felicitas Cape +1",
         waist = "Fucho-no-obi",
         legs = "Nyame Flanchard",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.PDT = {
@@ -396,7 +397,7 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         back = "Felicitas Cape +1",
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
@@ -412,10 +413,10 @@ function init_gear_sets()
         body = "Blacksmith's Smock",
         hands = "Smithy's Mitts",
         ring1 = "Confectioner's Ring",
-        ring2 = "Craftmaster's Ring",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Blacksmith's Belt",
-        legs = "Carmine Cuisses +1",
+        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
@@ -430,11 +431,11 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         back = "Felicitas Cape +1",
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.Refresh = {
@@ -446,7 +447,7 @@ function init_gear_sets()
         body = "Shamash Robe",
         hands = gear.chironic.refresh.hands,
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
         feet = gear.chironic.refresh.feet
@@ -544,6 +545,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     -- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
     if spellMap == 'StatusRemoval' and buffactive['Divine Caress'] then
         equip(sets.buff['Divine Caress'])
+    end
+
+    if spell.english:startswith('Protect')
+        or spell.english:startswith('Shell')
+        or spell.english:startswith('Regen')
+        or S { 'Haste', 'Refresh', }:contains(spell.english) then
+        equip(sets.midcast['Enhancing Magic'].Duration)
     end
 end
 
