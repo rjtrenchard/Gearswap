@@ -800,10 +800,10 @@ function init_gear_sets()
         ear2 = "Odnowa earring +1",
         body = "Adamantite Armor",
         hands = "Nyame Gauntlets",
-        ring2 = "Gelatinous Ring +1",
-        ring1 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
+        ring2 = "Shneddick Ring +1",
+        ring1 = "Gelatinous Ring +1",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }

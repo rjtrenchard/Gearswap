@@ -1,21 +1,31 @@
---[[
-    f9      F9          cycle OffenseMode
-    ^f9     CTRL+F9     cycle HybridMode
-    !f9     ALT+F9      cycle RangedMode
-    @f9     WIN+F9      cycle WeaponskillMode
-    f10     F10         DefenseMode Physical
-    ^f10    CTRL+F10    cycle PhysicalDefenseMode
-    !f10    ALT+F10     toggle Kiting
-    f11     F11         set DefenseMode Magical
-    ^f11    CTRL+F11    cycle CastingMode
-    f12     F12         update user
-    ^f12    CTRL+F12    cycle IdleMode
-    !f12    ALT+F12     reset DefenseMode
+---------------------
+-- Required files: --
+---------------------
+--
+--  Motes files
+--
+--  natty_helper_functions.lua
+--  natty_includes.lua
+--  natty_helper_data.lua
+--  Augments.lua
+--  default_sets.lua
 
-    bind ^- gs c toggle selectnpctargets')
-    send_command('bind ^= gs c cycle pctargetmode')
-]]
---TODO: fix macro changing function so it stops freaking out when you change to an undefined weapon.
+-------------------
+-- Default Binds --
+-------------------
+--
+-- numpad 1-6: /bstpet 1-6
+-- F9       Cycle OffenseMode
+-- Ctrl+F9  Cycle HybridMode
+-- F10      Enable PDT DefenseMode
+-- F11      Enable MDT DefenseMode
+-- Ctrl+F11 Reraise Mode
+-- Alt+F12  Disable DefenseMode
+-- Ctrl+F12 Cycle IdleMode
+-- F12      Update gear
+-- Ctrl+-   Cycle Doom Mode
+-- Ctrl+=   Cycle TreasureHunter
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.

@@ -1,15 +1,31 @@
--- NOTE: I do not play bst, so this will not be maintained for 'active' use.
--- It is added to the repository to allow people to have a baseline to build from,
--- and make sure it is up-to-date with the library API.
+---------------------
+-- Required files: --
+---------------------
+--
+--  Motes files
+--
+--  natty_helper_functions.lua
+--  natty_includes.lua
+--  natty_helper_data.lua
+--  Augments.lua
+--  default_sets.lua
 
--- Credit to Quetzalcoatl.Falkirk for most of the original work.
+-------------------
+-- Default Binds --
+-------------------
+--
+-- numpad 1-6: /bstpet 1-6
+-- F9       Cycle OffenseMode
+-- Ctrl+F9  Cycle HybridMode
+-- F10      Enable PDT DefenseMode
+-- F11      Enable MDT DefenseMode
+-- Ctrl+F11 Reraise Mode
+-- Alt+F12  Disable DefenseMode
+-- Ctrl+F12 Cycle IdleMode
+-- F12      Update gear
+-- Ctrl+-   Cycle Doom Mode
+-- Ctrl+=   Cycle TreasureHunter
 
---[[
-    Custom commands:
-
-    Ctrl-F8 : Cycle through available pet food options.
-    Alt-F8 : Cycle through correlation modes for pet attacks.
-]]
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------

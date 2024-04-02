@@ -411,16 +411,17 @@ function init_gear_sets()
     sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {
         main = "Musa",
         sub = "Khonsu",
+        ammo = "Staunch Tathlum +1",
         head = "Kaykaus Mitra +1",
-        neck = "Argute Stole +2",
+        neck = "Loricate Torque +1",
         ear1 = { name = "Etiolation Earring", priority = 9 },
         ear2 = "Magnetic Earring",
         body = "Kaykaus Bliaut +1",
         hands = "Kaykaus Cuffs +1",
         ring1 = { name = "Gelatinous Ring +1", priority = 8 },
-        ring2 = { name = "Mephitas's Ring +1", priority = 7 },
-        back = { name = "Moonlight Cape", priority = 10 },
-        waist = "Shinjutsu-no-obi +1",
+        ring2 = "Medada's Ring",
+        back = gear.idle_cape,
+        waist = "Platinum Moogle Belt",
         legs = "Kaykaus Tights +1",
         feet = "Kaykaus Boots +1"
     })

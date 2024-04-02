@@ -1,3 +1,31 @@
+---------------------
+-- Required files: --
+---------------------
+--
+--  Motes files
+--
+--  natty_helper_functions.lua
+--  natty_includes.lua
+--  natty_helper_data.lua
+--  Augments.lua
+--  default_sets.lua
+
+-------------------
+-- Default Binds --
+-------------------
+--
+-- F9       Cycle OffenseMode
+-- Ctrl+F9  Cycle HybridMode
+-- F10      Enable PDT DefenseMode
+-- F11      Enable MDT DefenseMode
+-- Ctrl+F11 Cycle CastingMode
+-- Alt+F12  Disable DefenseMode
+-- Ctrl+F12 Cycle IdleMode
+-- F12      Update gear
+-- Ctrl+-   Cycle Doom Mode
+-- Ctrl+=   Cycle TreasureHunter
+-- Alt+`    Toggle MagicBurst
+
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
@@ -1091,7 +1119,7 @@ function init_gear_sets()
         feet = gear.chironic.refresh.feet
     })
 
-    sets.idle.Regain = set_combine(sets.idle, {
+    sets.idle.Regain = set_combine(sets.idle.PDT, {
         neck = "Republican Platinum medal",
         ring2 = "Roller's ring",
         legs = "Carmine Cuisses +1",
