@@ -6,6 +6,8 @@ local MIN_MAGIC_HASTE = -0.5 * 100
 local MAX_JOB_HASTE = 256 / 1024 * 100
 local MAX_TOTAL_HASTE = 0.8 * 100
 
+local MIN_OSASH_USE = 2 -- switch to osash if we get 2 affinity or more
+
 ---------------------------------------------
 -- Recast functions
 ---------------------------------------------
@@ -166,41 +168,41 @@ function equipped_DW()
     }
     return player and not
         (player.equipment.sub == 'empty'
-            and special_names:contains(player.equipment.sub)
-            and player.equipment.sub:endswith('Strap')
-            and player.equipment.sub:endswith('Strap +1')
-            and player.equipment.sub:endswith('Grip')
-            and player.equipment.sub:endswith('Grip +1')
-            and player.equipment.sub:endswith('Shield')
-            and player.equipment.sub:endswith('Shield -1')
-            and player.equipment.sub:endswith('Shield +1')
-            and player.equipment.sub:endswith('Aspis')
-            and player.equipment.sub:endswith('Aspis -1')
-            and player.equipment.sub:endswith('Aspis +1')
-            and player.equipment.sub:endswith('Buckler')
-            and player.equipment.sub:endswith('Buckler +1')
-            and player.equipment.sub:endswith('Buckler -1')
-            and player.equipment.sub:endswith('Bulwark')
-            and player.equipment.sub:endswith('Bulwark -1')
-            and player.equipment.sub:endswith('Bulwark +1')
-            and player.equipment.sub:endswith('Escutcheon')
-            and player.equipment.sub:endswith('Scutum')
-            and player.equipment.sub:endswith('Scutum -1')
-            and player.equipment.sub:endswith('Scutum +1')
-            and player.equipment.sub:endswith('Ecu')
-            and player.equipment.sub:endswith('Ecu -1')
-            and player.equipment.sub:endswith('Ecu +1')
-            and player.equipment.sub:endswith('Targe')
-            and player.equipment.sub:endswith('Targe -1')
-            and player.equipment.sub:endswith('Targe +1')
-            and player.equipment.sub:endswith('Hoplon')
-            and player.equipment.sub:endswith('Hoplon -1')
-            and player.equipment.sub:endswith('Hoplon +1')
-            and player.equipment.sub:endswith('Sipar')
-            and player.equipment.sub:endswith('Sipar -1')
-            and player.equipment.sub:endswith('Sipar +1')
-            and player.equipment.sub:endswith('Guard')
-            and player.equipment.sub:endswith('Guard +1'))
+            or special_names:contains(player.equipment.sub)
+            or player.equipment.sub:endswith('Strap')
+            or player.equipment.sub:endswith('Strap +1')
+            or player.equipment.sub:endswith('Grip')
+            or player.equipment.sub:endswith('Grip +1')
+            or player.equipment.sub:endswith('Shield')
+            or player.equipment.sub:endswith('Shield -1')
+            or player.equipment.sub:endswith('Shield +1')
+            or player.equipment.sub:endswith('Aspis')
+            or player.equipment.sub:endswith('Aspis -1')
+            or player.equipment.sub:endswith('Aspis +1')
+            or player.equipment.sub:endswith('Buckler')
+            or player.equipment.sub:endswith('Buckler +1')
+            or player.equipment.sub:endswith('Buckler -1')
+            or player.equipment.sub:endswith('Bulwark')
+            or player.equipment.sub:endswith('Bulwark -1')
+            or player.equipment.sub:endswith('Bulwark +1')
+            or player.equipment.sub:endswith('Escutcheon')
+            or player.equipment.sub:endswith('Scutum')
+            or player.equipment.sub:endswith('Scutum -1')
+            or player.equipment.sub:endswith('Scutum +1')
+            or player.equipment.sub:endswith('Ecu')
+            or player.equipment.sub:endswith('Ecu -1')
+            or player.equipment.sub:endswith('Ecu +1')
+            or player.equipment.sub:endswith('Targe')
+            or player.equipment.sub:endswith('Targe -1')
+            or player.equipment.sub:endswith('Targe +1')
+            or player.equipment.sub:endswith('Hoplon')
+            or player.equipment.sub:endswith('Hoplon -1')
+            or player.equipment.sub:endswith('Hoplon +1')
+            or player.equipment.sub:endswith('Sipar')
+            or player.equipment.sub:endswith('Sipar -1')
+            or player.equipment.sub:endswith('Sipar +1')
+            or player.equipment.sub:endswith('Guard')
+            or player.equipment.sub:endswith('Guard +1'))
 end
 
 function can_DW()
@@ -804,20 +806,34 @@ end
 function get_3D_distance(target, optional_base)
     optional_base = optional_base or player
     target = target or nil
+
     if not target then return -1 end
+    if not optional_base then return -1 end -- player or other target not found not found
 
     local target_space = { x = target.x, y = target.y, z = target.z }
     local base_space = { x = optional_base.x, y = optional_base.y, z = optional_base.z }
 
-    if "number" == type(target_space.x) == type(target_space.y) == type(target_space.z) == type(base_space.x) == type(base_space.y) == type(base_space.z) then
-        return math.sqrt(
-            (target_space.x - base_space.x) ^ 2 +
-            (target_space.y - base_space.y) ^ 2 +
-            (target_space.z - base_space.z) ^ 2
-        )
-    else
-        return -1
+    return math.sqrt(
+        ((target_space.x - base_space.x) ^ 2) +
+        ((target_space.y - base_space.y) ^ 2) +
+        ((target_space.z - base_space.z) ^ 2))
+end
+
+function calculate_osash_bonus(target)
+    local distance = get_3D_distance(target)
+
+    if distance == -1 then return 1 end -- on error, just assume the worst
+
+    -- at min/max
+    if distance <= 1.93 then
+        return 15
+    elseif distance >= 13.00 then
+        return 1
     end
+
+    -- otherwise, return reverse scale, mostly based on assumption.
+    -- https://www.desmos.com/calculator/crhqgyjbhp
+    return 1 + math.floor((1400 * (14 - distance)) / 1207)
 end
 
 -- returns a trust count in party
@@ -1031,6 +1047,185 @@ function agnostic_stratagems(spell)
 end
 
 (function()
+    -- check if functions exist
+    if not set_elemental_gear
+        or not set_elemental_gorget_belt
+        or not get_trust_count
+        or not set_elemental_obi_cape_ring
+        or not get_elemental_item_name
+    then
+        print("Error: Motentens libs not loaded, helper functions might not work.")
+    end
+
+    elements.obi_of = {
+        ['Light'] = 'Hachirin-no-obi',
+        ['Dark'] = 'Hachirin-no-obi',
+        ['Fire'] = 'Hachirin-no-obi',
+        ['Water'] = 'Hachirin-no-obi',
+        ['Thunder'] = 'Hachirin-no-obi',
+        ['Earth'] = 'Hachirin-no-obi',
+        ['Wind'] = 'Hachirin-no-obi',
+        ['Ice'] = 'Hachirin-no-obi',
+    }
+    elements.gorget_of = {
+        ['Light'] = 'Fotia Gorget',
+        ['Dark'] = 'Fotia Gorget',
+        ['Fire'] = 'Fotia Gorget',
+        ['Water'] = 'Fotia Gorget',
+        ['Thunder'] = 'Fotia Gorget',
+        ['Earth'] = 'Fotia Gorget',
+        ['Wind'] = 'Fotia Gorget',
+        ['Ice'] = 'Fotia Gorget',
+    }
+    elements.belt_of = {
+        ['Light'] = 'Fotia Belt',
+        ['Dark'] = 'Fotia Belt',
+        ['Fire'] = 'Fotia Belt',
+        ['Water'] = 'Fotia Belt',
+        ['Thunder'] = 'Fotia Belt',
+        ['Earth'] = 'Fotia Belt',
+        ['Wind'] = 'Fotia Belt',
+        ['Ice'] = 'Fotia Belt',
+    }
+
+    get_elemental_item_name = function(item_type, valid_elements, restricted_to_elements)
+        local potential_elements = restricted_to_elements or elements.list
+        local item_map = elements[item_type:lower() .. '_of']
+
+        for element in (potential_elements.it or it)(potential_elements) do
+            if valid_elements:contains(element) and (player.inventory[item_map[element]] or player.wardrobe[item_map[element]] or player.wardrobe2[item_map[element]] or player.wardrobe3[item_map[element]] or player.wardrobe4[item_map[element]] or player.wardrobe5[item_map[element]] or player.wardrobe6[item_map[element]] or player.wardrobe7[item_map[element]] or player.wardrobe8[item_map[element]]) then
+                return item_map[element]
+            end
+        end
+    end
+
+    -- General handler function to set all the elemental gear for an action.
+    set_elemental_gear = function(spell)
+        set_osash(spell)
+        set_elemental_gorget_belt(spell)
+        set_elemental_obi_cape_ring(spell)
+        set_elemental_staff(spell)
+    end
+
+    -- add "NukeWaist"
+    gear.default.nuke_waist = "Sacro Cord"
+    gear.NukeWaist = "Sacro Cord"
+
+    set_osash = function(spell)
+        gear.NukeWaist = (calculate_osash_bonus(spell.target) >= MIN_OSASH_USE) and "Orpheus's Sash" or
+            gear.default.nuke_waist
+    end
+
+    -- Set the name field of the predefined gear vars for gorgets and belts, for the specified weaponskill.
+    set_elemental_gorget_belt = function(spell)
+        if spell.type ~= 'WeaponSkill' then return end
+
+        -- Get the union of all the skillchain elements for the weaponskill
+        local weaponskill_elements = S {}
+            :union(skillchain_elements[spell.skillchain_a])
+            :union(skillchain_elements[spell.skillchain_b])
+            :union(skillchain_elements[spell.skillchain_c])
+
+        gear.ElementalGorget.name  = get_elemental_item_name("gorget", weaponskill_elements) or gear.default
+            .weaponskill_neck or ""
+        gear.ElementalBelt.name    = get_elemental_item_name("belt", weaponskill_elements) or
+            gear.default.weaponskill_waist or ""
+
+        if get_trust_count() >= 2 then
+            gear.TrustRing.name = "Sroda Ring"
+        else
+            gear.TrustRing.name = gear.default.trust_ring
+        end
+    end
+
+    -- returns a trust count in party
+    get_trust_count = function()
+        if windower.ffxi.get_party().alliance_leader then return 0 end
+        local p1 = (windower.ffxi.get_mob_by_target("p1") and windower.ffxi.get_mob_by_target("p1").is_npc) and 1 or 0
+        local p2 = (windower.ffxi.get_mob_by_target("p2") and windower.ffxi.get_mob_by_target("p2").is_npc) and 1 or 0
+        local p3 = (windower.ffxi.get_mob_by_target("p3") and windower.ffxi.get_mob_by_target("p3").is_npc) and 1 or 0
+        local p4 = (windower.ffxi.get_mob_by_target("p4") and windower.ffxi.get_mob_by_target("p4").is_npc) and 1 or 0
+        local p5 = (windower.ffxi.get_mob_by_target("p5") and windower.ffxi.get_mob_by_target("p5").is_npc) and 1 or 0
+        return p1 + p2 + p3 + p4 + p5
+    end
+
+    world_opposing_elements = T {
+        ['Fire'] = 'Water',
+        ['Water'] = 'Thunder',
+        ['Thunder'] = 'Stone',
+        ['Stone'] = 'Wind',
+        ['Wind'] = 'Ice',
+        ['Ice'] = 'Fire',
+        ['Light'] = 'Dark',
+        ['Dark'] = 'Light',
+        ['None'] = ''
+    }
+
+    -- Function to get an appropriate obi/cape/ring for the current action.
+    set_elemental_obi_cape_ring = function(spell)
+        if spell.element == 'None' then
+            return
+        end
+
+        local osash_bonus = 1 + (calculate_osash_bonus(spell.target) / 100)
+        local env_bonus = 1
+
+        local world_elements = S { world.day_element }
+
+        if world.day_element == spell.element then
+            env_bonus = env_bonus + 0.1
+        elseif world_opposing_elements[world.day_element] == spell.element then
+            env_bonus = env_bonus - 0.1
+        end
+
+        if world.weather_element ~= 'None' then
+            world_elements:add(world.weather_element)
+
+            if world.weather_element == spell.element then
+                if world.weather_intensity == 1 then
+                    env_bonus = env_bonus + 0.1
+                elseif world.weather_intensity == 2 then
+                    env_bonus = env_bonus + 0.25
+                end
+            elseif world_opposing_elements[world.weather_element] == spell.element then
+                if world.weather_intensity == 1 then
+                    env_bonus = env_bonus - 0.1
+                elseif world.weather_intensity == 2 then
+                    env_bonus = env_bonus - 0.25
+                end
+            end
+        end
+
+        -- print(osash_bonus, env_bonus)
+
+        -- osash aware swap.
+        local obi_name
+        if gear.default.obi_waist == 'Orpheus\'s Sash' then
+            obi_name = (osash_bonus < env_bonus) and "Hachirin-no-obi" or "Orpheus's Sash"
+            -- and get_elemental_item_name("obi", S { spell.element }, world_elements)
+            -- or nil
+        else
+            -- obi_name = get_elemental_item_name("obi", S { spell.element }, world_elements)
+            obi_name = env_bonus > 1.01 and "Hachirin-no-obi" or nil
+        end
+        gear.ElementalObi.name = obi_name or gear.default.obi_waist or ""
+
+        -- print(obi_name)
+        if obi_name then
+            if player.inventory['Twilight Cape'] or player.wardrobe['Twilight Cape'] or player.wardrobe2['Twilight Cape'] or player.wardrobe3['Twilight Cape'] or player.wardrobe4['Twilight Cape'] then
+                gear.ElementalCape.name = "Twilight Cape"
+            end
+            if (player.inventory['Zodiac Ring'] or player.wardrobe['Zodiac Ring'] or player.wardrobe2['Zodiac Ring'] or player.wardrobe3['Zodiac Ring'] or player.wardrobe4['Zodiac Ring']) and spell.english ~= 'Impact' and
+                not S { 'Divine Magic', 'Dark Magic', 'Healing Magic' }:contains(spell.skill) then
+                gear.ElementalRing.name = "Zodiac Ring"
+            end
+        else
+            gear.ElementalCape.name = gear.default.obi_back
+            gear.ElementalRing.name = gear.default.obi_ring
+            gear.DrainWaist = gear.default.drain_waist
+        end
+    end
+
     state.Verbose = state.Verbose or M { ['description'] = 'Verbosity', 'Normal', 'Verbose', 'Debug' }
     init_recast()
     init_DW_class()

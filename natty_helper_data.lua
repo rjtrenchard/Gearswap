@@ -151,3 +151,103 @@ mon.monster_family_killer = T {
     ["Dragon"] = "Demon",
     ["Demon"] = "Dragon"
 }
+
+info.Weapons = {}
+
+info.Weapons.REMA = S {
+    -- Prime
+    'Varga Purnikawa',
+    'Mpu Gandring',
+    'Caliburnus',
+    'Helheim',
+    'Spalirisos',
+    'Laphria',
+    'Foenaria',
+    'Gae Buide',
+    'Dokoku',
+    'Kusanagi',
+    'Lorg Mor',
+    'Opashoro',
+    'Pinaka',
+    'Earp',
+    'Duban',
+    'Loughnashade',
+
+    -- Relic
+    'Spharai',
+    'Mandau',
+    'Excalibur',
+    'Ragnarok',
+    'Guttler',
+    'Bravura',
+    'Apocalypse',
+    'Gungnir',
+    'Kikoku',
+    'Amanomurakumo',
+    'Claustrum',
+    'Yoichinoyumi',
+    'Annihilator',
+    'Aegic',
+    'Gjallarhorn',
+
+    -- Empyrean
+    'Verethragna',
+    'Twashtar',
+    'Almace',
+    'Caladbolg',
+    'Farsha',
+    'Ukonvasara',
+    'Redemption',
+    'Rhongomiant',
+    'Kannagi',
+    'Masamune',
+    'Gambanteinn',
+    'Hvergelmir',
+    'Gandiva',
+    'Armageddon',
+    'Daurdabla',
+
+    -- Aeonic
+    'Godhands',
+    'Aeneas',
+    'Sequence',
+    'Lionheart',
+    'Tri-edge',
+    'Chango',
+    'Anguta',
+    'Trishula',
+    'Heishi Shorinken',
+    'Dojikiri Yasutsuna',
+    'Tishtrya',
+    'Khatvanga',
+    'Fail-Not',
+    'Fomalhaut',
+    'Duban',
+    'Marsyas',
+
+    -- Mythic
+    'Conquerer',
+    'Glanzfaust',
+    'Yagrush',
+    'Laevateinn',
+    'Murgleis',
+    'Vajra',
+    'Burtgang',
+    'Liberator',
+    'Aymur',
+    'Carnwenhan',
+    'Gastraphetes',
+    'Kogarasumaru',
+    'Nagi',
+    'Ryunohige',
+    'Nirvana',
+    'Tizona',
+    'Death Pentalty',
+    'Kenkonken',
+    'Terpsichore',
+    'Tupsimati',
+
+    -- Ergon
+    'Idris',
+    'Epeolatry'
+}
