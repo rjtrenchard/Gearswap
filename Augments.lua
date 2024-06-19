@@ -156,6 +156,10 @@ gear.merlinic.phalanx.head = {
     augments = { 'Crit. hit damage +1%', 'STR+2', 'Phalanx +4', 'Accuracy+17 Attack+17', }
 }
 
+gear.merlinic.occultacumen = {}
+gear.merlinic.occultacumen.hands = { name = "Merlinic Dastanas", augments = { '"Mag.Atk.Bns."+4', '"Occult Acumen"+11', 'VIT+10' } }
+gear.merlinic.occultacumen.feet = { name = "Merlinic Crackows", augments = { 'Accuracy+8', '"Occult Acumen"+11', 'Mag. Acc.+4', } }
+
 -- Chironic
 gear.chironic = {}
 gear.chironic.refresh = {}
@@ -232,7 +236,8 @@ gear.grioavolr.bp = {
 
 -- Gada
 gear.gada = {}
-gear.gada.enh_dur = { name = "Gada", augments = { 'Enh. Mag. eff. dur. +5', 'VIT+8', '"Mag.Atk.Bns."+19', 'DMG:+11', } }
+-- gear.gada.enh_dur = { name = "Gada", augments = { 'Enh. Mag. eff. dur. +5', 'VIT+8', '"Mag.Atk.Bns."+19', 'DMG:+11' } }
+gear.gada.indi = { name = "Gada", augments = { 'Indi. eff. dur. +10', 'VIT+2', 'Mag. Acc.+9', } }
 
 -- Colada
 gear.colada = {}
