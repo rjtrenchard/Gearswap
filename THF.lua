@@ -47,12 +47,14 @@ function user_setup()
     include('natty_helper_functions.lua')
     include('default_sets.lua')
 
+    gear.default.obi_waist = "Orpheus's Sash"
+
     state.OffenseMode:options('Normal', 'Acc', 'Crit')
     state.HybridMode:options('Normal', 'PDT', 'MDT', 'Evasion')
     state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc', 'Att', 'Low')
     state.PhysicalDefenseMode:options('PDT', 'Evasion')
-    state.IdleMode:options('Normal', 'PDT', 'Refresh')
+    state.IdleMode:options('Normal', 'PDT', 'Refresh', 'Regain')
 
     state.DoomMode = M { ['description'] = 'Doom Mode', 'Cursna', 'Holy Water', 'None' }
 
@@ -64,7 +66,7 @@ function user_setup()
     send_command('bind numpad7 gs equip sets.weapons.Daggers')
     send_command('bind numpad8 gs equip sets.weapons.Naegling')
     send_command('bind numpad9 gs equip sets.weapons.Tauret')
-    send_command('bind numpad^4 gs equip sets.weapons.DI')
+    send_command('bind ^numpad4 gs equip sets.weapons.DI')
     send_command('bind numpad4 gs equip sets.weapons.AE')
 
     select_default_macro_book()
@@ -167,6 +169,16 @@ function init_gear_sets()
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
+
+    sets.idle.Regain = set_combine(sets.idle.PDT, {
+        head = "Gleti's Mask",
+        neck = "Republican Platinum medal",
+        body = "Gleti's Cuirass",
+        hands = "Gleti's Gauntlets",
+        ring1 = "Roller's Ring",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
+    })
 
     sets.idle.Weak = sets.idle
 
@@ -454,7 +466,7 @@ function init_gear_sets()
     sets.precast.WS['Exenterator'].Low = sets.precast.WS.Low
     sets.precast.WS['Exenterator'].MaxTP = { ear2 = "Brutal Earring" }
 
-    sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS, { ring1 = "Regal Ring", legs = "Samnuha Tights" })
+    sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS, { ring1 = "Regal Ring", })
     sets.precast.WS['Dancing Edge'].Acc = set_combine(sets.precast.WS['Dancing Edge'], {})
     sets.precast.WS['Dancing Edge'].Att = set_combine(sets.precast.WS['Dancing Edge'], {})
     sets.precast.WS['Dancing Edge'].SA = set_combine(sets.precast.WS['Dancing Edge'].Att, {})
@@ -485,12 +497,12 @@ function init_gear_sets()
     sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {})
     sets.precast.WS["Rudra's Storm"].Att = set_combine(sets.precast.WS["Rudra's Storm"], {})
     sets.precast.WS["Rudra's Storm"].SA = set_combine(sets.precast.WS["Rudra's Storm"].Att,
-        { head = "Nyame Helm", ammo = "Yetshila +1", body = "Pillager's Vest +2" })
+        { head = "Nyame Helm", ammo = "Yetshila +1", })
     sets.precast.WS["Rudra's Storm"].TA = set_combine(sets.precast.WS["Rudra's Storm"].Att,
-        { head = "Nyame Helm", ammo = "Yetshila +1", body = "Pillager's Vest +2" })
+        { head = "Nyame Helm", ammo = "Yetshila +1", })
 
     sets.precast.WS["Rudra's Storm"].SATA = set_combine(sets.precast.WS["Rudra's Storm"].Att,
-        { head = "Nyame Helm", ammo = "Yetshila +1", body = "Pillager's Vest +2" })
+        { head = "Nyame Helm", ammo = "Yetshila +1", })
 
     sets.precast.WS["Rudra's Storm"].Low = sets.precast.WS.Low
     sets.precast.WS["Rudra's Storm"].MaxTP = { ear1 = "Sherida Earring", ear2 = "Ishvara Earring" }
@@ -502,13 +514,10 @@ function init_gear_sets()
     sets.precast.WS['Shark Bite'].Att = set_combine(sets.precast.WS['Shark Bite'], { ring2 = "Ilabrat Ring" })
     sets.precast.WS['Shark Bite'].SA = set_combine(sets.precast.WS['Shark Bite'].Att, {
         ammo = "Yetshila +1",
-        body = "Pillager's Vest +2",
-        legs = "Pillager's Culottes +1"
     })
     sets.precast.WS['Shark Bite'].TA = set_combine(sets.precast.WS['Shark Bite'].Att, {
         ammo = "Yetshila +1",
-        body = "Pillager's Vest +2",
-        legs = "Pillager's Culottes +1"
+
     })
     sets.precast.WS['Shark Bite'].SATA = set_combine(sets.precast.WS['Shark Bite'].Att, {
         ammo = "Yetshila +1",
@@ -523,18 +532,15 @@ function init_gear_sets()
     sets.precast.WS['Mandalic Stab'].Att = set_combine(sets.precast.WS['Mandalic Stab'], {})
     sets.precast.WS['Mandalic Stab'].SA = set_combine(sets.precast.WS['Mandalic Stab'].Att, {
         ammo = "Yetshila +1",
-        body = "Pillager's Vest +2",
-        legs = "Pillager's Culottes +1"
+
     })
     sets.precast.WS['Mandalic Stab'].TA = set_combine(sets.precast.WS['Mandalic Stab'].Att, {
         ammo = "Yetshila +1",
-        body = "Pillager's Vest +2",
-        legs = "Pillager's Culottes +1"
+
     })
     sets.precast.WS['Mandalic Stab'].SATA = set_combine(sets.precast.WS['Mandalic Stab'].Att, {
         ammo = "Yetshila +1",
-        body = "Pillager's Vest +2",
-        legs = "Pillager's Culottes +1"
+
     })
     sets.precast.WS['Mandalic Stab'].Low = sets.precast.WS.Low
     sets.precast.WS['Mandalic Stab'].MaxTP = { ear1 = "Sherida Earring", ear2 = "Ishvara Earring" }
@@ -566,7 +572,7 @@ function init_gear_sets()
         ring1 = "Medada's Ring",
         ring2 = "Epaminondas Ring",
         back = gear.dex_ws_cape,
-        waist = "Eschan Stone",
+        waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
@@ -650,13 +656,13 @@ function init_gear_sets()
         neck = "Anu Torque",
         ear1 = "Sherida Earring",
         ear2 = "Skulker's Earring +1",
-        body = "Malignance Tabard",
+        body = "Gleti's Cuirass",
         hands = "Adhemar Wristbands +1",
         ring1 = "Gere Ring",
         ring2 = "Epona's Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
-        legs = "Samnuha Tights",
+        legs = "Gleti's Breeches",
         feet = "Plunderer's Poulaines +3"
     }
     sets.engaged.Acc = {
@@ -737,13 +743,13 @@ function init_gear_sets()
         neck = "Anu Torque",
         ear1 = "Suppanomimi",
         ear2 = "Skulker's Earring +1",
-        body = "Malignance Tabard",
-        hands = "Malignance Gloves",
+        body = "Gleti's Cuirass",
+        hands = "Gleti's Gauntlets",
         ring1 = gear.left_moonlight,
         ring2 = "Gere Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
-        legs = "Malignance Tights",
+        legs = "Gleti's Breeches",
         feet = "Malignance Boots"
     }
     sets.engaged.Acc.PDT = {

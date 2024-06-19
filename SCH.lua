@@ -32,7 +32,7 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
-    gear.default.obi_waist = "Sacro Cord"
+    gear.default.obi_waist = "Orpheus's Sash"
     gear.default.cure_waist = "Shinjutsu-no-obi +1"
     info.addendumNukes = S { "Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV",
         "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V" }
@@ -240,8 +240,8 @@ function init_gear_sets()
 
     sets.precast.WS['Shattersoul'] = set_combine(sets.precast.WS, {
         neck = "Argute Stole +2",
-        ear1 = "Regal Earring",
-        ear2 = "Brutal Earring",
+        ear1 = "Brutal Earring",
+        ear2 = "Arbatel Earring +2",
         ring1 = "Freke Ring",
         ring2 = "Metamorph Ring +1",
         back = "Aurist's Cape +1",
@@ -530,7 +530,9 @@ function init_gear_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration, sets.SIRD,
         { back = "Fi Follet Cape +1", head = "Amalric Coif +1", waist = "Emphatikos Rope" })
 
-    sets.midcast.Storm = set_combine(sets.midcast['Enhancing Magic'].Duration, {})
+    sets.midcast.Storm = set_combine({
+        feet = "Pedagogy Loafers +3"
+    })
 
     sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'].Duration, { ear1 = "Brachyura Earring" })
     sets.midcast.Protectra = sets.midcast.Protect
@@ -545,8 +547,8 @@ function init_gear_sets()
         ammo = "Pemphredo Tathlum",
         head = "Agwu's Cap",
         neck = "Argute Stole +2",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
+        ear2 = "Arbatel Earring +2",
+        ear1 = "Malignance Earring",
         hands = "Agwu's Gages",
         ring1 = gear.left_stikini,
         ring2 = "Metamorph Ring +1",
@@ -563,8 +565,8 @@ function init_gear_sets()
         ammo = "Pemphredo Tathlum",
         head = "Agwu's Cap",
         neck = "Argute Stole +2",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
+        ear2 = "Arbatel Earring +2",
+        ear1 = "Malignance Earring",
         hands = "Agwu's Gages",
         ring1 = gear.left_stikini,
         ring2 = "Metamorph Ring +1",
@@ -605,7 +607,7 @@ function init_gear_sets()
         head = "Pixie Hairpin +1",
         neck = "Argute Stole +2",
         ear1 = "Malignance Earring",
-        ear2 = "Regal Earring",
+        ear2 = "Arbatel Earring +2",
         body = "Agwu's Robe",
         hands = "Agwu's Gages",
         ring2 = "Medada's Ring",
@@ -642,8 +644,8 @@ function init_gear_sets()
         ammo = "Sapience Orb",
         head = "Agwu's Cap",
         neck = "Erra Pendant",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
+        ear2 = "Arbatel Earring +2",
+        ear1 = "Malignance Earring",
         body = "Agwu's Robe",
         hands = "Gendewitha Gages +1",
         ring1 = "Evanescence Ring",
@@ -664,8 +666,8 @@ function init_gear_sets()
         ammo = "Ghastly Tathlum +1",
         head = "Arbatel Bonnet +2",
         neck = "Sibyl Scarf",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
+        ear2 = "Arbatel Earring +2",
+        ear1 = "Malignance Earring",
         body = "Arbatel Gown +2",
         hands = "Arbatel Bracers +3",
         ring1 = "Freke Ring",
@@ -682,8 +684,8 @@ function init_gear_sets()
         ammo = "Pemphredo Tathlum",
         head = "Arbatel Bonnet +2",
         neck = "Argute Stole +2",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
+        ear1 = "Malignance Earring",
+        ear2 = "Arbatel Earring +2",
         body = "Arbatel Gown +2",
         hands = "Arbetel Bracers +2",
         ring1 = "Metamorph Ring +1",
@@ -724,7 +726,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Helix = set_combine(sets.midcast['Elemental Magic'],
-        { neck = "Argute Stole +2", back = "Bookworm's Cape", waist = "Sacro Cord" })
+        { neck = "Argute Stole +2", back = "Bookworm's Cape", waist = "Orpheus's Sash" })
 
     sets.midcast.Helix.Resistant = set_combine(sets.midcast['Elemental Magic'].Resistant,
         { { neck = "Argute Stole +2", back = "Bookworm's Cape", waist = "Acuity Belt +1" } })
@@ -839,8 +841,8 @@ function init_gear_sets()
         ammo = "Homiliary",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
+        ear1 = "Malignance Earring",
+        ear2 = "Arbatel Earring +2",
         body = "Arbatel Gown +2",
         hands = "Gendewitha Gages +1",
         ring1 = "Medada's Ring",
@@ -1220,7 +1222,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         else
             equip(sets.midcast['Enhancing Magic'].Duration)
         end
-        -- eventArgs.handled = true
+
+        if spell.english:endswith('storm') or spell.english:endswith('storm II') then
+            equip(sets.midcast.Storm)
+        end
     else
         -- if spell.skill == 'Elemental Magic' or spell.skill == 'Dark Magic' or spell.skill ==  then end
         -- if low and not a helix spell, cast in low nukes

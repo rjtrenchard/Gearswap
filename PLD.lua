@@ -24,6 +24,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     include('augments.lua')
+    include('natty_helper_functions.lua')
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc')
@@ -41,41 +42,8 @@ function user_setup()
     send_command('bind @f10 gs c toggle EquipShield')
     send_command('bind @f11 gs c toggle EquipShield')
 
-    gear.WSDayEar1 = "Brutal Earring"
-    gear.WSDayEar2 = "Crepuscular Earring"
-    gear.WSNightEar1 = "Lugra Earring +1"
-    gear.WSNightEar2 = "Lugra Earring"
-
-    gear.WSEarBrutal = { name = gear.WSDayEar1 }
-    gear.WSEarCessance = { name = gear.WSDayEar2 }
-
-    ticker = windower.register_event('time change', function(myTime)
-        if (myTime == 17 * 60 or myTime == 7 * 60) then
-            procTime(myTime)
-            if (player.status == 'Idle' or state.Kiting.value) then
-                update_combat_form()
-            end
-        end
-    end)
-
     update_defense_mode()
     select_default_macro_book()
-end
-
-function procTime(myTime)
-    if isNight() then
-        gear.WSEarBrutal = gear.WSNightEar1
-        gear.WSEarCessance = gear.WSNightEar2
-        gear.MovementFeet = gear.NightFeet
-    else
-        gear.WSEarBrutal = gear.WSDayEar1
-        gear.WSEarCessance = gear.WSDayEar2
-        gear.MovementFeet = gear.DayFeet
-    end
-end
-
-function isNight()
-    return (world.time >= 17 * 60 or world.time < 7 * 60)
 end
 
 function user_unload()
@@ -139,17 +107,18 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {
-        ammo = "Sapience Orb",
-        head = "Carmine Mask +1",
-        neck = "Orunmila's Torque",
-        ear1 = "Enchanter's Earring +1",
-        ear2 = "Loquacious Earring",
-        body = "Sacro Breastplate",
-        hands = "Leyline Gloves",
-        ring1 = "Kishar Ring",
-        ring2 = "Medada's Ring",
-        legs = "Enif Cosciales",
-        feet = "Odyssean Greaves"
+        ammo = "Sapience Orb",           -- 2
+        head = "Carmine Mask +1",        -- 14
+        neck = "Orunmila's Torque",      -- 5
+        ear1 = "Enchanter's Earring +1", -- 2
+        ear2 = "Loquacious Earring",     -- 2
+        body = "Sacro Breastplate",      -- 10
+        hands = "Leyline Gloves",        -- 8
+        ring1 = "Kishar Ring",           -- 4
+        ring2 = "Medada's Ring",         -- 10
+        back = "",
+        legs = "Enif Cosciales",         -- 8
+        feet = "Odyssean Greaves"        -- 11
     }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
@@ -159,17 +128,17 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo = "Coiste Bodhar",
-        head = "Sulevia's Mask +1",
+        head = "Nyame Helm",
         neck = "Fotia Gorget",
-        ear1 = "Thrud Earring",
-        ear2 = "Moonshade Earring",
-        body = "Sulevia's Platemail +2",
-        hands = "Sulevia's Gauntlets +1",
+        ear1 = "Moonshade Earring",
+        ear2 = "Thrud Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
         ring1 = gear.TrustRing,
         ring2 = "Epaminondas's Ring",
-        back = "Atheling Mantle",
+        back = "butts",
         waist = "Fotia Belt",
-        legs = "Sulevia's Cuisses +2",
+        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
@@ -197,39 +166,43 @@ function init_gear_sets()
     sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS.Acc, {})
 
     sets.precast.WS['Sanguine Blade'] = {
-        ammo = "Coiste Bodhar",
+        ammo = "Oshasha's Treatise",
         head = "Pixie Hairpin +1",
         neck = "Sibyl Scarf",
         ear1 = "Friomisi Earring",
         ear2 = "Crematio Earring",
-        body = "Sulevia's Platemail +2",
-        hands = "Sulevia's Gauntlets +1",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
         ring1 = "Archon Ring",
         ring2 = "Epaminondas's Ring",
         back = "Toro Cape",
-        waist = "Eschan Stone",
-        legs = "Sulevia's Cuisses +2",
+        waist = "Orpheus's Sash",
+        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
-    sets.precast.WS['Atonement'] = {
-        ammo = "Staunch Tathlum +1",
-        head = "Sulevia's Mask +1",
-        neck = "Fotia Gorget",
-        ear1 = "Eabani Earring",
-        ear2 = "Moonshade Earring",
-        body = "Sulevia's Platemail +2",
-        hands = "Sulevia's Gauntlets +1",
-        ring1 = "Regal Ring",
-        ring2 = "Vexer Ring",
-        back = "Fierabras's Mantle",
-        waist = "Fotia Belt",
-        legs = "Sulevia's Cuisses +2",
-        feet = "Caballarius Leggings"
-    }
+    sets.precast.WS['Atonement'] = set_combine(sets.enmity)
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS,
-        { neck = "Republican Platinum medal", waist = "Sailfi Belt +1" })
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+        neck = "Republican Platinum medal",
+        waist = "Sailfi Belt +1",
+    })
+
+    sets.precast.WS['Imperator'] = {
+        ammo = "Coiste Bodhar",
+        head = "Nyame Helm",
+        neck = "Kgt. Beads +2",
+        ear1 = "Lugra Earring +1",
+        ear2 = "Moonshade Earring", -- at full TP: Chevalier's earring +2
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Regal Ring", -- or ephramad's
+        ring2 = "Epaminondas's Ring",
+        back = "",            -- MND+WSD JSE cape
+        waist = "Kentarch Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
 
     --------------------------------------
     -- Midcast sets

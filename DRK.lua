@@ -125,7 +125,7 @@ function user_setup()
 
     send_command('bind numpad7 gs equip sets.Weapons.Caladbolg ; gs c update_if_weapon')
     send_command('bind numpad8 gs equip sets.Weapons.Liberator ; gs c update_if_weapon')
-    send_command('bind ^numpad8 gs equip sets.Weapons.Apocalypse; gs c update_if_weapon')
+    send_command('bind ^numpad8 gs equip sets.Weapons.Foenaria; gs c update_if_weapon')
     send_command('bind numpad9 gs equip sets.Weapons.greataxe; gs c update_if_weapon')
     send_command('bind ^numpad9 gs equip sets.Weapons.greataxe.hepatizon; gs c update_if_weapon')
     send_command('bind numpad4 gs equip sets.Weapons.sword; gs c update_if_weapon')
@@ -136,8 +136,8 @@ function user_setup()
     send_command('bind ^numpad1 gs c cycle EnmityMode')
     send_command('bind ^f11 gs c set DefenseMode Reraise')
 
-    gear.default.obi_waist = "Eschan Stone"
-    gear.default.drain_waist = "Austerity Belt +1"
+    gear.default.obi_waist = "Orpheus's Sash"
+    gear.default.drain_waist = "Orpheus's Sash"
     gear.default.cure_waist = "Gishdubar Sash"
 
     gear.default.trust_ring = "Regal Ring"
@@ -409,6 +409,7 @@ function init_gear_sets()
     sets.Weapons.club = { main = "Loxotic Mace +1", sub = "Blurred Shield +1" }
     sets.Weapons.ridill = { main = "Ridill", sub = "Blurred Shield +1" }
     sets.Weapons.Apocalypse = { main = "Apocalypse", sub = "Utu Grip" }
+    sets.Weapons.Foenaria = { main = "Foenaria", sub = "Utu Grip" }
 
     -- Precast Sets
     -- Precast sets to enhance JAs
@@ -623,7 +624,7 @@ function init_gear_sets()
         ring1 = "Epaminondas's Ring",
         ring2 = "Medada's Ring",
         back = gear.ws_cape,
-        waist = "Eschan Stone",
+        waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
         feet = "Heathen's Sollerets +3"
     }
@@ -662,16 +663,11 @@ function init_gear_sets()
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     -- Scythe Weaponskills
-    sets.precast.WS['Spinning Scythe'] = set_combine(sets.precast.WS.SingleHit,
-        { head = "Heathen's Burgeonet +3", hands = "Nyame Gauntlets" })
+    sets.precast.WS['Spinning Scythe'] = set_combine(sets.precast.WS.SingleHit)
     sets.precast.WS['Spinning Scythe'].Acc = set_combine(sets.precast.WS.Acc,
         { head = "Heathen's Burgeonet +3", hands = "Nyame Gauntlets", })
 
-    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS.SingleHit,
-        {
-            head = "Heathen's Burgeonet +3",
-            hands = "Nyame Gauntlets",
-        })
+    sets.precast.WS['Spiral Hell'] = set_combine(sets.precast.WS.SingleHit, {})
     sets.precast.WS['Spiral Hell'].Acc = set_combine(sets.precast.WS.Acc,
         { head = "Heathen's Burgeonet +3", hands = "Nyame Gauntlets", feet = { name = "Ratri Sollerets +1", priority = 10 } })
     sets.precast.WS['Spiral Hell'].PDL = set_combine(sets.precast.WS['Spiral Hell'],
@@ -702,7 +698,7 @@ function init_gear_sets()
         {
             head = "Heathen's Burgeonet +3",
             ear1 = "Lugra Earring +1",
-            hands = "Nyame Gauntlets",
+
             ring1 = "Niqmaddu Ring",
             back = gear.ws_cape,
             feet = "Heathen's Sollerets +3",
@@ -722,16 +718,9 @@ function init_gear_sets()
     sets.precast.WS['Guillotine'].PDL = set_combine(sets.precast.WS['Guillotine'],
         { ammo = "Crepuscular Pebble", head = "Heathen's burgeonet +3", ring2 = "Sroda Ring" })
 
-    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.SingleHit,
-        {
-            head = "Heathen's burgeonet +3",
-            hands = "Nyame Gauntlets",
-            neck = "Abyssal Beads +2",
-            waist = "Sailfi Belt +1",
-            feet = "Heathen's Sollerets +3"
-        })
+    sets.precast.WS['Cross Reaper'] = set_combine(sets.precast.WS.SingleHit, {})
     sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS.Acc,
-        { head = "Heathen's Burgeonet +3", hands = "Nyame Gauntlets", feet = "Heathen's Sollerets +3" })
+        { head = "Heathen's Burgeonet +3" })
     sets.precast.WS['Cross Reaper'].PDL = set_combine(sets.precast.WS['Cross Reaper'],
         {
             ammo = "Crepuscular Tathlum",
@@ -739,9 +728,8 @@ function init_gear_sets()
             ring1 = "Sroda Ring",
         })
 
-    sets.precast.WS['Insurgency'] = set_combine(sets.precast.WS,
+    sets.precast.WS['Insurgency'] = set_combine(sets.precast.WS.SingleHit,
         {
-            head = "Heathen's Burgeonet +3",
             neck = "Abyssal Beads +2",
             hands = "Nyame Gauntlets",
             back = gear.ws_cape,
@@ -761,7 +749,6 @@ function init_gear_sets()
 
     sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS.SingleHit,
         {
-            head = "Ratri Sallet +1",
             neck = "Abyssal Beads +2",
             hands = "Nyame Gauntlets",
             waist = "Sailfi Belt +1",
@@ -770,7 +757,6 @@ function init_gear_sets()
         })
     sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS.Acc,
         {
-            head = "Ratri Sallet +1",
             ear2 = "Lugra Earring +1",
             hands = "Nyame Gauntlets",
             feet = "Heathen's Sollerets +3"
@@ -800,7 +786,6 @@ function init_gear_sets()
 
     sets.precast.WS['Torcleaver'] = set_combine(sets.precast.WS.SingleHit, {
         neck = "Abyssal Beads +2",
-        hands = "Sakpata's Gauntlets",
         back = gear.torcleaver_cape,
         waist = "Fotia Belt"
     })
@@ -993,7 +978,7 @@ function init_gear_sets()
         ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
-        legs = "Carmine Cuisses +1",
+        legs = "Sakpata's Cuisses",
         feet = "Sakpata's Leggings"
     })
 
@@ -1170,7 +1155,7 @@ function init_gear_sets()
 
     sets.midcast['Dark Magic'] = {
         ammo = "Pemphredo Tathlum",
-        head = "Ignominy Burgonet +3",
+        head = "Ignominy Burgeonet +3",
         neck = "Incanter's Torque",
         ear1 = "Malignance Earring",
         ear2 = "Mani Earring",
@@ -1209,7 +1194,7 @@ function init_gear_sets()
         body = "Carmine Scale Mail +1",
         hands = "Fallen's Finger Gauntlets +3",
         back = "Niht Mantle",
-        waist = gear.DrainWaist,
+        waist = gear.ElementalObi,
         feet = gear.yorium.drain.feet
     })
     sets.midcast['Drain II'] = sets.midcast['Drain']
@@ -1248,21 +1233,36 @@ function init_gear_sets()
 
     sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'],
         {
-            head = "Ignominy Burgonet +3",
+            ammo = "Pemphredo Tathlum",
+            head = "Ignominy Burgeonet +3",
             neck = "Erra Pendant",
+            ear1 = "Malignance Earring",
+            ear2 = "Heathen's Earring +1",
+            body = "Heathen's Cuirass +3",
             hands = "Vicious Mufflers",
-            ring2 = "Medada's Ring",
             ring1 = "Kishar Ring",
+            ring2 = "Medada's Ring",
             back = "Chuparrosa Mantle",
+            waist = "Eschan Stone",
+            legs = "Heathen's Flanchard +3",
             feet = "Ratri Sollerets +1"
         })
     sets.midcast.Absorb.Weapon = { main = "Liberator", sub = "Khonsu" }
     sets.midcast.Absorb.DarkSeal = { head = "Fallen's Burgeonet +3" }
     sets.midcast['Absorb-TP'] = set_combine(sets.midcast['Dark Magic'],
         {
+            ammo = "Pemphredo Tathlum",
+            head = "Heathen's Burgeonet +3",
+            neck = "Erra Pendant",
+            ear1 = "Malignance Earring",
+            ear2 = "Heathen's Earring +1",
+            body = "Heathen's Cuirass +3",
             hands = "Heathen's Gauntlets +2",
             ring1 = "Metamorph Ring +1",
             ring2 = "Medada's Ring",
+            back = gear.casting_cape,
+            waist = "Eschan Stone",
+            legs = "Heathen's Flanchard +3",
             feet = "Heathen's Sollerets +3"
         })
 
@@ -1672,8 +1672,8 @@ function init_gear_sets()
         head = "Sakpata's Helm",
         neck = "Abyssal Beads +2",
         ear2 = "Telos Earring",
-        ear1 = "Brutal Earring",
-        body = "Dagon Breastplate",
+        ear1 = "Schere EArring",
+        body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
         ring1 = gear.left_moonlight,
         ring2 = "Niqmaddu Ring",
@@ -1688,7 +1688,7 @@ function init_gear_sets()
         neck = "Abyssal Beads +2",
         ear2 = "Telos Earring",
         ear1 = "Crepuscular Earring",
-        body = "Dagon Breastplate",
+        body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
         ring1 = gear.left_moonlight,
         ring2 = "Regal Ring",
@@ -1939,9 +1939,8 @@ function init_gear_sets()
     -- Buff specific sets
     -------------------------------------------------------------------------------------------------------------------
     sets.buff['Souleater'] = { head = "Ignominy Burgonet +3" }
-    sets.buff['Arcane Circle'] = { feet = "Ignominy Sollerets +1" }
-    sets.buff['Nether Void'] = { legs = "Heath. Flanchard +3" }
     sets.buff['Dark Seal'] = { head = "Fallen's Burgeonet +3" }
+    sets.buff['Nether Void'] = { legs = "Heathen's Flanchard +3" }
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1954,10 +1953,10 @@ function filtered_action(spell)
         cancel_spell()
         -- weapon agnostic remap
         if spell.english == "Catastrophe" then
-            if main == 'Liberator' then
-                send_command('input /ws "Insurgency"' .. spell.target.raw)
-            elseif main == 'Foenaria' then
-                send_command('input /ws "Origin"' .. spell.target.raw)
+            if main == 'Foenaria' then
+                send_command('input /ws "Origin" ' .. spell.target.raw)
+            elseif main == 'Liberator' then
+                send_command('input /ws "Insurgency" ' .. spell.target.raw)
             elseif main == 'Helheim' then
                 send_command('input /ws "Fimbulvetr"' .. spell.target.raw)
             elseif main == 'Caladbolg' then
@@ -2066,9 +2065,6 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         equip(sets.buff['Dark Seal'])
     elseif spell.type == 'WeaponSkill' then
         if player.tp == 3000 and sets.precast.WS[spell.english] and sets.precast.WS[spell.english].FullTP then
-            if has_PDL_buffs(buffactive) and state.WeaponskillMode.value == 'AutoPDL' then
-                equip_PDL_WS_set(spell)
-            end
             -- equip moonshade with either lugra or a specific sets
             -- earring if lugra exists in the first ear slot.
             if sets.precast.WS[spell.english] and sets.precast.WS[spell.english].ear1 and sets.precast.WS[spell.english].ear2 and sets.precast.WS[spell.english].ear1 == sets.precast.WS.FullTP.ear2 then
@@ -2078,6 +2074,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             end
         elseif player.tp == 3000 and not sets.precast.WS[spell.english] and sets.precast.WS.FullTP then
             equip(sets.precast.WS.FullTP)
+        end
+        if has_PDL_buffs(buffactive) and state.WeaponskillMode.value == 'AutoPDL' then
+            equip_PDL_WS_set(spell)
         end
     end
 end
@@ -2110,7 +2109,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
     if spell.english:startswith('Absorb') and spell.english ~= 'Absorb-TP' then
         equip(sets.midcast.Absorb)
-
         -- equip liberator for absorb under these conditions
         if not buffactive['Aftermath: Lv.3']
             and player.tp < 800
@@ -2123,17 +2121,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     -- Dark seal handling
     if spell.skill == 'Dark Magic' and buffactive['Dark Seal'] then
         -- we're not interested in the relic bonus for these spells
-        if spell.english:startswith('Absorb') or spell.english == 'Drain' or spell.english == 'Dread Spikes' then
+        if spell.english == 'Drain' or spell.english == 'Dread Spikes' then
             equip(sets.midcast[spell.english])
-        elseif spell.english == 'Drain III' then
-            equip(sets.midcast['Drain III'].DarkSeal)
-        elseif spell.english:startswith('Endark') then
-            equip(sets.midcast['Endark'].DarkSeal)
-        elseif spell.english:startswith('Absorb') and spell.english ~= 'Absorb-TP' then
-            equip(sets.midcast['Dark Magic'], sets.midcast.Absorb, sets.midcast.Absorb.DarkSeal)
-        else
-            equip(sets.midcast['Dark Magic'].DarkSeal)
+        elseif S { 'Drain II', 'Drain III' }:contains(spell.english) or (spell.english:startswith('Absorb') and spell.english ~= 'Absorb-TP') then
+            equip(sets.buff['Dark Seal'])
         end
+    end
+
+    if spell.skill == 'Dark Magic' and buffactive['Nether Void'] then
+        equip(sets.buff['Nether Void'])
     end
 
     if S { 'enabled', 'one-time' }:contains(state.SIRDMode.value) then
@@ -2386,10 +2382,10 @@ end
 function isMainChanged()
     if info.lastWeapon == player.equipment.main then
         return false
-    else
-        info.lastWeapon = player.equipment.main
-        return true
     end
+
+    info.lastWeapon = player.equipment.main
+    return true
 end
 
 -- check if there is something in the sub slot

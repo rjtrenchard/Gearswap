@@ -216,7 +216,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'PDT', 'Refresh', 'Regen')
     state.DoomMode = M { ['description'] = 'Doom Mode', 'Cursna', 'Holy Water', 'None' }
 
-    gear.default.obi_waist = "Sacro Cord"
+    gear.default.obi_waist = "Orpheus's Sash"
     gear.default.drain_waist = "Fucho-no-Obi"
     gear.default.cure_waist = "Shinjutsu-no-obi +1"
 
@@ -256,8 +256,6 @@ function init_gear_sets()
     sets.weapons = {}
     sets.weapons.Naegling = { main = "Naegling", sub = "Thibron" }
     sets.weapons.magicatk = { main = "Maxentius", sub = "Bunzi's Rod" }
-
-    gear.default.obi_waist = "Acuity Belt +1"
 
     sets.buff['Burst Affinity'] = { feet = "Mavi Basmak +2" }
     sets.buff['Chain Affinity'] = { head = "Mavi Kavuk +2", feet = "Assimilator's Charuqs" }
@@ -885,7 +883,7 @@ function init_gear_sets()
         ring2 = "Epona's Ring",
         back = "Cornflower Cape",
         waist = "Sailfi Belt +1",
-        legs = "Samnuha Tights",
+        legs = "Gleti's Breeches",
         feet = "Malignance Boots"
     }
 

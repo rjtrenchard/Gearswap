@@ -48,7 +48,7 @@ function user_setup()
     state.DoomMode = M { ['description'] = 'Doom Mode', 'Cursna', 'Holy Water' }
     state.MagicBurst = M { ['description'] = 'Magic Burst', 'Normal', 'Once', 'Always' }
 
-    gear.default.obi_waist = "Eschan Stone"
+    gear.default.obi_waist = "Orpheus's Sash"
 
     -- gear.NormalShuriken = 'Date Shuriken'
     -- gear.SangeShuriken = 'Happo Shuriken'

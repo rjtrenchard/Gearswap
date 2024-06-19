@@ -110,12 +110,12 @@ function user_setup()
     state.HybridMode:options('Normal', 'PDT')
     state.DefenseMode:options('None', 'Physical', 'Magical', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc')
-    state.IdleMode:options('Normal', 'PDT', 'Reraise') -- pet mode will mirror this mode
+    state.IdleMode:options('Normal', 'PDT', 'Reraise', 'Regain') -- pet mode will mirror this mode
     state.PhysicalDefenseMode:options('PDT', 'Hybrid', 'Killer', 'Reraise')
 
     state.DoomMode = M { ['description'] = 'Doom Mode', 'Cursna', 'Holy Water', 'None' }
 
-    gear.default.ElementalObi = "Eschan Stone"
+    gear.default.obi_waist = "Orpheus's Sash"
 
     send_command('bind numpad7 gs c equip axes')
     send_command('bind ^numpad7 gs c equip axes_DT')
@@ -159,18 +159,18 @@ function init_gear_sets()
 
     sets.weapons = {}
     sets.weapons.axes = { main = "Aymur", sub = "Kaidate" }
-    sets.weapons.axes.DW = { main = "Aymur", sub = "Agwu's Axe" }
+    sets.weapons.axes.DW = { main = "Aymur", sub = "Ikenga's Axe" }
     sets.weapons.axes_DT = { main = "Aymur", sub = "Sacro Bulwark" }
-    sets.weapons.axes_DT.DW = { main = "Aymur", sub = "Fernagu" }
+    sets.weapons.axes_DT.DW = { main = "Aymur", sub = "Agwu's Axe" }
     -- sets.weapons.Dolichenus = { main = "Dolichenus", sub = "Kaidate" }
     -- sets.weapons.Dolichenus.DW = { main = "Dolichenus", sub = "Agwu's Axe" }
-    sets.weapons.axes_petDT = { main = "Pangu", sub = "Sacro Bulwark" }
-    sets.weapons.axes_petDT.DW = { main = "Pangu", sub = "Kumbhakarna" }
+    sets.weapons.axes_petDT = { main = "Agwu's Axe", sub = "Sacro Bulwark" }
+    sets.weapons.axes_petDT.DW = { main = "Agwu's Axe", sub = "Kaidate" }
     sets.weapons.sword = { main = "Naegling", sub = "Kaidate" }
     sets.weapons.sword.DW = { main = "Naegling", sub = "Fernagu" }
     sets.weapons.AE = { main = "Crepuscular Knife", sub = "Fernagu" }
     sets.weapons.AE.DW = sets.weapons.AE
-    sets.weapons.scythe = { main = "Drepanum", sub = "Bloodrain Strap" }
+    sets.weapons.scythe = { main = "Drepanum", sub = "Ultio Grip" }
     sets.weapons.scythe.DW = sets.weapons.scythe
 
     gear.pet_phys_cape = { name = "Artio's Mantle", augments = { 'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20', 'Eva.+20 /Mag. Eva.+20', 'Pet: Haste+10', 'System: 1 ID: 1246 Val: 4', } }
@@ -617,11 +617,22 @@ function init_gear_sets()
     sets.idle.Town = sets.idle
 
     sets.idle.Refresh = {
-        head = "Sibyl Scarf",
+        neck = "Sibyl Scarf",
         body = "Crepuscular Mail",
         ring1 = gear.left_stikini,
         ring2 = "Shneddick Ring +1"
     }
+
+    sets.idle.Regain = set_combine(sets.idle, {
+        head = "Valorous mask",
+        neck = "Republican Platinum medal",
+        body = "Gleti's Cuirass",
+        hands = "Gleti's Gauntlets",
+        ring1 = "Shneddick Ring +1",
+        ring2 = "Roller's Ring",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
+    })
 
     sets.idle.Reraise = set_combine(sets.idle, { head = "Crepuscular Helm", body = "Crepuscular Mail" })
 
@@ -738,7 +749,7 @@ function init_gear_sets()
         ring2 = "Gere Ring",
         back = gear.melee_cape,
         waist = "Sailfi Belt +1",
-        legs = "Malignance Tights",
+        legs = "Gleti's Breeches",
         feet = "Malignance Boots"
     }
 
@@ -1098,7 +1109,9 @@ function job_buff_change(buff, gain)
                 send_command('gs equip sets.buff.doom.HolyWater')
             end
         elseif buff == 'terror' or buff == 'stun' then
-            send_command('gs equip sets.idle.PDT')
+            if state.DefenseMode.value ~= 'Reraise' then
+                send_command('gs equip sets.idle.PDT')
+            end
         elseif buff == 'sleep' then
             if buffactive['Stoneskin'] and has_poison_debuff(buffactive) then send_command('cancel stoneskin') end
         elseif buff == 'Level Restriction' then

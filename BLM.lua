@@ -39,17 +39,17 @@ function user_setup()
         'Stonega', 'Waterga', 'Aeroga', 'Firaga', 'Blizzaga', 'Thundaga',
         'Stonega II', 'Waterga II', 'Aeroga II', 'Firaga II', 'Blizzaga II', 'Thundaga II' }
 
-    gear.default.obi_waist = "Sacro Cord"
+    gear.default.obi_waist = "Orpheus's Sash"
     gear.default.drain_waist = "Fucho-no-obi"
     gear.default.cure_waist = "Shinjutsu-no-obi +1"
 
 
     send_command('bind !numpad8 gs equip sets.weapons.Mpaca')
-    send_command('bind ^numpad8 gs equip sets.weapons.Mpaca.refresh')
-    send_command('bind numpad8 gs equip sets.weapons.Mpaca.casting')
-    send_command('bind !numpad9 gs equip sets.weapons.Xoanon')
+    send_command('bind ^numpad8 gs equip sets.weapons.Mpaca.casting')
+    send_command('bind numpad8 gs equip sets.weapons.Maxentius')
+    send_command('bind !numpad9 gs equip sets.weapons.Xoanon.casting')
     send_command('bind ^numpad9 gs equip sets.weapons.Xoanon.refresh')
-    send_command('bind numpad9 gs equip sets.weapons.Xoanon.casting')
+    send_command('bind numpad9 gs equip sets.weapons.Xoanon')
     send_command('bind numpad7 gs equip sets.weapons.Bunzi.casting')
     send_command('bind !numpad7 gs equip sets.weapons.Bunzi.refresh')
     send_command('bind ^numpad7 gs equip sets.weapons.Bunzi')
@@ -116,7 +116,7 @@ function init_gear_sets()
 
     sets.weapons.Xoanon = {
         main = "Xoanon",
-        sub = "Khonsu"
+        sub = "Ultio Grip"
     }
     sets.weapons.Xoanon.refresh = {
         main = "Xoanon",
@@ -125,6 +125,11 @@ function init_gear_sets()
     sets.weapons.Xoanon.casting = {
         main = "Xoanon",
         sub = "Enki Strap"
+    }
+
+    sets.weapons.Maxentius = {
+        main = "Maxentius",
+        sub = "Genmei Shield",
     }
 
     sets.weapons.Bunzi = {
@@ -254,8 +259,8 @@ function init_gear_sets()
         ear2 = "Moonshade Earring",
         body = "Nyame mail",
         hands = "Nyame gauntlets",
-        ring1 = gear.left_chirich,
-        ring2 = gear.right_chirich,
+        ring1 = "Epaminondas's Ring",
+        ring2 = "Shukuyu Ring",
         back = "Aurist's Cape +1",
         waist = "Fotia Belt",
         legs = "Nyame Flanchard",
@@ -265,7 +270,7 @@ function init_gear_sets()
     sets.precast.WS.Magical = {
         ammo = "Oshasha's Treatise",
         head = "Nyame Helm",
-        neck = "Sibyl Scarf",
+        neck = "Sorcerer's Stole +2",
         ear1 = "Malignance Earring",
         ear2 = "Regal Earring",
         body = "Nyame Mail",
@@ -276,16 +281,35 @@ function init_gear_sets()
         waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
-
     }
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
+
+    sets.precast.WS['Shining Strike'] = set_combine(sets.precast.WS.Magical, {
+    })
+
+    sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS, {
+        ear1 = "Malignance Earring",
+        ear2 = "Wicce Earring +2",
+        ring1 = "Metamorph Ring +1",
+        ring2 = gear.right_stikini,
+    })
+
+    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
+        neck = "Sorcerer's stole +2",
+        ear1 = "Moonshade Earring",
+        ear2 = "Wicce Earring +2",
+        ring1 = "Metamorph Ring +1",
+        ring2 = "Epaminondas's Ring",
+        waist = "Luminary Sash",
+    })
+
     sets.precast.WS['Vidohunir'] = set_combine(sets.precast.WS.Magical, {
         ammo = "Ghastly Tathlum +1",
         head = "Pixie Hairpin +1",
         neck = "Sibyl Scarf",
         ear1 = "Malignance Earring",
-        ear2 = "Regal Earring",
+        ear2 = "Wicce Earring +2",
         ring1 = "Archon Ring",
         ring2 = "Epaminondas's Ring",
         back = "Aurist's Cape +1",
@@ -294,17 +318,43 @@ function init_gear_sets()
 
     sets.precast.WS['Cataclysm'] = sets.precast.WS['Vidohunir']
 
-    sets.precast.WS['Shining Strike'] = set_combine(sets.precast.WS.Magical, {
+    sets.precast.WS['Retribution'] = set_combine(sets.precast.WS, {
+        neck = "Platinum Republican medal",
+        ear1 = "Moonshade Earring",
+        ear2 = "Wicce Earring +2",
+        ring2 = "Metamorph Ring +1",
+        waist = "Luminary Sash",
+
     })
 
-    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
-        neck = "Sorcerer's stole +2",
-        ear1 = "Regal Earring",
-        ear2 = "Wicce Earring +2",
-        waist = "Luminary Sash",
-        ring1 = "Metamorph Ring +1",
-        ring2 = "Epaminondas's Ring",
+    sets.precast.WS['Shattersoul'] = set_combine(sets.precast.WS, {
+        neck = "Sorcerer's Stole +2",
+        ring2 = "Metamorph Ring +1",
+        waist = "Acuity Belt +1",
+        ammo = "Ghastly Tathlum +1",
     })
+
+    sets.precast.WS['Myrkr'] = {
+        ammo = "Ghastly Tathlum +1",
+        head = "Wicce Petasos +2",
+        neck = "Orunmila's Torque",
+        ear1 = "Etiolation Earring",
+        ear2 = "Moonshade Earring",
+        body = "Wicce Coat +3",
+        hands = "Wicce Gloves +2",
+        ring1 = "Metamorph Ring +1",
+        ring2 = "Mephitas's Ring +1",
+        back = "Fi Follet Cape +1",
+        waist = "Shinjutsu-no-obi +1",
+        legs = "Wicce Chausses +3",
+        feet = "Wicce Sabots +2"
+    }
+
+    sets.precast.WS['Full Swing'] = set_combine(sets.precast.WS, {
+        neck = "Republican Platinum medal",
+        waist = "Cornelia's Belt",
+    })
+
 
 
     ---- Midcast Sets ----
@@ -754,7 +804,7 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = {
         ammo = "Oshasha's Treatise",
-        head = "Blistering Sallet +1",
+        head = "Nyame Helm",
         neck = "Combatant's Torque",
         ear1 = "Telos Earring",
         ear2 = "Brutal Earring",
@@ -763,7 +813,7 @@ function init_gear_sets()
         ring1 = gear.left_chirich,
         ring2 = gear.right_chirich,
         back = "Aurist's Cape +1",
-        waist = "Windbuffet Belt +1",
+        waist = "Cornelia's Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
@@ -800,11 +850,10 @@ function filtered_action(spell)
 end
 
 function job_pretarget(spell, action, spellMap, eventArgs)
-    if spell.skill ~= 'Weaponskill' then
-        if spell.type ~= 'WeaponSkill' then
-            set_recast()
-        end
+    if spell.type ~= 'WeaponSkill' then
+        set_recast()
     end
+
 
     if spell.skill == 'Elemental Magic' and not is_spell_ready(spell) then
         if is_mapped_st_spell(spell) then
@@ -1082,7 +1131,8 @@ function define_spell_priority()
             "Aero IV",
             "Aero III",
             "Aero"
-        }
+        },
+        ['Dark'] = T { 'Impact' }
     }
 
     aoe_spell_priority = T {
@@ -1121,7 +1171,8 @@ function define_spell_priority()
             "Aeroja",
             "Aeroga II",
             "Aeroga",
-        }
+        },
+        ['Dark'] = T { 'Impact' }
     }
 end
 

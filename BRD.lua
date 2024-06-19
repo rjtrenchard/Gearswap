@@ -54,7 +54,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'PDT', 'SubtleBlow')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal', 'PDT', 'Refresh')
+    state.IdleMode:options('Normal', 'PDT', 'Refresh', 'Regen', 'Regain')
 
     state.LullabyMode = M { ['description'] = 'Lullaby Mode', 'Range', 'Potency' }
     state.EnmityMode = M { ['description'] = 'Enmity Mode', 'Normal', 'Enmity' }
@@ -97,8 +97,8 @@ function user_setup()
     gear.left_idle_ring = gear.left_moonlight
 
     if is_healer_role() then
-        gear.left_idle_ear = { name = "Etiolation Earring" }
-        gear.right_idle_ear = { name = "Infused Earring" }
+        gear.left_idle_ear.name = "Etiolation Earring"
+        gear.right_idle_ear.name = "Infused Earring"
         gear.left_idle_ring = gear.left_stikini
     end
 
@@ -136,7 +136,7 @@ function user_setup()
     send_command('bind ^= gs c cycle treasuremode')
 
     gear.default.cure_waist = "Shinjutsu-no-obi +1"
-    gear.default.obi_waist = "Eschan Stone"
+    gear.default.obi_waist = "Orpheus's Sash"
 
     info.songs_casted = 0
 
@@ -199,7 +199,7 @@ function init_gear_sets()
     sets.weapons['Carnwenhan'].DW = { main = "Carnwenhan", sub = "Crepuscular Knife" }
     sets.weapons['Critical'].DW = { main = "Gleti's Knife", sub = "Crepuscular Knife" }
     sets.weapons['Club'].DW = { main = "Daybreak", sub = "Centovente" }
-    sets.weapons['Staff'] = { main = "Xoanon", sub = "Bloodrain Strap" }
+    sets.weapons['Staff'] = { main = "Xoanon", sub = "Ultio Grip" }
     sets.weapons['AccSword'].DW = { main = "Naegling", sub = "Crepuscular Knife" }
 
     -- Augmented Gear
@@ -246,8 +246,8 @@ function init_gear_sets()
 
 
 
-    sets.SIRD = {
 
+    sets.SIRD = {
         neck = "Loricate Torque +1", -- 5
         ear1 = "Magnetic Earring",   -- 8
         ear2 = "Halasz Earring",     -- 5
@@ -278,17 +278,20 @@ function init_gear_sets()
         legs = "Zoar Subligar +1"    -- 6
     }
 
-    sets.StoreTP = {
+    sets.FullTP = {
         range = gear.MeleeInstrument,
-        neck = "Bard's Charm +2",
+        head = "Bunzi's Hat",
+        neck = "Ainia Collar",
         ear1 = "Crepuscular Earring",
-        ear2 = "Telos Earring",
+        ear2 = "Dedition Earring",
         body = "Ashera Harness",
         ring1 = gear.left_chirich,
         ring2 = gear.right_chirich,
         back = gear.melee_cape,
         waist = "Kentarch Belt +1",
+        legs = "Volte Tights"
     }
+
 
     sets.Empyrean = {
         head = "Fili Calot +2",
@@ -370,8 +373,8 @@ function init_gear_sets()
         ear2 = "Odnowa Earring +1",
         body = "Adamantite Armor",
         hands = "Nyame Gauntlets",
-        ring2 = "Shneddick Ring +1",
         ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
@@ -427,8 +430,21 @@ function init_gear_sets()
 
     sets.idle.Regen = set_combine(sets.idle.PDT, {
         neck = "Bathy Choker +1", ear2 = "Infused Earring", ring1 = gear.left_chirich, ring2 = "Paguroidea Ring",
-
     })
+
+    sets.idle.Regain = {
+        range = gear.MeleeInstrument,
+        head = "Bunzi's Hat",
+        neck = "Republican Platinum medal",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Dedition Earring",
+        body = "Ashera Harness",
+        ring1 = gear.left_chirich,
+        ring2 = "Roller's Ring",
+        back = gear.MeleeCape,
+        waist = "Kentarch Belt +1",
+        legs = "Volte Tights"
+    }
 
     -- Defense sets
 
@@ -700,7 +716,6 @@ function init_gear_sets()
 
     sets.midcast.Mazurka = { range = info.ExtraSongInstrument }
 
-
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEffect = {
         main = "Carnwenhan",
@@ -898,8 +913,8 @@ function init_gear_sets()
         ear2 = "Crepuscular Earring",
         body = "Brioso Justaucorps +3",
         hands = "Brioso Cuffs +3",
-        ring1 = gear.left_stikini,
-        ring2 = "Metamorph Ring +1",
+        ring1 = "Metamorph Ring +1",
+        ring2 = "Medada's Ring",
         back = "Aurist's Cape +1",
         waist = "Acuity Belt +1",
         legs = "Brioso Cannions +2",
@@ -911,6 +926,22 @@ function init_gear_sets()
         neck = "Jokushu Chain",
         back = "Disperser's Cape"
     })
+
+    sets.midcast['Absorb-TP'] = {
+        ammo = gear.MaccInstrument,
+        head = "Fili Calot +2",
+        neck = "Moonbow Whistle +1",
+        ear1 = "Crepuscular Earring",
+        ear2 = "Dignitary's Earring",
+        body = "Fili Hongreline +3",
+        hands = "Fili Manchettes +2",
+        ring1 = "Metamorph Ring +1",
+        ring2 = "Medada's Ring",
+        back = gear.CastingCape,
+        waist = "Obstinate Sash",
+        legs = "Fili Rhingrave +2",
+        feet = "Fili Cothurnes +2",
+    }
 
     -- Engaged sets
 
@@ -1162,7 +1193,6 @@ end
 -- end
 -- end
 
-
 function job_precast(spell, action, spellMap, eventArgs)
     if spell.type ~= 'WeaponSkill' then
         set_recast('range')
@@ -1355,6 +1385,8 @@ function job_buff_change(buff, gain)
             send_command('dressup blinking self always off')
         end
     end
+
+    -- print(buff, gain)
 end
 
 -- Handle notifications of general user state change.
@@ -1589,7 +1621,7 @@ function show_overwrite_timer(spell)
     local tier = get_spell_tier(spell)
     local overwrite = 21
     if song == 'Minuet' then
-        send_command(string.format('timers c "Overwrite %s %s" %d down', song, tier, overwrite))
+        send_command(string.format('timers c "Overwrite %s %s" %d down', song, tier and tier or "", overwrite))
     end
 end
 

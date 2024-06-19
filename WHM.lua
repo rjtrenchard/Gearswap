@@ -170,7 +170,7 @@ function init_gear_sets()
     }
 
     -- Cure sets
-    gear.default.obi_waist = "Luminary Sash"
+    gear.default.obi_waist = "Orpheus's Sash"
     gear.default.cure_waist = "Luminary Sash"
 
     sets.midcast['Healing Magic'] = {
@@ -238,10 +238,7 @@ function init_gear_sets()
         head = "Eber Cap", legs = "Piety Pantaloons"
     }
 
-    -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = {
-        main = "Grioavolr",
-        sub = "Oneiros Grip",
         head = "Befouled Crown",
         neck = "Incanter's Torque",
         ear1 = "Andoaa Earring",
@@ -257,6 +254,18 @@ function init_gear_sets()
     }
 
     sets.midcast['Enhancing Magic'].Duration = set_combine(sets.midcast['Enhancing Magic'], {
+        -- main = gada.enh_dur,
+        sub = "Ammurapi Shield",
+        head = gear.telchine.enh_dur.head,
+        body = gear.telchine.enh_dur.body,
+        hands = gear.telchine.enh_dur.hands,
+        legs = gear.telchine.enh_dur.legs,
+        waist = "Embla Sash",
+        feet = gear.telchine.enh_dur.feet
+    })
+
+    sets.midcast['Enhancing Magic'].Duration500 = set_combine(sets.midcast['Enhancing Magic'], {
+        -- main = gada.enh_dur,
         sub = "Ammurapi Shield",
         head = gear.telchine.enh_dur.head,
         body = gear.telchine.enh_dur.body,
@@ -279,22 +288,23 @@ function init_gear_sets()
         feet = "Gendewitha Galoshes"
     }
 
-    sets.midcast.Auspice = { hands = "Dynasty Mitts", feet = "Eber Duckbills" }
+    sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'].Duration,
+        { feet = "Eber Duckbills" })
 
-    sets.midcast.BarElement = { main = "Beneficus", legs = "", }
+    sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'].Duration, { main = "Beneficus" })
+    sets.midcast.BarStatus = set_combine(sets.midcast.BarElement, { neck = "Sroda Necklace" })
 
-    sets.midcast.Regen = {
+    sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'].Duration, {
         -- main = "Bolelabunga",
-        sub = "Ammurapi Shield",
-        head = "Inyanga Tiara +1",
-        body = "Piety Briault",
-        hands = "Eber Mitts",
-        legs = "Theophany Pantaloons +1"
-    }
+        -- sub = "Ammurapi Shield",
+        -- head = "Inyanga Tiara +1",
+        -- body = "Piety Briault",
+        -- hands = "Eber Mitts",
+        -- legs = "Theophany Pantaloons +1"
+    })
 
-    sets.midcast.Protectra = { ring1 = "Sheltered Ring", feet = "Piety Duckbills" }
-
-    sets.midcast.Shellra = { ring1 = "Sheltered Ring", legs = "Piety Pantaloons" }
+    sets.midcast.Protectra = set_combine(sets.midcast['Enhancing Magic'].Duration, { ear1 = "Brachyura Earring" })
+    sets.midcast.Shellra = sets.midcast.Protectra
 
 
     sets.midcast['Divine Magic'] = {
@@ -504,17 +514,18 @@ function init_gear_sets()
 
     -- Basic set for if no TP weapon is defined.
     sets.engaged = {
+        ammo = "Amar Cluster",
         head = "Bunzi's Hat",
         neck = "Combatant's Torque",
         ear1 = "Telos Earring",
         ear2 = "Brutal Earring",
-        body = "Bunzi's Robe",
-        hands = "Bunzi's Gloves",
+        body = "Nyame Mail",
+        hands = "Gazu Bracelets +1",
         ring1 = gear.left_chirich,
         ring2 = gear.right_chirich,
-        waist = "Sailfi Belt +1",
-        legs = "Ayanmo Cosciales +2",
-        feet = "Bunzi's Sabots"
+        waist = "Grunfeld Rope",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
 
@@ -552,6 +563,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         or spell.english:startswith('Regen')
         or S { 'Haste', 'Refresh', }:contains(spell.english) then
         equip(sets.midcast['Enhancing Magic'].Duration)
+    elseif spell.english:startswith('Boost-') then
+        equip(sets.midcast['Enhancing Magic'].Duration500)
     end
 end
 

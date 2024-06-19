@@ -51,7 +51,7 @@ function user_setup()
     gear.MAbullet = "Orichalcum Bullet"
     gear.QDbullet = "Hauksbok Bullet"
 
-    gear.default.obi_waist = "Eschan Stone"
+    gear.default.obi_waist = "Orpheus's Sash"
 
     gear.leaden_cape = {
         name = "Camulus's Mantle",
@@ -136,8 +136,6 @@ function init_gear_sets()
     sets.weapons.Naegling = { main = 'Naegling', sub = 'Crepuscular Knife' }
     sets.weapons.Ranged = { range = "Compensator", ammo = gear.RAbullet }
     sets.weapons.TPBonus = { range = "Anarchy +2", ammo = "empty" }
-
-
 
     -- Precast Sets
 
@@ -345,6 +343,7 @@ function init_gear_sets()
         ring2 = "Medada's Ring",
     })
 
+
     -- Sets for ranged WS's
     sets.precast.WS['Hot Shot'] = set_combine(sets.precast.WS,
         { ear1 = "Beyla Earring", ear2 = "Chasseur's Earring +1", ring1 = "Dingir Ring", ring2 = "Epaminondas's Ring" })
@@ -471,7 +470,6 @@ function init_gear_sets()
 
     sets.midcast.RA.Crit = set_combine(sets.midcast.RA.Acc,
         { ear1 = "Odr Earring", ring1 = "Mummu Ring", ring2 = "Begrudging Ring" })
-
 
     -- Sets to return to when not performing an action.
 

@@ -56,7 +56,7 @@ function user_setup()
 
     select_default_macro_book()
 
-    gear.default.obi_waist = "Eschan Stone"
+    gear.default.obi_waist = "Orpheus's Sash"
 
     if player.sub_job == 'BLU' then
         send_command('bind ` input /ma "Cursed Sphere" <t>')

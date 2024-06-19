@@ -415,7 +415,7 @@ function init_gear_sets()
         ring1 = "Freke Ring",
         ring2 = "Metamorph Ring +1",
         back = "",
-        waist = "Austerity Belt +1",
+        waist = "Orpheus's Sash",
         legs = "Amalric Slops +1",
         feet = "Amalric Nails +1"
     }
@@ -637,11 +637,11 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
+        ring2 = "Shneddick Ring +1",
         back = "Umbra Cape",
         waist = "Platinum Moogle Belt",
         legs = "Assiduity Pants +1",
-        feet = "Crier's Gaiters"
+        feet = "Nyame Sollerets"
     }
 
     sets.idle.PDT = {

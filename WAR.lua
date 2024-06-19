@@ -32,13 +32,16 @@ function user_setup()
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc', 'Crit')
-    state.HybridMode:options('Normal', 'PDT', 'Reraise')
+    state.HybridMode:options('Normal', 'PDT', 'Reraise', 'MDT')
     state.DefenseMode:options('None', 'Physical', 'Magical', 'Reraise')
     state.WeaponskillMode:options('Normal', 'Acc', 'Mod')
+    state.IdleMode:options('Normal', 'PDT', 'Regain')
 
     state.PhysicalDefenseMode:options('PDT', 'Reraise')
 
     state.DoomMode = M { ['description'] = 'Doom Mode', 'Cursna', 'Holy Water', 'None' }
+
+    gear.default.obi_waist = "Orpheus's Sash"
 
     -- Additional local binds
     send_command('bind ^` input /ja "Hasso" <me>')
@@ -68,6 +71,10 @@ function user_setup()
 
     send_command('bind ^- gs c cycle DoomMode')
     send_command('bind ^= gs c cycle treasuremode')
+
+    send_command('bind ^numpad1 input /item "Panacea" <me>')
+    send_command('bind ^numpad2 input /item "Remedy" <me>')
+    send_command('bind ^numpad3 input /item "Holy Water" <me>')
 
 
     info.magic_ws = S {
@@ -383,7 +390,7 @@ function init_gear_sets()
         ring1 = "Epaminondas's Ring",
         ring2 = "Medada's Ring",
         back = gear.magic_ws_cape,
-        waist = "Eschan Stone",
+        waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
@@ -418,7 +425,7 @@ function init_gear_sets()
 
     sets.precast.WS['Vorpal Blade'] = set_combine(sets.precast.WS.Crit)
 
-    sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS['Cataclysm'], { back = gear.str_ws_cape })
+
 
     -- Axe
     sets.precast.WS['Calamity'] = sets.precast.WS['Savage Blade']
@@ -479,7 +486,7 @@ function init_gear_sets()
         ring1 = "Epaminondas's Ring",
         ring2 = "Archon Ring",
         back = gear.str_ws_cape,
-        waist = "Eschan Stone",
+        waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets",
     }
@@ -504,7 +511,7 @@ function init_gear_sets()
         ring1 = "Epaminondas's Ring",
         ring2 = "Medada's Ring",
         back = gear.magic_ws_cape,
-        waist = "Eschan Stone",
+        waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
@@ -561,7 +568,7 @@ function init_gear_sets()
         back = gear.melee_cape,
         waist = "Flume Belt +1",
         legs = "Sakpata's Cuisses",
-        feet = "Sakapta's Leggings"
+        feet = "Sakpata's Leggings"
     })
 
     sets.idle.Weak = {
@@ -587,6 +594,14 @@ function init_gear_sets()
     sets.idle.Field.PDT = set_combine(sets.idle.Field, sets.idle.PDT)
 
     sets.idle.Reraise = sets.idle.Weak
+
+    sets.idle.Regain = set_combine(sets.idle.Field, {
+        head = "Valorous Mask",
+        neck = "Republican Platinum medal",
+        ring1 = "Roller's Ring",
+    })
+    sets.idle.Field.Regain = sets.idle.Regain
+
     -- Defense sets
     sets.defense.PDT = {
         ammo = "Brigantia Pebble",
@@ -608,8 +623,8 @@ function init_gear_sets()
         ammo = "Staunch Tathlum +1",
         head = "Crepuscular Helm",
         neck = "Loricate Torque +1",
-        ear1 = "Schere Earring",
-        ear2 = "Telos Earring",
+        ear1 = "Tuisto Earring",
+        ear2 = "Odnowa Earring",
         body = "Crepuscular Mail",
         hands = "Sakpata's Gauntlets",
         ring2 = "Gelatinous Ring +1",
@@ -724,6 +739,7 @@ function init_gear_sets()
         legs = "Sakpata's Cuisses",
         feet = "Sakpata's Leggings"
     }
+
     sets.engaged.Reraise = {
         ammo = "Coiste Bodhar",
         head = "Crepuscular Helm",
@@ -754,6 +770,10 @@ function init_gear_sets()
         legs = "Sakpata's Cuisses",
         feet = "Sakpata's Leggings"
     }
+    sets.engaged.MDT = set_combine(sets.engaged, {
+        neck = "Warder's Charm +1",
+        body = "Sakpata's Plate",
+    })
 
     sets.engaged.DW = {
         ammo = "Coiste Bodhar",
@@ -897,6 +917,9 @@ function filtered_action(spell)
             elseif main == 'Ikenga\'s Axe' then
                 send_command('input /ws "Mistral Axe" ' .. spell.target.raw)
                 cancel_spell()
+            elseif main == 'Loxotic Mace +1' then
+                send_command('input /ws "Black Halo" ' .. spell.target.raw)
+                cancel_spell()
             end
         elseif spell.english == "Fell Cleave" then
             if main == "Shining One" then
@@ -998,6 +1021,11 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
             equip(sets.buff.doom.HolyWater)
         end
     end
+    if spell.english == 'Tomahawk' and not spell.interrupted then
+        local tomahawk_timer = calculate_tomahawk_duration()
+        send_command('input /p Tomahawk on :: ' .. tomahawk_timer .. ' seconds')
+        send_command('timers c Tomahawk ' .. tomahawk_timer .. ' down')
+    end
 end
 
 function job_buff_change(buff, gain)
@@ -1058,6 +1086,8 @@ function job_buff_change(buff, gain)
             end
         elseif S { 'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3' }:contains(buff) then
             -- update_combat_form()
+        elseif buff == 'Max HP Down' or buff == 'Defense Down' then
+            send_command('input /item "Panacea" <me>')
         end
 
         -- when losing a buff
@@ -1085,6 +1115,16 @@ function job_buff_change(buff, gain)
             windower.add_to_chat(144, "Max HP down!")
         end
     end
+end
+
+function calculate_tomahawk_duration()
+    local player = windower.ffxi.get_player()
+
+    local tomahawk_lv = player['merits'].tomahawk or 0
+
+    local tomahawk_duration = (tomahawk_lv > 0 and (30 + (tomahawk_lv * 15 - 15))) or 0
+
+    return tomahawk_duration
 end
 
 -------------------------------------------------------------------------------------------------------------------
