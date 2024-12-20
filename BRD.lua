@@ -187,14 +187,14 @@ function init_gear_sets()
 
     sets.weapons = {}
     sets.weapons['Sword'] = { main = "Naegling", sub = "Genmei Shield" }
-    sets.weapons['Dagger'] = { main = "Aeneas", sub = "Genmei Shield" }
+    sets.weapons['Dagger'] = { main = "Mpu Gandring", sub = "Genmei Shield" }
     sets.weapons['Tauret'] = { main = "Tauret", sub = "Genmei Shield" }
     sets.weapons['Carnwenhan'] = { main = "Carnwenhan", sub = "Genmei Shield" }
     sets.weapons['Critical'] = { main = "Gleti's Knife", sub = "Genmei Shield" }
     sets.weapons['Club'] = { main = "Daybreak", sub = "Genmei Shield" }
     sets.weapons['AccSword'] = { main = "Naegling", sub = "Genmei Shield" }
     sets.weapons['Sword'].DW = { main = "Naegling", sub = "Centovente" }
-    sets.weapons['Dagger'].DW = { main = "Aeneas", sub = "Crepuscular Knife" }
+    sets.weapons['Dagger'].DW = { main = "Mpu Gandring", sub = "Crepuscular Knife" }
     sets.weapons['Tauret'].DW = { main = "Tauret", sub = "Crepuscular Knife" }
     sets.weapons['Carnwenhan'].DW = { main = "Carnwenhan", sub = "Crepuscular Knife" }
     sets.weapons['Critical'].DW = { main = "Gleti's Knife", sub = "Crepuscular Knife" }
@@ -443,7 +443,8 @@ function init_gear_sets()
         ring2 = "Roller's Ring",
         back = gear.MeleeCape,
         waist = "Kentarch Belt +1",
-        legs = "Volte Tights"
+        legs = "Volte Tights",
+        feet = "Nyame Sollerets"
     }
 
     -- Defense sets
@@ -495,7 +496,7 @@ function init_gear_sets()
         hands = "Leyline Gloves",   -- 8
         ring1 = "Kishar Ring",      -- 6
         ring2 = "Lebeche Ring",
-        -- ring2 = "Medada's Ring",         -- 10
+        -- ring2 = "Rahab Ring",         -- 10
         back = "Fi Follet Cape +1", -- 10
         waist = "Embla Sash",       -- 5
         legs = "Kaykaus Tights +1", -- 7
@@ -511,7 +512,7 @@ function init_gear_sets()
         body = { name = "Brioso Justaucorps +3", priority = 9 }, -- 15
         hands = "Leyline Gloves",                                -- 8
         ring1 = "Kishar Ring",                                   -- 6
-        ring2 = "Medada's Ring",                                 -- 10
+        ring2 = "Rahab Ring",                                    -- 10
         back = { name = "Moonlight Cape", priority = 10 },       -- 0
         waist = { name = "Platinum Moogle Belt", priority = 8 }, -- 0
         legs = "Kaykaus Tights +1",                              -- 7
@@ -567,7 +568,7 @@ function init_gear_sets()
         ear2 = "Moonshade Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Shukuyu Ring",
+        ring1 = "Ephramad's Ring",
         ring2 = "Epaminondas's Ring",
         back = gear.WSCape,
         waist = "Fotia Belt",
@@ -609,7 +610,7 @@ function init_gear_sets()
         neck = "Sibyl Scarf",
         ear1 = "Regal Earring",
         ear2 = "Moonshade Earring",
-        ring1 = "Medada's Ring",
+        ring1 = "Ilabrat Ring",
         ring2 = "Epaminondas's Ring",
         back = gear.MatkCape,
         waist = gear.ElementalObi
@@ -638,7 +639,7 @@ function init_gear_sets()
         ear1 = "Regal Earring",
         ear2 = "Brutal Earring",
         ring1 = "Metamorph Ring +1",
-        ring2 = "Shukuyu Ring",
+        ring2 = "Ephramad's Ring",
         back = "Aurist's Cape +1",
         waist = "Acuity Belt +1",
     })
@@ -649,7 +650,7 @@ function init_gear_sets()
         neck = "Sibyl Scarf",
         ear1 = "Regal Earring",
         ear2 = "Moonshade Earring",
-        ring1 = "Medada's Ring",
+        ring1 = "Metamorph Ring +1",
         ring2 = "Archon Ring",
         back = gear.MatkCape,
         waist = gear.ElementalObi
@@ -666,7 +667,7 @@ function init_gear_sets()
         range = gear.WSInstrument,
         neck = "Republican Platinum medal",
         waist = "Sailfi Belt +1",
-        ring1 = "Shukuyu Ring",
+        ring1 = "Ephramad's Ring",
         ring2 = "Metamorph Ring +1",
         back = gear.WSCape
     })
@@ -681,7 +682,7 @@ function init_gear_sets()
         body = "Inyanga Jubbah +2",
         hands = "Gazu Bracelets +1",
         ring1 = "Kishar Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         back = gear.CastingCape,
         waist = "Sailfi Belt +1",
     })
@@ -700,7 +701,7 @@ function init_gear_sets()
     sets.midcast.Carol = {
         head = "Fili Calot +2",
         body = "Fili Hongreline +3",
-        hands = "Fili Manchettes +2",
+        hands = "Mousai Gages +1",
         legs = "Fili Rhingrave +2",
         feet = "Fili Cothurnes +2"
     }
@@ -713,6 +714,9 @@ function init_gear_sets()
 
     sets.midcast['Horde Lullaby'] = set_combine(sets.midcast.Lullaby, { range = "Daurdabla" })
     sets.midcast['Horde Lullaby II'] = sets.midcast['Horde Lullaby']
+    sets.midcast.Threnody = {
+        body = "Mousai manteel +1"
+    }
 
     sets.midcast.Mazurka = { range = info.ExtraSongInstrument }
 
@@ -751,7 +755,7 @@ function init_gear_sets()
         body = "Fili Hongreline +3",
         hands = "Brioso Cuffs +3", -- 2
         ring1 = "Metamorph Ring +1",
-        ring2 = "Medada's Ring",
+        ring2 = gear.right_stikini,
         back = gear.CastingCape,
         waist = "Acuity Belt +1",
         legs = "Inyanga Shalwar +2",
@@ -773,7 +777,7 @@ function init_gear_sets()
         body = "Brioso Justaucorps +3",
         hands = "Brioso Cuffs +3",
         ring1 = "Metamorph Ring +1",
-        ring2 = "Medada's Ring",
+        ring2 = gear.right_stikini,
         back = gear.CastingCape,
         waist = "Acuity Belt +1",
         legs = "Brioso Cannions +2",
@@ -813,7 +817,7 @@ function init_gear_sets()
         body = "Inyanga Jubbah +2",
         hands = "Leyline Gloves",
         ring1 = "Kishar Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         back = { name = "Moonlight Cape", priority = 10 },
         waist = "Embla Sash",
         legs = "Kaykaus Tights +1",
@@ -914,7 +918,7 @@ function init_gear_sets()
         body = "Brioso Justaucorps +3",
         hands = "Brioso Cuffs +3",
         ring1 = "Metamorph Ring +1",
-        ring2 = "Medada's Ring",
+        ring2 = gear.right_stikini,
         back = "Aurist's Cape +1",
         waist = "Acuity Belt +1",
         legs = "Brioso Cannions +2",
@@ -936,7 +940,7 @@ function init_gear_sets()
         body = "Fili Hongreline +3",
         hands = "Fili Manchettes +2",
         ring1 = "Metamorph Ring +1",
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         back = gear.CastingCape,
         waist = "Obstinate Sash",
         legs = "Fili Rhingrave +2",
@@ -1194,8 +1198,9 @@ end
 -- end
 
 function job_precast(spell, action, spellMap, eventArgs)
-    if spell.type ~= 'WeaponSkill' then
-        set_recast('range')
+    -- if spell.type ~= 'WeaponSkill' then
+    if not has_recast() then
+        set_recast()
     end
 
     if spell.type == 'BardSong' and state.ExtraSongsMode.value == "Dummy" then
@@ -1300,7 +1305,8 @@ end
 
 function job_post_aftercast(spell, action, spellMap, eventArgs)
     -- if we changed weapons, change back.
-    equip_recast()
+
+
     --[[if state.OffenseMode.value == 'Magic' then
         equip(sets.idle.Weap+
         on)
@@ -1325,6 +1331,8 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
         windower.add_to_chat(144,
             'Songs casted: ' .. info.songs_casted .. ' Spell: ' .. spell.type .. ' ' .. spell.english)
     end
+
+    equip_recast()
 end
 
 -------------------------------------------------------------------------------------------------------------------

@@ -158,6 +158,14 @@ function init_gear_sets()
         legs = "Erilaz Leg Guards +3", -- 13
         feet = "Erilaz Greaves +3"     -- 11
     }
+    sets.pax = {
+        neck = "Orunmila's Torque",
+        ear1 = "Halasz earring",
+        body = "Adhemar Jacket +1",
+        ring1 = "Mephitas's Ring +1",
+        ring2 = "Lebeche Ring",
+        waist = "Reiki Yotai"
+    }
 
     sets.enmityDT = {
         ammo = "Sapience Orb",
@@ -263,7 +271,7 @@ function init_gear_sets()
         ear2 = "Crematio Earring",
         body = "Cohort Cloak +1",
         hands = "Agwu's Gages",
-        ring1 = "Medada's Ring",
+        ring1 = "Metamorph Ring +1",
         ring2 = "Mujin Band",
         back = gear.LungeCape,
         waist = gear.ElementalObi,
@@ -271,7 +279,8 @@ function init_gear_sets()
         feet = "Agwu's Pigaches"
     }
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
-    sets.precast.JA['Gambit'] = set_combine(sets.enmity, { hands = "Runeist Mitons +2" })
+    -- sets.precast.JA['Gambit'] = set_combine(sets.enmity, { hands = "Runeist Mitons +2" })
+    sets.precast.JA['Gambit'] = set_combine(sets.pax, { hands = "Runeist Mitons +2" })
     sets.precast.JA['Rayke'] = set_combine(sets.enmity, { feet = "Futhark Boots +2" })
     sets.precast.JA['Elemental Sforzo'] = set_combine(sets.enmity, { body = "Futhark Coat +3" })
     sets.precast.JA['Swordplay'] = set_combine(sets.enmity, { hands = "Futhark Mitons +3" })
@@ -308,7 +317,7 @@ function init_gear_sets()
         ear2 = { name = "Odnowa Earring", priority = 9 },
         body = "Erilaz Surcoat +3", -- 13
         hands = "Leyline Gloves",   -- 8
-        ring1 = "Medada's Ring",    -- 10
+        ring1 = "Rahab Ring",       -- 10
         ring2 = "Kishar Ring",      -- 6
         back = gear.FCCape,         -- 10
         waist = { name = "Platinum Moogle Belt", priority = 8 },
@@ -332,7 +341,7 @@ function init_gear_sets()
         ear2 = { name = "Odnowa Earring", priority = 9 },
         body = "Erilaz Surcoat +3", -- 13
         hands = "Leyline Gloves",   -- 8
-        ring1 = "Medada's Ring",    -- 10
+        ring1 = "Rahab Ring",       -- 10
         ring2 = "Kishar Ring",      -- 6
         back = { name = "Moonlight Cape", priority = 8 },
         waist = { name = "Platinum Moogle Belt", priority = 7 },
@@ -433,7 +442,7 @@ function init_gear_sets()
 
     sets.midcast.FastRecast = {
         neck = "Orunmila's Torque",
-        ring1 = "Medada's Ring",
+        ring1 = "Rahab Ring",
         ring2 = "Kishar Ring",
         waist = "Sailfi Belt +1"
     }
@@ -481,7 +490,7 @@ function init_gear_sets()
         legs = gear.herculean.phalanx.legs,
         feet = gear.herculean.phalanx.feet,
     }
-    sets.PhalanxEmb = set_combine(sets.Phalanx, sets.buff['Embolden'])
+    sets.PhalanxEmb = set_combine({ ear1 = "Brachyura Earring" }, sets.Phalanx, sets.buff['Embolden'])
 
     sets.midcast.Phalanx = set_combine(sets.midcast['Enhancing Magic'], sets.Phalanx)
 
@@ -578,10 +587,10 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Tuisto Earring",
         ear2 = "Odnowa Earring +1",
-        body = "Erilaz Surcoat +3",
+        body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = gear.left_moonlight,
-        ring2 = "Gelatinous Ring +1",
+        ring1 = "Gelatinous Ring +1",
+        ring2 = "Shneddick Ring +1",
         back = "Moonlight Cape",
         waist = "Flume Belt +1",
         legs = "Nyame Flanchard",
@@ -773,7 +782,7 @@ function init_gear_sets()
     sets.engaged.Hybrid.Epeolatry.AM3 = sets.engaged.Hybrid
     sets.engaged.PDT.Epeolatry.AM3 = sets.engaged.PDT
     sets.engaged.DD.Epeolatry.AM3 = {
-        ammo = "Coiste Bodhar",
+        ammo = "Aurgelmir Orb +1",
         head = "Nyame Helm",
         neck = "Anu Torque",
         ear1 = "Sherida Earring",
@@ -783,7 +792,7 @@ function init_gear_sets()
         ring1 = gear.left_moonlight,
         ring2 = gear.right_moonlight,
         back = gear.DDCape,
-        waist = "Sailfi Belt +1",
+        waist = "Gerdr Belt +1",
         legs = "Samnuha Tights",
         feet = "Nyame Sollerets"
     }
@@ -962,6 +971,10 @@ function job_aftercast(spell)
             reset_timers()
         elseif spell.name == "Swipe" then
             send_command(trim(1))
+        end
+
+        if spell.english == "Gambit" then
+            windower.chat.input:schedule(94, "/p Gambit off")
         end
     end
 end

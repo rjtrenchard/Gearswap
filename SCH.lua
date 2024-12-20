@@ -118,13 +118,13 @@ function user_setup()
     send_command('bind ^numpad6 input /ja "Ebullience" <me>; gs c helix_on_dark_arts')
     send_command('bind ~numpad6 gs c cycle HelixMode')
 
-    send_command('bind numpad7 gs equip sets.weapons.Malignance')
-    send_command('bind ^numpad7 gs equip sets.weapons.Malignance.DD')
-    send_command('bind numpad8 gs equip sets.weapons.Xoanon')
-    send_command('bind ^numpad8 gs equip sets.weapons.Xoanon.DD')
-    send_command('bind numpad9 gs equip sets.weapons.Musa')
-    send_command('bind ^numpad9 gs equip sets.weapons.Musa.DD')
-    send_command('bind !numpad9 gs equip sets.weapons.Mpaca')
+    send_command('bind numpad7 gs c equip Malignance')
+    send_command('bind ^numpad7 gs c equip Malignance.DD')
+    send_command('bind numpad8 gs c equip Xoanon')
+    send_command('bind ^numpad8 gs c equip Xoanon.DD')
+    send_command('bind numpad9 gs c equip Musa')
+    send_command('bind ^numpad9 gs c equip Musa.DD')
+    send_command('bind !numpad9 gs c equip Mpaca')
 
     select_default_macro_book()
 end
@@ -177,11 +177,11 @@ function init_gear_sets()
     }
 
     sets.Empyrean = {
-        head = "Arbatel Bonnet +2",
+        head = "Arbatel Bonnet +3",
         body = "Arbatel Gown +1",
         hands = "Arbatel Bracers +3",
         legs = "Arbatel Pants +2",
-        feet = "Arbatel Loafers +2"
+        feet = "Arbatel Loafers +3"
     }
 
     -- Precast Sets
@@ -201,7 +201,7 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Shukuyu Ring",
+        ring2 = "Ephramad's Ring",
         back = "Aurist's Cape +1",
         waist = "Fotia Belt",
         legs = "Nyame Flanchard",
@@ -266,34 +266,42 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
+
     sets.precast.FC = {
-        main = "Musa",                -- 11
+        main = "Musa",                  -- 11
         sub = "Khonsu",
-        ammo = "Impatiens",           -- +2QC
-        head = gear.merlinic.fc.head, -- 15
-        neck = "Orunmila's Torque",   -- 5
-        ear1 = "Malignance Earring",  -- 4
-        ear2 = "Etiolation Earring",
-        -- ear2 = "Loquacious Earring",    -- 2
-        body = gear.merlinic.fc.body, -- 13
-        -- hands = "Gendewitha Gages +1",  -- 7
-        ring1 = "Kishar Ring",        -- 6
-        ring2 = "Medada's Ring",      -- 10
-        back = { name = "Moonlight Cape", priority = 10 },
-        waist = "Embla Sash",         -- 5
-        legs = "Kaykaus Tights +1",   -- 7
-        feet = "Pedagogy Loafers +3"  -- 8
+        ammo = "Impatiens",             -- +2QC
+        head = gear.merlinic.fc.head,   -- 15
+        neck = "Orunmila's Torque",     -- 5
+        ear1 = "Malignance Earring",    -- 4
+        ear2 = "Loquacious Earring",    -- 2
+        body = gear.merlinic.fc.body,   -- 13
+        hands = gear.merlinic.fc.hands, -- 7
+        ring1 = "Kishar Ring",          -- 6
+        ring2 = "Lebeche Ring",         -- 2
+        back = "Fi Follet Cape +1",     -- 10
+        waist = "Embla Sash",           -- 5
+        legs = "Kaykaus Tights +1",     -- 7
+        feet = "Academic's Loafers +3"  --
     }
 
     sets.precast.FC.WithArts = set_combine(sets.precast.FC,
-        { head = "Pedagogy Mortarboard +3", ring2 = "Medada's Ring", feet = "Academic's Loafers +3" }) -- need 70 FC
+        { ring2 = "Rahab Ring", feet = "Academic's Loafers +3" })                                                  -- need 70 FC
     sets.precast.FC.AgainstArts = set_combine(sets.precast.FC,
-        { ear2 = "Loquacious Earring", ring2 = "Medada's Ring", back = "Fi Follet Cape +1", })         -- need 90 FC
+        { ammo = "Sapience Orb", ear2 = "Loquacious Earring", ring2 = "Rahab Ring", back = "Fi Follet Cape +1", }) -- need 90 FC
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, { waist = "Siegel Sash" })
 
     sets.precast.FC.Impact = set_combine(sets.precast.FC,
-        { head = empty, body = "Crepuscular Cloak", ring2 = "Medada's Ring", back = "Fi Follet Cape +1" })
+        {
+            head = empty,
+            ammo = "Sapience Orb",
+            ear2 = "Loquacious Earring",
+            body = "Crepuscular Cloak",
+            ring2 = "Rahab Ring",
+            back = "Fi Follet Cape +1",
+            feet = "Academic's Loafers +3",
+        })
     sets.precast.Impact = sets.precast.FC.Impact
 
     sets.precast.FC.SubRDM = {
@@ -307,16 +315,16 @@ function init_gear_sets()
         body = gear.merlinic.fc.body, -- 13
         -- hands = "Gendewitha Gages +1",  -- 7
         ring1 = "Kishar Ring",        -- 6
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         back = "Perimede Cape",
         waist = "Embla Sash",        -- 5
         legs = "Kaykaus Tights +1",  -- 7
         feet = "Pedagogy Loafers +3" -- 8
     }
     sets.precast.FC.SubRDM.WithArts = set_combine(sets.precast.FC.SubRDM,
-        { head = "Pedagogy Mortarboard +3", feet = "Academic's Loafers +3" })
+        { feet = "Academic's Loafers +3" })
     sets.precast.FC.SubRDM.AgainstArts = set_combine(sets.precast.FC.SubRDM,
-        { head = gear.merlinic.fc.head, ring2 = "Medada's Ring", })
+        { head = gear.merlinic.fc.head, ring2 = "Rahab Ring", })
     sets.precast.FC.SubRDM['Enhancing Magic'] = set_combine(sets.precast.FC.SubRDM, { waist = "Siegel Sash" })
     sets.precast.FC.SubRDM['Enhancing Magic'].WithArts = {
         head = "Pedagogy Mortarboard +3",
@@ -326,7 +334,7 @@ function init_gear_sets()
     }
     sets.precast.FC.SubRDM['Enhancing Magic'].AgainstArts = { waist = "Siegel Sash" }
 
-    sets.precast.FC.SubRDM['Impact'] = sets.precast.FC.Impact
+    sets.precast.FC.SubRDM.Impact = sets.precast.FC.Impact
 
     sets.precast.FC.SubRDM.NoQC = {
         -- +15 FC
@@ -419,7 +427,7 @@ function init_gear_sets()
         body = "Kaykaus Bliaut +1",
         hands = "Kaykaus Cuffs +1",
         ring1 = { name = "Gelatinous Ring +1", priority = 8 },
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         back = gear.idle_cape,
         waist = "Platinum Moogle Belt",
         legs = "Kaykaus Tights +1",
@@ -434,7 +442,7 @@ function init_gear_sets()
         main = "Musa",
         sub = "Khonsu",
         ammo = "Savant's Treatise",
-        head = "Arbatel Bonnet +2",
+        head = "Arbatel Bonnet +3",
         neck = "Incanter's Torque",
         ear1 = "Andoaa Earring",
         ear2 = "Mimir Earring",
@@ -467,7 +475,7 @@ function init_gear_sets()
     sets.midcast.RegenPotency = set_combine(sets.midcast['Enhancing Magic'].Duration, {
         main = "Musa",
         sub = "Khonsu",
-        head = "Arbatel Bonnet +2",
+        head = "Arbatel Bonnet +3",
         body = gear.telchine.regen.body,
         hands = gear.telchine.regen.hands,
         waist = "Embla Sash",
@@ -478,7 +486,7 @@ function init_gear_sets()
     sets.midcast.RegenDuration = set_combine(sets.midcast['Enhancing Magic'].Duration, {
         main = "Musa",
         sub = "Khonsu",
-        head = "Arbatel Bonnet +2",
+        head = "Arbatel Bonnet +3",
         body = "Pedagogy Gown +3",
         hands = gear.telchine.enh_dur.hands,
         waist = "Embla Sash",
@@ -527,8 +535,20 @@ function init_gear_sets()
 
     sets.midcast.Blink = set_combine(sets.midcast['Enhancing Magic'].Duration)
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration, sets.SIRD,
-        { back = "Fi Follet Cape +1", head = "Amalric Coif +1", waist = "Emphatikos Rope" })
+    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration, {
+        ammo = "Staunch Tathlum +1", -- 11
+        head = "Amalric Coif +1",    --         2
+        neck = "Loricate Torque +1", -- 5
+        ear1 = "Magnetic Earring",   -- 8
+        ear2 = "Halasz Earring",     -- 5
+        body = "Rosette Jaseran +1", -- 25
+        hands = "Regal Cuffs",       --         2
+        ring1 = "Evanescence Ring",  -- 5
+        ring2 = "Freke Ring",        -- 10
+        waist = "Emphatikos Rope",   -- 12      1
+        legs = "Shedir Seraweels",   --         1
+        feet = "Amalric Nails +1"    -- 16
+    })
 
     sets.midcast.Storm = set_combine({
         feet = "Pedagogy Loafers +3"
@@ -554,8 +574,8 @@ function init_gear_sets()
         ring2 = "Metamorph Ring +1",
         back = "Aurist's Cape +1",
         waist = "Obstinate Sash",
-        legs = "Arbatel Pants +2",
-        feet = "Arbatel Loafers +2"
+        legs = gear.chironic.enfeebling.legs,
+        feet = "Arbatel Loafers +3"
     }
 
     -- Custom spell classes
@@ -572,8 +592,8 @@ function init_gear_sets()
         ring2 = "Metamorph Ring +1",
         back = "Aurist's Cape +1",
         waist = "Obstinate Sash",
-        legs = "Arbatel Pants +2",
-        feet = "Arbatel Loafers +2"
+        legs = gear.chironic.enfeebling.legs,
+        feet = "Arbatel Loafers +3"
     }
 
     sets.midcast.Dia = set_combine(sets.midcast['Enfeebling Magic'], {
@@ -604,18 +624,19 @@ function init_gear_sets()
         main = "Bunzi's Rod",
         sub = "Ammurapi Shield",
         ammo = "Ghastly Tathlum +1",
-        head = "Pixie Hairpin +1",
+        head = "Arbatel Bonnet +3",
         neck = "Argute Stole +2",
         ear1 = "Malignance Earring",
         ear2 = "Arbatel Earring +2",
         body = "Agwu's Robe",
         hands = "Agwu's Gages",
-        ring2 = "Medada's Ring",
+        ring2 = "Freke Ring",
         ring1 = "Metamorph Ring +1",
         back = gear.int_cape,
-        waist = gear.ElementalObi,
+        -- waist = gear.ElementalObi,
+        waist = "Anrin Obi",
         legs = "Agwu's Slops",
-        feet = "Arbatel Loafers +2"
+        feet = "Arbatel Loafers +3"
     }
 
     sets.midcast.Drain = {
@@ -633,7 +654,7 @@ function init_gear_sets()
         back = "Merciful Cape",
         waist = gear.DrainWaist,
         legs = "Pedagogy Pants +3",
-        feet = "Academic's Loafers +1"
+        feet = "Agwu's Pigaches"
     }
 
     sets.midcast.Aspir = sets.midcast.Drain
@@ -649,7 +670,7 @@ function init_gear_sets()
         body = "Agwu's Robe",
         hands = "Gendewitha Gages +1",
         ring1 = "Evanescence Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Metamorph Ring +1",
         back = "Aurist's Cape +1",
         waist = "Witful Belt",
         legs = "Pedagogy Pants +3",
@@ -664,36 +685,36 @@ function init_gear_sets()
         main = "Bunzi's Rod",
         sub = "Ammurapi Shield",
         ammo = "Ghastly Tathlum +1",
-        head = "Arbatel Bonnet +2",
+        head = "Arbatel Bonnet +3",
         neck = "Sibyl Scarf",
         ear2 = "Arbatel Earring +2",
         ear1 = "Malignance Earring",
-        body = "Arbatel Gown +2",
+        body = "Arbatel Gown +3",
         hands = "Arbatel Bracers +3",
         ring1 = "Freke Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Metamorph Ring +1",
         back = gear.int_cape,
         waist = gear.ElementalObi,
         legs = "Arbatel Pants +2",
-        feet = "Arbatel Loafers +2"
+        feet = "Arbatel Loafers +3"
     }
 
     sets.midcast['Elemental Magic'].Resistant = {
         main = "Contemplator +1",
         sub = "Khonsu",
         ammo = "Pemphredo Tathlum",
-        head = "Arbatel Bonnet +2",
+        head = "Arbatel Bonnet +3",
         neck = "Argute Stole +2",
         ear1 = "Malignance Earring",
         ear2 = "Arbatel Earring +2",
-        body = "Arbatel Gown +2",
+        body = "Arbatel Gown +3",
         hands = "Arbetel Bracers +2",
         ring1 = "Metamorph Ring +1",
-        ring2 = "Medada's Ring",
+        ring2 = "Freke Ring",
         back = "Aurist's Cape +1",
         waist = gear.ElementalObi,
         legs = "Arbatel Pants +2",
-        feet = "Arbatel Loafers +2"
+        feet = "Arbatel Loafers +3"
     }
 
     sets.midcast['Elemental Magic'].Low = {
@@ -715,13 +736,13 @@ function init_gear_sets()
     }
 
     sets.midcast.MagicBurst = {
-        head = "Pedagogy Mortarboard +3",
-        neck = "Argute Stole +2",
-        body = "Agwu's Robe",
-        hands = "Arbatel Bracers +3",
-        ring2 = "Mujin Band",
-        legs = "Agwu's Slops",
-        feet = "Arbatel Loafers +2"
+        main = "Bunzi's Rod",       -- 10
+        sub = "Ammurapi Shield",
+        neck = "Argute Stole +2",   -- 10
+        body = "Agwu's Robe",       -- 10
+        hands = "Agwu's Gages",     -- 8 6 II
+        legs = "Agwu's Slops",      -- 9
+        feet = "Arbatel Loafers +3" -- 5 II
 
     }
 
@@ -794,7 +815,7 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
         ear2 = "Lugalbanda Earring",
-        body = "Arbatel Gown +2",
+        body = "Arbatel Gown +3",
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
         ring2 = "Shneddick Ring +1",
@@ -826,7 +847,7 @@ function init_gear_sets()
         ammo = "Homiliary",
         head = "Befouled Crown",
         neck = "Sibyl Scarf",
-        body = "Arbatel Gown +2",
+        body = "Arbatel Gown +3",
         hands = gear.chironic.refresh.hands,
         ring1 = gear.left_stikini,
         ring2 = "Shneddick Ring +1",
@@ -843,9 +864,9 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Malignance Earring",
         ear2 = "Arbatel Earring +2",
-        body = "Arbatel Gown +2",
+        body = "Arbatel Gown +3",
         hands = "Gendewitha Gages +1",
-        ring1 = "Medada's Ring",
+        ring1 = "Metamorph Ring +1",
         ring2 = gear.right_stikini,
         back = "Fi Follet Cape +1",
         waist = "Cornelia's Belt",
@@ -861,7 +882,7 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
         ear2 = "Loquacious Earring",
-        body = "Arbatel Gown +2",
+        body = "Arbatel Gown +3",
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
         ring2 = "Shneddick Ring +1",
@@ -940,8 +961,8 @@ function init_gear_sets()
 
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-    sets.buff['Ebullience'] = { head = "Arbatel Bonnet +2" }
-    sets.buff['Rapture'] = { head = "Arbatel Bonnet +2" }
+    sets.buff['Ebullience'] = { head = "Arbatel Bonnet +3" }
+    sets.buff['Rapture'] = { head = "Arbatel Bonnet +3" }
     sets.buff['Perpetuance'] = { hands = "Arbatel Bracers +3" }
     sets.buff['Immanence'] = { hands = "Arbatel Bracers +3" }
     sets.buff['Penury'] = { legs = "Arbatel Pants +2" }
@@ -951,7 +972,7 @@ function init_gear_sets()
     sets.buff['Tranquility'] = { hands = "Pedagogy Bracers +2" }
     sets.buff['Equanimity'] = sets.buff['Tranquility']
 
-    sets.buff['Klimaform'] = { feet = "Arbatel Loafers +2" }
+    sets.buff['Klimaform'] = { feet = "Arbatel Loafers +3" }
 
     sets.buff.FullSublimation = {
         head = "Academic's Mortarboard +3",
@@ -1119,7 +1140,9 @@ function job_pretarget(spell, action, spellMap, eventArgs)
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if spell.type ~= 'WeaponSkill' then set_recast() end
+    if not has_recast() then
+        set_recast()
+    end
 
     -- handle lightarts/darkarts fast cast correction
     if spell.action_type == 'Magic' then
@@ -1132,7 +1155,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
                 elseif spell.skill == 'Enhancing Magic' then
                     equip(sets.precast.FC.SubRDM[withOrAgainst], sets.precast.FC['Enhancing Magic'][withOrAgainst])
                 elseif spell.english == "Impact" then
-                    equip(sets.precast.FC[withOrAgainst], sets.precast.FC.Impact.SubRDM)
+                    equip(sets.precast.FC[withOrAgainst], sets.precast.FC.SubRDM.Impact)
                 else
                     equip(sets.precast.FC.SubRDM[withOrAgainst])
                 end
@@ -1156,48 +1179,6 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         elseif spell.english == 'Dispelga' then
             equip(sets.precast.Dispelga)
         end
-
-
-        -- if spell.action_type == 'Magic' then
-        --     local withOrAgainst = nil
-
-        --     if (spell.type == "WhiteMagic" and (buffactive["Light Arts"] or buffactive['Addendum: White']))
-        --         or (spell.type == "BlackMagic" and (buffactive['Dark Arts'] or buffactive['Addendum: Black'])) then
-        --         withOrAgainst = "WithArts"
-        --     elseif (spell.type == "WhiteMagic" and (buffactive['Dark Arts'] or buffactive['Addendum: Black']))
-        --         or (spell.type == "BlackMagic" and (buffactive["Light Arts"] or buffactive['Addendum: White'])) then
-        --         withOrAgainst = "AgainstArts"
-        --     end
-
-        --     -- print(withOrAgainst, spell.type, player.sub_job, player.sub_job_level)
-
-        --     if withOrAgainst and spell.action_type == 'Magic' then
-        --         -- eventArgs.handled = true
-        --         if player.sub_job == 'RDM' and player.sub_job_level >= 35 then
-        --             if S { 'Sneak', 'Invisible', 'Deodorize', 'Stoneskin' }:contains(spell.english) then
-        --                 equip(sets.precast.FC.SubRDM.NoQC)
-        --             elseif spell.skill == 'Enhancing Magic' then
-        --                 equip(sets.precast.FC.SubRDM[withOrAgainst], sets.precast.FC['Enhancing Magic'][withOrAgainst])
-        --             elseif spell.english == "Impact" then
-        --                 equip(sets.precast.FC[withOrAgainst], sets.precast.FC.Impact.SubRDM)
-        --             else
-        --                 equip(sets.precast.FC.SubRDM[withOrAgainst])
-        --             end
-        --         else
-        --             if S { 'Sneak', 'Invisible', 'Deodorize', 'Stoneskin' }:contains(spell.english) then
-        --                 equip(sets.precast.FC.NoQC)
-        --             elseif spell.skill == 'Enhancing Magic' then
-        --                 equip(sets.precast.FC[withOrAgainst], sets.precast.FC['Enhancing Magic'][withOrAgainst])
-        --             elseif spell.english == "Impact" then
-        --                 equip(sets.precast.FC[withOrAgainst], sets.precast.FC.Impact)
-        --             else
-        --                 equip(sets.precast.FC[withOrAgainst])
-        --             end
-        --         end
-        --     elseif spell.action_type == 'Magic' and player.sub_job == 'RDM' and player.sub_job_level >= 35 and not spell == 'Impact' then
-        --         equip(sets.precast.FC.SubRDM)
-        --         -- eventArgs.handled = true
-        --     end
     end
 end
 
@@ -1494,6 +1475,10 @@ function job_self_command(cmdParams, eventArgs)
         }, ';'))
     elseif cmdParams[1]:lower() == 'helix_on_dark_arts' then
         helix_if_in_dark_arts(cmdParams[2])
+    elseif command == 'equip' then
+        -- print(arg)
+        job_custom_weapon_equip(arg)
+        set_recast()
     end
 end
 

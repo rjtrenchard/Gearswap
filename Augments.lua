@@ -100,6 +100,18 @@ gear.yorium.phalanx.feet = gear.yorium.enmity.feet
 gear.yorium.drain = {}
 gear.yorium.drain.feet = { name = "Yorium Sabatons", augments = { 'Mag. Acc.+10', '"Drain" and "Aspir" potency +6', } }
 
+-- Valorous
+gear.valorous = {}
+gear.valorous.phalanx = {
+    head = { name = "Valorous Mask", augments = { 'CHR+4', 'Pet: Attack+25 Pet: Rng.Atk.+25', 'Phalanx +4', } },
+    body = { name = "Valorous Mail", augments = { 'Pet: Mag. Acc.+10', 'Pet: Attack+11 Pet: Rng.Atk.+11', 'Phalanx +4', 'Mag. Acc.+13 "Mag.Atk.Bns."+13', } },
+    hands = { name = "Valorous Mitts", augments = { 'INT+3', '"Blood Boon"+6', 'Phalanx +3', 'Accuracy+10 Attack+10', } },
+    legs = { name = "Valorous Hose", augments = { 'VIT+8', 'DEX+7', 'Phalanx +4', 'Accuracy+15 Attack+15', } },
+    feet = { name = "Valorous Greaves", augments = { 'Pet: Haste+4', 'Enmity+5', 'Phalanx +4', 'Accuracy+5 Attack+5', } },
+}
+
+
+
 -- Acro
 gear.acro = {}
 gear.acro.SIRD = {}

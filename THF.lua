@@ -98,13 +98,13 @@ function init_gear_sets()
         augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'DEX+10',
             'Crit.hit rate+10%', },
     }
-    gear.dex_ws_cape = {
+    gear.ws_cape_dex = {
         name = "Toutatis's Cape",
         augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%', }
     }
-    -- gear.agi_ws_cape = { name = "Toutatis's Cape",
+    -- gear.ws_cape_agi = { name = "Toutatis's Cape",
     --     augments = { 'AGI+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%', 'AGI+10' } }
-    gear.str_ws_cape = gear.dex_ws_cape
+    gear.ws_cape_str = gear.ws_cape_dex
 
     --------------------------------------
     -- Idle/resting/defense sets
@@ -288,10 +288,10 @@ function init_gear_sets()
     -- Normal melee group
     sets.weapons = {}
     sets.weapons.Naegling = { main = "Naegling", sub = "Centovente" }
-    sets.weapons.Daggers = { main = "Aeneas", sub = "Crepuscular Knife" }
-    sets.weapons.Tauret = { main = "Tauret", sub = "Crepuscular Knife" }
+    sets.weapons.Daggers = { main = "Mpu Gandring", sub = "Crepuscular Knife" }
+    sets.weapons.Tauret = { main = "Mpu Gandring", sub = "Centovente" }
     sets.weapons.DI = { main = "Voluspa Knife", sub = "Crepuscular Knife" }
-    sets.weapons.AE = { main = "Aeneas", sub = "Centovente" }
+    sets.weapons.AE = { main = "Tauret", sub = "Centovente" }
 
     -- Actions we want to use to tag TH.
     sets.precast.Step = sets.TreasureHunterTag
@@ -396,7 +396,7 @@ function init_gear_sets()
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
         ring1 = "Rahab Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         legs = "Enif Cosciales"
     }
 
@@ -415,7 +415,7 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = gear.TrustRing,
         ring2 = "Epaminondas's Ring",
-        back = gear.str_ws_cape,
+        back = gear.ws_cape_str,
         waist = "Fotia Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
@@ -457,7 +457,7 @@ function init_gear_sets()
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS,
-        { ammo = "Cath Palug Stone", ear2 = "Skulker's Earring +1", hands = "Adhemar Wristbands +1", ring2 = "Gere Ring" })
+        { ammo = "Cath Palug Stone", ear2 = "Skulker's Earring +2", hands = "Adhemar Wristbands +1", ring2 = "Gere Ring" })
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {})
     sets.precast.WS['Exenterator'].Att = set_combine(sets.precast.WS['Exenterator'], {})
     sets.precast.WS['Exenterator'].SA = set_combine(sets.precast.WS['Exenterator'].Att, {})
@@ -475,7 +475,7 @@ function init_gear_sets()
     sets.precast.WS['Dancing Edge'].Low = sets.precast.WS.Low
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS.Crit,
-        { ear1 = "Odr Earring", ear2 = "Skulker's Earring +1" })
+        { ear1 = "Odr Earring", ear2 = "Skulker's Earring +2" })
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {})
     sets.precast.WS['Evisceration'].Att = set_combine(sets.precast.WS['Evisceration'], {})
     sets.precast.WS['Evisceration'].SA = set_combine(sets.precast.WS['Evisceration'].Att, {})
@@ -484,15 +484,14 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Low = sets.precast.WS.Low
 
     sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {
-        ammo = "Oshasha's Treatise",
-        head = "Nyame Helm",
+        ammo = "Coiste Bodhar",
         neck = "Caro Necklace",
         ear1 = "Ishvara Earring",
         ear2 = "Moonshade Earring",
         ring1 = "Ilabrat Ring",
         ring2 = "Epaminondas's Ring",
-        back = gear.dex_ws_cape,
-        waist = "Kentarch Belt +1"
+        back = gear.ws_cape_dex,
+        waist = "Gerdr Belt +1"
     })
     sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {})
     sets.precast.WS["Rudra's Storm"].Att = set_combine(sets.precast.WS["Rudra's Storm"], {})
@@ -507,10 +506,26 @@ function init_gear_sets()
     sets.precast.WS["Rudra's Storm"].Low = sets.precast.WS.Low
     sets.precast.WS["Rudra's Storm"].MaxTP = { ear1 = "Sherida Earring", ear2 = "Ishvara Earring" }
 
+    sets.precast.WS["Ruthless Stroke"] = set_combine(sets.precast.WS, {
+        ammo = "Cath Palug Stone",
+        neck = "Republican Platinum medal",
+        ear1 = "Moonshade Earring",
+        ear2 = "Skulker's Earring +2",
+        ring1 = "Epaminondas's Ring",
+        ring2 = "Ephramad's Ring",
+        back = gear.ws_cape_dex,
+        waist = "Gerdr Belt +1",
+    })
+
     sets.precast.WS["Shark Bite"] = set_combine(sets.precast.WS["Rudra\'s Storm"],
-        { head = "Nyame Helm", ear2 = "Moonshade Earring", ring1 = "Epona's Ring" })
+        {
+            head = "Nyame Helm",
+            ear2 = "Moonshade Earring",
+            ring1 = "Ilabrat Ring",
+            ring2 = "Ephramad's Ring",
+        })
     sets.precast.WS['Shark Bite'].Acc = set_combine(sets.precast.WS['Shark Bite'],
-        { ammo = "Honed Tathlum", back = gear.dex_ws_cape })
+        { ammo = "Honed Tathlum", back = gear.ws_cape_dex })
     sets.precast.WS['Shark Bite'].Att = set_combine(sets.precast.WS['Shark Bite'], { ring2 = "Ilabrat Ring" })
     sets.precast.WS['Shark Bite'].SA = set_combine(sets.precast.WS['Shark Bite'].Att, {
         ammo = "Yetshila +1",
@@ -550,7 +565,7 @@ function init_gear_sets()
         head = "Nyame Helm",
         neck = "Republican Platinum medal",
         ear1 = "Ishvara Earring",
-        back = gear.str_ws_cape,
+        back = gear.ws_cape_str,
         waist = "Sailfi Belt +1",
     })
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {})
@@ -569,9 +584,9 @@ function init_gear_sets()
         ear2 = "Friomisi Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Medada's Ring",
+        ring1 = "Ilabrat Ring",
         ring2 = "Epaminondas Ring",
-        back = gear.dex_ws_cape,
+        back = gear.ws_cape_dex,
         waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
@@ -601,9 +616,8 @@ function init_gear_sets()
         ear1 = "Enchanter's Earring +1",
         ear2 = "Loquacious Earring",
         body = "Malignance Tabard",
-        hands = "Medada's ring",
+        hands = "Leyline Gloves",
         ring1 = "Rahab Ring",
-        ring2 = "Medada's Ring",
         waist = "Sailfi Belt +1",
         legs = "Malignance Tights",
         feet = "Malignance Boots"
@@ -655,22 +669,22 @@ function init_gear_sets()
         head = "Malignance Chapeau",
         neck = "Anu Torque",
         ear1 = "Sherida Earring",
-        ear2 = "Skulker's Earring +1",
+        ear2 = "Skulker's Earring +2",
         body = "Gleti's Cuirass",
-        hands = "Adhemar Wristbands +1",
+        hands = "Malignance Gloves",
         ring1 = "Gere Ring",
         ring2 = "Epona's Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
         legs = "Gleti's Breeches",
-        feet = "Plunderer's Poulaines +3"
+        feet = "Malignance Boots"
     }
     sets.engaged.Acc = {
         ammo = "Seething Bomblet +1",
         head = "Malignance Chapeau",
         neck = "Anu Torque",
         ear1 = "Telos Earring",
-        ear2 = "Skulker's Earring +1",
+        ear2 = "Skulker's Earring +2",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Gere Ring",
@@ -742,14 +756,14 @@ function init_gear_sets()
         head = "Malignance Chapeau",
         neck = "Anu Torque",
         ear1 = "Suppanomimi",
-        ear2 = "Skulker's Earring +1",
+        ear2 = "Skulker's Earring +2",
         body = "Gleti's Cuirass",
-        hands = "Gleti's Gauntlets",
+        hands = "Malignance Gloves",
         ring1 = gear.left_moonlight,
         ring2 = "Gere Ring",
         back = gear.melee_cape,
         waist = "Reiki Yotai",
-        legs = "Gleti's Breeches",
+        legs = "Malignance Tights",
         feet = "Malignance Boots"
     }
     sets.engaged.Acc.PDT = {
@@ -757,7 +771,7 @@ function init_gear_sets()
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
         ear1 = "Sherida Earring",
-        ear2 = "Skulker's Earring +1",
+        ear2 = "Skulker's Earring +2",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Regal Ring",

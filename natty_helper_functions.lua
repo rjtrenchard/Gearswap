@@ -23,7 +23,7 @@ end
 -- passing a string naming that slot will disable the slot for recall
 -- ie, set_recast('main') would ignore the main slot
 function set_recast(...)
-    if has_recast() then return end
+    -- if has_recast() then return end
 
     local e_main = true
     local e_sub = true
@@ -64,10 +64,36 @@ function set_recast(...)
     info._RecastFlag = (sets._Recast.main or sets._Recast.sub or sets._Recast.range or sets._Recast.ammo) or false
 end
 
+function set_recast_from_table(arg)
+    if can_DW() and sets.weapons[arg] and sets.weapons[arg].DW then
+        sets._Recast = sets.weapons[arg].DW
+    else
+        sets._Recast = sets.weapons[arg]
+    end
+end
+
+function update_recast(gearset)
+    local tbl = sets.weapons
+
+    for str in gearset:gmatch("%w+") do
+        next = tbl[str]
+    end
+    -- print("updating recast for ", gearset)
+
+    if can_DW() and tbl[DW] then
+        print("Recast has Dual Wield")
+        tbl = tbl[DW]
+    end
+
+
+
+    sets._Recast = tbl
+end
+
 -- resets the Recast weapon set to nil
 function reset_recast()
-    sets._Recast = { main = nil, sub = nil, range = nil, ammo = nil }
-    info._RecastFlag = false
+    -- sets._Recast = { main = nil, sub = nil, range = nil, ammo = nil }
+    -- info._RecastFlag = false
 end
 
 -- returns the Recast weapon set
@@ -83,7 +109,7 @@ end
 function equip_recast()
     if has_recast() then
         equip(recall_recast())
-        reset_recast()
+        -- reset_recast()
     end
 end
 
@@ -208,7 +234,6 @@ end
 function can_DW()
     return T(windower.ffxi.get_abilities().job_traits)
         :contains(res.job_traits:with('english', 'Dual Wield').id)
-        and equipped_DW()
 end
 
 -- when blu, calculate how much DW they have
@@ -453,12 +478,12 @@ end
 -- returns WithArts, AgainstArts, or NA based on spell type and buff active
 function is_with_arts(spell)
     spell = spell or nil
-    if not spell then return end
+    if not spell then return 'NA' end
 
     local book = (function()
-        if buffactive['Light Arts'] or buffactive['Addendum: Light'] then
+        if buffactive['Light Arts'] or buffactive['Addendum: White'] then
             return 'Light Arts'
-        elseif buffactive['Dark Arts'] or buffactive['Addendum: Dark'] then
+        elseif buffactive['Dark Arts'] or buffactive['Addendum: Black'] then
             return 'Dark Arts'
         else
             return 'NA'
@@ -490,7 +515,7 @@ end
 function set_DW_class(custom_DW)
     if not can_DW() then return end
 
-    if info.DW_exclude_offhand and info.DW_exclude_offhand:contains(player.equipment.sub) then
+    if not equipped_DW() then
         state.CombatForm:reset()
         return
     end
@@ -719,6 +744,7 @@ function get_spell_tier(spell, include_space_flag)
     for spellTier in spell.english:gmatch("%s[IV]+$") do
         return spellTier:gsub(include_space_flag, "") or ""
     end
+    return ""
 end
 
 function get_ninjutsu_tier(spell)
@@ -945,7 +971,10 @@ function is_night()
 end
 
 function job_custom_weapon_equip(arg)
-    if not sets then return end
+    if not sets then
+        print('Error: no sets yet!')
+        return
+    end
     if not sets.weapons then
         print('Error: no sets.weapons table')
         return
@@ -955,15 +984,21 @@ function job_custom_weapon_equip(arg)
         return
     end
 
+
     if can_DW() then
         if sets.weapons[arg] and sets.weapons[arg].DW then
             send_command('gs equip sets.weapons.' .. arg .. '.DW')
         else
+            set_recast()
             send_command('gs equip sets.weapons.' .. arg)
         end
     else
+        set_recast()
         send_command('gs equip sets.weapons.' .. arg)
     end
+
+    -- update_recast(arg)
+    set_recast_from_table(arg)
 end
 
 function get_pet_killer_trait(pet_name)
@@ -1058,14 +1093,15 @@ end
     end
 
     elements.obi_of = {
-        ['Light'] = 'Hachirin-no-obi',
-        ['Dark'] = 'Hachirin-no-obi',
-        ['Fire'] = 'Hachirin-no-obi',
-        ['Water'] = 'Hachirin-no-obi',
-        ['Thunder'] = 'Hachirin-no-obi',
-        ['Earth'] = 'Hachirin-no-obi',
-        ['Wind'] = 'Hachirin-no-obi',
-        ['Ice'] = 'Hachirin-no-obi',
+        ['Light'] = 'Korin Obi',
+        ['Dark'] = 'Anrin Obi',
+        ['Fire'] = 'Karin Obi',
+        ['Water'] = 'Suirin Obi',
+        ['Thunder'] = 'Rairin Obi',
+        ['Earth'] = 'Dorin Obi',
+        ['Wind'] = 'Furin Obi',
+        ['Ice'] = 'Hyorin Obi',
+        ['default'] = 'Hachirin-no-obi'
     }
     elements.gorget_of = {
         ['Light'] = 'Fotia Gorget',
@@ -1141,13 +1177,14 @@ end
     -- returns a trust count in party
     get_trust_count = function()
         if windower.ffxi.get_party().alliance_leader then return 0 end
-        local p1 = (windower.ffxi.get_mob_by_target("p1") and windower.ffxi.get_mob_by_target("p1").is_npc) and 1 or 0
-        local p2 = (windower.ffxi.get_mob_by_target("p2") and windower.ffxi.get_mob_by_target("p2").is_npc) and 1 or 0
-        local p3 = (windower.ffxi.get_mob_by_target("p3") and windower.ffxi.get_mob_by_target("p3").is_npc) and 1 or 0
-        local p4 = (windower.ffxi.get_mob_by_target("p4") and windower.ffxi.get_mob_by_target("p4").is_npc) and 1 or 0
-        local p5 = (windower.ffxi.get_mob_by_target("p5") and windower.ffxi.get_mob_by_target("p5").is_npc) and 1 or 0
-        return p1 + p2 + p3 + p4 + p5
+        return is_trust("p1") + is_trust("p2") + is_trust("p3") + is_trust("p4") + is_trust("p5")
     end
+
+    is_trust = function(get_mob_by_target_str)
+        local party_member = windower.ffxi.get_mob_by_target(get_mob_by_target_str)
+        return (party_member and party_member.is_npc) and 1 or 0
+    end
+
 
     world_opposing_elements = T {
         ['Fire'] = 'Water',

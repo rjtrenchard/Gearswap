@@ -22,9 +22,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    include('augments.lua')
-    include('natty_helper_functions.lua')
-    include('default_sets.lua')
+    include('natty_includes.lua')
 
     state.OffenseMode:options('None', 'Normal')
     state.CastingMode:options('Normal', 'Resistant')
@@ -56,7 +54,7 @@ function init_gear_sets()
         body = "Inyanga Jubbah +2",
         hands = "Gendewitha Gages +1",
         ring1 = "Kishar Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         back = "Fi Follet Cape +1",
         waist = "Embla Sash",
         legs = "Kaykaus Tights +1",
@@ -110,8 +108,8 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Shukuyu Ring",
-        back = "Felicitas Cape +1",
+        ring2 = "Ephramad's Ring",
+        back = "Aurist's cape +1",
         waist = "Fotia Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
@@ -121,7 +119,7 @@ function init_gear_sets()
         neck = "Sibyl Scarf",
         ear1 = "Regal Earring",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Freke Ring",
         waist = "Luminary Sash"
     })
     sets.precast.WS['Seraph Strike'] = set_combine(sets.precast.WS['Flash Nova'], {})
@@ -174,7 +172,7 @@ function init_gear_sets()
     gear.default.cure_waist = "Luminary Sash"
 
     sets.midcast['Healing Magic'] = {
-        main = "Gada",
+        -- main = "Gada",
         head = "Kaykaus Mitra +1",
         neck = "Incanter's Torque",
         ear1 = "Beatific earring",
@@ -189,38 +187,40 @@ function init_gear_sets()
         feet = "Bunzi's Sabots",
     }
 
-    sets.midcast.CureSolace = {
-        main = "Daybreak",
-        sub = "Ammurapi Shield",
-        ammo = "Pemphredo Tathlum",
-        head = "Kaykaus Mitra +1",
-        neck = "Nodens Gorget",
-        ear1 = "Magnetic Earring",
-        body = "Kaykaus Bliaut +1",
-        hands = "Kaykaus Cuffs +1",
-        ring1 = "Metamorph Ring +1",
-        ring2 = "Mephitas's Ring +1",
-        back = "Oretania's Cape +1",
-        waist = "Shinjutsu-no-obi +1",
-        legs = "Kaykaus Tights +1",
-        feet = "Kaykaus Boots +1"
-    }
+    -- sets.midcast.CureSolace = {
+    --     main = "Daybreak",
+    --     sub = "Ammurapi Shield",
+    --     ammo = "Pemphredo Tathlum",
+    --     head = "Kaykaus Mitra +1",
+    --     neck = "Nodens Gorget",
+    --     ear1 = "Magnetic Earring",
+    --     body = "Kaykaus Bliaut +1",
+    --     hands = "Kaykaus Cuffs +1",
+    --     ring1 = "Metamorph Ring +1",
+    --     ring2 = "Mephitas's Ring +1",
+    --     back = "Oretania's Cape +1",
+    --     waist = "Shinjutsu-no-obi +1",
+    --     legs = "Kaykaus Tights +1",
+    --     feet = "Kaykaus Boots +1"
+    -- }
 
     sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {
         main = "Daybreak",
         head = "Kaykaus Mitra +1",
-        neck = "Elite Royal Collar",
-        ear1 = "Regal Earring",
+        neck = "Unmoving Collar +1",
+        ear1 = "Etiolation Earring",
         ear2 = "Magnetic Earring",
         body = "Kaykaus Bliaut +1",
         hands = "Kaykaus Cuffs +1",
-        ring1 = gear.left_stikini,
+        ring1 = "Gelatinous Ring +1",
         ring2 = "Metamorph Ring +1",
-        back = "Fi Follet Cape +1",
+        back = "Moonlight Cape",
         waist = gear.CureWaist,
         legs = "Kaykaus Tights +1",
         feet = "Kaykaus Boots +1"
     })
+
+    sets.midcast.CureSolace = sets.midcast.Cure
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {})
 
@@ -291,6 +291,22 @@ function init_gear_sets()
     sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'].Duration,
         { feet = "Eber Duckbills" })
 
+    sets.midcast.Aquaveil = set_combine({
+        ammo = "Staunch Tathlum +1",    -- 11
+        head = "Amalric Coif +1",       --         2
+        neck = "Loricate Torque +1",    -- 5
+        ear1 = "Magnetic Earring",      -- 8
+        ear2 = "Halasz Earring",        -- 5
+        body = "Rosette Jaseran +1",    -- 25
+        hands = "Regal Cuffs",          --         2
+        ring1 = "Evanescence Ring",     -- 5
+        ring2 = "Freke Ring",           -- 10
+        waist = "Emphatikos Rope",      -- 12      1
+        -- legs = "Shedir Seraweels",      --         1
+        legs = "Bunzi's Pants",         -- 20
+        feet = "Theophany Duckbills +1" -- 20
+    })
+
     sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'].Duration, { main = "Beneficus" })
     sets.midcast.BarStatus = set_combine(sets.midcast.BarElement, { neck = "Sroda Necklace" })
 
@@ -317,20 +333,20 @@ function init_gear_sets()
         body = "Bunzi's Robe",
         hands = "Bunzi's Gloves",
         ring1 = "Freke Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Metamorph Ring +1",
         back = "Felicitas Cape +1",
         waist = gear.ElementalObi,
         legs = "Bunzi's Pants",
         feet = "Bunzi's Sabots"
     }
 
-    sets.midcast['Divine Magic']['Banish'] = set_combine(sets.midcast['Divine Magic'], {
-        head = "Ipoca Beret",
-        neck = "Jokushu Chain",
-        hands = "Piety Mitts +1",
-        ring2 = "Fenian Ring",
-        back = "Disperser's Cape",
-    })
+    -- sets.midcast['Divine Magic']['Banish'] = set_combine(sets.midcast['Divine Magic'], {
+    --     head = "Ipoca Beret",
+    --     neck = "Jokushu Chain",
+    --     hands = "Piety Mitts +1",
+    --     ring2 = "Fenian Ring",
+    --     back = "Disperser's Cape",
+    -- })
 
 
     sets.midcast['Dark Magic'] = {
@@ -351,8 +367,8 @@ function init_gear_sets()
     }
 
     sets.midcast['Enfeebling Magic'] = {
-        main = "Contemplator +1",
-        sub = "Enki Strap",
+        -- main = "Contemplator +1",
+        -- sub = "Enki Strap",
         head = "Bunzi's Hat",
         neck = "Incanter's Torque +1",
         ear1 = "Enfeebling Earring",
@@ -383,7 +399,7 @@ function init_gear_sets()
         -- sub = "Ammurapi Shield",
         ammo = "Homiliary",
         head = "Nyame Helm",
-        neck = "Sibyl Scarf",
+        neck = "Loricate Torque +1",
         ear1 = "Infused Earring",
         ear2 = "Etiolation Earring",
         body = "Nyame Mail",
@@ -520,10 +536,11 @@ function init_gear_sets()
         ear1 = "Telos Earring",
         ear2 = "Brutal Earring",
         body = "Nyame Mail",
-        hands = "Gazu Bracelets +1",
+        hands = "Bunzi's Gloves",
         ring1 = gear.left_chirich,
         ring2 = gear.right_chirich,
-        waist = "Grunfeld Rope",
+        back = "Aurist's Cape +1",
+        waist = "Cornelia's Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
@@ -540,6 +557,10 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
+    if not has_recast() then
+        set_recast()
+    end
+
     if spell.english == "Paralyna" and buffactive.Paralyzed then
         -- no gear swaps if we're paralyzed, to avoid blinking while trying to remove it.
         eventArgs.handled = true
@@ -566,6 +587,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     elseif spell.english:startswith('Boost-') then
         equip(sets.midcast['Enhancing Magic'].Duration500)
     end
+end
+
+function job_aftercast(spell, action, spellMap, eventArgs)
+    equip_recast()
 end
 
 -------------------------------------------------------------------------------------------------------------------

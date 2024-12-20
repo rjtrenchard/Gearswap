@@ -38,37 +38,21 @@ function user_setup()
     send_command('bind ^` input /ja "Hasso" <me>')
     send_command('bind !` input /ja "Seigan" <me>')
 
-    gear.WSDayEar1 = "Brutal Earring"
-    gear.WSDayEar2 = "Crepuscular Earring"
-    gear.WSNightEar1 = "Lugra Earring +1"
-    gear.WSNightEar2 = "Lugra Earring"
-
-    gear.WSEarBrutal = { name = gear.WSDayEar1 }
-    gear.WSEarCessance = { name = gear.WSDayEar2 }
-
-    ticker = windower.register_event('time change', function(myTime)
-        if (myTime == 17 * 60 or myTime == 7 * 60) and (player.status == 'Idle' or state.Kiting.value) then
-            procTime(myTime)
-            if (player.status == 'Idle' or state.Kiting.value) then
-                update_combat_form()
-            end
-        end
-    end)
+    -- ticker = windower.register_event('time change', function(myTime)
+    --     if (myTime == 17 * 60 or myTime == 7 * 60) and (player.status == 'Idle' or state.Kiting.value) then
+    --         procTime(myTime)
+    --         if (player.status == 'Idle' or state.Kiting.value) then
+    --             update_combat_form()
+    --         end
+    --     end
+    -- end)
 
     update_combat_form()
     select_default_macro_book()
 end
 
 function procTime(myTime)
-    if isNight() then
-        gear.WSEarBrutal.name = gear.WSNightEar1
-        gear.WSEarCessance.name = gear.WSNightEar2
-        gear.MovementFeet = gear.NightFeet
-    else
-        gear.WSEarBrutal.name = gear.WSDayEar1
-        gear.WSEarCessance = gear.WSDayEar2
-        gear.MovementFeet = gear.DayFeet
-    end
+
 end
 
 function isNight()
@@ -77,7 +61,7 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
-    windower.unregister_event(ticker)
+    -- windower.unregister_event(ticker)
     unbind_numpad()
     send_command('unbind ^`')
     send_command('unbind !-')
@@ -108,8 +92,8 @@ function init_gear_sets()
         ear2 = "Enchanter's Earring +1",
         body = "Sacro Breastplate",
         hands = "Leyline Gloves",
-        ring1 = "Medada's Ring",
-        ring2 = "Rahab Ring",
+        ring1 = "Rahab Ring",
+        ring2 = "Lebeche Ring",
         legs = "Limbo Trousers"
     }
 
@@ -143,14 +127,14 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        ammo = "Coiste Bodhar",
-        head = "Nyame Helm",
-        neck = "Fotia Gorget",
+        ammo = "Knobkierrie",
+        head = "Mpaca's Cap",
+        neck = "Republican Platinum medal",
         ear1 = "Thrud Earring",
         ear2 = "Moonshade Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Niqmaddu Ring",
+        ring1 = "Ephramad's Ring",
         ring2 = "Epaminondas's Ring",
         back = "Atheling Mantle",
         waist = "Sailfi Belt +1",
@@ -182,7 +166,12 @@ function init_gear_sets()
 
     sets.precast.WS['Tachi: Ageha'] = set_combine(sets.precast.WS, {})
 
-    sets.precast.WS['Tachi: Jinpu'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Tachi: Jinpu'] = set_combine(sets.precast.WS, {
+        ammo = "Coiste Bodhar",
+        neck = "Sibyl Scarf",
+        ear1 = "Friomisi Earring",
+        waist = "Orpheus's Sash",
+    })
     sets.precast.WS['Tachi: Koki'] = sets.precast.WS['Tachi: Jinpu']
     sets.precast.WS['Tachi: Goten'] = sets.precast.WS['Tachi: Jinpu']
     sets.precast.WS['Tachi: Kagero'] = sets.precast.WS['Tachi: Jinpu']

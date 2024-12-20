@@ -23,9 +23,11 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	include('augments.lua')
-	include('natty_helper_functions.lua')
-	include('default_sets.lua')
+	-- include('augments.lua')
+	-- include('natty_helper_functions.lua')
+	-- include('default_sets.lua')
+
+	include('natty_includes.lua')
 
 	state.RangedMode:options('Normal', 'Acc')
 	state.WeaponskillMode:options('Normal', 'Acc')
@@ -73,7 +75,7 @@ function init_gear_sets()
 		body = "Adhemar Jacket +1",
 		hands = "Leyline Gloves",
 		ring1 = "Rahab Ring",
-		ring2 = "Medada's Ring",
+		ring2 = "Rahab Ring",
 		legs = "Limbo Trousers",
 		feet = "Carmine Greaves +1"
 	}
@@ -97,21 +99,21 @@ function init_gear_sets()
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
-		head = "Orion beret +2",
+		head = "Nyame Helm",
 		neck = "Fotia Gorget",
 		ear1 = "Ishvara Earring",
 		ear2 = "Moonshade Earring",
+		body = "Nyame Mail",
 		hands = "Nyame Gauntlets",
 		ring1 = "Regal Ring",
-		ring2 = "Epaminondas's Ring",
-		back = "Sylvan Chlamys",
+		ring2 = "Ephramad's Ring",
+		back = "Moonlight Cape",
 		waist = "Fotia Belt",
-		legs = "Arcadian Braccae +2",
-		feet = "Orion Socks +1"
+		legs = "Nyame Flanchard",
+		feet = "Nyame Sollerets"
 	}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		body = "Kyujutsugi",
 		ring1 = "Hajduk Ring +1",
 		back = "Lutian Cape",
 		legs = "Orion Braccae +1"
@@ -121,9 +123,24 @@ function init_gear_sets()
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		ammo = "Hauksbok Arrow",
 		neck = "Republican Platinum Medal",
-		ring2 = "Epaminondas's Ring",
+		ring1 = "Epaminondas's Ring",
 		waist = "Sailfi Belt +1"
 	})
+
+	sets.precast.WS["Empyreal Arrow"] = {
+		head = "Malignance Chapeau",
+		neck = "Fotia Gorget",
+		ear1 = "Crepuscular Earring",
+		ear2 = "Telos Earring",
+		body = "Malignance Tabard",
+		hands = "Malignance Gloves",
+		ring1 = "Ephramad's Ring",
+		ring2 = "Beithir Ring",
+		waist = "Tellen Belt",
+		legs = "Malignance Tights",
+		feet = "Malignance Boots"
+	}
+
 
 
 	--------------------------------------
@@ -198,17 +215,18 @@ function init_gear_sets()
 
 	-- Idle sets
 	sets.idle = {
-		head = "Malignance Chapeau",
+		head = "Nyame Helm",
 		neck = "Loricate Torque +1",
 		ear1 = "Odnowa Earring +1",
-		ear2 = "Etiolation Earring",
-		body = "Malignance Tabard",
-		hands = "Malignance Gloves",
-		ring1 = "Defending Ring",
+		ear2 = "Tuisto Earring",
+		body = "Nyame Mail",
+		hands = "Nyame Gauntlets",
+		ring1 = "Gelatinous Ring +1",
+		ring2 = "Shneddick Ring +1",
 		back = "Moonlight Cape",
 		waist = "Flume Belt +1",
-		legs = "Carmine Cuisses +1",
-		feet = "Malignance Boots"
+		legs = "Nyame Flanchard",
+		feet = "Nyame Sollerets"
 	}
 
 	-- Defense sets
@@ -248,17 +266,18 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.engaged = {
+		-- ammo = "Chapuli Arrow",
 		head = "Malignance Chapeau",
 		neck = "Anu Torque",
-		ear1 = "Sherida Earring",
-		ear2 = "Telos Earring",
+		ear1 = "Eabani Earring",
+		ear2 = "Suppanomimi",
 		body = "Malignance Tabard",
-		hands = "Malignance Gloves",
+		hands = "Adhemar Wristbands +1",
 		ring1 = "Epona's Ring",
-		ring2 = gear.right_chirich,
+		ring2 = "Hetairoi Ring",
 		back = "Moonlight Cape",
 		waist = "Sailfi Belt +1",
-		legs = "Samnuha Tights",
+		legs = "Malignance Tights",
 		feet = "Malignance Boots"
 	}
 
@@ -301,6 +320,12 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_pretarget(spell, action, spellMap, eventArgs)
+	if spell.type == 'WeaponSkill' then
+		equip({ ammo = empty })
+	end
+end
+
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
@@ -342,6 +367,10 @@ function job_buff_change(buff, gain)
 		else
 			enable('body')
 		end
+	end
+
+	if buff == "Flurry" then
+		send_command("cancel flurry")
 	end
 end
 

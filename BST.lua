@@ -97,6 +97,19 @@ function job_setup()
     include('Mote-TreasureHunter')
 end
 
+windower.register_event('gain experience', function(new, old)
+    if not pet.isvalid then
+        send_command("gs c bl Rapid Broth")
+    elseif pet.hpp < 50 then
+        send_command("input /ja \"Reward\"")
+    else
+        local abil_recasts = windower.ffxi.get_ability_recasts()
+        if abil_recasts[106] < 10 then
+            send_command('input /ja "Killer Instinct"')
+        end
+    end
+end)
+
 -------------------------------------------------------------------------------------------------------------------
 -- User setup functions for this job.  Recommend that these be overridden in a sidecar file.
 -------------------------------------------------------------------------------------------------------------------
@@ -180,11 +193,11 @@ function init_gear_sets()
     gear.stp_cape = { name = "Artio's Mantle", augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Store TP"+10', 'Phys. dmg. taken-10%' } }
     gear.dw_cape = { name = "Artio's Mantle", augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dual Wield"+10', 'Phys. dmg. taken-10%' } }
 
-    gear.str_ws_cape = { name = "Artio's Mantle", augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%', } }
+    gear.ws_cape_str = { name = "Artio's Mantle", augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%', } }
     gear.primalrend_cape = { name = "Artio's Mantle", augments = { 'CHR+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'CHR+10', 'Weapon skill damage +10%', 'Phys. dmg. taken-10%', } }
     gear.cloudsplitter_cape = { name = "Artio's Mantle", augments = { 'MND+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'MND+10', 'Weapon skill damage +10%', } }
     gear.multi_ws_cape = gear.melee_cape
-    gear.crit_ws_cape = gear.str_ws_cape
+    gear.ws_cape_crit = gear.ws_cape_str
 
     gear.charm_cape = gear.primalrend_cape
     gear.reward_cape = gear.cloudsplitter_cape
@@ -343,7 +356,7 @@ function init_gear_sets()
         ear2 = "Enchanter's Earring +1", -- 2
         body = "Sacro Breastplate",      -- 10
         hands = "Leyline Gloves",        -- 8
-        ring1 = "Medada's Ring",         -- 10
+        ring1 = "Rahab Ring",            -- 10
         ring2 = "Rahab Ring",            -- 6
         legs = "Limbo Trousers",         -- 3
     }
@@ -360,8 +373,8 @@ function init_gear_sets()
         body = "Nukumi Gausape +3",
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Sroda Ring",
-        back = gear.str_ws_cape,
+        ring2 = "Ephramad's Ring",
+        back = gear.ws_cape_str,
         waist = "Fotia Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
@@ -380,7 +393,7 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
         ring2 = "Regal Ring",
-        back = gear.str_ws_cape,
+        back = gear.ws_cape_str,
         waist = "Fotia Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
@@ -396,8 +409,8 @@ function init_gear_sets()
         hands = "Nukumi Manoplas +3",
         ring2 = gear.right_chirich,
         ring1 = "Begrudging Ring",
-        back = gear.crit_ws_cape,
-        waist = "Fotia Belt",
+        back = gear.ws_cape_crit,
+        waist = "Gerdr Belt +1",
         legs = "Gleti's Breeches",
         feet = "Gleti's Boots"
     }
@@ -410,7 +423,7 @@ function init_gear_sets()
         ear2 = "Lugra Earring +1",
         body = "Gleti's Cuirass",
         hands = "Gleti's Gauntlets",
-        ring1 = "Sroda Ring",
+        ring1 = "Ephramad's Ring",
         ring2 = "Gere Ring",
         back = gear.multi_ws_cape,
         waist = "Fotia Belt",
@@ -469,7 +482,7 @@ function init_gear_sets()
 
     sets.precast.WS['Cloudsplitter'] = set_combine(sets.precast.WS['Primal Rend'],
         {
-            ring1 = "Medada's Ring",
+            ring1 = "Rahab Ring",
             back = gear.cloudsplitter_cape,
         })
     sets.precast.WS['Cloudsplitter'].FullTP = sets.precast.WS['Primal Rend'].FullTP
@@ -511,7 +524,7 @@ function init_gear_sets()
         ear2 = "Enchanter's Earring +1",
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
-        ring1 = "Medada's Ring",
+        ring1 = "Rahab Ring",
         ring2 = "Rahab Ring",
         waist = "Klouskap Sash +1",
         legs = "Malignance Tights",
@@ -642,7 +655,8 @@ function init_gear_sets()
         head = "Nukumi Cabasset +3",
         body = "Nyame Mail",
         hands = "Gleti's Gauntlets",
-        legs = "Nukumi Quijotes +3",
+        -- legs = "Nukumi Quijotes +3",
+        legs = "Gleti's Breeches",
         waist = "Isa Belt",
         back = gear.pet_mag_cape,
         feet = "Gleti's Boots"
@@ -875,7 +889,7 @@ function init_gear_sets()
     sets.engaged.Aymur.PetTank.Killer = sets.engaged.PetTank.Killer
 
     sets.engaged.Aymur.AM3 = {
-        ammo = "Coiste Bodhar",
+        ammo = "Aurgelmir Orb +1",
         head = "Malignance Chapeau",
         neck = "Ainia Collar",
         ear1 = "Telos Earring",
@@ -885,7 +899,7 @@ function init_gear_sets()
         ring1 = gear.left_moonlight,
         ring2 = gear.right_moonlight,
         back = gear.stp_cape,
-        waist = "Kentarch Belt +1",
+        waist = "Gerdr Belt +1",
         legs = "Malignance Tights",
         feet = "Malignance Boots"
     }
@@ -937,7 +951,10 @@ function init_gear_sets()
     sets.engaged.SlowDW.Aymur = sets.engaged.NormalDW.Aymur
     sets.engaged.SlowMaxDW.Aymur = sets.engaged.NormalDW.Aymur
 
-    sets.engaged.HasteMaxDW.Aymur.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteMaxDW)
+    sets.engaged.HasteMaxDW.Aymur.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteMaxDW, {
+        ear1 = "Suppanomimi",
+        waist = "Gerdr Belt +1",
+    })
     sets.engaged.HasteDW.Aymur.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.HasteDW)
     sets.engaged.NormalDW.Aymur.AM3 = set_combine(sets.engaged.Aymur.AM3, sets.NormalDW)
     sets.engaged.SlowDW.Aymur.AM3 = sets.engaged.NormalDW.Aymur.AM3
@@ -975,6 +992,27 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+function check_buff()
+    local latency = 0.5
+
+    local abil_recasts = windower.ffxi.get_ability_recasts()
+
+    if not buffactive['Killer Instinct'] and abil_recasts[106] < latency then
+        windower.chat.input('/ja "Killer Instinct" <me>')
+        tickdelay = os.clock() + 1.1
+        return true
+    elseif player.sub_job == 'WAR' and not buffactive.Berserk and abil_recasts[1] < latency then
+        windower.chat.input('/ja "Berserk" <me>')
+        tickdelay = os.clock() + 1.1
+        return true
+    else
+        return false
+    end
+
+
+    return false
+end
+
 function filtered_action(spell)
     if spell.type == 'WeaponSkill' then
         local main = player.equipment.main
@@ -1005,6 +1043,30 @@ function filtered_action(spell)
 end
 
 function job_pretarget(spell, action, spellMap, eventArgs)
+    -- if not pet.isvalid then
+    --     cancel_spell()
+    --     job_self_command("bl \"Rapid Broth\"")
+    -- else
+    --     if pet.hpp < 50 then
+    --         cancel_spell()
+    --         send_command('input /ja reward')
+    --     else
+    --         check_buff()
+    --     end
+    -- end
+
+
+    -- if buffactive['Paralysis'] or buffactive['Paralyze'] or buffactive['Paralyzed'] then
+    --     cancel_spell()
+    --     send_command('input /item "Remedy" <me>')
+    --     return
+    -- end
+
+    -- if spell.english == "Reward" then
+    --     local recasts = windower.ffxi.get_ability_recasts() or T {}
+    --     local reward_recast = recasts[0] or 0
+    -- end
+
     -- auto engage on ready action
     if spell.type == 'Monster' and pet.status == 'Idle' and player.target.type == 'MONSTER' then
         eventArgs.cancel = true
@@ -1077,6 +1139,10 @@ end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
     sets.jugpet.ammo = empty
+
+    -- if spell.english == "TP Drainkiss" then
+    --     send_command("wait 1; /pet heel")
+    -- end
 end
 
 -------------------------------------------------------------------------------------------------------------------

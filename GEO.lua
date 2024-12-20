@@ -93,7 +93,6 @@ function user_setup()
 
     send_command('bind !` gs c cycle MagicBurst')
 
-
     select_default_macro_book()
 end
 
@@ -163,7 +162,7 @@ function init_gear_sets()
         body = "Amalric Doublet +1",
         -- hands = "Wicce Gloves +2",
         ring1 = "Mephitas's Ring +1",
-        ring2 = "Medada's Ring",
+        ring2 = "Freke Ring",
         back = "Fi Follet Cape +1",
         waist = "Shinjutsu-no-obi+1",
         legs = "Lengo Pants",
@@ -184,7 +183,7 @@ function init_gear_sets()
     sets.precast.JA['Primeval Zeal'] = { head = "Bagua Galero +1" }
     sets.precast.JA['Curative Recantation'] = { hands = "Bagua Mitaines +1" }
     sets.precast.JA['Mending Halation'] = { legs = "Bagua Pants +1" }
-    sets.precast.JA['Radial Arcana'] = { feet = "Bagua Sandals +1" }
+    sets.precast.JA['Radial Arcana'] = { feet = "Bagua Sandals +3" }
     sets.precast.JA['Concentric Pulse'] = { head = "Bagua Galero +1" }
 
     -- Fast cast sets for spells
@@ -194,15 +193,16 @@ function init_gear_sets()
         head = gear.merlinic.fc.head,   -- 15
         neck = "Orunmila's Torque",     -- 5
         ear1 = "Malignance Earring",    -- 4
-        -- ear2 = "Loquacious Earring",    -- 2
+        ear2 = "Loquacious Earring",    -- 2
         body = gear.merlinic.fc.body,   -- 13
         hands = gear.merlinic.fc.hands, -- 7
         ring1 = "Kishar Ring",          -- 6
-        ring2 = "Medada's Ring",        -- 10
+        ring2 = "Rahab Ring",           -- 10
         back = "Perimede Cape",
-        -- waist = "Embla Sash",           -- 5
-        waist = { name = "Platinum Moogle belt", priority = 10 },
-        legs = "Geomancy Pants +1",  -- 11
+        waist = "Shinjutsu-no-obi +1",  -- 5
+        -- waist = { name = "Platinum Moogle belt", priority = 10 },
+        -- legs = "Geomancy Pants +1",  -- 11
+        legs = "Agwu's Slops",       -- 7
         feet = gear.merlinic.fc.feet -- 12
     }
     sets.precast.Geomancy = set_combine(sets.precast.FC, { range = "Dunna" })
@@ -268,42 +268,42 @@ function init_gear_sets()
         ear1 = "Malignance earring",
         ear2 = "Loquacious Earring",
         hands = "Telchine Gloves",
-        ring1 = "Medada's Ring",
+        ring1 = "Rahab Ring",
         ring2 = "Kishar Ring",
     }
 
     sets.midcast.Geomancy = {
         main = "Idris",
         range = "Dunna",
-        head = "Azimuth Hood +2",
+        head = "Azimuth Hood +3",
         neck = "Bagua Charm +2",
         body = "Bagua Tunic +1",
-        hands = "Geomancy Mitaines +2",
+        hands = "Geomancy Mitaines +3",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini
     }
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         back = "Lifestream Cape",
         legs = "Bagua Pants +1",
-        feet = "Azimuth Gaiters +2"
+        feet = "Azimuth Gaiters +3"
     })
 
     sets.midcast['Elemental Magic'] = {
         main = "Bunzi's Rod",
         sub = "Ammurapi Shield",
         ammo = "Ghastly Tathlum +1",
-        head = "Azimuth Hood +2",
+        head = "Azimuth Hood +3",
         neck = "Sibyl Scarf",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
-        body = "Azimuth Coat +2",
+        body = "Azimuth Coat +3",
         hands = "Azimuth Gloves +2",
         ring1 = "Freke Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Metamorph Ring +1",
         back = gear.int_cape,
         waist = gear.ElementalObi,
-        legs = "Azimuth Tights +2",
-        feet = "Azimuth Gaiters +2"
+        legs = "Azimuth Tights +3",
+        feet = "Azimuth Gaiters +3"
     }
     sets.midcast['Elemental Magic'].Acc = set_combine(sets.midcast['Elemental Magic'], {
         head = empty,
@@ -316,18 +316,18 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Low = {
         main = "Caduceus",
         sub = "Sm. Escutcheon",
-        head = "Azimuth Hood +2",
+        head = "Azimuth Hood +3",
         neck = "Loricate Torque +1",
         ear1 = "Handler's Earring +1",
         ear2 = "Rimeice Earring",
         body = "Seidr Cotehardie",
-        hands = "Geomancy Mitaines +2",
+        hands = "Geomancy Mitaines +3",
         ring1 = "Gelatinous Ring +1",
         ring2 = "Shadow Ring",
         back = "Moonlight Cape",
         waist = "Platinum Moogle belt",
         legs = "Bagua Pants +1",
-        feet = "Bagua Sandals +1",
+        feet = "Bagua Sandals +3",
     }
 
     sets.midcast['Elemental Magic'].Dark = {
@@ -338,10 +338,10 @@ function init_gear_sets()
     sets.magic_burst = {
         head = "Ea Hat +1",              -- 7
         neck = "Mizukage-no-kubikazari", -- 10
-        body = "Azimuth Coat +2",
+        body = "Azimuth Coat +3",
         hands = "Agwu's Gages",
-        ring1 = "Mujin Band",
-        legs = "Azimuth Tights +2",
+        -- ring1 = "Mujin Band",
+        legs = "Azimuth Tights +3",
         feet = "Agwu's Pigaches",
     }
 
@@ -402,11 +402,19 @@ function init_gear_sets()
         feet = gear.telchine.enh_dur.feet
     }
 
-    sets.midcast.Aquaveil = set_combine(sets.SIRD, {
-        ammo = "Staunch Tathlum +1",
-        head = "Amalric Coif +1",
-        waist = "Emphatikos Rope",
-        legs = "Shedir Seraweels"
+    sets.midcast.Aquaveil = set_combine({
+        ammo = "Staunch Tathlum +1", -- 11
+        head = "Amalric Coif +1",    --         2
+        neck = "Loricate Torque +1", -- 5
+        ear1 = "Magnetic Earring",   -- 8
+        ear2 = "Halasz Earring",     -- 5
+        body = "Rosette Jaseran +1", -- 25
+        hands = "Regal Cuffs",       --         2
+        ring1 = "Evanescence Ring",  -- 5
+        ring2 = "Freke Ring",        -- 10
+        waist = "Emphatikos Rope",   -- 12      1
+        legs = "Shedir Seraweels",   --         1
+        feet = "Amalric Nails +1"    -- 16
     })
     sets.midcast.Stoneskin = set_combine(sets.SIRD, {
         neck = "Nodens Gorget",
@@ -511,7 +519,7 @@ function init_gear_sets()
         neck = "Loricate Torque +1",
         ear1 = "Lugalbanda Earring",
         ear2 = "Etiolation Earring",
-        body = "Azimuth Coat +2",
+        body = "Azimuth Coat +3",
         hands = "Nyame Gauntlets",
         ring1 = "Gelatinous Ring +1",
         ring2 = "Shneddick Ring +1",
@@ -539,18 +547,18 @@ function init_gear_sets()
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = {
         range = "Dunna",
-        head = "Azimuth Hood +2",
+        head = "Azimuth Hood +3",
         neck = "Bagua Charm +2",
         ear1 = "Handler's Earring +1",
         ear2 = "Rimeice Earring",
         body = "Nyame Mail",
-        hands = "Geomancy Mitaines +2",
+        hands = "Geomancy Mitaines +3",
         ring1 = "Gelatinous Ring +1",
         ring2 = "Paguroidea Ring",
         back = gear.luopan_cape,
         waist = "Isa Belt",
         legs = "Nyame Flanchard",
-        feet = "Bagua Sandals +1"
+        feet = "Bagua Sandals +3"
     }
 
     sets.idle.PDT.Pet = {

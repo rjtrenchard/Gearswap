@@ -63,20 +63,37 @@ function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'Evasion', 'PDT')
     state.WeaponskillMode:options('Normal', 'Acc')
-    state.PhysicalDefenseMode:options('Evasion', 'PDT')
-
-
-    gear.default.weaponskill_neck = "Combatant's Torque"
-    gear.default.weaponskill_waist = "Caudata Belt"
-    gear.AugQuiahuiz = { name = "Quiahuiz Trousers", augments = { 'Haste+2', '"Snapshot"+2', 'STR+8' } }
+    state.PhysicalDefenseMode:options('PDT', 'Evasion')
+    state.IdleMode:options('Normal', 'Regain', 'PDT')
 
     -- Additional local binds
     send_command('bind ^= gs c cycle mainstep')
     send_command('bind != gs c cycle altstep')
     send_command('bind ^- gs c toggle selectsteptarget')
     send_command('bind !- gs c toggle usealtstep')
-    send_command('bind ^` input /ja "Chocobo Jig" <me>')
-    send_command('bind !` input /ja "Chocobo Jig II" <me>')
+    -- send_command('bind ^` input /ja "Chocobo Jig" <me>')
+    -- send_command('bind !` input /ja "Chocobo Jig II" <me>')
+
+    send_command('bind numpad1 input /ja "Curing Waltz III"')
+    send_command('bind numpad2 input /ja "Curing Waltz V"')
+    send_command('bind numpad3 input /ja "Contradance"')
+
+    send_command('bind numpad4 input /ja "Divine Waltz II')
+    send_command('bind numpad5 input /ja "Healing Waltz"')
+
+    send_command('bind numpad7 gs c equip sets.weapons.normal')
+    send_command('bind numpad8 gs c equip sets.weapons.TP')
+
+    info.WaltzCosts = {
+        ["Curing Waltz"] = 200,
+        ["Divine Waltz"] = 400,
+        ["Curing Waltz II"] = 350,
+        ["Healing Waltz"] = 200,
+        ["Curing Waltz III"] = 500,
+        ["Curing Waltz IV"] = 650,
+        ["Divine Waltz II"] = 800,
+        ["Curing Waltz V"] = 800
+    }
 
     select_default_macro_book()
 end
@@ -98,8 +115,19 @@ function init_gear_sets()
     -- Start defining the sets
     --------------------------------------
 
-    gear.fc_head = { name = "Herculean Helm", augments = { 'Mag. Acc.+18', '"Fast Cast"+6', 'MND+8', } }
+    gear.tp_cape = { name = "Senuna's Mantle", augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dbl.Atk."+10', 'Phys. dmg. taken-10%' } }
+    gear.ws_cape_dex = { name = "Senuna's Mantle", augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%', 'Phys. dmg. taken-10%', } }
 
+    sets.weapons = {}
+    sets.weapons.normal = {
+        main = "Mpu Gandring",
+        sub = "Crepuscular Knife"
+    }
+
+    sets.weapons.TP = {
+        main = "Mpu Gandring",
+        sub = "Centovente"
+    }
 
     sets.resist = {}
     sets.resist.death = {
@@ -109,109 +137,158 @@ function init_gear_sets()
         ring2 = "Eihwaz Ring"
     }
 
+    sets.enmity = {
+        ammo = "Sapience Orb",
+        head = "Halitus Helm",
+        neck = "Unmoving Collar +1",
+        ear1 = "Trux Earring",
+        ear2 = "Cryptic Earring",
+        body = "Emet Harness +1",
+        hands = "Kurys Gloves",
+        ring1 = "Supershear Ring",
+        ring2 = "Eihwaz Ring",
+        -- back = "",
+        waist = "Trance Belt",
+        legs = "Zoar Subligar +1",
+        feet = "Ahosi Leggings",
+    }
+
+    sets.TreasureHunter = {
+        ammo = "Perfect Lucky egg",
+        waist = "Chaac belt",
+        legs = "Volte Hose",
+        feet = "Volte Boots"
+    }
+
     -- Precast Sets
 
     -- Precast sets to enhance JAs
 
-    sets.precast.JA['No Foot Rise'] = { body = "Horos Casaque" }
+    sets.precast.JA['No Foot Rise'] = { body = "Horos Casaque +1" }
 
-    sets.precast.JA['Trance'] = { head = "Horos Tiara" }
+    sets.precast.JA['Trance'] = { head = "Horos Tiara +1" }
 
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {
-        ammo = "Yamarang",
-        head = "Horos Tiara",
-        ear1 = "Roundel Earring",
-        body = "Maxixi Casaque",
-        hands = "Nyame Gauntlets",
-        ring1 = "Asklepian Ring",
-        back = "Toetapper Mantle",
-        waist = "Caudata Belt",
-        legs = "Gleti's Breeches",
-        feet = "Maxixi Toe Shoes"
+        ammo = "Brigantia Pebble",
+        head = "Horos Tiara +1",
+        neck = "Etoile Gorget +2",
+        ear1 = "Enchanter's Earring +1",
+        ear2 = "Handler's Earring +1",
+        body = "Maxixi Casaque +1",
+        hands = "Maculele Bangles +3",
+        ring1 = "Metamorth Ring +1",
+        ring2 = "Defending Ring",
+        back = gear.tp_cape,
+        waist = "Chaac Belt",
+        legs = "Dashing Subligar",
+        feet = "Maxixi Toe Shoes +1"
     }
 
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
 
-    sets.precast.Samba = { head = "Maxixi Tiara" }
+    sets.precast.Samba = { head = "Maxixi Tiara +1" }
 
-    sets.precast.Jig = { legs = "Horos Tights", feet = "Maxixi Toe Shoes" }
+    sets.precast.Jig = { legs = "Horos Tights +1", feet = "Maxixi Toe Shoes +1" }
 
-    sets.precast.Step = { waist = "Chaac Belt" }
-    sets.precast.Step['Feather Step'] = { feet = "Charis Shoes +2" }
+    sets.precast.Step = {
+        ammo = "Cath Palug Stone",
+        head = "Maxixi Tiara +1",
+        neck = "Etoile Gorget +2",
+        ear1 = "Odr Earring",
+        ear2 = "Maculele Earring +2",
+        body = "Horos Casaque +1",
+        hands = "Maxixi Bangles +1",
+        ring1 = gear.left_chirich,
+        ring2 = gear.right_chirich,
+        back = gear.dex_cape,
+        waist = "Kentarch Belt +1",
+        legs = "Maculele Tights +3",
+        feet = "Horos Toe Shoes +1"
+    }
+    sets.precast.Step['Feather Step'] = { feet = "Maculele Toe Shoes +3" }
 
     sets.precast.Flourish1 = {}
+    sets.precast.Flourish1['Animated Flourish'] = sets.enmity
     sets.precast.Flourish1['Violent Flourish'] = {
         ear1 = "Dignitary's Earring",
-        ear2 = "Crepuscular Earring",
-        body = "Horos Casaque",
+        ear2 = "Maculele Earring +2",
+        body = "Horos Casaque +1",
         hands = "Nyame Gauntlets",
-        ring2 = gear.right_stikini,
+        ring1 = gear.left_chirich,
+        ring2 = gear.right_chirich,
         waist = "Chaac Belt",
-        legs = "Iuitl Tights",
+        legs = "Malignance Tights",
         feet = "Malignance Boots"
     } -- magic accuracy
     sets.precast.Flourish1['Desperate Flourish'] = {
-        ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1",
-        neck = "Bathy Choker +1",
-        body = "Horos Casaque",
+        ammo = "Cath Palug Stone",
+        head = "Maculele Tiara +3",
+        neck = "Etoile Gorget +2",
+        body = "Horos Casaque +1",
         hands = "Nyame Gauntlets",
-        ring1 = "Beeline Ring",
-        back = "Toetapper Mantle",
-        waist = "Sailfi Belt +1",
-        legs = "Kaabnax Trousers",
-        feet = "Malignance Boots"
+        ring1 = gear.left_chirich,
+        ring2 = gear.right_chirich,
+        back = gear.tp_cape,
+        waist = "Kentarch Belt +1",
+        legs = "Maculele Tights +3",
+        feet = "Maculele Toe Shoes +3"
     } -- acc gear
 
     sets.precast.Flourish2 = {}
-    sets.precast.Flourish2['Reverse Flourish'] = { hands = "Charis Bangles +2" }
+    sets.precast.Flourish2['Reverse Flourish'] = {
+        hands = "Maculele Bangles +3",
+        back = gear.tp_cape,
+    }
 
     sets.precast.Flourish3 = {}
-    sets.precast.Flourish3['Striking Flourish'] = { body = "Charis Casaque +2" }
-    sets.precast.Flourish3['Climactic Flourish'] = { head = "Charis Tiara +2" }
+    sets.precast.Flourish3['Striking Flourish'] = { body = "Maculele Casaque +3" }
+    sets.precast.Flourish3['Climactic Flourish'] = { head = "Maculele Tiara +3" }
 
     -- Fast cast sets for spells
 
     sets.precast.FC = {
         ammo = "Sapience Orb",
-        head = gear.fc_head,
+        head = gear.herculean.fc.head,
+        neck = "Orunmila's Torque",
         ear1 = "Enchanter's Earring +1",
         ear2 = "Loquacious Earring",
         body = "Adhemar Jacket +1",
         hands = "Leyline Gloves",
         ring1 = "Rahab Ring",
-        ring2 = "Medada's Ring",
+        -- ring2 = "Rahab Ring",
+        legs = "Limbo Trousers",
     }
 
-    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, { neck = "Magoraga Beads" })
+    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {})
 
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        ammo = "Oshasha's Treatise",
-        head = "Adhemar Bonnet +1",
+        ammo = "Coiste Bodhar",
+        head = "Maculele Tiara +3",
         neck = "Fotia Gorget",
-        ear1 = "Sherida Earring",
-        ear2 = "Moonshade Earring",
-        body = "Gleti's Cuirass",
-        hands = "Adhemar Wristbands +1",
+        ear1 = "Moonshade Earring",
+        ear2 = "Maculele earring +2",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Epona's Ring",
-        back = "Atheling Mantle",
-        waist = "Fotia Belt",
-        legs = "Samnuha Tights",
-        feet = "Gleti's Boots"
+        ring2 = "Regal Ring",
+        back = gear.ws_cape_dex,
+        waist = "Gerdr Belt +1",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, { ammo = "Yamarang", back = "Toetapper Mantle" })
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, { ammo = "Yamarang", back = gear.tp_cape })
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        ammo = "Voluspa Tathlum",
+        ammo = "Coiste Bodhar",
         ring1 = "Ilabrat Ring",
+        ring2 = "Regal Ring",
         waist = "Fotia Belt",
     })
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'],
@@ -222,23 +299,26 @@ function init_gear_sets()
     sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS.Acc, { hands = "Adhemar Wristbands +1" })
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
-        ammo = "Voluspa Tathlum",
+        ammo = "Coiste Bodhar",
         head = "Blistering Sallet +1",
         ear1 = "Sherida Earring",
         ear2 = "Odr Earring",
         body = "Gleti's Cuirass",
-        ring1 = gear.left_chirich,
+        hands = "Gleti's Gauntlets",
+        ring1 = "Ephramad's Ring",
         ring2 = "Begrudging Ring",
-        legs = "Zoar Subligar +1",
+        back = gear.ws_cape_dex,
+        waist = "Gerdr Belt +1",
+        legs = "Gleti's Breeches",
         feet = "Gleti's Boots"
     })
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'],
         {})
 
     sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS,
-        { ammo = "Oshasha's Treatise" })
+        { ammo = "Crepuscular Pebble" })
     sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"],
-        { ammo = "Yamarang", back = "Toetapper Mantle" })
+        { ammo = "Yamarang", })
 
     sets.precast.WS['Aeolian Edge'] = {
         ammo = "Ghastly Tathlum +1",
@@ -249,24 +329,36 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Acumen Ring",
+        ring2 = "Ilabrat Ring",
         back = "Toro Cape",
-        waist = "Chaac Belt",
+        waist = "Orpheus's Sash",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
-    sets.precast.Skillchain = { hands = "Charis Bangles +2" }
+    sets.precast.WS['Ruthless Stroke'] = set_combine(sets.precast.WS, {
+        ammo = "Coiste Bodhar",
+        -- hands = "Maxixi Bangles +1"
+    })
+
+    sets.precast.Skillchain = { hands = "Maculele Bangles +3" }
 
 
     -- Midcast Sets
 
     sets.midcast.FastRecast = {
-        head = "Adhemar Bonnet +1",
+        ammo = "Sapience Orb",
+        head = "Malginance Chapeau",
+        neck = "Orunmila's Torque",
+        ear1 = "Enchanter's Earring +1",
         ear2 = "Loquacious Earring",
         body = "Malignance Tabard",
-        hands = "Adhemar Wristbands +1",
-        legs = "Kaabnax Trousers",
+        hands = "Leyline Gloves",
+        ring1 = "Rahab Ring",
+        ring2 = "Rahab Ring",
+        back = "",
+        waist = "Sailfi belt +1",
+        legs = "Malginance Tights",
         feet = "Malignance Boots"
     }
 
@@ -277,7 +369,7 @@ function init_gear_sets()
         body = "Iuitl Vest",
         hands = "Adhemar Wristbands +1",
         ring1 = "Beeline Ring",
-        back = "Toetapper Mantle",
+        back = gear.tp_cape,
         legs = "Kaabnax Trousers",
         feet = "Malignance Boots"
     }
@@ -329,6 +421,22 @@ function init_gear_sets()
         feet = "Malignance Boots"
     }
 
+    sets.idle.Regain = {
+        ammo = "Aurgelmir Orb +1",
+        head = "Gleti's Mask",
+        neck = "Republican Platinum medal",
+        ear1 = "Telos Earring",
+        ear2 = "Dedition Earring",
+        body = "Gleti's Cuirass",
+        hands = "Gleti's Gauntlets",
+        ring1 = "Roller's Ring",
+        ring2 = "Defending Ring",
+        back = gear.tp_cape,
+        waist = "Reiki Yotai",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
+    }
+
     sets.idle.Weak = sets.idle
     -- Defense sets
 
@@ -340,7 +448,7 @@ function init_gear_sets()
         hands = "Malignance Gloves",
         ring1 = gear.left_moonlight,
         ring2 = "Gelatinous Ring +1",
-        back = "Toetapper Mantle",
+        back = gear.tp_cape,
         waist = "Flume Belt +1",
         legs = "Malignance Tights",
         feet = "Malignance Boots"
@@ -363,7 +471,7 @@ function init_gear_sets()
     sets.defense.MDT = set_combine(sets.defense.PDT,
         { ear1 = "Eabani Earring", ear2 = "Eabani Earring", ring2 = 'Archon Ring', waist = "Platinum Moogle Belt" })
 
-    sets.Kiting = { feet = "Skadi's Jambeaux +1" }
+    -- sets.Kiting = { feet = "Skadi's Jambeaux +1" }
 
     -- Engaged sets
 
@@ -375,18 +483,18 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = {
         ammo = "Coiste Bodhar",
-        head = "Adhemar Bonnet +1",
+        head = "Malignance Chapeau",
         neck = "Anu Torque",
-        ear1 = "Telos Earring",
-        ear2 = "Sherida Earring",
+        ear1 = "Sherida Earring",
+        ear2 = "Maculele Earring +2",
         body = "Gleti's Cuirass",
-        hands = "Adhemar Wristbands +1",
+        hands = "Malignance Gloves",
         ring1 = gear.left_moonlight,
         ring2 = "Gere Ring",
-        back = "Sacro Mantle",
+        back = gear.tp_cape,
         waist = "Sailfi Belt +1",
-        legs = "Samnuha Tights",
-        feet = "Gleti's Boots"
+        legs = "Gleti's Breeches",
+        feet = "Maculele Toe Shoes +3"
     }
 
     sets.engaged.Acc = {
@@ -395,17 +503,17 @@ function init_gear_sets()
         neck = "Anu Torque",
         ear1 = "Telos Earring",
         ear2 = "Brutal Earring",
-        body = "Charis Casaque +2",
+        body = "Maculele Casaque +3",
         hands = "Adhemar Wristbands +1",
         ring1 = "Rajas Ring",
         ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
+        back = gear.tp_cape,
         waist = "Sailfi Belt +1",
         legs = "Malignance Tights",
         feet = "Malignance Boots"
     }
     sets.engaged.Evasion = {
-        ammo = "Charis Feather",
+        ammo = "Yamarang",
         head = "Adhemar Bonnet +1",
         neck = "Bathy Choker +1",
         ear1 = "Telos Earring",
@@ -414,13 +522,13 @@ function init_gear_sets()
         hands = "Adhemar Wristbands +1",
         ring1 = "Beeline Ring",
         ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
+        back = gear.tp_cape,
         waist = "Reiki Yotai",
         legs = "Kaabnax Trousers",
         feet = "Malignance Boots"
     }
     sets.engaged.PDT = {
-        ammo = "Charis Feather",
+        ammo = "Staunch Tathlum +1",
         head = "Malignance Chapeau",
         neck = "Loricate Torque +1",
         ear1 = "Telos Earring",
@@ -444,7 +552,7 @@ function init_gear_sets()
         hands = "Adhemar Wristbands +1",
         ring1 = "Beeline Ring",
         ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
+        back = gear.tp_cape,
         waist = "Sailfi Belt +1",
         legs = "Malignance Tights",
         feet = "Malignance Boots"
@@ -459,277 +567,48 @@ function init_gear_sets()
         hands = "Adhemar Wristbands +1",
         ring1 = "Patricius Ring",
         ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
+        back = gear.tp_cape,
         waist = "Sailfi Belt +1",
         legs = "Malignance Tights",
         feet = "Malignance Boots"
     }
-
-    -- Custom melee group: High Haste (2x March or Haste)
-    sets.engaged.HighHaste = {
-        ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1",
-        neck = "Combatant's Torque",
-        ear1 = "Telos Earring",
-        ear2 = "Brutal Earring",
-        body = "Gleti's Cuirass",
-        hands = "Maxixi Bangles",
-        ring1 = "Rajas Ring",
-        ring2 = "Epona's Ring",
-        back = "Atheling Mantle",
-        waist = "Reiki Yotai",
-        legs = "Kaabnax Trousers",
-        feet = "Manibozho Boots"
-    }
-
-    -- sets.engaged.Fodder.HighHaste = {
-    --     ammo = "Charis Feather",
-    --     head = "Adhemar Bonnet +1",
-    --     neck = "Anu Torque",
-    --     ear1 = "Telos Earring",
-    --     ear2 = "Brutal Earring",
-    --     body = "Charis Casaque +2",
-    --     hands = "Maxixi Bangles",
-    --     ring1 = "Rajas Ring",
-    --     ring2 = "Epona's Ring",
-    --     back = "Atheling Mantle",
-    --     waist = "Reiki Yotai",
-    --     legs = gear.AugQuiahuiz,
-    --     feet = "Horos Toe Shoes"
-    -- }
-    -- sets.engaged.Fodder.Evasion.HighHaste = {
-    --     ammo = "Charis Feather",
-    --     head = "Adhemar Bonnet +1",
-    --     neck = "Anu Torque",
-    --     ear1 = "Telos Earring",
-    --     ear2 = "Brutal Earring",
-    --     body = "Gleti's Cuirass",
-    --     hands = "Maxixi Bangles",
-    --     ring1 = "Rajas Ring",
-    --     ring2 = "Epona's Ring",
-    --     back = "Atheling Mantle",
-    --     waist = "Reiki Yotai",
-    --     legs = "Kaabnax Trousers",
-    --     feet = "Malignance Boots"
-    -- }
-
-    sets.engaged.Acc.HighHaste = {
-        ammo = "Yamarang",
-        head = "Adhemar Bonnet +1",
-        neck = "Combatant's Torque",
-        ear1 = "Telos Earring",
-        ear2 = "Brutal Earring",
-        body = "Iuitl Vest",
-        hands = "Adhemar Wristbands +1",
-        ring1 = "Rajas Ring",
-        ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
-        waist = "Sailfi Belt +1",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
-    }
-    sets.engaged.Evasion.HighHaste = {
-        ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1",
-        neck = "Bathy Choker +1",
-        ear1 = "Telos Earring",
-        ear2 = "Brutal Earring",
-        body = "Gleti's Cuirass",
-        hands = "Adhemar Wristbands +1",
-        ring1 = "Beeline Ring",
-        ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
-        waist = "Reiki Yotai",
-        legs = "Kaabnax Trousers",
-        feet = "Malignance Boots"
-    }
-    sets.engaged.Acc.Evasion.HighHaste = {
-        ammo = "Yamarang",
-        head = "Malignance Chapeau",
-        neck = "Bathy Choker +1",
-        ear1 = "Telos Earring",
-        ear2 = "Brutal Earring",
-        body = "Malignance Tabard",
-        hands = "Malignance Gloves",
-        ring1 = "Beeline Ring",
-        ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
-        waist = "Sailfi Belt +1",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
-    }
-    sets.engaged.PDT.HighHaste = {
-        ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1",
-        neck = "Loricate Torque +1",
-        ear1 = "Telos Earring",
-        ear2 = "Brutal Earring",
-        body = "Gleti's Cuirass",
-        hands = "Malignance Gloves",
-        ring1 = "Patricius Ring",
-        ring2 = "Epona's Ring",
-        back = "Moonlight Cape",
-        waist = "Reiki Yotai",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
-    }
-    sets.engaged.Acc.PDT.HighHaste = {
-        ammo = "Yamarang",
-        head = "Adhemar Bonnet +1",
-        neck = "Loricate Torque +1",
-        ear1 = "Telos Earring",
-        ear2 = "Brutal Earring",
-        body = "Iuitl Vest",
-        hands = "Adhemar Wristbands +1",
-        ring1 = "Patricius Ring",
-        ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
-        waist = "Sailfi Belt +1",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
-    }
-
-
-    -- Custom melee group: Max Haste (2x March + Haste)
-    sets.engaged.MaxHaste = {
-        ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1",
-        neck = "Combatant's Torque",
-        ear1 = "Bladeborn Earring",
-        ear2 = "Steelflash Earring",
-        body = "Gleti's Cuirass",
-        hands = "Maxixi Bangles",
-        ring1 = "Rajas Ring",
-        ring2 = "Epona's Ring",
-        back = "Atheling Mantle",
-        waist = "Windbuffet Belt +1",
-        legs = gear.AugQuiahuiz,
-        feet = "Manibozho Boots"
-    }
-
-    -- Getting Marches+Haste from Trust NPCs, doesn't cap delay.
-    -- sets.engaged.Fodder.MaxHaste = {
-    --     ammo = "Charis Feather",
-    --     head = "Adhemar Bonnet +1",
-    --     neck = "Combatant's Torque",
-    --     ear1 = "Telos Earring",
-    --     ear2 = "Brutal Earring",
-    --     body = "Thaumas Coat",
-    --     hands = "Maxixi Bangles",
-    --     ring1 = "Rajas Ring",
-    --     ring2 = "Epona's Ring",
-    --     back = "Atheling Mantle",
-    --     waist = "Reiki Yotai",
-    --     legs = gear.AugQuiahuiz,
-    --     feet = "Horos Toe Shoes"
-    -- }
-    -- sets.engaged.Fodder.Evasion.MaxHaste = {
-    --     ammo = "Charis Feather",
-    --     head = "Adhemar Bonnet +1",
-    --     neck = "Combatant's Torque",
-    --     ear1 = "Telos Earring",
-    --     ear2 = "Brutal Earring",
-    --     body = "Gleti's Cuirass",
-    --     hands = "Maxixi Bangles",
-    --     ring1 = "Rajas Ring",
-    --     ring2 = "Epona's Ring",
-    --     back = "Atheling Mantle",
-    --     waist = "Reiki Yotai",
-    --     legs = "Kaabnax Trousers",
-    --     feet = "Manibozho Boots"
-    -- }
-
-    sets.engaged.Acc.MaxHaste = {
-        ammo = "Yamarang",
-        head = "Adhemar Bonnet +1",
-        neck = "Combatant's Torque",
-        ear1 = "Bladeborn Earring",
-        ear2 = "Steelflash Earring",
-        body = "Iuitl Vest",
-        hands = "Adhemar Wristbands +1",
-        ring1 = "Rajas Ring",
-        ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
-        waist = "Sailfi Belt +1",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
-    }
-    sets.engaged.Evasion.MaxHaste = {
-        ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1",
-        neck = "Bathy Choker +1",
-        ear1 = "Bladeborn Earring",
-        ear2 = "Steelflash Earring",
-        body = "Gleti's Cuirass",
-        hands = "Adhemar Wristbands +1",
-        ring1 = "Beeline Ring",
-        ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
-        waist = "Windbuffet Belt +1",
-        legs = "Kaabnax Trousers",
-        feet = "Malignance Boots"
-    }
-    sets.engaged.Acc.Evasion.MaxHaste = {
-        ammo = "Yamarang",
-        head = "Adhemar Bonnet +1",
-        neck = "Bathy Choker +1",
-        ear1 = "Bladeborn Earring",
-        ear2 = "Steelflash Earring",
-        body = "Gleti's Cuirass",
-        hands = "Adhemar Wristbands +1",
-        ring1 = "Beeline Ring",
-        ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
-        waist = "Sailfi Belt +1",
-        legs = "Kaabnax Trousers",
-        feet = "Malignance Boots"
-    }
-    sets.engaged.PDT.MaxHaste = {
-        ammo = "Charis Feather",
-        head = "Adhemar Bonnet +1",
-        neck = "Loricate Torque +1",
-        ear1 = "Bladeborn Earring",
-        ear2 = "Steelflash Earring",
-        body = "Gleti's Cuirass",
-        hands = "Adhemar Wristbands +1",
-        ring1 = "Patricius Ring",
-        ring2 = "Epona's Ring",
-        back = "Moonlight Cape",
-        waist = "Windbuffet Belt +1",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
-    }
-    sets.engaged.Acc.PDT.MaxHaste = {
-        ammo = "Yamarang",
-        head = "Adhemar Bonnet +1",
-        neck = "Loricate Torque +1",
-        ear1 = "Bladeborn Earring",
-        ear2 = "Steelflash Earring",
-        body = "Iuitl Vest",
-        hands = "Adhemar Wristbands +1",
-        ring1 = "Patricius Ring",
-        ring2 = "Epona's Ring",
-        back = "Toetapper Mantle",
-        waist = "Sailfi Belt +1",
-        legs = "Malignance Tights",
-        feet = "Malignance Boots"
-    }
-
-
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-    sets.buff['Saber Dance'] = { legs = "Horos Tights" }
-    sets.buff['Climactic Flourish'] = { head = "Charis Tiara +2" }
+    sets.buff['Saber Dance'] = { legs = "Horos Tights +1" }
+    sets.buff['Climactic Flourish'] = { head = "Maculele Tiara +3" }
 end
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+-- function filtered_action(spell)
+--     print('Filtered action: ' .. spell.english)
+-- end
+
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
+function job_pretarget(spell, action, spellMap, eventArgs)
+    if spell.type == 'Waltz' and buffactive['Saber Dance'] then
+        send_command('cancel "saber dance"')
+    end
+end
+
 function job_precast(spell, action, spellMap, eventArgs)
-    --auto_presto(spell)
+    if spell.type == 'Waltz' and spell.english ~= "Healing Waltz" then
+        local tp_cost = info.WaltzCosts[spell.english]
+        if player.tp < tp_cost then
+            -- get next spell
+            local next_tier = numeral_to_digit(get_spell_tier(spell)) - 1
+            if next_tier > 0 then
+                eventArgs.cancel = true
+                local base_spell = get_spell_base(spell) .. " " .. spell.type
+                send_command("input /ja " .. base_spell .. " " .. digit_to_numeral(next_tier - 1))
+            else
+                windower.add_to_chat(144, "Not enough TP!")
+            end
+        end
+    end
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
@@ -746,15 +625,15 @@ end
 -- Return true if we handled the aftercast work.  Otherwise it will fall back
 -- to the general aftercast() code in Mote-Include.
 function job_aftercast(spell, action, spellMap, eventArgs)
-    if not spell.interrupted then
-        if spell.english == "Wild Flourish" then
-            state.SkillchainPending:set()
-            send_command('wait 5;gs c unset SkillchainPending')
-        elseif spell.type:lower() == "weaponskill" then
-            state.SkillchainPending:toggle()
-            send_command('wait 6;gs c unset SkillchainPending')
-        end
-    end
+    -- if not spell.interrupted then
+    -- if spell.english == "Wild Flourish" then
+    -- state.SkillchainPending:set()
+    -- send_command('wait 5;gs c unset SkillchainPending')
+    --     elseif spell.type == "WeaponSkill" then
+    --         -- state.SkillchainPending:toggle()
+    --         -- send_command('wait 6;gs c unset SkillchainPending')
+    --     end
+    -- end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -895,7 +774,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function determine_haste_group()
-    -- We have three groups of DW in gear: Charis body, Charis neck + DW earrings, and Reiki Yotai.
+    -- We have three groups of DW in gear: Maculele body, Maculele neck + DW earrings, and Reiki Yotai.
 
     -- For high haste, we want to be able to drop one of the 10% groups (body, preferably).
     -- High haste buffs:
@@ -951,4 +830,5 @@ function select_default_macro_book()
     else
         set_macro_page(5, 19)
     end
+    send_command('@wait 5; input /lockstyleset 15')
 end

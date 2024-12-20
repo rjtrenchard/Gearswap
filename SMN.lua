@@ -333,7 +333,7 @@ function init_gear_sets()
     sets.precast.BloodPactWard = set_combine(sets.midcast['Summoning Magic'],
         {
             main = "Espiritus",
-            ammo = "Sancus Sachet +1",
+            ammo = "Epitaph",
             body = "Convoker's Doublet +2",
             hands = "Glyphic Bracers +1",
             back = "Conveyance Cape",
@@ -355,10 +355,10 @@ function init_gear_sets()
         ear2 = "Loquacious Earring",
         body = "Inyanga Jubbah +2",
         hands = gear.merlinic.fc.hands,
-        ring1 = "Medada's Ring",
+        ring1 = "Rahab Ring",
         ring2 = "Kishar Ring",
         back = "Perimede Cape",
-        waist = "Embla Belt",
+        waist = "Embla Sash",
         legs = "Lengo Pants",
         feet = gear.merlinic.fc.feet
     }
@@ -397,9 +397,9 @@ function init_gear_sets()
         ear2 = "Crepuscular Earring",
         body = "Bunzi's Robe",
         hands = "Bunzi's Gloves",
-        ring1 = "Rajas Ring",
-        ring2 = "Shukuyu Ring",
-        back = "Pahtli Cape",
+        ring1 = "Shukuyu Ring",
+        ring2 = "Ephramad's Ring",
+        back = "Aurist's cape +1",
         waist = "Fotia Belt",
         legs = "Bunzi's Pants",
         feet = "Bunzi's Sabots"
@@ -427,13 +427,13 @@ function init_gear_sets()
         ear1 = "Evans Earring",
         ear2 = "Moonshade Earring",
         body = "Convoker's Doublet +2",
-        hands = "Caller's Bracers +2",
+        hands = "Caller's Bracers +1",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
         back = "Pahtli Cape",
         waist = "Fucho-no-Obi",
         legs = "Assiduity Pants +1",
-        feet = "Chelona Boots +1"
+        feet = "Bunzi's Sabots"
     }
 
 
@@ -453,7 +453,7 @@ function init_gear_sets()
         hands = "Bunzi's Gloves",
         ring1 = "Rahab Ring",
         back = "Fi Follet Cape +1",
-        waist = "Embla Belt",
+        waist = "Embla Sash",
         legs = "Bunzi's Pants",
         feet = "Bunzi's Sabots"
     }
@@ -485,7 +485,7 @@ function init_gear_sets()
         hands = "Telchine Gloves",
         ring2 = "Rahab Ring",
         back = "Oretania's Cape +1",
-        waist = "Embla Belt",
+        waist = "Embla Sash",
         legs = "Bunzi's Pants",
         feet = "Bunzi's Sabots"
     }
@@ -496,7 +496,7 @@ function init_gear_sets()
         neck = "Incanter's Torque",
         ear1 = "Cath Palug Earring",
         ear2 = "Lodurr Earring",
-        body = "Beckoner's Doublet",
+        body = "Beckoner's Doublet +1",
         hands = "Glyphic Bracers +1",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
@@ -513,38 +513,47 @@ function init_gear_sets()
         legs = "Shedir Seraweels"
     }
 
-    sets.midcast.Aquaveil = {
-        head = "Amalric Coif +1",
-        waist = "Emphatikos rope",
-        legs = "Shedir Seraweels"
-    }
+    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'].Duration, {
+        ammo = "Staunch Tathlum +1", -- 11
+        head = "Amalric Coif +1",    --         2
+        neck = "Loricate Torque +1", -- 5
+        ear1 = "Magnetic Earring",   -- 8
+        ear2 = "Halasz Earring",     -- 5
+        body = "Rosette Jaseran +1", -- 25
+        hands = "Regal Cuffs",       --         2
+        ring1 = "Evanescence Ring",  -- 5
+        ring2 = "Freke Ring",        -- 10
+        waist = "Emphatikos Rope",   -- 12      1
+        legs = "Shedir Seraweels",   --         1
+        feet = "Amalric Nails +1"    -- 16
+    })
 
     -- Avatar pact sets.  All pacts are Ability type.
 
     sets.midcast.Pet.BloodPactWard = {
         main = "Soulscourge",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Convoker's Horn +2",
-        neck = "Incanter Torque",
+        neck = "Incanter's Torque",
         ear1 = "Evans Earring",
         body = "Caller's Doublet +2",
         hands = "Glyphic Bracers +1",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
-        waist = "Diabolos's Rope",
+        waist = "Kobo Obi",
         legs = "Marduk's Shalwar +1"
     }
 
     sets.midcast.Pet.DebuffBloodPactWard = {
         main = "Soulscourge",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Convoker's Horn +2",
-        neck = "Incanter Torque",
+        neck = "Incanter's Torque",
         body = "Caller's Doublet +2",
         hands = "Glyphic Bracers +1",
         ring1 = gear.left_stikini,
         ring2 = gear.right_stikini,
-        waist = "Diabolos's Rope",
+        waist = "Kobo Obi",
         legs = "Marduk's Shalwar +1"
     }
 
@@ -553,7 +562,7 @@ function init_gear_sets()
     sets.midcast.Pet.PhysicalBloodPactRage = {
         main = "Gridarvor",
         sub = "Elan Strap +1",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = gear.helios.physicalbp.head,
         neck = "Shulmanu Collar",
         ear1 = "Lugalbanda Earring",
@@ -573,7 +582,7 @@ function init_gear_sets()
     sets.midcast.Pet.MagicalBloodPactRage = {
         main = gear.grioavolr.bp,
         sub = "Elan Strap +1",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Cath Palug Crown",
         neck = "Adad Amulet",
         ear1 = "Lugalbanda Earring",
@@ -596,9 +605,9 @@ function init_gear_sets()
 
     -- Spirits cast magic spells, which can be identified in standard ways.
 
-    sets.midcast.Pet.WhiteMagic = { legs = "Summoner's Spats +2" }
+    sets.midcast.Pet.WhiteMagic = { legs = "Glyphic Spats +1" }
 
-    sets.midcast.Pet['Elemental Magic'] = set_combine(sets.midcast.Pet.BloodPactRage, { legs = "Summoner's Spats +2" })
+    sets.midcast.Pet['Elemental Magic'] = set_combine(sets.midcast.Pet.BloodPactRage, { legs = "Glyphic Spats +1" })
 
     sets.midcast.Pet['Elemental Magic'].Resistant = {}
 
@@ -609,27 +618,23 @@ function init_gear_sets()
 
     -- Resting sets
     sets.resting = {
-        main = gear.Staff.HMP,
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Convoker's Horn +2",
         neck = "Bathy Choker +1",
         ear1 = "Evans Earring",
         ear2 = "Cath Palug Earring",
         body = "Bunzi's Robe",
-        hands = "Serpentes Cuffs",
-        ring1 = "Sheltered Ring",
-        ring2 = "Shadow Ring",
-        back = "Pahtli Cape",
+
         waist = "Fucho-no-obi",
         legs = "Assiduity Pants +1",
-        feet = "Chelona Boots +1"
+
     }
 
     -- Idle sets
     sets.idle = {
         -- main = "Malignance Pole",
         -- sub = "Oneiros Grip",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
         ear1 = "Evans Earring",
@@ -638,7 +643,7 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = gear.left_stikini,
         ring2 = "Shneddick Ring +1",
-        back = "Umbra Cape",
+        back = "Aurist's cape +1  ",
         waist = "Platinum Moogle Belt",
         legs = "Assiduity Pants +1",
         feet = "Nyame Sollerets"
@@ -647,7 +652,7 @@ function init_gear_sets()
     sets.idle.PDT = {
         main = gear.Staff.PDT,
         sub = "Enki Strap",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Nyame Helm",
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
@@ -656,7 +661,7 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = "Defending Ring",
         ring2 = gear.right_stikini,
-        back = "Umbra Cape",
+        back = "Aurist's cape +1",
         waist = "Platinum Moogle Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
@@ -685,7 +690,7 @@ function init_gear_sets()
     sets.idle.Avatar = {
         main = "Gridarvor",
         sub = "Oneiros Grip",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Convoker's Horn +2",
         neck = "Shulmanu Collar",
         ear1 = "Enmerkar Earring",
@@ -703,7 +708,7 @@ function init_gear_sets()
     sets.idle.PDT.Avatar = {
         main = "Gridarvor",
         sub = "Oneiros Grip",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Convoker's Horn +2",
         neck = "Shulmanu Collar",
         ear1 = "Enmerkar Earring",
@@ -721,9 +726,9 @@ function init_gear_sets()
     sets.idle.Spirit = {
         main = "Gridarvor",
         sub = "Vox Grip",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Convoker's Horn +2",
-        neck = "Incanter Torque",
+        neck = "Incanter's Torque",
         ear1 = "Enmerkar Earring",
         ear2 = "Cath Palug Earring",
         body = "Shomonjijoe +1",
@@ -739,7 +744,7 @@ function init_gear_sets()
     sets.idle.Town = {
         -- main = "Malignance Pole",
         -- sub = "Oneiros Grip",
-        ammo = "Sancus Sachet +1",
+        ammo = "Epitaph",
         head = "Convoker's Horn +2",
         neck = "Bathy Choker +1",
         ear1 = "Enmerkar Earring",
@@ -747,11 +752,11 @@ function init_gear_sets()
         body = "Shomonjijoe +1",
         hands = "Serpentes Cuffs",
         ring1 = gear.left_stikini,
-        ring2 = gear.right_stikini,
-        back = "Umbra Cape",
+        ring2 = "Shneddick Ring +1",
+        back = "Aurist's cape +1",
         waist = "Fucho-no-Obi",
         legs = "Assiduity Pants +1",
-        feet = "Crier's Gaiters"
+        -- feet = "Crier's Gaiters"
     }
 
     -- Favor uses Caller's Horn instead of Convoker's Horn for refresh
@@ -780,10 +785,10 @@ function init_gear_sets()
     --hands="Caller's Bracers +1"}
     -- Carby: Mitts+Conv.feet = 1/tick perp.  Everything else should be +refresh
     sets.perp.Carbuncle = { --main="Bolelabunga",sub="Ammurapi Shield",
-        head = "Convoker's Horn", hands = "", }
+    }
     sets.perp['Cait Sith'] = {}
-    -- Diabolos's Rope doesn't gain us anything at this time
-    --sets.perp.Diabolos = {waist="Diabolos's Rope"}
+    -- Kobo Obi doesn't gain us anything at this time
+    --sets.perp.Diabolos = {waist="Kobo Obi"}
     sets.perp.Alexander = sets.midcast.Pet.BloodPactWard
 
     sets.perp.staff_and_grip = { main = gear.perp_staff, sub = "Enki Strap" }
@@ -799,7 +804,7 @@ function init_gear_sets()
         hands = "Bunzi's Gloves",
         ring1 = "Defending Ring",
         ring2 = gear.right_stikini,
-        back = "Umbra Cape",
+        back = "Aurist's cape +1",
         waist = "Fucho-no-Obi",
         legs = "Bunzi's Pants",
         feet = "Bunzi's Sabots"
@@ -814,7 +819,7 @@ function init_gear_sets()
         hands = "Bunzi's Gloves",
         ring1 = "Defending Ring",
         ring2 = "Archon Ring",
-        back = "Umbra Cape",
+        back = "Aurist's cape +1",
         waist = "Fucho-no-Obi",
         legs = "Bunzi's Pants",
         feet = "Bunzi's Sabots"
@@ -830,10 +835,10 @@ function init_gear_sets()
     --------------------------------------
 
     -- Normal melee group
-    --[[sets.engaged = {ammo="Sancus Sachet +1",
+    --[[sets.engaged = {ammo="Epitaph",
         head="Zelus Tiara",neck="Combatant's Torque",ear1="Crepuscular Earring",ear2="Brutal Earring",
         body="Bunzi's Robe",hands="Bunzi's Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
-        back="Umbra Cape",waist="Cornelia's Belt",legs="Bunzi's Pants",feet="Bunzi's Sabots"}]]
+        back="Aurist's cape +1",waist="Cornelia's Belt",legs="Bunzi's Pants",feet="Bunzi's Sabots"}]]
     sets.engaged = set_combine(sets.idle.Avatar, {})
 end
 

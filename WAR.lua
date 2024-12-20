@@ -32,8 +32,9 @@ function user_setup()
     include('default_sets.lua')
 
     state.OffenseMode:options('Normal', 'Acc', 'Crit')
-    state.HybridMode:options('Normal', 'PDT', 'Reraise', 'MDT')
+    state.HybridMode:options('Normal', 'PDT', 'MDT')
     state.DefenseMode:options('None', 'Physical', 'Magical', 'Reraise')
+    state.PhysicalDefenseMode:options('None', 'Physical', 'Magical', 'Reraise', 'Regain')
     state.WeaponskillMode:options('Normal', 'Acc', 'Mod')
     state.IdleMode:options('Normal', 'PDT', 'Regain')
 
@@ -75,6 +76,8 @@ function user_setup()
     send_command('bind ^numpad1 input /item "Panacea" <me>')
     send_command('bind ^numpad2 input /item "Remedy" <me>')
     send_command('bind ^numpad3 input /item "Holy Water" <me>')
+
+    send_command('bind ^space tc nearest')
 
 
     info.magic_ws = S {
@@ -139,7 +142,7 @@ function init_gear_sets()
         name = "Cichol's Mantle",
         augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Dbl.Atk."+10', 'Phys. dmg. taken-10%', }
     }
-    gear.str_ws_cape = {
+    gear.ws_cape_str = {
         name = "Cichol's Mantle",
         augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+10', 'Weapon skill damage +10%', 'Phys. dmg. taken-10%', },
     }
@@ -147,9 +150,9 @@ function init_gear_sets()
         name = "Cichol's Mantle",
         augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'Weapon skill damage +10%', }
     }
-    gear.multi_ws_cape = gear.str_ws_cape
+    gear.multi_ws_cape = gear.ws_cape_str
 
-    gear.crit_cape = gear.str_ws_cape
+    gear.crit_cape = gear.ws_cape_str
 
     sets.weapons = {}
     sets.weapons.Sword = { main = "Naegling", sub = "Blurred Shield +1" }
@@ -208,13 +211,13 @@ function init_gear_sets()
         body = "Sacro Breastplate",
         hands = "Leyline Gloves",
         ring1 = "Rahab Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         legs = "Limbo Trousers",
         feet = gear.odyssean.fc.feet
     }
 
     sets.FullTP = {
-        ammo = "Coiste Bodhar",
+        ammo = "Aurgelmir Orb +1",
         head = "Flamma Zucchetto +2",
         neck = "Vim Torque +1",
         ear1 = "Telos Earring",
@@ -282,6 +285,10 @@ function init_gear_sets()
     }
 
     -- Precast Sets
+
+    sets.precast.RA = { range = "Grudge" }
+    sets.midcast.RA = sets.precast.RA
+
     -- Precast sets to enhance JAs
     sets.precast.JA['Provoke'] = sets.enmity
     sets.precast.JA['Berserk'] = { body = "Pummeler's Lorica +3", back = gear.melee_cape, feet = "Agoge Calligae +3" }
@@ -324,8 +331,8 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Boii Mufflers +3",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Sroda Ring",
-        back = gear.str_ws_cape,
+        ring2 = "Ephramad's Ring",
+        back = gear.ws_cape_str,
         waist = "Fotia Belt",
         legs = "Boii Cuisses +3",
         feet = "Nyame Sollerets",
@@ -341,7 +348,7 @@ function init_gear_sets()
         hands = "Boii Mufflers +3",
         ring1 = gear.left_moonlight,
         ring2 = gear.right_moonlight,
-        back = gear.str_ws_cape,
+        back = gear.ws_cape_str,
         waist = "Fotia Belt",
         legs = "Boii Cuisses +3",
         feet = "Boii Calligae +3"
@@ -355,7 +362,7 @@ function init_gear_sets()
         ear2 = "Moonshade Earring",
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
-        ring1 = "Sroda Ring",
+        ring1 = "Ephramad's ring",
         ring2 = "Niqmaddu Ring",
         back = gear.melee_cape,
         waist = "Fotia Belt",
@@ -373,8 +380,8 @@ function init_gear_sets()
         hands = "Sakpata's Gauntlets",
         ring1 = "Begrudging Ring",
         ring2 = "Hetairoi Ring",
-        back = gear.str_ws_cape,
-        waist = "Fotia Belt",
+        back = gear.ws_cape_str,
+        waist = "Gerdr Belt +1",
         legs = "Zoar Subligar +1",
         feet = "Boii Calligae +3"
     }
@@ -388,7 +395,7 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Metamorph Ring +1",
         back = gear.magic_ws_cape,
         waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
@@ -447,21 +454,30 @@ function init_gear_sets()
         ring1 = "Begrudging Ring",
         ring2 = "Niqmaddu Ring",
         back = gear.crit_cape,
+        waist = "Gerdr Belt +1",
         feet = "Boii Calligae +3"
     })
     sets.precast.WS['Impulse Drive'].FullTP = {
         ear1 = "Thrud Earring"
     }
 
-    sets.precast.WS['Stardiver'] = sets.precast.WS['Upheaval']
+    sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS['Upheaval'],
+        {
+            ammo = "Yetshila",
+            head = "Boii Mask +3",
+            ring1 = "Begrudging Ring",
+            ring2 = "Niqmaddu Ring",
+            back = gear.crit_cape,
+            waist = "Gerdr Belt +1",
+        })
 
     -- Club
-    sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
+    sets.precast.WS['Judgment'] = set_combine(sets.precast.WS['Savage Blade'], { ring2 = "Regal Ring" })
 
     sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
 
     sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS['Upheaval'],
-        { ring1 = "Sroda Ring", ring2 = "Metamorph Ring +1" })
+        { ring1 = "Ephramad's Ring", ring2 = "Metamorph Ring +1" })
 
     sets.precast.WS['True Strike'] = set_combine(
         sets.precast.WS['Impulse Drive'],
@@ -485,12 +501,12 @@ function init_gear_sets()
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
         ring2 = "Archon Ring",
-        back = gear.str_ws_cape,
+        back = gear.ws_cape_str,
         waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets",
     }
-    sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS['Cataclysm'], { back = gear.str_ws_cape })
+    sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS['Cataclysm'], { back = gear.ws_cape_str })
 
     -- H2H?
     sets.precast.WS['Asuran Fists'] = sets.precast.WS.Acc
@@ -509,7 +525,7 @@ function init_gear_sets()
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
         ring1 = "Epaminondas's Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Regal Ring",
         back = gear.magic_ws_cape,
         waist = gear.ElementalObi,
         legs = "Nyame Flanchard",
@@ -523,7 +539,7 @@ function init_gear_sets()
         body = "Sakpata's Plate",
         hands = "Sakpata's Gauntlets",
         ring1 = "Rahab Ring",
-        ring2 = "Medada's Ring",
+        ring2 = "Rahab Ring",
         legs = "Sakpata's Cuisses",
         feet = gear.odyssean.fc.feet
     }
@@ -651,6 +667,22 @@ function init_gear_sets()
         feet = "Sakpata's Leggings"
     }
 
+    sets.defense.Regain = {
+        ammo = "Aurgelmir Orb +1",
+        head = "Malignance Chapeau",
+        neck = "Republican Platinum medal",
+        ear1 = "Sherida Earring",
+        ear2 = "Dedition Earring",
+        body = "Malignance Tabard",
+        hands = "Malignance Gloves",
+        ring1 = "Roller's Ring",
+        ring2 = gear.right_chirich,
+        back = gear.stp_cape,
+        waist = "Gerdr Belt +1",
+        legs = "Malignance Tights",
+        feet = "Malignance Boots"
+    }
+
     sets.Kiting = { feet = "Hermes' Sandals" }
 
     sets.Reraise = { head = "Crepuscular Helm", body = "Crepuscular Mail" }
@@ -739,22 +771,10 @@ function init_gear_sets()
         legs = "Sakpata's Cuisses",
         feet = "Sakpata's Leggings"
     }
+    sets.engaged.SubtleBlow = set_combine(sets.engaged, {
 
-    sets.engaged.Reraise = {
-        ammo = "Coiste Bodhar",
-        head = "Crepuscular Helm",
-        neck = "Loricate Torque +1",
-        ear1 = "Schere Earring",
-        ear2 = "Telos Earring",
-        body = "Crepuscular Mail",
-        hands = "Sakpata's Gauntlets",
-        ring1 = gear.left_moonlight,
-        ring2 = "Niqmaddu Ring",
-        back = gear.melee_cape,
-        waist = "Sailfi Belt +1",
-        legs = "Sakpata's Cuisses",
-        feet = "Sakpata's Leggings"
-    }
+    })
+
     sets.engaged.Acc.Reraise = {
         ammo = "Seething bomblet +1",
         head = "Crepuscular Helm",
@@ -971,6 +991,14 @@ function job_pretarget(spell, action, spellMap, eventArgs)
         windower.add_to_chat(36, 'Cancelled: Warcry is active.')
         eventArgs.cancel = true
     end
+
+
+    -- windower.chat.input:schedule(1, '/echo success')
+
+    -- if spell.english == "Provoke" and spell.target and spell.target.distance ~= nil and spell.target.distance > 17 then
+    --     cancel_spell()
+    --     send_command("input /ra " .. spell.target.raw)
+    -- end
 end
 
 -- Run after the default precast() is done.
@@ -1086,7 +1114,7 @@ function job_buff_change(buff, gain)
             end
         elseif S { 'Aftermath', 'Aftermath: Lv.1', 'Aftermath: Lv.2', 'Aftermath: Lv.3' }:contains(buff) then
             -- update_combat_form()
-        elseif buff == 'Max HP Down' or buff == 'Defense Down' then
+        elseif buff == 'Max HP Down' then
             send_command('input /item "Panacea" <me>')
         end
 
